@@ -60,6 +60,7 @@ def main():
     ap.add_argument("--n_cal", type=int, default=8)
     ap.add_argument("--accel", default="ethos-u55-256")
     ap.add_argument("--fp32_only", action="store_true", help="skip quantization (debug)")
+    ap.add_argument("--all_ops", action="store_true", help="quantize every op, not just matrix ops")
     a = ap.parse_args()
     out = OUT_ROOT / a.task
     out.mkdir(parents=True, exist_ok=True)
@@ -83,8 +84,17 @@ def main():
     else:
         from litert_torch.quantize import pt2e_quantizer as pq
         from litert_torch.quantize import quant_config as qc
-        quantizer = pq.PT2EQuantizer().set_global(
-            pq.get_symmetric_quantization_config(is_per_channel=True, is_dynamic=False))
+        qcfg = pq.get_symmetric_quantization_config(is_per_channel=True, is_dynamic=False)
+        quantizer = pq.PT2EQuantizer()
+        if a.all_ops:
+            quantizer.set_global(qcfg)
+        else:
+            # Matrix ops only (the phones' QNN path quantizes the same set):
+            # a global config also annotates the scalar embed-scale multiply,
+            # whose folded 0-d quantized constant the litert converter rejects.
+            for op in (torch.ops.aten.linear.default, torch.ops.aten.matmul.default,
+                       torch.ops.aten.bmm.default, torch.ops.aten.mm.default):
+                quantizer.set_operator_type(op, qcfg)
         try:  # torch < 2.8
             from torch.export import export_for_training as _export
         except ImportError:  # torch >= 2.8 exports the training IR by default
@@ -101,12 +111,29 @@ def main():
                 prepared(torch.tensor(rng.normal(0, 1, (1, seq, 512)), dtype=torch.float32),
                          torch.tensor(rng.normal(0, 1, (1, seq, 512)), dtype=torch.float32),
                          torch.tensor(rng.integers(0, cfg["vocab_size"], (1, cfg["seq_len"])), dtype=torch.int32))
-        converted = convert_pt2e(prepared, fold_quantize=False)
+        # fold_quantize=True stores the weights as int8 constants. With it off
+        # (the first export) the flatbuffer kept every weight in float32 next
+        # to a runtime quantize op, so the "INT8" graphs were 25-35 MB and the
+        # float attention scores dominated the arena.
+        converted = convert_pt2e(prepared, fold_quantize=True)
         edge = litert_torch.convert(converted, (z_H, z_L, inputs),
                                     quant_config=qc.QuantConfig(pt2e_quantizer=quantizer))
         path = out / "inner_step_int8.tflite"
     edge.export(str(path))
     print(f"[{a.task}] wrote {path} ({path.stat().st_size/1e6:.2f} MB)", flush=True)
+
+    # Weight-dtype audit: every constant above 64 KB, by dtype. A real INT8
+    # graph has no large float32 constants.
+    from ai_edge_litert.interpreter import Interpreter
+    it = Interpreter(model_path=str(path))
+    by = {}
+    for d in it.get_tensor_details():
+        n = int(np.prod(d["shape"])) if len(d["shape"]) else 1
+        nb = n * np.dtype(d["dtype"]).itemsize
+        if nb >= 65536:
+            by.setdefault(d["dtype"].__name__, []).append(nb)
+    for k, v in sorted(by.items()):
+        print(f"[{a.task}] tensors >=64KB {k}: {len(v)} tensors, {sum(v)/1e6:.1f} MB", flush=True)
 
     # Numerical check of the TFLite graph against torch.
     got = edge(z_H, z_L, inputs)
