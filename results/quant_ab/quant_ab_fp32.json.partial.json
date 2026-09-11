@@ -1,0 +1,10 @@
+[
+  {
+    "variant": "fp32",
+    "arc_pass1_single_pass": 0.005,
+    "pexact_token": 0.03458916202634796,
+    "cell": 0.7384492619632922,
+    "n_tasks": 400,
+    "wall_s": 23418
+  }
+]

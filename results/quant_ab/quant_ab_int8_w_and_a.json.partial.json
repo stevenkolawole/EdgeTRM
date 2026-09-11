@@ -1,0 +1,10 @@
+[
+  {
+    "variant": "int8_w_and_a",
+    "arc_pass1_single_pass": 0.0025,
+    "pexact_token": 0.02716827380143963,
+    "cell": 0.712119884675276,
+    "n_tasks": 400,
+    "wall_s": 29529
+  }
+]
