@@ -38,7 +38,7 @@ python3 pretrain.py \
   data_paths="[data/maze-30x30-hard-1k]" \
   evaluators="[]" \
   +load_checkpoint="$HOME/workspace/EdgeTRM/maze_mlp_h100/step_130200" \
-  epochs=600 eval_interval=600 checkpoint_every_eval=True checkpoint_interval=100 \
+  epochs=600 eval_interval=600 checkpoint_every_eval=True +checkpoint_interval=100 \
   lr=1e-4 lr_warmup_steps=0 puzzle_emb_lr=1e-4 weight_decay=1.0 puzzle_emb_weight_decay=1.0 global_batch_size=128 \
   arch.mlp_t=True arch.pos_encodings=none \
   arch.L_layers=2 \
