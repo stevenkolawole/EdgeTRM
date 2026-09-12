@@ -1,0 +1,32 @@
+{
+  "task": "maze-30x30-hard",
+  "model": "TRM-MLP-mixing, trained by us (H100, batch 384, 130200 steps)",
+  "ckpt": "/home/ubuntu/maze_ema_step10000.pt",
+  "n": 200,
+  "rows": [
+    {
+      "variant": "FP32",
+      "pexact": 0.0,
+      "cell": 0.8274722222222223,
+      "fidelity": 1.0000065565109253
+    },
+    {
+      "variant": "INT8",
+      "pexact": 0.0,
+      "cell": 0.8274222222222222,
+      "fidelity": 0.9867660999298096
+    },
+    {
+      "variant": "INT4-naive",
+      "pexact": 0.0,
+      "cell": 0.8264055555555555,
+      "fidelity": 0.9382232427597046
+    },
+    {
+      "variant": "INT4-calib",
+      "pexact": 0.0,
+      "cell": 0.8249833333333333,
+      "fidelity": 0.9583617448806763
+    }
+  ]
+}
