@@ -24,8 +24,8 @@ $PY pretrain.py \
   arch=trm \
   data_paths="[data/maze-30x30-hard-1k]" \
   evaluators="[]" \
-  epochs=25000 eval_interval=2500 checkpoint_every_eval=True +checkpoint_interval=5000 \
-  lr=1e-4 puzzle_emb_lr=1e-4 weight_decay=1.0 puzzle_emb_weight_decay=1.0 global_batch_size=128 \
+  epochs=12000 eval_interval=2000 checkpoint_every_eval=True +checkpoint_interval=5000 \
+  lr=1e-4 puzzle_emb_lr=1e-4 weight_decay=1.0 puzzle_emb_weight_decay=1.0 global_batch_size=64 \
   arch.mlp_t=True arch.pos_encodings=none \
   arch.L_layers=2 \
   arch.H_cycles=3 arch.L_cycles=4 \
