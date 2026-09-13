@@ -298,7 +298,10 @@ def main():
     out_path.parent.mkdir(parents=True, exist_ok=True)
     records = []
     if out_path.exists():
-        records = json.load(open(out_path)).get("records", [])
+        try:
+            records = json.load(open(out_path)).get("records", [])
+        except (json.JSONDecodeError, ValueError):
+            print(f"  {out_path} unreadable (truncated write); starting fresh", flush=True)
     done = {(r["H_cycles"], r["nsup"], r["quant"]["spec"]) for r in records}
     print(f"{a.task}: {len(inp)} puzzles, batch {batch}, H={Hs}, nsup={nsups}, quants={quants}; "
           f"{len(records)} records already", flush=True)

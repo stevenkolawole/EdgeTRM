@@ -178,7 +178,12 @@ def main():
     data = load_gsm8k(a.n)
     out_path = Path(a.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    records = json.load(open(out_path))["records"] if out_path.exists() else []
+    records = []
+    if out_path.exists():
+        try:
+            records = json.load(open(out_path))["records"]
+        except (json.JSONDecodeError, ValueError):
+            print(f"  {out_path} unreadable (truncated write); starting fresh", flush=True)
     done = {(r["steps"], r["quant"]["spec"], r["scope"]) for r in records}
     steps_list = [int(s) for s in a.steps.split(",")]
     quants = [q for q in a.quants.split(",") if q]

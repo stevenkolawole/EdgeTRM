@@ -152,7 +152,12 @@ def main():
     quants = [q for q in a.quants.split(",") if q]
     out_path = Path(a.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    records = json.load(open(out_path))["records"] if out_path.exists() else []
+    records = []
+    if out_path.exists():
+        try:
+            records = json.load(open(out_path))["records"]
+        except (json.JSONDecodeError, ValueError):
+            print(f"  {out_path} unreadable (truncated write); starting fresh", flush=True)
     done = {(r["size"], r["iters"], r["quant"]["spec"]) for r in records}
     for size in a.sizes.split(","):
         ds = dataset(a.task, size)
