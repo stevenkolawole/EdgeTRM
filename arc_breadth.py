@@ -30,6 +30,8 @@ from breadth_sweep import parse_quant, quantize_weights_, _ActQuant, _linears, f
 DEV = "cuda"
 nb_func.DATA_DIR = str(Q.DATA)
 nb_func.get_inner = lambda m: m
+nb_func.torch = torch          # notebook-era globals the evaluator relies on
+nb_func.np = np
 
 
 def load_split():
@@ -115,6 +117,7 @@ def main():
         return ({"pexact_token": float((corr.sum(-1) == mask.sum(-1)).mean()), "cell_token": float(corr.sum() / mask.sum())},
                 torch.cat(finals), handles)
 
+    @torch.no_grad()
     def evaluate(m, nsup, act=None):
         stats, z, handles = carry_pass(m, nsup, act)          # activation scales frozen here if act
         p1, p2, cell, ms, n = nb_func.evaluate_arc_per_puzzle(m, loader, device=DEV, n_sup_max=nsup, return_pass2=True)
