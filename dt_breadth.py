@@ -63,13 +63,37 @@ def build(task):
 
 
 def parse_quant(spec):
+    """'fp32' | 'w4c' | 'w8c+a8' (+a8: static per-tensor INT8 activation fake-quant at every conv input)."""
     if spec == "fp32":
-        return {"spec": spec, "bits": None, "gran": None}
-    body = spec[1:]
+        return {"spec": spec, "bits": None, "gran": None, "act": None}
+    s, act = spec, None
+    if "+a8" in s:
+        s, act = s.replace("+a8", ""), 8
+    body = s[1:]
     i = 0
     while i < len(body) and body[i].isdigit():
         i += 1
-    return {"spec": spec, "bits": int(body[:i]), "gran": body[i:]}
+    return {"spec": spec, "bits": int(body[:i]), "gran": body[i:], "act": act}
+
+
+class _ActQuant:
+    """Static per-tensor symmetric activation fake-quant at a conv's input (calibrated on the first batch)."""
+
+    def __init__(self, bits):
+        self.qmax = 2 ** (bits - 1) - 1
+        self.absmax = 0.0
+        self.scale = None
+
+    def __call__(self, mod, args):
+        x = args[0]
+        if self.scale is None:
+            self.absmax = max(self.absmax, float(x.detach().abs().max()))
+            return None
+        xq = torch.round(x / self.scale).clamp(-self.qmax, self.qmax) * self.scale
+        return (xq,) + tuple(args[1:])
+
+    def freeze(self):
+        self.scale = max(self.absmax, 1e-8) / self.qmax
 
 
 @torch.no_grad()
@@ -107,19 +131,33 @@ def quantize_(net, bits, gran):
 
 
 @torch.no_grad()
-def run(net, loader, task, iters, batch_ref=None):
+def run(net, loader, task, iters, act=None):
     """accuracy at every iteration count in `iters`, per example (bool matrix),
-    and the recurrent feature map at each of those counts (for fidelity)."""
+    and the recurrent feature map at each of those counts (for fidelity).
+    act=8: static INT8 activation fake-quant at every conv input, scales frozen
+    after observing the first batch at the full iteration count."""
     from deepthinking.utils.testing import get_predicted
     net = net.to(DEV)
     max_it = max(iters)
     thoughts = []
     hook = net.recur_block.register_forward_hook(lambda m, i, o: thoughts.append(o))
+    handles, obs = [], []
+    if act is not None:
+        for mod in net.modules():
+            if isinstance(mod, (torch.nn.Conv1d, torch.nn.Conv2d)):
+                q = _ActQuant(act)
+                obs.append(q)
+                handles.append(mod.register_forward_pre_hook(q))
     correct = {k: [] for k in iters}
     feats = {k: [] for k in iters}
-    for inputs, targets in loader:
+    for bi, (inputs, targets) in enumerate(loader):
         thoughts.clear()
         inputs, targets = inputs.to(DEV), targets.to(DEV)
+        if act is not None and bi == 0:
+            net(inputs, iters_to_do=max_it)          # calibration pass
+            for q in obs:
+                q.freeze()
+            thoughts.clear()
         all_out = net(inputs, iters_to_do=max_it)
         tg = targets.view(targets.size(0), -1)
         for k in iters:
@@ -127,6 +165,8 @@ def run(net, loader, task, iters, batch_ref=None):
             correct[k].extend(torch.amin(pred == tg, dim=[1]).cpu().tolist())
             feats[k].append(thoughts[k - 1].flatten(1).float().cpu())
     hook.remove()
+    for h in handles:
+        h.remove()
     net.cpu()
     torch.cuda.empty_cache()
     return {k: np.array(v, dtype=bool) for k, v in correct.items()}, {k: torch.cat(v) for k, v in feats.items()}
@@ -181,7 +221,7 @@ def main():
             net, meta = build(a.task)
             nq = quantize_(net, q["bits"], q["gran"])
             t1 = time.time()
-            c, f = run(net, loader, a.task, iters)
+            c, f = run(net, loader, a.task, iters, act=q["act"])
             for k in iters:
                 records.append({"task": a.task, "size": size, "iters": k, "quant": q, **meta, "n": int(len(c[k])),
                                 "acc": float(c[k].mean()), "fidelity": fidelity(f[k], ref_f[k]),
