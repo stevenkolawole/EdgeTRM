@@ -61,7 +61,7 @@ def prompt_ids(tok, question):
 
 @torch.no_grad()
 def latents(model, ids):
-    out = model(ids, output_hidden_states=True)
+    out = model(ids, output_hidden_states=True, return_dict=True, use_cache=False)
     return out.hidden_states[-1][0].float().cpu()
 
 
@@ -69,7 +69,7 @@ def latents(model, ids):
 def gold_nll(model, tok, ids, solution):
     sol = tok.encode(solution + tok.eos_token, return_tensors="pt", add_special_tokens=False).to(DEV)
     full = torch.cat([ids, sol], dim=1)
-    logits = model(full).logits[0, ids.shape[1] - 1:-1].float()
+    logits = model(full, return_dict=True, use_cache=False).logits[0, ids.shape[1] - 1:-1].float()
     return float(F.cross_entropy(logits, sol[0], reduction="mean"))
 
 
