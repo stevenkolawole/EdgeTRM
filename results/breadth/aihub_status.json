@@ -1,0 +1,3671 @@
+[
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jpe7eqk15",
+    "status": "FAILED",
+    "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jgzlo6rk5",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S21",
+    "job_id": "j5wl2k96p",
+    "status": "FAILED",
+    "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jg9zjr4lp",
+    "status": "FAILED",
+    "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jp1ny982g",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jgddekveg",
+    "status": "FAILED",
+    "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "j57e0mdlp",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jp4yk7wvp",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jpxlnq11p",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "j5m0q7zwg",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jgnzl4erg",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jprl8ry9p",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jp2r01m4g",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jpyorld75",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jp0m3wr6g",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jp8e0n7xp",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jgk271y2g",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S25",
+    "job_id": "j5qlen24p",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jgly6dk85",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "j568ex10g",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jp3zvdml5",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jgolkxvxg",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jpvl08wj5",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jgjrz9lxp",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jpe7eqv15",
+    "status": "FAILED",
+    "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jgzlo67k5",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "j5wl2kd6p",
+    "status": "FAILED",
+    "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jg9zjr3lp",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jp1ny9d2g",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jgddekreg",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "j57e0mjlp",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jp4yk7xvp",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jpxlnq71p",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "j5m0q7wwg",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jgnzl49rg",
+    "status": "OPTIMIZING_MODEL"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jprl8r49p",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "jp2r0174g",
+    "status": "OPTIMIZING_MODEL"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "jpyorl475",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8295P ADP",
+    "job_id": "jp0m3w16g",
+    "status": "SUCCESS"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "jp8e0n3xp",
+    "status": "OPTIMIZING_MODEL"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "jgk271l2g",
+    "status": "OPTIMIZING_MODEL"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8775P ADP",
+    "job_id": "j5qlen74p",
+    "status": "OPTIMIZING_MODEL"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "jgly6d085",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "j568ex30g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA7255P ADP",
+    "job_id": "jp3zvd4l5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jgolkx1xg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jpvl081j5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jgjrz90xp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jpe7eqr15",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jgzlo6xk5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "j5wl2km6p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jg9zjr9lp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jp1ny9q2g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jgddek7eg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "j57e0mvlp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jp4yk7jvp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jpxlnqe1p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "j5m0q7vwg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jgnzl4rrg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jprl8r19p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "jp2r0134g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "jpyorlv75",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "jp0m3we6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jp8e0nwxp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jgk271r2g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "j5qlen94p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "jgly6de85",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "j568exq0g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "jp3zvdql5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "jgolkxexg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "jpvl08zj5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "jgjrz9kxp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jpe7eq415",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jgzlo6vk5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "j5wl2kx6p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jg9zjr8lp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jp1ny932g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jgddek0eg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "j5wl2kx3p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jg9zjr8wp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jp1ny938g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jgddek0rg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "j57e0m6vp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jp4yk788p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "j568exkng",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jp3zvdym5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jpvl08jz5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jgjrz9j1p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jpe7eqj85",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jgzlo6145",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "j5wl2kj4p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jg9zjr6mp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jgddekj6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "j57e0mqnp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jp4yk7z2p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jpxlnqw8p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jp1ny9lkg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jgddek9kg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "j57e0mwqp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jp2r01nxg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jpyorl0r5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jp0m3w72g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jp8e0nvzp",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jgk271myg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jgk27jxyg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "j5qlejq7p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jgly6jme5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "j568ek4vg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jp3zvy0x5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jgolkj64g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jgly6j4l5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "j568ek27g",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jp3zvynz5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jgolkjzdg",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jpvl0jqm5",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jgjrzjd8p",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jpe7ejo05",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jgzlo1265",
+    "status": "CREATED"
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "j5wl2jwjp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jpxlnqm3p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S21",
+    "job_id": "j5m0q74dg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jprl8r90p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jp2r01jrg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jpyorln85",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jp8e0n8kp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jgk271dwg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "j5qlenwnp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jgly6d7j5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "j568exv6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jp3zvd835",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jgolkxmqg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jpvl08ek5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jgjrz9ovp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jgzlo68o5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "j5wl2k83p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jg9zjrkwp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jp1ny978g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jgddek8rg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "j57e0mkvp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jp4yk7m8p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jpxlnq33p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "j5m0q7odg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jgnzl4okg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jprl8ro0p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jp2r014rg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jp0m3wd9g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jp8e0n6kp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jgk271owg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "j5qlenznp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jgly6doj5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "j568exr6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jp3zvdx35",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jgolkxoqg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jpvl089k5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jgjrz9wvp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "jpe7eqlo5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "jgzlo64o5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8295P ADP",
+    "job_id": "j5wl2k13p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "jg9zjrxwp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "jp1ny9v8g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8775P ADP",
+    "job_id": "jgddekzrg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "j57e0m7vp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "jp4yk798p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA7255P ADP",
+    "job_id": "jpxlnqd3p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "j5m0q7ddg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jgnzl47kg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jprl8rn0p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jp2r01vrg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jpyorl785",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jp0m3wv9g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jp8e0n4kp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jgk2719wg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "j5qlenmnp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jgly6d1j5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "j568exd6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jp3zvdw35",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jgolkx4qg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jpvl087k5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jgjrz9qvp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "jpe7eqyo5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "jgzlo6no5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "j5wl2k43p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jg9zjrdwp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jp1ny968g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jgddek2rg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "j57e0m9vp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "jp4yk738p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "jpxlnqx3p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "j5m0q78dg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "jgnzl4kkg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "jprl8rw0p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jp2r01erg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jpyorlm85",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jp0m3w69g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jp8e0n1kp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jgk2718wg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "j5qlenvnp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jgly6dlj5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "j568exw6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jp3zvd635",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jgolkx8qg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jpvl08dk5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jgjrz97vp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "j5m0q7j7g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jgnzl4jjg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jprl8rzkp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jpyorl905",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jp0m3wy0g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jp8e0noqp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jgk271zvg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "j5qlen8ep",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jgly6dn25",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "j568ex6ng",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jp3zvdkm5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jpvl083z5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jpe7eqzo5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jgzlo6mo5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S21",
+    "job_id": "j5wl2k73p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jg9zjrmwp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jp1ny9j8g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jgddek3rg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "j5wl2k7mp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jg9zjrm8p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jp1ny9j7g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jgddek3zg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "j57e0m49p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jp4yk711p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jpxlnq4lp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "j5m0q7m9g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jgnzl4nqg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jprl8r07p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jp2r01wqg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jpyorlxl5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jp0m3wjng",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jp8e0nxop",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jgk2714ng",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "j5qlenyop",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jgly6dym5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "j568ex8yg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jp3zvdzn5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jgolkxlkg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jpvl08lr5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jgjrz9rep",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jpe7eq7v5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jgzlo6lx5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "j5wl2klmp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jg9zjrz8p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jp1ny9n7g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jgddekdzg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "j57e0me9p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jp4yk7y1p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "jpxlnqllp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "j5m0q709g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8295P ADP",
+    "job_id": "jgnzl4zqg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "jp2r01rqg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "jpyorlol5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8775P ADP",
+    "job_id": "jp0m3wmng",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "jp8e0neop",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "jgk2712ng",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA7255P ADP",
+    "job_id": "j5qlenlop",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jgly6dwm5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "j568exoyg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jp3zvdon5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jgolkxdkg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jpvl082r5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jgjrz93ep",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jpe7eq6v5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jgzlo6zx5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "j5wl2kymp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jg9zjro8p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jp1ny9o7g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jgddek6zg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "j57e0mo9p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jp4yk7e1p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jpxlnq0lp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "j5m0q799g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "jgnzl41qg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "jprl8rx7p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jp2r01oqg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jpyorl8l5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jp0m3wong",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "jp8e0njop",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "jgk2716ng",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "j5qlen4op",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "jgly6d8m5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "j568exmyg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "jp3zvd7n5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jgolkxwkg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jpvl08mr5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jgjrz9yep",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jpe7eqxv5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jgzlo6yx5",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "j5wl2kzmp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jg9zjr28p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jp1ny917g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jgddek4zg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "j57e0mn9p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jp4yk741p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jpxlnqrlp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jgjrz9x1p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jpe7eq985",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jgzlo6e45",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "j5wl2ko4p",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jg9zjrvmp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jp1ny90ng",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jgddekw6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "j5wl2kozp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jg9zjrvqp",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jp1ny90kg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jgddekwkg",
+    "status": "CREATED"
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "j57e0mzqp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S21",
+    "job_id": "j5m0q7k9g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jgnzl4qqg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jprl8rd7p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jp2r01dqg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jpyorl2l5",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jp0m3w9ng",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jp8e0nrop",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jgk2710ng",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "j5qlen1op",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jgly6dqm5",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "j568ex0yg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jp3zvdrn5",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jgolkx9kg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jpvl08nr5",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jgjrz98ep",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jpe7eqnv5",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jgzlo60x5",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S25",
+    "job_id": "j5wl2krmp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jg9zjrq8p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jp1ny9m7g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jgddekmzg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "j5wl2kr4p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jg9zjrqmp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jp1ny9mng",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jgddekm6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "j57e0m8np",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jp4yk722p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jpxlnqz8p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "j5m0q7l7g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jgnzl4wjg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jprl8r7kp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jp2r01z6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jpyorly05",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jp0m3w80g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jp8e0ndqp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jgk271wvg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "j5qlenxep",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "jgly6d925",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8295P ADP",
+    "job_id": "j568ex9ng",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "jp3zvdlm5",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "jgolkx71g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8775P ADP",
+    "job_id": "jpvl08yz5",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "jgjrz961p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "jpe7eq085",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA7255P ADP",
+    "job_id": "jgzlo6q45",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "j5wl2k04p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jg9zjr7mp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jp1ny9kng",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jgddeky6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "j57e0m1np",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jp4yk762p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jpxlnq88p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "j5m0q717g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jgnzl4djg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jprl8rmkp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jp2r01q6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jpyorlk05",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jp0m3ww0g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jp8e0nnqp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jgk2711vg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "j5qlennep",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "jgly6dd25",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "j568exxng",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jp3zvddm5",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jgolkxx1g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jpvl088z5",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "jgjrz991p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "jpe7eqq85",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "jgzlo6645",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "j5wl2kk4p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "jg9zjrrmp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "jp1ny99ng",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jgddekk6g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "j57e0mmnp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jp4yk772p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jpxlnqq8p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "j5m0q777g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jgnzl44jg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jprl8rrkp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jp2r0116g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jpyorll05",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jp0m3wn0g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jp8e0nlqp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jgk271jvg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jp4yk7qqp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jpxlnqvjp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "j5m0q7ryg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jgnzl4yvg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jprl8rqvp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jp2r016xg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jpyorlwr5",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jp0m3wq2g",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jp8e0n9zp",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jgk271nyg",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "int4",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "j5qlenk7p",
+    "status": "CREATED"
+  },
+  {
+    "task": "arc",
+    "kind": "compile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jgly6dze5",
+    "status": "CREATED"
+  }
+]
