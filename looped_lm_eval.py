@@ -48,9 +48,14 @@ def extract_answer(text):
             return None
         s = nums[-1]
     s = s.replace(",", "").rstrip(".")
+    if len(s) > 40:                       # a runaway digit string is never a GSM8K answer
+        return None
     try:
-        return str(int(float(s))) if float(s) == int(float(s)) else s
-    except ValueError:
+        v = float(s)
+        if v != v or v in (float("inf"), float("-inf")):
+            return None
+        return str(int(v)) if v == int(v) else s
+    except (ValueError, OverflowError):
         return s
 
 
