@@ -89,16 +89,36 @@ def _clean(sd):
     return {k.replace("_orig_mod.model.", "").replace("model.", ""): v for k, v in sd.items()}
 
 
+CKPT_OVERRIDE = None   # set from --ckpt: a trained variant's step_N file (all_config.yaml beside it)
+
+
+def _variant_arch(ckpt):
+    """arch fields of a checkpoint trained with TRM's pretrain.py (all_config.yaml in the run dir)."""
+    import yaml
+    cfg_path = Path(ckpt).parent / "all_config.yaml"
+    if not cfg_path.exists():
+        return {}
+    return yaml.safe_load(cfg_path.read_text()).get("arch", {})
+
+
 def build_trm(task, H, nsup, batch):
     from models.recursive_reasoning.trm import TinyRecursiveReasoningModel_ACTV1
-    t = TRM_TASKS[task]
-    sd = _clean(torch.load(t["ckpt"], map_location="cpu", weights_only=False))
+    t = dict(TRM_TASKS[task])
+    ckpt = CKPT_OVERRIDE or t["ckpt"]
+    if CKPT_OVERRIDE:
+        arch = _variant_arch(ckpt)
+        t.update(L=arch.get("L_cycles", t["L"]), mlp_t=arch.get("mlp_t", t["mlp_t"]),
+                 pos=arch.get("pos_encodings", t["pos"]))
+        heads, plen, exp = arch.get("num_heads", 8), arch.get("puzzle_emb_len", 16), arch.get("expansion", 4)
+    else:
+        heads, plen, exp = 8, 16, 4
+    sd = _clean(torch.load(ckpt, map_location="cpu", weights_only=False))
     hidden = sd["inner.embed_tokens.embedding_weight"].shape[1]
     npid = sd["inner.puzzle_emb.weights"].shape[0]
     cfg = dict(batch_size=batch, seq_len=t["seq"], vocab_size=t["vocab"], num_puzzle_identifiers=npid,
-               H_cycles=H, L_cycles=t["L"], H_layers=0, L_layers=2, hidden_size=hidden, expansion=4,
-               num_heads=8, pos_encodings=t["pos"], halt_max_steps=nsup, halt_exploration_prob=0.1,
-               forward_dtype="float32", mlp_t=t["mlp_t"], puzzle_emb_ndim=hidden, puzzle_emb_len=16,
+               H_cycles=H, L_cycles=t["L"], H_layers=0, L_layers=2, hidden_size=hidden, expansion=exp,
+               num_heads=heads, pos_encodings=t["pos"], halt_max_steps=nsup, halt_exploration_prob=0.1,
+               forward_dtype="float32", mlp_t=t["mlp_t"], puzzle_emb_ndim=hidden, puzzle_emb_len=plen,
                no_ACT_continue=True)
     m = TinyRecursiveReasoningModel_ACTV1(cfg).eval()
     miss, unexp = m.load_state_dict(sd, strict=False)
@@ -284,7 +304,16 @@ def main():
     ap.add_argument("--n", type=int, default=1000)
     ap.add_argument("--batch", type=int, default=0)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--ckpt", default="", help="TRM tasks: evaluate this trained checkpoint (step_N file of a "
+                                                "pretrain.py run; heads/mixer/L read from its all_config.yaml)")
+    ap.add_argument("--variant", default="", help="label stored in every record (e.g. sudoku_mlp_w256_s0_step6510)")
     a = ap.parse_args()
+    global CKPT_OVERRIDE
+    if a.ckpt:
+        assert a.task in TRM_TASKS, "--ckpt applies to TRM tasks only"
+        CKPT_OVERRIDE = a.ckpt
+        arch = _variant_arch(a.ckpt)
+        print(f"variant checkpoint {a.ckpt}: arch {arch}", flush=True)
 
     np.random.seed(0)
     torch.manual_seed(0)
@@ -303,6 +332,7 @@ def main():
         except (json.JSONDecodeError, ValueError):
             print(f"  {out_path} unreadable (truncated write); starting fresh", flush=True)
     done = {(r["H_cycles"], r["nsup"], r["quant"]["spec"]) for r in records}
+    extra = {"variant": a.variant, "ckpt": a.ckpt} if a.ckpt else {}
     print(f"{a.task}: {len(inp)} puzzles, batch {batch}, H={Hs}, nsup={nsups}, quants={quants}; "
           f"{len(records)} records already", flush=True)
 
@@ -318,7 +348,7 @@ def main():
                                 "quant": parse_quant("fp32"), "n": int(len(inp)),
                                 "pexact": float(ref_c.mean()), "cell": ref_cell, "fidelity_H": 1.0,
                                 "fidelity_L": 1.0, "correct": ref_c.astype(int).tolist(),
-                                "secs": time.time() - t0})
+                                "secs": time.time() - t0, **extra})
                 print(f"  H={Hc} nsup={nsup} fp32       pexact {ref_c.mean()*100:6.2f} cell {ref_cell*100:6.2f}", flush=True)
             for spec in quants:
                 if spec == "fp32" or (Hc, nsup, spec) in done:
@@ -332,7 +362,7 @@ def main():
                 fH, fL = fidelity(zH, ref_zH), fidelity(zL, ref_zL)
                 rec = {"task": a.task, "H_cycles": Hc, "L_cycles": meta["L_cycles"], "nsup": nsup, "quant": q,
                        "n": int(len(inp)), "pexact": float(c.mean()), "cell": cell, "fidelity_H": fH,
-                       "fidelity_L": fL, "correct": c.astype(int).tolist(), "secs": time.time() - t1}
+                       "fidelity_L": fL, "correct": c.astype(int).tolist(), "secs": time.time() - t1, **extra}
                 records.append(rec)
                 print(f"  H={Hc} nsup={nsup} {spec:10s} pexact {c.mean()*100:6.2f} cell {cell*100:6.2f} "
                       f"fidH {fH:.4f} fidL {fL:.4f} ({time.time()-t1:.0f}s)", flush=True)
