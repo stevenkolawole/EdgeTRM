@@ -61,8 +61,14 @@ def prompt_ids(tok, question):
 
 @torch.no_grad()
 def latents(model, ids):
-    out = model(ids, output_hidden_states=True, return_dict=True, use_cache=False)
-    return out.hidden_states[-1][0].float().cpu()
+    """Final hidden state (after the last loop, before the LM head), read
+    through a hook on the final norm: transformers' output-capture wrapper
+    cannot attach hidden states to this remote model's tuple outputs."""
+    cap = []
+    h = model.model.norm.register_forward_hook(lambda m, i, o: cap.append(o.detach()))
+    model(ids, use_cache=False)
+    h.remove()
+    return cap[-1][0].float().cpu()
 
 
 @torch.no_grad()
