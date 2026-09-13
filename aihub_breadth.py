@@ -89,7 +89,8 @@ def stage_submit(tasks, devices, do_fp32):
     for task in tasks:
         rec_path = OUT / f"{task}_jobs.json"
         rec = json.loads(rec_path.read_text()) if rec_path.exists() else {"task": task, "jobs": []}
-        have = {(j["precision"], j["device"], j["kind"]) for j in rec["jobs"]}
+        have = {(j["precision"], j["device"], j["kind"]) for j in rec["jobs"] if j.get("job_id")}
+        rec["jobs"] = [j for j in rec["jobs"] if j.get("job_id")]
         qms = quantized_models(task)
         print(f"[{task}] quantized models: {list(qms)}", flush=True)
 
@@ -112,11 +113,19 @@ def stage_submit(tasks, devices, do_fp32):
                     cj = hub.submit_compile_job(model=model, device=dev(name, os_), options=opts,
                                                 name=f"breadth_{task}_{prec}_{name}")
                 except Exception as exc:  # noqa: BLE001
-                    print(f"[{task}] compile {prec} {name}: submit failed: {str(exc)[:120]}", flush=True)
-                    rec["jobs"].append({"kind": "compile", "precision": prec, "runtime": runtime, "device": name,
-                                        "os": os_, "job_id": None, "error": str(exc)[:200]})
-                    save()
-                    continue
+                    msg = str(exc)
+                    if "does not support compilation to QNN" in msg and is_q:
+                        # older Snapdragons: TFLite runtime (GPU/CPU delegate) instead
+                        try:
+                            opts, runtime = TFL, "tflite"
+                            cj = hub.submit_compile_job(model=model, device=dev(name, os_), options=opts,
+                                                        name=f"breadth_{task}_{prec}_{name}")
+                        except Exception as exc2:  # noqa: BLE001
+                            print(f"[{task}] compile {prec} {name}: tflite fallback failed: {str(exc2)[:120]}", flush=True)
+                            continue
+                    else:
+                        print(f"[{task}] compile {prec} {name}: submit failed: {msg[:120]}", flush=True)
+                        continue
                 rec["jobs"].append({"kind": "compile", "precision": prec, "runtime": runtime, "device": name,
                                     "os": os_, "job_id": cj.job_id})
                 print(f"[{task}] compile {prec:5s} {name:32s} -> {cj.job_id}", flush=True)

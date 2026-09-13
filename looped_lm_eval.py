@@ -35,7 +35,7 @@ def load_gsm8k(n):
     files = sorted(glob.glob(str(HOME / "hf_cache/hub/datasets--openai--gsm8k/snapshots/*/main/test-*.parquet")))
     df = pd.concat([pd.read_parquet(f) for f in files]).reset_index(drop=True)
     rows = df.iloc[:n]
-    return [(q, a.split("####")[-1].strip().replace(",", "")) for q, a in zip(rows["question"], rows["answer"])]
+    return [(q, a.split("####")[-1].strip().replace(",", ""), a) for q, a in zip(rows["question"], rows["answer"])]
 
 
 def extract_answer(text):
@@ -129,23 +129,38 @@ def latents(model, ids, steps):
 
 
 @torch.no_grad()
-def evaluate(model, tok, data, steps, max_new, ref_lat=None):
+def gold_nll(model, tok, ids, solution, steps):
+    """Teacher-forced mean NLL (nats/token) of the gold solution after the prompt."""
+    sol = tok.encode(solution + tok.eos_token, return_tensors="pt", add_special_tokens=False).to(DEV)
+    full = torch.cat([ids, sol], dim=1)
+    out = model(full, num_steps=steps, output_details={"return_logits": True, "return_latents": False,
+                                                       "return_head": False, "return_stats": False})
+    logits = out.logits[0, ids.shape[1] - 1:-1].float()
+    return float(F.cross_entropy(logits, sol[0], reduction="mean"))
+
+
+@torch.no_grad()
+def evaluate(model, tok, data, steps, max_new, ref_lat=None, gen=True):
     from transformers import GenerationConfig
     cfg = GenerationConfig(max_new_tokens=max_new, do_sample=False, temperature=None, top_p=None,
                            pad_token_id=tok.pad_token_id or tok.eos_token_id, eos_token_id=tok.eos_token_id)
-    correct, lats, fids, gens = [], [], [], []
-    for i, (q, gold) in enumerate(data):
+    correct, lats, fids, gens, nlls = [], [], [], [], []
+    for i, (q, gold, sol) in enumerate(data):
         ids = prompt_ids(tok, q)
         lat = latents(model, ids, steps)
         lats.append(lat)
         if ref_lat is not None:
             fids.append(float(F.cosine_similarity(lat, ref_lat[i], dim=-1).mean()))
+        nlls.append(gold_nll(model, tok, ids, sol, steps))
+        if not gen:
+            continue
         out = model.generate(ids, cfg, num_steps=steps, tokenizer=tok)
         text = tok.decode(out[0, ids.shape[1]:], skip_special_tokens=True)
         pred = extract_answer(text)
         correct.append(int(pred == gold))
         gens.append(len(out[0]) - ids.shape[1])
-    return correct, lats, (sum(fids) / len(fids) if fids else 1.0), sum(gens) / len(gens)
+    return (correct, lats, (sum(fids) / len(fids) if fids else 1.0),
+            (sum(gens) / len(gens) if gens else 0.0), sum(nlls) / len(nlls))
 
 
 def main():
@@ -155,7 +170,8 @@ def main():
     ap.add_argument("--scope", default="core", choices=["core", "all"])
     ap.add_argument("--steps", default="4,8,16,32,64")
     ap.add_argument("--n", type=int, default=250)
-    ap.add_argument("--max_new", type=int, default=400)
+    ap.add_argument("--max_new", type=int, default=512)
+    ap.add_argument("--no_gen", action="store_true", help="teacher-forced NLL and fidelity only (fast)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     model_id = {"huginn": "tomg-group-umd/huginn-0125"}[a.model]
@@ -171,26 +187,28 @@ def main():
     for steps in steps_list:
         model, tok = build(model_id)
         t0 = time.time()
-        c, lats, _, glen = evaluate(model, tok, data, steps, a.max_new)
+        c, lats, _, glen, nll = evaluate(model, tok, data, steps, a.max_new, gen=not a.no_gen)
         ref[steps] = lats
+        acc = sum(c) / len(c) if c else None
         if (steps, "bf16", a.scope) not in done:
             records.append({"model": a.model, "steps": steps, "quant": parse_quant("bf16"), "scope": a.scope,
-                            "n": len(data), "acc": sum(c) / len(c), "fidelity": 1.0, "gen_len": glen,
+                            "n": len(data), "acc": acc, "nll": nll, "fidelity": 1.0, "gen_len": glen,
                             "correct": c, "secs": time.time() - t0})
             json.dump({"model": a.model, "records": records}, open(out_path, "w"))
-        print(f"  steps={steps:3d} bf16      acc {sum(c)/len(c)*100:5.1f}  gen {glen:.0f} ({time.time()-t0:.0f}s)", flush=True)
+        print(f"  steps={steps:3d} bf16      acc {acc if acc is None else round(acc*100,1)}  nll {nll:.3f}  gen {glen:.0f} ({time.time()-t0:.0f}s)", flush=True)
         for spec in quants:
             if spec == "bf16" or (steps, spec, a.scope) in done:
                 continue
             q = parse_quant(spec)
             t1 = time.time()
             nq = quantize_model_(model, q, a.scope)
-            c, _, fid, glen = evaluate(model, tok, data, steps, a.max_new, ref_lat=ref[steps])
+            c, _, fid, glen, nll = evaluate(model, tok, data, steps, a.max_new, ref_lat=ref[steps], gen=not a.no_gen)
+            acc = sum(c) / len(c) if c else None
             records.append({"model": a.model, "steps": steps, "quant": q, "scope": a.scope, "n": len(data),
-                            "acc": sum(c) / len(c), "fidelity": fid, "gen_len": glen, "correct": c,
+                            "acc": acc, "nll": nll, "fidelity": fid, "gen_len": glen, "correct": c,
                             "n_quantized_linears": nq, "secs": time.time() - t1})
             json.dump({"model": a.model, "records": records}, open(out_path, "w"))
-            print(f"  steps={steps:3d} {spec:9s} acc {sum(c)/len(c)*100:5.1f}  fid {fid:.4f}  gen {glen:.0f} ({time.time()-t1:.0f}s)", flush=True)
+            print(f"  steps={steps:3d} {spec:9s} acc {acc if acc is None else round(acc*100,1)}  nll {nll:.3f}  fid {fid:.4f}  gen {glen:.0f} ({time.time()-t1:.0f}s)", flush=True)
             del model
             torch.cuda.empty_cache()
             model, tok = build(model_id)           # fresh weights for the next quantizer
