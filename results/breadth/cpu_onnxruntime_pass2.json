@@ -1,0 +1,282 @@
+{
+ "meta": {
+  "cpu": "Intel(R) Xeon(R) Platinum 8275CL CPU @ 3.00GHz",
+  "cores": 96,
+  "onnxruntime": "1.29.0",
+  "platform": "Linux-6.17.0-1017-aws-x86_64-with-glibc2.39",
+  "provider": "CPUExecutionProvider",
+  "note": "other jobs share this host; see intra-op thread column"
+ },
+ "rows": [
+  {
+   "task": "sudoku_mlp",
+   "precision": "fp32",
+   "threads": 1,
+   "file_mb": 19.6214017868042,
+   "ms_median": 381.20169000467286,
+   "ms_p10": 379.0027420036495,
+   "ms_p90": 423.13940601889044,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "fp32",
+   "threads": 4,
+   "file_mb": 19.6214017868042,
+   "ms_median": 124.01657100417651,
+   "ms_p10": 107.03941603424028,
+   "ms_p90": 142.28615100728348,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "fp32",
+   "threads": 16,
+   "file_mb": 19.6214017868042,
+   "ms_median": 62.784831010503694,
+   "ms_p10": 48.29417198197916,
+   "ms_p90": 66.58780900761485,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "int8_static",
+   "threads": 1,
+   "file_mb": 5.805722236633301,
+   "ms_median": 224.15455398731865,
+   "ms_p10": 216.25374600989744,
+   "ms_p90": 235.6044549960643,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "int8_static",
+   "threads": 4,
+   "file_mb": 5.805722236633301,
+   "ms_median": 125.58113248087466,
+   "ms_p10": 106.90802294993773,
+   "ms_p90": 138.80823302315548,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "int8_static",
+   "threads": 16,
+   "file_mb": 5.805722236633301,
+   "ms_median": 92.08795049926266,
+   "ms_p10": 83.69992399821058,
+   "ms_p90": 95.14674899401143,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "int4_matmulnbits",
+   "threads": 1,
+   "file_mb": 0.44573307037353516,
+   "ms_median": 267.13769100024365,
+   "ms_p10": 265.553544042632,
+   "ms_p90": 268.47225602250546,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "int4_matmulnbits",
+   "threads": 4,
+   "file_mb": 0.44573307037353516,
+   "ms_median": 136.82651199633256,
+   "ms_p10": 128.2682730234228,
+   "ms_p90": 156.28704300615937,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "int4_matmulnbits",
+   "threads": 16,
+   "file_mb": 0.44573307037353516,
+   "ms_median": 54.15200599236414,
+   "ms_p10": 51.007681991904974,
+   "ms_p90": 65.55056001525372,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "fp32",
+   "threads": 1,
+   "file_mb": 31.17325210571289,
+   "ms_median": 376.0089609713759,
+   "ms_p10": 374.8374819988385,
+   "ms_p90": 428.1178289675154,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "fp32",
+   "threads": 4,
+   "file_mb": 31.17325210571289,
+   "ms_median": 142.8804625174962,
+   "ms_p10": 140.83630999084562,
+   "ms_p90": 162.60403901105747,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "fp32",
+   "threads": 16,
+   "file_mb": 31.17325210571289,
+   "ms_median": 84.18225048808381,
+   "ms_p10": 77.12134602479637,
+   "ms_p90": 92.0568149886094,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "int8_static",
+   "threads": 1,
+   "file_mb": 9.394664764404297,
+   "ms_median": 236.9593989860732,
+   "ms_p10": 235.8680649776943,
+   "ms_p90": 237.836456974037,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "int8_static",
+   "threads": 4,
+   "file_mb": 9.394664764404297,
+   "ms_median": 175.5199659965001,
+   "ms_p10": 173.79211401566863,
+   "ms_p90": 179.13537798449397,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "int8_static",
+   "threads": 16,
+   "file_mb": 9.394664764404297,
+   "ms_median": 124.96023951098323,
+   "ms_p10": 116.51511199306697,
+   "ms_p90": 127.99206998897716,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "int4_matmulnbits",
+   "threads": 1,
+   "file_mb": 1.1670427322387695,
+   "ms_median": 376.1762900103349,
+   "ms_p10": 265.7753700041212,
+   "ms_p90": 426.3422730145976,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "int4_matmulnbits",
+   "threads": 4,
+   "file_mb": 1.1670427322387695,
+   "ms_median": 150.92978248139843,
+   "ms_p10": 140.62504097819328,
+   "ms_p90": 163.6636060429737,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "int4_matmulnbits",
+   "threads": 16,
+   "file_mb": 1.1670427322387695,
+   "ms_median": 78.37122600176372,
+   "ms_p10": 73.79239803412929,
+   "ms_p90": 86.5303220343776,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "fp32",
+   "threads": 1,
+   "file_mb": 53.679911613464355,
+   "ms_median": 3419.3899184756447,
+   "ms_p10": 3368.9045200007968,
+   "ms_p90": 3444.611385988537,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "fp32",
+   "threads": 4,
+   "file_mb": 53.679911613464355,
+   "ms_median": 944.8648685356602,
+   "ms_p10": 932.1913640014827,
+   "ms_p90": 973.3977260184474,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "fp32",
+   "threads": 16,
+   "file_mb": 53.679911613464355,
+   "ms_median": 329.9479204870295,
+   "ms_p10": 316.9532679603435,
+   "ms_p90": 341.54779999516904,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "int8_static",
+   "threads": 1,
+   "file_mb": 14.587895393371582,
+   "ms_median": 2855.7770985062234,
+   "ms_p10": 2853.075336024631,
+   "ms_p90": 4161.3162200083025,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "int8_static",
+   "threads": 4,
+   "file_mb": 14.587895393371582,
+   "ms_median": 1411.2476029840764,
+   "ms_p10": 1299.1372129763477,
+   "ms_p90": 1448.6150129814632,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "int8_static",
+   "threads": 16,
+   "file_mb": 14.587895393371582,
+   "ms_median": 658.5969409788959,
+   "ms_p10": 642.4920929712243,
+   "ms_p90": 668.3376799919643,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "int4_matmulnbits",
+   "threads": 1,
+   "file_mb": 0.8314456939697266,
+   "ms_median": 3364.6598824998364,
+   "ms_p10": 3274.8023659805767,
+   "ms_p90": 3418.4695970034227,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "int4_matmulnbits",
+   "threads": 4,
+   "file_mb": 0.8314456939697266,
+   "ms_median": 989.6967474778648,
+   "ms_p10": 922.9749320074916,
+   "ms_p90": 1055.537889013067,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "int4_matmulnbits",
+   "threads": 16,
+   "file_mb": 0.8314456939697266,
+   "ms_median": 319.6549800049979,
+   "ms_p10": 310.7176010380499,
+   "ms_p90": 326.8122190493159,
+   "runs": 50
+  }
+ ]
+}
