@@ -56,6 +56,9 @@ def main():
                     help="official protocol: all augmented test rows, inverse-augmented and voted per puzzle "
                          "(pass@1/pass@2 with test-time augmentation, comparable to the published 44.6%%); "
                          "token metrics and fidelity still on the canonical rows")
+    ap.add_argument("--shard", default="", help="--full only: K/N keeps the puzzles whose crc32(name) %% N == K, "
+                                                "so N processes split the augmented rows without breaking the "
+                                                "per-puzzle vote; merge shards by n_puzzles-weighted mean")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     Q._setup()
@@ -66,11 +69,21 @@ def main():
     canon = np.array([i for i in range(len(pids)) if pids[i] != 0 and "|||" not in identifiers[int(pids[i])]])
     ds = SimpleNamespace(inputs=inputs[canon], labels=labels[canon], per_sample_pids=pids[canon])
     loader = SimpleNamespace(dataset=ds, batch_size=a.chunk)
+    shard_note = ""
     if a.full:
-        loader = SimpleNamespace(dataset=SimpleNamespace(inputs=inputs, labels=labels, per_sample_pids=pids),
-                                 batch_size=a.chunk)
+        sel = np.arange(len(pids))
+        if a.shard:
+            import zlib
+            k, nsh = (int(x) for x in a.shard.split("/"))
+            bucket = np.array([zlib.crc32(identifiers[int(p)].split("|||")[0].encode()) % nsh if p != 0 else -1
+                               for p in pids])
+            sel = np.nonzero(bucket == k)[0]
+            shard_note = f"; shard {k}/{nsh}: {len(sel)} rows"
+        loader = SimpleNamespace(dataset=SimpleNamespace(inputs=np.asarray(inputs[sel]), labels=np.asarray(labels[sel]),
+                                                         per_sample_pids=pids[sel]), batch_size=a.chunk)
     protocol = "full_aug_vote" if a.full else "canonical_single_pass"
-    print(f"ARC-AGI-1: {len(canon)} canonical (un-augmented) rows of {len(pids)}; protocol {protocol}", flush=True)
+    print(f"ARC-AGI-1: {len(canon)} canonical (un-augmented) rows of {len(pids)}; protocol {protocol}{shard_note}",
+          flush=True)
     c_inputs = np.asarray(ds.inputs).astype(np.int64)
     c_labels = np.asarray(ds.labels).astype(np.int64)
     c_pids = ds.per_sample_pids
@@ -126,13 +139,15 @@ def main():
                 torch.cat(finals), handles)
 
     @torch.no_grad()
-    def evaluate(m, nsup, act=None):
+    def evaluate(m, nsup, act=None, score=True):
         stats, z, handles = carry_pass(m, nsup, act)          # activation scales frozen here if act
-        p1, p2, cell, ms, n = nb_func.evaluate_arc_per_puzzle(m, loader, device=DEV, n_sup_max=nsup, return_pass2=True,
-                                                              fast_mode=not a.full)
+        if score:
+            p1, p2, cell, ms, n = nb_func.evaluate_arc_per_puzzle(m, loader, device=DEV, n_sup_max=nsup,
+                                                                  return_pass2=True, fast_mode=not a.full)
+            stats.update({"arc_pass1": p1, "arc_pass2": p2, "cell": cell, "n_puzzles": n})
         for h in handles:
             h.remove()
-        stats.update({"arc_pass1": p1, "arc_pass2": p2, "cell": cell, "n_puzzles": n, "protocol": protocol})
+        stats.update({"protocol": protocol, "shard": a.shard})
         return stats, z
 
     out_path = Path(a.out)
@@ -149,15 +164,18 @@ def main():
         for nsup in [int(x) for x in a.nsup.split(",")]:
             t0 = time.time()
             m = build(H, nsup)
-            ref, ref_z = evaluate(m, nsup)
+            # in --full mode the fp32 vote is hours of CPU: score it only when fp32 is asked for and not done
+            score_ref = (not a.full) or ("fp32" in quants and (H, nsup, "fp32") not in done)
+            ref, ref_z = evaluate(m, nsup, score=score_ref)
             del m
             torch.cuda.empty_cache()
-            if (H, nsup, "fp32") not in done:
+            if (H, nsup, "fp32") not in done and score_ref:
                 records.append({"task": "arc_attn", "H_cycles": H, "L_cycles": cfg_yaml["arch"]["L_cycles"], "nsup": nsup,
                                 "quant": parse_quant("fp32"), **ref, "fidelity_H": 1.0, "secs": time.time() - t0})
                 json.dump({"task": "arc_attn", "records": records}, open(out_path, "w"))
-            print(f"  H={H} nsup={nsup} fp32       pass1 {ref['arc_pass1']*100:6.2f} pass2 {ref['arc_pass2']*100:6.2f} "
-                  f"cell {ref['cell']*100:6.2f} tok {ref['pexact_token']*100:6.2f} ({time.time()-t0:.0f}s)", flush=True)
+            if score_ref:
+                print(f"  H={H} nsup={nsup} fp32       pass1 {ref['arc_pass1']*100:6.2f} pass2 {ref['arc_pass2']*100:6.2f} "
+                      f"cell {ref['cell']*100:6.2f} tok {ref['pexact_token']*100:6.2f} ({time.time()-t0:.0f}s)", flush=True)
             for spec in quants:
                 if spec == "fp32" or (H, nsup, spec) in done:
                     continue
