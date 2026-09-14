@@ -1,0 +1,282 @@
+{
+ "meta": {
+  "cpu": "Intel(R) Xeon(R) Platinum 8275CL CPU @ 3.00GHz",
+  "cores": 96,
+  "onnxruntime": "1.29.0",
+  "platform": "Linux-6.17.0-1017-aws-x86_64-with-glibc2.39",
+  "provider": "CPUExecutionProvider",
+  "note": "other jobs share this host; see intra-op thread column"
+ },
+ "rows": [
+  {
+   "task": "sudoku_mlp",
+   "precision": "fp32",
+   "threads": 1,
+   "file_mb": 19.6214017868042,
+   "ms_median": 269.3371679924894,
+   "ms_p10": 268.02727300673723,
+   "ms_p90": 270.49392799381167,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "fp32",
+   "threads": 4,
+   "file_mb": 19.6214017868042,
+   "ms_median": 158.21918152505532,
+   "ms_p10": 156.18921001441777,
+   "ms_p90": 160.8661719947122,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "fp32",
+   "threads": 16,
+   "file_mb": 19.6214017868042,
+   "ms_median": 61.213179025799036,
+   "ms_p10": 59.57672599470243,
+   "ms_p90": 63.75833600759506,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "int8_static",
+   "threads": 1,
+   "file_mb": 5.805767059326172,
+   "ms_median": 215.01578798051924,
+   "ms_p10": 214.22543202061206,
+   "ms_p90": 216.1459379713051,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "int8_static",
+   "threads": 4,
+   "file_mb": 5.805767059326172,
+   "ms_median": 131.94819050841033,
+   "ms_p10": 119.79475198313594,
+   "ms_p90": 138.08603899087757,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_mlp",
+   "precision": "int8_static",
+   "threads": 16,
+   "file_mb": 5.805767059326172,
+   "ms_median": 104.91520096547902,
+   "ms_p10": 89.9894600152038,
+   "ms_p90": 121.91753298975527,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "fp32",
+   "threads": 1,
+   "file_mb": 31.17325210571289,
+   "ms_median": 261.5463694965001,
+   "ms_p10": 260.1785509614274,
+   "ms_p90": 270.8272460149601,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "fp32",
+   "threads": 4,
+   "file_mb": 31.17325210571289,
+   "ms_median": 145.60554650961421,
+   "ms_p10": 143.83420604281127,
+   "ms_p90": 162.54939802456647,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "fp32",
+   "threads": 16,
+   "file_mb": 31.17325210571289,
+   "ms_median": 76.799900009064,
+   "ms_p10": 74.96566500049084,
+   "ms_p90": 79.25226900260895,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "int8_static",
+   "threads": 1,
+   "file_mb": 9.394722938537598,
+   "ms_median": 237.11636100779288,
+   "ms_p10": 235.07018899545074,
+   "ms_p90": 343.72214798349887,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "int8_static",
+   "threads": 4,
+   "file_mb": 9.394722938537598,
+   "ms_median": 162.00689499964938,
+   "ms_p10": 152.21191802993417,
+   "ms_p90": 176.44055001437664,
+   "runs": 50
+  },
+  {
+   "task": "sudoku_attn",
+   "precision": "int8_static",
+   "threads": 16,
+   "file_mb": 9.394722938537598,
+   "ms_median": 115.17274449579418,
+   "ms_p10": 99.71555002266541,
+   "ms_p90": 122.72569298511371,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "fp32",
+   "threads": 1,
+   "file_mb": 53.679911613464355,
+   "ms_median": 2411.4282004884444,
+   "ms_p10": 2408.2682189764455,
+   "ms_p90": 2444.0892330021597,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "fp32",
+   "threads": 4,
+   "file_mb": 53.679911613464355,
+   "ms_median": 866.186536004534,
+   "ms_p10": 864.7927470155992,
+   "ms_p90": 1025.8589609875344,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "fp32",
+   "threads": 16,
+   "file_mb": 53.679911613464355,
+   "ms_median": 343.9294130075723,
+   "ms_p10": 339.86867498606443,
+   "ms_p90": 353.5583720076829,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "int8_static",
+   "threads": 1,
+   "file_mb": 14.587921142578125,
+   "ms_median": 2841.7602664849255,
+   "ms_p10": 2837.123678997159,
+   "ms_p90": 2917.8913020296022,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "int8_static",
+   "threads": 4,
+   "file_mb": 14.587921142578125,
+   "ms_median": 1529.0245969954412,
+   "ms_p10": 1199.6243610046804,
+   "ms_p90": 1531.763206992764,
+   "runs": 50
+  },
+  {
+   "task": "maze",
+   "precision": "int8_static",
+   "threads": 16,
+   "file_mb": 14.587921142578125,
+   "ms_median": 630.741085507907,
+   "ms_p10": 625.7860150071792,
+   "ms_p90": 737.7470990177244,
+   "runs": 50
+  },
+  {
+   "task": "arc",
+   "precision": "fp32",
+   "threads": 1,
+   "file_mb": 53.70335292816162,
+   "ms_median": 2403.9887759718113,
+   "ms_p10": 2401.7358060227707,
+   "ms_p90": 3412.192528019659,
+   "runs": 50
+  },
+  {
+   "task": "arc",
+   "precision": "fp32",
+   "threads": 4,
+   "file_mb": 53.70335292816162,
+   "ms_median": 967.0969044964295,
+   "ms_p10": 915.1669620187022,
+   "ms_p90": 995.0764210079797,
+   "runs": 50
+  },
+  {
+   "task": "arc",
+   "precision": "fp32",
+   "threads": 16,
+   "file_mb": 53.70335292816162,
+   "ms_median": 317.42439552908763,
+   "ms_p10": 307.8206990030594,
+   "ms_p90": 323.1017329962924,
+   "runs": 50
+  },
+  {
+   "task": "arc",
+   "precision": "int8_static",
+   "threads": 1,
+   "file_mb": 14.5938720703125,
+   "ms_median": 2828.1063009926584,
+   "ms_p10": 2824.699200980831,
+   "ms_p90": 2830.789166968316,
+   "runs": 50
+  },
+  {
+   "task": "arc",
+   "precision": "int8_static",
+   "threads": 4,
+   "file_mb": 14.5938720703125,
+   "ms_median": 1269.9729185260367,
+   "ms_p10": 1188.4365470032208,
+   "ms_p90": 1320.5773580120876,
+   "runs": 50
+  },
+  {
+   "task": "arc",
+   "precision": "int8_static",
+   "threads": 16,
+   "file_mb": 14.5938720703125,
+   "ms_median": 600.8282834955025,
+   "ms_p10": 582.4665729887784,
+   "ms_p90": 620.1136860181578,
+   "runs": 50
+  },
+  {
+   "task": "arc",
+   "precision": "int4_matmulnbits",
+   "threads": 1,
+   "file_mb": 0.8316726684570312,
+   "ms_median": 2433.040128526045,
+   "ms_p10": 2401.1103869997896,
+   "ms_p90": 2437.771704979241,
+   "runs": 50
+  },
+  {
+   "task": "arc",
+   "precision": "int4_matmulnbits",
+   "threads": 4,
+   "file_mb": 0.8316726684570312,
+   "ms_median": 942.0339684875216,
+   "ms_p10": 893.4074930148199,
+   "ms_p90": 1066.2554110167548,
+   "runs": 50
+  },
+  {
+   "task": "arc",
+   "precision": "int4_matmulnbits",
+   "threads": 16,
+   "file_mb": 0.8316726684570312,
+   "ms_median": 328.5543524834793,
+   "ms_p10": 314.26418403862044,
+   "ms_p90": 520.6253970391117,
+   "runs": 50
+  }
+ ]
+}
