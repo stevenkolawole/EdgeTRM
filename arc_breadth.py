@@ -52,6 +52,10 @@ def main():
     ap.add_argument("--H", default="3")
     ap.add_argument("--nsup", default="16")
     ap.add_argument("--chunk", type=int, default=64)
+    ap.add_argument("--full", action="store_true",
+                    help="official protocol: all augmented test rows, inverse-augmented and voted per puzzle "
+                         "(pass@1/pass@2 with test-time augmentation, comparable to the published 44.6%%); "
+                         "token metrics and fidelity still on the canonical rows")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     Q._setup()
@@ -62,7 +66,11 @@ def main():
     canon = np.array([i for i in range(len(pids)) if pids[i] != 0 and "|||" not in identifiers[int(pids[i])]])
     ds = SimpleNamespace(inputs=inputs[canon], labels=labels[canon], per_sample_pids=pids[canon])
     loader = SimpleNamespace(dataset=ds, batch_size=a.chunk)
-    print(f"ARC-AGI-1: {len(canon)} canonical (un-augmented) rows of {len(pids)}", flush=True)
+    if a.full:
+        loader = SimpleNamespace(dataset=SimpleNamespace(inputs=inputs, labels=labels, per_sample_pids=pids),
+                                 batch_size=a.chunk)
+    protocol = "full_aug_vote" if a.full else "canonical_single_pass"
+    print(f"ARC-AGI-1: {len(canon)} canonical (un-augmented) rows of {len(pids)}; protocol {protocol}", flush=True)
     c_inputs = np.asarray(ds.inputs).astype(np.int64)
     c_labels = np.asarray(ds.labels).astype(np.int64)
     c_pids = ds.per_sample_pids
@@ -120,10 +128,11 @@ def main():
     @torch.no_grad()
     def evaluate(m, nsup, act=None):
         stats, z, handles = carry_pass(m, nsup, act)          # activation scales frozen here if act
-        p1, p2, cell, ms, n = nb_func.evaluate_arc_per_puzzle(m, loader, device=DEV, n_sup_max=nsup, return_pass2=True)
+        p1, p2, cell, ms, n = nb_func.evaluate_arc_per_puzzle(m, loader, device=DEV, n_sup_max=nsup, return_pass2=True,
+                                                              fast_mode=not a.full)
         for h in handles:
             h.remove()
-        stats.update({"arc_pass1": p1, "arc_pass2": p2, "cell": cell, "n_puzzles": n})
+        stats.update({"arc_pass1": p1, "arc_pass2": p2, "cell": cell, "n_puzzles": n, "protocol": protocol})
         return stats, z
 
     out_path = Path(a.out)
