@@ -166,6 +166,8 @@ def parse_quant(spec):
     """'fp32' | 'w4t' | 'w4a+a8' | 'w3g128' -> dict."""
     if spec == "fp32":
         return {"spec": spec, "bits": None, "gran": None, "act": None}
+    if spec.startswith("noise"):          # Gaussian weight noise, std = sigma x per-tensor weight std
+        return {"spec": spec, "bits": None, "gran": "noise", "sigma": float(spec[5:]), "act": None}
     s = spec
     act = None
     if "+a8" in s:
@@ -181,9 +183,12 @@ def parse_quant(spec):
 
 
 @torch.no_grad()
-def quantize_weights_(m, bits, gran):
+def quantize_weights_(m, bits, gran, sigma=None):
     for mod in _linears(m):
         W = mod.weight.data
+        if gran == "noise":                                 # control: additive Gaussian noise, no rounding
+            mod.weight.data = W + torch.randn_like(W) * (sigma * W.std())
+            continue
         if gran == "a":                                     # per-channel asymmetric min/max
             qmax = 2 ** bits - 1
             wmin = W.amin(dim=1, keepdim=True)
@@ -356,7 +361,7 @@ def main():
                 q = parse_quant(spec)
                 t1 = time.time()
                 mq, _ = build(a.task, H, nsup, batch)
-                quantize_weights_(mq, q["bits"], q["gran"])
+                quantize_weights_(mq, q["bits"], q["gran"], q.get("sigma"))
                 c, cell, zH, zL = run(mq, inp, lab, batch, nsup, act_quant=q["act"])
                 del mq
                 fH, fL = fidelity(zH, ref_zH), fidelity(zL, ref_zL)

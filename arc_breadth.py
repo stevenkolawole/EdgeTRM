@@ -182,7 +182,7 @@ def main():
                 q = parse_quant(spec)
                 t1 = time.time()
                 mq = build(H, nsup)
-                quantize_weights_(mq, q["bits"], q["gran"])
+                quantize_weights_(mq, q["bits"], q["gran"], q.get("sigma"))
                 r, z = evaluate(mq, nsup, act=q["act"])
                 del mq
                 torch.cuda.empty_cache()
