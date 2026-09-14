@@ -66,6 +66,8 @@ def parse_quant(spec):
     """'fp32' | 'w4c' | 'w8c+a8' (+a8: static per-tensor INT8 activation fake-quant at every conv input)."""
     if spec == "fp32":
         return {"spec": spec, "bits": None, "gran": None, "act": None}
+    if spec.startswith("noise"):          # Gaussian weight noise, std = sigma x per-tensor weight std (control)
+        return {"spec": spec, "bits": None, "gran": "noise", "sigma": float(spec[5:]), "act": None}
     s, act = spec, None
     if "+a8" in s:
         s, act = s.replace("+a8", ""), 8
@@ -97,11 +99,15 @@ class _ActQuant:
 
 
 @torch.no_grad()
-def quantize_(net, bits, gran):
+def quantize_(net, bits, gran, sigma=None):
     n = 0
     for mod in net.modules():
         if isinstance(mod, (torch.nn.Conv1d, torch.nn.Conv2d)):
             W = mod.weight.data
+            if gran == "noise":
+                mod.weight.data = W + torch.randn_like(W) * (sigma * W.std())
+                n += 1
+                continue
             o = W.shape[0]
             Wf = W.reshape(o, -1)
             if gran == "a":
@@ -219,7 +225,7 @@ def main():
                 continue
             q = parse_quant(spec)
             net, meta = build(a.task)
-            nq = quantize_(net, q["bits"], q["gran"])
+            nq = quantize_(net, q["bits"], q["gran"], q.get("sigma"))
             t1 = time.time()
             c, f = run(net, loader, a.task, iters, act=q["act"])
             for k in iters:
