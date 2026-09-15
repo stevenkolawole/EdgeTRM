@@ -147,3 +147,20 @@ Terminated
 05:34 eval trm_sudoku_mlp_w768_s0 step_39060 (sudoku_mlp, H=3 nsup=16)
 05:38 eval trm_sudoku_mlp_w768_s0 step_45570 (sudoku_mlp, H=3 nsup=16)
 05:39 eval trm_sudoku_mlp_w768_s0 step_52080 (sudoku_mlp, H=3 nsup=16)
+05:41 eval trm_sudoku_mlp_w768_s0 step_58590 (sudoku_mlp, H=3 nsup=16)
+05:45 eval trm_sudoku_mlp_w768_s0 step_65100 (sudoku_mlp, H=3 nsup=1,4,16)
+05:54 noise trm_sudoku_attn_w256_s0
+05:55 full grid trm_sudoku_attn_w256_s0
+05:56 noise trm_sudoku_attn_w256_s1
+05:57 full grid trm_sudoku_attn_w256_s1
+05:58 noise trm_sudoku_attn_w256_s2
+05:59 full grid trm_sudoku_attn_w256_s2
+05:59 noise trm_sudoku_attn_w512_s0
+05:59 full grid trm_sudoku_attn_w512_s0
+06:01 noise trm_sudoku_attn_w512_s1
+06:02 full grid trm_sudoku_attn_w512_s1
+06:03 noise trm_sudoku_mlp_w256_s0
+06:06 full grid trm_sudoku_mlp_w256_s0
+06:07 noise trm_sudoku_mlp_w256_s1
+06:09 full grid trm_sudoku_mlp_w256_s1
+06:10 noise trm_sudoku_mlp_w256_s2
