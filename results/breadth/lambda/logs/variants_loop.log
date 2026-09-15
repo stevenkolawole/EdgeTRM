@@ -164,3 +164,8 @@ Terminated
 06:07 noise trm_sudoku_mlp_w256_s1
 06:09 full grid trm_sudoku_mlp_w256_s1
 06:10 noise trm_sudoku_mlp_w256_s2
+06:14 full grid trm_sudoku_mlp_w256_s2
+06:15 noise trm_sudoku_mlp_w512_s0
+06:16 full grid trm_sudoku_mlp_w512_s0
+06:23 noise trm_sudoku_mlp_w512_s1
+06:31 full grid trm_sudoku_mlp_w512_s1
