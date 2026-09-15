@@ -173,8 +173,8 @@ def stage_status(tasks):
                 continue
             job = hub.get_job(j["job_id"])
             st = job.get_status()
-            row = {"task": task, **{k: j[k] for k in ("kind", "precision", "runtime", "device", "job_id")},
-                   "status": st.code}
+            row = {"task": j.get("task", task), **{k: j[k] for k in ("kind", "precision", "runtime", "device", "job_id")},
+                   "status": st.code, "model": j.get("model")}
             if j["kind"] == "profile" and st.code == "SUCCESS":
                 p = job.download_profile()
                 s = p["execution_summary"]

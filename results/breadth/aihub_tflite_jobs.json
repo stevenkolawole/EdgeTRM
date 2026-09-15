@@ -1,0 +1,784 @@
+{
+  "jobs": [
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 6",
+      "os": "13",
+      "job_id": "jgoln34dg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 7",
+      "os": "14",
+      "job_id": "jpvlrv9m5",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 8",
+      "os": "14",
+      "job_id": "jgjr2ew8p",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 9",
+      "os": "15",
+      "job_id": "jpe7wkl05",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 10",
+      "os": "16",
+      "job_id": "jgzljr465",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy Note 20 (Intl)",
+      "os": "11",
+      "job_id": "j5wl3q1jp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A53 5G",
+      "os": "12",
+      "job_id": "jg9zywxvp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A14 5G",
+      "os": "13",
+      "job_id": "jp1nwevlg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy S21",
+      "os": "12",
+      "job_id": "jgddqozlg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A73 5G",
+      "os": "12",
+      "job_id": "j57elx9rp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Snapdragon 7 Gen 4 QRD",
+      "os": "15",
+      "job_id": "jp4ydv3lp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing RB3 Gen 2 Vision Kit",
+      "os": "1.6",
+      "job_id": "jpxl6yx9p",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing Q-6690 MTP",
+      "os": "15",
+      "job_id": "j5m0638qg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 6",
+      "os": "13",
+      "job_id": "jgnzm3kmg",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 7",
+      "os": "14",
+      "job_id": "jprl2ewep",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 8",
+      "os": "14",
+      "job_id": "jp2r9lemg",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 9",
+      "os": "15",
+      "job_id": "jpyoj6m45",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 10",
+      "os": "16",
+      "job_id": "jp0m2l6eg",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy Note 20 (Intl)",
+      "os": "11",
+      "job_id": "jp8emz18p",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A53 5G",
+      "os": "12",
+      "job_id": "jgk2q38og",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A14 5G",
+      "os": "13",
+      "job_id": "j5qlr3vmp",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy S21",
+      "os": "12",
+      "job_id": "jgly23ll5",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A73 5G",
+      "os": "12",
+      "job_id": "j568znw7g",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Snapdragon 7 Gen 4 QRD",
+      "os": "15",
+      "job_id": "jp3z1e6z5",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing RB3 Gen 2 Vision Kit",
+      "os": "1.6",
+      "job_id": "jgoln38dg",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "maze",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing Q-6690 MTP",
+      "os": "15",
+      "job_id": "jpvlrv7m5",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 6",
+      "os": "13",
+      "job_id": "jgjr2eq8p",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 7",
+      "os": "14",
+      "job_id": "jpe7wky05",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 8",
+      "os": "14",
+      "job_id": "jgzljrn65",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 9",
+      "os": "15",
+      "job_id": "j5wl3q4jp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 10",
+      "os": "16",
+      "job_id": "jg9zywdvp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy Note 20 (Intl)",
+      "os": "11",
+      "job_id": "jp1nwe6lg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A53 5G",
+      "os": "12",
+      "job_id": "jgddqo2lg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A14 5G",
+      "os": "13",
+      "job_id": "j57elx4rp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy S21",
+      "os": "12",
+      "job_id": "jp4ydv1lp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A73 5G",
+      "os": "12",
+      "job_id": "jpxl6y49p",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Snapdragon 7 Gen 4 QRD",
+      "os": "15",
+      "job_id": "j5m063mqg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing RB3 Gen 2 Vision Kit",
+      "os": "1.6",
+      "job_id": "jgnzm3nmg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing Q-6690 MTP",
+      "os": "15",
+      "job_id": "jprl2e0ep",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 6",
+      "os": "13",
+      "job_id": "jp2r9lwmg",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 7",
+      "os": "14",
+      "job_id": "jpyoj6x45",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 8",
+      "os": "14",
+      "job_id": "jp0m2ljeg",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 9",
+      "os": "15",
+      "job_id": "jp8emzx8p",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 10",
+      "os": "16",
+      "job_id": "jgk2q34og",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy Note 20 (Intl)",
+      "os": "11",
+      "job_id": "j5qlr3ymp",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A53 5G",
+      "os": "12",
+      "job_id": "jgly23xl5",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A14 5G",
+      "os": "13",
+      "job_id": "j568zn77g",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy S21",
+      "os": "12",
+      "job_id": "jp3z1e9z5",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A73 5G",
+      "os": "12",
+      "job_id": "jgoln3rdg",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Snapdragon 7 Gen 4 QRD",
+      "os": "15",
+      "job_id": "jpvlrvdm5",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing RB3 Gen 2 Vision Kit",
+      "os": "1.6",
+      "job_id": "jgjr2e78p",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_mlp",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing Q-6690 MTP",
+      "os": "15",
+      "job_id": "jpe7wkz05",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 6",
+      "os": "13",
+      "job_id": "jgzljrm65",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 7",
+      "os": "14",
+      "job_id": "j5wl3q7jp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 8",
+      "os": "14",
+      "job_id": "jg9zywmvp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 9",
+      "os": "15",
+      "job_id": "jp1nwejlg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 10",
+      "os": "16",
+      "job_id": "jgddqo3lg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy Note 20 (Intl)",
+      "os": "11",
+      "job_id": "j57elxerp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A53 5G",
+      "os": "12",
+      "job_id": "jp4ydvylp",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A14 5G",
+      "os": "13",
+      "job_id": "jpxl6yl9p",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy S21",
+      "os": "12",
+      "job_id": "jgnzm3zmg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A73 5G",
+      "os": "12",
+      "job_id": "jprl2elep",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Snapdragon 7 Gen 4 QRD",
+      "os": "15",
+      "job_id": "jp2r9lrmg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing RB3 Gen 2 Vision Kit",
+      "os": "1.6",
+      "job_id": "jpyoj6o45",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "int8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing Q-6690 MTP",
+      "os": "15",
+      "job_id": "jp0m2lmeg",
+      "model": "inner_step_int8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 6",
+      "os": "13",
+      "job_id": "jp8emze8p",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 7",
+      "os": "14",
+      "job_id": "jgk2q32og",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 8",
+      "os": "14",
+      "job_id": "j5qlr3lmp",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 9",
+      "os": "15",
+      "job_id": "jgly23yl5",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Google Pixel 10",
+      "os": "16",
+      "job_id": "j568zn87g",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy Note 20 (Intl)",
+      "os": "11",
+      "job_id": "jp3z1ezz5",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A53 5G",
+      "os": "12",
+      "job_id": "jgoln3ldg",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A14 5G",
+      "os": "13",
+      "job_id": "jpvlrvlm5",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy S21",
+      "os": "12",
+      "job_id": "jgjr2er8p",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Samsung Galaxy A73 5G",
+      "os": "12",
+      "job_id": "jpe7wk705",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Snapdragon 7 Gen 4 QRD",
+      "os": "15",
+      "job_id": "jgzljrl65",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing RB3 Gen 2 Vision Kit",
+      "os": "1.6",
+      "job_id": "j5wl3qljp",
+      "model": "inner_step_w4a8.tflite"
+    },
+    {
+      "kind": "profile",
+      "task": "sudoku_attn",
+      "precision": "w4a8_tflite",
+      "runtime": "tflite_direct",
+      "device": "Dragonwing Q-6690 MTP",
+      "os": "15",
+      "job_id": "jg9zywzvp",
+      "model": "inner_step_w4a8.tflite"
+    }
+  ]
+}

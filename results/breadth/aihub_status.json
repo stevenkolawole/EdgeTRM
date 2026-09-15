@@ -1834,6 +1834,74 @@
     }
   },
   {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jprl229vp",
+    "status": "SUCCESS",
+    "ms": 1983.257,
+    "load_peak_mb": 1221.828125,
+    "infer_peak_mb": 417.38777923583984,
+    "peak_mb": 685.26171875,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jp2r99jxg",
+    "status": "SUCCESS",
+    "ms": 1454.46,
+    "load_peak_mb": 1058.23046875,
+    "infer_peak_mb": 28.063613891601562,
+    "peak_mb": 294.78515625,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jpyojjnr5",
+    "status": "SUCCESS",
+    "ms": 3197.462,
+    "load_peak_mb": 1130.140625,
+    "infer_peak_mb": 38.532257080078125,
+    "peak_mb": 299.9609375,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "maze",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jp0m22k2g",
+    "status": "SUCCESS",
+    "ms": 1082.195,
+    "load_peak_mb": 1089.62109375,
+    "infer_peak_mb": 415.24952697753906,
+    "peak_mb": 714.984375,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
     "task": "sudoku_mlp",
     "kind": "compile",
     "precision": "int8",
@@ -3110,7 +3178,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jp0m37d6g",
-    "status": "MEASURING_PERFORMANCE"
+    "status": "SUCCESS",
+    "ms": 15.239,
+    "load_peak_mb": 14.453125,
+    "infer_peak_mb": 0.3828125,
+    "peak_mb": 14.015625,
+    "units": {
+      "NPU": 1391
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3119,7 +3194,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jp8e0v6xp",
-    "status": "PROVISIONING_DEVICE"
+    "status": "SUCCESS",
+    "ms": 10.45,
+    "load_peak_mb": 14.5078125,
+    "infer_peak_mb": 0.30078125,
+    "peak_mb": 13.84375,
+    "units": {
+      "NPU": 1715
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3128,7 +3210,14 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jgk27mo2g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 17.44,
+    "load_peak_mb": 14.3828125,
+    "infer_peak_mb": 0.40234375,
+    "peak_mb": 14.23828125,
+    "units": {
+      "NPU": 1227
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3137,7 +3226,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "j5qleoz4p",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 7.43,
+    "load_peak_mb": 15.7578125,
+    "infer_peak_mb": 0.11328125,
+    "peak_mb": 15.1484375,
+    "units": {
+      "NPU": 1391
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3146,7 +3242,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jgly6ro85",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 5.193,
+    "load_peak_mb": 15.8125,
+    "infer_peak_mb": 0.125,
+    "peak_mb": 15.0859375,
+    "units": {
+      "NPU": 1715
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3155,7 +3258,14 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "j568elr0g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 10.217,
+    "load_peak_mb": 15.69140625,
+    "infer_peak_mb": 0.37890625,
+    "peak_mb": 15.62890625,
+    "units": {
+      "NPU": 1227
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3164,7 +3274,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8295P ADP",
     "job_id": "jp3zv2xl5",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 20.3,
+    "load_peak_mb": 93.33984375,
+    "infer_peak_mb": 5.390899658203125,
+    "peak_mb": 114.578125,
+    "units": {
+      "NPU": 1391
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3173,7 +3290,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8295P ADP",
     "job_id": "jgolkqoxg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 17.087,
+    "load_peak_mb": 93.94921875,
+    "infer_peak_mb": 5.167572021484375,
+    "peak_mb": 114.875,
+    "units": {
+      "NPU": 1715
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3182,7 +3306,14 @@
     "runtime": "qnn_context_binary",
     "device": "SA8295P ADP",
     "job_id": "jpvl0xej5",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 32.128,
+    "load_peak_mb": 93.61328125,
+    "infer_peak_mb": 5.2118377685546875,
+    "peak_mb": 114.77734375,
+    "units": {
+      "NPU": 1227
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3191,7 +3322,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8775P ADP",
     "job_id": "jgjrz4oxp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 14.972,
+    "load_peak_mb": 93.890625,
+    "infer_peak_mb": 9.35516357421875,
+    "peak_mb": 67.12890625,
+    "units": {
+      "NPU": 1391
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3200,7 +3338,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8775P ADP",
     "job_id": "jpe7e3815",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 10.348,
+    "load_peak_mb": 96.06640625,
+    "infer_peak_mb": 9.112472534179688,
+    "peak_mb": 68.84765625,
+    "units": {
+      "NPU": 1715
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3209,7 +3354,14 @@
     "runtime": "qnn_context_binary",
     "device": "SA8775P ADP",
     "job_id": "jgzlok8k5",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 19.256,
+    "load_peak_mb": 94.2578125,
+    "infer_peak_mb": 9.740921020507812,
+    "peak_mb": 68.05078125,
+    "units": {
+      "NPU": 1227
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3218,7 +3370,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA7255P ADP",
     "job_id": "j5wl2n16p",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 33.392,
+    "load_peak_mb": 94.09765625,
+    "infer_peak_mb": 9.050628662109375,
+    "peak_mb": 73.20703125,
+    "units": {
+      "NPU": 1391
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3227,7 +3386,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA7255P ADP",
     "job_id": "jg9zjexlp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 21.207,
+    "load_peak_mb": 94.12890625,
+    "infer_peak_mb": 9.293060302734375,
+    "peak_mb": 73.16796875,
+    "units": {
+      "NPU": 1715
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3236,7 +3402,14 @@
     "runtime": "qnn_context_binary",
     "device": "SA7255P ADP",
     "job_id": "jp1nyxv2g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 45.023,
+    "load_peak_mb": 94.32421875,
+    "infer_peak_mb": 8.471572875976562,
+    "peak_mb": 76.640625,
+    "units": {
+      "NPU": 1227
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3245,7 +3418,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "QCS8550 (Proxy)",
     "job_id": "jgddelzeg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 15.117,
+    "load_peak_mb": 87.515625,
+    "infer_peak_mb": 1.6817779541015625,
+    "peak_mb": 91.83984375,
+    "units": {
+      "NPU": 1391
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3254,7 +3434,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "QCS8550 (Proxy)",
     "job_id": "j57e037lp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 9.999,
+    "load_peak_mb": 84.578125,
+    "infer_peak_mb": 1.330047607421875,
+    "peak_mb": 88.33984375,
+    "units": {
+      "NPU": 1715
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3263,7 +3450,14 @@
     "runtime": "qnn_context_binary",
     "device": "QCS8550 (Proxy)",
     "job_id": "jp4yk09vp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 16.899,
+    "load_peak_mb": 83.2265625,
+    "infer_peak_mb": 1.839447021484375,
+    "peak_mb": 87.56640625,
+    "units": {
+      "NPU": 1227
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3272,7 +3466,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jpxln2d1p",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 49.399,
+    "load_peak_mb": 4.26953125,
+    "infer_peak_mb": 1.7244873046875,
+    "peak_mb": 4.53515625,
+    "units": {
+      "NPU": 1715
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3281,7 +3482,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "j5m0qydwg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 15.164,
+    "load_peak_mb": 4.26953125,
+    "infer_peak_mb": 3.732086181640625,
+    "peak_mb": 6.49609375,
+    "units": {
+      "NPU": 1391
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3290,7 +3498,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jgnzl87rg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 10.091,
+    "load_peak_mb": 4.30078125,
+    "infer_peak_mb": 1.71490478515625,
+    "peak_mb": 4.5625,
+    "units": {
+      "NPU": 1715
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3299,7 +3514,14 @@
     "runtime": "qnn_context_binary",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jprl8jn9p",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 19.447,
+    "load_peak_mb": 4.2265625,
+    "infer_peak_mb": 2.3935546875,
+    "peak_mb": 5.078125,
+    "units": {
+      "NPU": 1227
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3308,7 +3530,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jp2r0nv4g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 97.303,
+    "load_peak_mb": 115.87109375,
+    "infer_peak_mb": 5.985076904296875,
+    "peak_mb": 144.6171875,
+    "units": {
+      "NPU": 1715
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3317,7 +3546,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Arduino VENTUNO Q",
     "job_id": "jpyor0775",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 13.574,
+    "load_peak_mb": 4.53125,
+    "infer_peak_mb": 2.4725799560546875,
+    "peak_mb": 4.796875,
+    "units": {
+      "NPU": 1391
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3326,7 +3562,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Arduino VENTUNO Q",
     "job_id": "jp0m37v6g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 9.254,
+    "load_peak_mb": 4.5625,
+    "infer_peak_mb": 2.4731903076171875,
+    "peak_mb": 4.83203125,
+    "units": {
+      "NPU": 1715
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3335,7 +3578,14 @@
     "runtime": "qnn_context_binary",
     "device": "Arduino VENTUNO Q",
     "job_id": "jp8e0v4xp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 17.944,
+    "load_peak_mb": 4.50390625,
+    "infer_peak_mb": 3.1241455078125,
+    "peak_mb": 5.34765625,
+    "units": {
+      "NPU": 1227
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3344,7 +3594,15 @@
     "runtime": "tflite",
     "device": "Google Pixel 6",
     "job_id": "jgk27m92g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 58.883,
+    "load_peak_mb": 1075.9296875,
+    "infer_peak_mb": 24.896591186523438,
+    "peak_mb": 301.59765625,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3353,7 +3611,15 @@
     "runtime": "tflite",
     "device": "Google Pixel 6",
     "job_id": "j5qleom4p",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 58.796,
+    "load_peak_mb": 989.62109375,
+    "infer_peak_mb": 19.137619018554688,
+    "peak_mb": 296.625,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3362,7 +3628,15 @@
     "runtime": "tflite",
     "device": "Google Pixel 7",
     "job_id": "jgly6r185",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 70.929,
+    "load_peak_mb": 1056.53125,
+    "infer_peak_mb": 24.929168701171875,
+    "peak_mb": 309.02734375,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3371,7 +3645,15 @@
     "runtime": "tflite",
     "device": "Google Pixel 7",
     "job_id": "j568eld0g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 70.205,
+    "load_peak_mb": 1008.4140625,
+    "infer_peak_mb": 18.10394287109375,
+    "peak_mb": 296.453125,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3380,7 +3662,15 @@
     "runtime": "tflite",
     "device": "Google Pixel 8",
     "job_id": "jp3zv2wl5",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 57.695,
+    "load_peak_mb": 1037.7890625,
+    "infer_peak_mb": 24.348663330078125,
+    "peak_mb": 312.62890625,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3389,7 +3679,15 @@
     "runtime": "tflite",
     "device": "Google Pixel 8",
     "job_id": "jgolkq4xg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 59.957,
+    "load_peak_mb": 1100.90234375,
+    "infer_peak_mb": 17.664352416992188,
+    "peak_mb": 303.390625,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3398,7 +3696,15 @@
     "runtime": "tflite",
     "device": "Google Pixel 9",
     "job_id": "jpvl0x9j5",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 54.853,
+    "load_peak_mb": 1125.375,
+    "infer_peak_mb": 24.288650512695312,
+    "peak_mb": 313.52734375,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3407,7 +3713,15 @@
     "runtime": "tflite",
     "device": "Google Pixel 9",
     "job_id": "jgjrz4wxp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 56.668,
+    "load_peak_mb": 1047.64453125,
+    "infer_peak_mb": 18.262237548828125,
+    "peak_mb": 307.76171875,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3416,7 +3730,15 @@
     "runtime": "tflite",
     "device": "Google Pixel 10",
     "job_id": "jpe7e3l15",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 177.935,
+    "load_peak_mb": 1186.63671875,
+    "infer_peak_mb": 726.0373382568359,
+    "peak_mb": 364.859375,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3425,7 +3747,15 @@
     "runtime": "tflite",
     "device": "Google Pixel 10",
     "job_id": "jgzlok4k5",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 180.872,
+    "load_peak_mb": 918.625,
+    "infer_peak_mb": 172.61241149902344,
+    "peak_mb": 325.640625,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3434,7 +3764,15 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "j5wl2n46p",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 72.088,
+    "load_peak_mb": 1219.9453125,
+    "infer_peak_mb": 46.715667724609375,
+    "peak_mb": 343.59765625,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3443,7 +3781,15 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jg9zjedlp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 70.375,
+    "load_peak_mb": 1209.890625,
+    "infer_peak_mb": 37.98475646972656,
+    "peak_mb": 717.30859375,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3452,7 +3798,15 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jp1nyx62g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 147.806,
+    "load_peak_mb": 1096.5078125,
+    "infer_peak_mb": 31.648635864257812,
+    "peak_mb": 426.078125,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3461,7 +3815,15 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jgddel2eg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 150.673,
+    "load_peak_mb": 1106.453125,
+    "infer_peak_mb": 23.934158325195312,
+    "peak_mb": 405.99609375,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3470,7 +3832,15 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "j57e039lp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 227.772,
+    "load_peak_mb": 1150.53515625,
+    "infer_peak_mb": 403.9737854003906,
+    "peak_mb": 698.1953125,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
   },
   {
     "task": "sudoku_mlp",
@@ -3479,7 +3849,151 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jp4yk03vp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 228.107,
+    "load_peak_mb": 1119.84375,
+    "infer_peak_mb": 407.1339569091797,
+    "peak_mb": 697.85546875,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jp8emm8zp",
+    "status": "SUCCESS",
+    "ms": 228.001,
+    "load_peak_mb": 1188.66796875,
+    "infer_peak_mb": 405.72745513916016,
+    "peak_mb": 662.453125,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jgk2qqdyg",
+    "status": "SUCCESS",
+    "ms": 225.707,
+    "load_peak_mb": 1216.49609375,
+    "infer_peak_mb": 407.64854431152344,
+    "peak_mb": 660.4765625,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "j5qlrrw7p",
+    "status": "SUCCESS",
+    "ms": 156.551,
+    "load_peak_mb": 1066.296875,
+    "infer_peak_mb": 29.432907104492188,
+    "peak_mb": 287.0546875,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jgly227e5",
+    "status": "SUCCESS",
+    "ms": 155.434,
+    "load_peak_mb": 1047.91796875,
+    "infer_peak_mb": 22.802566528320312,
+    "peak_mb": 278.87109375,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "j568zzvvg",
+    "status": "SUCCESS",
+    "ms": 323.594,
+    "load_peak_mb": 1101.87109375,
+    "infer_peak_mb": 39.0252685546875,
+    "peak_mb": 291.953125,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jp3z118x5",
+    "status": "SUCCESS",
+    "ms": 320.04,
+    "load_peak_mb": 1093.5859375,
+    "infer_peak_mb": 31.501434326171875,
+    "peak_mb": 287.0390625,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jgolnnm4g",
+    "status": "SUCCESS",
+    "ms": 122.479,
+    "load_peak_mb": 1348.66796875,
+    "infer_peak_mb": 412.0810317993164,
+    "peak_mb": 700.37109375,
+    "units": {
+      "CPU": 5,
+      "GPU": 1626
+    }
+  },
+  {
+    "task": "sudoku_mlp",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jpvlrr475",
+    "status": "SUCCESS",
+    "ms": 120.545,
+    "load_peak_mb": 1304.28515625,
+    "infer_peak_mb": 408.91185760498047,
+    "peak_mb": 693.171875,
+    "units": {
+      "CPU": 2,
+      "GPU": 1205
+    }
   },
   {
     "task": "sudoku_attn",
@@ -4386,7 +4900,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S21",
     "job_id": "jpxln2x1p",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 35.228,
+    "load_peak_mb": 90.7890625,
+    "infer_peak_mb": 10.212326049804688,
+    "peak_mb": 95.9609375,
+    "units": {
+      "NPU": 2599
+    }
   },
   {
     "task": "sudoku_attn",
@@ -4395,7 +4916,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy A73 5G",
     "job_id": "j5m0qy8wg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 69.081,
+    "load_peak_mb": 81.421875,
+    "infer_peak_mb": 7.8462677001953125,
+    "peak_mb": 86.72265625,
+    "units": {
+      "NPU": 2599
+    }
   },
   {
     "task": "sudoku_attn",
@@ -4404,7 +4932,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jgnzl8krg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 23.988,
+    "load_peak_mb": 85.6640625,
+    "infer_peak_mb": 9.106536865234375,
+    "peak_mb": 90.08203125,
+    "units": {
+      "NPU": 2315
+    }
   },
   {
     "task": "sudoku_attn",
@@ -4413,7 +4948,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jprl8jw9p",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 20.238,
+    "load_peak_mb": 85.86328125,
+    "infer_peak_mb": 8.846206665039062,
+    "peak_mb": 89.81640625,
+    "units": {
+      "NPU": 2599
+    }
   },
   {
     "task": "sudoku_attn",
@@ -4422,7 +4964,14 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jp2r0ne4g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 22.675,
+    "load_peak_mb": 86.24609375,
+    "infer_peak_mb": 10.019073486328125,
+    "peak_mb": 91.15234375,
+    "units": {
+      "NPU": 2235
+    }
   },
   {
     "task": "sudoku_attn",
@@ -4431,7 +4980,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S23",
     "job_id": "jpyor0m75",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 16.129,
+    "load_peak_mb": 83.16796875,
+    "infer_peak_mb": 2.4598236083984375,
+    "peak_mb": 87.96875,
+    "units": {
+      "NPU": 2315
+    }
   },
   {
     "task": "sudoku_attn",
@@ -4440,7 +4996,14 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S23",
     "job_id": "jp0m3766g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 12.941,
+    "load_peak_mb": 83.62109375,
+    "infer_peak_mb": 1.6491546630859375,
+    "peak_mb": 87.91015625,
+    "units": {
+      "NPU": 2235
+    }
   },
   {
     "task": "sudoku_attn",
@@ -4449,7 +5012,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S24",
     "job_id": "jp8e0v1xp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 11.384,
+    "load_peak_mb": 92.20703125,
+    "infer_peak_mb": 6.5010223388671875,
+    "peak_mb": 96.8046875,
+    "units": {
+      "NPU": 2315
+    }
   },
   {
     "task": "sudoku_attn",
@@ -4458,7 +5028,14 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S24",
     "job_id": "jgk27m82g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 7.146,
+    "load_peak_mb": 92.2109375,
+    "infer_peak_mb": 6.937713623046875,
+    "peak_mb": 96.80859375,
+    "units": {
+      "NPU": 2599
+    }
   },
   {
     "task": "sudoku_attn",
@@ -4467,7 +5044,14 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S24",
     "job_id": "j5qleov4p",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 9.062,
+    "load_peak_mb": 93.95703125,
+    "infer_peak_mb": 6.6920623779296875,
+    "peak_mb": 99.12109375,
+    "units": {
+      "NPU": 2235
+    }
   },
   {
     "task": "sudoku_attn",
@@ -4476,7 +5060,821 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S25",
     "job_id": "jgly6rl85",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "ms": 7.942,
+    "load_peak_mb": 108.50390625,
+    "infer_peak_mb": 8.989151000976562,
+    "peak_mb": 132.796875,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jgjr2217p",
+    "status": "SUCCESS",
+    "ms": 10.204,
+    "load_peak_mb": 83.3125,
+    "infer_peak_mb": 1.5927658081054688,
+    "peak_mb": 87.25,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jpe7ww275",
+    "status": "SUCCESS",
+    "ms": 8.925,
+    "load_peak_mb": 108.56640625,
+    "infer_peak_mb": 8.332992553710938,
+    "peak_mb": 132.12109375,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jgzljjwz5",
+    "status": "SUCCESS",
+    "ms": 5.5,
+    "load_peak_mb": 108.359375,
+    "infer_peak_mb": 8.296844482421875,
+    "peak_mb": 131.65234375,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "j5wl33xzp",
+    "status": "SUCCESS",
+    "ms": 6.229,
+    "load_peak_mb": 119.27734375,
+    "infer_peak_mb": 8.835983276367188,
+    "peak_mb": 142.41796875,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jg9zyy8qp",
+    "status": "SUCCESS",
+    "ms": 3.881,
+    "load_peak_mb": 116.921875,
+    "infer_peak_mb": 8.25189208984375,
+    "peak_mb": 140.12109375,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jp1nww3kg",
+    "status": "SUCCESS",
+    "ms": 6.07,
+    "load_peak_mb": 116.6171875,
+    "infer_peak_mb": 8.764328002929688,
+    "peak_mb": 140.20703125,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jgddqq0kg",
+    "status": "SUCCESS",
+    "ms": 8.834,
+    "load_peak_mb": 135.9140625,
+    "infer_peak_mb": 9.29412841796875,
+    "peak_mb": 117.546875,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "j5wl33xjp",
+    "status": "SUCCESS",
+    "ms": 6.409,
+    "load_peak_mb": 136.3515625,
+    "infer_peak_mb": 9.669540405273438,
+    "peak_mb": 118.05859375,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jg9zyy8vp",
+    "status": "SUCCESS",
+    "ms": 9.247,
+    "load_peak_mb": 135.9765625,
+    "infer_peak_mb": 9.96270751953125,
+    "peak_mb": 118.671875,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jp1nww3lg",
+    "status": "SUCCESS",
+    "ms": 12.602,
+    "load_peak_mb": 115.20703125,
+    "infer_peak_mb": 6.6178436279296875,
+    "peak_mb": 136.6875,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jgddqq0lg",
+    "status": "SUCCESS",
+    "ms": 17.049,
+    "load_peak_mb": 14.5859375,
+    "infer_peak_mb": 0.53125,
+    "peak_mb": 14.29296875,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "j57ellkrp",
+    "status": "SUCCESS",
+    "ms": 10.868,
+    "load_peak_mb": 14.578125,
+    "infer_peak_mb": 0.1171875,
+    "peak_mb": 13.87890625,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jp4yddmlp",
+    "status": "SUCCESS",
+    "ms": 13.635,
+    "load_peak_mb": 14.69140625,
+    "infer_peak_mb": 0.40625,
+    "peak_mb": 14.5390625,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jpxl6639p",
+    "status": "SUCCESS",
+    "ms": 15.752,
+    "load_peak_mb": 14.68359375,
+    "infer_peak_mb": 0.09765625,
+    "peak_mb": 14.52734375,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "j5m066oqg",
+    "status": "SUCCESS",
+    "ms": 10.591,
+    "load_peak_mb": 14.64453125,
+    "infer_peak_mb": 0.5859375,
+    "peak_mb": 14.3828125,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jgnzmmomg",
+    "status": "SUCCESS",
+    "ms": 13.043,
+    "load_peak_mb": 14.62890625,
+    "infer_peak_mb": 0.40625,
+    "peak_mb": 14.54296875,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jprl22oep",
+    "status": "SUCCESS",
+    "ms": 7.068,
+    "load_peak_mb": 15.796875,
+    "infer_peak_mb": 0.44921875,
+    "peak_mb": 15.61328125,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jp2r994mg",
+    "status": "SUCCESS",
+    "ms": 4.595,
+    "load_peak_mb": 15.82421875,
+    "infer_peak_mb": 0.4375,
+    "peak_mb": 15.63671875,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jpyojjq45",
+    "status": "SUCCESS",
+    "ms": 6.319,
+    "load_peak_mb": 15.96875,
+    "infer_peak_mb": 0.40234375,
+    "peak_mb": 15.95703125,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "jp0m22deg",
+    "status": "SUCCESS",
+    "ms": 22.405,
+    "load_peak_mb": 93.88671875,
+    "infer_peak_mb": 5.0799102783203125,
+    "peak_mb": 114.90625,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "jp8emm68p",
+    "status": "SUCCESS",
+    "ms": 19.263,
+    "load_peak_mb": 93.84765625,
+    "infer_peak_mb": 5.0988311767578125,
+    "peak_mb": 114.90625,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8295P ADP",
+    "job_id": "jgk2qqoog",
+    "status": "SUCCESS",
+    "ms": 17.017,
+    "load_peak_mb": 93.71484375,
+    "infer_peak_mb": 5.10736083984375,
+    "peak_mb": 114.9453125,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "j5qlrrzmp",
+    "status": "SUCCESS",
+    "ms": 15.483,
+    "load_peak_mb": 94.359375,
+    "infer_peak_mb": 9.113021850585938,
+    "peak_mb": 68.59375,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "jgly22ol5",
+    "status": "SUCCESS",
+    "ms": 10.363,
+    "load_peak_mb": 94.40234375,
+    "infer_peak_mb": 9.246063232421875,
+    "peak_mb": 67.33984375,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8775P ADP",
+    "job_id": "j568zzr7g",
+    "status": "SUCCESS",
+    "ms": 15.538,
+    "load_peak_mb": 94.4765625,
+    "infer_peak_mb": 9.565933227539062,
+    "peak_mb": 69.37109375,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "jp3z11xz5",
+    "status": "SUCCESS",
+    "ms": 38.499,
+    "load_peak_mb": 94.3828125,
+    "infer_peak_mb": 9.181472778320312,
+    "peak_mb": 73.94140625,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "jgolnnodg",
+    "status": "SUCCESS",
+    "ms": 23.906,
+    "load_peak_mb": 96.24609375,
+    "infer_peak_mb": 8.888076782226562,
+    "peak_mb": 73.49609375,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA7255P ADP",
+    "job_id": "jpvlrrem5",
+    "status": "SUCCESS",
+    "ms": 41.332,
+    "load_peak_mb": 94.06640625,
+    "infer_peak_mb": 8.499237060546875,
+    "peak_mb": 84.3125,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jgjr22o8p",
+    "status": "SUCCESS",
+    "ms": 16.153,
+    "load_peak_mb": 87.6015625,
+    "infer_peak_mb": 1.6254730224609375,
+    "peak_mb": 92.1171875,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jpe7ww805",
+    "status": "SUCCESS",
+    "ms": 10.193,
+    "load_peak_mb": 88.49609375,
+    "infer_peak_mb": 1.6190185546875,
+    "peak_mb": 92.59375,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jgzljj865",
+    "status": "SUCCESS",
+    "ms": 13.013,
+    "load_peak_mb": 87.33984375,
+    "infer_peak_mb": 1.7220306396484375,
+    "peak_mb": 92.38671875,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "j5wl338jp",
+    "status": "SUCCESS",
+    "ms": 60.141,
+    "load_peak_mb": 6.33984375,
+    "infer_peak_mb": 1.717620849609375,
+    "peak_mb": 6.609375,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jg9zyykvp",
+    "status": "SUCCESS",
+    "ms": 15.541,
+    "load_peak_mb": 4.390625,
+    "infer_peak_mb": 3.731903076171875,
+    "peak_mb": 6.6171875,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jp1nww7lg",
+    "status": "SUCCESS",
+    "ms": 10.129,
+    "load_peak_mb": 6.375,
+    "infer_peak_mb": 1.71746826171875,
+    "peak_mb": 6.63671875,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jgddqq8lg",
+    "status": "SUCCESS",
+    "ms": 15.421,
+    "load_peak_mb": 6.3359375,
+    "infer_peak_mb": 4.357574462890625,
+    "peak_mb": 7.18359375,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "j57ell7rp",
+    "status": "SUCCESS",
+    "ms": 112.166,
+    "load_peak_mb": 122.98828125,
+    "infer_peak_mb": 6.72540283203125,
+    "peak_mb": 142.5390625,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jp4ydd9lp",
+    "status": "SUCCESS",
+    "ms": 15.245,
+    "load_peak_mb": 4.6484375,
+    "infer_peak_mb": 2.475616455078125,
+    "peak_mb": 4.91796875,
+    "units": {
+      "NPU": 2315
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jpxl66d9p",
+    "status": "SUCCESS",
+    "ms": 9.816,
+    "load_peak_mb": 4.6796875,
+    "infer_peak_mb": 2.4730377197265625,
+    "peak_mb": 4.94140625,
+    "units": {
+      "NPU": 2599
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "j5m066dqg",
+    "status": "SUCCESS",
+    "ms": 15.331,
+    "load_peak_mb": 4.64453125,
+    "infer_peak_mb": 3.120025634765625,
+    "peak_mb": 5.484375,
+    "units": {
+      "NPU": 2235
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "jgnzmm7mg",
+    "status": "SUCCESS",
+    "ms": 74.698,
+    "load_peak_mb": 1504.01953125,
+    "infer_peak_mb": 29.323486328125,
+    "peak_mb": 412.25,
+    "units": {
+      "CPU": 2,
+      "GPU": 2045
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jprl22nep",
+    "status": "FAILED",
+    "error": "The process ended because of a segmentation fault. Consult the runtime log for more details."
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "jp2r99vmg",
+    "status": "FAILED",
+    "error": "Failed to profile the model because memory usage exceeded device limits."
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "jpyojj745",
+    "status": "FAILED",
+    "error": "The process ended because of a segmentation fault. Consult the runtime log for more details."
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jp0m22veg",
+    "status": "SUCCESS",
+    "ms": 346.595,
+    "load_peak_mb": 1467.0390625,
+    "infer_peak_mb": 360.25694274902344,
+    "peak_mb": 437.046875,
+    "units": {
+      "CPU": 2,
+      "GPU": 2045
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jp8emm48p",
+    "status": "SUCCESS",
+    "ms": 84.778,
+    "load_peak_mb": 1603.8046875,
+    "infer_peak_mb": 46.494964599609375,
+    "peak_mb": 973.54296875,
+    "units": {
+      "CPU": 2,
+      "GPU": 2045
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jgk2qq9og",
+    "status": "SUCCESS",
+    "ms": 166.956,
+    "load_peak_mb": 1454.48828125,
+    "infer_peak_mb": 33.58485412597656,
+    "peak_mb": 559.984375,
+    "units": {
+      "CPU": 2,
+      "GPU": 2045
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "j5qlrrmmp",
+    "status": "SUCCESS",
+    "ms": 247.807,
+    "load_peak_mb": 1714.1328125,
+    "infer_peak_mb": 556.4046936035156,
+    "peak_mb": 929.42578125,
+    "units": {
+      "CPU": 2,
+      "GPU": 2045
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jgly221l5",
+    "status": "SUCCESS",
+    "ms": 256.711,
+    "load_peak_mb": 1738.46484375,
+    "infer_peak_mb": 544.8749237060547,
+    "peak_mb": 876.734375,
+    "units": {
+      "CPU": 2,
+      "GPU": 2045
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "j568zzd7g",
+    "status": "SUCCESS",
+    "ms": 179.069,
+    "load_peak_mb": 1469.4765625,
+    "infer_peak_mb": 35.58802795410156,
+    "peak_mb": 386.55859375,
+    "units": {
+      "CPU": 2,
+      "GPU": 2045
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "jp3z11wz5",
+    "status": "SUCCESS",
+    "ms": 358.623,
+    "load_peak_mb": 1473.7578125,
+    "infer_peak_mb": 44.985992431640625,
+    "peak_mb": 392.59375,
+    "units": {
+      "CPU": 2,
+      "GPU": 2045
+    }
+  },
+  {
+    "task": "sudoku_attn",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jgolnn4dg",
+    "status": "SUCCESS",
+    "ms": 141.755,
+    "load_peak_mb": 1836.1328125,
+    "infer_peak_mb": 559.1719436645508,
+    "peak_mb": 924.12890625,
+    "units": {
+      "CPU": 2,
+      "GPU": 2045
+    }
   },
   {
     "task": "arc",
@@ -5375,5 +6773,2083 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jgly6dze5",
     "status": "SUCCESS"
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jpvlrr9m5",
+    "status": "SUCCESS",
+    "ms": 192.421,
+    "load_peak_mb": 91.109375,
+    "infer_peak_mb": 11.044281005859375,
+    "peak_mb": 97.58984375,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jgjr22w8p",
+    "status": "SUCCESS",
+    "ms": 314.881,
+    "load_peak_mb": 81.765625,
+    "infer_peak_mb": 7.7605438232421875,
+    "peak_mb": 87.80078125,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jpe7wwl05",
+    "status": "SUCCESS",
+    "ms": 190.422,
+    "load_peak_mb": 86.171875,
+    "infer_peak_mb": 9.8726806640625,
+    "peak_mb": 92.59375,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "jgzljj465",
+    "status": "SUCCESS",
+    "ms": 137.195,
+    "load_peak_mb": 86.8828125,
+    "infer_peak_mb": 10.49761962890625,
+    "peak_mb": 93.3984375,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S22 5G",
+    "job_id": "j5wl331jp",
+    "status": "SUCCESS",
+    "ms": 337.064,
+    "load_peak_mb": 86.359375,
+    "infer_peak_mb": 12.983230590820312,
+    "peak_mb": 98.3984375,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jg9zyyxvp",
+    "status": "SUCCESS",
+    "ms": 101.954,
+    "load_peak_mb": 83.3046875,
+    "infer_peak_mb": 2.8695602416992188,
+    "peak_mb": 89.8359375,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jp1nwwvlg",
+    "status": "SUCCESS",
+    "ms": 81.33,
+    "load_peak_mb": 84.41796875,
+    "infer_peak_mb": 2.8704299926757812,
+    "peak_mb": 91.18359375,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S23",
+    "job_id": "jgddqqzlg",
+    "status": "SUCCESS",
+    "ms": 201.248,
+    "load_peak_mb": 83.875,
+    "infer_peak_mb": 5.3404693603515625,
+    "peak_mb": 95.94921875,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "j57ell9rp",
+    "status": "SUCCESS",
+    "ms": 75.342,
+    "load_peak_mb": 94.30859375,
+    "infer_peak_mb": 8.422958374023438,
+    "peak_mb": 100.59765625,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jp4ydd3lp",
+    "status": "SUCCESS",
+    "ms": 58.959,
+    "load_peak_mb": 92.36328125,
+    "infer_peak_mb": 7.7833099365234375,
+    "peak_mb": 98.49609375,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S24",
+    "job_id": "jpxl66x9p",
+    "status": "SUCCESS",
+    "ms": 150.371,
+    "load_peak_mb": 92.984375,
+    "infer_peak_mb": 10.346893310546875,
+    "peak_mb": 104.65234375,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "j5m0668qg",
+    "status": "SUCCESS",
+    "ms": 53.834,
+    "load_peak_mb": 108.65625,
+    "infer_peak_mb": 9.822174072265625,
+    "peak_mb": 134.3671875,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jgnzmmkmg",
+    "status": "SUCCESS",
+    "ms": 43.745,
+    "load_peak_mb": 108.578125,
+    "infer_peak_mb": 10.231185913085938,
+    "peak_mb": 134.390625,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S25",
+    "job_id": "jprl22wep",
+    "status": "SUCCESS",
+    "ms": 132.503,
+    "load_peak_mb": 108.90625,
+    "infer_peak_mb": 12.879196166992188,
+    "peak_mb": 140.3203125,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jp2r99emg",
+    "status": "SUCCESS",
+    "ms": 50.367,
+    "load_peak_mb": 116.78515625,
+    "infer_peak_mb": 9.791336059570312,
+    "peak_mb": 141.875,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jpyojjm45",
+    "status": "SUCCESS",
+    "ms": 38.332,
+    "load_peak_mb": 116.8671875,
+    "infer_peak_mb": 9.704177856445312,
+    "peak_mb": 142.640625,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Samsung Galaxy S26",
+    "job_id": "jp0m226eg",
+    "status": "SUCCESS",
+    "ms": 106.814,
+    "load_peak_mb": 116.875,
+    "infer_peak_mb": 10.41021728515625,
+    "peak_mb": 145.73046875,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jp8emm18p",
+    "status": "SUCCESS",
+    "ms": 59.523,
+    "load_peak_mb": 135.859375,
+    "infer_peak_mb": 10.019973754882812,
+    "peak_mb": 119.50390625,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "jgk2qq8og",
+    "status": "SUCCESS",
+    "ms": 48.035,
+    "load_peak_mb": 135.87109375,
+    "infer_peak_mb": 10.486480712890625,
+    "peak_mb": 119.7734375,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon 8 Elite QRD",
+    "job_id": "j5qlrrvmp",
+    "status": "SUCCESS",
+    "ms": 144.023,
+    "load_peak_mb": 80.30078125,
+    "infer_peak_mb": 12.565689086914062,
+    "peak_mb": 143.01953125,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jgly22ll5",
+    "status": "SUCCESS",
+    "ms": 86.958,
+    "load_peak_mb": 115.25390625,
+    "infer_peak_mb": 6.343292236328125,
+    "peak_mb": 144.6875,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "j568zzw7g",
+    "status": "SUCCESS",
+    "ms": 100.645,
+    "load_peak_mb": 14.54296875,
+    "infer_peak_mb": 0.9296875,
+    "peak_mb": 15.3984375,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jp3z116z5",
+    "status": "SUCCESS",
+    "ms": 79.377,
+    "load_peak_mb": 14.57421875,
+    "infer_peak_mb": 0.93359375,
+    "peak_mb": 15.41015625,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Elite CRD",
+    "job_id": "jgolnn8dg",
+    "status": "SUCCESS",
+    "ms": 203.933,
+    "load_peak_mb": 14.59765625,
+    "infer_peak_mb": 3.5859375,
+    "peak_mb": 20.72265625,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jpvlrr7m5",
+    "status": "SUCCESS",
+    "ms": 98.723,
+    "load_peak_mb": 14.6015625,
+    "infer_peak_mb": 0.9296875,
+    "peak_mb": 15.37109375,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jgjr22q8p",
+    "status": "SUCCESS",
+    "ms": 79.737,
+    "load_peak_mb": 14.578125,
+    "infer_peak_mb": 0.921875,
+    "peak_mb": 15.34375,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X Plus 8-Core CRD",
+    "job_id": "jpe7wwy05",
+    "status": "SUCCESS",
+    "ms": 194.199,
+    "load_peak_mb": 14.66015625,
+    "infer_peak_mb": 3.5859375,
+    "peak_mb": 20.71875,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jgzljjn65",
+    "status": "SUCCESS",
+    "ms": 54.64,
+    "load_peak_mb": 15.92578125,
+    "infer_peak_mb": 0.90625,
+    "peak_mb": 17.44140625,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "j5wl334jp",
+    "status": "SUCCESS",
+    "ms": 42.235,
+    "load_peak_mb": 15.83203125,
+    "infer_peak_mb": 0.93359375,
+    "peak_mb": 16.78125,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Snapdragon X2 Elite CRD",
+    "job_id": "jg9zyydvp",
+    "status": "SUCCESS",
+    "ms": 112.998,
+    "load_peak_mb": 15.9609375,
+    "infer_peak_mb": 3.59375,
+    "peak_mb": 22.12890625,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "jp1nww6lg",
+    "status": "SUCCESS",
+    "ms": 113.683,
+    "load_peak_mb": 96.23828125,
+    "infer_peak_mb": 6.5772247314453125,
+    "peak_mb": 114.75,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8295P ADP",
+    "job_id": "jgddqq2lg",
+    "status": "SUCCESS",
+    "ms": 88.975,
+    "load_peak_mb": 93.9609375,
+    "infer_peak_mb": 6.3475189208984375,
+    "peak_mb": 114.9140625,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8295P ADP",
+    "job_id": "j57ell4rp",
+    "status": "SUCCESS",
+    "ms": 219.226,
+    "load_peak_mb": 101.33984375,
+    "infer_peak_mb": 8.883209228515625,
+    "peak_mb": 120.71484375,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "jp4ydd1lp",
+    "status": "SUCCESS",
+    "ms": 102.609,
+    "load_peak_mb": 94.66796875,
+    "infer_peak_mb": 10.1156005859375,
+    "peak_mb": 77.65234375,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA8775P ADP",
+    "job_id": "jpxl6649p",
+    "status": "SUCCESS",
+    "ms": 80.23,
+    "load_peak_mb": 94.5859375,
+    "infer_peak_mb": 9.84552001953125,
+    "peak_mb": 77.61328125,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA8775P ADP",
+    "job_id": "j5m066mqg",
+    "status": "SUCCESS",
+    "ms": 217.408,
+    "load_peak_mb": 94.60546875,
+    "infer_peak_mb": 12.399124145507812,
+    "peak_mb": 83.38671875,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "jgnzmmnmg",
+    "status": "SUCCESS",
+    "ms": 172.41,
+    "load_peak_mb": 95.890625,
+    "infer_peak_mb": 9.806610107421875,
+    "peak_mb": 75.82421875,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "SA7255P ADP",
+    "job_id": "jprl220ep",
+    "status": "SUCCESS",
+    "ms": 131.009,
+    "load_peak_mb": 93.70703125,
+    "infer_peak_mb": 9.666046142578125,
+    "peak_mb": 75.734375,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "SA7255P ADP",
+    "job_id": "jp2r99wmg",
+    "status": "SUCCESS",
+    "ms": 437.946,
+    "load_peak_mb": 95.65625,
+    "infer_peak_mb": 12.559356689453125,
+    "peak_mb": 81.39453125,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jpyojjx45",
+    "status": "SUCCESS",
+    "ms": 101.411,
+    "load_peak_mb": 84.98046875,
+    "infer_peak_mb": 2.9327774047851562,
+    "peak_mb": 91.48828125,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jp0m22jeg",
+    "status": "SUCCESS",
+    "ms": 80.9,
+    "load_peak_mb": 89.36328125,
+    "infer_peak_mb": 2.6061325073242188,
+    "peak_mb": 95.39453125,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "QCS8550 (Proxy)",
+    "job_id": "jp8emmx8p",
+    "status": "SUCCESS",
+    "ms": 212.723,
+    "load_peak_mb": 83.65625,
+    "infer_peak_mb": 5.3582000732421875,
+    "peak_mb": 95.62890625,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jgk2qq4og",
+    "status": "SUCCESS",
+    "ms": 290.762,
+    "load_peak_mb": 4.30078125,
+    "infer_peak_mb": 3.000396728515625,
+    "peak_mb": 7.6953125,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "j5qlrrymp",
+    "status": "SUCCESS",
+    "ms": 101.225,
+    "load_peak_mb": 6.26953125,
+    "infer_peak_mb": 2.45831298828125,
+    "peak_mb": 5.2890625,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "jgly22xl5",
+    "status": "SUCCESS",
+    "ms": 78.84,
+    "load_peak_mb": 6.2890625,
+    "infer_peak_mb": 4.9852294921875,
+    "peak_mb": 7.73046875,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Dragonwing IQ-9075 EVK",
+    "job_id": "j568zz77g",
+    "status": "SUCCESS",
+    "ms": 213.762,
+    "load_peak_mb": 4.3515625,
+    "infer_peak_mb": 8.833358764648438,
+    "peak_mb": 11.58984375,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jp3z119z5",
+    "status": "SUCCESS",
+    "ms": 410.438,
+    "load_peak_mb": 123.04296875,
+    "infer_peak_mb": 6.0986785888671875,
+    "peak_mb": 143.07421875,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int8",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jgolnnrdg",
+    "status": "SUCCESS",
+    "ms": 91.575,
+    "load_peak_mb": 4.5703125,
+    "infer_peak_mb": 3.7722015380859375,
+    "peak_mb": 6.0078125,
+    "units": {
+      "NPU": 1661
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "int4",
+    "runtime": "qnn_context_binary_qio",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jpvlrrdm5",
+    "status": "SUCCESS",
+    "ms": 70.97,
+    "load_peak_mb": 4.58984375,
+    "infer_peak_mb": 3.753021240234375,
+    "peak_mb": 6.02734375,
+    "units": {
+      "NPU": 1861
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "qnn_context_binary",
+    "device": "Arduino VENTUNO Q",
+    "job_id": "jgjr2278p",
+    "status": "SUCCESS",
+    "ms": 205.525,
+    "load_peak_mb": 4.56640625,
+    "infer_peak_mb": 9.5697021484375,
+    "peak_mb": 11.859375,
+    "units": {
+      "NPU": 1605
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 6",
+    "job_id": "jpe7wwz05",
+    "status": "SUCCESS",
+    "ms": 400.311,
+    "load_peak_mb": 1019.02734375,
+    "infer_peak_mb": 25.448532104492188,
+    "peak_mb": 316.31640625,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 7",
+    "job_id": "jgzljjm65",
+    "status": "SUCCESS",
+    "ms": 495.352,
+    "load_peak_mb": 1023.72265625,
+    "infer_peak_mb": 24.043121337890625,
+    "peak_mb": 325.9140625,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 8",
+    "job_id": "j5wl337jp",
+    "status": "SUCCESS",
+    "ms": 519.1,
+    "load_peak_mb": 1157.63671875,
+    "infer_peak_mb": 23.44970703125,
+    "peak_mb": 320.58203125,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 9",
+    "job_id": "jg9zyymvp",
+    "status": "SUCCESS",
+    "ms": 475.886,
+    "load_peak_mb": 1018.8515625,
+    "infer_peak_mb": 24.106109619140625,
+    "peak_mb": 332.4453125,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 10",
+    "job_id": "jp1nwwjlg",
+    "status": "SUCCESS",
+    "ms": 638.514,
+    "load_peak_mb": 1064.34765625,
+    "infer_peak_mb": 108.63282775878906,
+    "peak_mb": 346.18359375,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jgddqq3lg",
+    "status": "SUCCESS",
+    "ms": 635.275,
+    "load_peak_mb": 1180.8984375,
+    "infer_peak_mb": 70.67094421386719,
+    "peak_mb": 764.75,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "j5wl33l6p",
+    "status": "SUCCESS",
+    "ms": 1606.799,
+    "load_peak_mb": 1136.859375,
+    "infer_peak_mb": 29.21893310546875,
+    "peak_mb": 517.29296875,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jg9zyyzlp",
+    "status": "SUCCESS",
+    "ms": 1964.59,
+    "load_peak_mb": 1299.01953125,
+    "infer_peak_mb": 420.38488006591797,
+    "peak_mb": 727.80859375,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 3",
+    "job_id": "jp1nwwn2g",
+    "status": "SUCCESS",
+    "ms": 1990.425,
+    "load_peak_mb": 1222.09765625,
+    "infer_peak_mb": 418.23079681396484,
+    "peak_mb": 687.55078125,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 4",
+    "job_id": "jgddqqdeg",
+    "status": "SUCCESS",
+    "ms": 1454.909,
+    "load_peak_mb": 1025.484375,
+    "infer_peak_mb": 29.076522827148438,
+    "peak_mb": 295.2578125,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Google Pixel 5",
+    "job_id": "j57ellelp",
+    "status": "SUCCESS",
+    "ms": 3208.768,
+    "load_peak_mb": 1132.890625,
+    "infer_peak_mb": 37.9879150390625,
+    "peak_mb": 302.6171875,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "arc",
+    "kind": "profile",
+    "precision": "fp32",
+    "runtime": "tflite",
+    "device": "Samsung Galaxy Tab S7",
+    "job_id": "jpxl66l1p",
+    "status": "SUCCESS",
+    "ms": 1080.991,
+    "load_peak_mb": 1192.96484375,
+    "infer_peak_mb": 416.03138732910156,
+    "peak_mb": 715.60546875,
+    "units": {
+      "CPU": 2,
+      "GPU": 1463
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 6",
+    "job_id": "jgoln34dg",
+    "status": "SUCCESS",
+    "ms": 5753.057,
+    "load_peak_mb": 175.484375,
+    "infer_peak_mb": 32.06245422363281,
+    "peak_mb": 231.890625,
+    "units": {
+      "CPU": 1857
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 7",
+    "job_id": "jpvlrv9m5",
+    "status": "SUCCESS",
+    "ms": 5616.22,
+    "load_peak_mb": 200.75390625,
+    "infer_peak_mb": 7.4903564453125,
+    "peak_mb": 241.09765625,
+    "units": {
+      "CPU": 1857
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 8",
+    "job_id": "jgjr2ew8p",
+    "status": "SUCCESS",
+    "ms": 5324.264,
+    "load_peak_mb": 157.875,
+    "infer_peak_mb": 15.193695068359375,
+    "peak_mb": 249.94140625,
+    "units": {
+      "CPU": 1857
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 9",
+    "job_id": "jpe7wkl05",
+    "status": "SUCCESS",
+    "ms": 4711.57,
+    "load_peak_mb": 166.69140625,
+    "infer_peak_mb": 23.025711059570312,
+    "peak_mb": 257.796875,
+    "units": {
+      "CPU": 1857
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 10",
+    "job_id": "jgzljr465",
+    "status": "SUCCESS",
+    "ms": 3135.918,
+    "load_peak_mb": 214.54296875,
+    "infer_peak_mb": 31.1661376953125,
+    "peak_mb": 203.96484375,
+    "units": {
+      "CPU": 1857
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "j5wl3q1jp",
+    "status": "SUCCESS",
+    "ms": 7018.817,
+    "load_peak_mb": 143.66015625,
+    "infer_peak_mb": 36.37615966796875,
+    "peak_mb": 218.19921875,
+    "units": {
+      "CPU": 1857
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jg9zywxvp",
+    "status": "SUCCESS",
+    "ms": 7665.838,
+    "load_peak_mb": 176.9921875,
+    "infer_peak_mb": 28.846893310546875,
+    "peak_mb": 216.96875,
+    "units": {
+      "CPU": 1857
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jp1nwevlg",
+    "status": "SUCCESS",
+    "ms": 10598.075,
+    "load_peak_mb": 177.94140625,
+    "infer_peak_mb": 20.2122802734375,
+    "peak_mb": 236.13671875,
+    "units": {
+      "CPU": 1857
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jgddqozlg",
+    "status": "SUCCESS",
+    "ms": 172.835,
+    "load_peak_mb": 2301.08984375,
+    "infer_peak_mb": 1841.3218536376953,
+    "peak_mb": 456.1484375,
+    "units": {
+      "NPU": 1856,
+      "CPU": 1
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "j57elx9rp",
+    "status": "SUCCESS",
+    "ms": 301.004,
+    "load_peak_mb": 1971.203125,
+    "infer_peak_mb": 1558.37890625,
+    "peak_mb": 425.70703125,
+    "units": {
+      "NPU": 1856,
+      "CPU": 1
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jp4ydv3lp",
+    "status": "SUCCESS",
+    "ms": 83.223,
+    "load_peak_mb": 2090.3359375,
+    "infer_peak_mb": 1604.0892181396484,
+    "peak_mb": 245.9765625,
+    "units": {
+      "NPU": 1856,
+      "CPU": 1
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jpxl6yx9p",
+    "status": "SUCCESS",
+    "ms": 275.474,
+    "load_peak_mb": 1545.8125,
+    "infer_peak_mb": 38.08049011230469,
+    "peak_mb": 43.5234375,
+    "units": {
+      "NPU": 1856,
+      "CPU": 1
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "j5m0638qg",
+    "status": "SUCCESS",
+    "ms": 784.869,
+    "load_peak_mb": 2098.375,
+    "infer_peak_mb": 2188.603713989258,
+    "peak_mb": 252.1015625,
+    "units": {
+      "NPU": 1856,
+      "CPU": 1
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 6",
+    "job_id": "jgnzm3kmg",
+    "status": "SUCCESS",
+    "ms": 1054.876,
+    "load_peak_mb": 166.4765625,
+    "infer_peak_mb": 12.408493041992188,
+    "peak_mb": 195.6796875,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 7",
+    "job_id": "jprl2ewep",
+    "status": "SUCCESS",
+    "ms": 923.841,
+    "load_peak_mb": 156.59765625,
+    "infer_peak_mb": 10.95538330078125,
+    "peak_mb": 234.87109375,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 8",
+    "job_id": "jp2r9lemg",
+    "status": "SUCCESS",
+    "ms": 897.554,
+    "load_peak_mb": 150.98046875,
+    "infer_peak_mb": 18.243728637695312,
+    "peak_mb": 235.6015625,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 9",
+    "job_id": "jpyoj6m45",
+    "status": "SUCCESS",
+    "ms": 819.776,
+    "load_peak_mb": 109.08203125,
+    "infer_peak_mb": 13.213348388671875,
+    "peak_mb": 234.203125,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 10",
+    "job_id": "jp0m2l6eg",
+    "status": "SUCCESS",
+    "ms": 673.509,
+    "load_peak_mb": 140.94140625,
+    "infer_peak_mb": 14.548934936523438,
+    "peak_mb": 174.796875,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jp8emz18p",
+    "status": "SUCCESS",
+    "ms": 1137.114,
+    "load_peak_mb": 130.05078125,
+    "infer_peak_mb": 23.106597900390625,
+    "peak_mb": 202.23046875,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jgk2q38og",
+    "status": "SUCCESS",
+    "ms": 2695.785,
+    "load_peak_mb": 123.47265625,
+    "infer_peak_mb": 16.620269775390625,
+    "peak_mb": 177.66796875,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "j5qlr3vmp",
+    "status": "SUCCESS",
+    "ms": 2665.737,
+    "load_peak_mb": 152.8359375,
+    "infer_peak_mb": 6.48492431640625,
+    "peak_mb": 178.81640625,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jgly23ll5",
+    "status": "SUCCESS",
+    "ms": 1316.65,
+    "load_peak_mb": 325.25,
+    "infer_peak_mb": 283.56983947753906,
+    "peak_mb": 201.91796875,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "j568znw7g",
+    "status": "SUCCESS",
+    "ms": 1508.323,
+    "load_peak_mb": 338.32421875,
+    "infer_peak_mb": 199.4031982421875,
+    "peak_mb": 190.79296875,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jp3z1e6z5",
+    "status": "SUCCESS",
+    "ms": 1283.15,
+    "load_peak_mb": 285.21875,
+    "infer_peak_mb": 201.46058654785156,
+    "peak_mb": 254.72265625,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jgoln38dg",
+    "status": "SUCCESS",
+    "ms": 1784.189,
+    "load_peak_mb": 304.05859375,
+    "infer_peak_mb": 96.27545166015625,
+    "peak_mb": 107.671875,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jpvlrv7m5",
+    "status": "SUCCESS",
+    "ms": 1443.242,
+    "load_peak_mb": 325.10546875,
+    "infer_peak_mb": 198.1003875732422,
+    "peak_mb": 239.203125,
+    "units": {
+      "CPU": 2040
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 6",
+    "job_id": "jgjr2eq8p",
+    "status": "SUCCESS",
+    "ms": 54.742,
+    "load_peak_mb": 194.62890625,
+    "infer_peak_mb": 10.776412963867188,
+    "peak_mb": 208.4140625,
+    "units": {
+      "CPU": 1377
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 7",
+    "job_id": "jpe7wky05",
+    "status": "SUCCESS",
+    "ms": 51.156,
+    "load_peak_mb": 185.9375,
+    "infer_peak_mb": 8.288986206054688,
+    "peak_mb": 238.98046875,
+    "units": {
+      "CPU": 1377
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 8",
+    "job_id": "jgzljrn65",
+    "status": "SUCCESS",
+    "ms": 43.024,
+    "load_peak_mb": 157.4453125,
+    "infer_peak_mb": 9.577316284179688,
+    "peak_mb": 232.40625,
+    "units": {
+      "CPU": 1377
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 9",
+    "job_id": "j5wl3q4jp",
+    "status": "SUCCESS",
+    "ms": 38.589,
+    "load_peak_mb": 181.19140625,
+    "infer_peak_mb": 8.370803833007812,
+    "peak_mb": 236.234375,
+    "units": {
+      "CPU": 1377
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 10",
+    "job_id": "jg9zywdvp",
+    "status": "SUCCESS",
+    "ms": 32.774,
+    "load_peak_mb": 148.22265625,
+    "infer_peak_mb": 11.061721801757812,
+    "peak_mb": 193.84765625,
+    "units": {
+      "CPU": 1377
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jp1nwe6lg",
+    "status": "SUCCESS",
+    "ms": 60.454,
+    "load_peak_mb": 201.5703125,
+    "infer_peak_mb": 17.87957763671875,
+    "peak_mb": 220.4453125,
+    "units": {
+      "CPU": 1377
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jgddqo2lg",
+    "status": "SUCCESS",
+    "ms": 129.356,
+    "load_peak_mb": 184.828125,
+    "infer_peak_mb": 14.184707641601562,
+    "peak_mb": 187.68359375,
+    "units": {
+      "CPU": 1377
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "j57elx4rp",
+    "status": "SUCCESS",
+    "ms": 122.826,
+    "load_peak_mb": 161.96484375,
+    "infer_peak_mb": 5.913642883300781,
+    "peak_mb": 210.4453125,
+    "units": {
+      "CPU": 1377
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jp4ydv1lp",
+    "status": "SUCCESS",
+    "ms": 34.245,
+    "load_peak_mb": 375.62890625,
+    "infer_peak_mb": 335.5768737792969,
+    "peak_mb": 179.25,
+    "units": {
+      "NPU": 1376,
+      "CPU": 1
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jpxl6y49p",
+    "status": "SUCCESS",
+    "ms": 54.376,
+    "load_peak_mb": 332.6171875,
+    "infer_peak_mb": 239.8878173828125,
+    "peak_mb": 134.07421875,
+    "units": {
+      "NPU": 1376,
+      "CPU": 1
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "j5m063mqg",
+    "status": "SUCCESS",
+    "ms": 16.846,
+    "load_peak_mb": 384.765625,
+    "infer_peak_mb": 284.6921844482422,
+    "peak_mb": 184.703125,
+    "units": {
+      "NPU": 1376,
+      "CPU": 1
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jgnzm3nmg",
+    "status": "SUCCESS",
+    "ms": 49.243,
+    "load_peak_mb": 271.1875,
+    "infer_peak_mb": 10.896499633789062,
+    "peak_mb": 18.3203125,
+    "units": {
+      "NPU": 1376,
+      "CPU": 1
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jprl2e0ep",
+    "status": "SUCCESS",
+    "ms": 154.212,
+    "load_peak_mb": 342.1640625,
+    "infer_peak_mb": 273.7054901123047,
+    "peak_mb": 187.5,
+    "units": {
+      "NPU": 1376,
+      "CPU": 1
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 6",
+    "job_id": "jp2r9lwmg",
+    "status": "SUCCESS",
+    "ms": 128.888,
+    "load_peak_mb": 148.44921875,
+    "infer_peak_mb": 11.717422485351562,
+    "peak_mb": 159.83984375,
+    "units": {
+      "CPU": 1716
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 7",
+    "job_id": "jpyoj6x45",
+    "status": "SUCCESS",
+    "ms": 84.892,
+    "load_peak_mb": 146.46484375,
+    "infer_peak_mb": 11.12640380859375,
+    "peak_mb": 189.90234375,
+    "units": {
+      "CPU": 1716
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 8",
+    "job_id": "jp0m2ljeg",
+    "status": "SUCCESS",
+    "ms": 89.325,
+    "load_peak_mb": 152.03125,
+    "infer_peak_mb": 17.735595703125,
+    "peak_mb": 191.2734375,
+    "units": {
+      "CPU": 1716
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 9",
+    "job_id": "jp8emzx8p",
+    "status": "SUCCESS",
+    "ms": 100.441,
+    "load_peak_mb": 119.92578125,
+    "infer_peak_mb": 10.26617431640625,
+    "peak_mb": 185.05078125,
+    "units": {
+      "CPU": 1716
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 10",
+    "job_id": "jgk2q34og",
+    "status": "SUCCESS",
+    "ms": 76.962,
+    "load_peak_mb": 152.65625,
+    "infer_peak_mb": 13.583160400390625,
+    "peak_mb": 146.859375,
+    "units": {
+      "CPU": 1716
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "j5qlr3ymp",
+    "status": "SUCCESS",
+    "ms": 144.257,
+    "load_peak_mb": 144.2578125,
+    "infer_peak_mb": 23.577468872070312,
+    "peak_mb": 148.77734375,
+    "units": {
+      "CPU": 1716
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jgly23xl5",
+    "status": "SUCCESS",
+    "ms": 281.905,
+    "load_peak_mb": 125.0,
+    "infer_peak_mb": 16.71868896484375,
+    "peak_mb": 135.8828125,
+    "units": {
+      "CPU": 1716
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "j568zn77g",
+    "status": "SUCCESS",
+    "ms": 210.942,
+    "load_peak_mb": 143.921875,
+    "infer_peak_mb": 5.269126892089844,
+    "peak_mb": 162.98046875,
+    "units": {
+      "CPU": 1716
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jp3z1e9z5",
+    "status": "FAILED",
+    "error": "Failed to profile the model: [tflite] Node number 1716 (TfLiteQnnDelegate) failed to invoke."
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jgoln3rdg",
+    "status": "FAILED",
+    "error": "Failed to profile the model: [tflite] Node number 1716 (TfLiteQnnDelegate) failed to invoke."
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jpvlrvdm5",
+    "status": "FAILED",
+    "error": "Failed to profile the model: [tflite] Node number 1844 (TfLiteQnnDelegate) failed to invoke."
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jgjr2e78p",
+    "status": "FAILED",
+    "error": ""
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jpe7wkz05",
+    "status": "FAILED",
+    "error": "Failed to profile the model: [tflite] Node number 1716 (TfLiteQnnDelegate) failed to invoke."
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 6",
+    "job_id": "jgzljrm65",
+    "status": "SUCCESS",
+    "ms": 154.599,
+    "load_peak_mb": 184.42578125,
+    "infer_peak_mb": 13.501937866210938,
+    "peak_mb": 242.16796875,
+    "units": {
+      "CPU": 2595
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 7",
+    "job_id": "j5wl3q7jp",
+    "status": "SUCCESS",
+    "ms": 154.034,
+    "load_peak_mb": 239.390625,
+    "infer_peak_mb": 10.386749267578125,
+    "peak_mb": 284.875,
+    "units": {
+      "CPU": 2595
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 8",
+    "job_id": "jg9zywmvp",
+    "status": "SUCCESS",
+    "ms": 126.891,
+    "load_peak_mb": 193.93359375,
+    "infer_peak_mb": 10.345230102539062,
+    "peak_mb": 280.0546875,
+    "units": {
+      "CPU": 2595
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 9",
+    "job_id": "jp1nwejlg",
+    "status": "SUCCESS",
+    "ms": 120.35,
+    "load_peak_mb": 159.39453125,
+    "infer_peak_mb": 10.6793212890625,
+    "peak_mb": 278.41796875,
+    "units": {
+      "CPU": 2595
+    }
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 10",
+    "job_id": "jgddqo3lg",
+    "status": "MEASURING_PERFORMANCE"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "j57elxerp",
+    "status": "PROVISIONING_DEVICE"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jp4ydvylp",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jpxl6yl9p",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jgnzm3zmg",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jprl2elep",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jp2r9lrmg",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "jpyoj6o45",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "int8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jp0m2lmeg",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 6",
+    "job_id": "jp8emze8p",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 7",
+    "job_id": "jgk2q32og",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 8",
+    "job_id": "j5qlr3lmp",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 9",
+    "job_id": "jgly23yl5",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Google Pixel 10",
+    "job_id": "j568zn87g",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy Note 20 (Intl)",
+    "job_id": "jp3z1ezz5",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A53 5G",
+    "job_id": "jgoln3ldg",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A14 5G",
+    "job_id": "jpvlrvlm5",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy S21",
+    "job_id": "jgjr2er8p",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Samsung Galaxy A73 5G",
+    "job_id": "jpe7wk705",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Snapdragon 7 Gen 4 QRD",
+    "job_id": "jgzljrl65",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing RB3 Gen 2 Vision Kit",
+    "job_id": "j5wl3qljp",
+    "status": "CREATED"
+  },
+  {
+    "task": "tflite",
+    "kind": "profile",
+    "precision": "w4a8_tflite",
+    "runtime": "tflite_direct",
+    "device": "Dragonwing Q-6690 MTP",
+    "job_id": "jg9zywzvp",
+    "status": "CREATED"
   }
 ]

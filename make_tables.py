@@ -169,7 +169,8 @@ P("")
 P("## F. Trained Sudoku variants along training (H=3, n=16, puzzle-exact %; per-tensor INT4 fidelity in brackets)\n")
 P("| run | step | fp32 | w8c | w4c | w4t |")
 P("|---|---|---|---|---|---|")
-for f in sorted(glob.glob(str(R / "lambda" / "variant_*.json")), key=lambda p: (p.rsplit("_", 1)[0], int(p.rsplit("_", 1)[1][:-5]))):
+for f in sorted([p for p in glob.glob(str(R / "lambda" / "variant_*.json")) if not p.endswith("_noise.json")],
+                key=lambda p: (p.rsplit("_", 1)[0], int(p.rsplit("_", 1)[1][:-5]))):
     rs = [r for r in load(f) if r["H_cycles"] == 3 and r["nsup"] == 16]
     by = {r["quant"]["spec"]: r for r in rs}
     if "fp32" in by:
