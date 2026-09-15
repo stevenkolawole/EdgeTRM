@@ -92,3 +92,8 @@ wrote /home/ubuntu/breadth/results/variant_trm_sudoku_mlp_w768_s0_45570_noise.js
 variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_mlp_w768_s0/step_52080: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 768, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': True, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 12, 'pos_encodings': 'none', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 768}
 sudoku_mlp: 1000 puzzles, batch 256, H=[3], nsup=[16], quants=['fp32', 'noise0.02', 'noise0.05', 'noise0.1', 'noise0.15', 'noise0.2', 'noise0.3', 'noise0.5', 'noise0.7', 'noise1.0']; 0 records already
   H=3 nsup=16 fp32       pexact  78.40 cell  91.87
+  H=3 nsup=16 noise0.02  pexact  79.60 cell  92.01 fidH 0.9573 fidL 0.9286 (126s)
+  H=3 nsup=16 noise0.05  pexact  77.80 cell  91.40 fidH 0.9479 fidL 0.9163 (125s)
+  H=3 nsup=16 noise0.1   pexact  77.00 cell  91.22 fidH 0.9296 fidL 0.8806 (119s)
+  H=3 nsup=16 noise0.15  pexact  38.20 cell  86.57 fidH 0.7546 fidL 0.6599 (104s)
+  H=3 nsup=16 noise0.2   pexact  11.50 cell  80.66 fidH 0.6835 fidL 0.5940 (118s)

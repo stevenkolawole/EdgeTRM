@@ -1159,3 +1159,31 @@ sudoku_mlp: 1000 puzzles, batch 256, H=[3], nsup=[1, 4, 16], quants=['fp32', 'w8
   H=3 nsup=16 w3t        pexact   0.00 cell  20.37 fidH 0.0304 fidL 0.1337 (71s)
   H=3 nsup=16 w3c        pexact   3.10 cell  59.34 fidH 0.3398 fidL 0.4288 (64s)
   H=3 nsup=16 w3a        pexact  37.50 cell  75.52 fidH 0.6558 fidL 0.6339 (70s)
+  H=3 nsup=16 w3g32      pexact  74.70 cell  90.43 fidH 0.8357 fidL 0.8186 (71s)
+  H=3 nsup=16 w2t        pexact   0.00 cell   3.45 fidH 0.0331 fidL 0.1676 (69s)
+  H=3 nsup=16 w2c        pexact   0.00 cell  44.02 fidH 0.1419 fidL 0.1813 (71s)
+  H=3 nsup=16 w2a        pexact   0.00 cell  51.01 fidH 0.1925 fidL 0.2580 (69s)
+  H=3 nsup=16 w2g32      pexact   0.00 cell  41.51 fidH 0.1489 fidL 0.2326 (71s)
+wrote /home/ubuntu/breadth/results/variant_trm_sudoku_mlp_w512_s2_65100.json 69 records
+variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_mlp_w512_s2/step_65100: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 512, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': True, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 8, 'pos_encodings': 'none', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 512}
+sudoku_mlp: 1000 puzzles, batch 256, H=[3], nsup=[1, 4, 16], quants=['fp32', 'noise0.02', 'noise0.05', 'noise0.1', 'noise0.15', 'noise0.2', 'noise0.3', 'noise0.5', 'noise0.7', 'noise1.0']; 0 records already
+  H=3 nsup=1 fp32       pexact  15.70 cell  75.14
+  H=3 nsup=1 noise0.02  pexact  14.60 cell  75.20 fidH 0.9859 fidL 0.9749 (6s)
+  H=3 nsup=1 noise0.05  pexact  12.40 cell  74.74 fidH 0.9475 fidL 0.9116 (5s)
+  H=3 nsup=1 noise0.1   pexact  10.40 cell  74.63 fidH 0.9112 fidL 0.8503 (7s)
+  H=3 nsup=1 noise0.15  pexact   6.10 cell  73.01 fidH 0.8716 fidL 0.7912 (7s)
+  H=3 nsup=1 noise0.2   pexact   2.20 cell  70.08 fidH 0.8155 fidL 0.7104 (7s)
+  H=3 nsup=1 noise0.3   pexact   0.20 cell  61.13 fidH 0.5917 fidL 0.4697 (7s)
+  H=3 nsup=1 noise0.5   pexact   0.00 cell  50.26 fidH 0.3847 fidL 0.3326 (7s)
+  H=3 nsup=1 noise0.7   pexact   0.00 cell  25.23 fidH 0.1300 fidL 0.1759 (7s)
+  H=3 nsup=1 noise1.0   pexact   0.00 cell  13.41 fidH 0.0593 fidL 0.0957 (7s)
+  H=3 nsup=4 fp32       pexact  68.10 cell  88.51
+  H=3 nsup=4 noise0.02  pexact  66.00 cell  87.92 fidH 0.9235 fidL 0.8659 (21s)
+  H=3 nsup=4 noise0.05  pexact  66.50 cell  87.88 fidH 0.9106 fidL 0.8548 (18s)
+  H=3 nsup=4 noise0.1   pexact  60.40 cell  85.90 fidH 0.8622 fidL 0.8010 (21s)
+  H=3 nsup=4 noise0.15  pexact  25.20 cell  81.90 fidH 0.7065 fidL 0.5827 (20s)
+  H=3 nsup=4 noise0.2   pexact   6.00 cell  73.05 fidH 0.6236 fidL 0.5237 (20s)
+  H=3 nsup=4 noise0.3   pexact   0.30 cell  64.73 fidH 0.5559 fidL 0.4705 (21s)
+  H=3 nsup=4 noise0.5   pexact   0.00 cell  52.86 fidH 0.3111 fidL 0.3540 (20s)
+  H=3 nsup=4 noise0.7   pexact   0.00 cell  29.87 fidH 0.1284 fidL 0.2291 (18s)
+  H=3 nsup=4 noise1.0   pexact   0.00 cell  10.40 fidH 0.0532 fidL 0.1508 (21s)
