@@ -9699,7 +9699,8 @@
     "runtime": "tflite_direct",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jg9zywzvp",
-    "status": "MEASURING_PERFORMANCE",
-    "model": "inner_step_w4a8.tflite"
+    "status": "FAILED",
+    "model": "inner_step_w4a8.tflite",
+    "error": "Failed to profile the model: [tflite] Node number 2858 (TfLiteQnnDelegate) failed to invoke."
   }
 ]
