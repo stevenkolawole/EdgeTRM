@@ -1269,3 +1269,6 @@ sudoku_mlp: 1000 puzzles, batch 256, H=[1, 2, 3, 4], nsup=[1, 2, 4, 8, 16], quan
   H=4 nsup=16 w3g32      pexact  78.50 cell  91.81 fidH 0.8814 fidL 0.8884 (41s)
   H=4 nsup=16 w2t        pexact   0.00 cell   3.46 fidH 0.0723 fidL 0.2084 (41s)
   H=4 nsup=16 w2c        pexact   0.00 cell  42.89 fidH 0.1322 fidL 0.1438 (40s)
+  H=4 nsup=16 w2a        pexact   0.00 cell  54.48 fidH 0.1995 fidL 0.3059 (41s)
+  H=4 nsup=16 w2g32      pexact   0.00 cell  51.22 fidH 0.1968 fidL 0.3279 (41s)
+wrote /home/ubuntu/breadth/results/variant_trm_sudoku_mlp_w512_s1_65100.json 460 records

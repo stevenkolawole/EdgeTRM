@@ -1,0 +1,6 @@
+variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_mlp_w256_s0/step_6510: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 256, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': True, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 4, 'pos_encodings': 'none', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 256}
+sudoku_mlp: 1000 puzzles, batch 256, H=[3], nsup=[16], quants=['fp32', 'noise0.02', 'noise0.05', 'noise0.1', 'noise0.15', 'noise0.2', 'noise0.3', 'noise0.5', 'noise0.7', 'noise1.0']; 0 records already
+  H=3 nsup=16 fp32       pexact  12.30 cell  69.93
+  H=3 nsup=16 noise0.02  pexact  12.60 cell  69.93 fidH 0.9964 fidL 0.9967 (11s)
+  H=3 nsup=16 noise0.05  pexact  12.00 cell  69.56 fidH 0.9911 fidL 0.9922 (12s)
+  H=3 nsup=16 noise0.1   pexact   9.30 cell  68.70 fidH 0.9768 fidL 0.9803 (12s)

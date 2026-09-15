@@ -1079,3 +1079,17 @@ sudoku_attn: 1000 puzzles, batch 256, H=[3], nsup=[1, 4, 16], quants=['fp32', 'n
   H=3 nsup=4 noise0.15  pexact  43.00 cell  80.87 fidH 0.9066 fidL 0.7962 (9s)
   H=3 nsup=4 noise0.2   pexact  41.40 cell  80.48 fidH 0.9035 fidL 0.7898 (10s)
   H=3 nsup=4 noise0.3   pexact  41.00 cell  79.83 fidH 0.8865 fidL 0.7627 (10s)
+  H=3 nsup=4 noise0.5   pexact  33.40 cell  77.47 fidH 0.8361 fidL 0.6900 (10s)
+  H=3 nsup=4 noise0.7   pexact  10.20 cell  66.61 fidH 0.6912 fidL 0.5301 (10s)
+  H=3 nsup=4 noise1.0   pexact   0.00 cell  48.50 fidH 0.3527 fidL 0.2843 (10s)
+  H=3 nsup=16 fp32       pexact  53.40 cell  84.31
+  H=3 nsup=16 noise0.02  pexact  52.80 cell  83.99 fidH 0.8702 fidL 0.7656 (32s)
+  H=3 nsup=16 noise0.05  pexact  53.50 cell  84.33 fidH 0.8648 fidL 0.7542 (33s)
+  H=3 nsup=16 noise0.1   pexact  53.60 cell  84.18 fidH 0.8557 fidL 0.7474 (32s)
+  H=3 nsup=16 noise0.15  pexact  54.80 cell  84.52 fidH 0.8574 fidL 0.7455 (33s)
+  H=3 nsup=16 noise0.2   pexact  58.30 cell  85.23 fidH 0.8532 fidL 0.7421 (32s)
+  H=3 nsup=16 noise0.3   pexact  49.80 cell  83.53 fidH 0.8379 fidL 0.7156 (32s)
+  H=3 nsup=16 noise0.5   pexact  47.20 cell  82.20 fidH 0.7998 fidL 0.6666 (32s)
+  H=3 nsup=16 noise0.7   pexact  22.00 cell  74.39 fidH 0.7067 fidL 0.5396 (32s)
+  H=3 nsup=16 noise1.0   pexact   0.00 cell  57.95 fidH 0.5173 fidL 0.3926 (33s)
+wrote /home/ubuntu/breadth/results/variant_trm_sudoku_attn_w512_s2_65100_noise.json 30 records
