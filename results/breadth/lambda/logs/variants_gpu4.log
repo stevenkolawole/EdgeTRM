@@ -1,0 +1,6 @@
+variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_attn_w512_s1/step_65100: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 512, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': False, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 8, 'pos_encodings': 'rope', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 512}
+sudoku_attn: 1000 puzzles, batch 256, H=[3], nsup=[1, 4, 16], quants=['fp32', 'w8t', 'w8c', 'w8a', 'w6t', 'w6c', 'w6a', 'w5t', 'w5c', 'w5a', 'w4t', 'w4c', 'w4a', 'w4g128', 'w4g32', 'w3t', 'w3c', 'w3a', 'w3g32', 'w2t', 'w2c', 'w2a', 'w2g32']; 0 records already
+  H=3 nsup=1 fp32       pexact   2.10 cell  69.66
+  H=3 nsup=1 w8t        pexact   2.10 cell  69.67 fidH 0.9998 fidL 0.9996 (4s)
+  H=3 nsup=1 w8c        pexact   2.10 cell  69.64 fidH 0.9999 fidL 0.9999 (4s)
+  H=3 nsup=1 w8a        pexact   2.10 cell  69.65 fidH 1.0000 fidL 0.9999 (4s)
