@@ -1,0 +1,11 @@
+huginn: 200 GSM8K problems, steps [16], quants ['bf16', 'w8c', 'w4c', 'w4g32', 'w3a'], scope core
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  5.13it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  3.04it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:01<00:00,  2.63it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:01<00:00,  3.54it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:01<00:00,  3.36it/s]
+  steps= 16 bf16      acc 33.5  nll 0.836  gen 240 (6146s)
+  steps= 16 w4c       acc 27.5  nll 0.821  fid 0.9320  gen 259 (6728s)
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.96it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  3.73it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  2.87it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:01<00:00,  3.86it/s]
+  steps= 16 w4g32     acc 35.0  nll 0.842  fid 0.9778  gen 256 (6401s)
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  6.48it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  3.43it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  3.03it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:01<00:00,  3.96it/s]
+  steps= 16 w3a       acc 2.5  nll 0.987  fid 0.7830  gen 308 (8697s)
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  7.07it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  3.61it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  3.22it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00,  4.16it/s]
+wrote /home/ubuntu/breadth/results/huginn_gsm8k_s16.json 7

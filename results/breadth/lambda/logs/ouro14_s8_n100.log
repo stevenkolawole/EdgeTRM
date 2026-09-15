@@ -1,0 +1,7 @@
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+  steps=8 bf16      acc 68.0  nll 0.900  gen 237 (5459s)
+  steps=8 w8c       acc 65.0  nll 0.890  fid 0.9968  gen 242 (5635s)
+  steps=8 w4c       acc 2.0  nll 1.426  fid 0.6974  gen 401 (8888s)
+  steps=8 w4g32     acc 49.0  nll 0.888  fid 0.8828  gen 350 (7057s)
+  steps=8 w3a       acc 0.0  nll 5.894  fid 0.1936  gen 497 (9867s)
+wrote /home/ubuntu/breadth/results/ouro14_gsm8k_s8_n100.json 5

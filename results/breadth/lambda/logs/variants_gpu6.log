@@ -1,0 +1,119 @@
+variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_attn_w256_s2/step_6510: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 256, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': False, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 4, 'pos_encodings': 'rope', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 256}
+sudoku_attn: 1000 puzzles, batch 256, H=[3], nsup=[16], quants=['fp32', 'w8t', 'w8c', 'w8a', 'w6t', 'w6c', 'w6a', 'w5t', 'w5c', 'w5a', 'w4t', 'w4c', 'w4a', 'w4g128', 'w4g32', 'w3t', 'w3c', 'w3a', 'w3g32', 'w2t', 'w2c', 'w2a', 'w2g32']; 0 records already
+  H=3 nsup=16 fp32       pexact   0.40 cell  63.38
+  H=3 nsup=16 w8t        pexact   0.30 cell  63.40 fidH 0.9998 fidL 0.9999 (100s)
+  H=3 nsup=16 w8c        pexact   0.40 cell  63.35 fidH 0.9998 fidL 0.9999 (24s)
+  H=3 nsup=16 w8a        pexact   0.40 cell  63.36 fidH 0.9999 fidL 0.9999 (24s)
+  H=3 nsup=16 w6t        pexact   0.30 cell  63.29 fidH 0.9972 fidL 0.9987 (24s)
+  H=3 nsup=16 w6c        pexact   0.50 cell  63.25 fidH 0.9986 fidL 0.9993 (22s)
+  H=3 nsup=16 w6a        pexact   0.30 cell  63.35 fidH 0.9985 fidL 0.9992 (26s)
+  H=3 nsup=16 w5t        pexact   0.00 cell  62.98 fidH 0.9874 fidL 0.9941 (24s)
+  H=3 nsup=16 w5c        pexact   0.30 cell  63.23 fidH 0.9949 fidL 0.9978 (24s)
+  H=3 nsup=16 w5a        pexact   0.30 cell  63.23 fidH 0.9953 fidL 0.9979 (25s)
+  H=3 nsup=16 w4t        pexact   0.00 cell  61.42 fidH 0.9539 fidL 0.9798 (24s)
+  H=3 nsup=16 w4c        pexact   0.10 cell  62.19 fidH 0.9760 fidL 0.9897 (22s)
+  H=3 nsup=16 w4a        pexact   0.00 cell  62.69 fidH 0.9800 fidL 0.9921 (24s)
+  H=3 nsup=16 w4g128     pexact   0.20 cell  62.41 fidH 0.9803 fidL 0.9920 (24s)
+  H=3 nsup=16 w4g32      pexact   0.00 cell  62.49 fidH 0.9835 fidL 0.9928 (24s)
+  H=3 nsup=16 w3t        pexact   0.00 cell  52.48 fidH 0.7379 fidL 0.8769 (24s)
+  H=3 nsup=16 w3c        pexact   0.00 cell  57.47 fidH 0.8600 fidL 0.9348 (24s)
+  H=3 nsup=16 w3a        pexact   0.00 cell  59.76 fidH 0.9138 fidL 0.9650 (25s)
+  H=3 nsup=16 w3g32      pexact   0.00 cell  58.74 fidH 0.8834 fidL 0.9470 (24s)
+  H=3 nsup=16 w2t        pexact   0.00 cell  11.39 fidH -0.0069 fidL 0.2034 (24s)
+  H=3 nsup=16 w2c        pexact   0.00 cell  17.67 fidH 0.0287 fidL 0.2994 (24s)
+  H=3 nsup=16 w2a        pexact   0.00 cell  43.01 fidH 0.4883 fidL 0.7346 (25s)
+  H=3 nsup=16 w2g32      pexact   0.00 cell  32.56 fidH 0.3083 fidL 0.5989 (23s)
+wrote /home/ubuntu/breadth/results/variant_trm_sudoku_attn_w256_s2_6510.json 23 records
+variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_attn_w256_s2/step_58590: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 256, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': False, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 4, 'pos_encodings': 'rope', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 256}
+sudoku_attn: 1000 puzzles, batch 256, H=[3], nsup=[16], quants=['fp32', 'w8t', 'w8c', 'w8a', 'w6t', 'w6c', 'w6a', 'w5t', 'w5c', 'w5a', 'w4t', 'w4c', 'w4a', 'w4g128', 'w4g32', 'w3t', 'w3c', 'w3a', 'w3g32', 'w2t', 'w2c', 'w2a', 'w2g32']; 0 records already
+  H=3 nsup=16 fp32       pexact  32.70 cell  77.63
+  H=3 nsup=16 w8t        pexact  32.00 cell  77.52 fidH 0.9592 fidL 0.9353 (24s)
+  H=3 nsup=16 w8c        pexact  32.80 cell  77.80 fidH 0.9699 fidL 0.9524 (26s)
+  H=3 nsup=16 w8a        pexact  31.70 cell  77.61 fidH 0.9718 fidL 0.9554 (25s)
+  H=3 nsup=16 w6t        pexact  31.30 cell  77.20 fidH 0.9366 fidL 0.9043 (22s)
+  H=3 nsup=16 w6c        pexact  32.20 cell  77.38 fidH 0.9571 fidL 0.9349 (24s)
+  H=3 nsup=16 w6a        pexact  33.20 cell  77.67 fidH 0.9561 fidL 0.9339 (25s)
+  H=3 nsup=16 w5t        pexact  28.50 cell  75.91 fidH 0.8925 fidL 0.8318 (24s)
+  H=3 nsup=16 w5c        pexact  32.90 cell  77.46 fidH 0.9326 fidL 0.8981 (25s)
+  H=3 nsup=16 w5a        pexact  31.30 cell  77.21 fidH 0.9415 fidL 0.9138 (24s)
+  H=3 nsup=16 w4t        pexact   8.00 cell  67.82 fidH 0.7395 fidL 0.6323 (21s)
+  H=3 nsup=16 w4c        pexact  27.90 cell  76.03 fidH 0.8916 fidL 0.8260 (24s)
+  H=3 nsup=16 w4a        pexact  32.50 cell  77.15 fidH 0.8996 fidL 0.8381 (24s)
+  H=3 nsup=16 w4g128     pexact  31.90 cell  77.08 fidH 0.9161 fidL 0.8680 (24s)
+  H=3 nsup=16 w4g32      pexact  31.60 cell  77.06 fidH 0.9177 fidL 0.8751 (25s)
+  H=3 nsup=16 w3t        pexact   0.00 cell  42.14 fidH 0.3039 fidL 0.1611 (21s)
+  H=3 nsup=16 w3c        pexact   2.50 cell  61.49 fidH 0.6038 fidL 0.4637 (24s)
+  H=3 nsup=16 w3a        pexact   9.80 cell  65.58 fidH 0.6990 fidL 0.5512 (24s)
+  H=3 nsup=16 w3g32      pexact  17.80 cell  72.54 fidH 0.8378 fidL 0.7371 (24s)
+  H=3 nsup=16 w2t        pexact   0.00 cell  11.11 fidH 0.0461 fidL 0.2668 (24s)
+  H=3 nsup=16 w2c        pexact   0.00 cell  13.59 fidH 0.0502 fidL -0.0019 (24s)
+  H=3 nsup=16 w2a        pexact   0.00 cell  45.22 fidH 0.3384 fidL 0.2085 (22s)
+  H=3 nsup=16 w2g32      pexact   0.00 cell  46.32 fidH 0.3472 fidL 0.2148 (24s)
+wrote /home/ubuntu/breadth/results/variant_trm_sudoku_attn_w256_s2_58590.json 23 records
+variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_attn_w512_s1/step_19530: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 512, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': False, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 8, 'pos_encodings': 'rope', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 512}
+sudoku_attn: 1000 puzzles, batch 256, H=[3], nsup=[16], quants=['fp32', 'w8t', 'w8c', 'w8a', 'w6t', 'w6c', 'w6a', 'w5t', 'w5c', 'w5a', 'w4t', 'w4c', 'w4a', 'w4g128', 'w4g32', 'w3t', 'w3c', 'w3a', 'w3g32', 'w2t', 'w2c', 'w2a', 'w2g32']; 0 records already
+  H=3 nsup=16 fp32       pexact  42.30 cell  80.15
+  H=3 nsup=16 w8t        pexact  42.20 cell  80.11 fidH 0.9569 fidL 0.9146 (75s)
+  H=3 nsup=16 w8c        pexact  42.90 cell  80.36 fidH 0.9619 fidL 0.9218 (81s)
+  H=3 nsup=16 w8a        pexact  41.90 cell  80.13 fidH 0.9630 fidL 0.9241 (77s)
+variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_attn_w512_s1/step_26040: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 512, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': False, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 8, 'pos_encodings': 'rope', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 512}
+sudoku_attn: 1000 puzzles, batch 256, H=[3], nsup=[16], quants=['fp32', 'w8t', 'w8c', 'w8a', 'w6t', 'w6c', 'w6a', 'w5t', 'w5c', 'w5a', 'w4t', 'w4c', 'w4a', 'w4g128', 'w4g32', 'w3t', 'w3c', 'w3a', 'w3g32', 'w2t', 'w2c', 'w2a', 'w2g32']; 0 records already
+  H=3 nsup=16 fp32       pexact  46.70 cell  81.61
+  H=3 nsup=16 w8t        pexact  48.80 cell  82.24 fidH 0.9510 fidL 0.8974 (32s)
+  H=3 nsup=16 w8c        pexact  46.90 cell  81.70 fidH 0.9606 fidL 0.9136 (32s)
+  H=3 nsup=16 w8a        pexact  47.80 cell  82.00 fidH 0.9587 fidL 0.9100 (32s)
+  H=3 nsup=16 w6t        pexact  47.40 cell  81.81 fidH 0.9452 fidL 0.8919 (32s)
+  H=3 nsup=16 w6c        pexact  47.60 cell  81.88 fidH 0.9519 fidL 0.8999 (32s)
+  H=3 nsup=16 w6a        pexact  47.80 cell  81.98 fidH 0.9493 fidL 0.8971 (32s)
+  H=3 nsup=16 w5t        pexact  46.30 cell  81.33 fidH 0.9305 fidL 0.8688 (33s)
+  H=3 nsup=16 w5c        pexact  47.30 cell  81.91 fidH 0.9403 fidL 0.8850 (32s)
+  H=3 nsup=16 w5a        pexact  47.70 cell  81.75 fidH 0.9434 fidL 0.8903 (32s)
+  H=3 nsup=16 w4t        pexact  47.80 cell  81.70 fidH 0.9066 fidL 0.8299 (32s)
+  H=3 nsup=16 w4c        pexact  47.60 cell  81.83 fidH 0.9287 fidL 0.8662 (33s)
+  H=3 nsup=16 w4a        pexact  47.10 cell  81.76 fidH 0.9357 fidL 0.8772 (33s)
+  H=3 nsup=16 w4g128     pexact  45.70 cell  81.39 fidH 0.9260 fidL 0.8605 (32s)
+  H=3 nsup=16 w4g32      pexact  46.90 cell  81.54 fidH 0.9379 fidL 0.8801 (32s)
+  H=3 nsup=16 w3t        pexact   0.00 cell  49.89 fidH 0.3524 fidL 0.3255 (32s)
+variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_attn_w512_s1/step_39060: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 512, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': False, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 8, 'pos_encodings': 'rope', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 512}
+sudoku_attn: 1000 puzzles, batch 1000, H=[3], nsup=[16], quants=['fp32', 'w8t', 'w8c', 'w8a', 'w6t', 'w6c', 'w6a', 'w5t', 'w5c', 'w5a', 'w4t', 'w4c', 'w4a', 'w4g128', 'w4g32', 'w3t', 'w3c', 'w3a', 'w3g32', 'w2t', 'w2c', 'w2a', 'w2g32']; 0 records already
+variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_attn_w512_s2/step_6510: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 512, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': False, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 8, 'pos_encodings': 'rope', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 512}
+sudoku_attn: 1000 puzzles, batch 1000, H=[3], nsup=[16], quants=['fp32', 'w8t', 'w8c', 'w8a', 'w6t', 'w6c', 'w6a', 'w5t', 'w5c', 'w5a', 'w4t', 'w4c', 'w4a', 'w4g128', 'w4g32', 'w3t', 'w3c', 'w3a', 'w3g32', 'w2t', 'w2c', 'w2a', 'w2g32']; 0 records already
+  H=3 nsup=16 fp32       pexact  50.00 cell  83.58
+  H=3 nsup=16 fp32       pexact  12.30 cell  70.22
+  H=3 nsup=16 w8t        pexact  49.60 cell  83.51 fidH 0.9154 fidL 0.8206 (77s)
+  H=3 nsup=16 w8t        pexact  12.30 cell  70.26 fidH 0.9983 fidL 0.9976 (76s)
+variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_attn_w512_s1/step_39060: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 512, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': False, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 8, 'pos_encodings': 'rope', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 512}
+sudoku_attn: 1000 puzzles, batch 256, H=[3], nsup=[16], quants=['fp32', 'w8t', 'w8c', 'w8a', 'w6t', 'w6c', 'w6a', 'w5t', 'w5c', 'w5a', 'w4t', 'w4c', 'w4a', 'w4g128', 'w4g32', 'w3t', 'w3c', 'w3a', 'w3g32', 'w2t', 'w2c', 'w2a', 'w2g32']; 2 records already
+  H=3 nsup=16 w8c        pexact  49.20 cell  83.64 fidH 0.9203 fidL 0.8291 (32s)
+  H=3 nsup=16 w8a        pexact  49.50 cell  83.37 fidH 0.9212 fidL 0.8278 (32s)
+  H=3 nsup=16 w6t        pexact  48.00 cell  82.91 fidH 0.8973 fidL 0.7912 (32s)
+  H=3 nsup=16 w6c        pexact  49.40 cell  83.45 fidH 0.8981 fidL 0.7948 (32s)
+  H=3 nsup=16 w6a        pexact  49.80 cell  83.74 fidH 0.8985 fidL 0.7918 (33s)
+  H=3 nsup=16 w5t        pexact  46.30 cell  82.82 fidH 0.8806 fidL 0.7687 (32s)
+  H=3 nsup=16 w5c        pexact  51.40 cell  83.44 fidH 0.8944 fidL 0.7897 (32s)
+  H=3 nsup=16 w5a        pexact  49.70 cell  83.57 fidH 0.8870 fidL 0.7789 (32s)
+  H=3 nsup=16 w4t        pexact  50.00 cell  82.98 fidH 0.8606 fidL 0.7399 (32s)
+  H=3 nsup=16 w4c        pexact  49.70 cell  83.43 fidH 0.8820 fidL 0.7695 (33s)
+  H=3 nsup=16 w4a        pexact  49.50 cell  83.19 fidH 0.8807 fidL 0.7696 (32s)
+  H=3 nsup=16 w4g128     pexact  50.80 cell  83.61 fidH 0.8884 fidL 0.7809 (33s)
+  H=3 nsup=16 w4g32      pexact  51.70 cell  83.87 fidH 0.8914 fidL 0.7884 (33s)
+  H=3 nsup=16 w3t        pexact   0.00 cell  34.19 fidH 0.0998 fidL 0.1248 (33s)
+  H=3 nsup=16 w3c        pexact  49.80 cell  82.84 fidH 0.8341 fidL 0.6988 (32s)
+  H=3 nsup=16 w3a        pexact  50.90 cell  83.03 fidH 0.8668 fidL 0.7502 (32s)
+  H=3 nsup=16 w3g32      pexact  53.20 cell  83.89 fidH 0.8766 fidL 0.7664 (32s)
+  H=3 nsup=16 w2t        pexact   0.00 cell  11.11 fidH 0.0128 fidL 0.1906 (32s)
+  H=3 nsup=16 w2c        pexact   0.00 cell  10.02 fidH 0.0108 fidL 0.1083 (32s)
+  H=3 nsup=16 w2a        pexact   0.30 cell  55.31 fidH 0.2814 fidL 0.2559 (32s)
+  H=3 nsup=16 w2g32      pexact   0.60 cell  54.82 fidH 0.2941 fidL 0.2634 (32s)
+wrote /home/ubuntu/breadth/results/variant_trm_sudoku_attn_w512_s1_39060.json 23 records
+variant checkpoint /home/ubuntu/edgetrm_src/TinyRecursiveModels/checkpoints/Sudoku-extreme-1k-aug-1000-ACT-torch/trm_sudoku_attn_w512_s1/step_58590: arch {'H_cycles': 3, 'H_layers': 0, 'L_cycles': 6, 'L_layers': 2, 'expansion': 4, 'forward_dtype': 'bfloat16', 'halt_exploration_prob': 0.1, 'halt_max_steps': 16, 'hidden_size': 512, 'loss': {'loss_type': 'stablemax_cross_entropy', 'name': 'losses@ACTLossHead'}, 'mlp_t': False, 'name': 'recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1', 'no_ACT_continue': True, 'num_heads': 8, 'pos_encodings': 'rope', 'puzzle_emb_len': 16, 'puzzle_emb_ndim': 512}
+sudoku_attn: 1000 puzzles, batch 256, H=[3], nsup=[16], quants=['fp32', 'w8t', 'w8c', 'w8a', 'w6t', 'w6c', 'w6a', 'w5t', 'w5c', 'w5a', 'w4t', 'w4c', 'w4a', 'w4g128', 'w4g32', 'w3t', 'w3c', 'w3a', 'w3g32', 'w2t', 'w2c', 'w2a', 'w2g32']; 0 records already
+  H=3 nsup=16 fp32       pexact  62.20 cell  86.01
+  H=3 nsup=16 w8t        pexact  62.30 cell  85.99 fidH 0.9283 fidL 0.8606 (32s)
+  H=3 nsup=16 w8c        pexact  62.30 cell  85.98 fidH 0.9299 fidL 0.8641 (32s)
+  H=3 nsup=16 w8a        pexact  61.30 cell  85.65 fidH 0.9290 fidL 0.8587 (32s)
+  H=3 nsup=16 w6t        pexact  62.00 cell  85.82 fidH 0.9183 fidL 0.8536 (32s)
+  H=3 nsup=16 w6c        pexact  60.90 cell  85.72 fidH 0.9130 fidL 0.8444 (32s)
+  H=3 nsup=16 w6a        pexact  61.50 cell  85.90 fidH 0.9140 fidL 0.8457 (32s)
+  H=3 nsup=16 w5t        pexact  60.60 cell  85.40 fidH 0.9008 fidL 0.8301 (32s)
+  H=3 nsup=16 w5c        pexact  61.90 cell  85.77 fidH 0.9169 fidL 0.8510 (32s)

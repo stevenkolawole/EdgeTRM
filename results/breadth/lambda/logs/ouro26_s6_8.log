@@ -1,0 +1,2 @@
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+  steps=6 bf16      acc 77.5  nll 0.829  gen 226 (13210s)
