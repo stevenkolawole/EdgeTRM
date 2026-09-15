@@ -169,3 +169,8 @@ Terminated
 06:16 full grid trm_sudoku_mlp_w512_s0
 06:23 noise trm_sudoku_mlp_w512_s1
 06:31 full grid trm_sudoku_mlp_w512_s1
+06:48 noise trm_sudoku_mlp_w768_s0
+06:51 full grid trm_sudoku_mlp_w768_s0
+07:00 eval trm_sudoku_attn_w512_s2 step_52080 (sudoku_attn, H=3 nsup=16)
+07:05 eval trm_sudoku_attn_w512_s2 step_58590 (sudoku_attn, H=3 nsup=16)
+07:13 eval trm_sudoku_mlp_w512_s2 step_52080 (sudoku_mlp, H=3 nsup=16)
