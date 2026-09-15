@@ -7,6 +7,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "jpe7eqk15",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -16,7 +17,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S21",
     "job_id": "jgzlo6rk5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -26,6 +28,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "j5wl2k96p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -36,6 +39,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jg9zjr4lp",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -45,7 +49,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jp1ny982g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -55,6 +60,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jgddekveg",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -64,7 +70,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "j57e0mdlp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -73,7 +80,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jp4yk7wvp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -82,7 +90,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jpxlnq11p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -91,7 +100,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S23",
     "job_id": "j5m0q7zwg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -100,7 +110,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S23",
     "job_id": "jgnzl4erg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -109,7 +120,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S23",
     "job_id": "jprl8ry9p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -118,7 +130,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S24",
     "job_id": "jp2r01m4g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -127,7 +140,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S24",
     "job_id": "jpyorld75",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -136,7 +150,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S24",
     "job_id": "jp0m3wr6g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -145,7 +160,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S25",
     "job_id": "jp8e0n7xp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -154,7 +170,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S25",
     "job_id": "jgk271y2g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -163,7 +180,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S25",
     "job_id": "j5qlen24p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -172,7 +190,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S26",
     "job_id": "jgly6dk85",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -181,7 +200,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S26",
     "job_id": "j568ex10g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -190,7 +210,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S26",
     "job_id": "jp3zvdml5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -199,7 +220,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jgolkxvxg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -208,7 +230,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jpvl08wj5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -217,7 +240,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jgjrz9lxp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -227,6 +251,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jpe7eqv15",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -236,7 +261,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jgzlo67k5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -246,6 +272,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "j5wl2kd6p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -255,7 +282,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Elite CRD",
     "job_id": "jg9zjr3lp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -264,7 +292,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Elite CRD",
     "job_id": "jp1ny9d2g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -273,7 +302,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X Elite CRD",
     "job_id": "jgddekreg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -282,7 +312,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "j57e0mjlp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -291,7 +322,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jp4yk7xvp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -300,7 +332,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jpxlnq71p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -309,7 +342,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "j5m0q7wwg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -318,7 +352,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jgnzl49rg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -327,7 +362,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jprl8r49p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -336,7 +372,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8295P ADP",
     "job_id": "jp2r0174g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -345,7 +382,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8295P ADP",
     "job_id": "jpyorl475",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -354,7 +392,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA8295P ADP",
     "job_id": "jp0m3w16g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -363,7 +402,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8775P ADP",
     "job_id": "jp8e0n3xp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -372,7 +412,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8775P ADP",
     "job_id": "jgk271l2g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -381,7 +422,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA8775P ADP",
     "job_id": "j5qlen74p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -390,7 +432,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA7255P ADP",
     "job_id": "jgly6d085",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -399,7 +442,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA7255P ADP",
     "job_id": "j568ex30g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -408,7 +452,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA7255P ADP",
     "job_id": "jp3zvd4l5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -417,7 +462,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "QCS8550 (Proxy)",
     "job_id": "jgolkx1xg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -426,7 +472,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "QCS8550 (Proxy)",
     "job_id": "jpvl081j5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -435,7 +482,8 @@
     "runtime": "qnn_context_binary",
     "device": "QCS8550 (Proxy)",
     "job_id": "jgjrz90xp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -445,6 +493,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jpe7eqr15",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -454,7 +503,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jgzlo6xk5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -464,6 +514,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "j5wl2km6p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -473,7 +524,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jg9zjr9lp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -482,7 +534,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jp1ny9q2g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -491,7 +544,8 @@
     "runtime": "qnn_context_binary",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jgddek7eg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -501,6 +555,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "j57e0mvlp",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -510,7 +565,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jp4yk7jvp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -520,6 +576,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jpxlnqe1p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -529,7 +586,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Arduino VENTUNO Q",
     "job_id": "j5m0q7vwg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -538,7 +596,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Arduino VENTUNO Q",
     "job_id": "jgnzl4rrg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -547,7 +606,8 @@
     "runtime": "qnn_context_binary",
     "device": "Arduino VENTUNO Q",
     "job_id": "jprl8r19p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -557,6 +617,7 @@
     "device": "Google Pixel 6",
     "job_id": "jp2r0134g",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -567,6 +628,7 @@
     "device": "Google Pixel 6",
     "job_id": "jpyorlv75",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -576,7 +638,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 6",
     "job_id": "jp0m3we6g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -586,6 +649,7 @@
     "device": "Google Pixel 7",
     "job_id": "jp8e0nwxp",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -596,6 +660,7 @@
     "device": "Google Pixel 7",
     "job_id": "jgk271r2g",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -605,7 +670,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 7",
     "job_id": "j5qlen94p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -615,6 +681,7 @@
     "device": "Google Pixel 8",
     "job_id": "jgly6de85",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -625,6 +692,7 @@
     "device": "Google Pixel 8",
     "job_id": "j568exq0g",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -634,7 +702,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 8",
     "job_id": "jp3zvdql5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -644,6 +713,7 @@
     "device": "Google Pixel 9",
     "job_id": "jgolkxexg",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -654,6 +724,7 @@
     "device": "Google Pixel 9",
     "job_id": "jpvl08zj5",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -663,7 +734,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 9",
     "job_id": "jgjrz9kxp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -673,6 +745,7 @@
     "device": "Google Pixel 10",
     "job_id": "jpe7eq415",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -683,6 +756,7 @@
     "device": "Google Pixel 10",
     "job_id": "jgzlo6vk5",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -692,7 +766,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 10",
     "job_id": "j5wl2kx6p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -702,6 +777,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jg9zjr8lp",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -712,6 +788,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jp1ny932g",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -721,7 +798,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jgddek0eg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -731,6 +809,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "j5wl2kx3p",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -741,6 +820,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jg9zjr8wp",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -750,7 +830,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jp1ny938g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -760,6 +841,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jgddek0rg",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -770,6 +852,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "j57e0m6vp",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -779,7 +862,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jp4yk788p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -789,6 +873,7 @@
     "device": "Google Pixel 3",
     "job_id": "j568exkng",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -799,6 +884,7 @@
     "device": "Google Pixel 3",
     "job_id": "jp3zvdym5",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -808,7 +894,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 3",
     "job_id": "jpvl08jz5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -818,6 +905,7 @@
     "device": "Google Pixel 4",
     "job_id": "jgjrz9j1p",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -828,6 +916,7 @@
     "device": "Google Pixel 4",
     "job_id": "jpe7eqj85",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -837,7 +926,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 4",
     "job_id": "jgzlo6145",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -847,6 +937,7 @@
     "device": "Google Pixel 5",
     "job_id": "j5wl2kj4p",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -857,6 +948,7 @@
     "device": "Google Pixel 5",
     "job_id": "jg9zjr6mp",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -866,7 +958,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 5",
     "job_id": "jgddekj6g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -876,6 +969,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "j57e0mqnp",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -886,6 +980,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jp4yk7z2p",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -895,7 +990,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jpxlnqw8p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "maze",
@@ -905,6 +1001,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jp1ny9lkg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 315.999,
     "load_peak_mb": 86.53515625,
     "infer_peak_mb": 12.762985229492188,
@@ -921,6 +1018,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jgddek9kg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 301.023,
     "load_peak_mb": 81.28125,
     "infer_peak_mb": 7.4800567626953125,
@@ -937,6 +1035,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "j57e0mwqp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 176.334,
     "load_peak_mb": 85.73046875,
     "infer_peak_mb": 10.2451171875,
@@ -953,6 +1052,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "jp2r01nxg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 179.147,
     "load_peak_mb": 90.5546875,
     "infer_peak_mb": 10.937057495117188,
@@ -969,6 +1069,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jpyorl0r5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 124.441,
     "load_peak_mb": 86.49609375,
     "infer_peak_mb": 10.763748168945312,
@@ -985,6 +1086,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jp0m3w72g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 98.651,
     "load_peak_mb": 83.33984375,
     "infer_peak_mb": 2.8524322509765625,
@@ -1001,6 +1103,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jp8e0nvzp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 214.398,
     "load_peak_mb": 84.03515625,
     "infer_peak_mb": 5.6075286865234375,
@@ -1017,6 +1120,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "jgk271myg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 150.171,
     "load_peak_mb": 92.859375,
     "infer_peak_mb": 10.392318725585938,
@@ -1033,6 +1137,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jgk27jxyg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 77.032,
     "load_peak_mb": 83.20703125,
     "infer_peak_mb": 2.8777008056640625,
@@ -1049,6 +1154,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "j5qlejq7p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 71.28,
     "load_peak_mb": 92.55859375,
     "infer_peak_mb": 16.161972045898438,
@@ -1065,6 +1171,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "jgly6jme5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 56.183,
     "load_peak_mb": 94.609375,
     "infer_peak_mb": 8.023406982421875,
@@ -1081,6 +1188,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "j568ek4vg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 52.019,
     "load_peak_mb": 108.48046875,
     "infer_peak_mb": 9.508651733398438,
@@ -1097,6 +1205,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "jp3zvy0x5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 136.926,
     "load_peak_mb": 108.45703125,
     "infer_peak_mb": 11.135910034179688,
@@ -1113,6 +1222,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "jgolkj64g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 106.824,
     "load_peak_mb": 117.1328125,
     "infer_peak_mb": 10.60675048828125,
@@ -1129,6 +1239,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "jgly6j4l5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 40.538,
     "load_peak_mb": 108.375,
     "infer_peak_mb": 9.595108032226562,
@@ -1145,6 +1256,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "j568ek27g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 49.16,
     "load_peak_mb": 116.80859375,
     "infer_peak_mb": 9.435821533203125,
@@ -1161,6 +1273,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "jp3zvynz5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 38.872,
     "load_peak_mb": 119.42578125,
     "infer_peak_mb": 10.998703002929688,
@@ -1177,6 +1290,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jgolkjzdg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 57.579,
     "load_peak_mb": 135.85546875,
     "infer_peak_mb": 10.523025512695312,
@@ -1193,6 +1307,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jpvl0jqm5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 39.31,
     "load_peak_mb": 135.83203125,
     "infer_peak_mb": 10.4488525390625,
@@ -1209,6 +1324,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jgjrzjd8p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 127.298,
     "load_peak_mb": 135.875,
     "infer_peak_mb": 13.14654541015625,
@@ -1225,6 +1341,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jpe7ejo05",
     "status": "SUCCESS",
+    "model": null,
     "ms": 82.382,
     "load_peak_mb": 115.51171875,
     "infer_peak_mb": 6.8097991943359375,
@@ -1241,6 +1358,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "jgzlo1265",
     "status": "SUCCESS",
+    "model": null,
     "ms": 77.226,
     "load_peak_mb": 14.5234375,
     "infer_peak_mb": 0.91796875,
@@ -1257,6 +1375,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "j5wl2jwjp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 202.431,
     "load_peak_mb": 14.58984375,
     "infer_peak_mb": 3.5859375,
@@ -1273,6 +1392,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "jgnzljnkg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 98.587,
     "load_peak_mb": 14.44921875,
     "infer_peak_mb": 0.93359375,
@@ -1289,6 +1409,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jprl8z00p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 96.999,
     "load_peak_mb": 14.44921875,
     "infer_peak_mb": 0.921875,
@@ -1305,6 +1426,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jp2r02wrg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 76.618,
     "load_peak_mb": 14.55859375,
     "infer_peak_mb": 0.91796875,
@@ -1321,6 +1443,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jpyor9x85",
     "status": "SUCCESS",
+    "model": null,
     "ms": 194.485,
     "load_peak_mb": 14.64453125,
     "infer_peak_mb": 3.59375,
@@ -1337,6 +1460,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jp0m3nj9g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 53.838,
     "load_peak_mb": 15.734375,
     "infer_peak_mb": 0.9375,
@@ -1353,6 +1477,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jp8e0lxkp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 44.762,
     "load_peak_mb": 15.83984375,
     "infer_peak_mb": 0.9375,
@@ -1369,6 +1494,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jgk27j4wg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 114.808,
     "load_peak_mb": 15.921875,
     "infer_peak_mb": 3.58984375,
@@ -1385,6 +1511,7 @@
     "device": "SA8295P ADP",
     "job_id": "j5qlejynp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 111.42,
     "load_peak_mb": 100.9921875,
     "infer_peak_mb": 6.7440948486328125,
@@ -1401,6 +1528,7 @@
     "device": "SA8295P ADP",
     "job_id": "jgly6jxj5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 84.63,
     "load_peak_mb": 96.2890625,
     "infer_peak_mb": 6.4806365966796875,
@@ -1417,6 +1545,7 @@
     "device": "SA8295P ADP",
     "job_id": "j568ek76g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 219.19,
     "load_peak_mb": 96.30078125,
     "infer_peak_mb": 8.965972900390625,
@@ -1433,6 +1562,7 @@
     "device": "SA8775P ADP",
     "job_id": "jp3zvy935",
     "status": "SUCCESS",
+    "model": null,
     "ms": 97.21,
     "load_peak_mb": 95.171875,
     "infer_peak_mb": 10.064468383789062,
@@ -1449,6 +1579,7 @@
     "device": "SA8775P ADP",
     "job_id": "jgolkjrqg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 76.249,
     "load_peak_mb": 94.3515625,
     "infer_peak_mb": 10.11962890625,
@@ -1465,6 +1596,7 @@
     "device": "SA8775P ADP",
     "job_id": "jpvl0jlk5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 217.633,
     "load_peak_mb": 95.4765625,
     "infer_peak_mb": 12.035430908203125,
@@ -1481,6 +1613,7 @@
     "device": "SA7255P ADP",
     "job_id": "jgjrzjrvp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 169.645,
     "load_peak_mb": 93.80859375,
     "infer_peak_mb": 9.971603393554688,
@@ -1497,6 +1630,7 @@
     "device": "SA7255P ADP",
     "job_id": "jpe7ej7o5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 125.518,
     "load_peak_mb": 94.65625,
     "infer_peak_mb": 10.0233154296875,
@@ -1513,6 +1647,7 @@
     "device": "SA7255P ADP",
     "job_id": "jgzlo1lo5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 436.131,
     "load_peak_mb": 93.46875,
     "infer_peak_mb": 12.11151123046875,
@@ -1529,6 +1664,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "j5wl2jl3p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 97.525,
     "load_peak_mb": 88.71484375,
     "infer_peak_mb": 2.7518768310546875,
@@ -1545,6 +1681,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "jg9zj6zwp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 78.083,
     "load_peak_mb": 88.34375,
     "infer_peak_mb": 2.7252578735351562,
@@ -1561,6 +1698,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "jp1nyrn8g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 214.97,
     "load_peak_mb": 83.5234375,
     "infer_peak_mb": 5.892181396484375,
@@ -1577,6 +1715,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jgddejdrg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 276.088,
     "load_peak_mb": 4.296875,
     "infer_peak_mb": 2.5876312255859375,
@@ -1593,6 +1732,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "j5wl2jlmp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 95.875,
     "load_peak_mb": 6.265625,
     "infer_peak_mb": 2.9135589599609375,
@@ -1609,6 +1749,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jg9zj6z8p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 75.344,
     "load_peak_mb": 4.32421875,
     "infer_peak_mb": 3.026580810546875,
@@ -1625,6 +1766,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jp1nyrn7g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 213.937,
     "load_peak_mb": 6.2578125,
     "infer_peak_mb": 10.820159912109375,
@@ -1641,6 +1783,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jgddejdzg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 359.433,
     "load_peak_mb": 123.28125,
     "infer_peak_mb": 6.4244384765625,
@@ -1657,6 +1800,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "j57e0qe9p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 89.652,
     "load_peak_mb": 4.5625,
     "infer_peak_mb": 3.776580810546875,
@@ -1673,6 +1817,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "jp4ykzy1p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 68.889,
     "load_peak_mb": 4.5859375,
     "infer_peak_mb": 3.7536163330078125,
@@ -1689,6 +1834,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "jpxlnwllp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 205.517,
     "load_peak_mb": 4.5625,
     "infer_peak_mb": 9.587722778320312,
@@ -1705,6 +1851,7 @@
     "device": "Google Pixel 6",
     "job_id": "j5m0qj09g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 395.842,
     "load_peak_mb": 1149.50390625,
     "infer_peak_mb": 26.152786254882812,
@@ -1722,6 +1869,7 @@
     "device": "Google Pixel 7",
     "job_id": "jgnzljzqg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 488.71,
     "load_peak_mb": 1118.7421875,
     "infer_peak_mb": 24.453048706054688,
@@ -1739,6 +1887,7 @@
     "device": "Google Pixel 8",
     "job_id": "jprl8zl7p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 509.989,
     "load_peak_mb": 1041.55859375,
     "infer_peak_mb": 24.459762573242188,
@@ -1756,6 +1905,7 @@
     "device": "Google Pixel 9",
     "job_id": "jp2r02rqg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 469.531,
     "load_peak_mb": 1162.50390625,
     "infer_peak_mb": 23.8870849609375,
@@ -1773,6 +1923,7 @@
     "device": "Google Pixel 10",
     "job_id": "jpyor9ol5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 631.684,
     "load_peak_mb": 1122.9140625,
     "infer_peak_mb": 110.66799926757812,
@@ -1790,6 +1941,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jp0m3nmng",
     "status": "SUCCESS",
+    "model": null,
     "ms": 634.873,
     "load_peak_mb": 1244.1953125,
     "infer_peak_mb": 70.20350646972656,
@@ -1807,6 +1959,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jp8e0leop",
     "status": "SUCCESS",
+    "model": null,
     "ms": 1486.405,
     "load_peak_mb": 1151.2734375,
     "infer_peak_mb": 28.8922119140625,
@@ -1824,6 +1977,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jgk27j2ng",
     "status": "SUCCESS",
+    "model": null,
     "ms": 1965.527,
     "load_peak_mb": 1156.61328125,
     "infer_peak_mb": 420.7185592651367,
@@ -1841,6 +1995,7 @@
     "device": "Google Pixel 3",
     "job_id": "jprl229vp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 1983.257,
     "load_peak_mb": 1221.828125,
     "infer_peak_mb": 417.38777923583984,
@@ -1858,6 +2013,7 @@
     "device": "Google Pixel 4",
     "job_id": "jp2r99jxg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 1454.46,
     "load_peak_mb": 1058.23046875,
     "infer_peak_mb": 28.063613891601562,
@@ -1875,6 +2031,7 @@
     "device": "Google Pixel 5",
     "job_id": "jpyojjnr5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 3197.462,
     "load_peak_mb": 1130.140625,
     "infer_peak_mb": 38.532257080078125,
@@ -1892,6 +2049,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jp0m22k2g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 1082.195,
     "load_peak_mb": 1089.62109375,
     "infer_peak_mb": 415.24952697753906,
@@ -1909,6 +2067,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "jpxlnqm3p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -1918,7 +2077,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S21",
     "job_id": "j5m0q74dg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -1928,6 +2088,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "jprl8r90p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -1938,6 +2099,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jp2r01jrg",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -1947,7 +2109,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jpyorln85",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -1957,6 +2120,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jp8e0n8kp",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -1966,7 +2130,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jgk271dwg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -1975,7 +2140,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "j5qlenwnp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -1984,7 +2150,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jgly6d7j5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -1993,7 +2160,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S23",
     "job_id": "j568exv6g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2002,7 +2170,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S23",
     "job_id": "jp3zvd835",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2011,7 +2180,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S23",
     "job_id": "jgolkxmqg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2020,7 +2190,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S24",
     "job_id": "jpvl08ek5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2029,7 +2200,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S24",
     "job_id": "jgjrz9ovp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2038,7 +2210,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S24",
     "job_id": "jgzlo68o5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2047,7 +2220,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S25",
     "job_id": "j5wl2k83p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2056,7 +2230,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S25",
     "job_id": "jg9zjrkwp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2065,7 +2240,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S25",
     "job_id": "jp1ny978g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2074,7 +2250,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S26",
     "job_id": "jgddek8rg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2083,7 +2260,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S26",
     "job_id": "j57e0mkvp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2092,7 +2270,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S26",
     "job_id": "jp4yk7m8p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2101,7 +2280,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jpxlnq33p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2110,7 +2290,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "j5m0q7odg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2119,7 +2300,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jgnzl4okg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2129,6 +2311,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jprl8ro0p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -2138,7 +2321,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jp2r014rg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2148,6 +2332,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jp0m3wd9g",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -2157,7 +2342,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Elite CRD",
     "job_id": "jp8e0n6kp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2166,7 +2352,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Elite CRD",
     "job_id": "jgk271owg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2175,7 +2362,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X Elite CRD",
     "job_id": "j5qlenznp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2184,7 +2372,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jgly6doj5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2193,7 +2382,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "j568exr6g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2202,7 +2392,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jp3zvdx35",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2211,7 +2402,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jgolkxoqg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2220,7 +2412,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jpvl089k5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2229,7 +2422,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jgjrz9wvp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2238,7 +2432,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8295P ADP",
     "job_id": "jpe7eqlo5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2247,7 +2442,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8295P ADP",
     "job_id": "jgzlo64o5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2256,7 +2452,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA8295P ADP",
     "job_id": "j5wl2k13p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2265,7 +2462,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8775P ADP",
     "job_id": "jg9zjrxwp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2274,7 +2472,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8775P ADP",
     "job_id": "jp1ny9v8g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2283,7 +2482,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA8775P ADP",
     "job_id": "jgddekzrg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2292,7 +2492,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA7255P ADP",
     "job_id": "j57e0m7vp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2301,7 +2502,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA7255P ADP",
     "job_id": "jp4yk798p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2310,7 +2512,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA7255P ADP",
     "job_id": "jpxlnqd3p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2319,7 +2522,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "QCS8550 (Proxy)",
     "job_id": "j5m0q7ddg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2328,7 +2532,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "QCS8550 (Proxy)",
     "job_id": "jgnzl47kg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2337,7 +2542,8 @@
     "runtime": "qnn_context_binary",
     "device": "QCS8550 (Proxy)",
     "job_id": "jprl8rn0p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2347,6 +2553,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jp2r01vrg",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -2356,7 +2563,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jpyorl785",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2366,6 +2574,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jp0m3wv9g",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -2375,7 +2584,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jp8e0n4kp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2384,7 +2594,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jgk2719wg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2393,7 +2604,8 @@
     "runtime": "qnn_context_binary",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "j5qlenmnp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2403,6 +2615,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jgly6d1j5",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -2412,7 +2625,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "j568exd6g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2422,6 +2636,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jp3zvdw35",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -2431,7 +2646,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Arduino VENTUNO Q",
     "job_id": "jgolkx4qg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2440,7 +2656,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Arduino VENTUNO Q",
     "job_id": "jpvl087k5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2449,7 +2666,8 @@
     "runtime": "qnn_context_binary",
     "device": "Arduino VENTUNO Q",
     "job_id": "jgjrz9qvp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2458,7 +2676,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 6",
     "job_id": "jpe7eqyo5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2468,6 +2687,7 @@
     "device": "Google Pixel 6",
     "job_id": "jgzlo6no5",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2477,7 +2697,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 6",
     "job_id": "j5wl2k43p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2486,7 +2707,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 7",
     "job_id": "jg9zjrdwp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2496,6 +2718,7 @@
     "device": "Google Pixel 7",
     "job_id": "jp1ny968g",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2505,7 +2728,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 7",
     "job_id": "jgddek2rg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2514,7 +2738,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 8",
     "job_id": "j57e0m9vp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2524,6 +2749,7 @@
     "device": "Google Pixel 8",
     "job_id": "jp4yk738p",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2533,7 +2759,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 8",
     "job_id": "jpxlnqx3p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2542,7 +2769,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 9",
     "job_id": "j5m0q78dg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2552,6 +2780,7 @@
     "device": "Google Pixel 9",
     "job_id": "jgnzl4kkg",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2561,7 +2790,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 9",
     "job_id": "jprl8rw0p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2570,7 +2800,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 10",
     "job_id": "jp2r01erg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2580,6 +2811,7 @@
     "device": "Google Pixel 10",
     "job_id": "jpyorlm85",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2589,7 +2821,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 10",
     "job_id": "jp0m3w69g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2598,7 +2831,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jp8e0n1kp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2608,6 +2842,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jgk2718wg",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2617,7 +2852,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "j5qlenvnp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2626,7 +2862,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jgly6dlj5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2636,6 +2873,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "j568exw6g",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2645,7 +2883,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jp3zvd635",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2654,7 +2893,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jgolkx8qg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2664,6 +2904,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jpvl08dk5",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2673,7 +2914,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jgjrz97vp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2682,7 +2924,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 3",
     "job_id": "j5m0q7j7g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2692,6 +2935,7 @@
     "device": "Google Pixel 3",
     "job_id": "jgnzl4jjg",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2701,7 +2945,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 3",
     "job_id": "jprl8rzkp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2710,7 +2955,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 4",
     "job_id": "jpyorl905",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2720,6 +2966,7 @@
     "device": "Google Pixel 4",
     "job_id": "jp0m3wy0g",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2729,7 +2976,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 4",
     "job_id": "jp8e0noqp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2738,7 +2986,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 5",
     "job_id": "jgk271zvg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2748,6 +2997,7 @@
     "device": "Google Pixel 5",
     "job_id": "j5qlen8ep",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2757,7 +3007,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 5",
     "job_id": "jgly6dn25",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2766,7 +3017,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Tab S7",
     "job_id": "j568ex6ng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2776,6 +3028,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jp3zvdkm5",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_3053_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -2785,7 +3038,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jpvl083z5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_mlp",
@@ -2795,6 +3049,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "j5qlejlop",
     "status": "SUCCESS",
+    "model": null,
     "ms": 29.35,
     "load_peak_mb": 91.10546875,
     "infer_peak_mb": 10.174880981445312,
@@ -2811,6 +3066,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jgly6jwm5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 55.81,
     "load_peak_mb": 80.9296875,
     "infer_peak_mb": 7.6001434326171875,
@@ -2827,6 +3083,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "j568ekoyg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 22.021,
     "load_peak_mb": 85.46484375,
     "infer_peak_mb": 8.668533325195312,
@@ -2843,6 +3100,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jp3zvyon5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 17.273,
     "load_peak_mb": 85.96875,
     "infer_peak_mb": 8.618255615234375,
@@ -2859,6 +3117,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jgolkjdkg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 37.746,
     "load_peak_mb": 85.84375,
     "infer_peak_mb": 9.816177368164062,
@@ -2875,6 +3134,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jpvl0j2r5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 15.094,
     "load_peak_mb": 83.859375,
     "infer_peak_mb": 1.98748779296875,
@@ -2891,6 +3151,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jgjrzj3ep",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.134,
     "load_peak_mb": 83.1796875,
     "infer_peak_mb": 1.4932022094726562,
@@ -2907,6 +3168,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jpe7ej6v5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 16.937,
     "load_peak_mb": 83.37890625,
     "infer_peak_mb": 1.8339462280273438,
@@ -2923,6 +3185,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "jgzlo1zx5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.265,
     "load_peak_mb": 93.8046875,
     "infer_peak_mb": 6.83642578125,
@@ -2939,6 +3202,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "j5wl2jymp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 6.78,
     "load_peak_mb": 91.73046875,
     "infer_peak_mb": 7.1261138916015625,
@@ -2955,6 +3219,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "jg9zj6o8p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 11.37,
     "load_peak_mb": 92.52734375,
     "infer_peak_mb": 6.9115142822265625,
@@ -2971,6 +3236,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "jp1nyro7g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 8.379,
     "load_peak_mb": 109.72265625,
     "infer_peak_mb": 9.009765625,
@@ -2987,6 +3253,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "jgddej6zg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 5.987,
     "load_peak_mb": 108.390625,
     "infer_peak_mb": 8.919525146484375,
@@ -3003,6 +3270,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "j57e0qo9p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 11.246,
     "load_peak_mb": 108.37109375,
     "infer_peak_mb": 8.755081176757812,
@@ -3019,6 +3287,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "jp4ykze1p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 9.552,
     "load_peak_mb": 116.796875,
     "infer_peak_mb": 8.860443115234375,
@@ -3035,6 +3304,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "jgddel8eg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 6.68,
     "load_peak_mb": 119.203125,
     "infer_peak_mb": 9.694839477539062,
@@ -3051,6 +3321,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "j57e03klp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 4.623,
     "load_peak_mb": 117.015625,
     "infer_peak_mb": 8.380844116210938,
@@ -3067,6 +3338,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jp4yk0mvp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 9.663,
     "load_peak_mb": 135.76171875,
     "infer_peak_mb": 9.909561157226562,
@@ -3083,6 +3355,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jpxln231p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 5.955,
     "load_peak_mb": 135.6171875,
     "infer_peak_mb": 9.7655029296875,
@@ -3099,6 +3372,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "j5m0qyowg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 13.617,
     "load_peak_mb": 135.84375,
     "infer_peak_mb": 9.865478515625,
@@ -3115,6 +3389,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jgnzl8org",
     "status": "SUCCESS",
+    "model": null,
     "ms": 12.807,
     "load_peak_mb": 115.1171875,
     "infer_peak_mb": 6.1906890869140625,
@@ -3131,6 +3406,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "jprl8jo9p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 16.055,
     "load_peak_mb": 14.32421875,
     "infer_peak_mb": 0.359375,
@@ -3147,6 +3423,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "jp2r0n44g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.692,
     "load_peak_mb": 14.36328125,
     "infer_peak_mb": 0.26171875,
@@ -3163,6 +3440,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "jpyor0q75",
     "status": "SUCCESS",
+    "model": null,
     "ms": 17.83,
     "load_peak_mb": 14.44921875,
     "infer_peak_mb": 0.39453125,
@@ -3179,6 +3457,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jp0m37d6g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 15.239,
     "load_peak_mb": 14.453125,
     "infer_peak_mb": 0.3828125,
@@ -3195,6 +3474,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jp8e0v6xp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.45,
     "load_peak_mb": 14.5078125,
     "infer_peak_mb": 0.30078125,
@@ -3211,6 +3491,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jgk27mo2g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 17.44,
     "load_peak_mb": 14.3828125,
     "infer_peak_mb": 0.40234375,
@@ -3227,6 +3508,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "j5qleoz4p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 7.43,
     "load_peak_mb": 15.7578125,
     "infer_peak_mb": 0.11328125,
@@ -3243,6 +3525,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jgly6ro85",
     "status": "SUCCESS",
+    "model": null,
     "ms": 5.193,
     "load_peak_mb": 15.8125,
     "infer_peak_mb": 0.125,
@@ -3259,6 +3542,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "j568elr0g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.217,
     "load_peak_mb": 15.69140625,
     "infer_peak_mb": 0.37890625,
@@ -3275,6 +3559,7 @@
     "device": "SA8295P ADP",
     "job_id": "jp3zv2xl5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 20.3,
     "load_peak_mb": 93.33984375,
     "infer_peak_mb": 5.390899658203125,
@@ -3291,6 +3576,7 @@
     "device": "SA8295P ADP",
     "job_id": "jgolkqoxg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 17.087,
     "load_peak_mb": 93.94921875,
     "infer_peak_mb": 5.167572021484375,
@@ -3307,6 +3593,7 @@
     "device": "SA8295P ADP",
     "job_id": "jpvl0xej5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 32.128,
     "load_peak_mb": 93.61328125,
     "infer_peak_mb": 5.2118377685546875,
@@ -3323,6 +3610,7 @@
     "device": "SA8775P ADP",
     "job_id": "jgjrz4oxp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 14.972,
     "load_peak_mb": 93.890625,
     "infer_peak_mb": 9.35516357421875,
@@ -3339,6 +3627,7 @@
     "device": "SA8775P ADP",
     "job_id": "jpe7e3815",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.348,
     "load_peak_mb": 96.06640625,
     "infer_peak_mb": 9.112472534179688,
@@ -3355,6 +3644,7 @@
     "device": "SA8775P ADP",
     "job_id": "jgzlok8k5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 19.256,
     "load_peak_mb": 94.2578125,
     "infer_peak_mb": 9.740921020507812,
@@ -3371,6 +3661,7 @@
     "device": "SA7255P ADP",
     "job_id": "j5wl2n16p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 33.392,
     "load_peak_mb": 94.09765625,
     "infer_peak_mb": 9.050628662109375,
@@ -3387,6 +3678,7 @@
     "device": "SA7255P ADP",
     "job_id": "jg9zjexlp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 21.207,
     "load_peak_mb": 94.12890625,
     "infer_peak_mb": 9.293060302734375,
@@ -3403,6 +3695,7 @@
     "device": "SA7255P ADP",
     "job_id": "jp1nyxv2g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 45.023,
     "load_peak_mb": 94.32421875,
     "infer_peak_mb": 8.471572875976562,
@@ -3419,6 +3712,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "jgddelzeg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 15.117,
     "load_peak_mb": 87.515625,
     "infer_peak_mb": 1.6817779541015625,
@@ -3435,6 +3729,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "j57e037lp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 9.999,
     "load_peak_mb": 84.578125,
     "infer_peak_mb": 1.330047607421875,
@@ -3451,6 +3746,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "jp4yk09vp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 16.899,
     "load_peak_mb": 83.2265625,
     "infer_peak_mb": 1.839447021484375,
@@ -3467,6 +3763,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jpxln2d1p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 49.399,
     "load_peak_mb": 4.26953125,
     "infer_peak_mb": 1.7244873046875,
@@ -3483,6 +3780,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "j5m0qydwg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 15.164,
     "load_peak_mb": 4.26953125,
     "infer_peak_mb": 3.732086181640625,
@@ -3499,6 +3797,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jgnzl87rg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.091,
     "load_peak_mb": 4.30078125,
     "infer_peak_mb": 1.71490478515625,
@@ -3515,6 +3814,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jprl8jn9p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 19.447,
     "load_peak_mb": 4.2265625,
     "infer_peak_mb": 2.3935546875,
@@ -3531,6 +3831,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jp2r0nv4g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 97.303,
     "load_peak_mb": 115.87109375,
     "infer_peak_mb": 5.985076904296875,
@@ -3547,6 +3848,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "jpyor0775",
     "status": "SUCCESS",
+    "model": null,
     "ms": 13.574,
     "load_peak_mb": 4.53125,
     "infer_peak_mb": 2.4725799560546875,
@@ -3563,6 +3865,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "jp0m37v6g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 9.254,
     "load_peak_mb": 4.5625,
     "infer_peak_mb": 2.4731903076171875,
@@ -3579,6 +3882,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "jp8e0v4xp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 17.944,
     "load_peak_mb": 4.50390625,
     "infer_peak_mb": 3.1241455078125,
@@ -3595,6 +3899,7 @@
     "device": "Google Pixel 6",
     "job_id": "jgk27m92g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 58.883,
     "load_peak_mb": 1075.9296875,
     "infer_peak_mb": 24.896591186523438,
@@ -3612,6 +3917,7 @@
     "device": "Google Pixel 6",
     "job_id": "j5qleom4p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 58.796,
     "load_peak_mb": 989.62109375,
     "infer_peak_mb": 19.137619018554688,
@@ -3629,6 +3935,7 @@
     "device": "Google Pixel 7",
     "job_id": "jgly6r185",
     "status": "SUCCESS",
+    "model": null,
     "ms": 70.929,
     "load_peak_mb": 1056.53125,
     "infer_peak_mb": 24.929168701171875,
@@ -3646,6 +3953,7 @@
     "device": "Google Pixel 7",
     "job_id": "j568eld0g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 70.205,
     "load_peak_mb": 1008.4140625,
     "infer_peak_mb": 18.10394287109375,
@@ -3663,6 +3971,7 @@
     "device": "Google Pixel 8",
     "job_id": "jp3zv2wl5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 57.695,
     "load_peak_mb": 1037.7890625,
     "infer_peak_mb": 24.348663330078125,
@@ -3680,6 +3989,7 @@
     "device": "Google Pixel 8",
     "job_id": "jgolkq4xg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 59.957,
     "load_peak_mb": 1100.90234375,
     "infer_peak_mb": 17.664352416992188,
@@ -3697,6 +4007,7 @@
     "device": "Google Pixel 9",
     "job_id": "jpvl0x9j5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 54.853,
     "load_peak_mb": 1125.375,
     "infer_peak_mb": 24.288650512695312,
@@ -3714,6 +4025,7 @@
     "device": "Google Pixel 9",
     "job_id": "jgjrz4wxp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 56.668,
     "load_peak_mb": 1047.64453125,
     "infer_peak_mb": 18.262237548828125,
@@ -3731,6 +4043,7 @@
     "device": "Google Pixel 10",
     "job_id": "jpe7e3l15",
     "status": "SUCCESS",
+    "model": null,
     "ms": 177.935,
     "load_peak_mb": 1186.63671875,
     "infer_peak_mb": 726.0373382568359,
@@ -3748,6 +4061,7 @@
     "device": "Google Pixel 10",
     "job_id": "jgzlok4k5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 180.872,
     "load_peak_mb": 918.625,
     "infer_peak_mb": 172.61241149902344,
@@ -3765,6 +4079,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "j5wl2n46p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 72.088,
     "load_peak_mb": 1219.9453125,
     "infer_peak_mb": 46.715667724609375,
@@ -3782,6 +4097,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jg9zjedlp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 70.375,
     "load_peak_mb": 1209.890625,
     "infer_peak_mb": 37.98475646972656,
@@ -3799,6 +4115,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jp1nyx62g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 147.806,
     "load_peak_mb": 1096.5078125,
     "infer_peak_mb": 31.648635864257812,
@@ -3816,6 +4133,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jgddel2eg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 150.673,
     "load_peak_mb": 1106.453125,
     "infer_peak_mb": 23.934158325195312,
@@ -3833,6 +4151,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "j57e039lp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 227.772,
     "load_peak_mb": 1150.53515625,
     "infer_peak_mb": 403.9737854003906,
@@ -3850,6 +4169,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jp4yk03vp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 228.107,
     "load_peak_mb": 1119.84375,
     "infer_peak_mb": 407.1339569091797,
@@ -3867,6 +4187,7 @@
     "device": "Google Pixel 3",
     "job_id": "jp8emm8zp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 228.001,
     "load_peak_mb": 1188.66796875,
     "infer_peak_mb": 405.72745513916016,
@@ -3884,6 +4205,7 @@
     "device": "Google Pixel 3",
     "job_id": "jgk2qqdyg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 225.707,
     "load_peak_mb": 1216.49609375,
     "infer_peak_mb": 407.64854431152344,
@@ -3901,6 +4223,7 @@
     "device": "Google Pixel 4",
     "job_id": "j5qlrrw7p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 156.551,
     "load_peak_mb": 1066.296875,
     "infer_peak_mb": 29.432907104492188,
@@ -3918,6 +4241,7 @@
     "device": "Google Pixel 4",
     "job_id": "jgly227e5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 155.434,
     "load_peak_mb": 1047.91796875,
     "infer_peak_mb": 22.802566528320312,
@@ -3935,6 +4259,7 @@
     "device": "Google Pixel 5",
     "job_id": "j568zzvvg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 323.594,
     "load_peak_mb": 1101.87109375,
     "infer_peak_mb": 39.0252685546875,
@@ -3952,6 +4277,7 @@
     "device": "Google Pixel 5",
     "job_id": "jp3z118x5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 320.04,
     "load_peak_mb": 1093.5859375,
     "infer_peak_mb": 31.501434326171875,
@@ -3969,6 +4295,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jgolnnm4g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 122.479,
     "load_peak_mb": 1348.66796875,
     "infer_peak_mb": 412.0810317993164,
@@ -3986,6 +4313,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jpvlrr475",
     "status": "SUCCESS",
+    "model": null,
     "ms": 120.545,
     "load_peak_mb": 1304.28515625,
     "infer_peak_mb": 408.91185760498047,
@@ -4003,6 +4331,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "jpe7eqzo5",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -4012,7 +4341,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S21",
     "job_id": "jgzlo6mo5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4022,6 +4352,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "j5wl2k73p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -4032,6 +4363,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jg9zjrmwp",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -4041,7 +4373,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jp1ny9j8g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4051,6 +4384,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jgddek3rg",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -4060,7 +4394,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "j5wl2k7mp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4069,7 +4404,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jg9zjrm8p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4078,7 +4414,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jp1ny9j7g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4087,7 +4424,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S23",
     "job_id": "jgddek3zg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4096,7 +4434,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S23",
     "job_id": "j57e0m49p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4105,7 +4444,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S23",
     "job_id": "jp4yk711p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4114,7 +4454,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S24",
     "job_id": "jpxlnq4lp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4123,7 +4464,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S24",
     "job_id": "j5m0q7m9g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4132,7 +4474,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S24",
     "job_id": "jgnzl4nqg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4141,7 +4484,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S25",
     "job_id": "jprl8r07p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4150,7 +4494,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S25",
     "job_id": "jp2r01wqg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4159,7 +4504,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S25",
     "job_id": "jpyorlxl5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4168,7 +4514,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S26",
     "job_id": "jp0m3wjng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4177,7 +4524,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S26",
     "job_id": "jp8e0nxop",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4186,7 +4534,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S26",
     "job_id": "jgk2714ng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4195,7 +4544,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "j5qlenyop",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4204,7 +4554,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jgly6dym5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4213,7 +4564,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "j568ex8yg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4223,6 +4575,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jp3zvdzn5",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -4232,7 +4585,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jgolkxlkg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4242,6 +4596,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jpvl08lr5",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -4251,7 +4606,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Elite CRD",
     "job_id": "jgjrz9rep",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4260,7 +4616,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Elite CRD",
     "job_id": "jpe7eq7v5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4269,7 +4626,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X Elite CRD",
     "job_id": "jgzlo6lx5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4278,7 +4636,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "j5wl2klmp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4287,7 +4646,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jg9zjrz8p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4296,7 +4656,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jp1ny9n7g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4305,7 +4666,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jgddekdzg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4314,7 +4676,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "j57e0me9p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4323,7 +4686,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jp4yk7y1p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4332,7 +4696,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8295P ADP",
     "job_id": "jpxlnqllp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4341,7 +4706,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8295P ADP",
     "job_id": "j5m0q709g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4350,7 +4716,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA8295P ADP",
     "job_id": "jgnzl4zqg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4359,7 +4726,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8775P ADP",
     "job_id": "jp2r01rqg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4368,7 +4736,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8775P ADP",
     "job_id": "jpyorlol5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4377,7 +4746,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA8775P ADP",
     "job_id": "jp0m3wmng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4386,7 +4756,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA7255P ADP",
     "job_id": "jp8e0neop",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4395,7 +4766,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA7255P ADP",
     "job_id": "jgk2712ng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4404,7 +4776,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA7255P ADP",
     "job_id": "j5qlenlop",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4413,7 +4786,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "QCS8550 (Proxy)",
     "job_id": "jgly6dwm5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4422,7 +4796,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "QCS8550 (Proxy)",
     "job_id": "j568exoyg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4431,7 +4806,8 @@
     "runtime": "qnn_context_binary",
     "device": "QCS8550 (Proxy)",
     "job_id": "jp3zvdon5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4441,6 +4817,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jgolkxdkg",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -4450,7 +4827,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jpvl082r5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4460,6 +4838,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jgjrz93ep",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -4469,7 +4848,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jpe7eq6v5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4478,7 +4858,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jgzlo6zx5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4487,7 +4868,8 @@
     "runtime": "qnn_context_binary",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "j5wl2kymp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4497,6 +4879,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jg9zjro8p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -4506,7 +4889,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jp1ny9o7g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4516,6 +4900,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jgddek6zg",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -4525,7 +4910,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Arduino VENTUNO Q",
     "job_id": "j57e0mo9p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4534,7 +4920,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Arduino VENTUNO Q",
     "job_id": "jp4yk7e1p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4543,7 +4930,8 @@
     "runtime": "qnn_context_binary",
     "device": "Arduino VENTUNO Q",
     "job_id": "jpxlnq0lp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4553,6 +4941,7 @@
     "device": "Google Pixel 6",
     "job_id": "j5m0q799g",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4563,6 +4952,7 @@
     "device": "Google Pixel 6",
     "job_id": "jgnzl41qg",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4572,7 +4962,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 6",
     "job_id": "jprl8rx7p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4582,6 +4973,7 @@
     "device": "Google Pixel 7",
     "job_id": "jp2r01oqg",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4592,6 +4984,7 @@
     "device": "Google Pixel 7",
     "job_id": "jpyorl8l5",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4601,7 +4994,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 7",
     "job_id": "jp0m3wong",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4611,6 +5005,7 @@
     "device": "Google Pixel 8",
     "job_id": "jp8e0njop",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4621,6 +5016,7 @@
     "device": "Google Pixel 8",
     "job_id": "jgk2716ng",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4630,7 +5026,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 8",
     "job_id": "j5qlen4op",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4640,6 +5037,7 @@
     "device": "Google Pixel 9",
     "job_id": "jgly6d8m5",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4650,6 +5048,7 @@
     "device": "Google Pixel 9",
     "job_id": "j568exmyg",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4659,7 +5058,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 9",
     "job_id": "jp3zvd7n5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4669,6 +5069,7 @@
     "device": "Google Pixel 10",
     "job_id": "jgolkxwkg",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4679,6 +5080,7 @@
     "device": "Google Pixel 10",
     "job_id": "jpvl08mr5",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4688,7 +5090,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 10",
     "job_id": "jgjrz9yep",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4698,6 +5101,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jpe7eqxv5",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4708,6 +5112,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jgzlo6yx5",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4717,7 +5122,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "j5wl2kzmp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4727,6 +5133,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jg9zjr28p",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4737,6 +5144,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jp1ny917g",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4746,7 +5154,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jgddek4zg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4756,6 +5165,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "j57e0mn9p",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4766,6 +5176,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jp4yk741p",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4775,7 +5186,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jpxlnqrlp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4785,6 +5197,7 @@
     "device": "Google Pixel 3",
     "job_id": "jgjrz9x1p",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4795,6 +5208,7 @@
     "device": "Google Pixel 3",
     "job_id": "jpe7eq985",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4804,7 +5218,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 3",
     "job_id": "jgzlo6e45",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4814,6 +5229,7 @@
     "device": "Google Pixel 4",
     "job_id": "j5wl2ko4p",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4824,6 +5240,7 @@
     "device": "Google Pixel 4",
     "job_id": "jg9zjrvmp",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4833,7 +5250,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 4",
     "job_id": "jp1ny90ng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4843,6 +5261,7 @@
     "device": "Google Pixel 5",
     "job_id": "jgddekw6g",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4853,6 +5272,7 @@
     "device": "Google Pixel 5",
     "job_id": "j5wl2kozp",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4862,7 +5282,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 5",
     "job_id": "jg9zjrvqp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4872,6 +5293,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jp1ny90kg",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -4882,6 +5304,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jgddekwkg",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_8099_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -4891,7 +5314,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Tab S7",
     "job_id": "j57e0mzqp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "sudoku_attn",
@@ -4901,6 +5325,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "jpxln2x1p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 35.228,
     "load_peak_mb": 90.7890625,
     "infer_peak_mb": 10.212326049804688,
@@ -4917,6 +5342,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "j5m0qy8wg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 69.081,
     "load_peak_mb": 81.421875,
     "infer_peak_mb": 7.8462677001953125,
@@ -4933,6 +5359,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jgnzl8krg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 23.988,
     "load_peak_mb": 85.6640625,
     "infer_peak_mb": 9.106536865234375,
@@ -4949,6 +5376,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jprl8jw9p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 20.238,
     "load_peak_mb": 85.86328125,
     "infer_peak_mb": 8.846206665039062,
@@ -4965,6 +5393,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jp2r0ne4g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 22.675,
     "load_peak_mb": 86.24609375,
     "infer_peak_mb": 10.019073486328125,
@@ -4981,6 +5410,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jpyor0m75",
     "status": "SUCCESS",
+    "model": null,
     "ms": 16.129,
     "load_peak_mb": 83.16796875,
     "infer_peak_mb": 2.4598236083984375,
@@ -4997,6 +5427,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jp0m3766g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 12.941,
     "load_peak_mb": 83.62109375,
     "infer_peak_mb": 1.6491546630859375,
@@ -5013,6 +5444,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "jp8e0v1xp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 11.384,
     "load_peak_mb": 92.20703125,
     "infer_peak_mb": 6.5010223388671875,
@@ -5029,6 +5461,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "jgk27m82g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 7.146,
     "load_peak_mb": 92.2109375,
     "infer_peak_mb": 6.937713623046875,
@@ -5045,6 +5478,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "j5qleov4p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 9.062,
     "load_peak_mb": 93.95703125,
     "infer_peak_mb": 6.6920623779296875,
@@ -5061,6 +5495,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "jgly6rl85",
     "status": "SUCCESS",
+    "model": null,
     "ms": 7.942,
     "load_peak_mb": 108.50390625,
     "infer_peak_mb": 8.989151000976562,
@@ -5077,6 +5512,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jgjr2217p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.204,
     "load_peak_mb": 83.3125,
     "infer_peak_mb": 1.5927658081054688,
@@ -5093,6 +5529,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "jpe7ww275",
     "status": "SUCCESS",
+    "model": null,
     "ms": 8.925,
     "load_peak_mb": 108.56640625,
     "infer_peak_mb": 8.332992553710938,
@@ -5109,6 +5546,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "jgzljjwz5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 5.5,
     "load_peak_mb": 108.359375,
     "infer_peak_mb": 8.296844482421875,
@@ -5125,6 +5563,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "j5wl33xzp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 6.229,
     "load_peak_mb": 119.27734375,
     "infer_peak_mb": 8.835983276367188,
@@ -5141,6 +5580,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "jg9zyy8qp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 3.881,
     "load_peak_mb": 116.921875,
     "infer_peak_mb": 8.25189208984375,
@@ -5157,6 +5597,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "jp1nww3kg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 6.07,
     "load_peak_mb": 116.6171875,
     "infer_peak_mb": 8.764328002929688,
@@ -5173,6 +5614,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jgddqq0kg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 8.834,
     "load_peak_mb": 135.9140625,
     "infer_peak_mb": 9.29412841796875,
@@ -5189,6 +5631,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "j5wl33xjp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 6.409,
     "load_peak_mb": 136.3515625,
     "infer_peak_mb": 9.669540405273438,
@@ -5205,6 +5648,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jg9zyy8vp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 9.247,
     "load_peak_mb": 135.9765625,
     "infer_peak_mb": 9.96270751953125,
@@ -5221,6 +5665,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jp1nww3lg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 12.602,
     "load_peak_mb": 115.20703125,
     "infer_peak_mb": 6.6178436279296875,
@@ -5237,6 +5682,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "jgddqq0lg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 17.049,
     "load_peak_mb": 14.5859375,
     "infer_peak_mb": 0.53125,
@@ -5253,6 +5699,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "j57ellkrp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.868,
     "load_peak_mb": 14.578125,
     "infer_peak_mb": 0.1171875,
@@ -5269,6 +5716,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "jp4yddmlp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 13.635,
     "load_peak_mb": 14.69140625,
     "infer_peak_mb": 0.40625,
@@ -5285,6 +5733,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jpxl6639p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 15.752,
     "load_peak_mb": 14.68359375,
     "infer_peak_mb": 0.09765625,
@@ -5301,6 +5750,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "j5m066oqg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.591,
     "load_peak_mb": 14.64453125,
     "infer_peak_mb": 0.5859375,
@@ -5317,6 +5767,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jgnzmmomg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 13.043,
     "load_peak_mb": 14.62890625,
     "infer_peak_mb": 0.40625,
@@ -5333,6 +5784,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jprl22oep",
     "status": "SUCCESS",
+    "model": null,
     "ms": 7.068,
     "load_peak_mb": 15.796875,
     "infer_peak_mb": 0.44921875,
@@ -5349,6 +5801,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jp2r994mg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 4.595,
     "load_peak_mb": 15.82421875,
     "infer_peak_mb": 0.4375,
@@ -5365,6 +5818,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jpyojjq45",
     "status": "SUCCESS",
+    "model": null,
     "ms": 6.319,
     "load_peak_mb": 15.96875,
     "infer_peak_mb": 0.40234375,
@@ -5381,6 +5835,7 @@
     "device": "SA8295P ADP",
     "job_id": "jp0m22deg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 22.405,
     "load_peak_mb": 93.88671875,
     "infer_peak_mb": 5.0799102783203125,
@@ -5397,6 +5852,7 @@
     "device": "SA8295P ADP",
     "job_id": "jp8emm68p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 19.263,
     "load_peak_mb": 93.84765625,
     "infer_peak_mb": 5.0988311767578125,
@@ -5413,6 +5869,7 @@
     "device": "SA8295P ADP",
     "job_id": "jgk2qqoog",
     "status": "SUCCESS",
+    "model": null,
     "ms": 17.017,
     "load_peak_mb": 93.71484375,
     "infer_peak_mb": 5.10736083984375,
@@ -5429,6 +5886,7 @@
     "device": "SA8775P ADP",
     "job_id": "j5qlrrzmp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 15.483,
     "load_peak_mb": 94.359375,
     "infer_peak_mb": 9.113021850585938,
@@ -5445,6 +5903,7 @@
     "device": "SA8775P ADP",
     "job_id": "jgly22ol5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.363,
     "load_peak_mb": 94.40234375,
     "infer_peak_mb": 9.246063232421875,
@@ -5461,6 +5920,7 @@
     "device": "SA8775P ADP",
     "job_id": "j568zzr7g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 15.538,
     "load_peak_mb": 94.4765625,
     "infer_peak_mb": 9.565933227539062,
@@ -5477,6 +5937,7 @@
     "device": "SA7255P ADP",
     "job_id": "jp3z11xz5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 38.499,
     "load_peak_mb": 94.3828125,
     "infer_peak_mb": 9.181472778320312,
@@ -5493,6 +5954,7 @@
     "device": "SA7255P ADP",
     "job_id": "jgolnnodg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 23.906,
     "load_peak_mb": 96.24609375,
     "infer_peak_mb": 8.888076782226562,
@@ -5509,6 +5971,7 @@
     "device": "SA7255P ADP",
     "job_id": "jpvlrrem5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 41.332,
     "load_peak_mb": 94.06640625,
     "infer_peak_mb": 8.499237060546875,
@@ -5525,6 +5988,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "jgjr22o8p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 16.153,
     "load_peak_mb": 87.6015625,
     "infer_peak_mb": 1.6254730224609375,
@@ -5541,6 +6005,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "jpe7ww805",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.193,
     "load_peak_mb": 88.49609375,
     "infer_peak_mb": 1.6190185546875,
@@ -5557,6 +6022,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "jgzljj865",
     "status": "SUCCESS",
+    "model": null,
     "ms": 13.013,
     "load_peak_mb": 87.33984375,
     "infer_peak_mb": 1.7220306396484375,
@@ -5573,6 +6039,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "j5wl338jp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 60.141,
     "load_peak_mb": 6.33984375,
     "infer_peak_mb": 1.717620849609375,
@@ -5589,6 +6056,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jg9zyykvp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 15.541,
     "load_peak_mb": 4.390625,
     "infer_peak_mb": 3.731903076171875,
@@ -5605,6 +6073,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jp1nww7lg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 10.129,
     "load_peak_mb": 6.375,
     "infer_peak_mb": 1.71746826171875,
@@ -5621,6 +6090,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jgddqq8lg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 15.421,
     "load_peak_mb": 6.3359375,
     "infer_peak_mb": 4.357574462890625,
@@ -5637,6 +6107,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "j57ell7rp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 112.166,
     "load_peak_mb": 122.98828125,
     "infer_peak_mb": 6.72540283203125,
@@ -5653,6 +6124,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "jp4ydd9lp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 15.245,
     "load_peak_mb": 4.6484375,
     "infer_peak_mb": 2.475616455078125,
@@ -5669,6 +6141,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "jpxl66d9p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 9.816,
     "load_peak_mb": 4.6796875,
     "infer_peak_mb": 2.4730377197265625,
@@ -5685,6 +6158,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "j5m066dqg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 15.331,
     "load_peak_mb": 4.64453125,
     "infer_peak_mb": 3.120025634765625,
@@ -5701,6 +6175,7 @@
     "device": "Google Pixel 6",
     "job_id": "jgnzmm7mg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 74.698,
     "load_peak_mb": 1504.01953125,
     "infer_peak_mb": 29.323486328125,
@@ -5718,6 +6193,7 @@
     "device": "Google Pixel 7",
     "job_id": "jprl22nep",
     "status": "FAILED",
+    "model": null,
     "error": "The process ended because of a segmentation fault. Consult the runtime log for more details."
   },
   {
@@ -5728,6 +6204,7 @@
     "device": "Google Pixel 8",
     "job_id": "jp2r99vmg",
     "status": "FAILED",
+    "model": null,
     "error": "Failed to profile the model because memory usage exceeded device limits."
   },
   {
@@ -5738,6 +6215,7 @@
     "device": "Google Pixel 9",
     "job_id": "jpyojj745",
     "status": "FAILED",
+    "model": null,
     "error": "The process ended because of a segmentation fault. Consult the runtime log for more details."
   },
   {
@@ -5748,6 +6226,7 @@
     "device": "Google Pixel 10",
     "job_id": "jp0m22veg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 346.595,
     "load_peak_mb": 1467.0390625,
     "infer_peak_mb": 360.25694274902344,
@@ -5765,6 +6244,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jp8emm48p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 84.778,
     "load_peak_mb": 1603.8046875,
     "infer_peak_mb": 46.494964599609375,
@@ -5782,6 +6262,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jgk2qq9og",
     "status": "SUCCESS",
+    "model": null,
     "ms": 166.956,
     "load_peak_mb": 1454.48828125,
     "infer_peak_mb": 33.58485412597656,
@@ -5799,6 +6280,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "j5qlrrmmp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 247.807,
     "load_peak_mb": 1714.1328125,
     "infer_peak_mb": 556.4046936035156,
@@ -5816,6 +6298,7 @@
     "device": "Google Pixel 3",
     "job_id": "jgly221l5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 256.711,
     "load_peak_mb": 1738.46484375,
     "infer_peak_mb": 544.8749237060547,
@@ -5833,6 +6316,7 @@
     "device": "Google Pixel 4",
     "job_id": "j568zzd7g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 179.069,
     "load_peak_mb": 1469.4765625,
     "infer_peak_mb": 35.58802795410156,
@@ -5850,6 +6334,7 @@
     "device": "Google Pixel 5",
     "job_id": "jp3z11wz5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 358.623,
     "load_peak_mb": 1473.7578125,
     "infer_peak_mb": 44.985992431640625,
@@ -5867,6 +6352,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jgolnn4dg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 141.755,
     "load_peak_mb": 1836.1328125,
     "infer_peak_mb": 559.1719436645508,
@@ -5884,6 +6370,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "j5m0q7k9g",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -5893,7 +6380,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S21",
     "job_id": "jgnzl4qqg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -5903,6 +6391,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "jprl8rd7p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -5913,6 +6402,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jp2r01dqg",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -5922,7 +6412,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jpyorl2l5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -5932,6 +6423,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jp0m3w9ng",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -5941,7 +6433,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jp8e0nrop",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -5950,7 +6443,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jgk2710ng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -5959,7 +6453,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S22 5G",
     "job_id": "j5qlen1op",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -5968,7 +6463,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S23",
     "job_id": "jgly6dqm5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -5977,7 +6473,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S23",
     "job_id": "j568ex0yg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -5986,7 +6483,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S23",
     "job_id": "jp3zvdrn5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -5995,7 +6493,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S24",
     "job_id": "jgolkx9kg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6004,7 +6503,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S24",
     "job_id": "jpvl08nr5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6013,7 +6513,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S24",
     "job_id": "jgjrz98ep",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6022,7 +6523,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S25",
     "job_id": "jpe7eqnv5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6031,7 +6533,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S25",
     "job_id": "jgzlo60x5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6040,7 +6543,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S25",
     "job_id": "j5wl2krmp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6049,7 +6553,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S26",
     "job_id": "jg9zjrq8p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6058,7 +6563,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Samsung Galaxy S26",
     "job_id": "jp1ny9m7g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6067,7 +6573,8 @@
     "runtime": "qnn_context_binary",
     "device": "Samsung Galaxy S26",
     "job_id": "jgddekmzg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6076,7 +6583,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "j5wl2kr4p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6085,7 +6593,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jg9zjrqmp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6094,7 +6603,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jp1ny9mng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6104,6 +6614,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jgddekm6g",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -6113,7 +6624,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "j57e0m8np",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6123,6 +6635,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jp4yk722p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -6132,7 +6645,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Elite CRD",
     "job_id": "jpxlnqz8p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6141,7 +6655,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Elite CRD",
     "job_id": "j5m0q7l7g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6150,7 +6665,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X Elite CRD",
     "job_id": "jgnzl4wjg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6159,7 +6675,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jprl8r7kp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6168,7 +6685,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jp2r01z6g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6177,7 +6695,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jpyorly05",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6186,7 +6705,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jp0m3w80g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6195,7 +6715,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jp8e0ndqp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6204,7 +6725,8 @@
     "runtime": "qnn_context_binary",
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jgk271wvg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6213,7 +6735,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8295P ADP",
     "job_id": "j5qlenxep",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6222,7 +6745,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8295P ADP",
     "job_id": "jgly6d925",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6231,7 +6755,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA8295P ADP",
     "job_id": "j568ex9ng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6240,7 +6765,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8775P ADP",
     "job_id": "jp3zvdlm5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6249,7 +6775,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA8775P ADP",
     "job_id": "jgolkx71g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6258,7 +6785,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA8775P ADP",
     "job_id": "jpvl08yz5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6267,7 +6795,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA7255P ADP",
     "job_id": "jgjrz961p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6276,7 +6805,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "SA7255P ADP",
     "job_id": "jpe7eq085",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6285,7 +6815,8 @@
     "runtime": "qnn_context_binary",
     "device": "SA7255P ADP",
     "job_id": "jgzlo6q45",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6294,7 +6825,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "QCS8550 (Proxy)",
     "job_id": "j5wl2k04p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6303,7 +6835,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "QCS8550 (Proxy)",
     "job_id": "jg9zjr7mp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6312,7 +6845,8 @@
     "runtime": "qnn_context_binary",
     "device": "QCS8550 (Proxy)",
     "job_id": "jp1ny9kng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6322,6 +6856,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jgddeky6g",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -6331,7 +6866,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "j57e0m1np",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6341,6 +6877,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jp4yk762p",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -6350,7 +6887,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jpxlnq88p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6359,7 +6897,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "j5m0q717g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6368,7 +6907,8 @@
     "runtime": "qnn_context_binary",
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jgnzl4djg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6378,6 +6918,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jprl8rmkp",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor '/inner/Add_1_output_0_updated_converted_QNN_DATATYPE_FLOAT_16' has a floating-point type which is not supported by the targeted device.\nPlease quantize "
   },
   {
@@ -6387,7 +6928,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jp2r01q6g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6397,6 +6939,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jpyorlk05",
     "status": "FAILED",
+    "model": null,
     "error": "Tensor 'puzzle_embedding' has a floating-point type which is not supported by the targeted device.\nPlease quantize the model including its I/O and try again."
   },
   {
@@ -6406,7 +6949,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Arduino VENTUNO Q",
     "job_id": "jp0m3ww0g",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6415,7 +6959,8 @@
     "runtime": "qnn_context_binary_qio",
     "device": "Arduino VENTUNO Q",
     "job_id": "jp8e0nnqp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6424,7 +6969,8 @@
     "runtime": "qnn_context_binary",
     "device": "Arduino VENTUNO Q",
     "job_id": "jgk2711vg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6434,6 +6980,7 @@
     "device": "Google Pixel 6",
     "job_id": "j5qlennep",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6444,6 +6991,7 @@
     "device": "Google Pixel 6",
     "job_id": "jgly6dd25",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6453,7 +7001,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 6",
     "job_id": "j568exxng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6463,6 +7012,7 @@
     "device": "Google Pixel 7",
     "job_id": "jp3zvddm5",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6473,6 +7023,7 @@
     "device": "Google Pixel 7",
     "job_id": "jgolkxx1g",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6482,7 +7033,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 7",
     "job_id": "jpvl088z5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6492,6 +7044,7 @@
     "device": "Google Pixel 8",
     "job_id": "jgjrz991p",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6502,6 +7055,7 @@
     "device": "Google Pixel 8",
     "job_id": "jpe7eqq85",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6511,7 +7065,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 8",
     "job_id": "jgzlo6645",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6521,6 +7076,7 @@
     "device": "Google Pixel 9",
     "job_id": "j5wl2kk4p",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6531,6 +7087,7 @@
     "device": "Google Pixel 9",
     "job_id": "jg9zjrrmp",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6540,7 +7097,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 9",
     "job_id": "jp1ny99ng",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6550,6 +7108,7 @@
     "device": "Google Pixel 10",
     "job_id": "jgddekk6g",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6560,6 +7119,7 @@
     "device": "Google Pixel 10",
     "job_id": "j57e0mmnp",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6569,7 +7129,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 10",
     "job_id": "jp4yk772p",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6579,6 +7140,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jpxlnqq8p",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6589,6 +7151,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "j5m0q777g",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6598,7 +7161,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jgnzl44jg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6608,6 +7172,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jprl8rrkp",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6618,6 +7183,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jp2r0116g",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6627,7 +7193,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jpyorll05",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6637,6 +7204,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jp0m3wn0g",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6647,6 +7215,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jp8e0nlqp",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6656,7 +7225,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jgk271jvg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6666,6 +7236,7 @@
     "device": "Google Pixel 3",
     "job_id": "jp4yk7qqp",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6676,6 +7247,7 @@
     "device": "Google Pixel 3",
     "job_id": "jpxlnqvjp",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6685,7 +7257,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 3",
     "job_id": "j5m0q7ryg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6695,6 +7268,7 @@
     "device": "Google Pixel 4",
     "job_id": "jgnzl4yvg",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6705,6 +7279,7 @@
     "device": "Google Pixel 4",
     "job_id": "jprl8rqvp",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6714,7 +7289,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 4",
     "job_id": "jp2r016xg",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6724,6 +7300,7 @@
     "device": "Google Pixel 5",
     "job_id": "jpyorlwr5",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6734,6 +7311,7 @@
     "device": "Google Pixel 5",
     "job_id": "jp0m3wq2g",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6743,7 +7321,8 @@
     "runtime": "tflite",
     "device": "Google Pixel 5",
     "job_id": "jp8e0n9zp",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6753,6 +7332,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jgk271nyg",
     "status": "FAILED",
+    "model": null,
     "error": "/tetra/tetra_env/lib/python3.12/site-packages/tf_keras/src/utils/traceback_utils.py:96:1: error: 'tfl.strided_slice' op quantization parameters violate the same"
   },
   {
@@ -6763,6 +7343,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "j5qlenk7p",
     "status": "FAILED",
+    "model": null,
     "error": "When targeting TF-Lite, QuantizeLinear layer 'QcQuantizeOp_onnx__MatMul_5813_copy_10_q' cannot have output dtype 'int4'."
   },
   {
@@ -6772,7 +7353,8 @@
     "runtime": "tflite",
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jgly6dze5",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "model": null
   },
   {
     "task": "arc",
@@ -6782,6 +7364,7 @@
     "device": "Samsung Galaxy S21",
     "job_id": "jpvlrr9m5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 192.421,
     "load_peak_mb": 91.109375,
     "infer_peak_mb": 11.044281005859375,
@@ -6798,6 +7381,7 @@
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jgjr22w8p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 314.881,
     "load_peak_mb": 81.765625,
     "infer_peak_mb": 7.7605438232421875,
@@ -6814,6 +7398,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jpe7wwl05",
     "status": "SUCCESS",
+    "model": null,
     "ms": 190.422,
     "load_peak_mb": 86.171875,
     "infer_peak_mb": 9.8726806640625,
@@ -6830,6 +7415,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "jgzljj465",
     "status": "SUCCESS",
+    "model": null,
     "ms": 137.195,
     "load_peak_mb": 86.8828125,
     "infer_peak_mb": 10.49761962890625,
@@ -6846,6 +7432,7 @@
     "device": "Samsung Galaxy S22 5G",
     "job_id": "j5wl331jp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 337.064,
     "load_peak_mb": 86.359375,
     "infer_peak_mb": 12.983230590820312,
@@ -6862,6 +7449,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jg9zyyxvp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 101.954,
     "load_peak_mb": 83.3046875,
     "infer_peak_mb": 2.8695602416992188,
@@ -6878,6 +7466,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jp1nwwvlg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 81.33,
     "load_peak_mb": 84.41796875,
     "infer_peak_mb": 2.8704299926757812,
@@ -6894,6 +7483,7 @@
     "device": "Samsung Galaxy S23",
     "job_id": "jgddqqzlg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 201.248,
     "load_peak_mb": 83.875,
     "infer_peak_mb": 5.3404693603515625,
@@ -6910,6 +7500,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "j57ell9rp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 75.342,
     "load_peak_mb": 94.30859375,
     "infer_peak_mb": 8.422958374023438,
@@ -6926,6 +7517,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "jp4ydd3lp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 58.959,
     "load_peak_mb": 92.36328125,
     "infer_peak_mb": 7.7833099365234375,
@@ -6942,6 +7534,7 @@
     "device": "Samsung Galaxy S24",
     "job_id": "jpxl66x9p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 150.371,
     "load_peak_mb": 92.984375,
     "infer_peak_mb": 10.346893310546875,
@@ -6958,6 +7551,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "j5m0668qg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 53.834,
     "load_peak_mb": 108.65625,
     "infer_peak_mb": 9.822174072265625,
@@ -6974,6 +7568,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "jgnzmmkmg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 43.745,
     "load_peak_mb": 108.578125,
     "infer_peak_mb": 10.231185913085938,
@@ -6990,6 +7585,7 @@
     "device": "Samsung Galaxy S25",
     "job_id": "jprl22wep",
     "status": "SUCCESS",
+    "model": null,
     "ms": 132.503,
     "load_peak_mb": 108.90625,
     "infer_peak_mb": 12.879196166992188,
@@ -7006,6 +7602,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "jp2r99emg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 50.367,
     "load_peak_mb": 116.78515625,
     "infer_peak_mb": 9.791336059570312,
@@ -7022,6 +7619,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "jpyojjm45",
     "status": "SUCCESS",
+    "model": null,
     "ms": 38.332,
     "load_peak_mb": 116.8671875,
     "infer_peak_mb": 9.704177856445312,
@@ -7038,6 +7636,7 @@
     "device": "Samsung Galaxy S26",
     "job_id": "jp0m226eg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 106.814,
     "load_peak_mb": 116.875,
     "infer_peak_mb": 10.41021728515625,
@@ -7054,6 +7653,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jp8emm18p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 59.523,
     "load_peak_mb": 135.859375,
     "infer_peak_mb": 10.019973754882812,
@@ -7070,6 +7670,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "jgk2qq8og",
     "status": "SUCCESS",
+    "model": null,
     "ms": 48.035,
     "load_peak_mb": 135.87109375,
     "infer_peak_mb": 10.486480712890625,
@@ -7086,6 +7687,7 @@
     "device": "Snapdragon 8 Elite QRD",
     "job_id": "j5qlrrvmp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 144.023,
     "load_peak_mb": 80.30078125,
     "infer_peak_mb": 12.565689086914062,
@@ -7102,6 +7704,7 @@
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jgly22ll5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 86.958,
     "load_peak_mb": 115.25390625,
     "infer_peak_mb": 6.343292236328125,
@@ -7118,6 +7721,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "j568zzw7g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 100.645,
     "load_peak_mb": 14.54296875,
     "infer_peak_mb": 0.9296875,
@@ -7134,6 +7738,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "jp3z116z5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 79.377,
     "load_peak_mb": 14.57421875,
     "infer_peak_mb": 0.93359375,
@@ -7150,6 +7755,7 @@
     "device": "Snapdragon X Elite CRD",
     "job_id": "jgolnn8dg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 203.933,
     "load_peak_mb": 14.59765625,
     "infer_peak_mb": 3.5859375,
@@ -7166,6 +7772,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jpvlrr7m5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 98.723,
     "load_peak_mb": 14.6015625,
     "infer_peak_mb": 0.9296875,
@@ -7182,6 +7789,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jgjr22q8p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 79.737,
     "load_peak_mb": 14.578125,
     "infer_peak_mb": 0.921875,
@@ -7198,6 +7806,7 @@
     "device": "Snapdragon X Plus 8-Core CRD",
     "job_id": "jpe7wwy05",
     "status": "SUCCESS",
+    "model": null,
     "ms": 194.199,
     "load_peak_mb": 14.66015625,
     "infer_peak_mb": 3.5859375,
@@ -7214,6 +7823,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jgzljjn65",
     "status": "SUCCESS",
+    "model": null,
     "ms": 54.64,
     "load_peak_mb": 15.92578125,
     "infer_peak_mb": 0.90625,
@@ -7230,6 +7840,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "j5wl334jp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 42.235,
     "load_peak_mb": 15.83203125,
     "infer_peak_mb": 0.93359375,
@@ -7246,6 +7857,7 @@
     "device": "Snapdragon X2 Elite CRD",
     "job_id": "jg9zyydvp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 112.998,
     "load_peak_mb": 15.9609375,
     "infer_peak_mb": 3.59375,
@@ -7262,6 +7874,7 @@
     "device": "SA8295P ADP",
     "job_id": "jp1nww6lg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 113.683,
     "load_peak_mb": 96.23828125,
     "infer_peak_mb": 6.5772247314453125,
@@ -7278,6 +7891,7 @@
     "device": "SA8295P ADP",
     "job_id": "jgddqq2lg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 88.975,
     "load_peak_mb": 93.9609375,
     "infer_peak_mb": 6.3475189208984375,
@@ -7294,6 +7908,7 @@
     "device": "SA8295P ADP",
     "job_id": "j57ell4rp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 219.226,
     "load_peak_mb": 101.33984375,
     "infer_peak_mb": 8.883209228515625,
@@ -7310,6 +7925,7 @@
     "device": "SA8775P ADP",
     "job_id": "jp4ydd1lp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 102.609,
     "load_peak_mb": 94.66796875,
     "infer_peak_mb": 10.1156005859375,
@@ -7326,6 +7942,7 @@
     "device": "SA8775P ADP",
     "job_id": "jpxl6649p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 80.23,
     "load_peak_mb": 94.5859375,
     "infer_peak_mb": 9.84552001953125,
@@ -7342,6 +7959,7 @@
     "device": "SA8775P ADP",
     "job_id": "j5m066mqg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 217.408,
     "load_peak_mb": 94.60546875,
     "infer_peak_mb": 12.399124145507812,
@@ -7358,6 +7976,7 @@
     "device": "SA7255P ADP",
     "job_id": "jgnzmmnmg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 172.41,
     "load_peak_mb": 95.890625,
     "infer_peak_mb": 9.806610107421875,
@@ -7374,6 +7993,7 @@
     "device": "SA7255P ADP",
     "job_id": "jprl220ep",
     "status": "SUCCESS",
+    "model": null,
     "ms": 131.009,
     "load_peak_mb": 93.70703125,
     "infer_peak_mb": 9.666046142578125,
@@ -7390,6 +8010,7 @@
     "device": "SA7255P ADP",
     "job_id": "jp2r99wmg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 437.946,
     "load_peak_mb": 95.65625,
     "infer_peak_mb": 12.559356689453125,
@@ -7406,6 +8027,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "jpyojjx45",
     "status": "SUCCESS",
+    "model": null,
     "ms": 101.411,
     "load_peak_mb": 84.98046875,
     "infer_peak_mb": 2.9327774047851562,
@@ -7422,6 +8044,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "jp0m22jeg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 80.9,
     "load_peak_mb": 89.36328125,
     "infer_peak_mb": 2.6061325073242188,
@@ -7438,6 +8061,7 @@
     "device": "QCS8550 (Proxy)",
     "job_id": "jp8emmx8p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 212.723,
     "load_peak_mb": 83.65625,
     "infer_peak_mb": 5.3582000732421875,
@@ -7454,6 +8078,7 @@
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jgk2qq4og",
     "status": "SUCCESS",
+    "model": null,
     "ms": 290.762,
     "load_peak_mb": 4.30078125,
     "infer_peak_mb": 3.000396728515625,
@@ -7470,6 +8095,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "j5qlrrymp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 101.225,
     "load_peak_mb": 6.26953125,
     "infer_peak_mb": 2.45831298828125,
@@ -7486,6 +8112,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "jgly22xl5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 78.84,
     "load_peak_mb": 6.2890625,
     "infer_peak_mb": 4.9852294921875,
@@ -7502,6 +8129,7 @@
     "device": "Dragonwing IQ-9075 EVK",
     "job_id": "j568zz77g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 213.762,
     "load_peak_mb": 4.3515625,
     "infer_peak_mb": 8.833358764648438,
@@ -7518,6 +8146,7 @@
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jp3z119z5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 410.438,
     "load_peak_mb": 123.04296875,
     "infer_peak_mb": 6.0986785888671875,
@@ -7534,6 +8163,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "jgolnnrdg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 91.575,
     "load_peak_mb": 4.5703125,
     "infer_peak_mb": 3.7722015380859375,
@@ -7550,6 +8180,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "jpvlrrdm5",
     "status": "SUCCESS",
+    "model": null,
     "ms": 70.97,
     "load_peak_mb": 4.58984375,
     "infer_peak_mb": 3.753021240234375,
@@ -7566,6 +8197,7 @@
     "device": "Arduino VENTUNO Q",
     "job_id": "jgjr2278p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 205.525,
     "load_peak_mb": 4.56640625,
     "infer_peak_mb": 9.5697021484375,
@@ -7582,6 +8214,7 @@
     "device": "Google Pixel 6",
     "job_id": "jpe7wwz05",
     "status": "SUCCESS",
+    "model": null,
     "ms": 400.311,
     "load_peak_mb": 1019.02734375,
     "infer_peak_mb": 25.448532104492188,
@@ -7599,6 +8232,7 @@
     "device": "Google Pixel 7",
     "job_id": "jgzljjm65",
     "status": "SUCCESS",
+    "model": null,
     "ms": 495.352,
     "load_peak_mb": 1023.72265625,
     "infer_peak_mb": 24.043121337890625,
@@ -7616,6 +8250,7 @@
     "device": "Google Pixel 8",
     "job_id": "j5wl337jp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 519.1,
     "load_peak_mb": 1157.63671875,
     "infer_peak_mb": 23.44970703125,
@@ -7633,6 +8268,7 @@
     "device": "Google Pixel 9",
     "job_id": "jg9zyymvp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 475.886,
     "load_peak_mb": 1018.8515625,
     "infer_peak_mb": 24.106109619140625,
@@ -7650,6 +8286,7 @@
     "device": "Google Pixel 10",
     "job_id": "jp1nwwjlg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 638.514,
     "load_peak_mb": 1064.34765625,
     "infer_peak_mb": 108.63282775878906,
@@ -7667,6 +8304,7 @@
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jgddqq3lg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 635.275,
     "load_peak_mb": 1180.8984375,
     "infer_peak_mb": 70.67094421386719,
@@ -7684,6 +8322,7 @@
     "device": "Samsung Galaxy A53 5G",
     "job_id": "j5wl33l6p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 1606.799,
     "load_peak_mb": 1136.859375,
     "infer_peak_mb": 29.21893310546875,
@@ -7701,6 +8340,7 @@
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jg9zyyzlp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 1964.59,
     "load_peak_mb": 1299.01953125,
     "infer_peak_mb": 420.38488006591797,
@@ -7718,6 +8358,7 @@
     "device": "Google Pixel 3",
     "job_id": "jp1nwwn2g",
     "status": "SUCCESS",
+    "model": null,
     "ms": 1990.425,
     "load_peak_mb": 1222.09765625,
     "infer_peak_mb": 418.23079681396484,
@@ -7735,6 +8376,7 @@
     "device": "Google Pixel 4",
     "job_id": "jgddqqdeg",
     "status": "SUCCESS",
+    "model": null,
     "ms": 1454.909,
     "load_peak_mb": 1025.484375,
     "infer_peak_mb": 29.076522827148438,
@@ -7752,6 +8394,7 @@
     "device": "Google Pixel 5",
     "job_id": "j57ellelp",
     "status": "SUCCESS",
+    "model": null,
     "ms": 3208.768,
     "load_peak_mb": 1132.890625,
     "infer_peak_mb": 37.9879150390625,
@@ -7769,6 +8412,7 @@
     "device": "Samsung Galaxy Tab S7",
     "job_id": "jpxl66l1p",
     "status": "SUCCESS",
+    "model": null,
     "ms": 1080.991,
     "load_peak_mb": 1192.96484375,
     "infer_peak_mb": 416.03138732910156,
@@ -7779,13 +8423,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 6",
     "job_id": "jgoln34dg",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 5753.057,
     "load_peak_mb": 175.484375,
     "infer_peak_mb": 32.06245422363281,
@@ -7795,13 +8440,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 7",
     "job_id": "jpvlrv9m5",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 5616.22,
     "load_peak_mb": 200.75390625,
     "infer_peak_mb": 7.4903564453125,
@@ -7811,13 +8457,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 8",
     "job_id": "jgjr2ew8p",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 5324.264,
     "load_peak_mb": 157.875,
     "infer_peak_mb": 15.193695068359375,
@@ -7827,13 +8474,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 9",
     "job_id": "jpe7wkl05",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 4711.57,
     "load_peak_mb": 166.69140625,
     "infer_peak_mb": 23.025711059570312,
@@ -7843,13 +8491,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 10",
     "job_id": "jgzljr465",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 3135.918,
     "load_peak_mb": 214.54296875,
     "infer_peak_mb": 31.1661376953125,
@@ -7859,13 +8508,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "j5wl3q1jp",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 7018.817,
     "load_peak_mb": 143.66015625,
     "infer_peak_mb": 36.37615966796875,
@@ -7875,13 +8525,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jg9zywxvp",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 7665.838,
     "load_peak_mb": 176.9921875,
     "infer_peak_mb": 28.846893310546875,
@@ -7891,13 +8542,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jp1nwevlg",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 10598.075,
     "load_peak_mb": 177.94140625,
     "infer_peak_mb": 20.2122802734375,
@@ -7907,13 +8559,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy S21",
     "job_id": "jgddqozlg",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 172.835,
     "load_peak_mb": 2301.08984375,
     "infer_peak_mb": 1841.3218536376953,
@@ -7924,13 +8577,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A73 5G",
     "job_id": "j57elx9rp",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 301.004,
     "load_peak_mb": 1971.203125,
     "infer_peak_mb": 1558.37890625,
@@ -7941,13 +8595,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jp4ydv3lp",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 83.223,
     "load_peak_mb": 2090.3359375,
     "infer_peak_mb": 1604.0892181396484,
@@ -7958,13 +8613,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jpxl6yx9p",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 275.474,
     "load_peak_mb": 1545.8125,
     "infer_peak_mb": 38.08049011230469,
@@ -7975,13 +8631,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "j5m0638qg",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 784.869,
     "load_peak_mb": 2098.375,
     "infer_peak_mb": 2188.603713989258,
@@ -7992,13 +8649,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 6",
     "job_id": "jgnzm3kmg",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 1054.876,
     "load_peak_mb": 166.4765625,
     "infer_peak_mb": 12.408493041992188,
@@ -8008,13 +8666,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 7",
     "job_id": "jprl2ewep",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 923.841,
     "load_peak_mb": 156.59765625,
     "infer_peak_mb": 10.95538330078125,
@@ -8024,13 +8683,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 8",
     "job_id": "jp2r9lemg",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 897.554,
     "load_peak_mb": 150.98046875,
     "infer_peak_mb": 18.243728637695312,
@@ -8040,13 +8700,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 9",
     "job_id": "jpyoj6m45",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 819.776,
     "load_peak_mb": 109.08203125,
     "infer_peak_mb": 13.213348388671875,
@@ -8056,13 +8717,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 10",
     "job_id": "jp0m2l6eg",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 673.509,
     "load_peak_mb": 140.94140625,
     "infer_peak_mb": 14.548934936523438,
@@ -8072,13 +8734,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jp8emz18p",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 1137.114,
     "load_peak_mb": 130.05078125,
     "infer_peak_mb": 23.106597900390625,
@@ -8088,13 +8751,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jgk2q38og",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 2695.785,
     "load_peak_mb": 123.47265625,
     "infer_peak_mb": 16.620269775390625,
@@ -8104,13 +8768,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "j5qlr3vmp",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 2665.737,
     "load_peak_mb": 152.8359375,
     "infer_peak_mb": 6.48492431640625,
@@ -8120,13 +8785,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy S21",
     "job_id": "jgly23ll5",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 1316.65,
     "load_peak_mb": 325.25,
     "infer_peak_mb": 283.56983947753906,
@@ -8136,13 +8802,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A73 5G",
     "job_id": "j568znw7g",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 1508.323,
     "load_peak_mb": 338.32421875,
     "infer_peak_mb": 199.4031982421875,
@@ -8152,13 +8819,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jp3z1e6z5",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 1283.15,
     "load_peak_mb": 285.21875,
     "infer_peak_mb": 201.46058654785156,
@@ -8168,13 +8836,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jgoln38dg",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 1784.189,
     "load_peak_mb": 304.05859375,
     "infer_peak_mb": 96.27545166015625,
@@ -8184,13 +8853,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "maze",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jpvlrv7m5",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 1443.242,
     "load_peak_mb": 325.10546875,
     "infer_peak_mb": 198.1003875732422,
@@ -8200,13 +8870,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 6",
     "job_id": "jgjr2eq8p",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 54.742,
     "load_peak_mb": 194.62890625,
     "infer_peak_mb": 10.776412963867188,
@@ -8216,13 +8887,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 7",
     "job_id": "jpe7wky05",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 51.156,
     "load_peak_mb": 185.9375,
     "infer_peak_mb": 8.288986206054688,
@@ -8232,13 +8904,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 8",
     "job_id": "jgzljrn65",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 43.024,
     "load_peak_mb": 157.4453125,
     "infer_peak_mb": 9.577316284179688,
@@ -8248,13 +8921,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 9",
     "job_id": "j5wl3q4jp",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 38.589,
     "load_peak_mb": 181.19140625,
     "infer_peak_mb": 8.370803833007812,
@@ -8264,13 +8938,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 10",
     "job_id": "jg9zywdvp",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 32.774,
     "load_peak_mb": 148.22265625,
     "infer_peak_mb": 11.061721801757812,
@@ -8280,13 +8955,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jp1nwe6lg",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 60.454,
     "load_peak_mb": 201.5703125,
     "infer_peak_mb": 17.87957763671875,
@@ -8296,13 +8972,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jgddqo2lg",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 129.356,
     "load_peak_mb": 184.828125,
     "infer_peak_mb": 14.184707641601562,
@@ -8312,13 +8989,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "j57elx4rp",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 122.826,
     "load_peak_mb": 161.96484375,
     "infer_peak_mb": 5.913642883300781,
@@ -8328,13 +9006,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy S21",
     "job_id": "jp4ydv1lp",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 34.245,
     "load_peak_mb": 375.62890625,
     "infer_peak_mb": 335.5768737792969,
@@ -8345,13 +9024,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jpxl6y49p",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 54.376,
     "load_peak_mb": 332.6171875,
     "infer_peak_mb": 239.8878173828125,
@@ -8362,13 +9042,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "j5m063mqg",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 16.846,
     "load_peak_mb": 384.765625,
     "infer_peak_mb": 284.6921844482422,
@@ -8379,13 +9060,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jgnzm3nmg",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 49.243,
     "load_peak_mb": 271.1875,
     "infer_peak_mb": 10.896499633789062,
@@ -8396,13 +9078,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jprl2e0ep",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 154.212,
     "load_peak_mb": 342.1640625,
     "infer_peak_mb": 273.7054901123047,
@@ -8413,13 +9096,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 6",
     "job_id": "jp2r9lwmg",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 128.888,
     "load_peak_mb": 148.44921875,
     "infer_peak_mb": 11.717422485351562,
@@ -8429,13 +9113,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 7",
     "job_id": "jpyoj6x45",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 84.892,
     "load_peak_mb": 146.46484375,
     "infer_peak_mb": 11.12640380859375,
@@ -8445,13 +9130,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 8",
     "job_id": "jp0m2ljeg",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 89.325,
     "load_peak_mb": 152.03125,
     "infer_peak_mb": 17.735595703125,
@@ -8461,13 +9147,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 9",
     "job_id": "jp8emzx8p",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 100.441,
     "load_peak_mb": 119.92578125,
     "infer_peak_mb": 10.26617431640625,
@@ -8477,13 +9164,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 10",
     "job_id": "jgk2q34og",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 76.962,
     "load_peak_mb": 152.65625,
     "infer_peak_mb": 13.583160400390625,
@@ -8493,13 +9181,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "j5qlr3ymp",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 144.257,
     "load_peak_mb": 144.2578125,
     "infer_peak_mb": 23.577468872070312,
@@ -8509,13 +9198,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jgly23xl5",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 281.905,
     "load_peak_mb": 125.0,
     "infer_peak_mb": 16.71868896484375,
@@ -8525,13 +9215,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "j568zn77g",
     "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
     "ms": 210.942,
     "load_peak_mb": 143.921875,
     "infer_peak_mb": 5.269126892089844,
@@ -8541,63 +9232,69 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy S21",
     "job_id": "jp3z1e9z5",
     "status": "FAILED",
+    "model": "inner_step_w4a8.tflite",
     "error": "Failed to profile the model: [tflite] Node number 1716 (TfLiteQnnDelegate) failed to invoke."
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jgoln3rdg",
     "status": "FAILED",
+    "model": "inner_step_w4a8.tflite",
     "error": "Failed to profile the model: [tflite] Node number 1716 (TfLiteQnnDelegate) failed to invoke."
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jpvlrvdm5",
     "status": "FAILED",
+    "model": "inner_step_w4a8.tflite",
     "error": "Failed to profile the model: [tflite] Node number 1844 (TfLiteQnnDelegate) failed to invoke."
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jgjr2e78p",
     "status": "FAILED",
+    "model": "inner_step_w4a8.tflite",
     "error": ""
   },
   {
-    "task": "tflite",
+    "task": "sudoku_mlp",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jpe7wkz05",
     "status": "FAILED",
+    "model": "inner_step_w4a8.tflite",
     "error": "Failed to profile the model: [tflite] Node number 1716 (TfLiteQnnDelegate) failed to invoke."
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 6",
     "job_id": "jgzljrm65",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 154.599,
     "load_peak_mb": 184.42578125,
     "infer_peak_mb": 13.501937866210938,
@@ -8607,13 +9304,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 7",
     "job_id": "j5wl3q7jp",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 154.034,
     "load_peak_mb": 239.390625,
     "infer_peak_mb": 10.386749267578125,
@@ -8623,13 +9321,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 8",
     "job_id": "jg9zywmvp",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 126.891,
     "load_peak_mb": 193.93359375,
     "infer_peak_mb": 10.345230102539062,
@@ -8639,13 +9338,14 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 9",
     "job_id": "jp1nwejlg",
     "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
     "ms": 120.35,
     "load_peak_mb": 159.39453125,
     "infer_peak_mb": 10.6793212890625,
@@ -8655,201 +9355,351 @@
     }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 10",
     "job_id": "jgddqo3lg",
-    "status": "MEASURING_PERFORMANCE"
+    "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
+    "ms": 86.351,
+    "load_peak_mb": 200.09765625,
+    "infer_peak_mb": 13.441207885742188,
+    "peak_mb": 223.7265625,
+    "units": {
+      "CPU": 2595
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "j57elxerp",
-    "status": "PROVISIONING_DEVICE"
+    "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
+    "ms": 200.423,
+    "load_peak_mb": 249.953125,
+    "infer_peak_mb": 18.201324462890625,
+    "peak_mb": 243.14453125,
+    "units": {
+      "CPU": 2595
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jp4ydvylp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
+    "ms": 281.439,
+    "load_peak_mb": 212.625,
+    "infer_peak_mb": 17.01788330078125,
+    "peak_mb": 222.5625,
+    "units": {
+      "CPU": 2595
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jpxl6yl9p",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
+    "ms": 350.277,
+    "load_peak_mb": 229.2109375,
+    "infer_peak_mb": 4.267333984375,
+    "peak_mb": 225.984375,
+    "units": {
+      "CPU": 2595
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy S21",
     "job_id": "jgnzm3zmg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
+    "ms": 34.783,
+    "load_peak_mb": 488.2578125,
+    "infer_peak_mb": 424.39817810058594,
+    "peak_mb": 223.8046875,
+    "units": {
+      "NPU": 2594,
+      "CPU": 1
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jprl2elep",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
+    "ms": 79.129,
+    "load_peak_mb": 478.69140625,
+    "infer_peak_mb": 399.890625,
+    "peak_mb": 183.48828125,
+    "units": {
+      "NPU": 2594,
+      "CPU": 1
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jp2r9lrmg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
+    "ms": 17.508,
+    "load_peak_mb": 490.38671875,
+    "infer_peak_mb": 369.31419372558594,
+    "peak_mb": 211.4296875,
+    "units": {
+      "NPU": 2594,
+      "CPU": 1
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "jpyoj6o45",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
+    "ms": 71.308,
+    "load_peak_mb": 353.60546875,
+    "infer_peak_mb": 16.277481079101562,
+    "peak_mb": 22.81640625,
+    "units": {
+      "NPU": 2594,
+      "CPU": 1
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "int8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jp0m2lmeg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_int8.tflite",
+    "ms": 199.503,
+    "load_peak_mb": 467.3125,
+    "infer_peak_mb": 400.72926330566406,
+    "peak_mb": 217.9296875,
+    "units": {
+      "NPU": 2594,
+      "CPU": 1
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 6",
     "job_id": "jp8emze8p",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
+    "ms": 74.538,
+    "load_peak_mb": 155.8671875,
+    "infer_peak_mb": 11.96612548828125,
+    "peak_mb": 186.15625,
+    "units": {
+      "CPU": 2850
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 7",
     "job_id": "jgk2q32og",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
+    "ms": 69.721,
+    "load_peak_mb": 173.17578125,
+    "infer_peak_mb": 10.4468994140625,
+    "peak_mb": 217.2421875,
+    "units": {
+      "CPU": 2850
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 8",
     "job_id": "j5qlr3lmp",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
+    "ms": 73.285,
+    "load_peak_mb": 168.9140625,
+    "infer_peak_mb": 18.061859130859375,
+    "peak_mb": 220.3984375,
+    "units": {
+      "CPU": 2850
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 9",
     "job_id": "jgly23yl5",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
+    "ms": 66.043,
+    "load_peak_mb": 148.52734375,
+    "infer_peak_mb": 11.015151977539062,
+    "peak_mb": 216.90234375,
+    "units": {
+      "CPU": 2850
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Google Pixel 10",
     "job_id": "j568zn87g",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
+    "ms": 53.87,
+    "load_peak_mb": 178.21875,
+    "infer_peak_mb": 13.919769287109375,
+    "peak_mb": 156.109375,
+    "units": {
+      "CPU": 2850
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy Note 20 (Intl)",
     "job_id": "jp3z1ezz5",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
+    "ms": 97.268,
+    "load_peak_mb": 165.06640625,
+    "infer_peak_mb": 21.817733764648438,
+    "peak_mb": 169.94921875,
+    "units": {
+      "CPU": 2850
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A53 5G",
     "job_id": "jgoln3ldg",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
+    "ms": 172.185,
+    "load_peak_mb": 165.73046875,
+    "infer_peak_mb": 15.345687866210938,
+    "peak_mb": 167.23828125,
+    "units": {
+      "CPU": 2850
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A14 5G",
     "job_id": "jpvlrvlm5",
-    "status": "CREATED"
+    "status": "SUCCESS",
+    "model": "inner_step_w4a8.tflite",
+    "ms": 171.709,
+    "load_peak_mb": 171.16015625,
+    "infer_peak_mb": 66.84374237060547,
+    "peak_mb": 212.359375,
+    "units": {
+      "CPU": 2850
+    }
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy S21",
     "job_id": "jgjr2er8p",
-    "status": "CREATED"
+    "status": "FAILED",
+    "model": "inner_step_w4a8.tflite",
+    "error": "Failed to profile the model: [tflite] Node number 2850 (TfLiteQnnDelegate) failed to invoke."
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Samsung Galaxy A73 5G",
     "job_id": "jpe7wk705",
-    "status": "CREATED"
+    "status": "FAILED",
+    "model": "inner_step_w4a8.tflite",
+    "error": "Failed to profile the model: [tflite] Node number 2978 (TfLiteQnnDelegate) failed to invoke."
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Snapdragon 7 Gen 4 QRD",
     "job_id": "jgzljrl65",
-    "status": "CREATED"
+    "status": "FAILED",
+    "model": "inner_step_w4a8.tflite",
+    "error": "Failed to profile the model: [tflite] Node number 2978 (TfLiteQnnDelegate) failed to invoke."
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing RB3 Gen 2 Vision Kit",
     "job_id": "j5wl3qljp",
-    "status": "CREATED"
+    "status": "FAILED",
+    "model": "inner_step_w4a8.tflite",
+    "error": "Failed to profile the model: [tflite] Node number 2860 (TfLiteQnnDelegate) failed to invoke."
   },
   {
-    "task": "tflite",
+    "task": "sudoku_attn",
     "kind": "profile",
     "precision": "w4a8_tflite",
     "runtime": "tflite_direct",
     "device": "Dragonwing Q-6690 MTP",
     "job_id": "jg9zywzvp",
-    "status": "CREATED"
+    "status": "MEASURING_PERFORMANCE",
+    "model": "inner_step_w4a8.tflite"
   }
 ]
