@@ -20,8 +20,8 @@ import figstyle as fs  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 B = ROOT / "results" / "breadth"
 spec = lambda r: r["quant"]["spec"] if isinstance(r["quant"], dict) else r["quant"]
-TASKS = [("sudoku_mlp", "Sudoku, MLP mixer"), ("sudoku_attn", "Sudoku, attention"),
-         ("maze_attn", "Maze, attention"), ("hrm_sudoku", "HRM Sudoku"), ("hrm_maze", "HRM Maze")]
+TASKS = [("sudoku_mlp", "TRM Sudoku\nMLP mixer"), ("sudoku_attn", "TRM Sudoku\nattention"),
+         ("maze_attn", "TRM Maze\nattention"), ("hrm_sudoku", "HRM\nSudoku"), ("hrm_maze", "HRM\nMaze")]
 SIG = [0.02, 0.05, 0.1, 0.15, 0.2, 0.3, 0.5, 0.7, 1.0]
 
 
@@ -51,7 +51,7 @@ def main():
     a = ap.parse_args()
     fs.use()
     import matplotlib.pyplot as plt
-    fig, axes = plt.subplots(2, len(TASKS), figsize=(fs.TEXT_W, 2.6), sharex=True)
+    fig, axes = plt.subplots(2, len(TASKS), figsize=(fs.TEXT_W, 2.8), sharex=True)
     for j, (task, name) in enumerate(TASKS):
         d = draws(task)
         fp = st.median(v[0] for v in d.get("fp32", [(0, 1)]))

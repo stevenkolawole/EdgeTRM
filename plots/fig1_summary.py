@@ -55,7 +55,8 @@ def main():
         xs, ys = zip(*pts)
         ax1.plot(xs, ys, color=c, ls=ls, marker=mk, ms=3, lw=1.3)
         text = lab + (f"\n{where[q]}" if q in where else "")
-        ax1.annotate(text, (xs[-1], ys[-1]), xytext=(4, 0), textcoords="offset points", va="center", fontsize=6.5, color=c)
+        dy = {"fp32": 7, "w4c": -7, "w4t": 0}[q]
+        ax1.annotate(text, (xs[-1], ys[-1]), xytext=(4, dy), textcoords="offset points", va="center", fontsize=6.5, color=c)
     ax1.set_xscale("log", base=2)
     ax1.set_xticks([1, 4, 16, 64])
     ax1.set_xticklabels(["1", "4", "16", "64"])
@@ -69,7 +70,7 @@ def main():
         c, ls, mk, lab = style[q]
         xs, ys = zip(*pts)
         ax2.plot(xs, ys, color=c, ls=ls, marker=mk, ms=3, lw=1.3, label=lab)
-    ax2.legend(loc="lower right", fontsize=6.5, handlelength=1.6, borderpad=0.3, labelspacing=0.3)
+    ax2.legend(loc="upper left", fontsize=6.5, handlelength=1.6, borderpad=0.3, labelspacing=0.3)
     ax2.set_xscale("log", base=10)
     ax2.set_xticks([10, 30, 100, 300])
     ax2.set_xticklabels(["10", "30", "100", "300"])
@@ -78,7 +79,7 @@ def main():
     ax2.set_ylim(0, 105)
     ax2.set_xlim(8, 600)
     ax2.axvline(30, color=fs.GREY_LIGHT, lw=0.8)
-    ax2.annotate("trained\nto 30", (30, 5), xytext=(3, 0), textcoords="offset points", fontsize=6.5, color=fs.GREY)
+    ax2.annotate("trained to 30", (30, 3), xytext=(3, 0), textcoords="offset points", fontsize=6.5, color=fs.GREY)
     fs.panel_label(ax2, "b")
     for ax in (ax1, ax2):
         ax.grid(True, axis="y", color=fs.GREY_LIGHT, lw=0.5)
