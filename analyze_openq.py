@@ -236,5 +236,48 @@ def q2b():
             print(f"| {q} | " + " | ".join(f"{100*(1-ok[bins==b].mean()):.1f}" for b in range(4)) + " |")
 
 
+def q5b():
+    """Risk 0: three weight-noise draws per sigma for the TRM/HRM tasks. Seed 0 is the original
+    single-draw sweep (results/breadth/<task>_noise.json, H=3), seeds 1 and 2 are the Babel reruns
+    (results/breadth/babel/noise_<task>_seed<s>.json). Maze originals ran n=1000; the reruns n=500,
+    so the originals are cut to their first 500 puzzles. Prints exact accuracy (phi_H) per draw and
+    the spread, for nsup 1 and 16."""
+    import numpy as np
+    spec = lambda r: r["quant"]["spec"] if isinstance(r["quant"], dict) else r["quant"]
+    for task in ("sudoku_mlp", "sudoku_attn", "maze_attn", "hrm_sudoku", "hrm_maze"):
+        draws = {}
+        f0 = B / f"{task}_noise.json"
+        if f0.exists():
+            recs = json.load(open(f0))["records"]
+            draws[0] = [r for r in recs if r.get("H_cycles") in (3, None) or task.startswith("hrm")]
+        for sd in (1, 2):
+            fs = B / "babel" / f"noise_{task}_seed{sd}.json"
+            if fs.exists():
+                draws[sd] = json.load(open(fs))["records"]
+        if not draws:
+            continue
+        n_new = min(r["n"] for sd in draws if sd else () for r in draws[sd]) if any(draws.get(s) for s in (1, 2)) else None
+        print(f"\n### {task}: exact accuracy (phi_H) per draw; seeds {sorted(draws)}; reruns n={n_new}")
+        print("| nsup | sigma | " + " | ".join(f"seed {sd}" for sd in sorted(draws)) + " | spread |")
+        print("|---|---|" + "---|" * (len(draws) + 1))
+        for nsup in (1, 16):
+            for sig in ("0.05", "0.1", "0.15", "0.2", "0.3", "0.5", "0.7", "1.0"):
+                cells, accs = [], []
+                for sd in sorted(draws):
+                    rr = [r for r in draws[sd] if spec(r) == f"noise{sig}" and r["nsup"] == nsup]
+                    if not rr:
+                        cells.append("--"); continue
+                    r = rr[0]
+                    if sd == 0 and n_new and r["n"] > n_new and isinstance(r.get("correct"), list):
+                        acc = 100 * float(np.mean(r["correct"][:n_new]))
+                    else:
+                        acc = 100 * r["pexact"]
+                    accs.append(acc)
+                    cells.append(f"{acc:.1f} ({r['fidelity_H']:.2f})")
+                spread = f"{max(accs) - min(accs):.1f}" if len(accs) > 1 else "--"
+                flag = " **" if len(accs) > 1 and max(accs) - min(accs) > 10 else ""
+                print(f"| {nsup} | {sig} | " + " | ".join(cells) + f" | {spread}{flag} |")
+
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
