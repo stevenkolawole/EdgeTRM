@@ -124,5 +124,36 @@ def q8():
             print(f"| {Path(f).stem.replace('trm_sudoku_','')} | {nsup} | " + " | ".join("--" if d.get(q) is None else f"{d[q]:.1f}" for q in order) + f" | {half} |")
 
 
+
+def q1b():
+    """Do compressed models fail on the instances fp32 finds hardest?  For each maze size, bin the
+    instances by the fp32 iterations-to-solve (first iteration count at which fp32 is correct) and
+    report each quantizer's failure rate at its largest iteration count within each bin."""
+    import numpy as np
+    for f in sorted(glob.glob(str(B / "p4d" / "dt_extrap_mazes_*.json"))):
+        recs = json.load(open(f))["records"]
+        its = sorted({r["iters"] for r in recs})
+        spec = lambda r: r["quant"]["spec"] if isinstance(r["quant"], dict) else r["quant"]
+        by = {(spec(r), r["iters"]): np.array(r["correct"], bool) for r in recs}
+        fp = np.stack([by[("fp32", i)] for i in its])            # [iters, n]
+        n = fp.shape[1]
+        solve_at = np.full(n, np.inf)
+        for j, i in enumerate(its):
+            solve_at = np.where((solve_at == np.inf) & fp[j], i, solve_at)
+        bins = sorted(set(solve_at.tolist()))
+        print(f"\n### {Path(f).stem}: failure rate at {its[-1]} iterations, by fp32 iterations-to-solve")
+        print("| quant | " + " | ".join(("never" if b == np.inf else f"≤{int(b)}") + f" (n={int((solve_at==b).sum())})" for b in bins) + " |")
+        print("|---|" + "---|" * len(bins))
+        for q in ["w4c", "w4t", "w3a", "w3g32", "noise0.2", "noise0.3"]:
+            if (q, its[-1]) not in by:
+                continue
+            ok = by[(q, its[-1])]
+            cells = []
+            for b in bins:
+                m = solve_at == b
+                cells.append(f"{100*(1-ok[m].mean()):.1f}" if m.any() else "--")
+            print(f"| {q} | " + " | ".join(cells) + " |")
+
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()

@@ -77,6 +77,8 @@ def run(net, loader, task, iters, act=None, ref=None):
                 obs.append(q)
                 handles.append(mod.register_forward_pre_hook(q))
     correct = {k: [] for k in iters}
+    cell = {k: [] for k in iters}        # per-example accuracy over every output cell
+    cellt = {k: [] for k in iters}       # per-example accuracy over the target cells only
     feats = {k: [] for k in iters}
     pmask = {k: [] for k in iters}
     tmask = []
@@ -101,6 +103,9 @@ def run(net, loader, task, iters, act=None, ref=None):
         for k in iters:
             pred = get_predicted(inputs, all_out[:, k - 1], task)
             correct[k].extend(torch.amin(pred == tg, dim=[1]).cpu().tolist())
+            eq = (pred == tg)
+            cell[k].extend(eq.float().mean(1).cpu().tolist())
+            cellt[k].extend(((eq & tmask_b).sum(1).float() / tmask_b.sum(1).clamp_min(1)).cpu().tolist())
             f = store[k].float().reshape(B, store[k].shape[1], -1)      # [B, C, P]
             pm = (pred == 1)
             if ref is None:
@@ -122,7 +127,10 @@ def run(net, loader, task, iters, act=None, ref=None):
         hh.remove()
     net.cpu()
     torch.cuda.empty_cache()
-    out = {"correct": {k: np.array(v, dtype=bool) for k, v in correct.items()}}
+    out = {"correct": {k: np.array(v, dtype=bool) for k, v in correct.items()},
+           "n_target": (torch.cat(tmask).sum(1).numpy() if ref is None else None),
+           "cell": {k: np.array(v, dtype=float) for k, v in cell.items()},
+           "cellt": {k: np.array(v, dtype=float) for k, v in cellt.items()}}
     if ref is None:
         out["feats"] = {k: torch.cat(v) for k, v in feats.items()}
         out["pmask"] = {k: torch.cat(v) for k, v in pmask.items()}
@@ -141,9 +149,10 @@ def main():
     ap.add_argument("--n", type=int, default=1000)
     ap.add_argument("--batch", type=int, default=50)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--seed", type=int, default=0, help="RNG seed; only the weight-noise draws depend on it")
     a = ap.parse_args()
-    torch.manual_seed(0)
-    np.random.seed(0)
+    torch.manual_seed(a.seed)
+    np.random.seed(a.seed)
     iters = [int(x) for x in a.iters.split(",")]
     quants = [q for q in a.quants.split(",") if q]
     out_path = Path(a.out)
@@ -174,6 +183,8 @@ def main():
                 continue
             records.append({"task": a.task, "size": size, "iters": k, "quant": parse_quant("fp32"), **meta,
                             "n": int(len(ref["correct"][k])), "acc": float(ref["correct"][k].mean()),
+                            "cell_acc": float(ref["cell"][k].mean()), "cell_acc_target": float(ref["cellt"][k].mean()), "seed": a.seed,
+                            "n_target_cells": ref["n_target"].astype(int).tolist(),
                             "fidelity": 1.0, "fid_target": None if a.task == "prefix_sums" else 1.0,
                             "fid_pred": None if a.task == "prefix_sums" else 1.0,
                             "fid_cell_target": None if a.task == "prefix_sums" else 1.0,
@@ -195,6 +206,7 @@ def main():
                 mean = lambda v: (float(np.mean(v)) if len(v) else None)
                 records.append({"task": a.task, "size": size, "iters": k, "quant": q, **meta,
                                 "n": int(len(r["correct"][k])), "acc": float(r["correct"][k].mean()),
+                                "cell_acc": float(r["cell"][k].mean()), "cell_acc_target": float(r["cellt"][k].mean()), "seed": a.seed,
                                 "fidelity": mean(fk["whole"]), "fid_target": mean(fk["target"]),
                                 "fid_pred": mean(fk["pred"]), "fid_cell_target": mean(fk["cell"]),
                                 "mean_target_cells": n_path,
