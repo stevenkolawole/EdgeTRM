@@ -44,7 +44,7 @@ def main():
         ax.set_axisbelow(True)
     axes[0].set_ylabel("solved (%)")
     axes[2].set_xlabel("iterations at test time (trained to 30)")
-    axes[-1].legend(loc="lower right", fontsize=6, handlelength=1.4, borderpad=0.25, labelspacing=0.25)
+    axes[0].legend(loc="lower right", fontsize=6, handlelength=1.4, borderpad=0.25, labelspacing=0.25)
     fig.subplots_adjust(wspace=0.12)
     a.out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(a.out)
