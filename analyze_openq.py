@@ -256,7 +256,8 @@ def q5b():
                 draws[sd] = json.load(open(fs))["records"]
         if not draws:
             continue
-        n_new = min(r["n"] for sd in draws if sd else () for r in draws[sd]) if any(draws.get(s) for s in (1, 2)) else None
+        new_ns = [r["n"] for sd in (1, 2) if sd in draws for r in draws[sd]]
+        n_new = min(new_ns) if new_ns else None
         print(f"\n### {task}: exact accuracy (phi_H) per draw; seeds {sorted(draws)}; reruns n={n_new}")
         print("| nsup | sigma | " + " | ".join(f"seed {sd}" for sd in sorted(draws)) + " | spread |")
         print("|---|---|" + "---|" * (len(draws) + 1))
@@ -277,6 +278,37 @@ def q5b():
                 spread = f"{max(accs) - min(accs):.1f}" if len(accs) > 1 else "--"
                 flag = " **" if len(accs) > 1 and max(accs) - min(accs) > 10 else ""
                 print(f"| {nsup} | {sig} | " + " | ".join(cells) + f" | {spread}{flag} |")
+
+
+def q8b():
+    """Q8 with three draws: per variant, per sigma (n=16), exact accuracy for seeds 0/1/2 where the
+    seed files exist, the median, and the sigma at which the median draw halves."""
+    import statistics as st
+    spec = lambda r: r["quant"]["spec"] if isinstance(r["quant"], dict) else r["quant"]
+    sig = ["0.05", "0.1", "0.15", "0.2", "0.3", "0.5", "0.7"]
+    print("| variant | fp32 | " + " | ".join(f"σ{x}" for x in sig) + " | σ½ (median draw) |")
+    print("|---|---|" + "---|" * (len(sig) + 1))
+    for f in sorted(glob.glob(str(B / "p4d" / "variants_noise" / "*.json"))):
+        if "seed" in f:
+            continue
+        v = Path(f).stem
+        draws = {0: json.load(open(f))["records"]}
+        for sd in (1, 2):
+            fs = B / "p4d" / "variants_noise" / f"{v}_seed{sd}.json"
+            if fs.exists():
+                draws[sd] = json.load(open(fs))["records"]
+        def acc(sd, q):
+            rr = [r for r in draws[sd] if spec(r) == q and r["nsup"] == 16]
+            return 100 * rr[0]["pexact"] if rr else None
+        fp = acc(0, "fp32")
+        cells, medians = [], {}
+        for x in sig:
+            vals = [acc(sd, f"noise{x}") for sd in sorted(draws)]
+            vals = [a for a in vals if a is not None]
+            medians[x] = st.median(vals) if vals else None
+            cells.append("/".join(f"{a:.0f}" for a in vals))
+        half = next((x for x in sig if medians[x] is not None and medians[x] < 0.5 * fp), None)
+        print(f"| {v.replace('trm_sudoku_', '')} | {fp:.1f} | " + " | ".join(cells) + f" | {half} |")
 
 
 if __name__ == "__main__":
