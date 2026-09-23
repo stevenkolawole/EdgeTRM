@@ -163,11 +163,21 @@ def _linears(m):
 
 
 def parse_quant(spec):
-    """'fp32' | 'w4t' | 'w4a+a8' | 'w3g128' -> dict."""
+    """'fp32' | 'w4t' | 'w4a+a8' | 'w3g128' | 'noise0.2' | 'anoise0.2' | 'w8c+anoise0.2' -> dict.
+    anoise<s>: Gaussian noise added at every linear's input, std = s x that input's std (the
+    continuous activation-perturbation dial, open question Q5); weights untouched unless combined."""
     if spec == "fp32":
         return {"spec": spec, "bits": None, "gran": None, "act": None}
     if spec.startswith("noise"):          # Gaussian weight noise, std = sigma x per-tensor weight std
         return {"spec": spec, "bits": None, "gran": "noise", "sigma": float(spec[5:]), "act": None}
+    anoise = None
+    if "+anoise" in spec:
+        spec_w, an = spec.split("+anoise")
+        anoise = float(an)
+        base = parse_quant(spec_w)
+        return {**base, "spec": spec, "anoise": anoise}
+    if spec.startswith("anoise"):
+        return {"spec": spec, "bits": None, "gran": None, "act": None, "anoise": float(spec[6:])}
     s = spec
     act = None
     if "+a8" in s:
@@ -234,15 +244,31 @@ class _ActQuant:
         self.scale = max(self.absmax, 1e-8) / self.qmax
 
 
+class _ActNoise:
+    """Gaussian noise at a linear's input, std = sigma x the std of that input (per call): the
+    activation analogue of the weight-noise dial. Fresh noise on every pass, so this is the
+    per-pass perturbation of the contraction argument, not a fixed rule change."""
+
+    def __init__(self, sigma):
+        self.sigma = sigma
+
+    def __call__(self, mod, args):
+        x = args[0]
+        return (x + torch.randn_like(x) * (self.sigma * x.std()),) + tuple(args[1:])
+
+
 # ----------------------------------------------------------------------------- run
 @torch.no_grad()
-def run(m, inp, lab, batch, nsup, act_quant=None, calib_chunks=1):
+def run(m, inp, lab, batch, nsup, act_quant=None, calib_chunks=1, act_noise=None):
     """puzzle-exact per example, cell accuracy, final z_H (and z_L) per example."""
     m = m.to(DEV)
     n = inp.shape[0]
     correct, cell_c, cell_n, zH, zL = [], 0, 0, [], []
     # activation calibration: observe on the first chunks, then freeze
     handles = []
+    if act_noise is not None:
+        for mod in _linears(m):
+            handles.append(mod.register_forward_pre_hook(_ActNoise(act_noise)))
     if act_quant is not None:
         obs = []
         for mod in _linears(m):
@@ -361,8 +387,9 @@ def main():
                 q = parse_quant(spec)
                 t1 = time.time()
                 mq, _ = build(a.task, H, nsup, batch)
-                quantize_weights_(mq, q["bits"], q["gran"], q.get("sigma"))
-                c, cell, zH, zL = run(mq, inp, lab, batch, nsup, act_quant=q["act"])
+                if q["gran"] is not None:
+                    quantize_weights_(mq, q["bits"], q["gran"], q.get("sigma"))
+                c, cell, zH, zL = run(mq, inp, lab, batch, nsup, act_quant=q["act"], act_noise=q.get("anoise"))
                 del mq
                 fH, fL = fidelity(zH, ref_zH), fidelity(zL, ref_zL)
                 rec = {"task": a.task, "H_cycles": Hc, "L_cycles": meta["L_cycles"], "nsup": nsup, "quant": q,
