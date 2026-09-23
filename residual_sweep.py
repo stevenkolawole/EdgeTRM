@@ -172,7 +172,7 @@ def main():
                 "per_step": {k: {kk: vv for kk, vv in v.items() if kk in ("correct", "resid_H", "resid_L", "qhalt")}
                              for k, v in ref_rec.items()}, "secs": time.time() - t0}]
     print(f"{a.task} fp32: " + " ".join(f"k{k}={s['acc']*100:.1f}/rH{s['resid_H_mean']:.3f}/auR{s['auroc_resid_H'] or 0:.2f}"
-                                       + (f"/auQ{s['auroc_qhalt']:.2f}" if "auroc_qhalt" in s else "")
+                                       + (f"/auQ{s['auroc_qhalt'] or 0:.2f}" if "auroc_qhalt" in s else "")
                                        for k, s in records[0]["summary"].items() if k in (1, 2, 4, 8, a.nsup)), flush=True)
     json.dump({"task": a.task, "records": records}, open(out_path, "w"))
     for spec in quants:
@@ -191,8 +191,10 @@ def main():
                         "per_step": {k: {kk: ([round(x, 4) if isinstance(x, float) else x for x in vv])
                                          for kk, vv in v.items()} for k, v in rec.items()},
                         "secs": time.time() - t1})
+        json.dump({"task": a.task, "records": records}, open(out_path, "w"))
+        # AUROC is None when every puzzle is right or every puzzle is wrong at a step.
         print(f"  {spec:10s}: " + " ".join(f"k{k}={s['acc']*100:.1f}/rH{s['resid_H_mean']:.3f}/auR{s['auroc_resid_H'] or 0:.2f}"
-                                          + (f"/auQ{s['auroc_qhalt']:.2f}" if "auroc_qhalt" in s else "")
+                                          + (f"/auQ{s['auroc_qhalt'] or 0:.2f}" if "auroc_qhalt" in s else "")
                                           + (f"/fid{s['fid_H_mean']:.2f}/auF{s['auroc_fid_H'] or 0:.2f}" if "fid_H_mean" in s else "")
                                           for k, s in summ.items() if k in (1, 2, 4, 8, a.nsup)), flush=True)
         json.dump({"task": a.task, "records": records}, open(out_path, "w"))
