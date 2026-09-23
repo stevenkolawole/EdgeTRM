@@ -185,5 +185,56 @@ def q1c():
             print(f"| {q} | {n} | {100*(fail & ever).sum()/n:.0f}% | {100*(fail & prev).sum()/n:.0f}% | {100*(fail & ~ever).sum()/n:.0f}% |")
 
 
+def q2b():
+    """Q2 closure from the dt_cell_* reruns: exact accuracy, per-cell accuracy (all cells / target
+    cells) and fidelity per quantizer; the spread over three noise draws; and whether failures
+    concentrate on long paths."""
+    import numpy as np
+    for size in ("33", "25"):
+        files = sorted(glob.glob(str(B / "p4d" / f"dt_cell_mazes_{size}_s*.json")))
+        print(f"\n### mazes {size}: exact vs per-cell accuracy vs fidelity (seed 0), iterations 100/200/300")
+        print("| quant | exact | cell acc (all) | cell acc (target) | φ whole | φ target |")
+        print("|---|---|---|---|---|---|")
+        recs0 = json.load(open(files[0]))["records"]
+        spec = lambda r: r["quant"]["spec"] if isinstance(r["quant"], dict) else r["quant"]
+        order = []
+        for r in recs0:
+            if spec(r) not in order:
+                order.append(spec(r))
+        for q in order:
+            rows = [r for r in recs0 if spec(r) == q]
+            rows.sort(key=lambda r: r["iters"])
+            f = lambda key: "/".join("--" if r.get(key) is None else f"{100*r[key]:.1f}" for r in rows)
+            g = lambda key: "/".join("--" if r.get(key) is None else f"{r[key]:.3f}" for r in rows)
+            print(f"| {q} | {f('acc')} | {f('cell_acc')} | {f('cell_acc_target')} | {g('fidelity')} | {g('fid_target')} |")
+        print(f"\n### mazes {size}: three noise draws, exact accuracy at 300 iterations (φ whole)")
+        print("| σ | seed 0 | seed 1 | seed 2 |")
+        print("|---|---|---|---|")
+        for q in ("noise0.2", "noise0.3"):
+            cells = []
+            for fpath in files:
+                rr = [r for r in json.load(open(fpath))["records"] if spec(r) == q and r["iters"] == 300]
+                cells.append(f"{100*rr[0]['acc']:.1f} ({rr[0]['fidelity']:.3f})" if rr else "--")
+            print(f"| {q} | " + " | ".join(cells) + " |")
+        # failures vs path length (seed 0): split instances by target-cell count quartile
+        fp = [r for r in recs0 if spec(r) == "fp32" and r["iters"] == 300][0]
+        if "n_target_cells" not in fp:      # seed-0 files predate the field; seeds 1/2 carry it
+            alt = [r for r in json.load(open(files[1]))["records"] if spec(r) == "fp32" and r["iters"] == 300][0]
+            assert alt["correct"] == fp["correct"], "instance order differs between seed files"
+            fp = alt
+        nt = np.array(fp["n_target_cells"])
+        qs = np.quantile(nt, [0.25, 0.5, 0.75])
+        bins = np.digitize(nt, qs)
+        print(f"\n### mazes {size}: failure rate at 300 iterations by path-length quartile (target cells: quartiles {qs.astype(int).tolist()})")
+        print("| quant | Q1 (short) | Q2 | Q3 | Q4 (long) |")
+        print("|---|---|---|---|---|")
+        for q in order:
+            rr = [r for r in recs0 if spec(r) == q and r["iters"] == 300]
+            if not rr:
+                continue
+            ok = np.array(rr[0]["correct"], bool)
+            print(f"| {q} | " + " | ".join(f"{100*(1-ok[bins==b].mean()):.1f}" for b in range(4)) + " |")
+
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()

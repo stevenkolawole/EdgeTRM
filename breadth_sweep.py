@@ -338,6 +338,7 @@ def main():
     ap.add_argument("--ckpt", default="", help="TRM tasks: evaluate this trained checkpoint (step_N file of a "
                                                 "pretrain.py run; heads/mixer/L read from its all_config.yaml)")
     ap.add_argument("--variant", default="", help="label stored in every record (e.g. sudoku_mlp_w256_s0_step6510)")
+    ap.add_argument("--seed", type=int, default=0, help="RNG seed; the weight-noise draws depend on it")
     a = ap.parse_args()
     global CKPT_OVERRIDE
     if a.ckpt:
@@ -346,8 +347,8 @@ def main():
         arch = _variant_arch(a.ckpt)
         print(f"variant checkpoint {a.ckpt}: arch {arch}", flush=True)
 
-    np.random.seed(0)
-    torch.manual_seed(0)
+    np.random.seed(a.seed)
+    torch.manual_seed(a.seed)
     kind = (TRM_TASKS.get(a.task) or HRM_TASKS[a.task])["data"]
     batch = a.batch or (TRM_TASKS.get(a.task) or HRM_TASKS[a.task])["batch"]
     inp, lab = load_qa(kind, a.n)
@@ -363,7 +364,7 @@ def main():
         except (json.JSONDecodeError, ValueError):
             print(f"  {out_path} unreadable (truncated write); starting fresh", flush=True)
     done = {(r["H_cycles"], r["nsup"], r["quant"]["spec"]) for r in records}
-    extra = {"variant": a.variant, "ckpt": a.ckpt} if a.ckpt else {}
+    extra = {"variant": a.variant, "seed": a.seed, "ckpt": a.ckpt} if a.ckpt else {}
     print(f"{a.task}: {len(inp)} puzzles, batch {batch}, H={Hs}, nsup={nsups}, quants={quants}; "
           f"{len(records)} records already", flush=True)
 
