@@ -155,5 +155,35 @@ def q1b():
             print(f"| {q} | " + " | ".join(cells) + " |")
 
 
+def q1c():
+    """Angle G: for the instances a compressed model gets wrong at the largest iteration count,
+    was the model ever right at an earlier count (arrived, then left) or never (never arrived)?
+    Also the same for fp32 on the same instances, and whether the failing instances' fp32
+    iterations-to-solve differs from the rest."""
+    import numpy as np
+    for f in sorted(glob.glob(str(B / "p4d" / "dt_extrap_mazes_*.json"))):
+        recs = json.load(open(f))["records"]
+        its = sorted({r["iters"] for r in recs})
+        spec = lambda r: r["quant"]["spec"] if isinstance(r["quant"], dict) else r["quant"]
+        by = {(spec(r), r["iters"]): np.array(r["correct"], bool) for r in recs}
+        print(f"\n### {Path(f).stem}: failures at {its[-1]} iterations")
+        print("| quant | failures | were right earlier (arrived then left) | right at the previous count | never right |")
+        print("|---|---|---|---|---|")
+        for q in ["w4c", "w4t", "w3a", "noise0.2", "noise0.3"]:
+            if (q, its[-1]) not in by:
+                continue
+            last = by[(q, its[-1])]
+            fail = ~last
+            ever = np.zeros_like(last)
+            for i in its[:-1]:
+                ever |= by[(q, i)]
+            prev = by[(q, its[-2])]
+            n = int(fail.sum())
+            if n == 0:
+                print(f"| {q} | 0 | -- | -- | -- |")
+                continue
+            print(f"| {q} | {n} | {100*(fail & ever).sum()/n:.0f}% | {100*(fail & prev).sum()/n:.0f}% | {100*(fail & ~ever).sum()/n:.0f}% |")
+
+
 if __name__ == "__main__":
     globals()[sys.argv[1]]()
