@@ -1,0 +1,6 @@
+difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task hrm_sudoku --quants fp32,w2g32,w4c,w4t --ref_cache /home/ubuntu/x1/results/ref_deep_hrm_sudoku.pt --out /home/ubuntu/x1/results/deep_hrm_sudoku_a.json
+breadth_sweep.py --task maze_attn --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 1 --out /home/ubuntu/x1/results/noise_maze_attn_seed1.json
+breadth_sweep.py --task maze_attn --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 2 --out /home/ubuntu/x1/results/noise_maze_attn_seed2.json
+breadth_sweep.py --task hrm_maze --H 2 --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 0 --out /home/ubuntu/x1/results/noise_hrm_maze_H2_seed0.json
+breadth_sweep.py --task hrm_maze --H 2 --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 1 --out /home/ubuntu/x1/results/noise_hrm_maze_H2_seed1.json
+breadth_sweep.py --task hrm_maze --H 2 --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 2 --out /home/ubuntu/x1/results/noise_hrm_maze_H2_seed2.json

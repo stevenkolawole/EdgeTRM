@@ -98,9 +98,13 @@ def _fresh(m, bt):
 
 
 @torch.no_grad()
-def run_traj(m, inp, lab, batch, K, act_quant=None, act_noise=None, ref_zH=None, keep_zH=False):
+def run_traj(m, inp, lab, batch, K, act_quant=None, act_noise=None, ref_zH=None, keep_zH=False, partial=None, tag=None):
+    """partial: path of a chunk-level checkpoint (p4d reboots daily); resumes a spec at the next chunk.
+    Not used with static activation quantization (its scales are calibrated on chunk 0)."""
     m = m.to(DEV)
     n = inp.shape[0]
+    if act_quant is not None:
+        partial = None
     handles, obs = [], []
     if act_noise is not None:
         for mod in _linears(m):
@@ -115,7 +119,16 @@ def run_traj(m, inp, lab, batch, K, act_quant=None, act_noise=None, ref_zH=None,
     qhalt = np.zeros(n, dtype=np.float32)
     fid = np.full(n, np.nan, dtype=np.float32)
     zs = []
+    start = 0
+    if partial is not None and Path(partial).exists():
+        ck = torch.load(partial, weights_only=False)
+        if ck.get("tag") == tag:
+            start = ck["next"]
+            bits, wrong, qhalt, fid, zs = ck["bits"], ck["wrong"], ck["qhalt"], ck["fid"], ck["zs"]
+            print(f"    resuming {tag} at chunk {start}", flush=True)
     for ci, s in enumerate(range(0, n, batch)):
+        if ci < start:
+            continue
         x = torch.from_numpy(inp[s:s + batch]).to(DEV)
         y = torch.from_numpy(lab[s:s + batch]).to(DEV)
         B = x.shape[0]
@@ -147,6 +160,11 @@ def run_traj(m, inp, lab, batch, K, act_quant=None, act_noise=None, ref_zH=None,
             fid[s:s + B] = F.cosine_similarity(zH.flatten(1), ref.flatten(1), dim=-1).cpu().numpy()
         if keep_zH:
             zs.append(zH.half().cpu())
+        if partial is not None and s + batch < n:
+            tmp = str(partial) + ".tmp"
+            torch.save({"tag": tag, "next": ci + 1, "bits": bits, "wrong": wrong, "qhalt": qhalt, "fid": fid,
+                        "zs": zs}, tmp)
+            os.replace(tmp, partial)
     for h in handles:
         h.remove()
     m.cpu()
@@ -179,6 +197,11 @@ def main():
                                                           "(the deep K=512 sweep uses 300)")
     ap.add_argument("--batch", type=int, default=0)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--ref_cache", default="", help="file for the fp32 reference (final z_H): written after the fp32 "
+                                                    "run, reused on restart instead of rerunning fp32")
+    ap.add_argument("--ref_wait", action="store_true", help="do not run fp32 here: wait for --ref_cache (written by "
+                                                          "another process on the same puzzles) and pair against it")
+    ap.add_argument("--checkpoint", action="store_true", help="chunk-level resume (<out>.partial.pt)")
     a = ap.parse_args()
 
     meta = load_meta()
@@ -206,7 +229,7 @@ def main():
     batch = a.batch or t["batch"]
     H = int(a.H) if a.H else None
     quants = [q.strip() for q in a.quants.split(",") if q.strip()]
-    if "fp32" not in quants:
+    if "fp32" not in quants and not a.ref_wait:
         quants = ["fp32"] + quants
     out_path = Path(a.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -223,17 +246,42 @@ def main():
           f"{len(done)} done already; device {torch.cuda.get_device_name(0) if DEV == 'cuda' else 'cpu'}", flush=True)
 
     t0 = time.time()
+    partial = str(out_path) + ".partial.pt" if a.checkpoint else None
+    ref_cache = Path(a.ref_cache) if a.ref_cache else None
     torch.manual_seed(0)
     m, meta_m = build(a.task, H, a.K, batch)
-    bits, wrong, qh, fid, ref_zH = run_traj(m, inp, lab, batch, a.K, keep_zH=True)
     del m
-    packed = pack(bits)
-    acc = bits.mean(0)
-    print(f"  fp32 ({time.time()-t0:.0f}s): " + " ".join(f"k{k}={100*acc[k-1]:.1f}" for k in (1, 2, 4, 8, 16, 32, 64) if k <= a.K), flush=True)
-    if "fp32" in done:
-        same = sum(x == y for x, y in zip(done["fp32"]["bits"], packed))
-        print(f"  fp32 rerun vs stored: {same}/{len(packed)} identical trajectories", flush=True)
+    if a.ref_wait:
+        while not (ref_cache and ref_cache.exists()):
+            print(f"  waiting for {ref_cache}", flush=True)
+            time.sleep(300)
+    if ref_cache and ref_cache.exists() and ("fp32" in done or a.ref_wait):
+        rc = torch.load(ref_cache, weights_only=False)
+        assert rc["rows"] == rows and rc["K"] == a.K, "reference cache is for different puzzles or K"
+        ref_zH = rc["zH"]
+        print(f"  fp32 reference loaded from {ref_cache}", flush=True)
+        run_fp32 = False
     else:
+        run_fp32 = True
+    if run_fp32:
+        m, meta_m = build(a.task, H, a.K, batch)
+        bits, wrong, qh, fid, ref_zH = run_traj(m, inp, lab, batch, a.K, keep_zH=True, partial=partial,
+                                                tag=f"fp32|K{a.K}|n{len(rows)}|b{batch}")
+        del m
+        if ref_cache:
+            tmp = str(ref_cache) + ".tmp"
+            torch.save({"rows": rows, "K": a.K, "zH": ref_zH}, tmp)
+            os.replace(tmp, ref_cache)
+        if partial and Path(partial).exists():
+            os.remove(partial)
+    for spec in ([] if not run_fp32 else ["fp32"]):
+        packed = pack(bits)
+        acc = bits.mean(0)
+        print(f"  fp32 ({time.time()-t0:.0f}s): " + " ".join(f"k{k}={100*acc[k-1]:.1f}" for k in (1, 2, 4, 8, 16, 32, 64, 128, 256, 512) if k <= a.K), flush=True)
+        if "fp32" in done:
+            same = sum(x == y for x, y in zip(done["fp32"]["bits"], packed))
+            print(f"  fp32 rerun vs stored: {same}/{len(packed)} identical trajectories", flush=True)
+            continue
         rec = {"spec": "fp32", "quant": parse_quant("fp32"), "seed": 0, "H_cycles": meta_m["H_cycles"],
                "L_cycles": meta_m["L_cycles"], "K": a.K, "n": len(rows), "acc": acc.tolist(), "bits": packed,
                "wrong": {str(k): v.tolist() for k, v in wrong.items()}, "qhalt": np.round(qh.astype(float), 3).tolist(),
@@ -254,8 +302,10 @@ def main():
             quantize_weights_(mq, q["bits"], q["gran"], q.get("sigma"))
         torch.manual_seed(seed)
         b2, w2, qh2, fid2, _ = run_traj(mq, inp, lab, batch, a.K, act_quant=q["act"], act_noise=q.get("anoise"),
-                                        ref_zH=ref_zH)
+                                        ref_zH=ref_zH, partial=partial, tag=f"{spec}|K{a.K}|n{len(rows)}|b{batch}")
         del mq
+        if partial and Path(partial).exists():
+            os.remove(partial)
         acc2 = b2.mean(0)
         rec = {"spec": spec, "quant": q, "seed": seed, "H_cycles": meta_m["H_cycles"], "L_cycles": meta_m["L_cycles"],
                "K": a.K, "n": len(rows), "acc": acc2.tolist(), "bits": pack(b2),
@@ -265,7 +315,7 @@ def main():
         doc["records"].append(rec)
         atomic_dump(doc, out_path)
         print(f"  {spec:14s} ({time.time()-t1:.0f}s) fidH {rec['fid_H_mean']:.3f}: "
-              + " ".join(f"k{k}={100*acc2[k-1]:.1f}" for k in (1, 2, 4, 8, 16, 32, 64) if k <= a.K), flush=True)
+              + " ".join(f"k{k}={100*acc2[k-1]:.1f}" for k in (1, 2, 4, 8, 16, 32, 64, 128, 256, 512) if k <= a.K), flush=True)
     print("wrote", out_path, len(doc["records"]), "records", flush=True)
 
 

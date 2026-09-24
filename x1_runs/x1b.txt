@@ -1,0 +1,2 @@
+difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task sudoku_attn --quants fp32,w3c,w4c --ref_cache /home/ubuntu/x1/results/ref_deep_sudoku_attn.pt --out /home/ubuntu/x1/results/deep_sudoku_attn_a.json
+difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task sudoku_attn --quants w4t,noise0.7@s0 --ref_wait --ref_cache /home/ubuntu/x1/results/ref_deep_sudoku_attn.pt --out /home/ubuntu/x1/results/deep_sudoku_attn_b.json

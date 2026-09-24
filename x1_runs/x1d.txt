@@ -1,0 +1,7 @@
+breadth_sweep.py --task sudoku_mlp --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 1 --out /home/ubuntu/x1/results/noise_sudoku_mlp_seed1.json
+breadth_sweep.py --task sudoku_mlp --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 2 --out /home/ubuntu/x1/results/noise_sudoku_mlp_seed2.json
+breadth_sweep.py --task sudoku_attn --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 1 --out /home/ubuntu/x1/results/noise_sudoku_attn_seed1.json
+breadth_sweep.py --task sudoku_attn --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 2 --out /home/ubuntu/x1/results/noise_sudoku_attn_seed2.json
+breadth_sweep.py --task hrm_sudoku --H 2 --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 0 --out /home/ubuntu/x1/results/noise_hrm_sudoku_H2_seed0.json
+breadth_sweep.py --task hrm_sudoku --H 2 --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 1 --out /home/ubuntu/x1/results/noise_hrm_sudoku_H2_seed1.json
+breadth_sweep.py --task hrm_sudoku --H 2 --quants fp32,noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --nsup 16 --n 1000 --seed 2 --out /home/ubuntu/x1/results/noise_hrm_sudoku_H2_seed2.json

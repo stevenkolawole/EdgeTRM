@@ -147,7 +147,7 @@ def sudoku_sets(kind="diff"):
     names = ["0", "1-10", "11-30", "31-60", "61-120", ">120"]
     out = {}
     for task in ("sudoku_mlp", "sudoku_attn", "hrm_sudoku"):
-        files = sorted(glob.glob(str(B / "babel" / "x1" / f"{kind}_{task}_*.json")))
+        files = sorted(glob.glob(str(B / ("p4d" if kind == "deep" else "babel") / "x1" / f"{kind}_{task}_*.json")))
         if not files:
             continue
         mats, rows, K = {}, None, None

@@ -5,9 +5,11 @@
 Difficulty = the test puzzle's `rating` (tdoku backtracks), from
 results/breadth/sudoku_extreme_test_meta.json (built from sapientinc/sudoku-extreme test.csv).
 
+    (append --axis residual to any command to bin by blanks left after singles instead of the rating)
     python analyze_difficulty.py first    # existing p4d records, first 1000 test rows, nsup 1..64, H 1..4
     python analyze_difficulty.py strat    # stratified Babel sweep (difficulty_sweep.py), 6 bins x 1000, k = 1..64
     python analyze_difficulty.py deep     # deep Babel sweep, 300 per bin, k = 1..512
+    python analyze_difficulty.py halt     # halting-head AUROC per rating bin and quantizer (angle C)
     python analyze_difficulty.py glink    # which puzzles fail: fp32's solve step vs rating
     python analyze_difficulty.py json     # figure-ready JSON -> results/breadth/x1_difficulty_readout.json
     python analyze_difficulty.py fig [first1000|strat|deep]   # draft figure -> plots/x1_difficulty_<src>.{png,pdf}
@@ -29,7 +31,15 @@ B = Path(__file__).resolve().parent / "results" / "breadth"
 META = json.load(open(B / "sudoku_extreme_test_meta.json"))
 TASKS = [("sudoku_mlp", "TRM Sudoku-MLP", 3), ("sudoku_attn", "TRM Sudoku-attn", 3), ("hrm_sudoku", "HRM Sudoku", 2)]
 # bins for the first-1000 read-out (value-based, fixed before looking at accuracies by bin)
-FIRST_BINS = [(0, 4, "easy 0-4"), (5, 30, "medium 5-30"), (31, 10 ** 6, "hard >=31")]
+# difficulty axis: --axis rating (default; the dataset's tdoku backtrack count, planned axis) or
+# --axis residual (blanks left after naked + hidden singles; sudoku_difficulty.py)
+AXIS = "rating"
+if "--axis" in sys.argv:
+    AXIS = sys.argv[sys.argv.index("--axis") + 1]
+    del sys.argv[sys.argv.index("--axis"):sys.argv.index("--axis") + 2]
+RATING_FIRST = [(0, 4, "easy 0-4"), (5, 30, "medium 5-30"), (31, 10 ** 6, "hard >=31")]
+RES_BINS = [(0, 0, "res 0"), (1, 45, "res 1-45"), (46, 50, "res 46-50"), (51, 55, "res 51-55"), (56, 81, "res >=56")]
+FIRST_BINS = RATING_FIRST if AXIS == "rating" else RES_BINS
 STRAT_NAMES = ["0", "1-10", "11-30", "31-60", "61-120", ">120"]
 NSUP = (1, 2, 4, 8, 16, 32, 64)
 # which quantizers to show, per model, and their side of the basin (from the Sep 14-23 sweeps)
@@ -66,7 +76,7 @@ def fmt(p, lo=None, hi=None):
 
 # ------------------------------------------------------------------------ existing records (first 1000, p4d)
 def first_bins():
-    r = np.array(META["first1000"]["rating"])
+    r = np.array(META["first1000"]["rating" if AXIS == "rating" else "singles_residual"])
     return [(name, (r >= lo) & (r <= hi)) for lo, hi, name in FIRST_BINS], r
 
 
@@ -134,7 +144,8 @@ def load_strat(task, kind="diff"):
     """{spec: record with 'B' (n x K bool)}; merges every file of this task (fp32 from the first file,
     other fp32 copies are checked for identity)."""
     recs, fp32s = {}, []
-    files = sorted(glob.glob(str(B / "babel" / "x1" / f"{kind}_{task}_*.json")))
+    plat = "p4d" if kind == "deep" else "babel"          # deep K=512 sweep runs on p4d, the K=64 one on Babel
+    files = sorted(glob.glob(str(B / plat / "x1" / f"{kind}_{task}_*.json")))
     rows = None
     for f in files:
         d = json.load(open(f))
@@ -149,10 +160,14 @@ def load_strat(task, kind="diff"):
             if r["spec"] == "fp32":
                 file_fp32 = r["B"]
                 fp32s.append(r)
-            r["F"] = file_fp32                    # the fp32 run of the same job (same node, same process)
+            r["F"] = file_fp32                    # the fp32 run of the same job (same node, same process);
+            #                                       None for a --ref_wait file, filled in below
             if r["spec"] == "fp32" and "fp32" in recs:
                 continue
             recs.setdefault(r["spec"], r)
+    for s_, r_ in recs.items():
+        if isinstance(r_, dict) and r_.get("F") is None and "fp32" in recs:
+            r_["F"] = recs["fp32"]["B"]
     if fp32s:
         ref = fp32s[0]["B"]
         same = [float((f["B"] == ref).all(1).mean()) for f in fp32s[1:]]
@@ -162,11 +177,15 @@ def load_strat(task, kind="diff"):
 
 ROW_BIN = dict(zip(META["strat"]["rows"], META["strat"]["bin"]))
 ROW_RATING = dict(zip(META["strat"]["rows"], META["strat"]["rating"]))
+ROW_RES = dict(zip(META["strat"]["rows"], META["strat"].get("singles_residual", [0] * len(META["strat"]["rows"]))))
 
 
 def strat_bins(rows=None):
     """bins as masks over `rows` (the puzzle order of a sweep file); default = the full stratified set."""
     rows = META["strat"]["rows"] if rows is None else rows
+    if AXIS == "residual":
+        v = np.array([ROW_RES[r] for r in rows])
+        return [(nm, (v >= lo) & (v <= hi)) for lo, hi, nm in RES_BINS]
     b = np.array([ROW_BIN[r] for r in rows])
     return [(STRAT_NAMES[i], b == i) for i in range(len(STRAT_NAMES))]
 
@@ -258,6 +277,7 @@ def glink():
               f"Spearman(fp32 solve step, rating) over solved = {spearman(st[solved], r1000[solved]):+.2f}")
         sb = [(a, b) for a, b in STEP_BINS if a <= K]
         rb = [(lo, hi, nm) for lo, hi, nm in FIRST_BINS]
+        r1000 = first_bins()[1]
         print("| quant | acc@K | " + " | ".join(f"step {a}-{b}" for a, b in sb) + " | " + " | ".join(nm for _, _, nm in rb) + " |")
         print("|---|---|" + "---|" * (len(sb) + len(rb)))
         cnt = ["n=" + str(int((solved & (st >= a) & (st <= b)).sum())) for a, b in sb] + \
@@ -307,6 +327,47 @@ def glink():
             print(f"| {s} | {100*c.mean():.1f} | " + " | ".join(cells) + " |")
 
 
+def _auroc(score, positive):
+    score, positive = np.asarray(score, float), np.asarray(positive, bool)
+    npos, nneg = positive.sum(), (~positive).sum()
+    if npos == 0 or nneg == 0:
+        return float("nan")
+    order = np.argsort(score, kind="mergesort")
+    s = score[order]
+    ranks = np.empty(len(s))
+    i = 0
+    while i < len(s):
+        j = i
+        while j + 1 < len(s) and s[j + 1] == s[i]:
+            j += 1
+        ranks[order[i:j + 1]] = (i + j) / 2 + 1
+        i = j + 1
+    return float((ranks[positive].sum() - npos * (npos + 1) / 2) / (npos * nneg))
+
+
+def halt(kind="diff"):
+    """angle C per difficulty bin: AUROC of -q_halt (after the last step) for 'answer wrong'."""
+    for task, label, H in TASKS:
+        recs, rows = load_strat(task, kind)
+        if not recs:
+            continue
+        bins = strat_bins(rows)
+        K = recs["fp32"]["K"]
+        print(f"\n### {label} ({kind}, K={K}): AUROC of -q_halt for a wrong answer at step {K}, by rating bin "
+              "(accuracy in parentheses)")
+        print("| quant | all | " + " | ".join(nm for nm, _ in bins) + " |")
+        print("|---|---|" + "---|" * len(bins))
+        for s, r in recs.items():
+            if s.startswith("_"):
+                continue
+            q = np.array(r["qhalt"], float)
+            c = r["B"][:, K - 1]
+            cells = [f"{_auroc(-q, ~c):.2f} ({100*c.mean():.0f})"]
+            for _, m in bins:
+                cells.append(f"{_auroc(-q[m], ~c[m]):.2f} ({100*c[m].mean():.0f})")
+            print(f"| {s} | " + " | ".join(cells) + " |")
+
+
 # ------------------------------------------------------------------------ figure-ready JSON and draft figure
 def build_json():
     out = {"meta": {"difficulty": "sapientinc/sudoku-extreme test.csv `rating` = tdoku backtracks",
@@ -351,7 +412,8 @@ def build_json():
                     t[s][name] = {"n": int(m.sum()), "iters": steps, "acc": acc, "lo": lo, "hi": hi}
             out[key][task] = {"label": label, "H": H, "K": K, "platform": "Babel L40S",
                               "fp32_identity_across_files": recs.get("_fp32_identity"), "quants": t}
-    p = B / "x1_difficulty_readout.json"
+    out["meta"]["axis"] = AXIS
+    p = B / ("x1_difficulty_readout.json" if AXIS == "rating" else "x1_difficulty_readout_residual.json")
     json.dump(out, open(p, "w"))
     print("wrote", p)
     return out
@@ -365,7 +427,8 @@ def fig():
     d = build_json()
     src = sys.argv[2] if len(sys.argv) > 2 else ("strat" if d["strat"] else "first1000")
     tasks = [t for t, _, _ in TASKS if t in d[src]]
-    bins = STRAT_NAMES if src in ("strat", "deep") else [nm for _, _, nm in FIRST_BINS]
+    bins = list(next(iter(d[src][next(iter(d[src]))]["quants"].values())).keys())
+    bins = [b for b in bins if b not in ("fid_H_mean", "seed")]
     # per model: fp32, an in-basin quantizer, and the lossy ones that do not collapse
     pick = {"sudoku_mlp": [("fp32", fs.INK), ("w4c", fs.BLUE), ("w3g32", fs.AMBER), ("noise0.15@s0", fs.RED)],
             "sudoku_attn": [("fp32", fs.INK), ("w4c", fs.BLUE), ("w4t", fs.AMBER), ("noise0.7@s0", fs.RED)],
@@ -392,7 +455,7 @@ def fig():
                 ax.fill_between(c["iters"], c["lo"], c["hi"], color=col, alpha=0.15, lw=0)
             ax.set_xscale("log", base=2)
             if i == 0:
-                ax.set_title(f"rating {b}" + (f" (n={q['fp32'][b]['n']})" if 'fp32' in q else ""), fontsize=7)
+                ax.set_title((f"rating {b}" if AXIS == "rating" else b) + (f" (n={q['fp32'][b]['n']})" if 'fp32' in q else ""), fontsize=7)
             if j == 0:
                 ax.set_ylabel(d[src][t]["label"] + "\nacc. %", fontsize=7)
             if i == len(tasks) - 1:
@@ -400,12 +463,12 @@ def fig():
             if j == len(bins) - 1:
                 ax.legend(fontsize=5.5, frameon=False, loc="lower right")
     fig_.tight_layout()
-    out = Path(__file__).resolve().parent / "plots" / f"x1_difficulty_{src}"
+    out = Path(__file__).resolve().parent / "plots" / f"x1_difficulty_{src}" + ("" if AXIS == "rating" else "_residual")
     fig_.savefig(str(out) + ".png", dpi=200)
     fig_.savefig(str(out) + ".pdf")
     print("wrote", out)
 
 
 if __name__ == "__main__":
-    {"first": first, "strat": strat, "deep": lambda: strat("deep"), "glink": glink, "json": build_json,
+    {"first": first, "strat": strat, "deep": lambda: strat("deep"), "glink": glink, "halt": halt, "json": build_json,
      "fig": fig}[sys.argv[1]]()
