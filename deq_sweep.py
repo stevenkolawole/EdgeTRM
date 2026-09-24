@@ -258,14 +258,54 @@ def solve(f, z0, T, snaps, method):
 
 
 # ----------------------------------------------------------------------------- data
-def load_imagenet_val(n):
-    """Stratified val subset: the first n/1000 images of each class in file order, preprocessed as
-    tools/cls_valid.py (Resize 256, CenterCrop 224, ImageNet normalisation); uint8 cache on /data."""
+def load_imagenet_orig(per):
+    """Original ILSVRC2012 val JPEGs read straight from the mlx-vision/imagenet-1k val.zip (no unzip):
+    per class (synsets sorted = the standard label order) the first `per` files in sorted name order."""
+    import zipfile
+    from PIL import Image
+    import torchvision.transforms as T
+    tf = T.Compose([T.Resize(256), T.CenterCrop(224), T.PILToTensor()])
+    hf = os.environ.get("HF_HOME", "/data/hf_cache/skolawol")
+    zp = glob.glob(hf + "/hub/datasets--mlx-vision--imagenet-1k/snapshots/*/val.zip")
+    if not zp:
+        from huggingface_hub import hf_hub_download
+        zp = [hf_hub_download("mlx-vision/imagenet-1k", "val.zip", repo_type="dataset")]
+    z = zipfile.ZipFile(zp[0])
+    names = [nm for nm in z.namelist() if nm.lower().endswith((".jpeg", ".jpg", ".png"))
+             and "__MACOSX" not in nm and not nm.split("/")[-1].startswith("._")]
+    print(f"  val.zip: {len(names)} images, e.g. {names[:2]}", flush=True)
+    by = {}
+    for nm in names:
+        syn = [part for part in nm.split("/") if part.startswith("n") and len(part) == 9 and part[1:].isdigit()]
+        assert syn, f"no synset directory in {nm}"
+        by.setdefault(syn[0], []).append(nm)
+    syns = sorted(by)
+    assert len(syns) == 1000, len(syns)
+    xs, ys = [], []
+    for y, sn in enumerate(syns):
+        for nm in sorted(by[sn])[:per]:
+            with z.open(nm) as fh:
+                xs.append(tf(Image.open(fh).convert("RGB")))
+            ys.append(y)
+    return torch.stack(xs), torch.tensor(ys)
+
+
+def load_imagenet_val(n, source="resized"):
+    """Stratified val subset: n/1000 images per class, preprocessed as tools/cls_valid.py (Resize 256,
+    CenterCrop 224, ImageNet normalisation); uint8 cache on /data. source 'resized' = the
+    evanarlian/imagenet_1k_resized_256 parquet (re-encoded JPEG), 'orig' = the original val JPEGs."""
     per = n // 1000
-    cache = CACHE / f"imagenet_val_{per}pc.pt"
+    cache = CACHE / (f"imagenet_val_{per}pc.pt" if source == "resized" else f"imagenet_origval_{per}pc.pt")
     if cache.exists():
         d = torch.load(cache)
         return d["x"], d["y"]
+    if source == "orig":
+        x, y = load_imagenet_orig(per)
+        CACHE.mkdir(parents=True, exist_ok=True)
+        tmp = cache.with_suffix(f".tmp{os.getpid()}")
+        torch.save({"x": x, "y": y}, tmp)
+        os.replace(tmp, cache)
+        return x, y
     import pyarrow.parquet as pq
     from PIL import Image
     import torchvision.transforms as T
@@ -321,6 +361,7 @@ def main():
     ap.add_argument("--T", type=int, default=100)
     ap.add_argument("--budgets", default="1,2,4,8,12,16,26,40,60,100")
     ap.add_argument("--solvers", default="broyden,picard")
+    ap.add_argument("--data", default="resized", choices=["resized", "orig"])
     ap.add_argument("--out", required=True)
     ap.add_argument("--state", default="")
     ap.add_argument("--ckpt_every", type=int, default=10)
@@ -339,8 +380,16 @@ def main():
     state_path = Path(a.state or (CACHE / "state" / (out.stem + ".state.pt")))
     state_path.parent.mkdir(parents=True, exist_ok=True)
 
+    if out.exists():                                  # finished before (e.g. requeued at completion)
+        try:
+            prev = json.load(open(out))
+            if prev["meta"]["specs"] == specs and prev["meta"]["n"] == a.n:
+                print(f"{out} already complete ({len(prev['records'])} records); nothing to do")
+                return
+        except Exception:
+            pass
     t0 = time.time()
-    X, Y = load_imagenet_val(a.n)
+    X, Y = load_imagenet_val(a.n, a.data)
     N = len(Y)
     print(f"{a.model}: {N} images, specs {specs}, solvers {solvers}, T {a.T}, budgets {budgets} "
           f"({time.time()-t0:.0f}s data)", flush=True)
@@ -362,7 +411,9 @@ def main():
     ref_res = np.zeros(N, np.float32)
     if state_path.exists():
         st = torch.load(state_path, weights_only=False)
-        if st.get("args") == vars(a):
+        sa = dict(st.get("args", {}))
+        sa.setdefault("data", "resized")                 # state files written before --data existed
+        if sa == vars(a):
             acc, ref_res = st["acc"], st["ref_res"]
             print(f"  resumed at image {acc['next']}", flush=True)
 
@@ -445,7 +496,8 @@ def main():
             arrays[f"{tag}|{name}"] = A[name] if name in ("c1", "c5") else A[name].astype(np.float32)
         arrays[f"{tag}|trace"] = A["trace"].astype(np.float16)
     meta = {"model": f"mdeq_{a.model}", "seed": a.seed, "n": N, "T": a.T, "budgets": budgets, "specs": specs,
-            "solvers": solvers, "data": "ImageNet val (evanarlian/imagenet_1k_resized_256), first n/1000 per class",
+            "solvers": solvers, "data": ("ImageNet val (evanarlian/imagenet_1k_resized_256), first n/1000 per class" if a.data == "resized"
+                     else "ImageNet val original JPEGs (mlx-vision/imagenet-1k val.zip), first n/1000 per class by name"),
             "ref_res_median": float(np.median(ref_res)), "secs": time.time() - t0,
             "device": torch.cuda.get_device_name(0), "torch": torch.__version__}
     np.savez_compressed(str(out.with_suffix(".npz")), **arrays)

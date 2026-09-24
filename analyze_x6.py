@@ -90,6 +90,45 @@ def deq(rdir=None):
                 print(f"  {spec:10s} " + " ".join(f"{c:>12s}" for c in cells))
 
 
+def deqlm(rdir=None):
+    """DEQ-Transformer WT103 test perplexity / residual / cosine vs sigma and solver cap."""
+    rdir = Path(rdir or HERE / "results" / "transfer" / "babel")
+    recs = []
+    for f in sorted(glob.glob(str(rdir / "deqlm_*.json"))):
+        recs += json.load(open(f))["records"]
+    if not recs:
+        print("no deqlm records in", rdir)
+        return
+    for solver in ("anderson", "picard"):
+        S = [r for r in recs if r["solver"] == solver]
+        if not S:
+            continue
+        ks = sorted({r["budget"] for r in S})
+        by = defaultdict(lambda: defaultdict(list))
+        for r in S:
+            if r["spec"] == "fp32" and by["fp32"][r["budget"]]:
+                continue
+            by[r["spec"]][r["budget"]].append(r)
+        toks = sorted({r["tokens"] for r in S})
+        for metric, lab, fmt in (("ppl", "test perplexity", "{:.2f}"), ("res_median", "median rel. residual", "{:.1e}"),
+                                 ("cos_mean", "cosine to fp32 state (same cap)", "{:.3f}")):
+            print(f"\n=== DEQ-Transformer WT103 {solver}: {lab} by solver cap; tokens={toks} (noise: mean [min,max] over seeds)")
+            print(f"{'cell':10s} {'#':>2s} " + " ".join(f"{'k='+str(k):>24s}" for k in ks))
+            for spec in sorted(by, key=_key):
+                row = []
+                for k in ks:
+                    v = np.array([r[metric] for r in by[spec].get(k, [])], float)
+                    if not len(v):
+                        row.append("-")
+                        continue
+                    s = fmt.format(np.mean(v)) if metric != "ppl" else fmt.format(np.exp(np.mean(np.log(v))))
+                    if len(v) > 1:
+                        s += f" [{fmt.format(v.min())},{fmt.format(v.max())}]"
+                    row.append(s)
+                n = max(len(by[spec].get(k, [])) for k in ks)
+                print(f"{spec:10s} {n:2d} " + " ".join(f"{x:>24s}" for x in row))
+
+
 def diff(rdir=None):
     rdir = Path(rdir or HERE / "results" / "transfer" / "babel")
     recs = []
