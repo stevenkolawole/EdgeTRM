@@ -37,8 +37,13 @@ GEN10 = ["Samsung Galaxy S24", "Dragonwing RB3 Gen 2 Vision Kit", "Samsung Galax
          "Snapdragon X Elite CRD", "SA8295P ADP"]
 GRANVARS = ["w4a8_t", "w8a8_t", "w4a8_g32", "w4a8_g128", "w4a8_l64", "w4a8_l32", "w4a16_g32", "w4a16_l64"]
 # on-device correctness chains (task, device, precision); 8 supervision steps each (NSTEPS below)
-CHAINS = [("sudoku_mlp", "Samsung Galaxy S24", "w4a16"), ("sudoku_mlp", "Dragonwing RB3 Gen 2 Vision Kit", "w4a16"),
-          ("sudoku_mlp", "Samsung Galaxy S24", "fp32"), ("sudoku_mlp", "Samsung Galaxy S24", "w8a8"),
+# Order = priority. The S24 w8a8 Sudoku-MLP chain comes first: whether the device collapses like the host
+# QDQ simulation (0/100; localised to the RMSNorm variance/rsqrt tensors, which QNN fuses into one op on
+# device) decides what the paper may say about device INT8 correctness (REWRITE_NOTES 29).
+CHAINS = [("sudoku_mlp", "Samsung Galaxy S24", "w8a8"), ("sudoku_attn", "Samsung Galaxy S24", "w8a8"),
+          ("sudoku_mlp", "Samsung Galaxy S24", "w8a16"),
+          ("sudoku_mlp", "Samsung Galaxy S24", "w4a16"), ("sudoku_mlp", "Dragonwing RB3 Gen 2 Vision Kit", "w4a16"),
+          ("sudoku_mlp", "Samsung Galaxy S24", "fp32"),
           ("maze", "Samsung Galaxy S24", "w4a16"), ("maze", "Dragonwing RB3 Gen 2 Vision Kit", "w4a16"),
           ("maze", "Samsung Galaxy S24", "fp32"), ("maze", "Samsung Galaxy S24", "w8a8"),
           ("sudoku_attn", "Samsung Galaxy S24", "w4a16"), ("sudoku_attn", "Samsung Galaxy S24", "w8a8")]
@@ -251,9 +256,7 @@ def main():
                 c.poll(bs)
         free = a.depth - outstanding(bs, ours)
         submitted = 0
-        for c in chains:
-            if free <= 0:
-                break
+        for c in chains:          # chains are never held back by the profile depth limit
             if c.done or c.meta.get("current"):
                 continue
             if c.submit(recs[c.task], bs):

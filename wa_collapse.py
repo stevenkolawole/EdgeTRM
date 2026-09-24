@@ -48,8 +48,10 @@ import aihub_infer as I  # noqa: E402
 
 TASK = "sudoku_mlp"
 GROUPS = ["carry_in", "carry_out", "embed", "inject", "residual", "rms_sq", "rms_var", "rms_rsqrt", "rms_out",
-          "linear_out", "swiglu_prod", "swiglu_other", "head", "const"]
+          "rms_const", "linear_out", "swiglu_prod", "swiglu_other", "attn", "head", "const"]
 RMS = {"rms_sq", "rms_var", "rms_rsqrt", "rms_out"}
+import re  # noqa: E402
+_RMS_CONST = re.compile(r"^/inner/L_level/layers\.\d+(_\d+)?/Constant(_\d+)?_output_0$")
 PASS = {"Cast", "Transpose", "Reshape", "Identity", "Squeeze", "Unsqueeze", "Pad", "Concat", "Slice", "Flatten"}
 
 
@@ -125,7 +127,12 @@ def classify(g):
             act_in = [x for x in n.input if x and x not in inits and not x.startswith("/inner/Constant")
                       and "Constant" not in x]
             if op == "Constant":
-                r = "const"
+                r = "rms_const" if _RMS_CONST.match(t) else "const"
+            elif "self_attn" in nm and op not in ("MatMul", "Gemm") and op not in PASS:
+                r = "attn"
+            elif "self_attn" in nm and op in ("MatMul", "Gemm") and all(x not in inits for x in n.input) \
+                    and not any("Identity" in x or "onnx::MatMul" in x for x in n.input):
+                r = "attn"            # q.k^T and attn.v: activation x activation
             elif op in PASS or op == "QuantizeLinear" or op == "DequantizeLinear":
                 r = group(act_in[0]) if act_in else "const"
             elif op == "Gather":
@@ -376,6 +383,10 @@ VARIANTS = {
     "A2_rms_all": dict(eight=RMS | {"const"}),
     "A2a_rms_sq": dict(eight={"rms_sq"}),
     "A2b_rms_var_rsqrt": dict(eight={"rms_var", "rms_rsqrt", "const"}),
+    # same perturbation without the embed-scale scalar (rms_const = RMSNorm's own eps / 1.0 constants);
+    # the definition used for the cross-mixer comparison
+    "A2b2_rms_var_rsqrt": dict(eight={"rms_var", "rms_rsqrt", "rms_const"}),
+    "B2b2_rms_var_rsqrt16": dict(eight={"rms_var", "rms_rsqrt", "rms_const"}, sixteen_default=False),
     "A2c_rms_out": dict(eight={"rms_out"}),
     "A3_residual_inject": dict(eight={"residual", "inject"}),
     "A4_linear_in_edge": dict(eight=set(), edge_linear=True),
