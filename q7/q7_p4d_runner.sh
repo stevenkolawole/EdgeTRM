@@ -65,10 +65,10 @@ while true; do
       >> "$HOME/q7/logs/$run.log" 2>&1 < /dev/null 9>&- &
     echo $! > "$PIDS/$run.pid"
     log "launched $run seed=$seed card=$card pid=$! (card had $np procs) overrides: $over"
-    sleep 90   # let it reach the GPU before counting the card again
+    sleep 90 9>&-   # let it reach the GPU before counting the card again
   done < <(grep -v '^#' "$MANIFEST")
   if [ "$pending" -eq 0 ]; then log "all manifest runs DONE; runner exits"; exit 0; fi
   free=$(df --output=avail -BG / | tail -1 | tr -dc 0-9)
   [ "${free:-99}" -lt 3 ] && log "WARNING: only ${free} GB free on /"
-  sleep 300
+  sleep 300 9>&-
 done
