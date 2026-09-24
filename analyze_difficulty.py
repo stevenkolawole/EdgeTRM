@@ -464,7 +464,7 @@ def fig():
             if j == len(bins) - 1:
                 ax.legend(fontsize=5.5, frameon=False, loc="lower right")
     fig_.tight_layout()
-    out = Path(__file__).resolve().parent / "plots" / f"x1_difficulty_{src}" + ("" if AXIS == "rating" else "_residual")
+    out = Path(__file__).resolve().parent / "plots" / (f"x1_difficulty_{src}" + ("" if AXIS == "rating" else "_residual"))
     fig_.savefig(str(out) + ".png", dpi=200)
     fig_.savefig(str(out) + ".pdf")
     print("wrote", out)
