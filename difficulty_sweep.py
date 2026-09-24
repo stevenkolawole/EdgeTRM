@@ -46,7 +46,7 @@ sys.path.insert(0, str(HERE))
 from breadth_sweep import (DEV, HRM_TASKS, TRM_TASKS, _ActNoise, _ActQuant, _linears, build,  # noqa: E402
                            parse_quant, quantize_weights_)
 
-WRONG_AT = (1, 4, 16, 32, 64)
+WRONG_AT = (1, 4, 16, 32, 64, 128, 256, 512)
 META_CANDIDATES = [HERE / "results" / "breadth" / "sudoku_extreme_test_meta.json",
                    HERE / "sudoku_extreme_test_meta.json"]
 
@@ -175,6 +175,8 @@ def main():
     ap.add_argument("--H", default="", help="H_cycles override; empty = checkpoint default")
     ap.add_argument("--set", default="strat", choices=["strat", "first"])
     ap.add_argument("--n", type=int, default=0, help="first-n puzzles of the chosen set (0 = all); smoke tests")
+    ap.add_argument("--per_bin", type=int, default=0, help="strat set: keep the first N puzzles of each rating bin "
+                                                          "(the deep K=512 sweep uses 300)")
     ap.add_argument("--batch", type=int, default=0)
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
@@ -186,6 +188,14 @@ def main():
     else:
         rows = list(range(len(meta["first1000"]["rating"])))
         bins = None
+    if a.per_bin and a.set == "strat":
+        seen = {}
+        keep = []
+        for r, b in zip(rows, bins):
+            if seen.get(b, 0) < a.per_bin:
+                keep.append(r)
+                seen[b] = seen.get(b, 0) + 1
+        rows = keep
     if a.n:
         rows = rows[:a.n] if a.set == "first" else [r for i, r in enumerate(rows) if i % (len(rows) // a.n or 1) == 0][:a.n]
     inp, lab, rat = load_rows(rows)
