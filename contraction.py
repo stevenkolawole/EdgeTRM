@@ -563,8 +563,13 @@ def main():
         ap = argparse.ArgumentParser()
         ap.add_argument("--analyze", nargs="*")
         ap.add_argument("--summary", default="")
+        ap.add_argument("--figdata", default="", help="write the figure-ready per-task curves (task_curves) here")
         a = ap.parse_args()
-        return analyze(a.analyze, a.summary)
+        analyze(a.analyze, a.summary)
+        if a.figdata:
+            json.dump(task_curves(a.analyze), open(a.figdata, "w"), indent=1)
+            print("wrote", a.figdata)
+        return
     torch = _torch()
     import breadth_sweep as bs
     ap = argparse.ArgumentParser()
@@ -754,6 +759,24 @@ def cell_summary(r, T, ref=None, conv_tol=0.01):
             if k.startswith("sigma"):
                 sg = np.asarray(P[k], float)
                 s[f"frac_{k}_lt1"] = float(np.mean(sg < 1))
+    def qsplit(key, a=None):
+        a = np.asarray(P[key], float) if a is None else a
+        s[f"{key}_q"] = _q(a)
+        s[f"{key}_q_correct"] = _q(a[corr]) if corr.any() else None
+        s[f"{key}_q_wrong"] = _q(a[~corr]) if (~corr).any() else None
+    for key in ("gamma_nat", "settle01", "settle05", "res2T", "pi_dist"):
+        if key in P:
+            qsplit(key)
+    if "settle01" in P:
+        s["frac_never_settle01"] = float(np.mean(np.asarray(P["settle01"]) > T))
+        s["frac_never_settle05"] = float(np.mean(np.asarray(P["settle05"]) > T))
+    if "res2T" in P:                                  # fixed point / 2-cycle / other, per input (tol 0.01)
+        r1, r2 = resT, np.asarray(P["res2T"], float)
+        s["frac_fixed"] = float(np.mean(r1 < conv_tol))
+        s["frac_2cycle"] = float(np.mean((r1 >= conv_tol) & (r2 < conv_tol)))
+    for key in ("pi_agree", "pi_correct", "correct1"):
+        if key in P:
+            s[f"{key}_mean"] = float(np.mean(P[key]))
     if "disp" in P:
         disp = np.asarray(P["disp"], float)
         s.update({"phi_H": float(np.mean(P["phi_H"])), "phi_H_q": _q(P["phi_H"]), "disp_q": _q(disp),
@@ -765,6 +788,20 @@ def cell_summary(r, T, ref=None, conv_tol=0.01):
             ks = r.get("steps_kept") or list(range(T + 1))
             dt = np.asarray(P["disp_t"], float)       # column j <-> t = ks[j] + 1
             s["disp_t_med"] = {int(ks[j] + 1): float(np.median(dt[:, j])) for j in range(dt.shape[1])}
+        if "Dlin" in P:
+            Dlin = np.asarray(P["Dlin"], float)
+            lc = np.asarray(P["lin_conv"], float)
+            ok = lc < 1e-2                             # Neumann series converged (rho_fp32 < 1 along delta)
+            s["frac_lin_converged"] = float(ok.mean())
+            s["Dlin_q"] = _q(Dlin)
+            s["R_disp_over_Dlin_q"] = _q(disp[ok] / np.clip(Dlin[ok], 1e-12, None)) if ok.sum() >= 3 else None
+            s["spearman_disp_Dlin"] = spearman(disp[ok], Dlin[ok]) if ok.sum() >= 5 else None
+        if "xs_ref_correct" in P:
+            s["xs_ref_correct_mean"] = float(np.mean(P["xs_ref_correct"]))
+            s["xs_own_correct_mean"] = float(np.mean(P["xs_own_correct"]))
+            s["xs_ref_agree_mean"] = float(np.mean(P["xs_ref_agree"]))
+            s["xs_ref_dist_q"] = _q(P["xs_ref_dist"])
+            s["xs_own_dist_q"] = _q(P["xs_own_dist"])
         if ref is not None:
             RP = ref["per_input"]
             rlam, rqT, rres, _ = _scalars(RP, T)
@@ -786,6 +823,26 @@ def cell_summary(r, T, ref=None, conv_tol=0.01):
             s["disp_q_conv"] = _q(disp[conv]) if conv.any() else None
             s["disp_q_ref_correct"] = _q(disp[rcorr]) if rcorr.any() else None
             s["acc_on_ref_correct"] = float(corr[rcorr].mean()) if rcorr.any() else None
+            if rcorr.any():                             # the puzzles whose answer can be lost: fp32 solves them
+                if rk in P:
+                    rho_ = np.asarray(P[rk], float)[rcorr]
+                    s["rhoT_q_refcorrect"] = _q(rho_)
+                    s["frac_rhoT_lt1_refcorrect"] = float(np.mean(rho_ < 1))
+                s["Lambda_q_refcorrect"] = _q(lam[rcorr])
+                s["frac_Lambda_lt1_refcorrect"] = float(np.mean(lam[rcorr] < 1))
+                if "gamma_nat" in P:
+                    s["gamma_nat_q_refcorrect"] = _q(np.asarray(P["gamma_nat"], float)[rcorr])
+            if "xs_ref_correct" in P and rcorr.any():
+                xr = np.asarray(P["xs_ref_correct"], bool)
+                # basin switch: fp32 solves the puzzle, but the fp32 map started from the perturbed end state does not
+                s["frac_basin_switch"] = float(np.mean(~xr[rcorr]))
+                s["frac_wrong_but_fp32_recovers"] = float(np.mean(xr[rcorr] & ~corr[rcorr]))
+            for key in ("flip_lin", "flip_meas"):
+                if key in P and rcorr.any():
+                    fl = np.asarray(P[key], float)[rcorr]
+                    s[f"{key}_q_refcorrect"] = _q(fl)
+                    s[f"frac_{key}_lt1_refcorrect"] = float(np.mean(fl < 1))
+                    s[f"auroc_{key}_wrong_refcorrect"] = auroc(-fl, ~corr[rcorr])
     return s
 
 
@@ -854,6 +911,138 @@ def analyze(files, summary_path):
     if summary_path:
         json.dump(allsum, open(summary_path, "w"), indent=1)
         print("wrote", summary_path)
+
+
+METRICS = {   # per-cell scalar (from cell_summary) -> name in the figure data
+    "rho_own": lambda c: (c.get("rhoT_q") or [None] * 3)[1],
+    "rho_own_q1": lambda c: (c.get("rhoT_q") or [None] * 3)[0],
+    "rho_own_q3": lambda c: (c.get("rhoT_q") or [None] * 3)[2],
+    "frac_rho_lt1": lambda c: c.get("frac_rhoT_lt1"),
+    # over the puzzles fp32 solves (for fp32 itself: its correct puzzles)
+    "rho_own_sol": lambda c: (c.get("rhoT_q_refcorrect") or c.get("rhoT_q_correct") or [None] * 3)[1],
+    "rho_own_sol_q1": lambda c: (c.get("rhoT_q_refcorrect") or c.get("rhoT_q_correct") or [None] * 3)[0],
+    "rho_own_sol_q3": lambda c: (c.get("rhoT_q_refcorrect") or c.get("rhoT_q_correct") or [None] * 3)[2],
+    "frac_rho_lt1_sol": lambda c: c.get("frac_rhoT_lt1_refcorrect"),
+    "Lambda_sol": lambda c: (c.get("Lambda_q_refcorrect") or c.get("Lambda_q_correct") or [None] * 3)[1],
+    "gamma_nat_sol": lambda c: (c.get("gamma_nat_q_refcorrect") or c.get("gamma_nat_q_correct") or [None] * 3)[1],
+    "Lambda": lambda c: (c.get("Lambda_late_q") or [None] * 3)[1],
+    "frac_Lambda_lt1": lambda c: c.get("frac_Lambda_lt1"),
+    "gamma_nat": lambda c: (c.get("gamma_nat_q") or [None] * 3)[1],
+    "resT": lambda c: (c.get("resT_q") or [None] * 3)[1],
+    "settle05": lambda c: (c.get("settle05_q") or [None] * 3)[1],
+    "frac_never_settle05": lambda c: c.get("frac_never_settle05"),
+    "frac_fixed": lambda c: c.get("frac_fixed"),
+    "phi_H": lambda c: c.get("phi_H"),
+    "disp": lambda c: (c.get("disp_q") or [None] * 3)[1],
+    "deltaT": lambda c: (c.get("deltaT_q") or [None] * 3)[1],
+    "Dlin": lambda c: (c.get("Dlin_q") or [None] * 3)[1],
+    "frac_lin_converged": lambda c: c.get("frac_lin_converged"),
+    "R": lambda c: (c.get("R_disp_over_Dlin_q") or [None] * 3)[1],
+    "frac_basin_switch": lambda c: c.get("frac_basin_switch"),
+    "xs_ref_agree": lambda c: c.get("xs_ref_agree_mean"),
+    "pi_agree": lambda c: c.get("pi_agree_mean"),
+    "agree": lambda c: c.get("agree_mean"),
+    "sigma_max": lambda c: next((v[1] for k, v in c.items() if k.startswith("sigma") and k.endswith("_q") and v), None),
+}
+
+
+def _sigma_half(sig, acc, a0):
+    """First sigma where the median accuracy falls below a0/2, log-linear interpolation."""
+    prev = None
+    for x, y in zip(sig, acc):
+        if y < a0 / 2:
+            if prev is None:
+                return {"value": None, "bound": f"< {x}"}
+            x0, y0 = prev
+            f = (y0 - a0 / 2) / max(y0 - y, 1e-12)
+            return {"value": float(np.exp(np.log(x0) + f * (np.log(x) - np.log(x0)))), "bound": None}
+        prev = (x, y)
+    return {"value": None, "bound": f"> {sig[-1]}" if sig else None}
+
+
+def task_curves(files):
+    """Figure data per task: accuracy and mechanism metrics against weight-noise sigma (all draws), the
+    quantizer / weight-group cells, measured sigma_1/2 and the two label-free predictions of it."""
+    from collections import defaultdict
+    groups = defaultdict(list)
+    for f in sorted(set(f for p in files for f in glob.glob(p))):
+        j = json.load(open(f))
+        groups[(j["task"], j.get("period", 1), j["T"])].append((f, j))
+    out = {}
+    for (task, period, T), blobs in groups.items():
+        key = task + (f"_p{period}" if period != 1 else "") + (f"_T{T}" if task.startswith("dt_") else "")
+        fp, noise, others = None, defaultdict(list), []
+        for f, j in blobs:
+            ref = next((r for r in j["records"] if r["spec"] == "fp32"), None)
+            for r in j["records"]:
+                if r["spec"] == "fp32":
+                    if fp is None:
+                        fp = cell_summary(r, T)
+                    continue
+                c = cell_summary(r, T, ref)
+                q = r["quant"]
+                if q.get("gran") == "noise" and not q.get("group"):
+                    noise[float(q["sigma"])].append(c)
+                else:
+                    others.append(c)
+        if fp is None:
+            continue
+        sig = sorted(noise)
+        a0 = fp["acc"]
+        acc_med = [float(np.median([c["acc"] for c in noise[x]])) for x in sig]
+        d = {"task": task, "period": period, "T": T, "n": fp["n"], "fp32": {k: fn(fp) for k, fn in METRICS.items()},
+             "fp32_acc": a0, "sigma": sig, "acc_draws": [[c["acc"] for c in noise[x]] for x in sig], "acc_med": acc_med,
+             "metrics": {k: [[fn(c) for c in noise[x]] for x in sig] for k, fn in METRICS.items()},
+             "others": [{"spec": c["spec"], "draw": c["draw"], "acc": c["acc"], **{k: fn(c) for k, fn in METRICS.items()}}
+                        for c in others]}
+        d["fp32"].update({"rho_q_correct": fp.get("rhoT_q_correct"), "rho_q_wrong": fp.get("rhoT_q_wrong"),
+                          "Lambda_q_correct": fp.get("Lambda_q_correct"), "Lambda_q_wrong": fp.get("Lambda_q_wrong"),
+                          "resT_q_correct": fp.get("resT_q_correct"), "resT_q_wrong": fp.get("resT_q_wrong"),
+                          "gamma_q_correct": fp.get("gamma_nat_q_correct"), "gamma_q_wrong": fp.get("gamma_nat_q_wrong"),
+                          "auroc_rho_wrong": fp.get("auroc_rhoT_wrong"), "auroc_Lambda_wrong": fp.get("auroc_Lambda_wrong"),
+                          "auroc_resT_wrong": fp.get("auroc_resT_wrong"), "correct1": fp.get("correct1_mean"),
+                          "pi_agree": fp.get("pi_agree_mean"), "frac_2cycle": fp.get("frac_2cycle")})
+        sh = _sigma_half(sig, acc_med, a0) if sig else {"value": None, "bound": None}
+        d["sigma_half"] = sh
+        # sigma*_rho: linear fit of median rho_own on sigma <= sigma_1/2 / 2 (with fp32 at sigma 0), extrapolated to 1;
+        # over all inputs ("all") and over the puzzles fp32 solves ("sol")
+        lim = (sh["value"] or (float(sh["bound"][2:]) if sh.get("bound") and sh["bound"].startswith(">") else None))
+        d["sigma_star_rho"] = {}
+        for tag, mk_ in (("all", "rho_own"), ("sol", "rho_own_sol")):
+            rho0 = d["fp32"][mk_]
+            pred = {"value": None, "note": None, "rho_fp32": rho0}
+            if rho0 is None:
+                pred["note"] = "no rho"
+            elif rho0 >= 1:
+                pred["note"] = f"fp32 median rho_T {rho0:.2f} >= 1: bifurcation route not applicable"
+            else:
+                xs, ys = [0.0], [rho0]
+                for i, x in enumerate(sig):
+                    vals = [m for m in d["metrics"][mk_][i] if m is not None]
+                    if lim is not None and x <= lim / 2 and vals:
+                        xs.append(x)
+                        ys.append(float(np.median(vals)))
+                if len(xs) >= 2:
+                    b, a_ = np.polyfit(xs, ys, 1)
+                    pred.update({"value": float((1 - a_) / b) if b > 0 else None, "fit": [float(a_), float(b)],
+                                 "points": len(xs),
+                                 "note": None if b > 0 else "rho_own does not rise with sigma below sigma_1/2 / 2"})
+                else:
+                    pred["note"] = "no sigma below sigma_1/2 / 2"
+            d["sigma_star_rho"][tag] = pred
+        # sigma*_mu: decoder-margin route from the smallest sigma: per fp32-solved puzzle sigma_flip = sigma0 * min-cell
+        # margin ratio; the median over puzzles is where half of them flip
+        d["sigma_star_mu"] = {}
+        if sig:
+            s0 = sig[0]
+            for kind in ("lin", "meas"):
+                vals = [c.get(f"flip_{kind}_q_refcorrect") for c in noise[s0]]
+                vals = [v[1] for v in vals if v]
+                d["sigma_star_mu"][kind] = {"value": float(s0 * np.median(vals)) if vals else None, "sigma0": s0,
+                                            "per_draw": [float(s0 * v) for v in vals]}
+            d["sigma_star_mu"]["lin_converged_frac_at_sigma0"] = [c.get("frac_lin_converged") for c in noise[s0]]
+        out[key] = d
+    return out
 
 
 if __name__ == "__main__":
