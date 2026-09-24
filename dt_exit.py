@@ -1,0 +1,134 @@
+#!/usr/bin/env python3
+"""M5 part 5: early exit for deep-thinking maze nets (no halting head).
+
+The recall DT net (dt_net_recall_2d, width 128, checkpoint training-rusty-Tayla) is iterated T times;
+after every iteration we record, per maze:
+  correct   exact solution (every cell of the masked argmax equals the target), as deep-thinking scores it
+  res       ||h_t - h_{t-1}|| / ||h_t||  (convergence residual of the recurrent state)
+  chg       number of cells whose masked argmax changed since the previous iteration
+  conf      min over open cells of the max softmax probability of the 2-way head
+from which analyze_m5.py scores label-free exit rules (residual below a threshold tuned on fp32,
+answer unchanged for p iterations, confidence above a tuned threshold) against a fixed budget.
+
+Data: first 1000 test mazes per size (copied from p4d ~/breadth/dt_data, uint8; the first 256 equal
+the X2 subsets in ~/edgetrm_ckpt/dt_mazes). Quantizers as contraction.dt_quantize_ (every Conv).
+
+    python dt_exit.py --size 33 --T 500 --specs fp32,w4c,w4t,noise0.2@s0 --outdir ~/breadth_results/m5/dt_maze33
+"""
+import argparse
+import json
+import os
+import socket
+import sys
+import time
+from pathlib import Path
+
+import numpy as np
+import torch
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from contraction import build_dt, dt_quantize_  # noqa: E402
+from breadth_sweep import parse_quant  # noqa: E402
+
+DEV = "cuda" if torch.cuda.is_available() else "cpu"
+DATA = Path(os.environ.get("M5_DT_DATA", Path.home() / "edgetrm_ckpt" / "dt_mazes" / "full1000"))
+
+
+class _ActQuant:
+    """static per-tensor symmetric activation fake-quant at a conv input (dt_breadth convention)."""
+
+    def __init__(self, bits):
+        self.qmax, self.absmax, self.scale = 2 ** (bits - 1) - 1, 0.0, None
+
+    def __call__(self, mod, args):
+        x = args[0]
+        if self.scale is None:
+            self.absmax = max(self.absmax, float(x.detach().abs().max()))
+            return None
+        return (torch.round(x / self.scale).clamp(-self.qmax, self.qmax) * self.scale,) + tuple(args[1:])
+
+    def freeze(self):
+        self.scale = max(self.absmax, 1e-8) / self.qmax
+
+
+@torch.no_grad()
+def run(net, x, y, T, batch):
+    n = x.shape[0]
+    out = {k: [] for k in ("correct", "res", "chg", "conf")}
+    for s in range(0, n, batch):
+        xb = torch.from_numpy(x[s:s + batch]).float().to(DEV)
+        yb = torch.from_numpy(y[s:s + batch]).long().to(DEV).view(xb.shape[0], -1)
+        B = xb.shape[0]
+        mask = xb.max(1)[0].view(B, -1)                      # open cells (walls = 0)
+        h = net.projection(xb)
+        prevP, prevH = None, h
+        rec = {"correct": torch.zeros(B, T, dtype=torch.bool, device=DEV), "res": torch.zeros(B, T, dtype=torch.float16, device=DEV),
+               "chg": torch.zeros(B, T, dtype=torch.int16, device=DEV), "conf": torch.zeros(B, T, dtype=torch.float16, device=DEV)}
+        for t in range(T):
+            h = net.recur_block(torch.cat([h, xb], 1))
+            o = net.head(h)
+            pred = o.argmax(1).view(B, -1) * mask.long()
+            rec["correct"][:, t] = (pred == yb).all(1)
+            rec["res"][:, t] = (h - prevH).flatten(1).norm(dim=1) / h.flatten(1).norm(dim=1).clamp_min(1e-8)
+            rec["chg"][:, t] = ((pred != prevP).sum(1) if prevP is not None else mask.sum(1)).clamp_max(32767).to(torch.int16)
+            p = torch.softmax(o.float(), 1).amax(1).view(B, -1)
+            rec["conf"][:, t] = torch.where(mask > 0, p, torch.full_like(p, 2.0)).amin(1)
+            prevP, prevH = pred, h
+        for k in out:
+            out[k].append(rec[k].cpu().numpy())
+    return {k: np.concatenate(v) for k, v in out.items()}
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--size", type=int, required=True)
+    ap.add_argument("--T", type=int, default=500)
+    ap.add_argument("--specs", default="fp32")
+    ap.add_argument("--n", type=int, default=1000)
+    ap.add_argument("--batch", type=int, default=50)
+    ap.add_argument("--outdir", required=True)
+    ap.add_argument("--allow_cpu", action="store_true")
+    a = ap.parse_args()
+    assert a.allow_cpu or torch.cuda.is_available(), "NO CUDA"
+    x = np.load(DATA / f"maze{a.size}_inputs.npy")[:a.n]
+    y = np.load(DATA / f"maze{a.size}_solutions.npy")[:a.n]
+    od = Path(a.outdir)
+    od.mkdir(parents=True, exist_ok=True)
+    for spec in [s for s in a.specs.split(",") if s]:
+        path = od / f"{spec}.npz"
+        if path.exists():
+            print(f"  {spec}: exists, skipped", flush=True)
+            continue
+        base, seed = (spec.split("@s")[0], int(spec.split("@s")[1])) if "@s" in spec else (spec, 0)
+        q = parse_quant(base)
+        t0 = time.time()
+        net = build_dt().to(DEV)
+        torch.manual_seed(seed)
+        if q["gran"] is not None:
+            dt_quantize_(net, q["bits"], q["gran"], q.get("sigma"))
+        handles, obs = [], []
+        if q["act"] is not None:
+            for mod in net.modules():
+                if isinstance(mod, torch.nn.Conv2d):
+                    qa = _ActQuant(q["act"])
+                    obs.append(qa)
+                    handles.append(mod.register_forward_pre_hook(qa))
+            run(net, x[:a.batch], y[:a.batch], a.T, a.batch)
+            for qa in obs:
+                qa.freeze()
+        r = run(net, x, y, a.T, a.batch)
+        for hh in handles:
+            hh.remove()
+        info = {"task": f"dt_maze{a.size}", "spec": spec, "quant": q, "seed": seed, "T": a.T, "n": int(len(x)),
+                "secs": time.time() - t0, "host": socket.gethostname(),
+                "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu", "torch": torch.__version__}
+        tmp = str(path) + ".tmp.npz"
+        np.savez_compressed(tmp, info=json.dumps(info), **r)
+        os.replace(tmp, path)
+        c = r["correct"]
+        print(f"  size {a.size} {spec:12s} " + " ".join(f"it{t}:{100 * c[:, t - 1].mean():.1f}" for t in (10, 30, 100, 200, 300, 500) if t <= a.T)
+              + f" ({time.time() - t0:.0f}s)", flush=True)
+
+
+if __name__ == "__main__":
+    main()
