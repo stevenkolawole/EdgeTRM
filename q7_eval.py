@@ -195,6 +195,10 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
         cfg = _run_cfg(ckpt)
         if ref_ckpt is None and cfg.get("load_checkpoint"):
             ref_ckpt = cfg["load_checkpoint"]
+        if ref_ckpt is None and cfg.get("q7_fork_from") and (cfg.get("q7_start_step") or -1) >= 0:
+            fork_ref = Path(cfg["q7_fork_from"]).parent / f"step_{cfg['q7_start_step']}"
+            if fork_ref.exists():          # late-phase arms: the base run's checkpoint at the fork point
+                ref_ckpt = str(fork_ref)
         if quant_noise is None:
             quant_noise = cfg.get("q7_reg") in ("qat", "lsq") or (cfg.get("q7_act_bits") or 0) > 0
         ck_path, lsq_steps, act_scales = _lsq_split(ckpt)
