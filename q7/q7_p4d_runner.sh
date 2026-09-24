@@ -8,7 +8,7 @@
 # Every launch and exit is logged to ~/q7/logs/runner.log; per-run logs are ~/q7/logs/<run>.log.
 # Stops when every manifest run is DONE.
 set -f   # no globbing: overrides carry [..] lists
-exec 9>"$HOME/q7/runner.lock"
+exec 9>"$HOME/q7/runner2.lock"   # children close fd 9 (9>&-) so they never hold the lock
 flock -n 9 || { echo "$(date -u) runner already active"; exit 0; }
 source "$HOME/q7/env_p4d.sh"
 MANIFEST=$HOME/q7/p4d_manifest.tsv
@@ -46,7 +46,11 @@ while true; do
   pending=0
   while IFS=$'\t' read -r card run seed req over; do
     [ -z "${run:-}" ] && continue
-    [ -f "$Q7_ROOT/ckpt/$run/DONE" ] && continue
+    if [ -f "$Q7_ROOT/ckpt/$run/DONE" ]; then
+      # disk: a finished run no longer needs resume.pt (fork points resume_iter*.pt are kept)
+      if [ -f "$Q7_ROOT/ckpt/$run/resume.pt" ] && ! alive "$run"; then rm -f "$Q7_ROOT/ckpt/$run/resume.pt"; log "cleaned resume.pt of $run"; fi
+      continue
+    fi
     pending=$((pending + 1))
     alive "$run" && continue
     case "$card" in 3|4|5) ;; *) log "refusing $run on card $card (X5 owns 3-5)"; continue ;; esac
@@ -55,11 +59,13 @@ while true; do
     if [ "$np" -ge 2 ]; then continue; fi
     # shellcheck disable=SC2086
     CUDA_VISIBLE_DEVICES=$card setsid nohup bash "$HOME/q7/q7_train.sh" "$run" "$seed" $over \
-      >> "$HOME/q7/logs/$run.log" 2>&1 < /dev/null &
+      >> "$HOME/q7/logs/$run.log" 2>&1 < /dev/null 9>&- &
     echo $! > "$PIDS/$run.pid"
     log "launched $run seed=$seed card=$card pid=$! (card had $np procs) overrides: $over"
     sleep 90   # let it reach the GPU before counting the card again
   done < <(grep -v '^#' "$MANIFEST")
   if [ "$pending" -eq 0 ]; then log "all manifest runs DONE; runner exits"; exit 0; fi
+  free=$(df --output=avail -BG / | tail -1 | tr -dc 0-9)
+  [ "${free:-99}" -lt 3 ] && log "WARNING: only ${free} GB free on /"
   sleep 300
 done
