@@ -64,6 +64,8 @@ def main():
             if sh:
                 ax.axvline(sh, color=fs.GREY, lw=0.6, ls="--")
             ax.set_xscale("log")
+            from matplotlib.ticker import NullFormatter
+            ax.xaxis.set_minor_formatter(NullFormatter())
             if i == 0:
                 ax.set_title(title, fontsize=7)
             if j == 0:
@@ -73,7 +75,7 @@ def main():
             ax.tick_params(labelsize=6)
     fig.subplots_adjust(wspace=0.45, hspace=0.45)
     a.out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(a.out)
+    fig.savefig(a.out, bbox_inches="tight", pad_inches=0.03)
     print("wrote", a.out)
 
 

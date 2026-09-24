@@ -107,7 +107,7 @@ def main():
                                                                    "group": "one weight group"}[kind])
     axC.set_xscale("log")
     axC.set_ylim(-3, 103)
-    axC.set_xlabel("one-step map perturbation\n" + r"$\delta_T=\|\tilde F(s_T)-F(s_T)\|/\|s_T\|$", labelpad=1)
+    axC.set_xlabel(r"one-step $\delta_T$" + "\n", labelpad=1)
     axC.set_xticks([0.01, 0.1, 1])
     axC.set_xticklabels(["0.01", "0.1", "1"])
     axC.set_ylabel("fp32-solved puzzles\nstill solved (%)")
@@ -115,7 +115,7 @@ def main():
     for ax, l in zip((axA, axB, axC), "abc"):
         fs.panel_label(ax, l)
     a.out.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(a.out)
+    fig.savefig(a.out, bbox_inches="tight", pad_inches=0.03)
     print("wrote", a.out)
 
 
