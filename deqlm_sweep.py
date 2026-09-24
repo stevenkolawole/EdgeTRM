@@ -259,6 +259,11 @@ def main():
     print(f"  {len(models)} models; weight rel err " +
           ", ".join(f"{s}:{qinfo[s].get('weight_rel_err_mean', 0):.3f}" for s in specs), flush=True)
     arrays = {}
+    if records and out.with_suffix(".npz").exists():                  # resume after preemption
+        try:
+            arrays = dict(np.load(str(out.with_suffix(".npz"))))
+        except Exception:
+            arrays = {}
     kmax = budgets[-1]
     for sv in a.solvers.split(","):
         for k in budgets:

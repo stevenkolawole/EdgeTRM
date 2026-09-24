@@ -123,5 +123,58 @@ def diff(rdir=None):
             print(f"{spec:10s} " + " ".join(f"{x:>20s}" for x in row))
 
 
+def deqfig(rdir=None, model="mdeq_small"):
+    """Top-1 and residual vs sigma (log x) per solver budget, seeds as ranges; quantizers placed at their
+    mean relative weight error (the noise dial's sigma equals that error by construction)."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    rdir = Path(rdir or HERE / "results" / "transfer" / "babel")
+    recs = []
+    for f in sorted(glob.glob(str(rdir / "deq_*.json"))):
+        recs += [r for r in json.load(open(f))["records"] if r["model"] == model]
+    if not recs:
+        print("no records")
+        return
+    fig, axs = plt.subplots(1, 3, figsize=(13, 3.6))
+    cols = {4: "#b0c4de", 8: "#6495ed", 26: "#1f4e9c", 100: "#0b1f44"}
+    fp = [r for r in recs if r["spec"] == "fp32" and r["solver"] == "broyden"][0]
+    budgets = fp["budgets"]
+    for ax, solver, metric in ((axs[0], "broyden", "top1"), (axs[1], "picard", "top1"), (axs[2], "broyden", "res_median")):
+        R = [r for r in recs if r["solver"] == solver]
+        sig = sorted({float(r["spec"][5:]) for r in R if r["spec"].startswith("noise")})
+        for k, c in cols.items():
+            if k not in budgets:
+                continue
+            bi = budgets.index(k)
+            m, lo, hi = [], [], []
+            for s in sig:
+                v = [r["by_budget"][bi][metric] for r in R if r["spec"] == f"noise{s:g}" or r["spec"] == f"noise{s}"]
+                v = np.array(v) * (100 if metric == "top1" else 1)
+                m.append(v.mean()); lo.append(v.min()); hi.append(v.max())
+            ax.plot(sig, m, "-o", color=c, ms=3, label=f"k={k}")
+            ax.fill_between(sig, lo, hi, color=c, alpha=0.2)
+            f0 = [r for r in R if r["spec"] == "fp32"][0]["by_budget"][bi][metric] * (100 if metric == "top1" else 1)
+            ax.axhline(f0, color=c, ls=":", lw=0.8)
+        for r in R:
+            if r["spec"] in QORDER[1:]:
+                bi = budgets.index(26)
+                y = r["by_budget"][bi][metric] * (100 if metric == "top1" else 1)
+                ax.plot(r["quant"]["weight_rel_err_mean"], y, "k^", ms=5)
+                ax.annotate(r["spec"], (r["quant"]["weight_rel_err_mean"], y), fontsize=6, xytext=(2, 2),
+                            textcoords="offset points")
+        ax.set_xscale("log")
+        if metric == "res_median":
+            ax.set_yscale("log")
+        ax.set_xlabel("weight noise sigma (x tensor std) / quantizer rel. weight error")
+        ax.set_title(f"{model} {solver}: {'top-1 %' if metric == 'top1' else 'median rel. residual'}", fontsize=9)
+    axs[0].legend(fontsize=7)
+    out = HERE / "figures" / f"x6_{model}.png"
+    out.parent.mkdir(exist_ok=True)
+    fig.tight_layout()
+    fig.savefig(out, dpi=150)
+    print("wrote", out)
+
+
 if __name__ == "__main__":
     globals()[sys.argv[1]](*(sys.argv[2:]))
