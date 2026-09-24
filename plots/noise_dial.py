@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """The noise dial with three draws: exact accuracy (top) and fidelity phi_H (bottom) against
 weight-noise sigma at n=16 for five TRM/HRM models; every cell is three random draws (points),
-the line joins the medians. Data: results/breadth/<task>_noise.json (seed 0) and
-results/breadth/babel/noise_<task>_seed{1,2}.json.
+the line joins the medians. All draws on p4d at the default H (TRM 3, HRM 2); see draws().
 
   python plots/noise_dial.py --out figures/noise_dial.pdf
 """
@@ -25,23 +24,26 @@ TASKS = [("sudoku_mlp", "TRM Sudoku\nMLP mixer"), ("sudoku_attn", "TRM Sudoku\na
 SIG = [0.02, 0.05, 0.1, 0.15, 0.2, 0.3, 0.5, 0.7, 1.0]
 
 
+DEFAULT_H = {"sudoku_mlp": 3, "sudoku_attn": 3, "maze_attn": 3, "hrm_sudoku": 2, "hrm_maze": 2}
+
+
 def draws(task, nsup=16):
-    files = [B / f"{task}_noise.json"] + [B / "babel" / f"noise_{task}_seed{s}.json" for s in (1, 2)]
+    """Three weight-noise draws per sigma, all on p4d (A100) at the model's default H, n=1000.
+    Draw 0 is the original p4d sweep, except HRM Sudoku, whose original sweep ran at H=3 and was rerun
+    at H=2 (seed 0); draws 1-2 are the Sep 24 p4d rerun (results/breadth/p4d/noise_rerun). The earlier
+    Babel draws (L40S, HRM Sudoku at H=2 against an H=3 draw 0) are no longer used."""
+    H = DEFAULT_H[task]
+    R = B / "p4d" / "noise_rerun"
+    first = R / f"noise_{task}_H{H}_seed0.json" if task == "hrm_sudoku" else B / f"{task}_noise.json"
+    files = [first] + [R / f"noise_{task}_H{H}_seed{s}.json" for s in (1, 2)]
     out = {}
-    for sd, f in enumerate(files):
-        if not f.exists():
-            continue
-        recs = [r for r in json.load(open(f))["records"] if r["nsup"] == nsup and r.get("H_cycles") in (3, None) or
-                (task.startswith("hrm") and r["nsup"] == nsup)]
-        n_new = 500 if task.endswith("maze") or task == "maze_attn" else 1000
+    for f in files:
+        recs = [r for r in json.load(open(f))["records"] if r["nsup"] == nsup and r.get("H_cycles") == H]
+        assert recs, (f, H, nsup)
         for r in recs:
             q = spec(r)
             key = "fp32" if q == "fp32" else float(q.replace("noise", ""))
-            if sd == 0 and r["n"] > n_new and isinstance(r.get("correct"), list):
-                acc = 100 * float(np.mean(r["correct"][:n_new]))
-            else:
-                acc = 100 * r["pexact"]
-            out.setdefault(key, []).append((acc, r["fidelity_H"]))
+            out.setdefault(key, []).append((100 * r["pexact"], r["fidelity_H"]))
     return out
 
 
