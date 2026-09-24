@@ -44,6 +44,53 @@ def sigma_half(recs, fp):
     return None
 
 
+def sigma_half_q(recs, base):
+    """Noise cliff around a quantized point: cells '<base>~noiseS' against the '<base>' cell's accuracy."""
+    b = next((r for r in recs if r["quant"]["spec"] == base), None)
+    if b is None:
+        return None
+    by = defaultdict(list)
+    for r in recs:
+        if r["quant"]["spec"].startswith(base + "~noise"):
+            by[r["quant"]["noise_after_quant"]].append(r["pexact"])
+    if not by:
+        return None
+    fake = [{"quant": {"spec": f"noise{s}", "sigma": s}, "pexact": v} for s, vs in by.items() for v in vs]
+    return sigma_half(fake, b["pexact"])
+
+
+def qat_table():
+    """Runs started from a trained checkpoint (QAT, LSQ, w+a, fp32 fine-tune control)."""
+    rows = []
+    for f in sorted(glob.glob(str(ROOT / "*" / "*" / "eval_step_*.json"))):
+        d = json.load(open(f))
+        if not d.get("ref_ckpt") and not re.search(r"/(qat_|ft_)", f):
+            continue
+        run = Path(f).parts[-2]
+        step = int(re.search(r"eval_step_(\d+)", f).group(1))
+        q = {r["quant"]["spec"]: r for r in d["records"] if r.get("draw", 0) == 0}
+        rows.append((run, step, d, q))
+    if not rows:
+        return
+    print("\nRuns from a trained checkpoint (QAT at Ingolfsson et al.'s 12k-step budget; n=1000, H=3, n_sup=16).")
+    print("fidR = fidelity of z_H against the STARTING fp32 model; s1/2q = noise cliff around the quantized point")
+    print(f"{'run':18s} {'step':>6s} {'L':>2s} {'start':>5s} {'fp32':>5s} {'w4t':>5s} {'fidR':>5s} {'s1/2q':>5s} "
+          f"{'w4lsq':>5s} {'fidR':>5s} {'s1/2q':>5s} {'w4t+a':>5s} {'lsq+a':>5s}")
+    for run, step, d, q in sorted(rows, key=lambda x: (re.sub(r"_s\d+$", "", x[0]), x[0], x[1])):
+        def g(sp, k="pexact", pct=True):
+            r = q.get(sp)
+            if r is None or k not in r:
+                return "  -  "
+            return f"{r[k]*100:5.1f}" if pct else f"{r[k]:5.3f}"
+        sq = sigma_half_q(d["records"], "w4t")
+        sl = sigma_half_q(d["records"], "w4lsq")
+        print(f"{run:18s} {step:6d} {'L' if d.get('light') else ' ':>2s} "
+              f"{(d.get('ref_fp32_pexact') or 0)*100:5.1f} {g('fp32')} {g('w4t')} {g('w4t', 'fidelity_H_ref', False)} "
+              f"{(f'{sq:.3f}' if sq else '  -  '):>5s} {g('w4lsq')} {g('w4lsq', 'fidelity_H_ref', False)} "
+              f"{(f'{sl:.3f}' if sl else '  -  '):>5s} {g('w4t+a4s')} {g('w4lsq+a4s')}")
+    print("(L = light cell set at intermediate checkpoints: one draw, fewer cells)")
+
+
 def load_evals():
     rows = []
     for f in sorted(glob.glob(str(ROOT / "*" / "*" / "eval_step_*.json"))):
@@ -102,7 +149,8 @@ def equal_fp32(rows):
         bx = np.array([r["fp32"] for r in base])
         for key in ("w4t_fid", "s_half"):
             pass
-        for r in sorted([r for r in full if r["host"] == host and r["arm"] != "q7_base"],
+        for r in sorted([r for r in full if r["host"] == host and r["arm"] != "q7_base"
+                         and r["arm"].startswith("q7_")],
                         key=lambda r: (r["arm"], r["seed"], r["step"])):
             out = []
             for key in ("w4t_fid", "s_half"):
@@ -145,6 +193,7 @@ def main():
     else:
         table(rows)
         equal_fp32(rows)
+    qat_table()
     if a.lam:
         lambda_baselines()
 
