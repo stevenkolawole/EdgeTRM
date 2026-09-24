@@ -82,7 +82,7 @@ def cell(comp, prof, key):
     cs = comp.get(key, [])
     if pf:
         return {"status": "PROFILE_FAILED", "error": pf[-1].get("error", "")[:300], "profile_job": pf[-1]["job_id"],
-                "compile_job": pf[-1].get("from_compile")}
+                "compile_job": pf[-1].get("from_compile"), "log_errors": pf[-1].get("log_errors", [])}
     if any(c.get("status") == "FAILED" for c in cs):
         c = [c for c in cs if c.get("status") == "FAILED"][-1]
         return {"status": "COMPILE_FAILED", "error": c.get("error", "")[:300], "compile_job": c["job_id"]}
@@ -93,8 +93,11 @@ def cell(comp, prof, key):
     return None
 
 
-def short_reason(err):
-    e = (err or "").lower()
+def short_reason(err, log_errors=()):
+    e = ((err or "") + " " + " ".join(log_errors or [])).lower()
+    if "doesn't support fp16" in e:
+        op = next((l.split("validate op ")[1].split(" with")[0] for l in log_errors or [] if "validate op " in l), "")
+        return f"HTP has no FP16 (op {op})" if op else "HTP has no FP16"
     if "floating-point type which is not supported" in e:
         return "float tensor on integer-only HTP"
     if "block" in e and ("not supported" in e or "unsupported" in e):
@@ -187,7 +190,7 @@ def gran_matrix(comp, prof):
                 if c:
                     cells[prec] = c
                     if c["status"] in ("COMPILE_FAILED", "PROFILE_FAILED"):
-                        reasons[(prec, CHIP[dev][1], short_reason(c.get("error")))] += 1
+                        reasons[(prec, CHIP[dev][1], short_reason(c.get("error"), c.get("log_errors")))] += 1
             if not cells:
                 continue
             out.append({"task": task, "device": dev, "chip": CHIP[dev][0], "hexagon": CHIP[dev][1], "cells": cells})

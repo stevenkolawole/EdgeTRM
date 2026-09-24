@@ -636,6 +636,22 @@ def summarize_profile(p):
     return row
 
 
+def runtime_log_errors(job, keep=6):
+    """The on-device runtime log states why a profile failed (MODEL_GRAPH_ERROR alone does not)."""
+    import tempfile
+    try:
+        with tempfile.TemporaryDirectory() as d:
+            paths = job.download_job_logs(d)
+            lines = []
+            for p in (paths if isinstance(paths, list) else [paths]):
+                for l in open(p, errors="replace"):
+                    if "<E>" in l or "error]" in l:
+                        lines.append(l.split("] ", 3)[-1].strip()[:300])
+            return lines[:keep]
+    except Exception as exc:  # noqa: BLE001
+        return [f"log download failed: {str(exc)[:120]}"]
+
+
 def stage_status(tasks, dump_dir=None):
     import qai_hub as hub
     rows = []
@@ -666,6 +682,8 @@ def stage_status(tasks, dump_dir=None):
             summary = {}
             if st.code == "FAILED":
                 summary["error"] = (st.message or "")[:600]
+                if j["kind"] in ("profile", "inference"):
+                    summary["log_errors"] = runtime_log_errors(job)
             elif st.code == "SUCCESS" and j["kind"] == "profile":
                 p = job.download_profile()
                 summary.update(summarize_profile(p))

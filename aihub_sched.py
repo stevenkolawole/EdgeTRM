@@ -62,6 +62,10 @@ def plan():
     t += 1
     for task in ("maze", "sudoku_mlp"):                                  # T3: TF-Lite-only phones
         P += [(t, task, "step", 1, "fp32", d) for d in TFL]
+    for task in ("sudoku_mlp", "sudoku_attn", "maze"):                   # T3: our own INT8 / W4A8 TFLite
+        for prec in ("tfl_int8", "tfl_w4a8"):                            # (AI Edge Quantizer, mcu_h1.py)
+            P += [(t, task, "step", 1, prec, d) for d in TFL + ["Samsung Galaxy S21", "Dragonwing RB3 Gen 2 Vision Kit",
+                                                                 "Samsung Galaxy S24"]]
     t += 1
     for task in ("maze", "sudoku_mlp"):                                  # T4: A16 on every HTP
         for prec in ("w4a16", "w8a16"):
@@ -100,14 +104,23 @@ def plan():
 
 def source_compile(rec, graph, H, prec, cls, bs, device=None):
     """First finished compile of (graph, H, prec) for the runtime class; prefer the device's own."""
-    cands = [j for j in rec["jobs"] if j["kind"] == "compile" and j.get("job_id") and j["graph"] == graph
-             and j["H"] == H and j["prec"] == prec
-             and (("tflite" == j["runtime"]) == (cls == "tflite"))]
+    cands = [j for j in rec["jobs"] if j["kind"] == "compile" and (j.get("job_id") or j.get("model_id"))
+             and j["graph"] == graph and j["H"] == H and j["prec"] == prec
+             and (("tflite" in j["runtime"]) == (cls == "tflite"))]
     cands.sort(key=lambda j: j["device"] != device)
     for j in cands:
+        if j.get("model_id") and not j.get("job_id"):
+            return j            # a directly uploaded target model (e.g. our own TFLite flatbuffer)
         if bs.get(j["job_id"], (None, None))[1] == "SUCCESS":
             return j
     return None
+
+
+def target_model(src):
+    import qai_hub as hub
+    if src.get("model_id") and not src.get("job_id"):
+        return hub.get_model(src["model_id"])
+    return hub.get_job(src["job_id"]).get_target_model()
 
 
 class Chain:
@@ -256,18 +269,20 @@ def main():
             if free <= 0:
                 continue
             d = A.DEV_BY_NAME[dev]
-            src = source_compile(recs[task], graph, H, prec, "qnn" if d[2] else "tflite", bs, dev)
+            cls = "tflite" if (prec.startswith("tfl_") or not d[2]) else "qnn"
+            src = source_compile(recs[task], graph, H, prec, cls, bs, dev)
             if src is None:
                 continue
             try:
-                pj = hub.submit_profile_job(model=hub.get_job(src["job_id"]).get_target_model(),
+                pj = hub.submit_profile_job(model=target_model(src),
                                             device=hub.Device(dev, d[1]),
                                             name=f"x3_prof_{task}_{graph}_H{H}_{prec}_{dev}")
                 pid, err = pj.job_id, None
             except Exception as exc:  # noqa: BLE001
                 pid, err = None, str(exc)[:300]
             A.add_job(task, {"kind": "profile", "graph": graph, "H": H, "prec": prec, "device": dev, "os": d[1],
-                             "runtime": src["runtime"], "job_id": pid, "submit_error": err, "from_compile": src["job_id"],
+                             "runtime": src["runtime"], "job_id": pid, "submit_error": err,
+                             "from_compile": src.get("job_id") or src.get("model_id"),
                              "fanout_from_device": src["device"], "tier": tier,
                              "submitted": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
             have.add((task, graph, H, prec, dev))
