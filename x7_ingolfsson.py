@@ -136,7 +136,10 @@ def q_rows(x, bits):
 
 def q_tensor(x, bits, absmax=None):
     qmax = 2 ** (bits - 1) - 1
-    s = max(float(x.abs().max()) if absmax is None else absmax, 1e-12) / qmax
+    if absmax is None:                       # dynamic: stay on device (no host sync per call)
+        s = (x.abs().amax() / qmax).clamp_min(1e-12)
+    else:
+        s = max(absmax, 1e-12) / qmax
     return torch.round(x / s).clamp(-qmax, qmax) * s
 
 
@@ -239,26 +242,27 @@ class ActHook:
     def __call__(self, mod, args):
         x = args[0]
         if self.observe:
-            self.obs_max = max(self.obs_max, float(x.detach().abs().max()))
+            m = x.detach().abs().amax()
+            self.obs_max = m if not torch.is_tensor(self.obs_max) else torch.maximum(self.obs_max, m)
             return None
         xq = self._perturb(x)
         eps = xq - x
-        self.seq_sum += float(eps.pow(2).mean().sqrt() / x.std().clamp_min(1e-12))
+        self.seq_sum = self.seq_sum + (eps.pow(2).mean().sqrt() / x.std().clamp_min(1e-12)).detach()
         self.seq_n += 1
         if self.coh_on and self.coh_rows:
             e = eps[: self.coh_rows].detach().float()
             acc = self.coh.get(self.call)
             if acc is None:
-                self.coh[self.call] = [e.clone(), float(e.pow(2).sum()), 1]
+                self.coh[self.call] = [e.clone(), e.pow(2).sum(), 1]
             elif acc[0].shape == e.shape:
                 acc[0] += e
-                acc[1] += float(e.pow(2).sum())
+                acc[1] = acc[1] + e.pow(2).sum()
                 acc[2] += 1
         self.call += 1
         return (xq,) + tuple(args[1:])
 
     def coherence(self):
-        vals = [float(s.norm() / c) / math.sqrt(q / c) for s, q, c in self.coh.values() if c > 1 and q > 0]
+        vals = [float(s.norm() / c) / math.sqrt(float(q) / c) for s, q, c in self.coh.values() if c > 1 and float(q) > 0]
         return vals
 
 
@@ -283,7 +287,7 @@ class OutProbe:
         if self.on and self.x is not None:
             yref = F.linear(self.x, self.W0, self.b0)
             d = out[: self.rows] - yref
-            self.acc.setdefault(self.step, []).append(float(d.norm() / yref.norm().clamp_min(1e-12)))
+            self.acc.setdefault(self.step, []).append((d.norm() / yref.norm().clamp_min(1e-12)).detach())
             self.x = None
         return None
 
@@ -369,7 +373,7 @@ def calibrate(task, cell, cinp, clab, batch):
         carry = init_carry(m, bt)
         for _ in range(16):
             carry, _ = m(carry, bt)
-    out = [h.obs_max for h, _ in hooks]
+    out = [float(h.obs_max) for h, _ in hooks]
     for _, hd in hooks:
         hd.remove()
     del m
@@ -420,7 +424,11 @@ def evaluate(task, H, L, nsup, cells, inp, lab, batch, calib_cache, cinp_all, cl
     K = len(entries)
     acc = [{"exact": np.zeros(nsup), "cellc": np.zeros(nsup), "celln": np.zeros(nsup), "fid": np.zeros(nsup),
             "valid": np.zeros(nsup), "vshort": np.zeros(nsup),
-            "keep": {s: [] for s in KEEP_STEPS if s <= nsup}, "keep_valid": [], "keep_vshort": []} for _ in range(K)]
+            "keep": {s: [] for s in KEEP_STEPS if s <= nsup}, "keep_valid": [], "keep_vshort": [],
+            "t_exact": torch.zeros(nsup, device=DEV, dtype=torch.float64),
+            "t_cellc": torch.zeros(nsup, device=DEV, dtype=torch.float64),
+            "t_celln": torch.zeros(nsup, device=DEV, dtype=torch.float64),
+            "t_fid": torch.zeros(nsup, device=DEV, dtype=torch.float64)} for _ in range(K)]
     t0 = time.time()
     for bi, s in enumerate(range(0, n, batch)):
         bt = make_batch(inp, lab, s, s + batch)
@@ -451,10 +459,10 @@ def evaluate(task, H, L, nsup, cells, inp, lab, batch, calib_cache, cinp_all, cl
                 corr = (preds == y) & mask
                 ex = corr.sum(-1) == mask.sum(-1)
                 a = acc[k]
-                a["exact"][step] += int(ex.sum())
-                a["cellc"][step] += int(corr.sum())
-                a["celln"][step] += int(mask.sum())
-                a["fid"][step] += float(fid.sum())
+                a["t_exact"][step] += ex.sum()
+                a["t_cellc"][step] += corr.sum()
+                a["t_celln"][step] += mask.sum()
+                a["t_fid"][step] += fid.sum()
                 if (step + 1) in a["keep"]:
                     a["keep"][step + 1].extend(ex.int().cpu().tolist())
                 if is_maze:
@@ -469,6 +477,9 @@ def evaluate(task, H, L, nsup, cells, inp, lab, batch, calib_cache, cinp_all, cl
                     a.setdefault("final", []).extend(ex.int().cpu().tolist())
         print(f"    batch {bi}: {min(s + batch, n)}/{n} ({time.time() - t0:.0f}s)", flush=True)
 
+    for a in acc:
+        for key in ("exact", "cellc", "celln", "fid"):
+            a[key] = a.pop("t_" + key).cpu().numpy()
     recs = []
     for k, e in enumerate(entries):
         a = acc[k]
@@ -478,7 +489,7 @@ def evaluate(task, H, L, nsup, cells, inp, lab, batch, calib_cache, cinp_all, cl
         rho = {}
         for pr, _, _ in e["probes"]:
             for st, v in pr.acc.items():
-                rho.setdefault(st, []).extend(v)
+                rho.setdefault(st, []).extend(float(x) for x in v)
         rec = {"task": task, "cell": cell["name"], "w": cell["w"], "a": cell["a"], "seed": cell["seed"],
                "H_cycles": meta["H_cycles"], "L_cycles": meta["L_cycles"], "nsup": nsup, "n": n,
                "exact": (a["exact"] / n).tolist(), "cell_acc": (a["cellc"] / np.maximum(a["celln"], 1)).tolist(),
@@ -486,7 +497,7 @@ def evaluate(task, H, L, nsup, cells, inp, lab, batch, calib_cache, cinp_all, cl
                "correct": a["final"], "correct_at": {str(k2): v for k2, v in a["keep"].items()},
                "sigma_eq_w": float(np.mean(e["sig_w"])) if e["sig_w"] else None,
                "sigma_eq_w_max": float(np.max(e["sig_w"])) if e["sig_w"] else None,
-               "sigma_eq_a": (float(sum(h.seq_sum for h in hooks) / max(sum(h.seq_n for h in hooks), 1))
+               "sigma_eq_a": (float(sum(float(h.seq_sum) for h in hooks) / max(sum(h.seq_n for h in hooks), 1))
                               if hooks else None),
                "coherence_a": float(np.mean(coh)) if coh else None,
                "coherence_a_median": float(np.median(coh)) if coh else None,
