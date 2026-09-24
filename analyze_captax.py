@@ -140,11 +140,24 @@ def dt_sets():
     return out
 
 
+AXIS = "rating"
+if "--axis" in sys.argv:
+    AXIS = sys.argv[sys.argv.index("--axis") + 1]
+    del sys.argv[sys.argv.index("--axis"):sys.argv.index("--axis") + 2]
+RES_BINS = [(0, 0, "res 0"), (1, 45, "res 1-45"), (46, 50, "res 46-50"), (51, 55, "res 51-55"), (56, 81, "res >=56")]
+
+
 def sudoku_sets(kind="diff"):
-    """{(task, bin): (T, {spec: (n, K) bool})} from X1's stratified sweeps; noise draws kept apart."""
+    """{(task, bin): (T, {spec: (n, K) bool})} from X1's stratified sweeps; noise draws kept apart.
+    Bins: the rating bins of the stratified sample, or (--axis residual) blanks left after singles."""
     meta = json.load(open(B / "sudoku_extreme_test_meta.json"))
-    row_bin = dict(zip(meta["strat"]["rows"], meta["strat"]["bin"]))
-    names = ["0", "1-10", "11-30", "31-60", "61-120", ">120"]
+    if AXIS == "residual":
+        row_bin = {r: next(i for i, (lo, hi, _) in enumerate(RES_BINS) if lo <= v <= hi)
+                   for r, v in zip(meta["strat"]["rows"], meta["strat"]["singles_residual"])}
+        names = [nm for _, _, nm in RES_BINS]
+    else:
+        row_bin = dict(zip(meta["strat"]["rows"], meta["strat"]["bin"]))
+        names = ["0", "1-10", "11-30", "31-60", "61-120", ">120"]
     out = {}
     for task in ("sudoku_mlp", "sudoku_attn", "hrm_sudoku"):
         plat, pref = {"deep": ("p4d", "deep"), "diff": ("p4d", "diff"), "diff_babel": ("babel", "diff")}[kind]
@@ -227,11 +240,11 @@ def fit(which):
             res[f"first_{task}_{nm}"] = {"T": T, "fits": fits}
             print_fits(f"{task} {nm} (first 1000 rows, n={next(iter(mats.values())).shape[0]}, p4d)", T, fits)
     else:
-        kind = "deep" if which == "sudoku_deep" else "diff"
+        kind = {"sudoku_deep": "deep", "sudoku_babel": "diff_babel"}.get(which, "diff")
         for (task, nm), (T, mats) in sudoku_sets(kind).items():
             fits = fit_set(T, mats, nboot=200)
             res[f"{kind}_{task}_{nm}"] = {"T": T, "fits": fits}
-            print_fits(f"{task} rating {nm} (n={next(iter(mats.values())).shape[0]}, Babel L40S, {kind})", T, fits)
+            print_fits(f"{task} bin {nm} (n={next(iter(mats.values())).shape[0]}, Babel L40S, {kind})", T, fits)
     return res
 
 
@@ -248,7 +261,8 @@ def solve(which):
     elif which == "sudoku_first":
         sets = {f"{t} {b} (first 1000)": v for (t, b), v in sudoku_first_sets().items()}
     else:
-        sets = {f"{t} rating {b}": v for (t, b), v in sudoku_sets("deep" if which == "sudoku_deep" else "diff").items()}
+        kind = {"sudoku_deep": "deep", "sudoku_babel": "diff_babel"}.get(which, "diff")
+        sets = {f"{t} {b}": v for (t, b), v in sudoku_sets(kind).items()}
     print("## Iterations-to-solve on instances both fp32 and the quantized model solve for good at the last count")
     print("(stable solve = first count from which the instance stays correct; later = the quantized model needs more)")
     for name, (T, mats) in sets.items():
