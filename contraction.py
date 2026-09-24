@@ -567,7 +567,20 @@ def main():
         a = ap.parse_args()
         analyze(a.analyze, a.summary)
         if a.figdata:
-            json.dump(task_curves(a.analyze), open(a.figdata, "w"), indent=1)
+            D = task_curves(a.analyze)
+            rows, r2 = model_table(D)
+            D["_model_table"] = {"rows": rows, "r2_log_sigma_half_explained_by_S": r2}
+            json.dump(D, open(a.figdata, "w"), indent=1)
+            print("\n### per model: sigma_1/2 against the one-step sensitivity (label-free S at the smallest sigma)")
+            print("| model | n | fp32 acc | sigma_1/2 | S | delta_T at sigma_1/2 | S x sigma_1/2 | predicted sigma* (LOO) | "
+                  "rho fp32 solved | rho solved at sigma near sigma_1/2 |")
+            print("|---|---|---|---|---|---|---|---|---|---|")
+            f = lambda x, p=2: "--" if x is None else f"{x:.{p}f}"
+            for r in rows:
+                print(f"| {r['model']} | {r['n']} | {100*r['fp32_acc']:.1f} | {f(r['sigma_half'])} | {f(r['S'])} | "
+                      f"{f(r['delta_at_half'])} | {f(r['S_x_sigma_half'])} | {f(r['sigma_star_pred'])} | "
+                      f"{f(r['rho_fp32_solved'])} | {r['sigma_near_half']}: {', '.join(f(v) for v in r['rho_solved_near_half'])} |")
+            print(f"fraction of the variance of log sigma_1/2 explained by log S (slope fixed at -1): {f(r2)}")
             print("wrote", a.figdata)
         return
     torch = _torch()
@@ -1013,7 +1026,12 @@ def task_curves(files):
              "fp32_acc": a0, "sigma": sig, "acc_draws": [[c["acc"] for c in noise[x]] for x in sig], "acc_med": acc_med,
              "metrics": {k: [[fn(c) for c in noise[x]] for x in sig] for k, fn in METRICS.items()},
              "others": [{"spec": c["spec"], "draw": c["draw"], "acc": c["acc"], **{k: fn(c) for k, fn in METRICS.items()}}
-                        for c in others]}
+                        for c in others],
+             "cells": [{"spec": c["spec"], "draw": c["draw"], "acc": c["acc"], "retained": c.get("acc_on_ref_correct"),
+                        "deltaT": (c.get("deltaT_q") or [None] * 3)[1], "phi_H": c.get("phi_H"),
+                        "kind": "noise" if c["spec"].startswith("noise") and "@" not in c["spec"] else
+                        ("group" if "@" in c["spec"] else "quant")}
+                       for c in [cc for x in sig for cc in noise[x]] + others]}
         d["fp32"].update({"rho_q_correct": fp.get("rhoT_q_correct"), "rho_q_wrong": fp.get("rhoT_q_wrong"),
                           "Lambda_q_correct": fp.get("Lambda_q_correct"), "Lambda_q_wrong": fp.get("Lambda_q_wrong"),
                           "resT_q_correct": fp.get("resT_q_correct"), "resT_q_wrong": fp.get("resT_q_wrong"),
@@ -1101,6 +1119,36 @@ def task_curves(files):
             d["sigma_star_mu"]["lin_converged_frac_at_sigma0"] = [c.get("frac_lin_converged") for c in noise[s0]]
         out[key] = d
     return out
+
+
+def model_table(D):
+    """One row per model: measured sigma_1/2, one-step sensitivity S (smallest sigma), delta_T at sigma_1/2,
+    S x sigma_1/2, fp32 rho over solved puzzles, rho over solved puzzles at the sigma nearest sigma_1/2, and the
+    leave-one-out prediction sigma* = delta*/S with delta* the geometric mean of S x sigma_1/2 over the other models."""
+    rows = []
+    for k, d in D.items():
+        if k.startswith("_") or d.get("period", 1) != 1:   # period-2 DT map is a second analysis of the same model
+            continue
+        sh = d["sigma_half"]["value"]
+        if sh is None or not d["sigma"]:
+            continue
+        S0 = d["sensitivity"][0]
+        i = int(np.argmin([abs(np.log(x / sh)) for x in d["sigma"]]))
+        rho_near = [v for v in d["metrics"]["rho_own_sol"][i] if v is not None]
+        rows.append({"model": k, "n": d["n"], "fp32_acc": d["fp32_acc"], "sigma_half": sh, "S": S0,
+                     "delta_at_half": d.get("deltaT_at_sigma_half"), "S_x_sigma_half": S0 * sh,
+                     "rho_fp32_solved": d["fp32"].get("rho_own_sol"), "sigma_near_half": d["sigma"][i],
+                     "rho_solved_near_half": rho_near})
+    for r in rows:
+        others = [o["S_x_sigma_half"] for o in rows if o["model"] != r["model"] and not o["model"].startswith(
+            r["model"].split("_T")[0].split("_p2")[0])]
+        dstar = float(np.exp(np.mean(np.log(others)))) if others else None
+        r["delta_star_loo"] = dstar
+        r["sigma_star_pred"] = dstar / r["S"] if dstar else None
+    ls = np.log([r["sigma_half"] for r in rows])
+    lS = np.log([r["S"] for r in rows])
+    r2 = float(1 - np.var(ls + lS) / np.var(ls)) if len(rows) > 2 else None
+    return rows, r2
 
 
 if __name__ == "__main__":

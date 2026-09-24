@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
-"""Angle A mechanism figure (X2): what happens to the recursion map at the accuracy cliff.
+"""Angle A mechanism figure (X2): what the recursion map does at the accuracy cliff.
 
-  (a) exact accuracy against weight-noise sigma for the Sudoku TRM with the MLP mixer and with the
-      attention mixer (same task, same recipe): three draws per sigma (points), median (line),
-      sigma_1/2 (dashed);
-  (b) the same x-axis: a mechanism metric of the perturbed map on its own trajectory (default: the
-      median spectral radius of one recursion step's Jacobian at the final state, over the puzzles
-      fp32 solves; band = median of the per-draw quartiles), against 1;
-  (c) predicted against measured sigma_1/2 for every model (label-free routes from contraction.py).
+  (a) exact accuracy against weight-noise sigma for the Sudoku TRM with the MLP mixer, the Sudoku TRM
+      with the attention mixer (same task, same recipe) and HRM: three draws per sigma (points),
+      median (line), sigma_1/2 (dashed);
+  (b) the same x-axis: a stability metric of the perturbed map on its own trajectory, over the puzzles
+      fp32 solves (default: median spectral radius of one recursion step's Jacobian at s_T, against 1;
+      fp32 at the left edge as a diamond);
+  (c) every perturbed cell of every model (weight noise, quantizers, single weight groups): fraction of
+      fp32-solved puzzles still solved against the one-step map perturbation delta_T = ||F~(s_T) - F(s_T)||
+      / ||s_T|| at fp32's end state.
 
 Data: the figure JSON written by `contraction.py --analyze ... --figdata <json>`.
 
-  python plots/contraction_fig.py --data results/breadth/contraction_figdata.json \
-      --out figures/contraction_mechanism.pdf [--metric rho_own_sol]
+  python plots/contraction_fig.py --data results/breadth/x2_contraction_figdata.json \
+      --out figures/contraction_mechanism.pdf [--metric rho_own_sol | kick_sol | resT_sol | sigmaJ_sol]
 """
 import argparse
 import json
@@ -25,123 +27,91 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import figstyle as fs  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-PAIR = [("sudoku_mlp", "TRM, MLP mixer", fs.BLUE, fs.BLUE_LIGHT), ("sudoku_attn", "TRM, attention", fs.RED, fs.RED_LIGHT),
-        ("hrm_sudoku", "HRM", fs.GREY, fs.GREY_LIGHT)]
-LABEL = {"rho_own_sol": r"spectral radius $\rho(J)$ at $s_T$" + "\n(puzzles fp32 solves)",
-         "rho_own": r"spectral radius $\rho(J)$ at $s_T$",
-         "Lambda_sol": r"Lyapunov number $\Lambda$" + "\n(puzzles fp32 solves)",
-         "frac_basin_switch": "basin switch\n(fraction of fp32-solved)",
-         "resT": r"residual $\|s_T-s_{T-1}\|/\|s_T\|$",
-         "resT_sol": "residual at step 16\n(puzzles fp32 solves)",
-         "kick_sol": "growth of a random state kick\nover 16 steps (fp32-solved)",
-         "sigmaJ_sol": r"$\|J(s_T)\|_2$ (fp32-solved)",
-         "gamma_nat_sol": r"gain along travel $\gamma$"}
-NAMES = {"sudoku_mlp": "TRM Sudoku MLP", "sudoku_attn": "TRM Sudoku attn", "hrm_sudoku": "HRM Sudoku",
-         "maze_attn": "TRM Maze attn"}
+MODELS = [("sudoku_mlp", "TRM, MLP mixer", fs.BLUE), ("sudoku_attn", "TRM, attention", fs.RED),
+          ("hrm_sudoku", "HRM", fs.AMBER), ("maze_attn", "TRM Maze", fs.GREY), ("dt_maze33_T300", "DT maze 33", fs.INK),
+          ("dt_maze13_T100", "DT maze 13", fs.GREY_LIGHT)]
+LABEL = {"rho_own_sol": r"spectral radius $\rho(J(s_T))$",
+         "kick_sol": "growth of a random state\nkick over 16 steps",
+         "resT_sol": "residual at step 16",
+         "sigmaJ_sol": r"$\|J(s_T)\|_2$",
+         "frac_settled_sol": "fraction settled\n(residual < 0.1)",
+         "Lambda_sol": r"Lyapunov number $\Lambda$"}
+LOG = {"kick_sol", "resT_sol", "sigmaJ_sol"}
+ONE = {"rho_own_sol", "kick_sol", "Lambda_sol"}
 
 
-def _band(vals_per_sigma):
-    med = [np.median([v for v in vs if v is not None]) if any(v is not None for v in vs) else np.nan
-           for vs in vals_per_sigma]
-    return np.asarray(med, float)
+def _med(vs):
+    vs = [v for v in vs if v is not None]
+    return float(np.median(vs)) if vs else np.nan
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--data", type=Path, default=ROOT / "results" / "breadth" / "contraction_figdata.json")
+    ap.add_argument("--data", type=Path, default=ROOT / "results" / "breadth" / "x2_contraction_figdata.json")
     ap.add_argument("--out", type=Path, default=ROOT / "figures" / "contraction_mechanism.pdf")
     ap.add_argument("--metric", default="rho_own_sol")
-    ap.add_argument("--pred", default="sens", help="panel (c): sens (sigma_1/2 vs one-step sensitivity) | rho_sol | "
-                                                   "rho_all | mu_lin | mu_meas | kick")
-    ap.add_argument("--logy", action="store_true", help="log y-axis in panel (b)")
+    ap.add_argument("--curves", default="sudoku_mlp,sudoku_attn,hrm_sudoku,maze_attn", help="models in panels (a), (b)")
     a = ap.parse_args()
     D = json.load(open(a.data))
     fs.use()
     import matplotlib.pyplot as plt
-    fig = plt.figure(figsize=(fs.TEXT_W, 2.1))
-    gs = fig.add_gridspec(1, 3, width_ratios=[1.0, 1.0, 0.8], wspace=0.42)
+    fig = plt.figure(figsize=(fs.TEXT_W, 2.0))
+    gs = fig.add_gridspec(1, 3, width_ratios=[1.0, 1.0, 1.0], wspace=0.55)
     axA, axB, axC = (fig.add_subplot(gs[0, i]) for i in range(3))
-    q1k, q3k = a.metric + "_q1", a.metric + "_q3"
-    for task, name, col, light in PAIR:
-        if task not in D:
+    curves = a.curves.split(",")
+    for key, name, col in MODELS:
+        if key not in D or key not in curves:
             continue
-        d = D[task]
+        d = D[key]
         sig = np.asarray(d["sigma"], float)
         for x, accs in zip(sig, d["acc_draws"]):
-            axA.scatter([x] * len(accs), [100 * v for v in accs], s=7, color=col, alpha=0.55, lw=0, zorder=3)
+            axA.scatter([x] * len(accs), [100 * v for v in accs], s=6, color=col, alpha=0.5, lw=0, zorder=3)
         axA.plot(sig, [100 * v for v in d["acc_med"]], color=col, lw=1.2, label=name)
-        axA.axhline(100 * d["fp32_acc"], color=col, lw=0.6, ls=":")
         sh = d["sigma_half"]["value"]
         for ax in (axA, axB):
             if sh:
-                ax.axvline(sh, color=col, lw=0.7, ls="--")
-        m = _band(d["metrics"][a.metric])
-        axB.plot(sig, m, color=col, lw=1.2, marker="o", ms=2.5)
-        if q1k in d["metrics"]:
-            lo, hi = _band(d["metrics"][q1k]), _band(d["metrics"][q3k])
-            axB.fill_between(sig, lo, hi, color=light, alpha=0.6, lw=0)
+                ax.axvline(sh, color=col, lw=0.6, ls="--")
+        vals = d["metrics"][a.metric]
+        for x, vs in zip(sig, vals):
+            vs = [v for v in vs if v is not None]
+            axB.scatter([x] * len(vs), vs, s=6, color=col, alpha=0.5, lw=0, zorder=3)
+        axB.plot(sig, [_med(vs) for vs in vals], color=col, lw=1.2)
         f0 = d["fp32"].get(a.metric)
         if f0 is not None:
-            axB.scatter([sig[0] * 0.6], [f0], marker="D", s=10, color=col, zorder=4)
-    axA.set_xscale("log")
-    axB.set_xscale("log")
+            x0 = 0.013
+            axB.scatter([x0], [f0], marker="D", s=11, color=col, zorder=4)
+    for ax in (axA, axB):
+        ax.set_xscale("log")
+        ax.set_xlabel("weight noise $\\sigma$\n")
     axA.set_ylim(0, 100)
     axA.set_ylabel("exact accuracy (%)")
-    axA.set_xlabel(r"weight noise $\sigma$")
-    axB.set_xlabel(r"weight noise $\sigma$")
-    axB.set_ylabel(LABEL.get(a.metric, a.metric))
-    if a.metric.startswith("rho") or a.metric.startswith("Lambda") or a.metric.startswith("gamma") \
-            or a.metric.startswith("kick"):
+    h, l = axA.get_legend_handles_labels()
+    fig.legend(h, l, loc="upper center", ncol=len(l), fontsize=6.5, bbox_to_anchor=(0.5, 1.07), frameon=False)
+    axB.set_ylabel(LABEL.get(a.metric, a.metric) + "\n(puzzles fp32 solves)")
+    if a.metric in ONE:
         axB.axhline(1.0, color=fs.INK, lw=0.6)
-    if a.logy:
+    if a.metric in LOG:
         axB.set_yscale("log")
-    axA.legend(loc="lower left", fontsize=6.5)
-    # (c) predicted vs measured sigma_1/2, or measured sigma_1/2 against the one-step sensitivity
-    NAMEC = {"sudoku_mlp": "TRM MLP", "sudoku_attn": "TRM attn", "hrm_sudoku": "HRM", "maze_attn": "TRM Maze"}
-    COLC = {"sudoku_mlp": fs.BLUE, "sudoku_attn": fs.RED}
-    if a.pred == "sens":
-        pts = []
-        for key, d in D.items():
-            sh, dh = d["sigma_half"]["value"], d.get("deltaT_at_sigma_half")
-            sens = [v for x, v in zip(d["sigma"], d.get("sensitivity", [])) if v is not None and sh and x <= sh]
-            if sh is None or not sens:
+    # (c) retained fraction against the one-step perturbation, every cell of every model
+    MK = {"noise": "o", "quant": "s", "group": "^"}
+    for key, name, col in MODELS:
+        if key not in D:
+            continue
+        for c in D[key].get("cells", []):
+            if c["deltaT"] is None or c["retained"] is None:
                 continue
-            S = float(np.median(sens))
-            pts.append((key, S, sh, dh))
-            axC.scatter([S], [sh], s=14, color=COLC.get(key, fs.GREY), zorder=3)
-            axC.annotate(NAMEC.get(key, key), (S, sh), xytext=(3, 2), textcoords="offset points", fontsize=5.5)
-        if pts:
-            dstar = float(np.median([p[3] for p in pts if p[3] is not None]))
-            xs = np.geomspace(min(p[1] for p in pts) / 2, max(p[1] for p in pts) * 2, 50)
-            axC.plot(xs, dstar / xs, color=fs.GREY, lw=0.6, ls="--")
-            axC.annotate(rf"$\sigma_{{1/2}}=\delta^*/S$, $\delta^*={dstar:.2f}$", (xs[5], dstar / xs[5]), fontsize=5.5,
-                         color=fs.GREY)
-        axC.set_xscale("log")
-        axC.set_yscale("log")
-        axC.set_xlabel(r"one-step sensitivity $S=\delta_T/\sigma$")
-        axC.set_ylabel(r"measured $\sigma_{1/2}$")
-    else:
-        lo_, hi_ = 1e9, 0
-        for key, d in D.items():
-            sh = d["sigma_half"]["value"]
-            route = {"rho_sol": d["sigma_star_rho"].get("sol", {}), "rho_all": d["sigma_star_rho"].get("all", {}),
-                     "mu_lin": d["sigma_star_mu"].get("lin", {}), "mu_meas": d["sigma_star_mu"].get("meas", {}),
-                     "kick": d.get("sigma_star_kick", {})}[a.pred]
-            pv = route.get("value")
-            if sh is None or pv is None:
-                continue
-            axC.scatter([sh], [pv], s=14, color=COLC.get(key, fs.GREY), zorder=3)
-            axC.annotate(NAMEC.get(key, key), (sh, pv), xytext=(3, 2), textcoords="offset points", fontsize=5.5)
-            lo_, hi_ = min(lo_, sh, pv), max(hi_, sh, pv)
-        if hi_ > 0:
-            lim = [lo_ / 2, hi_ * 2]
-            axC.plot(lim, lim, color=fs.GREY, lw=0.6)
-            axC.set_xlim(lim)
-            axC.set_ylim(lim)
-        axC.set_xscale("log")
-        axC.set_yscale("log")
-        axC.set_xlabel(r"measured $\sigma_{1/2}$")
-        axC.set_ylabel(r"predicted $\sigma^*$")
+            axC.scatter([c["deltaT"]], [100 * c["retained"]], s=8, marker=MK[c["kind"]], color=col, alpha=0.7, lw=0,
+                        label=None)
+    for kind, mk in MK.items():
+        axC.scatter([], [], marker=mk, s=8, color=fs.GREY, label={"noise": "weight noise", "quant": "quantizer",
+                                                                   "group": "one weight group"}[kind])
+    axC.set_xscale("log")
+    axC.set_ylim(-3, 103)
+    axC.set_xlabel("one-step map perturbation\n" + r"$\delta_T=\|\tilde F(s_T)-F(s_T)\|/\|s_T\|$", labelpad=1)
+    axC.set_xticks([0.01, 0.1, 1])
+    axC.set_xticklabels(["0.01", "0.1", "1"])
+    axC.set_ylabel("fp32-solved puzzles\nstill solved (%)")
+    axC.legend(loc="lower left", fontsize=5.5, handletextpad=0.2)
     for ax, l in zip((axA, axB, axC), "abc"):
         fs.panel_label(ax, l)
     a.out.parent.mkdir(parents=True, exist_ok=True)

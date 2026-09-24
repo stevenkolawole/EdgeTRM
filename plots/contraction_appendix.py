@@ -19,7 +19,7 @@ import figstyle as fs  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 COLS = [("acc", "exact acc."), ("rho_own_sol", r"$\rho(J_T)$ solved"), ("Lambda_sol", r"$\Lambda$ solved"),
-        ("resT", "residual"), ("frac_basin_switch", "basin switch"), ("disp", r"$D$ (line) / $D_{lin}$ (dash)")]
+        ("resT", "residual"), ("frac_basin_switch", "basin switch"), ("frac_settled_sol", "settled (solved)"), ("sigmaJ_sol", r"$\|J_T\|_2$ solved")]
 ONE = {"rho_own_sol", "Lambda_sol"}
 
 
@@ -29,7 +29,7 @@ def main():
     ap.add_argument("--out", type=Path, default=ROOT / "figures" / "contraction_appendix.pdf")
     a = ap.parse_args()
     D = json.load(open(a.data))
-    keys = [k for k in D if D[k]["sigma"]]
+    keys = [k for k in D if not k.startswith("_") and D[k]["sigma"]]
     fs.use()
     import matplotlib.pyplot as plt
     fig, axes = plt.subplots(len(keys), len(COLS), figsize=(fs.TEXT_W * 1.25, 1.25 * len(keys) + 0.3), squeeze=False)
