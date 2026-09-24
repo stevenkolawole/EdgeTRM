@@ -759,6 +759,7 @@ def cell_summary(r, T, ref=None, conv_tol=0.01):
             if k.startswith("sigma"):
                 sg = np.asarray(P[k], float)
                 s[f"frac_{k}_lt1"] = float(np.mean(sg < 1))
+                s[f"{k}_q_correct"] = _q(sg[corr]) if corr.any() else None
     def qsplit(key, a=None):
         a = np.asarray(P[key], float) if a is None else a
         s[f"{key}_q"] = _q(a)
@@ -828,6 +829,12 @@ def cell_summary(r, T, ref=None, conv_tol=0.01):
                     rho_ = np.asarray(P[rk], float)[rcorr]
                     s["rhoT_q_refcorrect"] = _q(rho_)
                     s["frac_rhoT_lt1_refcorrect"] = float(np.mean(rho_ < 1))
+                s["resT_q_refcorrect"] = _q(resT[rcorr])
+                s["frac_settled_refcorrect"] = float(np.mean(resT[rcorr] < 0.1))
+                if "nl_rand_16" in P:
+                    s["kick_q_refcorrect"] = _q(np.asarray(P["nl_rand_16"], float)[rcorr])
+                if "sigma16" in P:
+                    s["sigmaJ_q_refcorrect"] = _q(np.asarray(P["sigma16"], float)[rcorr])
                 s["Lambda_q_refcorrect"] = _q(lam[rcorr])
                 s["frac_Lambda_lt1_refcorrect"] = float(np.mean(lam[rcorr] < 1))
                 if "gamma_nat" in P:
@@ -947,6 +954,12 @@ METRICS = {   # per-cell scalar (from cell_summary) -> name in the figure data
     "kick_dom16": lambda c: (c.get("nl_dom_16_q") or [None] * 3)[1],
     "frac_kick_rand16_lt1": lambda c: c.get("frac_nl_rand_16_lt1"),
     "acc_on_ref_correct": lambda c: c.get("acc_on_ref_correct"),
+    "resT_sol": lambda c: (c.get("resT_q_refcorrect") or c.get("resT_q_correct") or [None] * 3)[1],
+    "resT_sol_q1": lambda c: (c.get("resT_q_refcorrect") or c.get("resT_q_correct") or [None] * 3)[0],
+    "resT_sol_q3": lambda c: (c.get("resT_q_refcorrect") or c.get("resT_q_correct") or [None] * 3)[2],
+    "frac_settled_sol": lambda c: c.get("frac_settled_refcorrect"),
+    "kick_sol": lambda c: (c.get("kick_q_refcorrect") or c.get("nl_rand_16_q_correct") or [None] * 3)[1],
+    "sigmaJ_sol": lambda c: (c.get("sigmaJ_q_refcorrect") or c.get("sigma16_q_correct") or [None] * 3)[1],
     "flip_meas_frac": lambda c: c.get("frac_flip_meas_lt1_refcorrect"),
     "sigma_max": lambda c: next((v[1] for k, v in c.items() if k.startswith("sigma") and k.endswith("_q") and v), None),
 }
@@ -1062,6 +1075,19 @@ def task_curves(files):
             else:
                 sk["note"] = f"> {sig[-1]}" if sig else None
         d["sigma_star_kick"] = sk
+        # sensitivity S = delta_T / sigma (one-step map perturbation at fp32's end state per unit noise), and
+        # the one-step perturbation at the measured cliff (log-log interpolation of median delta_T to sigma_1/2)
+        dm = [float(np.median([v for v in vs if v is not None])) if any(v is not None for v in vs) else None
+              for vs in d["metrics"]["deltaT"]]
+        d["deltaT_med"] = dm
+        d["sensitivity"] = [None if y is None else y / x for x, y in zip(sig, dm)]
+        dh = None
+        if sh["value"] is not None:
+            xs_ = [x for x, y in zip(sig, dm) if y is not None]
+            ys_ = [y for y in dm if y is not None]
+            if len(xs_) >= 2:
+                dh = float(np.exp(np.interp(np.log(sh["value"]), np.log(xs_), np.log(ys_))))
+        d["deltaT_at_sigma_half"] = dh
         # sigma*_mu: decoder-margin route from the smallest sigma: per fp32-solved puzzle sigma_flip = sigma0 * min-cell
         # margin ratio; the median over puzzles is where half of them flip
         d["sigma_star_mu"] = {}

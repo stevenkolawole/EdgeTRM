@@ -25,12 +25,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import figstyle as fs  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-PAIR = [("sudoku_mlp", "MLP mixer", fs.BLUE, fs.BLUE_LIGHT), ("sudoku_attn", "attention mixer", fs.RED, fs.RED_LIGHT)]
+PAIR = [("sudoku_mlp", "TRM, MLP mixer", fs.BLUE, fs.BLUE_LIGHT), ("sudoku_attn", "TRM, attention", fs.RED, fs.RED_LIGHT),
+        ("hrm_sudoku", "HRM", fs.GREY, fs.GREY_LIGHT)]
 LABEL = {"rho_own_sol": r"spectral radius $\rho(J)$ at $s_T$" + "\n(puzzles fp32 solves)",
          "rho_own": r"spectral radius $\rho(J)$ at $s_T$",
          "Lambda_sol": r"Lyapunov number $\Lambda$" + "\n(puzzles fp32 solves)",
          "frac_basin_switch": "basin switch\n(fraction of fp32-solved)",
          "resT": r"residual $\|s_T-s_{T-1}\|/\|s_T\|$",
+         "resT_sol": "residual at step 16\n(puzzles fp32 solves)",
+         "kick_sol": "growth of a random state kick\nover 16 steps (fp32-solved)",
+         "sigmaJ_sol": r"$\|J(s_T)\|_2$ (fp32-solved)",
          "gamma_nat_sol": r"gain along travel $\gamma$"}
 NAMES = {"sudoku_mlp": "TRM Sudoku MLP", "sudoku_attn": "TRM Sudoku attn", "hrm_sudoku": "HRM Sudoku",
          "maze_attn": "TRM Maze attn"}
@@ -47,7 +51,9 @@ def main():
     ap.add_argument("--data", type=Path, default=ROOT / "results" / "breadth" / "contraction_figdata.json")
     ap.add_argument("--out", type=Path, default=ROOT / "figures" / "contraction_mechanism.pdf")
     ap.add_argument("--metric", default="rho_own_sol")
-    ap.add_argument("--pred", default="rho_sol", help="panel (c) route: rho_sol | rho_all | mu_lin | mu_meas")
+    ap.add_argument("--pred", default="sens", help="panel (c): sens (sigma_1/2 vs one-step sensitivity) | rho_sol | "
+                                                   "rho_all | mu_lin | mu_meas | kick")
+    ap.add_argument("--logy", action="store_true", help="log y-axis in panel (b)")
     a = ap.parse_args()
     D = json.load(open(a.data))
     fs.use()
@@ -84,31 +90,58 @@ def main():
     axA.set_xlabel(r"weight noise $\sigma$")
     axB.set_xlabel(r"weight noise $\sigma$")
     axB.set_ylabel(LABEL.get(a.metric, a.metric))
-    if a.metric.startswith("rho") or a.metric.startswith("Lambda") or a.metric.startswith("gamma"):
+    if a.metric.startswith("rho") or a.metric.startswith("Lambda") or a.metric.startswith("gamma") \
+            or a.metric.startswith("kick"):
         axB.axhline(1.0, color=fs.INK, lw=0.6)
+    if a.logy:
+        axB.set_yscale("log")
     axA.legend(loc="lower left", fontsize=6.5)
-    # (c) predicted vs measured sigma_1/2
-    lo_, hi_ = 1e9, 0
-    for key, d in D.items():
-        sh = d["sigma_half"]["value"]
-        route = {"rho_sol": d["sigma_star_rho"].get("sol", {}), "rho_all": d["sigma_star_rho"].get("all", {}),
-                 "mu_lin": d["sigma_star_mu"].get("lin", {}), "mu_meas": d["sigma_star_mu"].get("meas", {})}[a.pred]
-        pv = route.get("value")
-        if sh is None or pv is None:
-            continue
-        col = fs.BLUE if key == "sudoku_mlp" else fs.RED if key == "sudoku_attn" else fs.GREY
-        axC.scatter([sh], [pv], s=14, color=col, zorder=3)
-        axC.annotate(NAMES.get(key, key), (sh, pv), xytext=(3, 2), textcoords="offset points", fontsize=5.5)
-        lo_, hi_ = min(lo_, sh, pv), max(hi_, sh, pv)
-    if hi_ > 0:
-        lim = [lo_ / 2, hi_ * 2]
-        axC.plot(lim, lim, color=fs.GREY, lw=0.6)
-        axC.set_xlim(lim)
-        axC.set_ylim(lim)
-    axC.set_xscale("log")
-    axC.set_yscale("log")
-    axC.set_xlabel(r"measured $\sigma_{1/2}$")
-    axC.set_ylabel(r"predicted $\sigma^*$")
+    # (c) predicted vs measured sigma_1/2, or measured sigma_1/2 against the one-step sensitivity
+    NAMEC = {"sudoku_mlp": "TRM MLP", "sudoku_attn": "TRM attn", "hrm_sudoku": "HRM", "maze_attn": "TRM Maze"}
+    COLC = {"sudoku_mlp": fs.BLUE, "sudoku_attn": fs.RED}
+    if a.pred == "sens":
+        pts = []
+        for key, d in D.items():
+            sh, dh = d["sigma_half"]["value"], d.get("deltaT_at_sigma_half")
+            sens = [v for x, v in zip(d["sigma"], d.get("sensitivity", [])) if v is not None and sh and x <= sh]
+            if sh is None or not sens:
+                continue
+            S = float(np.median(sens))
+            pts.append((key, S, sh, dh))
+            axC.scatter([S], [sh], s=14, color=COLC.get(key, fs.GREY), zorder=3)
+            axC.annotate(NAMEC.get(key, key), (S, sh), xytext=(3, 2), textcoords="offset points", fontsize=5.5)
+        if pts:
+            dstar = float(np.median([p[3] for p in pts if p[3] is not None]))
+            xs = np.geomspace(min(p[1] for p in pts) / 2, max(p[1] for p in pts) * 2, 50)
+            axC.plot(xs, dstar / xs, color=fs.GREY, lw=0.6, ls="--")
+            axC.annotate(rf"$\sigma_{{1/2}}=\delta^*/S$, $\delta^*={dstar:.2f}$", (xs[5], dstar / xs[5]), fontsize=5.5,
+                         color=fs.GREY)
+        axC.set_xscale("log")
+        axC.set_yscale("log")
+        axC.set_xlabel(r"one-step sensitivity $S=\delta_T/\sigma$")
+        axC.set_ylabel(r"measured $\sigma_{1/2}$")
+    else:
+        lo_, hi_ = 1e9, 0
+        for key, d in D.items():
+            sh = d["sigma_half"]["value"]
+            route = {"rho_sol": d["sigma_star_rho"].get("sol", {}), "rho_all": d["sigma_star_rho"].get("all", {}),
+                     "mu_lin": d["sigma_star_mu"].get("lin", {}), "mu_meas": d["sigma_star_mu"].get("meas", {}),
+                     "kick": d.get("sigma_star_kick", {})}[a.pred]
+            pv = route.get("value")
+            if sh is None or pv is None:
+                continue
+            axC.scatter([sh], [pv], s=14, color=COLC.get(key, fs.GREY), zorder=3)
+            axC.annotate(NAMEC.get(key, key), (sh, pv), xytext=(3, 2), textcoords="offset points", fontsize=5.5)
+            lo_, hi_ = min(lo_, sh, pv), max(hi_, sh, pv)
+        if hi_ > 0:
+            lim = [lo_ / 2, hi_ * 2]
+            axC.plot(lim, lim, color=fs.GREY, lw=0.6)
+            axC.set_xlim(lim)
+            axC.set_ylim(lim)
+        axC.set_xscale("log")
+        axC.set_yscale("log")
+        axC.set_xlabel(r"measured $\sigma_{1/2}$")
+        axC.set_ylabel(r"predicted $\sigma^*$")
     for ax, l in zip((axA, axB, axC), "abc"):
         fs.panel_label(ax, l)
     a.out.parent.mkdir(parents=True, exist_ok=True)
