@@ -107,6 +107,56 @@ def _jac_stats(m, inp, lab, probes=8, n=256, iters=20, chunk=64):
             "jac_spec_max": float(spec.max())}
 
 
+SENS_SIGMAS = (0.02, 0.1)
+
+
+@torch.no_grad()
+def _act_map(m, zH, zL, x):
+    inner = m.inner
+    cs = inner.rotary_emb() if hasattr(inner, "rotary_emb") else None
+    for _ in range(inner.config.H_cycles):
+        for _ in range(inner.config.L_cycles):
+            zL = inner.L_level(zL, zH + x, cos_sin=cs)
+        zH = inner.L_level(zH, zL, cos_sin=cs)
+    return zH, zL
+
+
+@torch.no_grad()
+def _sens_stats(build, prep, inp, lab, batch, nsup, n=256, draws=DRAWS, tag=""):
+    """X2's one-step sensitivity: delta_T = ||F~(s_T) - F(s_T)|| / ||s_T|| with s_T = (z_H, z_L) the end state
+    (n_sup ACT steps) of the model `prep` produces, F one full ACT step of that model and F~ the same map
+    with Gaussian weight noise sigma x per-tensor std on every CastedLinear (after `prep`). S_sigma = median
+    over puzzles of delta_T / sigma, median over `draws` draws. Returns {f"S{tag}_{sigma}": ..., spreads}."""
+    dev = bs.DEV
+    m = build()
+    prep(m)
+    _, _, zH, zL = bs.run(m, inp[:n], lab[:n], batch, nsup)
+    m = m.to(dev)
+    x = m.inner._input_embeddings(torch.from_numpy(inp[:n]).to(dev),
+                                  torch.zeros(n, dtype=torch.int32, device=dev)).float()
+    zH, zL = zH.to(dev), zL.to(dev)
+    h0, l0 = _act_map(m, zH, zL, x)
+    norm = torch.sqrt(zH.pow(2).flatten(1).sum(1) + zL.pow(2).flatten(1).sum(1))
+    m.cpu()
+    out = {}
+    for sg in SENS_SIGMAS:
+        per = []
+        for d in range(draws):
+            mq = build()
+            prep(mq)
+            torch.manual_seed(100003 * d + int(round(sg * 10000)) + 13)
+            bs.quantize_weights_(mq, None, "noise", sg)
+            mq = mq.to(dev)
+            h1, l1 = _act_map(mq, zH, zL, x)
+            dl = torch.sqrt((h1 - h0).pow(2).flatten(1).sum(1) + (l1 - l0).pow(2).flatten(1).sum(1)) / norm
+            per.append(float(dl.median()) / sg)
+            del mq
+        out[f"S{tag}_{sg}"] = float(np.median(per))
+        out[f"S{tag}_{sg}_draws"] = per
+    torch.cuda.empty_cache()
+    return out
+
+
 def _lsq_split(ckpt):
     """pretrain_q7 checkpoints may carry a learned weight step `...q7_lsq_s` (weight-LSQ) and a frozen
     activation scale `...q7_act_s` (w+a runs) per CastedLinear. Returns (path of a copy without them,
@@ -213,7 +263,8 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
                 old = json.load(open(out))
                 if old.get("n") == rec["n"] and old.get("nsup") == nsup:
                     rec["records"] = old.get("records", [])
-                    rec.update({k: v for k, v in old.items() if k.startswith("jac") or k.startswith("ref_fp32")})
+                    rec.update({k: v for k, v in old.items() if k.startswith("jac") or k.startswith("ref_fp32")
+                                or k.startswith("S")})
             except (json.JSONDecodeError, ValueError):
                 log(f"[q7_eval] {out} unreadable; starting fresh")
         if ref_ckpt:   # records written before the reference was known are redone
@@ -244,7 +295,7 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
                                                                   or sp.endswith("~noise0.2"))]
             rec["light"] = True
         todo = [c for c in cells if c not in done]
-        if not todo and "jac_spec_mean" in rec:
+        if not todo and "jac_spec_mean" in rec and "S_0.02" in rec and (not quant_noise or "Sq_0.02" in rec):
             return rec
         t0 = time.time()
         ref_zH2 = None
@@ -260,6 +311,14 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
         if "jac_spec_mean" not in rec:
             rec.update(_jac_stats(m, inp, lab))
         del m
+        mk = lambda: bs.build("sudoku_mlp", H, nsup, batch)[0]  # noqa: E731
+        if "S_0.02" not in rec:
+            rec.update(_sens_stats(mk, lambda mm: None, inp, lab, batch, nsup))
+        if quant_noise and "Sq_0.02" not in rec:     # sensitivity around the deployed (quantized) point
+            if lsq_steps:
+                rec.update(_sens_stats(mk, lambda mm: _quantize_lsq_(mm, lsq_steps, 4), inp, lab, batch, nsup, tag="q"))
+            else:
+                rec.update(_sens_stats(mk, lambda mm: bs.quantize_weights_(mm, 4, "t"), inp, lab, batch, nsup, tag="q"))
         for spec, draw in todo:
             t1 = time.time()
             if spec == "fp32":
@@ -300,7 +359,9 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
         log(f"[q7_eval] {label or ckpt}: fp32 {fp['pexact']*100:.1f}"
             + (f" w4t {w4t['pexact']*100:.1f} (fidH {w4t['fidelity_H']:.3f}{fr(w4t)})" if w4t else "")
             + (f" w4lsq {lsq['pexact']*100:.1f} (fidH {lsq['fidelity_H']:.3f}{fr(lsq)})" if lsq else "")
-            + f" jac_fro2 {rec['jac_fro2']:.3f} jac_spec mean {rec['jac_spec_mean']:.3f}; {len(todo)} cells in {time.time()-t0:.0f}s")
+            + f" S0.02 {rec['S_0.02']:.2f} S0.1 {rec['S_0.1']:.2f}"
+            + (f" Sq0.1 {rec['Sq_0.1']:.2f}" if "Sq_0.1" in rec else "")
+            + f" jac_fro2 {rec['jac_fro2']:.3f}; {len(todo)} cells in {time.time()-t0:.0f}s")
         return rec
     finally:
         torch.set_rng_state(rng_cpu)

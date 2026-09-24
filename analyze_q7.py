@@ -75,7 +75,7 @@ def qat_table():
     print("\nRuns from a trained checkpoint (QAT at Ingolfsson et al.'s 12k-step budget; n=1000, H=3, n_sup=16).")
     print("fidR = fidelity of z_H against the STARTING fp32 model; s1/2q = noise cliff around the quantized point")
     print(f"{'run':18s} {'step':>6s} {'L':>2s} {'start':>5s} {'fp32':>5s} {'w4t':>5s} {'fidR':>5s} {'s1/2q':>5s} "
-          f"{'w4lsq':>5s} {'fidR':>5s} {'s1/2q':>5s} {'w4t+a':>5s} {'lsq+a':>5s}")
+          f"{'w4lsq':>5s} {'fidR':>5s} {'s1/2q':>5s} {'w4t+a':>5s} {'lsq+a':>5s} {'S.1':>5s} {'Sq.1':>5s}")
     for run, step, d, q in sorted(rows, key=lambda x: (re.sub(r"_s\d+$", "", x[0]), x[0], x[1])):
         def g(sp, k="pexact", pct=True):
             r = q.get(sp)
@@ -87,7 +87,8 @@ def qat_table():
         print(f"{run:18s} {step:6d} {'L' if d.get('light') else ' ':>2s} "
               f"{(d.get('ref_fp32_pexact') or 0)*100:5.1f} {g('fp32')} {g('w4t')} {g('w4t', 'fidelity_H_ref', False)} "
               f"{(f'{sq:.3f}' if sq else '  -  '):>5s} {g('w4lsq')} {g('w4lsq', 'fidelity_H_ref', False)} "
-              f"{(f'{sl:.3f}' if sl else '  -  '):>5s} {g('w4t+a4s')} {g('w4lsq+a4s')}")
+              f"{(f'{sl:.3f}' if sl else '  -  '):>5s} {g('w4t+a4s')} {g('w4lsq+a4s')} "
+              f"{(f'{d[chr(83)+'_0.1']:.2f}' if 'S_0.1' in d else '  -  '):>5s} {(f'{d['Sq_0.1']:.2f}' if 'Sq_0.1' in d else '  -  '):>5s}")
     print("(L = light cell set at intermediate checkpoints: one draw, fewer cells)")
 
 
@@ -102,7 +103,7 @@ def load_evals():
         fp = q.get(("fp32", 0))
         row = {"host": host, "run": run, "step": step, "ncells": len(recs),
                "arm": re.sub(r"_s\d+$", "", run), "seed": int(run.rsplit("_s", 1)[1]) if "_s" in run else -1,
-               **{k: d.get(k) for k in ("jac_fro2", "jac_spec_mean", "jac_spec_max")}}
+               **{k: d.get(k) for k in ("jac_fro2", "jac_spec_mean", "jac_spec_max", "S_0.02", "S_0.1")}}
         if fp:
             row["fp32"] = fp["pexact"]
             for spec in ("w4t", "w4c", "w4g32", "w3g32", "w8c"):
@@ -125,7 +126,7 @@ def fmt(v, p=1, pct=True):
 
 def table(rows):
     print(f"{'host':6s} {'run':16s} {'step':>6s} {'n':>3s} {'fp32':>5s} {'w4t':>5s} {'fidH':>5s} {'w4c':>5s} "
-          f"{'s1/2':>5s} {'n0.15 min/med/max':>18s} {'n0.2 med':>8s} {'J_F2':>6s} {'J_top':>6s}")
+          f"{'s1/2':>5s} {'n0.15 min/med/max':>18s} {'n0.2 med':>8s} {'J_F2':>6s} {'J_top':>6s} {'S.02':>5s} {'S.1':>5s}")
     for r in sorted(rows, key=lambda r: (r["arm"], r["seed"], r["host"], r["step"])):
         n15 = r.get("n0.15")
         n2 = r.get("n0.2")
@@ -134,7 +135,7 @@ def table(rows):
               f"{fmt(r.get('s_half'), 3, False):>5s} "
               f"{(f'{n15[0]*100:.1f}/{n15[1]*100:.1f}/{n15[2]*100:.1f}' if n15 else '-'):>18s} "
               f"{(f'{n2[1]*100:.1f}' if n2 else '-'):>8s} {fmt(r.get('jac_fro2'), 3, False):>6s} "
-              f"{fmt(r.get('jac_spec_mean'), 2, False):>6s}")
+              f"{fmt(r.get('jac_spec_mean'), 2, False):>6s} {fmt(r.get('S_0.02'), 2, False):>5s} {fmt(r.get('S_0.1'), 2, False):>5s}")
 
 
 def equal_fp32(rows):

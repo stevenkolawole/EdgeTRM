@@ -94,7 +94,7 @@ class PretrainConfig(pydantic.BaseModel):
     freeze_weights: bool = False # If True, freeze weights and only learn the embeddings
 
     # ---- Q7 (trainable basin width). Pass on the command line with a "+" prefix (+q7_reg=jac ...).
-    # q7_reg: none | jac | noise | qat | clip | lsq. Active from step q7_start_frac*total_steps; its strength
+    # q7_reg: none | jac | sens | noise | qat | clip | lsq. Active from step q7_start_frac*total_steps; its strength
     # ramps linearly from 0 to full over q7_ramp_steps (jac lambda, noise sigma, clip threshold).
     q7_reg: str = "none"
     q7_start_frac: float = 0.0
@@ -104,6 +104,8 @@ class PretrainConfig(pydantic.BaseModel):
     q7_jac_sub: int = 128           # jac: examples of the batch used for the estimate
     q7_jac_every: int = 1           # jac: compute the penalty every k steps (scaled by k)
     q7_sigma: float = 0.0           # noise: Gaussian weight noise, std = sigma x per-tensor weight std (fresh each step)
+                                    # sens: the weight-noise level sigma_p of the sensitivity probe
+    q7_sens_sub: int = 64           # sens: examples of the batch used for the probe
     q7_bits: int = 4                # qat: per-tensor symmetric fake-quant bits (straight-through estimator)
     q7_clip_k: float = 0.0          # clip: |W| <= k x per-tensor std after every optimizer step
     q7_eval_batches: int = 3        # in-run eval on the first N test batches (0 = the full 422k test set, upstream behaviour)
@@ -572,7 +574,9 @@ def q7_perturb_(config: PretrainConfig, weights, strength: float):
             qmax = 2 ** (config.q7_bits - 1) - 1
             s = (W.abs().max() / qmax).clamp_min(1e-8)
             saved.append(W.detach().clone())
-            W.copy_(torch.round(W / s).clamp(-qmax, qmax) * s)
+            # homotopy W + a (Q(W) - W), a = strength: a ramp (q7_ramp_steps > 0) introduces the quantizer
+            # gradually during training (in-training compression, CompreSSM's lesson); a = 1 is plain QAT
+            W.copy_(W + strength * (torch.round(W / s).clamp(-qmax, qmax) * s - W))
     return saved
 
 
@@ -628,6 +632,59 @@ def q7_jacobian_penalty(config: PretrainConfig, train_state: TrainState):
     return g.float().pow(2).sum() / v.numel()
 
 
+def q7_act_step(level: nn.Module, cfg, zH: torch.Tensor, zL: torch.Tensor, x: torch.Tensor, cs=None):
+    """One full ACT step F of TRM (H_cycles x (L_cycles L-updates + 1 H-update)), with gradient throughout:
+    the map whose one-step perturbation delta_T X2 measures (contraction.py, TRM family)."""
+    for _ in range(cfg.H_cycles):
+        for _ in range(cfg.L_cycles):
+            zL = level(zL, zH + x, cos_sin=cs)
+        zH = level(zH, zL, cos_sin=cs)
+    return zH, zL
+
+
+_Q7_SENS_COPY = {}
+
+
+def q7_sensitivity_penalty(config: PretrainConfig, train_state: TrainState):
+    """S = delta / sigma_p, delta = ||F_{W+eps}(s) - F_W(s)|| / ||s|| per puzzle (mean over puzzles), with
+    eps = sigma_p x per-tensor std x N(0, 1) on every weight of the recursion block (fresh draw each step)
+    and s the carry this batch just produced (the training-time end state). Differentiable in W through both
+    maps: the perturbed map runs on a structural copy of L_level whose weights are the tensors W + eps
+    (the trained module is never mutated, so torch.compile's guards are untouched). Eager, fp32.
+    X2: S at fp32's end state explains 84% of the variance of log basin width across six models."""
+    import copy as _copy
+    inner = _q7_inner(train_state.model)
+    level = inner.L_level
+    if "copy" not in _Q7_SENS_COPY:
+        cp = _copy.deepcopy(level)
+        for m in cp.modules():
+            if m.__class__.__name__ == "CastedLinear":
+                del m._parameters["weight"]
+        _Q7_SENS_COPY["copy"] = cp
+    cp = _Q7_SENS_COPY["copy"]
+    src = {nm: m for nm, m in level.named_modules() if m.__class__.__name__ == "CastedLinear"}
+    for nm, m in cp.named_modules():
+        if m.__class__.__name__ == "CastedLinear":
+            W = src[nm].weight
+            m.weight = W + torch.randn_like(W) * (config.q7_sigma * W.detach().std())
+    c = train_state.carry
+    n = min(config.q7_sens_sub, c.inner_carry.z_L.shape[0])
+    with torch.no_grad():
+        cd = c.current_data
+        x = q7_input_embeddings(inner, cd["inputs"][:n], cd["puzzle_identifiers"][:n]).float()
+        zH = c.inner_carry.z_H[:n].float()
+        zL = c.inner_carry.z_L[:n].float()
+    cs = inner.rotary_emb() if hasattr(inner, "rotary_emb") else None
+    h0, l0 = q7_act_step(level, inner.config, zH, zL, x, cs)
+    h1, l1 = q7_act_step(cp, inner.config, zH, zL, x, cs)
+    for m in cp.modules():                      # drop the graph references held by the copy
+        if m.__class__.__name__ == "CastedLinear":
+            m.weight = None
+    num = torch.sqrt((h1 - h0).pow(2).flatten(1).sum(1) + (l1 - l0).pow(2).flatten(1).sum(1))
+    den = torch.sqrt(zH.pow(2).flatten(1).sum(1) + zL.pow(2).flatten(1).sum(1)).clamp_min(1e-6)
+    return (num / den).mean() / config.q7_sigma
+
+
 def create_evaluators(config: PretrainConfig, eval_metadata: PuzzleDatasetMetadata) -> List[Any]:
     data_paths =config.data_paths_test if len(config.data_paths_test)>0 else config.data_paths
     # Initialize evaluators
@@ -670,6 +727,9 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
     q7_jac = None
     if config.q7_reg == "jac" and q7_s > 0 and train_state.step % config.q7_jac_every == 0:
         q7_jac = q7_jacobian_penalty(config, train_state)
+        (q7_s * config.q7_lambda * config.q7_jac_every * q7_jac).backward()
+    if config.q7_reg == "sens" and q7_s > 0 and train_state.step % config.q7_jac_every == 0:
+        q7_jac = q7_sensitivity_penalty(config, train_state)       # logged under q7/jac_fro2 = S estimate
         (q7_s * config.q7_lambda * config.q7_jac_every * q7_jac).backward()
 
     # Allreduce

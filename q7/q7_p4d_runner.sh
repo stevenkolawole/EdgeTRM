@@ -55,7 +55,18 @@ while true; do
     pending=$((pending + 1))
     alive "$run" && continue
     case "$card" in 3|4|5) ;; *) log "refusing $run on card $card (X5 owns 3-5)"; continue ;; esac
-    if [ "$req" != "-" ] && [ ! -f "$req" ]; then continue; fi
+    # requirements: "-" or comma-separated files that must all exist
+    if [ "$req" != "-" ]; then
+      miss=0; IFS=',' read -ra reqs <<< "$req"
+      for rf in "${reqs[@]}"; do [ -f "$rf" ] || miss=1; done
+      [ "$miss" = 1 ] && continue
+    fi
+    # crash-loop guard: a run that exited without DONE three times is skipped (reboot kills do not count)
+    nfail=$(grep -c "DONE=no" "$HOME/q7/logs/$run.log" 2>/dev/null)
+    if [ "${nfail:-0}" -ge 3 ]; then
+      [ -f "$PIDS/$run.failed" ] || { log "SKIP $run: exited without DONE $nfail times (see logs/$run.log)"; touch "$PIDS/$run.failed"; }
+      continue
+    fi
     np=$(card_procs "$card")
     if [ "$np" -ge 2 ]; then continue; fi
     script=q7_train.sh; [ "${run#eval_}" != "$run" ] && script=q7_evalrun.sh
