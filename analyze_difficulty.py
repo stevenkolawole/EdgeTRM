@@ -144,8 +144,9 @@ def load_strat(task, kind="diff"):
     """{spec: record with 'B' (n x K bool)}; merges every file of this task (fp32 from the first file,
     other fp32 copies are checked for identity)."""
     recs, fp32s = {}, []
-    plat = "p4d" if kind == "deep" else "babel"          # deep K=512 sweep runs on p4d, the K=64 one on Babel
-    files = sorted(glob.glob(str(B / plat / "x1" / f"{kind}_{task}_*.json")))
+    # kind: "deep" (K=512, p4d) | "diff" (K=64, 6000 puzzles, p4d) | "diff_babel" (the Babel K=64 MLP file)
+    plat, pref = {"deep": ("p4d", "deep"), "diff": ("p4d", "diff"), "diff_babel": ("babel", "diff")}[kind]
+    files = sorted(glob.glob(str(B / plat / "x1" / f"{pref}_{task}_*.json")))
     rows = None
     for f in files:
         d = json.load(open(f))
@@ -470,5 +471,5 @@ def fig():
 
 
 if __name__ == "__main__":
-    {"first": first, "strat": strat, "deep": lambda: strat("deep"), "glink": glink, "halt": halt, "json": build_json,
+    {"first": first, "strat": strat, "strat_babel": lambda: strat("diff_babel"), "deep": lambda: strat("deep"), "glink": glink, "halt": halt, "json": build_json,
      "fig": fig}[sys.argv[1]]()

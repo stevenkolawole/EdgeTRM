@@ -1,0 +1,3 @@
+difficulty_sweep.py --K 64 --batch 1000 --checkpoint --task sudoku_attn --quants fp32,w4c,w4t,w3c,w3a,w4g32,w8c --out /home/ubuntu/x1/results/diff_sudoku_attn_q.json
+difficulty_sweep.py --K 64 --batch 1000 --checkpoint --task hrm_sudoku --quants fp32,w4c,w4t,w2g32,w2a,w3c,w4g32,w8c --out /home/ubuntu/x1/results/diff_hrm_sudoku_q.json
+difficulty_sweep.py --K 64 --batch 1000 --checkpoint --task sudoku_mlp --quants fp32,w4c,w3g32,w3a,w4t,w3c,w4g32,w8c --out /home/ubuntu/x1/results/diff_sudoku_mlp_q.json

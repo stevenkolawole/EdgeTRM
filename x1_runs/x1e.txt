@@ -1,0 +1,3 @@
+difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task hrm_sudoku --quants fp32,w2g32,w4c,w4t --ref_cache /home/ubuntu/x1/results/ref_deep_hrm_sudoku.pt --out /home/ubuntu/x1/results/deep_hrm_sudoku_a.json
+difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task hrm_sudoku --quants noise1.0@s0,noise1.0@s1,noise1.0@s2 --ref_wait --ref_cache /home/ubuntu/x1/results/ref_deep_hrm_sudoku.pt --out /home/ubuntu/x1/results/deep_hrm_sudoku_b.json
+difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task hrm_sudoku --quants w8c,w4g32 --ref_wait --ref_cache /home/ubuntu/x1/results/ref_deep_hrm_sudoku.pt --out /home/ubuntu/x1/results/deep_hrm_sudoku_c.json

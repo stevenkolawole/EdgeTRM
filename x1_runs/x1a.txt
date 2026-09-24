@@ -1,2 +1,4 @@
 difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task sudoku_mlp --quants fp32,w3g32,w4c --ref_cache /home/ubuntu/x1/results/ref_deep_sudoku_mlp.pt --out /home/ubuntu/x1/results/deep_sudoku_mlp_a.json
 difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task sudoku_mlp --quants w4t,noise0.15@s0 --ref_wait --ref_cache /home/ubuntu/x1/results/ref_deep_sudoku_mlp.pt --out /home/ubuntu/x1/results/deep_sudoku_mlp_b.json
+difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task sudoku_mlp --quants noise0.15@s1,noise0.15@s2,w8c --ref_wait --ref_cache /home/ubuntu/x1/results/ref_deep_sudoku_mlp.pt --out /home/ubuntu/x1/results/deep_sudoku_mlp_c.json
+difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task sudoku_mlp --quants w4g32 --ref_wait --ref_cache /home/ubuntu/x1/results/ref_deep_sudoku_mlp.pt --out /home/ubuntu/x1/results/deep_sudoku_mlp_d.json
