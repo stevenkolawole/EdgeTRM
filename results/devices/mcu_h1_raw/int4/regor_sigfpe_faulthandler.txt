@@ -1,0 +1,9 @@
+Fatal Python error: Floating point exception
+
+Current thread 0x000079a84a72e080 (most recent call first):
+  File "/home/ubuntu/venvs/mcu/lib/python3.12/site-packages/ethosu/vela/vela.py", line 137 in process_regor
+  File "/home/ubuntu/venvs/mcu/lib/python3.12/site-packages/ethosu/vela/vela.py", line 1317 in main
+  File "<string>", line 1 in <module>
+
+Extension modules: numpy._core._multiarray_umath, numpy.linalg._umath_linalg, ethosu.mlw_codec (total: 3)
+timeout: the monitored command dumped core

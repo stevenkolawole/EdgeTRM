@@ -1,0 +1,10 @@
+{
+ "what": "Same INT8 graphs (~/mcu_h1/<task>/H<H>/inner_step_int8.tflite), ethos-u55-256 / Ethos_U55_High_End_Embedded / Shared_Sram, compiled with the eval kit's Vela 5.1.0 (~/corstone/ml-embedded-evaluation-kit/resources_downloaded/env/bin/vela) instead of 5.2.0 (~/venvs/mcu). Run by hand on p4d, Sep 24.",
+ "rows": [
+  {"task": "sudoku_mlp", "H": 1, "vela510_cycles": 136844418, "vela520_cycles": 51997258, "vela510_sram_kib": 1220.859375, "vela510_flash_kib": 5117.78125},
+  {"task": "sudoku_attn", "H": 1, "vela510_cycles": 332469456, "vela520_cycles": 162539662, "vela510_sram_kib": 997.125, "vela510_flash_kib": 6949.90625},
+  {"task": "sudoku_mlp", "H": 3, "vela510_cycles": 410269106, "vela520_cycles": 155829422, "vela510_sram_kib": 1269.359375, "vela510_flash_kib": 6430.59375},
+  {"task": "sudoku_attn", "H": 3, "vela510_cycles": 997144220, "vela520_cycles": 487456634, "vela510_sram_kib": 1045.625, "vela510_flash_kib": 8539.53125}
+ ],
+ "fvp_attention_invalid_commands": "Vela 5.2.0 and 5.1.0 both lower each U55 BATCH_MATMUL into ELEMENTWISE MUL (int8 x int8 -> int32) followed by POOL REDUCE_SUM with an int32 IFM and an int8 OFM; the sudoku_attn H=1 command stream has 2,254 such REDUCE_SUM commands (register stream parsed from vela --verbose-register-command-stream), and the Corstone-300 FVP's Ethos-U55 model (rev 136b7d75, Apr 12 2023) prints exactly 2,254 '[critical] ... Op=4: Invalid data type, ifm=5 ofm=1' lines during that step. The Sudoku-MLP streams contain no such command and run clean."
+}

@@ -1,0 +1,101 @@
+[fvp] /home/ubuntu/corstone/FVP/models/Linux64_GCC-9.3/FVP_Corstone_SSE-300_Ethos-U65 axf=/home/ubuntu/corstone/ml-embedded-evaluation-kit/build_sudoku_mlp_h1_int8_u65_256/bin/mlek_inference_runner.axf macs=256 Thu Sep 24 19:29:21 UTC 2026
+telnetterminal0: Listening for serial connection on port 5009
+telnetterminal1: Listening for serial connection on port 5011
+telnetterminal2: Listening for serial connection on port 5013
+telnetterminal5: Listening for serial connection on port 5015
+
+    Ethos-U rev 136b7d75 --- Apr 12 2023 13:44:01
+    (C) COPYRIGHT 2019-2023 Arm Limited
+    ALL RIGHTS RESERVED
+
+INFO - WARN - MPS3_SCC->CFG_ACLK reads 0. Assuming default clock of 32000000
+Processor internal clock: 32000000Hz
+INFO - V2M-MPS3 revision A
+INFO - Application Note AN228, Revision C
+INFO - MPS3 build 3
+INFO - MPS3 core clock has been set to: 32000000Hz
+INFO - CPU ID: 0x411fd220
+INFO - CPU: Cortex-M55 r1p0
+INFO - Enabling I-cache.
+INFO - Enabling D-cache.
+INFO - Configured TA_SRAM	@0x58103000
+INFO - Configured TA_EXT	@0x58103200
+INFO - Initialising Ethos-U device@0x58102000
+INFO - Using Dedicated_Sram memory mode; fast cache size: 393216
+INFO - Ethos-U device initialised
+INFO - Ethos-U version info:
+INFO - 	Arch:       v1.1.0
+INFO - 	Driver:     v1.0.0
+INFO - 	MACs/cc:    256
+INFO - 	Cmd stream: v0
+INFO - Target system design: Arm Corstone-300 - AN552
+INFO - Device MPS3 GLCD configured
+INFO - Resolution:    320 x 240
+INFO - Colour format: RGB565
+INFO - ARM ML Embedded Evaluation Kit
+INFO - Version 26.06.0 Build date: Sep 24 2026 @ 19:26:11
+INFO - Compiler: GNU-13.2.1
+INFO - Copyright 2021-2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
+INFO - Creating allocator using tensor arena at 0x0x70512eb0
+INFO - Allocating tensors
+INFO - Model INPUT tensors: 
+INFO - 	tensor type is int8
+INFO - 	tensor occupies 49664 bytes with dimensions
+INFO - 		0:   1
+INFO - 		1:  97
+INFO - 		2: 512
+INFO - Scale = 0.036887
+INFO - ZeroPoint = -3
+INFO - 	tensor type is int8
+INFO - 	tensor occupies 49664 bytes with dimensions
+INFO - 		0:   1
+INFO - 		1:  97
+INFO - 		2: 512
+INFO - Scale = 0.032989
+INFO - ZeroPoint = -5
+INFO - 	tensor type is int32
+INFO - 	tensor occupies 324 bytes with dimensions
+INFO - 		0:   1
+INFO - 		1:  81
+INFO - Scale = 0.000000
+INFO - ZeroPoint = 0
+INFO - Model OUTPUT tensors: 
+INFO - 	tensor type is int8
+INFO - 	tensor occupies 891 bytes with dimensions
+INFO - 		0:   1
+INFO - 		1:  81
+INFO - 		2:  11
+INFO - Scale = 0.693732
+INFO - ZeroPoint = 39
+INFO - Activation buffer (a.k.a tensor arena) size used: 1148740
+INFO - Number of operators: 4
+INFO - 	Operator 0: ethos-u
+INFO - 	Operator 1: EMBEDDING_LOOKUP
+INFO - 	Operator 2: QUANTIZE
+INFO - 	Operator 3: ethos-u
+INFO - NPU memory mode likely to be: Dedicated_Sram
+INFO - Final results:
+INFO - Total number of inferences: 1
+INFO - Profile for Inference:
+INFO - NPU ACTIVE: 108812417 cycles
+INFO - NPU AXI0_RD_DATA_BEAT_RECEIVED: 7211062 beats
+INFO - NPU AXI0_WR_DATA_BEAT_WRITTEN: 3185912 beats
+INFO - NPU AXI1_RD_DATA_BEAT_RECEIVED: 6816948 beats
+INFO - NPU IDLE: 1731 cycles
+INFO - NPU TOTAL: 108814148 cycles
+INFO - Inference completed.
+INFO - program terminating...
+
+Info: /OSCI/SystemC: Simulation stopped by user.
+[warning ][main@0][108816608 ns] Simulation stopped by user
+
+--- FVP_MPS3_Corstone_SSE_300 statistics: -------------------------------------
+Simulated time                          : 4.754605s
+User time                               : 690.673419s
+System time                             : 0.398200s
+Wall time                               : 690.814928s
+Performance index                       : 0.01
+cpu0                                    :   0.01 MIPS (    10059172 Inst)
+Memory highwater mark                   : 0x13840000 bytes ( 0.305 GB )
+-------------------------------------------------------------------------------
+[fvp] rc=0 Thu Sep 24 19:40:54 UTC 2026

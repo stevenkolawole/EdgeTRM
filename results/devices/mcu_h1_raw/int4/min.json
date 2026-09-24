@@ -1,0 +1,58 @@
+[
+ {
+  "graph": "w8a8",
+  "core": "regor",
+  "rc": 0,
+  "lines": [
+   "CPU operators = 0 (0.0%)",
+   "NPU operators = 1 (100.0%)",
+   "Weight  SRAM bandwidth                           2.27 MB/batch",
+   "Weight  Off-chip Flash bandwidth                 0.76 MB/batch"
+  ]
+ },
+ {
+  "graph": "w8a8",
+  "core": "legacy",
+  "rc": 0,
+  "lines": [
+   "Warning: Unsupported TensorFlow Lite semantics for FULLY_CONNECTED 'serving_default_output_0_output'. Placing on CPU instead",
+   "Unexpected None value for constant tensor: torch.nn.modules.container.Sequential/torch.nn.modules.linear.Linear_0;",
+   "CPU operators = 1 (100.0%)",
+   "NPU operators = 0 (0.0%)"
+  ]
+ },
+ {
+  "graph": "w4a8_c",
+  "core": "regor",
+  "rc": -8,
+  "lines": []
+ },
+ {
+  "graph": "w4a8_c",
+  "core": "legacy",
+  "rc": 0,
+  "lines": [
+   "Warning: Unsupported TensorFlow Lite semantics for FULLY_CONNECTED 'serving_default_output_0_output'. Placing on CPU instead",
+   "Unexpected None value for constant tensor: torch.nn.modules.container.Sequential/torch.nn.modules.linear.Linear_0;",
+   "CPU operators = 1 (100.0%)",
+   "NPU operators = 0 (0.0%)"
+  ]
+ },
+ {
+  "graph": "w4a8_t",
+  "core": "regor",
+  "rc": -8,
+  "lines": []
+ },
+ {
+  "graph": "w4a8_t",
+  "core": "legacy",
+  "rc": 0,
+  "lines": [
+   "Warning: Unsupported TensorFlow Lite semantics for FULLY_CONNECTED 'serving_default_output_0_output'. Placing on CPU instead",
+   "Unexpected None value for constant tensor: torch.nn.modules.container.Sequential/torch.nn.modules.linear.Linear_0;",
+   "CPU operators = 1 (100.0%)",
+   "NPU operators = 0 (0.0%)"
+  ]
+ }
+]

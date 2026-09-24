@@ -1,0 +1,19 @@
+[build] start Thu Sep 24 19:45:13 UTC 2026 task=sudoku_attn H=3 variant=int8 npu=u55_256 model=/home/ubuntu/mcu_h1/sudoku_attn/H3/fvp/int8_u55_256/inner_step_int8_vela.tflite
+--     CMSIS_SRC_PATH=/home/ubuntu/corstone/ml-embedded-evaluation-kit/dependencies/cmsis-6
+--     CMSIS_DSP_SRC_PATH=/home/ubuntu/corstone/ml-embedded-evaluation-kit/dependencies/cmsis-dsp
+--     CMSIS_NN_SRC_PATH=/home/ubuntu/corstone/ml-embedded-evaluation-kit/dependencies/cmsis-nn
+--     CORTEX_DFP_SRC_PATH=/home/ubuntu/corstone/ml-embedded-evaluation-kit/dependencies/cortex-dfp
+--     CMSIS_DSP_MIN_REQ_SRC_LIST=ON
+--     inference_runner_ACTIVATION_BUF_SZ=0x900000
+--     inference_runner_DYNAMIC_MEM_LOAD_ENABLED=OFF
+--     inference_runner_MODEL_PATH=/home/ubuntu/mcu_h1/sudoku_attn/H3/fvp/int8_u55_256/inner_step_int8_vela.tflite
+-- --------------------------------------------------------------------------------------------------
+-- Configuring done (7.5s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/ubuntu/corstone/ml-embedded-evaluation-kit/build_sudoku_attn_h3_int8_u55_256
+[106%] Building C object mlek-app/CMakeFiles/mlek_inference_runner.dir/__/hal/source/components/npu/ethosu_cpu_cache.c.obj
+[106%] Linking CXX executable ../bin/mlek_inference_runner.axf
+/home/ubuntu/corstone/gcc/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/bin/ld: warning: ../bin/mlek_inference_runner.axf has a LOAD segment with RWX permissions
+[106%] Built target mlek_inference_runner
+-rwxrwxr-x 1 ubuntu ubuntu 12990228 Sep 24 19:46 bin/mlek_inference_runner.axf
+[build] done Thu Sep 24 19:46:54 UTC 2026
