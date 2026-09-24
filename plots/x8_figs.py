@@ -30,7 +30,7 @@ def defer_fig():
     tasks = [t for t in NAMES if t in S["basin"]]
     fig, axes = plt.subplots(2, len(tasks), figsize=(3.2 * len(tasks), 5.6), squeeze=False, sharey="row")
     for j, t in enumerate(tasks):
-        d = "exact" if "sudoku" in t else "vshort"
+        d = "exact" if "sudoku" in t else "valid"
         rows = S["basin"][t][d]
         for r in rows:
             if r["rule"] is None or r["retained"] is None:
@@ -58,7 +58,7 @@ def detectors_fig():
     dets = ["head", "combo", "checker", "msp_min", "resid_H", "pi_dis", "fid_H"]
     fig, axes = plt.subplots(1, len(tasks), figsize=(3.4 * len(tasks), 3.2), squeeze=False, sharey=True)
     for j, t in enumerate(tasks):
-        d = "exact" if "sudoku" in t else "vshort"
+        d = "exact" if "sudoku" in t else "valid"
         rows = S["auroc"][t][d]
         for ci, cls in enumerate(["fp32", "in", "edge", "out"]):
             vals = []
@@ -79,7 +79,7 @@ def detectors_fig():
 
 
 def ptrm_fig():
-    keys = sorted(k for k in S["ptrm"] if k.endswith("|fp32"))
+    keys = sorted(k for k in S["ptrm"] if "|fp32|" in k)
     tasks = sorted({k.split("|")[0] for k in keys})
     if not tasks:
         return
@@ -87,9 +87,10 @@ def ptrm_fig():
     for j, t in enumerate(tasks):
         ax = axes[0, j]
         for noise, c in (("ptrm", "#2166ac"), ("anoise", "#b2182b")):
-            k = f"{t}|{noise}|fp32"
-            if k not in S["ptrm"]:
+            ks = sorted([k for k in S["ptrm"] if k.startswith(f"{t}|{noise}|fp32|")], key=lambda k: -len(S["ptrm"][k]["rows"]))
+            if not ks:
                 continue
+            k = ks[0]
             rows = S["ptrm"][k]["rows"]
             sg = [r["sigma"] for r in rows]
             ax.plot(sg, [100 * r["single_mean"] for r in rows], "-o", c=c, ms=3, label=f"{noise}: single rollout")

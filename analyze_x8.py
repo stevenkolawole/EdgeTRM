@@ -4,6 +4,7 @@
   python analyze_x8.py auroc     # detectors side by side: AUROC for "answer wrong", per definition
   python analyze_x8.py select    # defer rule: threshold set once on fp32, coverage / risk everywhere
   python analyze_x8.py basin     # head calibration vs the basin (risk, ECE, q separation by class)
+  python analyze_x8.py joint     # release check (phi filter) + defer rule, per model
   python analyze_x8.py early     # per-step read-out: step-k signals predicting the final answer
   python analyze_x8.py checker   # does the head add anything over the hand-coded checker?
   python analyze_x8.py fid       # fidelity as a filter, not a ranker (existing breadth records)
@@ -301,7 +302,15 @@ def print_auroc(res):
 
 # ----------------------------------------------------------------------------- 2. selective prediction
 def calibrate(score, wrong, rstar):
-    """Largest threshold t (an observed score) such that risk among {score <= t} <= rstar."""
+    """Largest threshold t (an observed score) such that risk among {score <= t} <= rstar.
+    rstar == "mid": the midpoint between the 95th percentile of the correct answers' scores and
+    the 5th percentile of the wrong answers' scores (a gap threshold; robust when fp32 is nearly
+    separable, where the risk-calibrated point sits on the edge of the wrong cluster)."""
+    if rstar == "mid":
+        c, w_ = score[wrong == 0], score[wrong == 1]
+        if len(c) == 0 or len(w_) == 0:
+            return np.inf if len(w_) == 0 else -np.inf
+        return float((np.percentile(c, 95) + np.percentile(w_, 5)) / 2)
     o = np.argsort(score, kind="mergesort")
     s, w = score[o], wrong[o]
     cw = np.cumsum(w)
@@ -318,7 +327,7 @@ def calibrate(score, wrong, rstar):
 SEL_DETS = ["head_rule", "head", "combo", "checker", "msp_min", "msp_mean", "resid_H", "pi_dis"]
 
 
-def compute_select(rstars=(0.01, 0.05)):
+def compute_select(rstars=(0.01, 0.05, "mid")):
     out = {}
     for task in TASKS:
         L = load_det(task)
@@ -377,9 +386,10 @@ def compute_select(rstars=(0.01, 0.05)):
 def print_select(res, rs=None):
     for task, tout in res.items():
         for d, T in tout.items():
-            rlist = [0.01, 0.05] if rs is None else [rs]
+            rlist = [0.01, 0.05, "mid"] if rs is None else [rs]
             for rr in rlist:
-                print(f"\n### {task} — wrong = not {d}; threshold set on fp32 for risk <= {rr:.0%} (two-fold cross-fit), "
+                how = "at the gap midpoint (p95 of correct, p5 of wrong)" if rr == "mid" else f"for risk <= {rr:.0%}"
+                print(f"\n### {task} — wrong = not {d}; threshold set on fp32 {how} (two-fold cross-fit), "
                       f"applied unchanged. cell = coverage% / risk% [Wilson 95%]; head_rule = the model's own sigmoid(q) > 0.5")
                 dets = [k for k in SEL_DETS if any(f"{k}@{rr}" in r["sel"] for r in T["rows"])]
                 print("| spec | class | acc | " + " | ".join(dets) + " |")
@@ -439,7 +449,9 @@ def compute_basin(sel=None):
                              "auroc_head": auroc(-q, w), "ece": ece(p, ~w), "mean_p": float(p.mean()),
                              "q_correct": float(q[~w].mean()) if (~w).any() else None,
                              "q_wrong": float(q[w].mean()) if w.any() else None,
-                             "rule": sr.get("head_rule@0.01"), "h01": sr.get("head@0.01"), "h05": sr.get("head@0.05")})
+                             "rule": sr.get("head_rule@0.01"), "h01": sr.get("head@0.01"), "h05": sr.get("head@0.05"),
+                             "hmid": sr.get("head@mid"), "msp_mid": sr.get("msp_min@mid"), "msp01": sr.get("msp_min@0.01"),
+                             "combo_mid": sr.get("combo@mid")})
             tout[d] = rows
         out[task] = tout
     return out
@@ -449,8 +461,8 @@ def print_basin(res):
     for task, tout in res.items():
         for d, rows in tout.items():
             print(f"\n### {task} — wrong = not {d}: halting head vs the basin")
-            print("| spec | class | acc | retained | φ_H | AUROC | ECE | mean σ(q) | q̄ correct | q̄ wrong | rule cov/risk | rule: correct kept | head@1% cov/risk | head@5% cov/risk |")
-            print("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
+            print("| spec | class | acc | retained | φ_H | AUROC | ECE | mean σ(q) | q̄ correct | q̄ wrong | rule cov/risk | rule: correct kept | head@1% cov/risk | head@5% | head@mid | msp_min@1% | msp_min@mid | combo@mid |")
+            print("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
             for r in sorted(rows, key=lambda x: -(x["retained"] or 0)):
                 def cr(v):
                     if v is None:
@@ -458,7 +470,44 @@ def print_basin(res):
                     return f"{100*v['coverage']:.0f}/{fmt(None if v['risk'] is None else 100*v['risk'], 1)}"
                 print(f"| {r['spec']} | {r['class']} | {100*r['acc']:.1f} | {fmt(r['retained'])} | {r['fid_H']:.3f} | {fmt(r['auroc_head'])} | "
                       f"{r['ece']:.3f} | {r['mean_p']:.2f} | {fmt(r['q_correct'], 1)} | {fmt(r['q_wrong'], 1)} | {cr(r['rule'])} | "
-                      f"{fmt(None if r['rule'] is None or r['rule']['cov_of_correct'] is None else 100*r['rule']['cov_of_correct'], 0)} | {cr(r['h01'])} | {cr(r['h05'])} |")
+                      f"{fmt(None if r['rule'] is None or r['rule']['cov_of_correct'] is None else 100*r['rule']['cov_of_correct'], 0)} | {cr(r['h01'])} | {cr(r['h05'])} | "
+                      f"{cr(r['hmid'])} | {cr(r['msp01'])} | {cr(r['msp_mid'])} | {cr(r['combo_mid'])} |")
+
+
+def compute_joint(basin=None, fid=None):
+    """Release check + defer: the fidelity filter (threshold per output length, fitted on the Sep
+    13-23 breadth records, i.e. independent of these runs) certifies the build; the halting rule
+    defers per input.  Per model: cells the filter passes vs flags, and the defer rule's worst
+    risk / lowest share of correct answers kept in each group."""
+    basin = basin or compute_basin()
+    fid = fid or compute_fid()
+    thr = {"sudoku": fid["filter"]["sudoku (81)"]["thr_exact"][0], "maze": fid["filter"]["maze (900)"]["thr_exact"][0]}
+    out = {}
+    for task, tout in basin.items():
+        kind = KIND[task]
+        d = "exact" if kind == "sudoku" else "valid"
+        rows = [r for r in tout[d] if r["spec"] != "fp32"]
+        res = {"phi_threshold": thr[kind], "definition": d}
+        for name, sel in (("pass", [r for r in rows if r["fid_H"] >= thr[kind]]), ("flag", [r for r in rows if r["fid_H"] < thr[kind]])):
+            risks = [r["rule"]["risk"] for r in sel if r["rule"] and r["rule"]["risk"] is not None]
+            kept = [r["rule"]["cov_of_correct"] for r in sel if r["rule"] and r["rule"]["cov_of_correct"] is not None]
+            res[name] = {"n": len(sel), "specs": [r["spec"] for r in sel], "max_rule_risk": max(risks) if risks else None,
+                         "min_correct_kept": min(kept) if kept else None,
+                         "classes": {c: sum(r["class"] == c for r in sel) for c in ("in", "edge", "out")}}
+        out[task] = res
+    return out
+
+
+def print_joint(res):
+    print("\n### Release check (φ filter, per-length threshold from the Sep 13-23 records) + defer rule (sigmoid(q) > 0.5)")
+    print("| model | def | φ threshold | passed: n (in/edge/out) | passed: max rule risk | passed: min correct kept | flagged: n (in/edge/out) | flagged: max rule risk | flagged: min correct kept |")
+    print("|---|---|---|---|---|---|---|---|---|")
+    for t, v in res.items():
+        P, Fl = v["pass"], v["flag"]
+        cl = lambda x: "/".join(str(x["classes"][c]) for c in ("in", "edge", "out"))
+        pct = lambda x: "--" if x is None else f"{100*x:.1f}"
+        print(f"| {t} | {v['definition']} | {v['phi_threshold']:.3f} | {P['n']} ({cl(P)}) | {pct(P['max_rule_risk'])} | {pct(P['min_correct_kept'])} | "
+              f"{Fl['n']} ({cl(Fl)}) | {pct(Fl['max_rule_risk'])} | {pct(Fl['min_correct_kept'])} |")
 
 
 # ----------------------------------------------------------------------------- 4. per-step read-out
@@ -879,7 +928,8 @@ def compute_ptrm():
         if "smoke" in f:
             continue
         j = json.load(open(f))
-        key = f"{j['task']}|{j['noise']}|{j.get('wspec', 'fp32')}"
+        Kmax = max(r["K"] for r in j["records"]) if j["records"] else 0
+        key = f"{j['task']}|{j['noise']}|{j.get('wspec', 'fp32')}|K{Kmax}"
         rows = []
         for r in sorted(j["records"], key=lambda x: x["sigma"]):
             s = r["summary"]
@@ -888,7 +938,9 @@ def compute_ptrm():
                          "single_min": s["single_min"], "single_max": s["single_max"],
                          "pass": s[str(K)]["pass"], "bestq": s[str(K)]["bestq"], "mode": s[str(K)]["mode"],
                          "curve": {k: v for k, v in s.items() if k.isdigit()}, "zL_rms": r.get("zL_rms")})
-        out[key] = {"n": j["n"], "nsup": j["nsup"], "rows": rows}
+        if key in out and len(out[key]["rows"]) >= len(rows):
+            continue                       # duplicate config (a parallel rerun): keep the more complete file
+        out[key] = {"n": j["n"], "nsup": j["nsup"], "rows": rows, "file": Path(f).name}
     return out
 
 
@@ -911,6 +963,8 @@ def main():
         print_select(compute_select())
     if cmd in ("basin", "all"):
         print_basin(compute_basin())
+    if cmd in ("joint", "all"):
+        print_joint(compute_joint())
     if cmd in ("early", "all"):
         print_early(compute_early())
     if cmd in ("checker", "all"):
@@ -923,8 +977,10 @@ def main():
         print_ptrm(compute_ptrm())
     if cmd == "json":
         sel = compute_select()
-        doc = {"auroc": compute_auroc(), "select": sel, "basin": compute_basin(sel), "early": compute_early(),
-               "checker": compute_checker(), "fid": compute_fid(), "indep": compute_indep(), "ptrm": compute_ptrm(),
+        bas = compute_basin(sel)
+        fidr = compute_fid()
+        doc = {"auroc": compute_auroc(), "select": sel, "basin": bas, "joint": compute_joint(bas, fidr), "early": compute_early(),
+               "checker": compute_checker(), "fid": fidr, "indep": compute_indep(), "ptrm": compute_ptrm(),
                "conventions": __doc__}
         p = Path(os.environ["X8_OUT"]) if os.environ.get("X8_OUT") else B / "x8_summary.json"
         json.dump(doc, open(p, "w"), default=lambda o: None if o is None else (float(o) if isinstance(o, (np.floating,)) else int(o) if isinstance(o, np.integer) else str(o)))
