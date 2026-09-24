@@ -40,14 +40,24 @@ GRANVARS = ["w4a8_t", "w8a8_t", "w4a8_g32", "w4a8_g128", "w4a8_l64", "w4a8_l32",
 # Order = priority. The S24 w8a8 Sudoku-MLP chain comes first: whether the device collapses like the host
 # QDQ simulation (0/100; localised to the RMSNorm variance/rsqrt tensors, which QNN fuses into one op on
 # device) decides what the paper may say about device INT8 correctness (REWRITE_NOTES 29).
-CHAINS = [("sudoku_mlp", "Samsung Galaxy S24", "w8a8"), ("sudoku_attn", "Samsung Galaxy S24", "w8a8"),
-          ("sudoku_mlp", "Samsung Galaxy S24", "w8a16"),
+CHAINS = [("sudoku_mlp", "Samsung Galaxy S24", "w8a8"), ("sudoku_mlp", "Samsung Galaxy S24", "w8a16"),
+          ("sudoku_attn", "Samsung Galaxy S24", "w8a8"),
+          ("sudoku_mlp", "Samsung Galaxy S24", "w8a8rms16"),   # wa_collapse B2 fix: RMSNorm at uint16
           ("sudoku_mlp", "Samsung Galaxy S24", "w4a16"), ("sudoku_mlp", "Dragonwing RB3 Gen 2 Vision Kit", "w4a16"),
           ("sudoku_mlp", "Samsung Galaxy S24", "fp32"),
           ("maze", "Samsung Galaxy S24", "w4a16"), ("maze", "Dragonwing RB3 Gen 2 Vision Kit", "w4a16"),
           ("maze", "Samsung Galaxy S24", "fp32"), ("maze", "Samsung Galaxy S24", "w8a8"),
           ("sudoku_attn", "Samsung Galaxy S24", "w4a16"), ("sudoku_attn", "Samsung Galaxy S24", "w8a8")]
 NSTEPS = {"sudoku_mlp": 8, "sudoku_attn": 8, "maze": 8}
+
+
+def named_outputs(o):
+    """qnn_dlc targets return outputs as output_0..output_3 in graph order (z_H_out, z_L_out,
+    logits, q_halt); map them back to the ONNX names."""
+    names = ["z_H_out", "z_L_out", "logits", "q_halt"]
+    if all(n in o for n in names):
+        return o
+    return {names[i]: o[f"output_{i}"] for i in range(4)}
 
 
 def order(devs):
@@ -171,7 +181,7 @@ class Chain:
             self.save()
             print(f"[chain {self.task} {self.tag}] step {cur['step']} FAILED: {msg[:160]}", flush=True)
             return False
-        o = job.download_output_data()
+        o = named_outputs(job.download_output_data())
         inp, lab, _ = self.data()
         zH = np.stack([x.astype(np.float32) for x in o["z_H_out"]])
         zL = np.stack([x.astype(np.float32) for x in o["z_L_out"]])

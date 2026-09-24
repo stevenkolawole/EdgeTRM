@@ -35,6 +35,15 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import aihub_h1 as A  # noqa: E402
 
 NSTEPS = {"sudoku_mlp": 16, "sudoku_attn": 16, "maze": 8}
+
+
+def named_outputs(o):
+    """qnn_dlc targets return outputs as output_0..output_3 in graph order (z_H_out, z_L_out,
+    logits, q_halt); map them back to the ONNX names."""
+    names = ["z_H_out", "z_L_out", "logits", "q_halt"]
+    if all(n in o for n in names):
+        return o
+    return {names[i]: o[f"output_{i}"] for i in range(4)}
 OUTS = ["z_H_out", "z_L_out", "logits", "q_halt"]
 
 
@@ -310,7 +319,7 @@ def chain(task, device, prec, log_lock):
                 meta["failed"] = (jst.message or "")[:600]
                 meta_path.write_text(json.dumps(meta, indent=1))
                 return
-        o = ij.download_output_data()
+        o = named_outputs(ij.download_output_data())
         zH = np.stack([x.astype(np.float32) for x in o["z_H_out"]])
         zL = np.stack([x.astype(np.float32) for x in o["z_L_out"]])
         lg = np.concatenate([x.astype(np.float32) for x in o["logits"]])

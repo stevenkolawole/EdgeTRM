@@ -245,45 +245,80 @@ def deadline(comp, prof, acc, deadlines_ms=(5, 10, 20, 50, 100, 200, 500, 1000, 
     return out
 
 
+def device_faithful():
+    """{(task, prec): {step: (exact, count, source)}} from results/devices/device_faithful_acc.json:
+    the accuracy of the very graph that is timed (host simulation of the compiled QDQ graph, or the
+    on-device chain, which takes precedence), keeping the largest sample per (task, prec, step)."""
+    f = DEV / "device_faithful_acc.json"
+    out = collections.defaultdict(dict)
+    if not f.exists():
+        return out
+    for r in json.loads(f.read_text()):
+        key, cur = (r["task"], r["prec"]), out[(r["task"], r["prec"])].get(r["step"])
+        dev = r["source"].startswith("ON DEVICE")
+        if cur is None or (dev and not cur[2].startswith("ON DEVICE")) or \
+                (dev == cur[2].startswith("ON DEVICE") and r["count"] > cur[1]):
+            out[key][r["step"]] = (r["exact"], r["count"], r["source"])
+    return out
+
+
 def energy_table(acc):
-    """Energy per answer and per solved instance, E_solved = E_step x n / accuracy(n), for (a) the
-    analytical estimate (results/devices/energy_estimate.json, Horowitz 45 nm, labelled estimate) and
-    (b) the measured L40S reference (results/devices/energy_l40s.json, NVML, batch 1, if present)."""
+    """Energy per answer and per solved instance, E_solved = E_step x n / accuracy(n).
+    Accuracy is always that of the graph whose cost is counted: for the analytical estimate of an
+    AI Hub format, the host simulation (or on-device run) of that compiled graph at H=1, n steps
+    (fp16 rows use the compiled fp32 graph, which HTP executes in fp16); rows without such an
+    accuracy get no mJ/solved. The measured L40S rows time the fp32 torch model, whose accuracy is
+    the harness fp32 cell. Every row names its accuracy source."""
     rows = []
     est = json.loads((DEV / "energy_estimate.json").read_text()) if (DEV / "energy_estimate.json").exists() else []
-    fmt_q = {"fp32": "fp32", "fp16": "fp32", "w8a8": "w8c+a8", "w4a8": "w4c+a8", "w8a16": "w8c+a16", "w4a16": "w4c+a16"}
+    df = device_faithful()
     for e in est:
         if e["H"] != 1:
             continue
-        at = ACC_TASK[e["task"]]
-        for n, a in sorted(acc.get((at, fmt_q[e["format"]]), {}).items()):
-            if a <= 0:
-                continue
+        prec = "fp32" if e["format"] in ("fp32", "fp16") else e["format"]
+        steps = df.get((e["task"], prec), {})
+        for n in (1, 2, 4, 8, 16):
             for bound in ("weights_on_chip", "weights_dram"):
                 ms = e[f"mj_per_step_{bound}"]
-                rows.append({"source": "estimate (Horowitz 45 nm)", "task": e["task"], "format": e["format"],
-                             "bound": bound, "n": n, "acc": a, "mj_per_answer": ms * n, "mj_per_solved": ms * n / a})
+                a = steps.get(n)
+                row = {"energy_source": "estimate (Horowitz 45 nm)", "task": e["task"], "format": e["format"],
+                       "bound": bound, "n": n, "mj_per_answer": ms * n}
+                if a is None:
+                    row.update(acc=None, acc_source="no device-faithful accuracy for this graph yet", mj_per_solved=None)
+                else:
+                    row.update(acc=a[0], acc_n=a[1], acc_source=a[2],
+                               mj_per_solved=(ms * n / a[0]) if a[0] > 0 else float("inf"))
+                rows.append(row)
     meas = DEV / "energy_l40s.json"
     if meas.exists():
         m = json.loads(meas.read_text())
         for r in m["runs"]:
             task = {"maze_attn": "maze"}.get(r["task"], r["task"])
-            q = "fp32" if r["dtype"] == "float32" else None
-            if q is None:
+            if r["dtype"] != "float32":
                 continue
-            for n, a in sorted(acc.get((ACC_TASK[task], q), {}).items()):
-                if a <= 0:
-                    continue
+            for n, a in sorted(acc.get((ACC_TASK[task], "fp32"), {}).items()):
                 for kind in ("total", "incr"):
                     e = r["median"][f"e_{kind}_mj_per_puzzle_step"]
-                    rows.append({"source": f"measured NVML {m['gpu']} batch {r['batch']} {r['dtype']}", "task": task,
-                                 "format": r["dtype"], "bound": kind, "n": n, "acc": a, "mj_per_answer": e * n,
-                                 "mj_per_solved": e * n / a})
+                    rows.append({"energy_source": f"measured NVML {m['gpu']} batch {r['batch']} {r['dtype']}",
+                                 "task": task, "format": r["dtype"], "bound": kind, "n": n, "acc": a,
+                                 "acc_source": "harness fp32 (the timed torch graph), n=1000", "mj_per_answer": e * n,
+                                 "mj_per_solved": e * n / a if a > 0 else float("inf")})
     (DEV / "energy_solved.json").write_text(json.dumps(rows, indent=1))
-    md = ["| source | task | format | bound | n | exact | mJ/answer | mJ/solved |", "|---|---|---|---|---|---|---|---|"]
-    md += [f"| {r['source']} | {r['task']} | {r['format']} | {r['bound']} | {r['n']} | {r['acc']*100:.1f} | "
-           f"{r['mj_per_answer']:.2f} | {r['mj_per_solved']:.2f} |" for r in rows]
-    (DEV / "energy_solved.md").write_text("# Energy per solved instance (E_step x n / accuracy)\n\n" + "\n".join(md) + "\n")
+    md = ["| energy source | task | format | bound | n | exact | accuracy source | mJ/answer | mJ/solved |",
+          "|---|---|---|---|---|---|---|---|---|"]
+    for r in rows:
+        a = "-" if r["acc"] is None else f"{r['acc']*100:.1f}"
+        sol = "-" if r["mj_per_solved"] is None else ("inf (0 solved)" if r["mj_per_solved"] == float("inf")
+                                                       else f"{r['mj_per_solved']:.2f}")
+        md.append(f"| {r['energy_source']} | {r['task']} | {r['format']} | {r['bound']} | {r['n']} | {a} | "
+                  f"{r['acc_source']}{'' if r.get('acc_n') is None else ' (n=%d)' % r['acc_n']} | "
+                  f"{r['mj_per_answer']:.2f} | {sol} |")
+    (DEV / "energy_solved.md").write_text(
+        "# Energy per solved instance (E_step x n / accuracy of the same graph)\n\n"
+        "Accuracy is taken from the graph whose cost is counted (device-faithful): host simulation of the AI Hub "
+        "compiled QDQ graph at H=1 (or the on-device chain when it exists), never the harness quantizer. "
+        "Regenerated Sep 24 after the harness-accuracy version credited Sudoku-MLP w8a8/w4a8 with 61% while the "
+        "compiled graphs solve 0%.\n\n" + "\n".join(md) + "\n")
     return rows
 
 
