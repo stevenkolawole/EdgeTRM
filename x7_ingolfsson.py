@@ -644,12 +644,22 @@ def analyze(pattern, summary_path):
     def base_name(c):
         return c.split("@")[0]
 
+    # one depth per model: ladder and biasnoise read only the default (H, L) at nsup 16 (TRM H=3, HRM H=2),
+    # and every quantized cell is paired with the fp32 record of the same (task, H, L, nsup)
+    def at_default(r):
+        t = TASKS[r["task"]]
+        return r["H_cycles"] == t["H"] and r["L_cycles"] == t["L"] and r["nsup"] == 16
+
+    def fp32_of(r):
+        return next((q for q in recs if q["task"] == r["task"] and q["cell"] == "fp32" and q["H_cycles"] == r["H_cycles"]
+                     and q["L_cycles"] == r["L_cycles"] and q["nsup"] == r["nsup"] and q["n"] == r["n"]), None)
+
     # ---- ladder
     for task in TASKS:
-        rr = [r for r in recs if r["task"] == task and r["_mode"] == "ladder"]
+        rr = [r for r in recs if r["task"] == task and r["_mode"] == "ladder" and at_default(r)]
         if not rr:
             continue
-        fp = [r for r in rr if r["cell"] == "fp32"]
+        fp = [fp32_of(rr[0])] if fp32_of(rr[0]) else []
         out = {}
         for bname in dict.fromkeys(base_name(r["cell"]) for r in rr):
             g = [r for r in rr if base_name(r["cell"]) == bname]
@@ -670,8 +680,9 @@ def analyze(pattern, summary_path):
                 row["valid_shortest"] = _agg(g, "valid_shortest")
             if fp:
                 row["exact_minus_fp32"] = ex["mean"] - fp[0]["exact"][-1]
+                row["fp32_config"] = [fp[0]["H_cycles"], fp[0]["L_cycles"], fp[0]["nsup"]]
             out[bname] = row
-        S["ladder"][task] = out
+        S["ladder"][task] = {"H_cycles": TASKS[task]["H"], "L_cycles": TASKS[task]["L"], "nsup": 16, "cells": out}
 
     # ---- depth
     for task in TASKS:
@@ -683,7 +694,9 @@ def analyze(pattern, summary_path):
         for r in rr:
             key = r["cell"]
             if r["H_cycles"] == t["H"] and r["L_cycles"] == t["L"] and r["nsup"] >= 32:
+                f0 = fp32_of(r)
                 out["nsup_curve"][key] = {"exact": r["exact"], "cell": r["cell_acc"], "fidelity_H": r["fidelity_H"],
+                                          "gap_to_fp32": (np.array(r["exact"]) - np.array(f0["exact"])).tolist() if f0 else None,
                                           **({"valid": r["valid"], "valid_shortest": r["valid_shortest"]} if "valid" in r else {})}
         for sweep, fld, dflt in (("H_sweep", "H_cycles", t["H"]), ("L_sweep", "L_cycles", t["L"])):
             other = "L_cycles" if fld == "H_cycles" else "H_cycles"
@@ -694,19 +707,23 @@ def analyze(pattern, summary_path):
                 v = r[fld]
                 i16 = min(16, r["nsup"]) - 1
                 d = out[sweep].setdefault(r["cell"], {})
+                f0 = fp32_of(r)
                 d[str(v)] = {"exact16": r["exact"][i16], "exact1": r["exact"][0], "cell16": r["cell_acc"][i16],
+                             "gap16": (r["exact"][i16] - f0["exact"][i16]) if f0 else None,
+                             "gap1": (r["exact"][0] - f0["exact"][0]) if f0 else None,
                              "fid16": r["fidelity_H"][i16],
                              **({"valid16": r["valid"][i16], "vshort16": r["valid_shortest"][i16]} if "valid" in r else {})}
         S["depth"][task] = out
 
     # ---- bias vs noise
     for task in TASKS:
-        rr = [r for r in recs if r["task"] == task and r["_mode"] == "biasnoise"]
+        rr = [r for r in recs if r["task"] == task and r["_mode"] == "biasnoise" and at_default(r)]
         if not rr:
             continue
-        fp = [r for r in rr if r["cell"] == "fp32"]
-        fp_ex = fp[0]["exact"][-1] if fp else None
-        out = {"fp32_exact": fp_ex, "n": rr[0]["n"], "arms": {}}
+        f0 = fp32_of(rr[0])
+        fp_ex = f0["exact"][-1] if f0 else None
+        out = {"fp32_exact": fp_ex, "n": rr[0]["n"], "H_cycles": TASKS[task]["H"], "L_cycles": TASKS[task]["L"],
+               "nsup": 16, "arms": {}}
         for arm in ARMS:
             ar = [r for r in rr if r["cell"].startswith(arm) and r["cell"] != "fp32"]
             if not ar:
@@ -734,8 +751,9 @@ def analyze(pattern, summary_path):
     # flat point lists for figures: accuracy against the common perturbation axis (rho_out), every cell
     pts = []
     for r in recs:
-        if r["cell"] == "fp32" or r["_mode"] not in ("ladder", "biasnoise"):
+        if r["cell"] == "fp32" or r["_mode"] not in ("ladder", "biasnoise") or not at_default(r):
             continue
+        f0 = fp32_of(r)
         b = base_name(r["cell"])
         arm = b[:2] if r["_mode"] == "biasnoise" else "quant"
         pts.append({"task": r["task"], "mode": r["_mode"], "cell": r["cell"], "arm": arm, "seed": r["seed"],
@@ -743,12 +761,13 @@ def analyze(pattern, summary_path):
                     "rho_out_step1": (r.get("rho_out_by_step") or {}).get("1"),
                     "sigma_eq_a": r.get("sigma_eq_a"), "sigma_eq_w": r.get("sigma_eq_w"),
                     "coherence_a": r.get("coherence_a"), "exact": r["exact"][-1], "exact_step1": r["exact"][0],
+                    "fp32_exact": f0["exact"][-1] if f0 else None, "H_cycles": r["H_cycles"], "L_cycles": r["L_cycles"],
                     "cell_acc": r["cell_acc"][-1], "fidelity_H": r["fidelity_H"][-1],
                     "valid": r["valid"][-1] if "valid" in r else None,
                     "valid_shortest": r["valid_shortest"][-1] if "valid_shortest" in r else None})
     S["fig_points"] = pts
     S["fp32"] = {task: next((r["exact"][-1] for r in recs if r["task"] == task and r["cell"] == "fp32"
-                             and r["H_cycles"] == TASKS[task]["H"] and r["L_cycles"] == TASKS[task]["L"]), None)
+                             and at_default(r)), None)
                  for task in TASKS}
     json.dump(S, open(summary_path, "w"), indent=1)
     print_summary(S)
@@ -770,8 +789,10 @@ def sigma_half(curve, fp_ex):
 
 
 def print_summary(S):
-    for task, rows in S["ladder"].items():
-        print(f"\n== ladder {task} (n={next(iter(rows.values()))['n']}) exact% [min-max over draws] cell% fidH sig_w sig_a coh")
+    for task, L in S["ladder"].items():
+        rows = L["cells"]
+        print(f"\n== ladder {task} (H={L['H_cycles']} L={L['L_cycles']} nsup={L['nsup']}, n={next(iter(rows.values()))['n']})"
+              f" exact% [min-max over draws] cell% fidH sig_w sig_a coh")
         for name, r in rows.items():
             ex = r["exact"]
             rng = f"[{ex['min']*100:.1f}-{ex['max']*100:.1f}]" if r["draws"] > 1 else ""
@@ -787,7 +808,9 @@ def print_summary(S):
         for sw in ("H_sweep", "L_sweep"):
             print(f"  {sw} exact% at nsup 16:")
             for c, v in d[sw].items():
-                print(f"    {c:14s} " + " ".join(f"{k}:{v[k]['exact16']*100:.1f}" for k in sorted(v, key=int)))
+                print(f"    {c:14s} " + " ".join(f"{k}:{v[k]['exact16']*100:.1f}"
+                                                 + ("" if v[k]["gap16"] is None or c == "fp32" else f"({v[k]['gap16']*100:+.1f})")
+                                                 for k in sorted(v, key=int)))
     for task, d in S["biasnoise"].items():
         print(f"\n== bias vs noise {task} (n={d['n']}, fp32 {d['fp32_exact']*100:.1f}): exact% mean [min-max] per sigma; sigma_half by draw")
         for arm, v in d["arms"].items():
