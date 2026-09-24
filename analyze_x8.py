@@ -449,15 +449,16 @@ def print_basin(res):
     for task, tout in res.items():
         for d, rows in tout.items():
             print(f"\n### {task} — wrong = not {d}: halting head vs the basin")
-            print("| spec | class | acc | retained | φ_H | AUROC | ECE | mean σ(q) | q̄ correct | q̄ wrong | rule cov/risk | head@1% cov/risk | head@5% cov/risk |")
-            print("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
+            print("| spec | class | acc | retained | φ_H | AUROC | ECE | mean σ(q) | q̄ correct | q̄ wrong | rule cov/risk | rule: correct kept | head@1% cov/risk | head@5% cov/risk |")
+            print("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
             for r in sorted(rows, key=lambda x: -(x["retained"] or 0)):
                 def cr(v):
                     if v is None:
                         return "--"
                     return f"{100*v['coverage']:.0f}/{fmt(None if v['risk'] is None else 100*v['risk'], 1)}"
                 print(f"| {r['spec']} | {r['class']} | {100*r['acc']:.1f} | {fmt(r['retained'])} | {r['fid_H']:.3f} | {fmt(r['auroc_head'])} | "
-                      f"{r['ece']:.3f} | {r['mean_p']:.2f} | {fmt(r['q_correct'], 1)} | {fmt(r['q_wrong'], 1)} | {cr(r['rule'])} | {cr(r['h01'])} | {cr(r['h05'])} |")
+                      f"{r['ece']:.3f} | {r['mean_p']:.2f} | {fmt(r['q_correct'], 1)} | {fmt(r['q_wrong'], 1)} | {cr(r['rule'])} | "
+                      f"{fmt(None if r['rule'] is None or r['rule']['cov_of_correct'] is None else 100*r['rule']['cov_of_correct'], 0)} | {cr(r['h01'])} | {cr(r['h05'])} |")
 
 
 # ----------------------------------------------------------------------------- 4. per-step read-out
