@@ -757,7 +757,21 @@ def analyze(pattern, summary_path):
                 half[str(d)] = sigma_half(curve, fp_ex) if fp_ex else None
                 if fp_ex and all(r.get("rho_out") is not None for _, r in pts):
                     rhalf[str(d)] = sigma_half([(r["rho_out"], r["exact"][-1]) for _, r in pts], fp_ex)
-            out["arms"][arm] = {"sigmas": rows, "sigma_half_by_draw": half, "rho_half_by_draw": rhalf}
+            extra = {}
+            for met in ("valid", "valid_shortest"):          # Maze: exact match mis-scores valid alternative paths
+                if f0 is None or met not in f0:
+                    continue
+                fm = f0[met][-1]
+                hm, rm = {}, {}
+                for d in draws:
+                    pts = sorted(((float(base_name(r["cell"])[2:]), r) for r in ar if r["seed"] == d), key=lambda z: z[0])
+                    hm[str(d)] = sigma_half([(sg, r[met][-1]) for sg, r in pts], fm)
+                    if all(r.get("rho_out") is not None for _, r in pts):
+                        rm[str(d)] = sigma_half([(r["rho_out"], r[met][-1]) for _, r in pts], fm)
+                extra[f"sigma_half_{met}_by_draw"] = hm
+                extra[f"rho_half_{met}_by_draw"] = rm
+                out.setdefault(f"fp32_{met}", fm)
+            out["arms"][arm] = {"sigmas": rows, "sigma_half_by_draw": half, "rho_half_by_draw": rhalf, **extra}
         S["biasnoise"][task] = out
     # flat point lists for figures: accuracy against the common perturbation axis (rho_out), every cell
     pts = []
@@ -834,6 +848,9 @@ def print_summary(S):
             rh = {k: (None if h is None else round(h["interp"], 3) if h["interp"] is not None else f"<{h['bracket'][1]:.3f}"
                       if h.get("below_grid") else f">{h['bracket'][0]:.3f}") for k, h in v.get("rho_half_by_draw", {}).items()}
             print(f"  {arm}: {line}\n      sigma_half {hh}  rho_half {rh}")
+            if "sigma_half_valid_by_draw" in v:
+                hv = {k: (None if h is None else h["interp"]) for k, h in v["sigma_half_valid_by_draw"].items()}
+                print(f"      sigma_half (valid path) {hv}")
 
 
 def main():
