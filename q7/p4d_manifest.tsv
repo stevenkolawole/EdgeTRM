@@ -1,0 +1,30 @@
+# card	run	seed	requires	overrides   (Q7/X5; see reports/edgetrm_exp/X5.md). Launched in this order as slots free (<=2 procs/card).
+3	q7_base_s0	0	-	+q7_fork_iters=[7]
+4	q7_base_s1	1	-	+q7_fork_iters=[7]
+5	q7_base_s2	2	-	+q7_fork_iters=[7]
+3	qat_naive_s0	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0
+3	qat_lsq_s0	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=lsq +q7_bits=4
+3	ft_fp32_s0	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+4	qat_naive_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0
+4	qat_lsq_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=lsq +q7_bits=4
+4	ft_fp32_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100
+5	qat_naive_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0
+5	qat_lsq_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=lsq +q7_bits=4
+5	ft_fp32_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100
+3	q7_noise_s0	0	-	+q7_reg=noise +q7_sigma=0.15
+4	q7_noise_s1	1	-	+q7_reg=noise +q7_sigma=0.15
+5	q7_noise_s2	2	-	+q7_reg=noise +q7_sigma=0.15
+3	q7_lqat_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=qat +q7_bits=4 +q7_start_step=52080
+3	q7_lclip_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=clip +q7_clip_k=3 +q7_ramp_steps=2000 +q7_start_step=52080
+3	q7_lnoise_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=noise +q7_sigma=0.3 +q7_ramp_steps=2000 +q7_start_step=52080
+4	q7_lqat_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=qat +q7_bits=4 +q7_start_step=52080
+4	q7_lclip_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=clip +q7_clip_k=3 +q7_ramp_steps=2000 +q7_start_step=52080
+4	q7_lnoise_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=noise +q7_sigma=0.3 +q7_ramp_steps=2000 +q7_start_step=52080
+5	q7_lqat_s2	2	/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt +q7_reg=qat +q7_bits=4 +q7_start_step=52080
+5	q7_lclip_s2	2	/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt +q7_reg=clip +q7_clip_k=3 +q7_ramp_steps=2000 +q7_start_step=52080
+5	q7_lnoise_s2	2	/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt +q7_reg=noise +q7_sigma=0.3 +q7_ramp_steps=2000 +q7_start_step=52080
+3	q7_jac_s0	0	-	+q7_reg=jac +q7_lambda=1.0
+4	q7_jac_s1	1	-	+q7_reg=jac +q7_lambda=1.0
+5	q7_jac_s2	2	-	+q7_reg=jac +q7_lambda=1.0
+3	q7_jac5_s0	0	-	+q7_reg=jac +q7_lambda=5.0
+4	q7_noise3_s1	1	-	+q7_reg=noise +q7_sigma=0.3
