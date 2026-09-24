@@ -1,0 +1,1 @@
+--model huginn --steps 32 --quants w3a --decodes greedy,rep1.1,rep1.3,nrng3 --n 200 --batch 12 --outdir /home/skolawol/breadth_results/lm/q6

@@ -76,7 +76,14 @@ def load(roots):
             key = (m["model"], int(m["steps"]), m["quant"], m["scope"])
             c = cells.setdefault(key, {"gen": {}, "tf": None, "tf_v": None, "root": str(root)})
             for f in sorted(d.glob("*.jsonl")):
-                c["gen"][f.stem] = {**c["gen"].get(f.stem, {}), **read_jsonl(f)}
+                recs = read_jsonl(f)
+                side = d / f"{f.stem}.ids.json"          # looped_add_ids.py sidecar for v1 records
+                if side.exists():
+                    ids = json.load(open(side))["ids"]
+                    for i, r in recs.items():
+                        if "ids" not in r and str(i) in ids:
+                            r["ids"], r["ids_reencoded"] = ids[str(i)], True
+                c["gen"][f.stem] = {**c["gen"].get(f.stem, {}), **recs}
             for name, v in (("tf2.json", 2), ("tf.json", 1)):
                 p = d / name
                 if p.exists() and (c["tf"] is None or (c["tf_v"] or 0) < v):
@@ -158,6 +165,10 @@ def sec_q6(cells, nmin):
                     deg, lp, cap = rate(recs, "degenerate"), loop_rate(recs), rate(recs, "capped")
                     ln = st.mean(r["n_gen"] for r in recs.values())
                     label = dfam + partial
+                    if dfam.startswith("pfx"):          # leak check: gold answer already inside the forced prefix
+                        leak = sum(bool(re.search(r"(?<![\d.])" + re.escape(r["gold"]) + r"(?![\d])", r.get("prefix_text", "")))
+                                   for r in recs.values())
+                        label += f" (gold in prefix: {leak})"
                 gap = ""
                 if quant != "bf16" and bf and g0 and dfam != "greedy":
                     den = acc(bf) - acc(g0)
@@ -210,7 +221,8 @@ def sec_div(cells, nmin):
             g = c["gen"]["greedy"]
             idx = sorted(set(g) & set(bf))
             use_ids = all("ids" in g[i] and "ids" in bf[i] for i in idx)
-            unit = "token" if use_ids else "char"
+            reenc = use_ids and any(g[i].get("ids_reencoded") or bf[i].get("ids_reencoded") for i in idx)
+            unit = ("token (re-encoded)" if reenc else "token") if use_ids else "char"
             divs, ident, early, late = [], [], [], []
             for i in idx:
                 a = g[i]["ids"] if use_ids else g[i]["text"]

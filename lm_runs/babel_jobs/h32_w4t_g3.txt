@@ -1,0 +1,1 @@
+--model huginn --steps 32 --quants w4t --decodes mark5,loopstop,loopban12,dry --n 200 --batch 12 --outdir /home/skolawol/breadth_results/lm/q6

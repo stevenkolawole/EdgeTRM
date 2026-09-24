@@ -41,6 +41,12 @@ whole input_ids, prompt included (as HF and vLLM do).
   loopban<n>        greedy; ban any token that would repeat an n-gram already in
                     the *generated* text (prompt excluded): a back-off that only
                     touches long verbatim repeats
+  pfx<k>            greedy after forcing the first k tokens of the bf16 model's greedy
+                    output for the same problem (oracle prefix; cut before any '####';
+                    ids from <outdir>/<model>_s<steps>_bf16_<scope>/greedy.jsonl, re-encoded
+                    from its text when ids were not stored); the budget stays max_new in total
+  prefill           greedy after a fixed assistant prefill "Let's solve this step by step."
+                    (deployable version of the same test)
   dry               greedy + DRY penalty (multiplier 0.8, base 1.75, allowed length 2,
                     breakers = tokens containing newline : " *), over prompt + output
 Teacher-forced extras: tf_ans_acc / tf_ans_nll score the gold final answer (tokens
@@ -68,7 +74,7 @@ import torch.nn.functional as F
 
 HOME = Path.home()
 os.environ.setdefault("HF_HOME", str(HOME / "hf_cache"))
-DEV = "cuda"
+DEV = os.environ.get("X4_DEVICE", "cuda")
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import looped_lm_eval as L  # noqa: E402  (load_gsm8k, extract_answer, parse_quant, quantize_linear_)
 
@@ -87,6 +93,7 @@ SUFFIX = "\nSolve this step by step. End with the line '#### <final numeric answ
 N_SHOT = 2
 TOPK = 64
 MARKERS = ("wait", "but", "alternatively", "hmm")
+PREFILL = "Let's solve this step by step.\n\n"
 
 
 def fewshot_prefix():
@@ -233,8 +240,13 @@ class Raven(Family):
         mod = sys.modules[type(model).__module__]
         F.scaled_dot_product_attention = _sdpa_padded       # inert unless _PAD["valid"] is set
         cache_cls = getattr(mod, "HuginnDynamicCache", None)
-        if cache_cls is not None and os.environ.get("X4_SLOW_CACHE") != "1":
-            cache_cls.update = _fast_update
+        if cache_cls is not None:
+            # transformers >= 4.55 makes Cache.key_cache/value_cache read-only properties; the remote
+            # cache assigns them in __init__.  A plain class attribute on the subclass shadows them.
+            cache_cls.key_cache = None
+            cache_cls.value_cache = None
+            if os.environ.get("X4_SLOW_CACHE") != "1":
+                cache_cls.update = _fast_update
         return model, tok
 
     def core_modules(self, model, scope):
@@ -417,6 +429,11 @@ def decode_kwargs(name):
         return {"do_sample": False}, ("loopban", int(m.group(1)))
     if name == "dry":   # DRY defaults (multiplier 0.8, base 1.75, allowed length 2), max match 64
         return {"do_sample": False}, ("dry", (0.8, 1.75, 2, 64))
+    m = re.fullmatch(r"pfx(\d+)", name)
+    if m:
+        return {"do_sample": False}, ("pfx", int(m.group(1)))
+    if name == "prefill":
+        return {"do_sample": False}, ("prefill", PREFILL)
     raise ValueError(name)
 
 
@@ -520,9 +537,33 @@ def tf_pass(fam, model, tok, data, ref=None):
 
 
 @torch.no_grad()
-def gen_pass(fam, model, tok, data, decode, max_new, batch, out_jsonl, log):
+def forced_prefixes(fam, tok, data, proc, bf16_greedy):
+    """Per-problem token ids forced at the start of the assistant turn (pfx / prefill)."""
+    if proc is None or proc[0] not in ("pfx", "prefill"):
+        return None
+    if proc[0] == "prefill":
+        ids = tok.encode(proc[1], add_special_tokens=False)
+        return [list(ids) for _ in data]
+    recs = read_jsonl(bf16_greedy)
+    if len(recs) < len(data):
+        raise RuntimeError(f"pfx needs the bf16 greedy records for all {len(data)} problems: {bf16_greedy}")
+    out = []
+    for i in range(len(data)):
+        r = recs[i]
+        text = r["text"].split("####")[0]
+        ids = r["ids"] if "ids" in r and "####" not in r["text"] else tok.encode(text, add_special_tokens=False)
+        out.append(list(ids[:proc[1]]))
+    return out
+
+
+def gen_pass(fam, model, tok, data, decode, max_new, batch, out_jsonl, log, bf16_greedy=None):
     from transformers import LogitsProcessorList
     kw, proc = decode_kwargs(decode)
+    pre = forced_prefixes(fam, tok, data, proc, bf16_greedy)
+    if pre is not None:
+        proc_hf = None
+    else:
+        proc_hf = proc
     seed = kw.pop("seed", None)
     stop = fam.stop_ids(tok)
     pad = fam.pad_id(tok)
@@ -538,7 +579,7 @@ def gen_pass(fam, model, tok, data, decode, max_new, batch, out_jsonl, log):
         idxs = list(range(b0, min(len(data), b0 + batch)))
         if all(i in done for i in idxs):
             continue
-        enc = [tok.encode(prompts[i], add_special_tokens=False) for i in idxs]
+        enc = [tok.encode(prompts[i], add_special_tokens=False) + (pre[i] if pre else []) for i in idxs]
         T = max(len(e) for e in enc)
         input_ids = torch.full((len(idxs), T), pad, dtype=torch.long)
         attn = torch.zeros((len(idxs), T), dtype=torch.long)
@@ -549,11 +590,12 @@ def gen_pass(fam, model, tok, data, decode, max_new, batch, out_jsonl, log):
         s0 = (seed if seed is not None else 0) * 100003 + b0   # fixed per batch: sampling and Huginn's random init
         torch.manual_seed(s0)
         torch.cuda.manual_seed_all(s0)
-        lp = LogitsProcessorList([_Proc(proc[0], T, proc[1], stop, tok, pad)]) if proc else None
+        lp = LogitsProcessorList([_Proc(proc_hf[0], T, proc_hf[1], stop, tok, pad)]) if proc_hf else None
+        npre = [len(pre[i]) if pre else 0 for i in idxs]
         tb = time.time()
-        out = fam.generate(model, input_ids, attn, max_new_tokens=max_new, pad_token_id=pad, eos_token_id=stop,
-                           logits_processor=lp, **kw, **extra)
-        gen = out[:, T:].tolist()
+        out = fam.generate(model, input_ids, attn, max_new_tokens=max_new - min(npre), pad_token_id=pad,
+                           eos_token_id=stop, logits_processor=lp, **kw, **extra)
+        gen = [(pre[i] if pre else []) + row[:max_new - npre[r]] for r, (i, row) in enumerate(zip(idxs, out[:, T:].tolist()))]
         lines = []
         ends = set(stop) | {pad}
         for r, i in enumerate(idxs):
@@ -567,6 +609,8 @@ def gen_pass(fam, model, tok, data, decode, max_new, batch, out_jsonl, log):
                 hit_eos = True                     # stopped by a stop string (few-shot prompts)
             pred = L.extract_answer(text)
             rec = {"idx": i, "gold": data[i][1], "pred": pred, "correct": int(pred == data[i][1]),
+                   "prefix_len": len(pre[i]) if pre else 0,
+                   "prefix_text": tok.decode(pre[i], skip_special_tokens=True) if pre else "",
                    **degeneracy(g, text, max_new, hit_eos), "text": text, "ids": g}
             lines.append(json.dumps(rec))
         f.write("\n".join(lines) + "\n")
@@ -688,7 +732,8 @@ def main():
             if not a.no_gen:
                 for dec in [d for d in a.decodes.split(",") if d]:
                     kw, proc = decode_kwargs(dec)
-                    recs, secs = gen_pass(fam, model, tok, data, dec, a.max_new, a.batch, tdir / f"{dec}.jsonl", log)
+                    recs, secs = gen_pass(fam, model, tok, data, dec, a.max_new, a.batch, tdir / f"{dec}.jsonl", log,
+                                          bf16_greedy=outdir / f"{a.model}_s{steps}_bf16_{a.scope}" / "greedy.jsonl")
                     summary["meta"]["decodes"][dec] = {**kw, "processor": proc}
                     summary["gen"][dec] = {**summarize(recs), "secs_this_run": secs, "batch": a.batch,
                                            "script_sha1": script_sha}

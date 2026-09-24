@@ -1,0 +1,1 @@
+--model huginn --steps 32 --quants bf16 --decodes greedy --n 8 --batch 4 --max_new 64 --outdir /home/skolawol/breadth_results/lm/smoke_huginn

@@ -1,0 +1,1 @@
+--model huginn --steps 32 --quants w4t --decodes topk20t0.7s0,topk20t0.7s1,topk20t0.7s2 --n 200 --batch 12 --outdir /home/skolawol/breadth_results/lm/q6

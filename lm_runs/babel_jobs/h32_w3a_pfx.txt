@@ -1,0 +1,1 @@
+--model huginn --steps 32 --quants w3a --decodes pfx1,pfx8,pfx32,prefill --n 200 --batch 12 --outdir /home/skolawol/breadth_results/lm/q6
