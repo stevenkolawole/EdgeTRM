@@ -27,6 +27,8 @@ Sources:
     python analyze_captax.py solve dt       # or: solve sudoku
     python analyze_captax.py length
     python analyze_captax.py json           # all fits -> results/breadth/x1_captax.json
+    (--model power fits acc = A - B T^-alpha instead; tau column = 1/alpha; --axis residual bins Sudoku
+     by blanks left after singles)
 """
 import glob
 import json
@@ -47,7 +49,38 @@ DT_QUANTS = ["fp32", "w8c", "w6c", "w4g32", "w4g128", "w4a", "w4c", "w4t", "w3g3
 TAUS = np.exp(np.linspace(np.log(0.3), np.log(3000), 220))
 
 
+MODEL = "exp"
+if "--model" in sys.argv:
+    MODEL = sys.argv[sys.argv.index("--model") + 1]
+    del sys.argv[sys.argv.index("--model"):sys.argv.index("--model") + 2]
+ALPHAS = np.exp(np.linspace(np.log(0.02), np.log(5), 160))
+
+
+def fit_power(T, y):
+    """y = A - B T^(-alpha) (A clipped to [0, 1]); grid over alpha, (A, B) by least squares. 'tau'
+    returned as 1/alpha so the tables stay comparable in sign (larger = slower); T0 = 0."""
+    T = np.asarray(T, float)
+    y = np.asarray(y, float)
+    best = (np.inf, 0, 0)
+    for al in ALPHAS:
+        X = np.stack([np.ones_like(T), -T ** (-al)], 1)
+        coef, *_ = np.linalg.lstsq(X, y, rcond=None)
+        A = float(np.clip(coef[0], 0, 1))
+        Bc = float(max(coef[1], 0))
+        sse = float(((A - Bc * T ** (-al) - y) ** 2).sum())
+        if sse < best[0]:
+            best = (sse, A, al)
+    sse, A, al = best
+    return float(A), float(1 / al), 0.0, float(math.sqrt(sse / len(T)))
+
+
 def fit_curve(T, y):
+    if MODEL == "power":
+        return fit_power(T, y)
+    return fit_exp(T, y)
+
+
+def fit_exp(T, y):
     """least squares for y = A (1 - exp(-(T - T0)/tau)) (T > T0), 0 else; grid over (tau, T0),
     A closed form (clipped to [0, 1]). Returns A, tau, T0, rmse."""
     T = np.asarray(T, float)
@@ -244,7 +277,8 @@ def fit(which):
         for (task, nm), (T, mats) in sudoku_sets(kind).items():
             fits = fit_set(T, mats, nboot=200)
             res[f"{kind}_{task}_{nm}"] = {"T": T, "fits": fits}
-            print_fits(f"{task} bin {nm} (n={next(iter(mats.values())).shape[0]}, Babel L40S, {kind})", T, fits)
+            plat = "Babel L40S" if kind == "diff_babel" else "p4d A100"
+            print_fits(f"{task} bin {nm} (n={next(iter(mats.values())).shape[0]}, {plat}, {kind}, {MODEL} fit)", T, fits)
     return res
 
 
