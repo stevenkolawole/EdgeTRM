@@ -278,7 +278,16 @@ def save_train_state(config: PretrainConfig, train_state: TrainState):
         return
 
     os.makedirs(config.checkpoint_path, exist_ok=True)
-    torch.save(train_state.model.state_dict(), os.path.join(config.checkpoint_path, f"step_{train_state.step}"))
+    path = os.path.join(config.checkpoint_path, f"step_{train_state.step}")
+    if os.path.exists(path):
+        # Q7: a restart replayed steps after this checkpoint was first written; its evaluation belongs to the
+        # old file and is dropped so the new file is evaluated from scratch
+        for stale in (os.path.join(config.checkpoint_path, f"eval_step_{train_state.step}.json"), path + ".nolsq"):
+            if os.path.exists(stale):
+                os.remove(stale)
+                print(f"[q7] removed stale {stale}")
+    torch.save(train_state.model.state_dict(), path + ".tmp")
+    os.replace(path + ".tmp", path)
 
 
 def load_checkpoint(model: nn.Module, config: PretrainConfig):
@@ -996,6 +1005,14 @@ def launch(hydra_config: DictConfig):
         wandb.log({"num_params": sum(x.numel() for x in train_state.model.parameters())}, step=train_state.step)
         save_code_and_config(config)
 
+    # Q7: finish evaluations of checkpoints written before a restart (resumable per cell)
+    if RANK == 0 and config.q7_inline_eval and config.checkpoint_path and os.path.isdir(config.checkpoint_path):
+        import re as _re
+        for fn in sorted(os.listdir(config.checkpoint_path)):
+            mm = _re.fullmatch(r"step_(\d+)", fn)
+            if mm and int(mm.group(1)) <= train_state.step:
+                q7_inline_eval(config, int(mm.group(1)))
+
     # Training Loop
     for _iter_id in range(start_iter_id, total_iters):
         print(f"[Rank {RANK}, World Size {WORLD_SIZE}]: Epoch {_iter_id * train_epochs_per_iter}")
@@ -1059,6 +1076,9 @@ def launch(hydra_config: DictConfig):
                 print("SAVE CHECKPOINT")
             if RANK == 0 and (config.checkpoint_every_eval or (_iter_id == total_iters - 1)):
                 save_train_state(config, train_state_eval)
+                # Q7: resume point right after the checkpoint, so a restart during the (long) evaluation below
+                # never replays steps and rewrites step_N under a finished or half-finished evaluation
+                save_resume_checkpoint(config, train_state, ema_helper, _iter_id + 1, 0)
                 if config.q7_inline_eval:
                     q7_inline_eval(config, train_state.step)
             if RANK == 0 and _iter_id in config.q7_fork_iters:
