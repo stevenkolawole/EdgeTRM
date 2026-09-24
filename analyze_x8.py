@@ -736,6 +736,19 @@ def compute_fid():
             pred = ph < g[0]
             v["global_thr_acc"] = float((pred == dm).mean())
             v["global_thr_bal"] = float(((pred & dm).sum() / max(dm.sum(), 1) + (~pred & ~dm).sum() / max((~dm).sum(), 1)) / 2)
+    # one global threshold in the cell unit (TRM/HRM groups + DT per-cell runs)
+    cc = [(g, c["phi"], c["ret_cell"] < 0.99) for g, ts in groups.items() for t in ts for c in allcells.get(t, [])]
+    cc += [(f"DT maze {c['size']} (per-cell runs)", c["phi"], c["ret_cell"] < 0.99) for c in dtcell if c["spec"] != "fp32"]
+    if cc:
+        phi = np.array([x[1] for x in cc]); dm = np.array([x[2] for x in cc])
+        gc = best_threshold(phi, dm)
+        filt["global cell unit"] = {"n": len(cc), "n_damaged_cell": int(dm.sum()), "auroc_cell": auroc(-phi, dm), "thr_cell": gc}
+        for gname in {x[0] for x in cc}:
+            m = np.array([x[0] == gname for x in cc])
+            pred = phi[m] < gc[0]
+            d = dm[m]
+            filt[gname]["global_cell_thr_bal"] = float(((pred & d).sum() / max(d.sum(), 1) + (~pred & ~d).sum() / max((~d).sum(), 1)) / 2)
+            filt[gname]["global_cell_thr_acc"] = float((pred == d).mean())
     res["filter"] = filt
     return res
 
@@ -750,15 +763,16 @@ def print_fid(res):
               f"{fmt(v['rho_in'])} [{fmt(v['ci_in'][0])},{fmt(v['ci_in'][1])}] | {v['n_near']} / {fmt(v['rho_near'])} [{fmt(v['ci_near'][0])},{fmt(v['ci_near'][1])}] | {fmt(v['auroc_damaged'])} | "
               f"{dd['n']} / {dd['n_in']} / {fmt(dd['rho_in'])} [{fmt(dd['ci_in'][0])},{fmt(dd['ci_in'][1])}] / {dd['n_near']}, {fmt(dd['rho_near'])} [{fmt(dd['ci_near'][0])},{fmt(dd['ci_near'][1])}] |")
     print("\n### Filter: one φ threshold per output length (damaged = exact retained < 0.9; cell unit: per-cell retained < 0.99)")
-    print("| group | cells | damaged (exact) | AUROC | best t / acc / bal.acc | global t: acc / bal | damaged (cell) | AUROC cell | best t cell / bal |")
-    print("|---|---|---|---|---|---|---|---|---|")
+    print("| group | cells | damaged (exact) | AUROC | best t / acc / bal.acc | global t: acc / bal | damaged (cell) | AUROC cell | best t cell / bal | global cell t: acc / bal |")
+    print("|---|---|---|---|---|---|---|---|---|---|")
     for g, v in res["filter"].items():
-        te = v.get("thr_exact"); tc = v.get("thr_cell")
+        te = v.get("thr_exact") or (None, None, None); tc = v.get("thr_cell")
         print(f"| {g} | {v['n']} | {v.get('n_damaged_exact')} | {fmt(v.get('auroc_exact'))} | "
               f"{fmt(te[0], 3)} / {fmt(te[1])} / {fmt(te[2])} | {fmt(v.get('global_thr_acc'))} / {fmt(v.get('global_thr_bal'))} | "
-              f"{v.get('n_damaged_cell', '--')} | {fmt(v.get('auroc_cell'))} | {fmt(tc[0], 3) if tc else '--'} / {fmt(tc[2]) if tc else '--'} |")
+              f"{v.get('n_damaged_cell', '--')} | {fmt(v.get('auroc_cell'))} | {fmt(tc[0], 3) if tc else '--'} / {fmt(tc[2]) if tc else '--'} | "
+              f"{fmt(v.get('global_cell_thr_acc'))} / {fmt(v.get('global_cell_thr_bal'))} |")
         if "per_model_thr_exact" in v:
-            print("|  per model | " + "; ".join(f"{m}: t={fmt(x[0], 3)} bal={fmt(x[2])}" for m, x in v["per_model_thr_exact"].items()) + " |||||||||")
+            print("|  per model | " + "; ".join(f"{m}: t={fmt(x[0], 3)} bal={fmt(x[2])}" for m, x in v["per_model_thr_exact"].items()) + " ||||||||||")
 
 
 # ----------------------------------------------------------------------------- 7. independence
@@ -912,7 +926,7 @@ def main():
         doc = {"auroc": compute_auroc(), "select": sel, "basin": compute_basin(sel), "early": compute_early(),
                "checker": compute_checker(), "fid": compute_fid(), "indep": compute_indep(), "ptrm": compute_ptrm(),
                "conventions": __doc__}
-        p = B / "x8_summary.json"
+        p = Path(os.environ["X8_OUT"]) if os.environ.get("X8_OUT") else B / "x8_summary.json"
         json.dump(doc, open(p, "w"), default=lambda o: None if o is None else (float(o) if isinstance(o, (np.floating,)) else int(o) if isinstance(o, np.integer) else str(o)))
         print("wrote", p)
 
