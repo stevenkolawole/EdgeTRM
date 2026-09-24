@@ -33,14 +33,14 @@ def trm_cells():
             if f.exists():
                 recs += json.load(open(f))["records"]
         recs = [r for r in recs if r["nsup"] == 16 and (task.startswith("hrm") or r.get("H_cycles") == 3)]
-        fp = [r for r in recs if spec(r) == "fp32"]
-        if not fp:
-            continue
-        base = fp[0]["pexact"]
+        # each cell is compared with fp32 at its own H (the HRM files hold H=1-4; the first fp32 record
+        # used to serve every H; fixed Sep 24)
+        base = {r.get("H_cycles"): r["pexact"] for r in recs if spec(r) == "fp32"}
         for r in recs:
-            if spec(r) == "fp32" or base == 0:
+            b = base.get(r.get("H_cycles"))
+            if spec(r) == "fp32" or not b:
                 continue
-            pts.append((task, mk, r["fidelity_H"], 100 * r["pexact"] / base))
+            pts.append((task, mk, r["fidelity_H"], 100 * r["pexact"] / b))
     return pts
 
 

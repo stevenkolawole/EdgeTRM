@@ -18,6 +18,7 @@ B = ROOT / "results" / "breadth"
 spec = lambda r: r["quant"]["spec"] if isinstance(r["quant"], dict) else r["quant"]
 TASKS = [("sudoku_mlp", "TRM Sudoku, MLP"), ("sudoku_attn", "TRM Sudoku, attn"), ("maze_attn", "TRM Maze"),
          ("hrm_sudoku", "HRM Sudoku"), ("hrm_maze", "HRM Maze")]
+DEFAULT_H = {"sudoku_mlp": 3, "sudoku_attn": 3, "maze_attn": 3, "hrm_sudoku": 2, "hrm_maze": 2}
 SIG = ["0.05", "0.1", "0.15", "0.2", "0.3", "0.5", "0.7"]
 
 
@@ -29,7 +30,9 @@ def family_rows():
             f = B / f"{task}{suffix}.json"
             if f.exists():
                 recs += json.load(open(f))["records"]
-        recs = [r for r in recs if r["nsup"] == 16 and (task.startswith("hrm") or r.get("H_cycles") == 3)]
+        # checkpoint-default H only (TRM 3, HRM 2); the HRM files hold H=1-4 and the dict below kept
+        # whichever H came last (fixed Sep 24)
+        recs = [r for r in recs if r["nsup"] == 16 and r.get("H_cycles") == DEFAULT_H[task]]
         c = {spec(r): 100 * r["pexact"] for r in recs}
         rows.append((name, c.get("fp32"), c.get("w4t"), c.get("w4c"), c.get("w4g128")))
     return rows
