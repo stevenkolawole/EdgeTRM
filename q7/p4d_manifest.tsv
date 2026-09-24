@@ -5,17 +5,20 @@
 3	qat_naive_s0	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0
 3	qat_lsq_s0	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=lsq +q7_bits=4
 3	ft_fp32_s0	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+3	eval_qat_naive_s0	0	/home/ubuntu/q7/ckpt/qat_naive_s0/DONE	qat_naive_s0
 3	zz_smoke_a4	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=lsq +q7_bits=4 +q7_act_bits=4 +q7_max_steps=60 +q7_eval_n=100
 3	qat_naive_a4_s0	0	/home/ubuntu/q7/ckpt/zz_smoke_a4/DONE	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_act_bits=4
 3	qat_lsq_a4_s0	0	/home/ubuntu/q7/ckpt/zz_smoke_a4/DONE	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=lsq +q7_bits=4 +q7_act_bits=4
 4	qat_naive_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0
 4	qat_lsq_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=lsq +q7_bits=4
 4	ft_fp32_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100
+4	eval_qat_naive_s1	1	/home/ubuntu/q7/ckpt/qat_naive_s1/DONE	qat_naive_s1
 4	qat_naive_a4_s1	1	/home/ubuntu/q7/ckpt/zz_smoke_a4/DONE	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_act_bits=4
 4	qat_lsq_a4_s1	1	/home/ubuntu/q7/ckpt/zz_smoke_a4/DONE	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=lsq +q7_bits=4 +q7_act_bits=4
 5	qat_naive_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0
 5	qat_lsq_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=lsq +q7_bits=4
 5	ft_fp32_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100
+5	eval_qat_naive_s2	2	/home/ubuntu/q7/ckpt/qat_naive_s2/DONE	qat_naive_s2
 5	qat_naive_a4_s2	2	/home/ubuntu/q7/ckpt/zz_smoke_a4/DONE	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_act_bits=4
 5	qat_lsq_a4_s2	2	/home/ubuntu/q7/ckpt/zz_smoke_a4/DONE	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=lsq +q7_bits=4 +q7_act_bits=4
 3	q7_noise_s0	0	-	+q7_reg=noise +q7_sigma=0.15

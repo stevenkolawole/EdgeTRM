@@ -20,7 +20,7 @@ alive() {  # run name -> 0 if its wrapper is running
   local f="$PIDS/$1.pid"
   [ -f "$f" ] || return 1
   local p; p=$(cat "$f")
-  [ -d "/proc/$p" ] && tr '\0' ' ' < "/proc/$p/cmdline" | grep -q "q7_train.sh $1 "
+  [ -d "/proc/$p" ] && tr '\0' ' ' < "/proc/$p/cmdline" | grep -q -E "q7_(train|evalrun).sh $1 "
 }
 
 card_procs() {  # GPU processes on card $1 (anyone's) + our runs on that card not yet visible there
@@ -33,7 +33,8 @@ card_procs() {  # GPU processes on card $1 (anyone's) + our runs on that card no
       ours=$((ours + 1))
       # is this run's python already on the GPU?
       if nvidia-smi --query-compute-apps=gpu_uuid,pid --format=csv,noheader | grep "$uuid" | awk -F', ' '{print $2}' \
-          | while read -r gp; do tr '\0' ' ' < "/proc/$gp/cmdline" 2>/dev/null | grep -q "run_name=$run " && echo y; done | grep -q y; then
+          | while read -r gp; do { tr '\0' '\n' < "/proc/$gp/environ" 2>/dev/null | grep -qx "Q7_RUN=$run" \
+              || tr '\0' ' ' < "/proc/$gp/cmdline" 2>/dev/null | grep -q "run_name=$run "; } && echo y; done | grep -q y; then
         visible=$((visible + 1))
       fi
     fi
@@ -57,8 +58,10 @@ while true; do
     if [ "$req" != "-" ] && [ ! -f "$req" ]; then continue; fi
     np=$(card_procs "$card")
     if [ "$np" -ge 2 ]; then continue; fi
+    script=q7_train.sh; [ "${run#eval_}" != "$run" ] && script=q7_evalrun.sh
     # shellcheck disable=SC2086
-    CUDA_VISIBLE_DEVICES=$card setsid nohup bash "$HOME/q7/q7_train.sh" "$run" "$seed" $over \
+    if [ "$script" = q7_evalrun.sh ]; then set -- $over; else set -- "$seed" $over; fi
+    Q7_RUN=$run CUDA_VISIBLE_DEVICES=$card setsid nohup bash "$HOME/q7/$script" "$run" "$@" \
       >> "$HOME/q7/logs/$run.log" 2>&1 < /dev/null 9>&- &
     echo $! > "$PIDS/$run.pid"
     log "launched $run seed=$seed card=$card pid=$! (card had $np procs) overrides: $over"
