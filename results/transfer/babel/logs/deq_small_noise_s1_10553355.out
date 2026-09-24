@@ -1,0 +1,47 @@
+NVIDIA L40S
+Thu Sep 24 08:30:34 PM UTC 2026 host babel-q5-16 restart 0: deq_sweep.py --model small --specs noise0.02,noise0.05,noise0.1,noise0.15,noise0.2,noise0.3,noise0.5,noise0.7,noise1.0 --seed 1 --n 5000 --batch 50 --T 100 --out /home/skolawol/x6/results/deq_small_noise_s1.json
+small: 5000 images, specs ['fp32', 'noise0.02', 'noise0.05', 'noise0.1', 'noise0.15', 'noise0.2', 'noise0.3', 'noise0.5', 'noise0.7', 'noise1.0'], solvers ['broyden', 'picard'], T 100, budgets [1, 2, 4, 8, 12, 16, 26, 40, 60, 100] (0s data)
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  10 models built; weight rel err fp32:0.000, noise0.02:0.020, noise0.05:0.050, noise0.1:0.100, noise0.15:0.150, noise0.2:0.200, noise0.3:0.300, noise0.5:0.499, noise0.7:0.699, noise1.0:0.999
+  images 50/5000 (39.8s/batch, 44s total)
+  images 500/5000 (38.0s/batch, 385s total)
+  images 1000/5000 (38.0s/batch, 766s total)
+  images 1500/5000 (38.0s/batch, 1146s total)
+  images 2000/5000 (38.0s/batch, 1527s total)
+  images 2500/5000 (38.0s/batch, 1908s total)
+  images 3000/5000 (38.0s/batch, 2289s total)
+  images 3500/5000 (38.0s/batch, 2670s total)
+  images 4000/5000 (38.0s/batch, 3050s total)
+  images 4500/5000 (38.0s/batch, 3431s total)
+  images 5000/5000 (38.0s/batch, 3811s total)
+  fp32      broyden k1:  0.7/9e-01 k2:  7.9/6e-01 k4: 53.7/4e-01 k8: 72.2/2e-01 k12: 73.6/9e-02 k16: 73.9/4e-02 k26: 73.8/6e-03 k40: 73.8/6e-04 k60: 73.8/2e-05 k100: 73.8/4e-07
+  fp32      picard  k1:  0.9/9e-01 k2:  5.4/8e-01 k4: 45.8/7e-01 k8: 67.1/6e-01 k12: 68.2/6e-01 k16: 67.8/7e-01 k26: 67.3/7e-01 k40: 66.2/7e-01 k60: 66.3/7e-01 k100: 66.3/7e-01
+  noise0.02 broyden k1:  0.8/9e-01 k2:  7.8/6e-01 k4: 53.5/4e-01 k8: 72.1/2e-01 k12: 73.2/9e-02 k16: 73.3/4e-02 k26: 73.5/6e-03 k40: 73.5/5e-04 k60: 73.5/2e-05 k100: 73.5/4e-07
+  noise0.02 picard  k1:  0.9/9e-01 k2:  5.7/8e-01 k4: 46.5/7e-01 k8: 66.4/6e-01 k12: 68.4/6e-01 k16: 68.0/7e-01 k26: 66.8/7e-01 k40: 66.2/7e-01 k60: 65.9/7e-01 k100: 66.1/7e-01
+  noise0.05 broyden k1:  0.7/9e-01 k2:  7.3/6e-01 k4: 52.8/4e-01 k8: 71.1/2e-01 k12: 72.5/9e-02 k16: 72.8/4e-02 k26: 72.7/5e-03 k40: 72.8/5e-04 k60: 72.7/1e-05 k100: 72.7/4e-07
+  noise0.05 picard  k1:  0.9/9e-01 k2:  5.3/8e-01 k4: 44.8/7e-01 k8: 65.6/6e-01 k12: 67.1/6e-01 k16: 67.0/6e-01 k26: 65.7/7e-01 k40: 65.0/7e-01 k60: 64.6/7e-01 k100: 64.6/7e-01
+  noise0.1  broyden k1:  0.6/9e-01 k2:  4.8/6e-01 k4: 47.5/4e-01 k8: 67.2/2e-01 k12: 68.6/8e-02 k16: 69.0/4e-02 k26: 68.9/5e-03 k40: 68.9/3e-04 k60: 68.9/7e-06 k100: 68.9/4e-07
+  noise0.1  picard  k1:  0.8/9e-01 k2:  3.8/8e-01 k4: 38.1/7e-01 k8: 60.6/6e-01 k12: 61.8/6e-01 k16: 62.3/6e-01 k26: 60.0/7e-01 k40: 60.0/7e-01 k60: 59.0/7e-01 k100: 59.1/7e-01
+  noise0.15 broyden k1:  0.5/9e-01 k2:  2.7/6e-01 k4: 37.3/4e-01 k8: 58.5/2e-01 k12: 60.6/8e-02 k16: 61.1/3e-02 k26: 61.0/4e-03 k40: 60.9/2e-04 k60: 61.0/4e-06 k100: 61.0/4e-07
+  noise0.15 picard  k1:  0.6/9e-01 k2:  1.9/8e-01 k4: 28.5/6e-01 k8: 51.6/5e-01 k12: 53.0/6e-01 k16: 52.6/6e-01 k26: 50.1/6e-01 k40: 49.4/6e-01 k60: 49.3/6e-01 k100: 48.2/7e-01
+  noise0.2  broyden k1:  0.5/9e-01 k2:  1.4/5e-01 k4: 22.7/3e-01 k8: 44.3/2e-01 k12: 46.5/8e-02 k16: 46.9/3e-02 k26: 47.1/4e-03 k40: 47.1/2e-04 k60: 47.1/3e-06 k100: 47.1/4e-07
+  noise0.2  picard  k1:  0.5/9e-01 k2:  0.8/8e-01 k4: 16.0/6e-01 k8: 35.0/5e-01 k12: 37.0/5e-01 k16: 36.7/5e-01 k26: 35.3/6e-01 k40: 33.8/6e-01 k60: 34.2/6e-01 k100: 33.2/6e-01
+  noise0.3  broyden k1:  0.3/9e-01 k2:  0.3/5e-01 k4:  2.6/3e-01 k8:  8.8/1e-01 k12: 10.2/7e-02 k16: 10.5/3e-02 k26: 10.5/4e-03 k40: 10.5/2e-04 k60: 10.5/4e-06 k100: 10.5/4e-07
+  noise0.3  picard  k1:  0.3/9e-01 k2:  0.2/7e-01 k4:  2.6/6e-01 k8:  5.9/5e-01 k12:  6.9/4e-01 k16:  7.1/4e-01 k26:  6.7/5e-01 k40:  6.3/5e-01 k60:  5.9/5e-01 k100:  6.0/5e-01
+  noise0.5  broyden k1:  0.2/8e-01 k2:  0.1/5e-01 k4:  0.2/3e-01 k8:  0.2/1e-01 k12:  0.2/5e-02 k16:  0.2/2e-02 k26:  0.2/4e-03 k40:  0.2/3e-04 k60:  0.2/5e-06 k100:  0.2/4e-07
+  noise0.5  picard  k1:  0.2/8e-01 k2:  0.2/6e-01 k4:  0.3/5e-01 k8:  0.1/4e-01 k12:  0.2/4e-01 k16:  0.2/4e-01 k26:  0.2/4e-01 k40:  0.2/4e-01 k60:  0.2/4e-01 k100:  0.2/4e-01
+  noise0.7  broyden k1:  0.2/7e-01 k2:  0.1/4e-01 k4:  0.1/2e-01 k8:  0.1/9e-02 k12:  0.1/4e-02 k16:  0.1/2e-02 k26:  0.1/2e-03 k40:  0.1/1e-04 k60:  0.1/2e-06 k100:  0.1/3e-07
+  noise0.7  picard  k1:  0.2/7e-01 k2:  0.1/5e-01 k4:  0.1/4e-01 k8:  0.1/3e-01 k12:  0.1/2e-01 k16:  0.1/2e-01 k26:  0.1/3e-01 k40:  0.1/3e-01 k60:  0.1/3e-01 k100:  0.1/3e-01
+  noise1.0  broyden k1:  0.1/7e-01 k2:  0.1/4e-01 k4:  0.1/2e-01 k8:  0.1/9e-02 k12:  0.1/4e-02 k16:  0.1/2e-02 k26:  0.1/4e-03 k40:  0.1/4e-04 k60:  0.1/2e-05 k100:  0.1/4e-07
+  noise1.0  picard  k1:  0.1/7e-01 k2:  0.1/5e-01 k4:  0.1/3e-01 k8:  0.1/2e-01 k12:  0.1/2e-01 k16:  0.1/2e-01 k26:  0.1/2e-01 k40:  0.1/2e-01 k60:  0.1/2e-01 k100:  0.1/2e-01
+wrote /home/skolawol/x6/results/deq_small_noise_s1.json (3814s)
+Thu Sep 24 09:34:10 PM UTC 2026 done rc=0

@@ -175,7 +175,7 @@ def deqfig(rdir=None, model="mdeq_small"):
     if not recs:
         print("no records")
         return
-    fig, axs = plt.subplots(1, 3, figsize=(13, 3.6))
+    fig, axs = plt.subplots(1, 4, figsize=(17, 3.8))
     cols = {4: "#b0c4de", 8: "#6495ed", 26: "#1f4e9c", 100: "#0b1f44"}
     fp = [r for r in recs if r["spec"] == "fp32" and r["solver"] == "broyden"][0]
     budgets = fp["budgets"]
@@ -205,8 +205,25 @@ def deqfig(rdir=None, model="mdeq_small"):
         ax.set_xscale("log")
         if metric == "res_median":
             ax.set_yscale("log")
-        ax.set_xlabel("weight noise sigma (x tensor std) / quantizer rel. weight error")
         ax.set_title(f"{model} {solver}: {'top-1 %' if metric == 'top1' else 'median rel. residual'}", fontsize=9)
+    ax = axs[3]                                                  # retained accuracy vs fidelity
+    bi = budgets.index(100)
+    f0 = fp["by_budget"][bi]["top1"]
+    for r in recs:
+        if r["solver"] != "broyden" or r["spec"] == "fp32":
+            continue
+        b = r["by_budget"][bi]
+        isq = not r["spec"].startswith("noise")
+        ax.plot(b["cos_mean"], b["top1"] / f0 * 100, "^" if isq else "o", color="k" if isq else "#1f4e9c",
+                ms=5 if isq else 3.5, alpha=1 if isq else 0.7)
+        if isq:
+            ax.annotate(r["spec"], (b["cos_mean"], b["top1"] / f0 * 100), fontsize=6, xytext=(2, -8),
+                        textcoords="offset points")
+    ax.set_xlabel("cosine of equilibrium to fp32 equilibrium (k=100)")
+    ax.set_title(f"{model} broyden: top-1 retained (% of fp32)", fontsize=9)
+    ax.grid(alpha=0.3)
+    for a_ in axs[:3]:
+        a_.set_xlabel("sigma (x tensor std) / quantizer rel. weight error", fontsize=8)
     axs[0].legend(fontsize=7)
     out = HERE / "figures" / f"x6_{model}.png"
     out.parent.mkdir(exist_ok=True)

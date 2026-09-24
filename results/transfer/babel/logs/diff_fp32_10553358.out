@@ -1,0 +1,12 @@
+NVIDIA L40S
+Thu Sep 24 09:39:35 PM UTC 2026 host babel-x9-32 restart 1: diff_sweep.py --specs fp32 --seed 0 --n 5000 --batch 1000 --out /home/skolawol/x6/results/diff_fp32.json
+specs ['fp32'], samplers ['ddim10', 'ddim25', 'ddim50', 'ddim100', 'ddpm50', 'ddpm100', 'ddpm250'], n 5000 (12s setup)
+/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py:202: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  ddim100  fp32       FID   15.79  vs-fp32    0.00  rmse 0.0000  cos 1.000  (269s)
+  ddpm50   fp32       FID  137.20  vs-fp32    0.00  rmse 0.0000  cos 1.000  (130s)
+  ddpm100  fp32       FID   82.44  vs-fp32    0.00  rmse 0.0000  cos 1.000  (239s)
+  ddpm250  fp32       FID   39.27  vs-fp32    0.00  rmse 0.0000  cos 1.000  (565s)
+wrote /home/skolawol/x6/results/diff_fp32.json 7 (1215s)
+Thu Sep 24 09:59:53 PM UTC 2026 done rc=0

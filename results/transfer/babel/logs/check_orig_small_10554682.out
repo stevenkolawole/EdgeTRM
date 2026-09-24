@@ -1,0 +1,11 @@
+NVIDIA L40S
+Thu Sep 24 10:13:14 PM UTC 2026 host babel-o5-20 restart 3: deq_sweep.py --model small --specs fp32 --seed 0 --n 1000 --batch 50 --T 100 --budgets 8,16,26,40,100 --solvers broyden --data orig --out /home/skolawol/x6/results/check_orig_small.json
+small: 1000 images, specs ['fp32'], solvers ['broyden'], T 100, budgets [8, 16, 26, 40, 100] (0s data)
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  1 models built; weight rel err fp32:0.000
+  images 50/1000 (5.7s/batch, 7s total)
+  images 500/1000 (3.1s/batch, 35s total)
+  images 1000/1000 (3.1s/batch, 67s total)
+  fp32      broyden k8: 72.9/2e-01 k16: 73.6/5e-02 k26: 74.0/8e-03 k40: 74.1/9e-04 k100: 74.1/4e-07
+wrote /home/skolawol/x6/results/check_orig_small.json (67s)
+Thu Sep 24 10:14:23 PM UTC 2026 done rc=0

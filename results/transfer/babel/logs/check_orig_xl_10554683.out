@@ -1,0 +1,12 @@
+NVIDIA L40S
+Thu Sep 24 10:14:52 PM UTC 2026 host babel-o5-28 restart 0: deq_sweep.py --model xl --specs fp32 --seed 0 --n 1000 --batch 25 --T 100 --budgets 8,16,26,40,100 --solvers broyden --data orig --out /home/skolawol/x6/results/check_orig_xl.json
+xl: 1000 images, specs ['fp32'], solvers ['broyden'], T 100, budgets [8, 16, 26, 40, 100] (0s data)
+  1 models built; weight rel err fp32:0.000
+  images 25/1000 (9.9s/batch, 22s total)
+  images 250/1000 (5.4s/batch, 71s total)
+  images 500/1000 (5.5s/batch, 126s total)
+  images 750/1000 (5.5s/batch, 180s total)
+  images 1000/1000 (5.5s/batch, 235s total)
+  fp32      broyden k8: 69.9/6e-01 k16: 76.7/4e-01 k26: 77.5/2e-01 k40: 76.8/1e-01 k100: 76.9/7e-04
+wrote /home/skolawol/x6/results/check_orig_xl.json (236s)
+Thu Sep 24 10:18:50 PM UTC 2026 done rc=0

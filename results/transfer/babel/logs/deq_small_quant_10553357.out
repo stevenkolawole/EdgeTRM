@@ -1,0 +1,38 @@
+NVIDIA L40S
+Thu Sep 24 09:02:51 PM UTC 2026 host babel-n9-24 restart 0: deq_sweep.py --model small --specs w8c,w4g32,w4g128,w4c,w4a,w4t --seed 0 --n 5000 --batch 50 --T 100 --out /home/skolawol/x6/results/deq_small_quant.json
+small: 5000 images, specs ['fp32', 'w8c', 'w4g32', 'w4g128', 'w4c', 'w4a', 'w4t'], solvers ['broyden', 'picard'], T 100, budgets [1, 2, 4, 8, 12, 16, 26, 40, 60, 100] (1s data)
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  note: 288 unexpected keys ignored, e.g. ['fullstage_copy.branches.0.blocks.0.conv1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.weight', 'fullstage_copy.branches.0.blocks.0.gn1.bias', 'fullstage_copy.branches.0.blocks.0.conv2.weight']
+  7 models built; weight rel err fp32:0.000, w8c:0.009, w4g32:0.107, w4g128:0.137, w4c:0.171, w4a:0.137, w4t:0.408
+  images 50/5000 (30.3s/batch, 44s total)
+  images 500/5000 (26.5s/batch, 283s total)
+  images 1000/5000 (26.5s/batch, 548s total)
+  images 1500/5000 (26.5s/batch, 814s total)
+  images 2000/5000 (26.5s/batch, 1079s total)
+  images 2500/5000 (26.5s/batch, 1345s total)
+  images 3000/5000 (26.5s/batch, 1610s total)
+  images 3500/5000 (26.5s/batch, 1875s total)
+  images 4000/5000 (26.5s/batch, 2141s total)
+  images 4500/5000 (26.5s/batch, 2406s total)
+  images 5000/5000 (26.5s/batch, 2672s total)
+  fp32      broyden k1:  0.7/9e-01 k2:  7.9/6e-01 k4: 53.7/4e-01 k8: 72.2/2e-01 k12: 73.6/9e-02 k16: 73.9/4e-02 k26: 73.8/6e-03 k40: 73.8/6e-04 k60: 73.8/2e-05 k100: 73.8/4e-07
+  fp32      picard  k1:  0.9/9e-01 k2:  5.4/8e-01 k4: 45.8/7e-01 k8: 67.1/6e-01 k12: 68.2/6e-01 k16: 67.8/7e-01 k26: 67.3/7e-01 k40: 66.2/7e-01 k60: 66.3/7e-01 k100: 66.3/7e-01
+  w8c       broyden k1:  0.8/9e-01 k2:  7.8/6e-01 k4: 53.8/4e-01 k8: 72.2/2e-01 k12: 73.5/9e-02 k16: 74.0/4e-02 k26: 73.8/6e-03 k40: 73.9/6e-04 k60: 73.8/2e-05 k100: 73.8/4e-07
+  w8c       picard  k1:  0.9/9e-01 k2:  5.4/8e-01 k4: 46.1/7e-01 k8: 67.4/6e-01 k12: 68.3/6e-01 k16: 68.0/7e-01 k26: 67.4/7e-01 k40: 66.4/7e-01 k60: 66.5/7e-01 k100: 66.3/7e-01
+  w4g32     broyden k1:  0.7/9e-01 k2:  4.2/6e-01 k4: 41.2/4e-01 k8: 64.8/2e-01 k12: 65.9/1e-01 k16: 66.6/5e-02 k26: 66.6/9e-03 k40: 66.6/9e-04 k60: 66.6/3e-05 k100: 66.5/4e-07
+  w4g32     picard  k1:  0.8/9e-01 k2:  2.8/8e-01 k4: 30.1/8e-01 k8: 53.2/7e-01 k12: 55.6/7e-01 k16: 55.0/7e-01 k26: 54.2/7e-01 k40: 53.3/7e-01 k60: 53.3/7e-01 k100: 53.0/7e-01
+  w4g128    broyden k1:  0.6/9e-01 k2:  3.6/6e-01 k4: 34.9/4e-01 k8: 59.1/2e-01 k12: 60.8/1e-01 k16: 61.3/5e-02 k26: 61.5/1e-02 k40: 61.6/1e-03 k60: 61.6/5e-05 k100: 61.6/4e-07
+  w4g128    picard  k1:  0.7/9e-01 k2:  2.6/8e-01 k4: 24.3/8e-01 k8: 46.1/7e-01 k12: 48.2/7e-01 k16: 47.5/7e-01 k26: 45.9/7e-01 k40: 45.5/8e-01 k60: 45.5/8e-01 k100: 45.4/8e-01
+  w4c       broyden k1:  0.5/9e-01 k2:  2.7/6e-01 k4: 28.7/4e-01 k8: 56.2/2e-01 k12: 57.2/1e-01 k16: 58.0/5e-02 k26: 57.8/8e-03 k40: 57.9/8e-04 k60: 57.9/3e-05 k100: 57.9/4e-07
+  w4c       picard  k1:  0.6/9e-01 k2:  1.7/8e-01 k4: 17.6/7e-01 k8: 41.4/6e-01 k12: 43.6/6e-01 k16: 44.4/6e-01 k26: 43.1/7e-01 k40: 43.1/7e-01 k60: 42.3/7e-01 k100: 42.5/7e-01
+  w4a       broyden k1:  0.4/1e+00 k2:  5.2/6e-01 k4: 43.4/4e-01 k8: 66.1/2e-01 k12: 67.8/9e-02 k16: 67.9/4e-02 k26: 67.9/6e-03 k40: 68.0/5e-04 k60: 68.1/1e-05 k100: 68.0/4e-07
+  w4a       picard  k1:  0.6/1e+00 k2:  3.6/8e-01 k4: 33.3/7e-01 k8: 57.7/6e-01 k12: 60.6/6e-01 k16: 59.8/6e-01 k26: 58.8/7e-01 k40: 58.2/7e-01 k60: 57.6/7e-01 k100: 57.9/7e-01
+  w4t       broyden k1:  0.1/9e-01 k2:  0.2/5e-01 k4:  0.2/3e-01 k8:  0.2/9e-02 k12:  0.2/4e-02 k16:  0.2/2e-02 k26:  0.2/2e-03 k40:  0.2/1e-04 k60:  0.2/3e-06 k100:  0.2/3e-07
+  w4t       picard  k1:  0.1/9e-01 k2:  0.2/6e-01 k4:  0.1/5e-01 k8:  0.2/3e-01 k12:  0.1/3e-01 k16:  0.2/3e-01 k26:  0.1/3e-01 k40:  0.1/4e-01 k60:  0.1/4e-01 k100:  0.1/4e-01
+wrote /home/skolawol/x6/results/deq_small_quant.json (2674s)
+Thu Sep 24 09:47:28 PM UTC 2026 done rc=0
