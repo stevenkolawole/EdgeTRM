@@ -128,6 +128,7 @@ def _sens_stats(build, prep, inp, lab, batch, nsup, n=256, draws=DRAWS, tag=""):
     with Gaussian weight noise sigma x per-tensor std on every CastedLinear (after `prep`). S_sigma = median
     over puzzles of delta_T / sigma, median over `draws` draws. Returns {f"S{tag}_{sigma}": ..., spreads}."""
     dev = bs.DEV
+    n = min(n, len(inp))
     m = build()
     prep(m)
     _, _, zH, zL = bs.run(m, inp[:n], lab[:n], batch, nsup)
