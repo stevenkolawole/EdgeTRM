@@ -899,15 +899,16 @@ def analyze(files, summary_path):
                        "torch": j.get("torch"), "cells": rows}
         print(f"\n### {key}  (task {j['task']}, n={j['n']}, T={T}, {j.get('gpu')})")
         print("| cell | acc | phi_H | agree | Lambda med (corr / wrong) | rho_T med (corr / wrong) | ||J_T|| med | "
-              "kick@20 rand med | res_T med | disp med | delta_T med | disp/delta med |")
-        print("|---|" + "---|" * 11)
+              "kick@16 rand med | frac Lambda<1 | res_T med | disp med | delta_T med | basin switch | acc on fp32-solved |")
+        print("|---|" + "---|" * 12)
         for s in rows:
             lc, lw = med(s.get("Lambda_q_correct")), med(s.get("Lambda_q_wrong"))
             rc, rw = med(s.get("rhoT_q_correct")), med(s.get("rhoT_q_wrong"))
             print(f"| {s['spec']}#{s['draw']} | {s['acc']*100:.1f} | {fmt(s.get('phi_H'))} | {fmt(s.get('agree_mean'))} | "
                   f"{fmt(med(s['Lambda_late_q']))} ({fmt(lc)} / {fmt(lw)}) | {fmt(med(s.get('rhoT_q')))} ({fmt(rc)} / {fmt(rw)}) | "
-                  f"{fmt(med(s.get(f'sigma{T}_q')), 1)} | {fmt(med(s.get('nl_rand_20_q')))} | {fmt(med(s['resT_q']))} | "
-                  f"{fmt(med(s.get('disp_q')))} | {fmt(med(s.get('deltaT_q')))} | {fmt(med(s.get('amp_q')), 2)} |")
+                  f"{fmt(med(s.get(f'sigma{T}_q')), 1)} | {fmt(med(s.get('nl_rand_16_q')))} | {fmt(s.get('frac_Lambda_lt1'), 2)} | "
+                  f"{fmt(med(s['resT_q']))} | {fmt(med(s.get('disp_q')))} | {fmt(med(s.get('deltaT_q')))} | "
+                  f"{fmt(s.get('frac_basin_switch'), 2)} | {fmt(s.get('acc_on_ref_correct'), 2)} |")
     if summary_path:
         json.dump(allsum, open(summary_path, "w"), indent=1)
         print("wrote", summary_path)
@@ -942,6 +943,11 @@ METRICS = {   # per-cell scalar (from cell_summary) -> name in the figure data
     "xs_ref_agree": lambda c: c.get("xs_ref_agree_mean"),
     "pi_agree": lambda c: c.get("pi_agree_mean"),
     "agree": lambda c: c.get("agree_mean"),
+    "kick_rand16": lambda c: (c.get("nl_rand_16_q") or [None] * 3)[1],
+    "kick_dom16": lambda c: (c.get("nl_dom_16_q") or [None] * 3)[1],
+    "frac_kick_rand16_lt1": lambda c: c.get("frac_nl_rand_16_lt1"),
+    "acc_on_ref_correct": lambda c: c.get("acc_on_ref_correct"),
+    "flip_meas_frac": lambda c: c.get("frac_flip_meas_lt1_refcorrect"),
     "sigma_max": lambda c: next((v[1] for k, v in c.items() if k.startswith("sigma") and k.endswith("_q") and v), None),
 }
 
@@ -1030,6 +1036,32 @@ def task_curves(files):
                 else:
                     pred["note"] = "no sigma below sigma_1/2 / 2"
             d["sigma_star_rho"][tag] = pred
+        # sigma*_kick: label-free, reference-free cliff detector: the sigma at which a random state kick stops
+        # dying out, i.e. the median (over draws) of the median 16-step growth crosses 1 (log-log interpolation)
+        kk = [float(np.median([v for v in vs if v is not None])) if any(v is not None for v in vs) else None
+              for vs in d["metrics"]["kick_rand16"]]
+        k0 = d["fp32"]["kick_rand16"]
+        sk = {"value": None, "note": None, "kick_fp32": k0, "kick_med": kk}
+        if k0 is None:
+            sk["note"] = "no kick"
+        elif k0 >= 1:
+            sk["note"] = "fp32 kick growth >= 1"
+        else:
+            px, py = 0.0, k0
+            for x, y in zip(sig, kk):
+                if y is None:
+                    continue
+                if y >= 1:
+                    if px == 0.0:
+                        sk["value"], sk["note"] = None, f"< {x}"
+                    else:
+                        f = (np.log(1) - np.log(py)) / (np.log(y) - np.log(py))
+                        sk["value"] = float(np.exp(np.log(px) + f * (np.log(x) - np.log(px))))
+                    break
+                px, py = x, y
+            else:
+                sk["note"] = f"> {sig[-1]}" if sig else None
+        d["sigma_star_kick"] = sk
         # sigma*_mu: decoder-margin route from the smallest sigma: per fp32-solved puzzle sigma_flip = sigma0 * min-cell
         # margin ratio; the median over puzzles is where half of them flip
         d["sigma_star_mu"] = {}
