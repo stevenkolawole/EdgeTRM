@@ -59,6 +59,10 @@ def sigma_half_q(recs, base):
     return sigma_half(fake, b["pexact"])
 
 
+def sfmt(v):
+    return "  -  " if v is None else f"{v:.2f}"
+
+
 def qat_table():
     """Runs started from a trained checkpoint (QAT, LSQ, w+a, fp32 fine-tune control)."""
     rows = []
@@ -88,7 +92,7 @@ def qat_table():
               f"{(d.get('ref_fp32_pexact') or 0)*100:5.1f} {g('fp32')} {g('w4t')} {g('w4t', 'fidelity_H_ref', False)} "
               f"{(f'{sq:.3f}' if sq else '  -  '):>5s} {g('w4lsq')} {g('w4lsq', 'fidelity_H_ref', False)} "
               f"{(f'{sl:.3f}' if sl else '  -  '):>5s} {g('w4t+a4s')} {g('w4lsq+a4s')} "
-              f"{(f'{d[chr(83)+'_0.1']:.2f}' if 'S_0.1' in d else '  -  '):>5s} {(f'{d['Sq_0.1']:.2f}' if 'Sq_0.1' in d else '  -  '):>5s}")
+              f"{sfmt(d.get('S_0.1')):>5s} {sfmt(d.get('Sq_0.1')):>5s}")
     print("(L = light cell set at intermediate checkpoints: one draw, fewer cells)")
 
 
