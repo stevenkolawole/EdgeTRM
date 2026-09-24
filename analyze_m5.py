@@ -25,6 +25,7 @@ Exit rules (t_i = exit step of instance i; if the rule never fires, t_i = K):
   msp[b]       min over answer cells of max-softmax > tau, tuned on fp32, frozen
   stab<p>      argmax answer unchanged for p consecutive steps (label-free, no tuning)
   nat|stab<p>  native OR stable (fallback when the head stays silent)
+  nat&same     native AND the answer did not change since the previous step (consistency guard)
   oracle       first step at which the answer is correct (upper bound)
 Tuning is two-fold cross-fitted on puzzle parity: tuned on the even fp32 half, applied to the odd
 half of every cell, and vice versa. Baseline "fixed@s": fixed depth matched to the rule's mean
@@ -48,8 +49,8 @@ RB = HERE / "results" / "breadth"
 DET_DIR = Path(os.environ.get("M5_DET_DIR", RB / "babel" / "x8"))
 M5_DIR = Path(os.environ.get("M5_DIR", RB / "babel" / "m5"))
 MODELS = ["sudoku_mlp", "sudoku_attn", "hrm_sudoku", "maze_attn", "hrm_maze"]
-HDEF = {"sudoku_mlp": 3, "sudoku_attn": 3, "maze_attn": 3, "hrm_sudoku": 2, "hrm_maze": 2}
-IS_HRM = {m: m.startswith("hrm") for m in MODELS}
+HDEF = {"sudoku_mlp": 3, "sudoku_attn": 3, "maze_attn": 3, "hrm_sudoku": 2, "hrm_maze": 2, "arc_attn": 3}
+IS_HRM = {m: m.startswith("hrm") for m in MODELS + ["arc_attn"]}
 BUDGETS = (0.5, 1.0)
 
 
@@ -127,9 +128,14 @@ def load_m5(model):
         sel = lambda a: a[:, h - 1::h]
         extra = {k: sel(h1[k]) for k in ("valid", "vshort") if k in h1}
         # default-H residual: the last H=1 sub-step's residual (the change made by the final H cycle)
-        out[info["spec"]] = Cell(model, info["spec"], "m5", sel(h1["correct"]).astype(bool), sel(h1["qh"]).astype(np.float32),
-                                 qc=sel(h1["qc"]).astype(np.float32), res=sel(h1["resH"]).astype(np.float32),
-                                 msp=sel(h1["msp"]).astype(np.float32), chg=_chg_default(h1["chg"], h), extra=extra, h1=h1)
+        g = lambda k: sel(h1[k]).astype(np.float32) if k in h1 else None
+        out[info["spec"]] = Cell(model, info["spec"], "m5", sel(h1["correct"]).astype(bool), g("qh"), qc=g("qc"), res=g("resH"),
+                                 msp=g("msp"), chg=_chg_default(h1["chg"], h), extra=extra, h1=h1)
+        if "qh32" in h1 and info["spec"] != "fp32" and not info.get("keep_head"):
+            # the same trajectory read by the unquantized fp32 halting head (head is read-only)
+            out[info["spec"] + "|h32"] = Cell(model, info["spec"] + "|h32", "m5", sel(h1["correct"]).astype(bool), g("qh32"),
+                                              qc=g("qc32"), res=g("resH"), msp=g("msp"), chg=_chg_default(h1["chg"], h),
+                                              extra=extra, h1={**h1, "qh": h1["qh32"], "qc": h1["qc32"]})
     return out
 
 
@@ -235,6 +241,9 @@ def exit_steps(cell, rule, param=None):
     if rule == "stab":
         m = stable_mask(cell, param)
         return None if m is None else first_true(m)
+    if rule == "natcons":                                 # native AND answer unchanged since the previous step
+        m = stable_mask(cell, 1)
+        return None if m is None else first_true(native_mask(cell) & m)
     if rule == "natstab":
         m = stable_mask(cell, param)
         return None if m is None else first_true(native_mask(cell) | m)
@@ -311,15 +320,15 @@ def paired_ci(ok, ref_ok):
 
 RULESET = [("native", None), ("pat", 2), ("pat", 3), ("min", 2), ("min", 4),
            ("thr", 0.5), ("thr", 1.0), ("res", 0.5), ("res", 1.0), ("msp", 0.5), ("msp", 1.0),
-           ("stab", 1), ("stab", 2), ("natstab", 2), ("oracle", None)]
+           ("stab", 1), ("stab", 2), ("natstab", 2), ("natcons", None), ("oracle", None)]
 
 
 def rule_name(rule, p):
     return {"native": "native", "pat": f"pat{p}", "min": f"min{p}+nat", "thr": f"thr[{p}]", "res": f"res[{p}]",
-            "msp": f"msp[{p}]", "stab": f"stab{p}", "natstab": f"nat|stab{p}", "oracle": "oracle"}[rule]
+            "msp": f"msp[{p}]", "stab": f"stab{p}", "natstab": f"nat|stab{p}", "natcons": "nat&same", "oracle": "oracle"}[rule]
 
 
-SEL_CANDIDATES = [("native", None), ("pat", 2), ("pat", 3), ("min", 2), ("min", 4)]
+SEL_CANDIDATES = [("native", None), ("pat", 2), ("pat", 3), ("min", 2), ("min", 4)]   # need only q (all sources)
 
 
 def select_rule(ref, budget=0.5):
@@ -417,7 +426,8 @@ def cmd_rules(a):
 
 
 def base_spec(s):
-    return s.split("@s")[0]
+    b = s.split("@s")[0]
+    return b + ("|h32" if s.endswith("|h32") and not b.endswith("|h32") else "")
 
 
 def summarize(model, K=16, corr="exact", rules=("native", "sel", "pat2", "min4+nat", "thr[0.5]", "res[0.5]", "stab2", "nat|stab2", "oracle")):
@@ -596,9 +606,163 @@ def cmd_device(a):
     return res
 
 
+def h1_cell(cell):
+    """the same trajectory at H=1 ("inner step") granularity: one step = one H cycle."""
+    h1 = cell.h1
+    f = lambda k: h1[k].astype(np.float32) if k in h1 else None
+    extra = {k: h1[k] for k in ("valid", "vshort") if k in h1}
+    return Cell(cell.model, cell.spec + "@H1", "m5", h1["correct"].astype(bool), f("qh"), qc=f("qc"), res=f("resH"),
+                msp=f("msp"), chg=h1["chg"].astype(np.int32), extra=extra)
+
+
+def cmd_inner(a):
+    """exit at H=1 granularity (the q head is read after every H cycle) vs at the default-H step,
+    both in default-H step units, on the m5 records (K default-H steps)."""
+    for model in a.models:
+        cells = {s: c for s, c in load_m5(model).items() if c.h1 is not None}
+        if "fp32" not in cells:
+            continue
+        h = HDEF[model]
+        K = min(a.K, cells["fp32"].K)
+        ref = cells["fp32"].trunc(K)
+        ref1 = h1_cell(cells["fp32"]).trunc(K * h)
+        sel, sel1 = select_rule(ref), select_rule(ref1)
+        print(f"\n=== {model} K={K} default-H steps (H={h}); rule chosen on fp32: default-H {rule_name(*sel)}, H=1 {rule_name(*sel1)}")
+        print(f"{'spec':18s} {'fixed':>5s} | {'default-H: native':>22s} {'sel':>18s} | {'H=1: native':>22s} {'sel':>18s}")
+        for spec in sorted(cells, key=spec_order):
+            c = cells[spec].trunc(K)
+            c1 = h1_cell(cells[spec]).trunc(K * h)
+            parts = []
+            for cc, unit, sl in ((c, 1, sel), (c1, h, sel1)):
+                for rule in (("native", None), sl):
+                    ok, st = score(cc, exit_steps(cc, *rule))
+                    parts.append(f"{100*ok.mean():5.1f} {(100*ok.mean()-100*c.c[:, -1].mean()):+5.1f} {st.mean()/unit:5.2f}")
+            print(f"{spec:18s} {100*c.c[:, -1].mean():5.1f} | {parts[0]:>22s} {parts[1]:>18s} | {parts[2]:>22s} {parts[3]:>18s}")
+
+
+BUDGETS_DEEP = (8, 16, 32, 64, 128, 256, 512)
+
+
+def deep_frontier(cell, rule, budgets=BUDGETS_DEEP):
+    """accuracy vs mean steps for (a) a fixed budget B and (b) the exit rule capped at B."""
+    t = exit_steps(cell, *rule)
+    rows = []
+    for B in budgets:
+        if B > cell.K:
+            continue
+        tb = np.minimum(t, B - 1)
+        ok = cell.c[np.arange(cell.n), tb]
+        rows.append({"B": B, "fixed_acc": 100 * cell.c[:, B - 1].mean(), "exit_acc": 100 * ok.mean(), "exit_steps": float((tb + 1).mean()),
+                     "fixed_steps_per_solved": B / max(cell.c[:, B - 1].mean(), 1e-9),
+                     "exit_steps_per_solved": float((tb + 1).mean()) / max(ok.mean(), 1e-9)})
+    return rows
+
+
+def cmd_deep(a):
+    """test-time scaling to 64 / 512 default-H steps (Sudoku): the exit rule (chosen on fp32 at K=16)
+    capped at a budget B vs the fixed budget B; steps per solved instance."""
+    out = {}
+    for model in [m for m in a.models if "sudoku" in m]:
+        cells = {s: c for s, c in load_all(model).items() if c.K >= 64}
+        if "fp32" not in cells:
+            continue
+        sel = select_rule(cells["fp32"].trunc(16))
+        print(f"\n=== {model}: rule chosen on fp32 at 16 steps = {rule_name(*sel)}; per budget B: fixed acc | exit acc, mean steps | steps per solved fixed -> exit")
+        for spec in sorted(cells, key=spec_order):
+            fr = deep_frontier(cells[spec], sel)
+            out[(model, spec)] = fr
+            print(f"{spec:16s} " + " | ".join(f"B{r['B']}: {r['fixed_acc']:4.1f}|{r['exit_acc']:4.1f} {r['exit_steps']:5.1f} ({r['fixed_steps_per_solved']:5.0f}->{r['exit_steps_per_solved']:4.0f})" for r in fr if r["B"] >= 16))
+    return out
+
+
+M2_DIR = Path(os.environ.get("M5_M2_DIR", RB / "babel" / "m2" / "cells"))
+
+
+def seq_sample(corr, q, rule="pat", p=2, Kmax=None):
+    """M5 x M2, sample until the head is confident: rollouts k = 1, 2, ... (M2's PTRM noise, each D
+    steps), each stopped by the exit rule; the first rollout whose rule fires gives the answer; if none
+    fires within Kmax rollouts, answer = the tried rollout with the highest final q. corr, q: [K, n, D].
+    Returns per-puzzle correctness, steps spent, rollouts used."""
+    K, n, D = corr.shape
+    Kmax = Kmax or K
+    qf = q.astype(np.float32)
+    fired = qf > 0
+    if rule == "pat":
+        rl = np.zeros_like(fired, dtype=np.int32)
+        run = np.zeros((K, n), np.int32)
+        for t in range(D):
+            run = np.where(fired[:, :, t], run + 1, 0)
+            rl[:, :, t] = run
+        fired = rl >= p
+    any_f = fired.any(2)                                   # [K, n]
+    t_f = np.where(any_f, fired.argmax(2), D - 1)          # exit step per rollout
+    ok = np.zeros(n, bool); steps = np.zeros(n); used = np.zeros(n, int)
+    for i in range(n):
+        for k in range(Kmax):
+            steps[i] += t_f[k, i] + 1
+            if any_f[k, i]:
+                ok[i] = corr[k, i, t_f[k, i]]; used[i] = k + 1
+                break
+        else:
+            kb = int(np.argmax(qf[:Kmax, i, D - 1]))
+            ok[i] = corr[kb, i, D - 1]; used[i] = Kmax
+    return ok, steps, used
+
+
+def cmd_sample(a):
+    for f in sorted(glob.glob(str(M2_DIR / "*.npz"))):
+        name = Path(f).stem
+        d = np.load(f)
+        corr, q = d["corr"].astype(bool), d["q"]
+        K, n, D = corr.shape
+        if K < 4:
+            continue
+        single = corr[:, :, -1].mean() * 100
+        bestq = corr[np.argmax(q[:, :, -1].astype(np.float32), 0), np.arange(n), -1].mean() * 100
+        passk = corr[:, :, -1].any(0).mean() * 100
+        print(f"\n{name}: K={K} n={n} D={D}; single rollout {single:.1f}, best-Q@{K} {bestq:.1f} (cost {K * D} steps), pass@{K} {passk:.1f}")
+        for rule, p in (("nat", None), ("pat", 2)):
+            for Km in sorted({1, 2, 4, 8, K}):
+                if Km > K:
+                    continue
+                ok, st, used = seq_sample(corr, q, rule, p or 1, Km)
+                bq = corr[np.argmax(q[:Km, :, -1].astype(np.float32), 0), np.arange(n), -1].mean() * 100
+                print(f"  seq {rule}{p or ''} Kmax={Km:2d}: acc {100 * ok.mean():5.1f}  mean steps {st.mean():6.1f}  rollouts {used.mean():4.2f}"
+                      f"   | best-Q@{Km} {bq:5.1f} at {Km * D} steps")
+
+
+def cmd_json(a):
+    """figure-ready summary: per model / K / correctness definition, every cell's rule table (draws
+    merged), plus Sudoku bins and device rows."""
+    out = {"note": "M5 exit-rule read-out; see analyze_m5.py docstring and reports/edgetrm_exp/M5.md",
+           "summaries": [], "bins": {}, "device": {}}
+    for model in a.models + ["arc_attn"]:
+        for K in (16, 64, 512):
+            for corr in (["exact", "vshort", "valid"] if "maze" in model else ["exact"]):
+                try:
+                    summ = summarize(model, K, corr, rules=tuple(rule_name(*r) for r in RULESET))
+                except Exception as e:                      # a model without records at this K
+                    summ = None
+                if summ is None or len(summ["rows"]) == 0:
+                    continue
+                out["summaries"].append({"model": model, "K": K, "corr": corr, "sel_rule": summ["sel_rule"],
+                                         "fp32_depth": summ["rows"]["fp32"]["fp32_depth"], "cells": summ["rows"],
+                                         "merged": group_rows(summ)})
+    a.specs = "all"
+    import contextlib, io
+    with contextlib.redirect_stdout(io.StringIO()):
+        b = cmd_bins(a)
+        d = cmd_device(a)
+    out["bins"] = {f"{m}|{s}": v for (m, s), v in b.items()}
+    out["device"] = {f"{m}|{dev}|{p}": v for (m, dev, p), v in d.items()}
+    path = RB / "m5_summary.json"
+    json.dump(out, open(path, "w"), indent=1, default=float)
+    print("wrote", path, len(out["summaries"]), "summaries")
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["rules", "summary", "bins", "device", "json", "agree"])
+    ap.add_argument("cmd", choices=["rules", "summary", "bins", "device", "json", "agree", "inner", "deep", "sample"])
     ap.add_argument("--K", type=int, default=16)
     ap.add_argument("--models", nargs="+", default=MODELS)
     ap.add_argument("--show", default="")
@@ -612,6 +776,14 @@ def main():
         cmd_bins(a)
     elif a.cmd == "device":
         cmd_device(a)
+    elif a.cmd == "json":
+        cmd_json(a)
+    elif a.cmd == "inner":
+        cmd_inner(a)
+    elif a.cmd == "deep":
+        cmd_deep(a)
+    elif a.cmd == "sample":
+        cmd_sample(a)
     elif a.cmd == "agree":
         for m in a.models:
             for row in check_agreement(m):

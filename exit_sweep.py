@@ -11,6 +11,9 @@ default H (TRM 3, HRM 2) is written into the file; K = h x (number of default-H 
 Per puzzle and step (arrays [n, K], stored in one compressed .npz per spec):
   correct   puzzle-exact correctness of the argmax answer
   qh, qc    halting logits q_halt, q_continue (TRM decides q_halt > 0; HRM q_halt > q_continue)
+  qh32, qc32  the same logits from the unquantized fp32 halting head applied to the (compressed)
+            state z_H[:, 0] without activation hooks (the head is read-only, so this is the exit an
+            fp32 head would take on the same trajectory)
   resH      ||z_H(k) - z_H(k-1)|| / ||z_H(k)||  (convergence residual, per H=1 step)
   msp       min over answer-bearing cells of the max softmax probability (confidence exit)
   chg       number of answer-bearing cells whose argmax changed since the previous step
@@ -18,7 +21,10 @@ Per puzzle and step (arrays [n, K], stored in one compressed .npz per spec):
 Maze tasks with --maze_flags also store valid / vshort (valid simple S-G path; valid and
 shortest; detector_sweep.maze_check) at every step.
 
-Spec syntax = breadth_sweep / detector_sweep (fp32, w4c, w3g32, w4c+a8, noise0.1@s1, anoise0.3@s0).
+Spec syntax = breadth_sweep / detector_sweep (fp32, w4c, w3g32, w4c+a8, noise0.1@s1, anoise0.3@s0), plus an
+optional suffix "%qh": the halting head (inner.q_head, hidden x 2) is kept in fp32 and outside the
+activation quantizer / noise hooks, everything else as the spec says (is an over- or under-confident
+exit caused by the head's own weights or by the state it reads?).
 Resumable: specs whose npz exists are skipped.
 
     python exit_sweep.py --task sudoku_mlp --K 1536 --specs fp32,w4c,w3g32 --n 1000 \
@@ -43,7 +49,7 @@ DEFAULT_H = {"sudoku_mlp": 3, "sudoku_attn": 3, "maze_attn": 3, "hrm_sudoku": 2,
 
 
 @torch.no_grad()
-def trajectory(m, x, y, K, kind, h_def, bfs=None, maze_flags=False):
+def trajectory(m, x, y, K, kind, h_def, bfs=None, maze_flags=False, head32=None):
     B = x.shape[0]
     bt = {"inputs": x, "labels": y, "puzzle_identifiers": torch.zeros(B, dtype=torch.int32, device=DEV)}
     carry = explicit_carry(m, bt)
@@ -53,7 +59,7 @@ def trajectory(m, x, y, K, kind, h_def, bfs=None, maze_flags=False):
     prevP = None
     rec = {k: torch.zeros(B, K, device=DEV, dtype=d) for k, d in
            (("correct", torch.bool), ("qh", torch.float16), ("qc", torch.float16), ("resH", torch.float16),
-            ("msp", torch.float16), ("chg", torch.int16), ("nwrong", torch.uint8))}
+            ("msp", torch.float16), ("chg", torch.int16), ("nwrong", torch.uint8), ("qh32", torch.float16), ("qc32", torch.float16))}
     mz = {"valid": np.zeros((B, K), bool), "vshort": np.zeros((B, K), bool)} if maze_flags else None
     for k in range(K):
         carry, out = m(carry, bt)
@@ -64,6 +70,10 @@ def trajectory(m, x, y, K, kind, h_def, bfs=None, maze_flags=False):
         rec["correct"][:, k] = ~wrong.any(1)
         rec["qh"][:, k] = out["q_halt_logits"].float()
         rec["qc"][:, k] = out["q_continue_logits"].float()
+        if head32 is not None:
+            z0 = carry.inner_carry.z_H[:, 0]
+            q32 = torch.nn.functional.linear(z0, head32[0].to(z0.dtype), head32[1].to(z0.dtype)).float()
+            rec["qh32"][:, k], rec["qc32"][:, k] = q32[:, 0], q32[:, 1]
         rec["resH"][:, k] = (zH - prevH).flatten(1).norm(dim=1) / zH.flatten(1).norm(dim=1).clamp_min(1e-8)
         p = torch.softmax(logits.float(), -1).amax(-1)
         rec["msp"][:, k] = torch.where(ans, p, big).amin(1)
@@ -82,14 +92,15 @@ def trajectory(m, x, y, K, kind, h_def, bfs=None, maze_flags=False):
     return out
 
 
-def run_spec(m, inp, lab, batch, K, kind, h_def, bfs, maze_flags, act_quant=None, act_noise=None):
+def run_spec(m, inp, lab, batch, K, kind, h_def, bfs, maze_flags, act_quant=None, act_noise=None, keep_head=False, head32=None):
     m = m.to(DEV)
     handles, obs = [], []
+    lins = [mod for mod in _linears(m) if not (keep_head and mod is m.inner.q_head)]
     if act_noise is not None:
-        for mod in _linears(m):
+        for mod in lins:
             handles.append(mod.register_forward_pre_hook(_ActNoise(act_noise)))
     if act_quant is not None:
-        for mod in _linears(m):
+        for mod in lins:
             q = _ActQuant(act_quant)
             obs.append(q)
             handles.append(mod.register_forward_pre_hook(q))
@@ -102,7 +113,7 @@ def run_spec(m, inp, lab, batch, K, kind, h_def, bfs, maze_flags, act_quant=None
             trajectory(m, x, y, 16 * h_def, kind, h_def)
             for q in obs:
                 q.freeze()
-        parts.append(trajectory(m, x, y, K, kind, h_def, bb, maze_flags))
+        parts.append(trajectory(m, x, y, K, kind, h_def, bb, maze_flags, head32))
         print(f"    chunk {ci} done ({s + x.shape[0]}/{inp.shape[0]})", flush=True)
     for h in handles:
         h.remove()
@@ -139,17 +150,22 @@ def main():
         if path.exists():
             print(f"  {spec}: exists, skipped", flush=True)
             continue
-        base, seed = split_spec(spec)
+        keep_head = spec.endswith("%qh")
+        base, seed = split_spec(spec[:-3] if keep_head else spec)
         q = parse_quant(base)
         t1 = time.time()
         m, meta = build(a.task, 1, a.K, batch)             # H=1, halt_max_steps = K
         torch.manual_seed(seed if seed is not None else 0)
+        w_head = m.inner.q_head.weight.data.clone()
+        head32 = (w_head.to(DEV), m.inner.q_head.bias.data.clone().to(DEV))
         if q["gran"] is not None:
             quantize_weights_(m, q["bits"], q["gran"], q.get("sigma"))
+        if keep_head:
+            m.inner.q_head.weight.data = w_head
         r = run_spec(m, inp, lab, batch, a.K, kind, h_def, bfs, a.maze_flags and kind == "maze",
-                     act_quant=q["act"], act_noise=q.get("anoise"))
+                     act_quant=q["act"], act_noise=q.get("anoise"), keep_head=keep_head, head32=head32)
         del m
-        info = {"task": a.task, "spec": spec, "quant": q, "seed": seed, "H_run": 1, "H_default": h_def, "K": a.K,
+        info = {"task": a.task, "spec": spec, "quant": q, "seed": seed, "keep_head": keep_head, "H_run": 1, "H_default": h_def, "K": a.K,
                 "n": int(len(inp)), "secs": time.time() - t1, "host": socket.gethostname(),
                 "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu", "torch": torch.__version__}
         tmp = str(path) + ".tmp.npz"
