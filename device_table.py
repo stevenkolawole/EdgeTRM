@@ -245,11 +245,53 @@ def deadline(comp, prof, acc, deadlines_ms=(5, 10, 20, 50, 100, 200, 500, 1000, 
     return out
 
 
+def energy_table(acc):
+    """Energy per answer and per solved instance, E_solved = E_step x n / accuracy(n), for (a) the
+    analytical estimate (results/devices/energy_estimate.json, Horowitz 45 nm, labelled estimate) and
+    (b) the measured L40S reference (results/devices/energy_l40s.json, NVML, batch 1, if present)."""
+    rows = []
+    est = json.loads((DEV / "energy_estimate.json").read_text()) if (DEV / "energy_estimate.json").exists() else []
+    fmt_q = {"fp32": "fp32", "fp16": "fp32", "w8a8": "w8c+a8", "w4a8": "w4c+a8", "w8a16": "w8c+a16", "w4a16": "w4c+a16"}
+    for e in est:
+        if e["H"] != 1:
+            continue
+        at = ACC_TASK[e["task"]]
+        for n, a in sorted(acc.get((at, fmt_q[e["format"]]), {}).items()):
+            if a <= 0:
+                continue
+            for bound in ("weights_on_chip", "weights_dram"):
+                ms = e[f"mj_per_step_{bound}"]
+                rows.append({"source": "estimate (Horowitz 45 nm)", "task": e["task"], "format": e["format"],
+                             "bound": bound, "n": n, "acc": a, "mj_per_answer": ms * n, "mj_per_solved": ms * n / a})
+    meas = DEV / "energy_l40s.json"
+    if meas.exists():
+        m = json.loads(meas.read_text())
+        for r in m["runs"]:
+            task = {"maze_attn": "maze"}.get(r["task"], r["task"])
+            q = "fp32" if r["dtype"] == "float32" else None
+            if q is None:
+                continue
+            for n, a in sorted(acc.get((ACC_TASK[task], q), {}).items()):
+                if a <= 0:
+                    continue
+                for kind in ("total", "incr"):
+                    e = r["median"][f"e_{kind}_mj_per_puzzle_step"]
+                    rows.append({"source": f"measured NVML {m['gpu']} batch {r['batch']} {r['dtype']}", "task": task,
+                                 "format": r["dtype"], "bound": kind, "n": n, "acc": a, "mj_per_answer": e * n,
+                                 "mj_per_solved": e * n / a})
+    (DEV / "energy_solved.json").write_text(json.dumps(rows, indent=1))
+    md = ["| source | task | format | bound | n | exact | mJ/answer | mJ/solved |", "|---|---|---|---|---|---|---|---|"]
+    md += [f"| {r['source']} | {r['task']} | {r['format']} | {r['bound']} | {r['n']} | {r['acc']*100:.1f} | "
+           f"{r['mj_per_answer']:.2f} | {r['mj_per_solved']:.2f} |" for r in rows]
+    (DEV / "energy_solved.md").write_text("# Energy per solved instance (E_step x n / accuracy)\n\n" + "\n".join(md) + "\n")
+    return rows
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--tables", default="all")
     a = ap.parse_args()
-    rows, comp, prof = load_status()
+    rows, comp, prof = load_status() if (AIH / "status.json").exists() else ([], {}, {})
     print(f"{len(rows)} job rows")
     if a.tables in ("all", "latency"):
         t = latency_table(comp, prof)
@@ -260,6 +302,9 @@ def main():
     if a.tables in ("all", "deadline"):
         d = deadline(comp, prof, load_acc())
         print("deadline rows", len(d))
+    if a.tables in ("all", "energy"):
+        e = energy_table(load_acc())
+        print("energy rows", len(e))
 
 
 if __name__ == "__main__":
