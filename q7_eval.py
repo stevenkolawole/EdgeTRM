@@ -99,18 +99,39 @@ def _jac_stats(m, inp, lab, probes=8, n=256, iters=20):
 
 
 def _lsq_split(ckpt):
-    """Weight-LSQ checkpoints (pretrain_q7 +q7_reg=lsq) carry a learned step `...q7_lsq_s` per CastedLinear.
-    Returns (path of a copy without them, {module name: step}) or (ckpt, {})."""
+    """pretrain_q7 checkpoints may carry a learned weight step `...q7_lsq_s` (weight-LSQ) and a frozen
+    activation scale `...q7_act_s` (w+a runs) per CastedLinear. Returns (path of a copy without them,
+    {module: weight step}, {module: activation scale}); the plain path and empty dicts otherwise."""
     sd = torch.load(ckpt, map_location="cpu", weights_only=False)
-    steps = {k: v for k, v in sd.items() if k.endswith("q7_lsq_s")}
-    if not steps:
-        return str(ckpt), {}
+    extra = {k: v for k, v in sd.items() if k.endswith("q7_lsq_s") or k.endswith("q7_act_s")}
+    if not extra:
+        return str(ckpt), {}, {}
     clean = str(ckpt) + ".nolsq"
     if not os.path.exists(clean):
-        torch.save({k: v for k, v in sd.items() if k not in steps}, clean + ".tmp")
+        torch.save({k: v for k, v in sd.items() if k not in extra}, clean + ".tmp")
         os.replace(clean + ".tmp", clean)
-    names = {bs._clean({k[: -len(".q7_lsq_s")]: 0}).popitem()[0]: float(v) for k, v in steps.items()}
-    return clean, names
+
+    def names(suffix):
+        return {bs._clean({k[: -len(suffix)]: 0}).popitem()[0]: float(v) for k, v in extra.items()
+                if k.endswith(suffix)}
+    return clean, names(".q7_lsq_s"), names(".q7_act_s")
+
+
+class _StaticActQ:
+    """Activation fake-quant at a stored (trained) per-tensor scale."""
+
+    def __init__(self, s, qp):
+        self.s, self.qp = s, qp
+
+    def __call__(self, mod, args):
+        x = args[0]
+        return (torch.clamp(torch.round(x / self.s), -self.qp, self.qp) * self.s,) + tuple(args[1:])
+
+
+def _attach_actq(m, scales, bits=4):
+    for name, mod in m.named_modules():
+        if mod.__class__.__name__ == "CastedLinear":
+            mod.register_forward_pre_hook(_StaticActQ(scales[name], 2 ** (bits - 1) - 1))
 
 
 @torch.no_grad()
@@ -134,7 +155,7 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
     rng_cpu, rng_np = torch.get_rng_state(), np.random.get_state()
     rng_cuda = torch.cuda.get_rng_state_all() if torch.cuda.is_available() else None
     try:
-        ck_path, lsq_steps = _lsq_split(ckpt)
+        ck_path, lsq_steps, act_scales = _lsq_split(ckpt)
         bs.CKPT_OVERRIDE = ck_path
         arch = bs._variant_arch(ckpt)
         H = arch.get("H_cycles", 3)
@@ -155,6 +176,9 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
         if lsq_steps:
             cells.insert(1, ("w4lsq", 0))
             rec["lsq_steps"] = lsq_steps
+        if act_scales:
+            cells[1:1] = [("fp32+a4s", 0), ("w4t+a4s", 0)] + ([("w4lsq+a4s", 0)] if lsq_steps else [])
+            rec["act_scales"] = act_scales
         todo = [c for c in cells if c not in done]
         if not todo and "jac_spec_mean" in rec:
             return rec
@@ -168,9 +192,14 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
             t1 = time.time()
             if spec == "fp32":
                 c, cell, fH, fL = ref_c, ref_cell, 1.0, 1.0
-            elif spec == "w4lsq":
+            elif spec in ("w4lsq", "fp32+a4s", "w4t+a4s", "w4lsq+a4s"):
                 mq, _ = bs.build("sudoku_mlp", H, nsup, batch)
-                _quantize_lsq_(mq, lsq_steps, 4)
+                if spec.startswith("w4lsq"):
+                    _quantize_lsq_(mq, lsq_steps, 4)
+                elif spec.startswith("w4t"):
+                    bs.quantize_weights_(mq, 4, "t")
+                if spec.endswith("+a4s"):
+                    _attach_actq(mq, act_scales, 4)
                 c, cell, zH, zL = bs.run(mq, inp, lab, batch, nsup)
                 del mq
                 fH, fL = bs.fidelity(zH, ref_zH), bs.fidelity(zL, ref_zL)
@@ -183,7 +212,12 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
                 c, cell, zH, zL = bs.run(mq, inp, lab, batch, nsup)
                 del mq
                 fH, fL = bs.fidelity(zH, ref_zH), bs.fidelity(zL, ref_zL)
-            qd = {"spec": "w4lsq", "bits": 4, "gran": "lsq", "act": None} if spec == "w4lsq" else bs.parse_quant(spec)
+            if spec in ("w4lsq", "fp32+a4s", "w4t+a4s", "w4lsq+a4s"):
+                qd = {"spec": spec, "bits": None if spec.startswith("fp32") else 4,
+                      "gran": "lsq" if spec.startswith("w4lsq") else ("t" if spec.startswith("w4t") else None),
+                      "act": "a4s" if spec.endswith("+a4s") else None}
+            else:
+                qd = bs.parse_quant(spec)
             rec["records"].append({"quant": qd, "draw": draw, "pexact": float(c.mean()),
                                    "cell": float(cell), "fidelity_H": fH, "fidelity_L": fL,
                                    "correct": c.astype(int).tolist(), "secs": time.time() - t1})

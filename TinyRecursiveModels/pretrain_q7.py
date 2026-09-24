@@ -112,6 +112,10 @@ class PretrainConfig(pydantic.BaseModel):
     q7_max_steps: int = 0           # smoke tests: stop after this many optimizer steps (0 = no limit)
     q7_inline_eval: bool = True     # after each checkpoint save, run q7_eval.evaluate_checkpoint in this process
     q7_eval_n: int = 1000           # puzzles for the inline evaluation
+    q7_act_bits: int = 0            # >0: static per-tensor symmetric activation fake-quant at every CastedLinear
+                                    # input (STE), scale = absmax / Qp over the first q7_act_calib_steps steps,
+                                    # then frozen and stored as buffer q7_act_s (runs uncompiled)
+    q7_act_calib_steps: int = 20
 
 @dataclass
 class TrainState:
@@ -171,6 +175,8 @@ def create_model(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, 
         # Q7: weight-LSQ (learned per-tensor step size, Esser et al. 2020) on every CastedLinear
         if config.q7_reg == "lsq":
             q7_install_lsq(model, config.q7_bits)
+        if config.q7_act_bits > 0:
+            q7_install_actq(model, config.q7_act_bits)
 
         # Broadcast parameters from rank 0
         if world_size > 1:
@@ -281,6 +287,9 @@ def load_checkpoint(model: nn.Module, config: PretrainConfig):
 
         # Load state dict
         state_dict = torch.load(config.load_checkpoint, map_location="cuda")
+        # Q7: a compiled run's checkpoint loaded into an uncompiled model (activation fake-quant runs)
+        if not any(k.startswith("_orig_mod.") for k in model.state_dict()):
+            state_dict = {k.removeprefix("_orig_mod."): v for k, v in state_dict.items()}
 
         # Resize and reset puzzle emb if needed
         puzzle_emb_name = "_orig_mod.model.inner.puzzle_emb.weights"
@@ -482,6 +491,44 @@ def q7_install_lsq(model: nn.Module, bits: int):
     print(f"[q7] LSQ installed: {sum(1 for n, _ in model.named_parameters() if n.endswith('q7_lsq_s'))} step sizes")
 
 
+def _q7_actq_hook(mod, args):
+    x = args[0]
+    if not getattr(mod, "_q7_frozen", False):          # calibration: observe absmax, pass through
+        mod._q7_absmax = max(getattr(mod, "_q7_absmax", 0.0), float(x.detach().abs().max()))
+        return None
+    s = mod.q7_act_s.to(x.dtype)
+    qp = mod._q7_act_qp
+    return (_q7_round_ste(torch.clamp(x / s, -qp, qp)) * s,) + tuple(args[1:])
+
+
+def q7_install_actq(model: nn.Module, bits: int):
+    """Static per-tensor activation fake-quant at every CastedLinear input (the w+a setting of
+    Ingolfsson et al.). Needs eager mode (forward pre-hooks); launch() sets DISABLE_COMPILE."""
+    n = 0
+    for m in model.modules():
+        if m.__class__.__name__ == "CastedLinear":
+            m.register_buffer("q7_act_s", torch.zeros((), device=m.weight.device), persistent=True)
+            m._q7_act_qp = 2 ** (bits - 1) - 1
+            m._q7_frozen = False
+            m._q7_absmax = 0.0
+            m.register_forward_pre_hook(_q7_actq_hook)
+            n += 1
+    print(f"[q7] activation fake-quant ({bits}-bit, per-tensor static) on {n} linears")
+
+
+@torch.no_grad()
+def q7_actq_freeze(model: nn.Module, from_buffers: bool = False):
+    """End of calibration (or after a resume): fix every scale; from_buffers keeps loaded scales."""
+    out = []
+    for m in model.modules():
+        if hasattr(m, "q7_act_s"):
+            if not from_buffers:
+                m.q7_act_s.fill_(max(m._q7_absmax, 1e-8) / m._q7_act_qp)
+            m._q7_frozen = bool(m.q7_act_s.item() > 0)
+            out.append(float(m.q7_act_s))
+    return out
+
+
 def q7_param_groups(model: nn.Module, config: "PretrainConfig"):
     """model.parameters() unless LSQ is on; then the step sizes form a group without weight decay."""
     if config.q7_reg != "lsq":
@@ -635,6 +682,12 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
 
     if config.q7_reg == "clip" and q7_s > 0:
         q7_clip_(config, q7_w, q7_s)
+
+    if config.q7_act_bits > 0 and not getattr(train_state, "_q7_act_frozen", False):
+        if train_state.step >= getattr(train_state, "_q7_act_start", 0) + config.q7_act_calib_steps:
+            sc = q7_actq_freeze(train_state.model)
+            train_state._q7_act_frozen = True
+            print(f"[q7] activation scales frozen at step {train_state.step}: {[round(x, 4) for x in sc]}")
 
     # Reduce metrics
     if len(metrics):
@@ -879,6 +932,8 @@ def launch(hydra_config: DictConfig):
 
     # Seed RNGs to ensure consistency
     torch.random.manual_seed(config.seed + RANK)
+    if config.q7_act_bits > 0:
+        os.environ["DISABLE_COMPILE"] = "1"   # activation fake-quant uses forward pre-hooks
 
     # Dataset
     train_epochs_per_iter = config.eval_interval if config.eval_interval is not None else config.epochs
@@ -927,6 +982,11 @@ def launch(hydra_config: DictConfig):
     # batch ordering as the original run.  Must be set before the DataLoader
     # worker is first spawned (i.e. before the training loop begins).
     train_loader.dataset._iters = dataset_iters
+    if config.q7_act_bits > 0:
+        sc = q7_actq_freeze(train_state.model, from_buffers=True)
+        train_state._q7_act_start = train_state.step
+        train_state._q7_act_frozen = all(x > 0 for x in sc)
+        print(f"[q7] activation scales after load: {'frozen' if train_state._q7_act_frozen else 'calibrating'}")
 
     # Progress bar and logger
     progress_bar = None
@@ -1013,8 +1073,9 @@ def launch(hydra_config: DictConfig):
             print(f"[q7] q7_max_steps={config.q7_max_steps} reached")
             break
 
-    if RANK == 0 and config.checkpoint_path is not None and not config.q7_max_steps:
-        open(os.path.join(config.checkpoint_path, "DONE"), "w").write(f"{train_state.step}\n")
+    if RANK == 0 and config.checkpoint_path is not None:
+        open(os.path.join(config.checkpoint_path, "DONE"), "w").write(
+            f"{train_state.step}{' (q7_max_steps)' if config.q7_max_steps else ''}\n")
 
     # finalize
     if dist.is_initialized():
