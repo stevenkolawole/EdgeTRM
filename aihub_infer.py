@@ -155,6 +155,90 @@ def stage_host(tasks, precs, nsteps=None):
             print(f"[{task}] host {prec}: exact {ex:.3f} cell {cell:.4f} ({time.time()-t0:.0f}s)", flush=True)
 
 
+def stage_hostbig(task, prec, start, count, nsteps, threads):
+    """The host loop on a larger, calibration-disjoint slice of the test set (indices start..start+count),
+    for tighter accuracies of the exact device graphs; per-step predictions saved."""
+    import onnxruntime as ort
+    so = ort.SessionOptions()
+    so.intra_op_num_threads = threads
+    out = idir(task) / f"hostbig_{prec}_{start}_{count}.npz"
+    if out.exists():
+        return
+    inp, lab = A.load_data(task, list(range(start, start + count)))
+    inp = inp.astype(np.int32)
+    path = A.ART / task / "stepc_H1.onnx" if prec == "fp32" else idir(task) / f"qdq_{prec}" / "model.onnx"
+    sess = ort.InferenceSession(str(path), so, providers=["CPUExecutionProvider"])
+    t0 = time.time()
+    r = host_loop(sess, task, inp, nsteps, initial_state(task))
+    np.savez_compressed(out, preds=r["preds"], q=r["q"], lab=lab)
+    ex = [(r["preds"][s_] == lab).all(-1).mean() for s_ in range(nsteps)]
+    print(f"[{task}] hostbig {prec} n={count} exact per step {[round(float(e), 3) for e in ex]} "
+          f"({time.time()-t0:.0f}s)", flush=True)
+
+
+def arc_rows(count):
+    """ARC-AGI-1 canonical (un-augmented) test rows, as arc_breadth.py scores its token metrics."""
+    root = pathlib.Path.home() / "edgetrm_data" / "arc1concept-aug-1000"
+    ident = json.loads((root / "identifiers.json").read_text())
+    d = root / "test"
+    inputs = np.load(d / "all__inputs.npy", mmap_mode="r")
+    labels = np.load(d / "all__labels.npy", mmap_mode="r")
+    pidx = np.load(d / "all__puzzle_indices.npy")
+    pid = np.load(d / "all__puzzle_identifiers.npy")
+    per = np.zeros(len(inputs), dtype=np.int64)
+    for k in range(len(pidx) - 1):
+        per[pidx[k]:pidx[k + 1]] = pid[k]
+    canon = [i for i in range(len(per)) if per[i] != 0 and "|||" not in ident[int(per[i])]][:count]
+    return np.asarray(inputs[canon]).astype(np.int32), np.asarray(labels[canon]).astype(np.int64), per[canon]
+
+
+def stage_host_arc(precs, count, nsteps, threads):
+    """Host loop of the exact ARC step graphs (fp32 and AI Hub QDQ) with each row's own puzzle
+    embedding; token puzzle-exact over non-pad cells (arc_breadth's pexact_token)."""
+    import onnxruntime as ort
+    task = "arc"
+    so = ort.SessionOptions()
+    so.intra_op_num_threads = threads
+    inp, lab, pids = arc_rows(count)
+    m, cfg, sd = A.build(task, 1)
+    W = sd["inner.puzzle_emb.weights"]
+    embs = W[torch_index(pids)].float().numpy()
+    zH0 = np.broadcast_to(m.inner.H_init.detach().numpy(), (1, cfg["seq_len"] + A.PLEN, 512)).astype(np.float32)
+    zL0 = np.broadcast_to(m.inner.L_init.detach().numpy(), (1, cfg["seq_len"] + A.PLEN, 512)).astype(np.float32)
+    del m
+    mask = lab != 0
+    for prec in precs:
+        out = idir(task) / f"host_{prec}_{count}.npz"
+        if out.exists():
+            continue
+        path = A.ART / task / "stepc_H1.onnx" if prec == "fp32" else idir(task) / f"qdq_{prec}" / "model.onnx"
+        sess = ort.InferenceSession(str(path), so, providers=["CPUExecutionProvider"])
+        t0 = time.time()
+        N = len(inp)
+        zH, zL = np.repeat(zH0[None], N, 0), np.repeat(zL0[None], N, 0)
+        preds = []
+        for s_ in range(nsteps):
+            nzH, nzL, lg = [], [], []
+            for i in range(N):
+                o = sess.run(OUTS, {"z_H": zH[i], "z_L": zL[i], "inputs": inp[i:i + 1],
+                                    "puzzle_embedding": embs[i:i + 1]})
+                nzH.append(o[0]); nzL.append(o[1]); lg.append(o[2])
+            zH, zL = np.stack(nzH), np.stack(nzL)
+            preds.append(np.concatenate(lg).argmax(-1))
+        preds = np.stack(preds)
+        np.savez_compressed(out, preds=preds, lab=lab, zH=zH[:, 0])
+        corr = (preds == lab[None]) & mask[None]
+        ex = (corr.sum(-1) == mask.sum(-1)[None]).mean(-1)
+        cell = corr.sum((1, 2)) / mask.sum()
+        print(f"[arc] host {prec} n={N}: token-exact per step {[round(float(e), 3) for e in ex]} "
+              f"cell {float(cell[-1]):.4f} ({time.time()-t0:.0f}s)", flush=True)
+
+
+def torch_index(a):
+    import torch
+    return torch.as_tensor(np.asarray(a), dtype=torch.long)
+
+
 # ----------------------------------------------------------------------------- device loop
 def chain(task, device, prec, log_lock):
     import qai_hub as hub
@@ -327,7 +411,9 @@ def stage_report(tasks):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["prep", "host", "run", "report"])
+    ap.add_argument("--stage", required=True, choices=["prep", "host", "hostbig", "hostarc", "run", "report"])
+    ap.add_argument("--start", type=int, default=1000)
+    ap.add_argument("--count", type=int, default=1000)
     ap.add_argument("--tasks", default="sudoku_mlp,sudoku_attn,maze")
     ap.add_argument("--precs", default="w8a8,w4a8,w8a16,w4a16")
     ap.add_argument("--devices", default="Samsung Galaxy S24|Dragonwing RB3 Gen 2 Vision Kit")
@@ -340,6 +426,12 @@ def main():
         stage_prep(tasks, [p for p in precs if p != "fp32"])
     elif a.stage == "host":
         stage_host(tasks, [p for p in precs if p != "fp32"], a.nsteps or None)
+    elif a.stage == "hostarc":
+        stage_host_arc(precs, a.count, a.nsteps or 8, a.threads)
+    elif a.stage == "hostbig":
+        for task in tasks:
+            for prec in precs:
+                stage_hostbig(task, prec, a.start, a.count, a.nsteps or NSTEPS[task], a.threads)
     elif a.stage == "run":
         stage_run(tasks, a.devices.split("|"), precs, a.threads)
     else:

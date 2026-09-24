@@ -1,0 +1,132 @@
+{
+ "carry_in": {
+  "n_tensors": 2,
+  "absmax_max": 5.763805389404297,
+  "std_median": 0.9892189800739288,
+  "absmax_over_std_median": 5.369959153443524,
+  "absmax_over_std_max": 5.896410535392605,
+  "step8_over_std_median": 0.04071300728592371,
+  "step8_over_std_max": 0.04481511744175003,
+  "frac_below_half_step8_median": 0.017172901900773196
+ },
+ "const": {
+  "n_tensors": 57,
+  "absmax_max": 22.627416610717773,
+  "std_median": 0.0,
+  "absmax_over_std_median": 1000000000000.0,
+  "absmax_over_std_max": 22627416610717.773,
+  "step8_over_std_median": 3921564668.416977,
+  "step8_over_std_max": 88734954595.5658,
+  "frac_below_half_step8_median": 1.0
+ },
+ "embed": {
+  "n_tensors": 6,
+  "absmax_max": 3.2864160537719727,
+  "std_median": 0.029332716949284077,
+  "absmax_over_std_median": 4.145362068797024,
+  "absmax_over_std_max": 10.879232681914848,
+  "step8_over_std_median": 0.03796980504401823,
+  "step8_over_std_max": 0.17834244340718639,
+  "frac_below_half_step8_median": 0.022430734536082474
+ },
+ "head": {
+  "n_tensors": 3,
+  "absmax_max": 129.7234344482422,
+  "std_median": 3.5781197547912598,
+  "absmax_over_std_median": 2.44440242163266,
+  "absmax_over_std_max": 3.572414032186717,
+  "step8_over_std_median": 0.01612780157441165,
+  "step8_over_std_max": 0.023576179022418976,
+  "frac_below_half_step8_median": 0.0
+ },
+ "inject": {
+  "n_tensors": 15,
+  "absmax_max": 11.177188873291016,
+  "std_median": 1.9176470041275024,
+  "absmax_over_std_median": 5.793425485356061,
+  "absmax_over_std_max": 6.491584941549851,
+  "step8_over_std_median": 0.03729988751183319,
+  "step8_over_std_max": 0.03909168153327279,
+  "frac_below_half_step8_median": 0.014749114046391752
+ },
+ "linear_out": {
+  "n_tensors": 112,
+  "absmax_max": 59.215065002441406,
+  "std_median": 1.3955987095832825,
+  "absmax_over_std_median": 9.564105794301256,
+  "absmax_over_std_max": 25.486304378782627,
+  "step8_over_std_median": 0.08430074784599809,
+  "step8_over_std_max": 0.19681577206906822,
+  "frac_below_half_step8_median": 0.05115375322164949
+ },
+ "residual": {
+  "n_tensors": 56,
+  "absmax_max": 59.17872619628906,
+  "std_median": 1.9090985655784607,
+  "absmax_over_std_median": 9.755861790086405,
+  "absmax_over_std_max": 18.86976072173984,
+  "step8_over_std_median": 0.05791856264725343,
+  "step8_over_std_max": 0.14198404983827667,
+  "frac_below_half_step8_median": 0.028647511275773196
+ },
+ "rms_out": {
+  "n_tensors": 76,
+  "absmax_max": 9.171154975891113,
+  "std_median": 0.9812849462032318,
+  "absmax_over_std_median": 7.797130913904841,
+  "absmax_over_std_max": 9.327647501709139,
+  "step8_over_std_median": 0.04404516101336732,
+  "step8_over_std_max": 0.06688849859342691,
+  "frac_below_half_step8_median": 0.016449289223582474
+ },
+ "rms_rsqrt": {
+  "n_tensors": 56,
+  "absmax_max": 40.89806365966797,
+  "std_median": 0.4595770388841629,
+  "absmax_over_std_median": 8.874659522823386,
+  "absmax_over_std_max": 17.953355538258787,
+  "step8_over_std_median": 0.033933627382035106,
+  "step8_over_std_max": 0.07455730956495035,
+  "frac_below_half_step8_median": 0.015869140625
+ },
+ "rms_sq": {
+  "n_tensors": 28,
+  "absmax_max": 3502.12158203125,
+  "std_median": 9.123398303985596,
+  "absmax_over_std_median": 33.21235690811983,
+  "absmax_over_std_max": 61.892138542101605,
+  "step8_over_std_median": 0.1250906304899989,
+  "step8_over_std_max": 0.2606328489030942,
+  "frac_below_half_step8_median": 0.05574963756443299
+ },
+ "rms_var": {
+  "n_tensors": 56,
+  "absmax_max": 1672.6517333984375,
+  "std_median": 4.247354865074158,
+  "absmax_over_std_median": 12.698925633732996,
+  "absmax_over_std_max": 31.879158999676875,
+  "step8_over_std_median": 0.05260927805140722,
+  "step8_over_std_max": 0.14031123452614044,
+  "frac_below_half_step8_median": 0.0162353515625
+ },
+ "swiglu_other": {
+  "n_tensors": 56,
+  "absmax_max": 35.65721893310547,
+  "std_median": 0.5639638453722,
+  "absmax_over_std_median": 5.259410291997691,
+  "absmax_over_std_max": 28.3934350564856,
+  "step8_over_std_median": 0.02043416289068532,
+  "step8_over_std_max": 0.09460565607272185,
+  "frac_below_half_step8_median": 0.005972385406494141
+ },
+ "swiglu_prod": {
+  "n_tensors": 28,
+  "absmax_max": 113.66077423095703,
+  "std_median": 1.1110295057296753,
+  "absmax_over_std_median": 38.69345628461504,
+  "absmax_over_std_max": 106.27728100752964,
+  "step8_over_std_median": 0.27889423630690185,
+  "step8_over_std_max": 0.5458913269027745,
+  "frac_below_half_step8_median": 0.4981022471005155
+ }
+}
