@@ -1,0 +1,20 @@
+NVIDIA L40S
+Thu Sep 24 10:52:44 PM UTC 2026 host babel-o9-16 restart 0: deq_sweep.py --model xl --specs noise0.1,noise0.2,noise0.3,noise0.5 --seed 2 --n 2000 --batch 25 --T 100 --solvers broyden --out /home/skolawol/x6/results/deq_xl_noise_s2.json
+xl: 2000 images, specs ['fp32', 'noise0.1', 'noise0.2', 'noise0.3', 'noise0.5'], solvers ['broyden'], T 100, budgets [1, 2, 4, 8, 12, 16, 26, 40, 60, 100] (0s data)
+  5 models built; weight rel err fp32:0.000, noise0.1:0.100, noise0.2:0.199, noise0.3:0.299, noise0.5:0.499
+  images 25/2000 (28.9s/batch, 39s total)
+  images 250/2000 (27.2s/batch, 284s total)
+  images 500/2000 (27.2s/batch, 556s total)
+  images 750/2000 (27.2s/batch, 830s total)
+  images 1000/2000 (27.3s/batch, 1103s total)
+  images 1250/2000 (27.2s/batch, 1376s total)
+  images 1500/2000 (27.2s/batch, 1648s total)
+  images 1750/2000 (27.2s/batch, 1921s total)
+  images 2000/2000 (27.2s/batch, 2194s total)
+  fp32      broyden k1:  0.2/1e+00 k2:  1.8/8e-01 k4: 30.5/7e-01 k8: 66.7/6e-01 k12: 74.5/5e-01 k16: 75.1/4e-01 k26: 75.6/2e-01 k40: 75.4/8e-02 k60: 75.3/2e-02 k100: 75.5/3e-04
+  noise0.1  broyden k1:  0.1/1e+00 k2:  1.4/8e-01 k4: 30.8/7e-01 k8: 66.5/6e-01 k12: 73.1/5e-01 k16: 75.0/4e-01 k26: 75.6/2e-01 k40: 75.8/7e-02 k60: 75.5/1e-02 k100: 75.5/2e-04
+  noise0.2  broyden k1:  0.2/1e+00 k2:  1.0/8e-01 k4: 27.0/7e-01 k8: 63.5/5e-01 k12: 71.1/4e-01 k16: 72.0/3e-01 k26: 72.5/2e-01 k40: 72.7/6e-02 k60: 72.8/9e-03 k100: 72.8/9e-05
+  noise0.3  broyden k1:  0.2/1e+00 k2:  0.5/8e-01 k4: 17.2/6e-01 k8: 54.8/5e-01 k12: 62.7/4e-01 k16: 64.5/3e-01 k26: 65.8/1e-01 k40: 65.8/4e-02 k60: 65.7/5e-03 k100: 65.8/3e-05
+  noise0.5  broyden k1:  0.3/1e+00 k2:  0.2/7e-01 k4:  2.5/6e-01 k8: 12.9/4e-01 k12: 18.4/3e-01 k16: 20.1/2e-01 k26: 20.8/8e-02 k40: 20.8/1e-02 k60: 20.9/8e-04 k100: 20.8/2e-06
+wrote /home/skolawol/x6/results/deq_xl_noise_s2.json (2195s)
+Thu Sep 24 11:29:20 PM UTC 2026 done rc=0
