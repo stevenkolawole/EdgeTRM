@@ -232,5 +232,48 @@ def deqfig(rdir=None, model="mdeq_small"):
     print("wrote", out)
 
 
+def deqlmfig(rdir=None):
+    """DEQ-Transformer: test ppl (log) vs sigma per Anderson cap, quantizers at their rel. weight error;
+    median residual at the largest cap."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    rdir = Path(rdir or HERE / "results" / "transfer" / "babel")
+    recs = []
+    for f in sorted(glob.glob(str(rdir / "deqlm_*.json"))):
+        recs += [r for r in json.load(open(f))["records"] if r["solver"] == "anderson"]
+    ks = sorted({r["budget"] for r in recs})
+    cols = dict(zip(ks, plt.cm.Blues(np.linspace(0.35, 1, len(ks)))))
+    fig, axs = plt.subplots(1, 2, figsize=(9.5, 3.6))
+    sig = sorted({float(r["spec"][5:]) for r in recs if r["spec"].startswith("noise")})
+    for k in ks:
+        for ax, metric in ((axs[0], "ppl"), (axs[1], "res_median")):
+            if metric == "res_median" and k != ks[-1]:
+                continue
+            m, lo, hi = [], [], []
+            for sg in sig:
+                v = np.array([r[metric] for r in recs if r["budget"] == k and r["spec"].startswith("noise")
+                              and abs(float(r["spec"][5:]) - sg) < 1e-9])
+                m.append(np.exp(np.log(v).mean())); lo.append(v.min()); hi.append(v.max())
+            ax.plot(sig, m, "-o", ms=3, color=cols[k], label=f"cap {k}")
+            ax.fill_between(sig, lo, hi, color=cols[k], alpha=0.2)
+            f0 = [r[metric] for r in recs if r["budget"] == k and r["spec"] == "fp32"][0]
+            ax.axhline(f0, color=cols[k], ls=":", lw=0.8)
+            for r in recs:
+                if r["budget"] == k and r["spec"] in QORDER[1:]:
+                    ax.plot(r["quant"]["weight_rel_err_mean"], r[metric], "k^", ms=4)
+                    if k == ks[-1]:
+                        ax.annotate(r["spec"], (r["quant"]["weight_rel_err_mean"], r[metric]), fontsize=6,
+                                    xytext=(2, 3), textcoords="offset points")
+    for ax, t in ((axs[0], "DEQ-Transformer WT103: test perplexity (Anderson)"),
+                  (axs[1], f"median rel. residual at cap {ks[-1]}")):
+        ax.set_xscale("log"); ax.set_yscale("log"); ax.set_title(t, fontsize=9)
+        ax.set_xlabel("sigma (x tensor std) / quantizer rel. weight error", fontsize=8)
+    axs[0].legend(fontsize=6, ncol=2)
+    out = HERE / "figures" / "x6_deq_transformer.png"
+    fig.tight_layout(); fig.savefig(out, dpi=150)
+    print("wrote", out)
+
+
 if __name__ == "__main__":
     globals()[sys.argv[1]](*(sys.argv[2:]))
