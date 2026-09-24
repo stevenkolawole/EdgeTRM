@@ -7,6 +7,7 @@ results/breadth/sudoku_extreme_test_meta.json (built from sapientinc/sudoku-extr
 
     python analyze_difficulty.py first    # existing p4d records, first 1000 test rows, nsup 1..64, H 1..4
     python analyze_difficulty.py strat    # stratified Babel sweep (difficulty_sweep.py), 6 bins x 1000, k = 1..64
+    python analyze_difficulty.py deep     # deep Babel sweep, 300 per bin, k = 1..512
     python analyze_difficulty.py glink    # which puzzles fail: fp32's solve step vs rating
     python analyze_difficulty.py json     # figure-ready JSON -> results/breadth/x1_difficulty_readout.json
     python analyze_difficulty.py fig      # draft figure -> plots/x1_difficulty.{png,pdf}
@@ -129,11 +130,11 @@ def unpack(hexes, K):
     return np.array([[(v >> k) & 1 for k in range(K)] for v in x], dtype=bool)
 
 
-def load_strat(task):
+def load_strat(task, kind="diff"):
     """{spec: record with 'B' (n x K bool)}; merges every file of this task (fp32 from the first file,
     other fp32 copies are checked for identity)."""
     recs, fp32s = {}, []
-    files = sorted(glob.glob(str(B / "babel" / "x1" / f"diff_{task}_*.json")))
+    files = sorted(glob.glob(str(B / "babel" / "x1" / f"{kind}_{task}_*.json")))
     rows = None
     for f in files:
         d = json.load(open(f))
@@ -159,8 +160,14 @@ def load_strat(task):
     return recs, rows
 
 
-def strat_bins():
-    b = np.array(META["strat"]["bin"])
+ROW_BIN = dict(zip(META["strat"]["rows"], META["strat"]["bin"]))
+ROW_RATING = dict(zip(META["strat"]["rows"], META["strat"]["rating"]))
+
+
+def strat_bins(rows=None):
+    """bins as masks over `rows` (the puzzle order of a sweep file); default = the full stratified set."""
+    rows = META["strat"]["rows"] if rows is None else rows
+    b = np.array([ROW_BIN[r] for r in rows])
     return [(STRAT_NAMES[i], b == i) for i in range(len(STRAT_NAMES))]
 
 
@@ -174,19 +181,20 @@ def _groups(recs):
     return g
 
 
-def strat():
-    bins = strat_bins()
+def strat(kind="diff"):
     for task, label, H in TASKS:
-        recs, rows = load_strat(task)
+        recs, rows = load_strat(task, kind)
         if not recs:
-            print(f"\n### {label}: no stratified records yet")
+            print(f"\n### {label}: no {kind} records yet")
             continue
+        bins = strat_bins(rows)
         K = recs["fp32"]["K"]
-        ks = [k for k in NSUP if k <= K]
+        ks = [k for k in NSUP + (128, 256, 512) if k <= K]
+        mid = 16 if K <= 64 else 64
         f = recs["fp32"]["B"]
-        print(f"\n### {label} (stratified, n=1000 per bin, K={K}; fp32 identity across files: "
+        print(f"\n### {label} ({kind}, n per bin {[int(m.sum()) for _, m in bins]}, K={K}; fp32 identity across files: "
               f"{recs.get('_fp32_identity')})")
-        print("| quant | φ_H | bin | " + " | ".join(f"k={k}" for k in ks) + " | gap@16 | gap@K | own gain 16->K | fp32 gain 16->K |")
+        print("| quant | φ_H | bin | " + " | ".join(f"k={k}" for k in ks) + f" | gap@{mid} | gap@K | own gain {mid}->K | fp32 gain {mid}->K |")
         print("|---|---|---|" + "---|" * (len(ks) + 4))
         for base, draws in _groups(recs).items():
             for s in sorted(draws):
@@ -194,10 +202,10 @@ def strat():
                 Bq, f = r["B"], r["F"]
                 for name, m in bins:
                     row = [fmt(*wilson(int(Bq[m, k - 1].sum()), int(m.sum()))) for k in ks]
-                    g16 = paired_gap(Bq[m, 15], f[m, 15]) if K >= 16 else (float("nan"),) * 3
+                    g16 = paired_gap(Bq[m, mid - 1], f[m, mid - 1]) if K >= mid else (float("nan"),) * 3
                     gK = paired_gap(Bq[m, K - 1], f[m, K - 1])
-                    own = Bq[m, K - 1].mean() - Bq[m, 15].mean()
-                    fg = f[m, K - 1].mean() - f[m, 15].mean()
+                    own = Bq[m, K - 1].mean() - Bq[m, mid - 1].mean()
+                    fg = f[m, K - 1].mean() - f[m, mid - 1].mean()
                     gs = ["" if s == "fp32" else f"{100*g[0]:+.1f} [{100*g[1]:+.0f},{100*g[2]:+.0f}]" for g in (g16, gK)]
                     print(f"| {s} | {r['fid_H_mean']:.3f} | {name} | " + " | ".join(row)
                           + f" | {gs[0]} | {gs[1]} | {100*own:+.1f} | {100*fg:+.1f} |")
@@ -268,12 +276,12 @@ def glink():
                 cells.append(fmt(1 - c[m].mean()) if m.sum() else "--")
             print(f"| {s} | {100*c.mean():.1f} | " + " | ".join(cells) + " |")
     # (b) stratified Babel records
-    bins = strat_bins()
-    rs = np.array(META["strat"]["rating"])
     for task, label, H in TASKS:
         recs, rows = load_strat(task)
         if not recs:
             continue
+        bins = strat_bins(rows)
+        rs = np.array([ROW_RATING[r] for r in rows])
         K = recs["fp32"]["K"]
         st = solve_step(recs["fp32"]["B"])
         solved = st <= K
@@ -320,24 +328,28 @@ def build_json():
                     t[s][name]["lo"].append(round(100 * lo, 2))
                     t[s][name]["hi"].append(round(100 * hi, 2))
         out["first1000"][task] = {"label": label, "H": H, "platform": "p4d (A100-40GB)", "quants": t}
-    sb = strat_bins()
-    for task, label, H in TASKS:
-        recs, _ = load_strat(task)
-        if not recs:
-            continue
-        K = recs["fp32"]["K"]
-        t = {}
-        for s, r in recs.items():
-            if s.startswith("_"):
+    out["deep"] = {}
+    for kind, key in (("diff", "strat"), ("deep", "deep")):
+        for task, label, H in TASKS:
+            recs, rows_ = load_strat(task, kind)
+            if not recs:
                 continue
-            t[s] = {"fid_H_mean": r["fid_H_mean"], "seed": r["seed"]}
-            for name, m in sb:
-                acc, lo, hi = [], [], []
-                for k in range(1, K + 1):
-                    p, a, b = wilson(int(r["B"][m, k - 1].sum()), int(m.sum()))
-                    acc.append(round(100 * p, 2)); lo.append(round(100 * a, 2)); hi.append(round(100 * b, 2))
-                t[s][name] = {"n": int(m.sum()), "iters": list(range(1, K + 1)), "acc": acc, "lo": lo, "hi": hi}
-        out["strat"][task] = {"label": label, "H": H, "K": K, "platform": "Babel L40S",
+            sb = strat_bins(rows_)
+            K = recs["fp32"]["K"]
+            steps = list(range(1, K + 1)) if K <= 64 else \
+                sorted({int(round(2 ** (i / 4))) for i in range(0, int(4 * math.log2(K)) + 1)})
+            t = {}
+            for s, r in recs.items():
+                if s.startswith("_"):
+                    continue
+                t[s] = {"fid_H_mean": r["fid_H_mean"], "seed": r["seed"]}
+                for name, m in sb:
+                    acc, lo, hi = [], [], []
+                    for k in steps:
+                        p, a_, b_ = wilson(int(r["B"][m, k - 1].sum()), int(m.sum()))
+                        acc.append(round(100 * p, 2)); lo.append(round(100 * a_, 2)); hi.append(round(100 * b_, 2))
+                    t[s][name] = {"n": int(m.sum()), "iters": steps, "acc": acc, "lo": lo, "hi": hi}
+            out[key][task] = {"label": label, "H": H, "K": K, "platform": "Babel L40S",
                               "fp32_identity_across_files": recs.get("_fp32_identity"), "quants": t}
     p = B / "x1_difficulty_readout.json"
     json.dump(out, open(p, "w"))
@@ -391,4 +403,5 @@ def fig():
 
 
 if __name__ == "__main__":
-    {"first": first, "strat": strat, "glink": glink, "json": build_json, "fig": fig}[sys.argv[1]]()
+    {"first": first, "strat": strat, "deep": lambda: strat("deep"), "glink": glink, "json": build_json,
+     "fig": fig}[sys.argv[1]]()

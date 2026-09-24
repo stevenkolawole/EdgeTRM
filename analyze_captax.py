@@ -23,7 +23,7 @@ Sources:
   sudoku  X1's stratified TRM/HRM sweeps `results/breadth/babel/x1/{diff,deep}_*.json` (T = ACT
        steps 1..64 or 1..512) per rating bin.
 
-    python analyze_captax.py fit dt         # or: fit sudoku
+    python analyze_captax.py fit dt         # or: fit sudoku_first | sudoku | sudoku_deep
     python analyze_captax.py solve dt       # or: solve sudoku
     python analyze_captax.py length
     python analyze_captax.py json           # all fits -> results/breadth/x1_captax.json
@@ -171,6 +171,30 @@ def sudoku_sets(kind="diff"):
     return out
 
 
+def sudoku_first_sets():
+    """{(task, bin): (T, mats)} from the existing p4d records on the first 1000 test rows
+    (nsup 1,2,4,8,16 from *_all.json, 32/64 from *_deep.json; default H)."""
+    meta = json.load(open(B / "sudoku_extreme_test_meta.json"))
+    r = np.array(meta["first1000"]["rating"])
+    bins = [("easy 0-4", (r >= 0) & (r <= 4)), ("medium 5-30", (r >= 5) & (r <= 30)), ("hard >=31", r >= 31)]
+    T = [1, 2, 4, 8, 16, 32, 64]
+    out = {}
+    for task, H in (("sudoku_mlp", 3), ("sudoku_attn", 3), ("hrm_sudoku", 2)):
+        by = {}
+        for f in (f"{task}_all.json", f"{task}_deep.json"):
+            for rec in json.load(open(B / f))["records"]:
+                if rec["H_cycles"] == H:
+                    by[(rec["quant"]["spec"], rec["nsup"])] = np.array(rec["correct"], bool)
+        specs = [q for q in ("fp32", "w8c", "w4g32", "w4a", "w4c", "w4t", "w3g32", "w3a", "w3c", "w2a", "w2g32")
+                 if all((q, t) in by for t in T)]
+        for nm, m in bins:
+            mats = {q: np.stack([by[(q, t)][m] for t in T], 1) for q in specs}
+            # drop quantizers that never solve anything in this bin (nothing to fit)
+            mats = {q: M for q, M in mats.items() if M.any()}
+            out[(task, nm)] = (T, mats)
+    return out
+
+
 # ------------------------------------------------------------------------ read-outs
 def fmt_ci(v, ci, pct=False, nd=1):
     f = (lambda x: f"{100*x:.{nd}f}") if pct else (lambda x: f"{x:.{nd}f}")
@@ -196,6 +220,11 @@ def fit(which):
             fits = fit_set(T, mats)
             res[f"dt_maze_{size}"] = {"T": T, "fits": fits}
             print_fits(f"deep-thinking maze {size} (n=1000, p4d)", T, fits)
+    elif which == "sudoku_first":
+        for (task, nm), (T, mats) in sudoku_first_sets().items():
+            fits = fit_set(T, mats, nboot=300)
+            res[f"first_{task}_{nm}"] = {"T": T, "fits": fits}
+            print_fits(f"{task} {nm} (first 1000 rows, n={next(iter(mats.values())).shape[0]}, p4d)", T, fits)
     else:
         kind = "deep" if which == "sudoku_deep" else "diff"
         for (task, nm), (T, mats) in sudoku_sets(kind).items():
@@ -213,8 +242,12 @@ def stable_solve(M):
 
 
 def solve(which):
-    sets = ({f"dt maze {k}": (T, m) for k, (T, m, _) in dt_sets().items()} if which == "dt"
-            else {f"{t} rating {b}": v for (t, b), v in sudoku_sets("deep" if which == "sudoku_deep" else "diff").items()})
+    if which == "dt":
+        sets = {f"dt maze {k}": (T, m) for k, (T, m, _) in dt_sets().items()}
+    elif which == "sudoku_first":
+        sets = {f"{t} {b} (first 1000)": v for (t, b), v in sudoku_first_sets().items()}
+    else:
+        sets = {f"{t} rating {b}": v for (t, b), v in sudoku_sets("deep" if which == "sudoku_deep" else "diff").items()}
     print("## Iterations-to-solve on instances both fp32 and the quantized model solve for good at the last count")
     print("(stable solve = first count from which the instance stays correct; later = the quantized model needs more)")
     for name, (T, mats) in sets.items():
@@ -322,7 +355,7 @@ def length():
 
 
 def to_json():
-    res = {"dt": fit("dt")}
+    res = {"dt": fit("dt"), "sudoku_first": fit("sudoku_first")}
     s = fit("sudoku")
     if s:
         res["sudoku"] = s
