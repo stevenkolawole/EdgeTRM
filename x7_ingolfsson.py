@@ -731,6 +731,25 @@ def analyze(pattern, summary_path):
                     rhalf[str(d)] = sigma_half([(r["rho_out"], r["exact"][-1]) for _, r in pts], fp_ex)
             out["arms"][arm] = {"sigmas": rows, "sigma_half_by_draw": half, "rho_half_by_draw": rhalf}
         S["biasnoise"][task] = out
+    # flat point lists for figures: accuracy against the common perturbation axis (rho_out), every cell
+    pts = []
+    for r in recs:
+        if r["cell"] == "fp32" or r["_mode"] not in ("ladder", "biasnoise"):
+            continue
+        b = base_name(r["cell"])
+        arm = b[:2] if r["_mode"] == "biasnoise" else "quant"
+        pts.append({"task": r["task"], "mode": r["_mode"], "cell": r["cell"], "arm": arm, "seed": r["seed"],
+                    "sigma": float(b[2:]) if arm != "quant" else None, "rho_out": r.get("rho_out"),
+                    "rho_out_step1": (r.get("rho_out_by_step") or {}).get("1"),
+                    "sigma_eq_a": r.get("sigma_eq_a"), "sigma_eq_w": r.get("sigma_eq_w"),
+                    "coherence_a": r.get("coherence_a"), "exact": r["exact"][-1], "exact_step1": r["exact"][0],
+                    "cell_acc": r["cell_acc"][-1], "fidelity_H": r["fidelity_H"][-1],
+                    "valid": r["valid"][-1] if "valid" in r else None,
+                    "valid_shortest": r["valid_shortest"][-1] if "valid_shortest" in r else None})
+    S["fig_points"] = pts
+    S["fp32"] = {task: next((r["exact"][-1] for r in recs if r["task"] == task and r["cell"] == "fp32"
+                             and r["H_cycles"] == TASKS[task]["H"] and r["L_cycles"] == TASKS[task]["L"]), None)
+                 for task in TASKS}
     json.dump(S, open(summary_path, "w"), indent=1)
     print_summary(S)
     print("wrote", summary_path)
