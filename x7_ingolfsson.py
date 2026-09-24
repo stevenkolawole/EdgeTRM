@@ -66,13 +66,13 @@ DEV = bs.DEV
 
 TASKS = {
     # n and the calibration pool follow the breadth sweeps (Sudoku first 1000 test rows, Maze first 500)
-    "sudoku_mlp": dict(n=1000, pool=(1000, 3000), H=3, L=6, batch=256, coh=8,
+    "sudoku_mlp": dict(n=1000, pool=(1000, 3000), H=3, L=6, batch=256, coh=4,
                        Hs=[1, 2, 3, 4, 6], Ls=[1, 2, 4, 6, 8]),
-    "sudoku_attn": dict(n=1000, pool=(1000, 3000), H=3, L=6, batch=256, coh=8,
+    "sudoku_attn": dict(n=1000, pool=(1000, 3000), H=3, L=6, batch=256, coh=4,
                         Hs=[1, 2, 3, 4, 6], Ls=[1, 2, 4, 6, 8]),
-    "maze_attn": dict(n=500, pool=(500, 1000), H=3, L=4, batch=50, coh=2,
+    "maze_attn": dict(n=500, pool=(500, 1000), H=3, L=4, batch=50, coh=1,
                       Hs=[1, 2, 3, 4, 6], Ls=[1, 2, 4, 8]),
-    "hrm_sudoku": dict(n=1000, pool=(1000, 3000), H=2, L=2, batch=256, coh=8,
+    "hrm_sudoku": dict(n=1000, pool=(1000, 3000), H=2, L=2, batch=256, coh=4,
                        Hs=[1, 2, 3, 4], Ls=[1, 2, 4]),
 }
 CALIB_N = 200

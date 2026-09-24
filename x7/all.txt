@@ -1,0 +1,26 @@
+--task sudoku_mlp --mode biasnoise --draws 0 --group 16 --out /home/ubuntu/x7/results/bn_sudoku_mlp_d0.json
+--task maze_attn --mode biasnoise --draws 0 --arms an,af,ab --sigmas 0.2,0.3,0.5,0.7,1,1.5,2 --group 8 --out /home/ubuntu/x7/results/bn_maze_attn_d0a.json
+--task sudoku_mlp --mode biasnoise --draws 1 --group 16 --out /home/ubuntu/x7/results/bn_sudoku_mlp_d1.json
+--task maze_attn --mode biasnoise --draws 1 --arms an,af,ab --sigmas 0.2,0.3,0.5,0.7,1,1.5,2 --group 8 --out /home/ubuntu/x7/results/bn_maze_attn_d1a.json
+--task sudoku_mlp --mode biasnoise --draws 2 --group 16 --out /home/ubuntu/x7/results/bn_sudoku_mlp_d2.json
+--task maze_attn --mode biasnoise --draws 2 --arms an,af,ab --sigmas 0.2,0.3,0.5,0.7,1,1.5,2 --group 8 --out /home/ubuntu/x7/results/bn_maze_attn_d2a.json
+--task maze_attn --mode biasnoise --draws 0 --arms wn --sigmas 0.3,0.5,1,1.5,2,3,4 --group 8 --out /home/ubuntu/x7/results/bn_maze_attn_d0wn.json
+--task maze_attn --mode biasnoise --draws 0 --arms wb --group 9 --out /home/ubuntu/x7/results/bn_maze_attn_d0wb.json
+--task maze_attn --mode biasnoise --draws 1 --arms wn --sigmas 0.3,0.5,1,1.5,2,3,4 --group 8 --out /home/ubuntu/x7/results/bn_maze_attn_d1wn.json
+--task maze_attn --mode biasnoise --draws 1 --arms wb --group 9 --out /home/ubuntu/x7/results/bn_maze_attn_d1wb.json
+--task maze_attn --mode biasnoise --draws 2 --arms wn --sigmas 0.3,0.5,1,1.5,2,3,4 --group 8 --out /home/ubuntu/x7/results/bn_maze_attn_d2wn.json
+--task maze_attn --mode biasnoise --draws 2 --arms wb --group 9 --out /home/ubuntu/x7/results/bn_maze_attn_d2wb.json
+--task sudoku_mlp --mode ladder --group 16 --out /home/ubuntu/x7/results/ladder_sudoku_mlp.json
+--task maze_attn --mode ladder --group 8 --out /home/ubuntu/x7/results/ladder_maze_attn.json
+--task sudoku_attn --mode ladder --group 16 --out /home/ubuntu/x7/results/ladder_sudoku_attn.json
+--task hrm_sudoku --mode ladder --group 16 --out /home/ubuntu/x7/results/ladder_hrm_sudoku.json
+--task sudoku_attn --mode biasnoise --draws 0 --group 16 --out /home/ubuntu/x7/results/bn_sudoku_attn_d0.json
+--task sudoku_attn --mode biasnoise --draws 1 --group 16 --out /home/ubuntu/x7/results/bn_sudoku_attn_d1.json
+--task sudoku_attn --mode biasnoise --draws 2 --group 16 --out /home/ubuntu/x7/results/bn_sudoku_attn_d2.json
+--task hrm_sudoku --mode biasnoise --draws 0 --group 16 --out /home/ubuntu/x7/results/bn_hrm_sudoku_d0.json
+--task hrm_sudoku --mode biasnoise --draws 1 --group 16 --out /home/ubuntu/x7/results/bn_hrm_sudoku_d1.json
+--task hrm_sudoku --mode biasnoise --draws 2 --group 16 --out /home/ubuntu/x7/results/bn_hrm_sudoku_d2.json
+--task sudoku_mlp --mode depth --group 4 --out /home/ubuntu/x7/results/depth_sudoku_mlp.json
+--task maze_attn --mode depth --group 4 --out /home/ubuntu/x7/results/depth_maze_attn.json
+--task sudoku_attn --mode depth --group 4 --out /home/ubuntu/x7/results/depth_sudoku_attn.json
+--task hrm_sudoku --mode depth --group 4 --out /home/ubuntu/x7/results/depth_hrm_sudoku.json
