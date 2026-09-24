@@ -10,7 +10,7 @@ results/breadth/sudoku_extreme_test_meta.json (built from sapientinc/sudoku-extr
     python analyze_difficulty.py deep     # deep Babel sweep, 300 per bin, k = 1..512
     python analyze_difficulty.py glink    # which puzzles fail: fp32's solve step vs rating
     python analyze_difficulty.py json     # figure-ready JSON -> results/breadth/x1_difficulty_readout.json
-    python analyze_difficulty.py fig      # draft figure -> plots/x1_difficulty.{png,pdf}
+    python analyze_difficulty.py fig [first1000|strat|deep]   # draft figure -> plots/x1_difficulty_<src>.{png,pdf}
 
 Every accuracy comes with n and a Wilson 95% interval; every gap to fp32 is paired (same
 puzzles) with a normal interval on the paired difference. Noise specs with several draws
@@ -363,13 +363,17 @@ def fig():
     import matplotlib.pyplot as plt
     fs.use()
     d = build_json()
-    src = "strat" if d["strat"] else "first1000"
+    src = sys.argv[2] if len(sys.argv) > 2 else ("strat" if d["strat"] else "first1000")
     tasks = [t for t, _, _ in TASKS if t in d[src]]
-    bins = STRAT_NAMES if src == "strat" else [nm for _, _, nm in FIRST_BINS]
+    bins = STRAT_NAMES if src in ("strat", "deep") else [nm for _, _, nm in FIRST_BINS]
     # per model: fp32, an in-basin quantizer, and the lossy ones that do not collapse
     pick = {"sudoku_mlp": [("fp32", fs.INK), ("w4c", fs.BLUE), ("w3g32", fs.AMBER), ("noise0.15@s0", fs.RED)],
             "sudoku_attn": [("fp32", fs.INK), ("w4c", fs.BLUE), ("w4t", fs.AMBER), ("noise0.7@s0", fs.RED)],
             "hrm_sudoku": [("fp32", fs.INK), ("w4c", fs.BLUE), ("w2g32", fs.AMBER), ("noise1.0@s0", fs.RED)]}
+    if src == "deep":
+        pick = {"sudoku_mlp": [("fp32", fs.INK), ("w4c", fs.BLUE), ("w3g32", fs.AMBER), ("noise0.15@s0", fs.RED)],
+                "sudoku_attn": [("fp32", fs.INK), ("w4c", fs.BLUE), ("w3c", fs.AMBER), ("noise0.7@s0", fs.RED)],
+                "hrm_sudoku": [("fp32", fs.INK), ("w4c", fs.BLUE), ("w2g32", fs.AMBER), ("noise1.0@s0", fs.RED)]}
     if src == "first1000":
         pick = {"sudoku_mlp": [("fp32", fs.INK), ("w4c", fs.BLUE), ("w3g32", fs.AMBER), ("w3c", fs.RED)],
                 "sudoku_attn": [("fp32", fs.INK), ("w4c", fs.BLUE), ("w4t", fs.AMBER), ("w3c", fs.RED)],
