@@ -22,6 +22,8 @@ Sections
   kl     per-problem teacher-forced KL / NLL increase vs generation failure on the
          problems bf16 greedy solves (AUROC, accuracy by KL quartile)
   sweep  loops x quantizer table for greedy (accuracy, NLL, KL, fidelity)
+  boundary  every LM cell with generation (Sep 13-15 Lambda grid + this harness): latent fidelity vs
+         teacher-forced NLL increase vs retained accuracy, and AUROC of each for predicting collapse
 """
 import argparse
 import json
@@ -337,9 +339,92 @@ def sec_sweep(cells, nmin):
         print()
 
 
+LAMBDA = HERE / "results/breadth/lambda"
+LAMBDA_FILES = [("huginn", ["huginn_gsm8k_s4.json", "huginn_gsm8k_s8.json", "huginn_gsm8k_s16.json", "huginn_gsm8k_s32.json",
+                            "huginn_gsm8k_s64_n50.json"], "huginn_gsm8k_s4_8_16_32_64_nogen.json"),
+                ("ouro14", ["ouro14_gsm8k_s1_2.json", "ouro14_gsm8k_s3_4_n100.json", "ouro14_gsm8k_s6_n100.json",
+                            "ouro14_gsm8k_s8_n100.json"], "ouro14_gsm8k_s1_2_3_4_6_8_nogen.json"),
+                ("ouro26", ["ouro26_gsm8k_s1_2.json", "ouro26_gsm8k_s3_4_n100.json", "ouro26_gsm8k_s6_n100.json",
+                            "ouro26_gsm8k_s8_n100.json"], "ouro26_gsm8k_s1_2_3_4_6_8_nogen.json")]
+
+
+def boundary_cells(cells):
+    """Every (model, loops, quant) with a greedy accuracy and a teacher-forced record, from the Sep 13-15
+    Lambda grid (Table E) and from this harness (source 'x4'); bf16 at the same loops as reference."""
+    rows = []
+    for model, gen_files, nogen in LAMBDA_FILES:
+        gen, ng = {}, {}
+        for f in gen_files:
+            p = LAMBDA / f
+            if p.exists():
+                for r in json.load(open(p))["records"]:
+                    if r.get("acc") is not None:
+                        gen.setdefault((r["steps"], r["quant"]["spec"]), r)
+        p = LAMBDA / nogen
+        if p.exists():
+            ng = {(r["steps"], r["quant"]["spec"]): r for r in json.load(open(p))["records"]}
+        for (st_, q), g in gen.items():
+            b, t, tb = gen.get((st_, "bf16")), ng.get((st_, q)), ng.get((st_, "bf16"))
+            if q == "bf16" or not b or not t or not tb:
+                continue
+            rows.append({"src": "lambda", "model": model, "loops": st_, "quant": q, "n": g["n"], "acc": 100 * g["acc"],
+                         "acc_bf16": 100 * b["acc"], "nll": t["nll"], "nll_bf16": tb["nll"], "fid": t["fidelity"],
+                         "agree": None, "kl": None})
+    for (model, steps, quant, scope), c in cells.items():
+        if quant == "bf16" or not c["tf"] or "greedy" not in c["gen"]:
+            continue
+        b = cells.get((model, steps, "bf16", scope))
+        if not b or not b["tf"] or "greedy" not in b["gen"]:
+            continue
+        t, tb = c["tf"]["summary"], b["tf"]["summary"]
+        rows.append({"src": "x4", "model": model, "loops": steps, "quant": quant, "n": len(c["gen"]["greedy"]),
+                     "acc": acc(c["gen"]["greedy"]), "acc_bf16": acc(b["gen"]["greedy"]), "nll": t["nll"],
+                     "nll_bf16": tb["nll"], "fid": t["fidelity"], "agree": t.get("tf_agree"), "kl": t.get("kl")})
+    return rows
+
+
+def sec_boundary(cells, nmin):
+    print("## Do generators follow the same boundary? latent fidelity vs teacher-forced loss vs retained accuracy\n")
+    print("retained = greedy accuracy / bf16 greedy accuracy at the same loop count; collapse = retained < 50%.\n")
+    rows = boundary_cells(cells)
+    rows.sort(key=lambda r: (-r["fid"]))
+    print("| src | model | loops | quant | n | acc (bf16) | retained | fidelity | ΔNLL (nats) | ΔNLL % | agree | KL |")
+    print("|---|---|---|---|---|---|---|---|---|---|---|---|")
+    for r in rows:
+        ret = 100 * r["acc"] / r["acc_bf16"] if r["acc_bf16"] > 0 else float("nan")
+        r["ret"] = ret
+        dn = r["nll"] - r["nll_bf16"]
+        print(f"| {r['src']} | {r['model']} | {r['loops']} | {r['quant']} | {r['n']} | {fmt(r['acc'])} ({fmt(r['acc_bf16'])}) | "
+              f"{fmt(ret, 0)}% | {fmt(r['fid'], 3)} | {dn:+.3f} | {100 * dn / r['nll_bf16']:+.0f}% | "
+              f"{fmt(r['agree'], 3) if r['agree'] is not None else '–'} | {fmt(r['kl'], 3) if r['kl'] is not None else '–'} |")
+    ok = [r for r in rows if r["acc_bf16"] >= 10 and not math.isnan(r["ret"])]
+    col = [r for r in ok if r["ret"] < 50]
+    held = [r for r in ok if r["ret"] >= 50]
+    if col and held:
+        print(f"\nCells with bf16 >= 10%: {len(held)} hold, {len(col)} collapse.")
+        print(f"- fidelity: collapsed max {max(r['fid'] for r in col):.3f}, held min {min(r['fid'] for r in held):.3f}; "
+              f"AUROC(1-fid -> collapse) {auroc([1 - r['fid'] for r in col], [1 - r['fid'] for r in held]):.3f}")
+        rel = lambda r: (r["nll"] - r["nll_bf16"]) / r["nll_bf16"]  # noqa: E731
+        print(f"- relative ΔNLL: collapsed min {100 * min(rel(r) for r in col):+.1f}%, held max {100 * max(rel(r) for r in held):+.1f}%; "
+              f"AUROC(ΔNLL% -> collapse) {auroc([rel(r) for r in col], [rel(r) for r in held]):.3f}")
+        dn = lambda r: r["nll"] - r["nll_bf16"]  # noqa: E731
+        print(f"- absolute ΔNLL: collapsed min {min(dn(r) for r in col):+.3f}, held max {max(dn(r) for r in held):+.3f}; "
+              f"AUROC(ΔNLL -> collapse) {auroc([dn(r) for r in col], [dn(r) for r in held]):.3f}")
+        print("  (destroyed cells with fidelity < 0.5 are trivially separated by every metric; the informative "
+              "comparison is among cells with fidelity >= 0.5:)")
+        col2 = [r for r in col if r["fid"] >= 0.5]
+        held2 = [r for r in held if r["fid"] >= 0.5]
+        if col2 and held2:
+            print(f"  fidelity AUROC {auroc([1 - r['fid'] for r in col2], [1 - r['fid'] for r in held2]):.3f}, "
+                  f"ΔNLL% AUROC {auroc([rel(r) for r in col2], [rel(r) for r in held2]):.3f}, "
+                  f"ΔNLL AUROC {auroc([dn(r) for r in col2], [dn(r) for r in held2]):.3f} "
+                  f"({len(col2)} collapsed, {len(held2)} held)")
+    print()
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("sections", nargs="*", default=["q6", "tf", "div", "len", "kl", "sweep"])
+    ap.add_argument("sections", nargs="*", default=["boundary", "q6", "tf", "div", "len", "kl", "sweep"])
     ap.add_argument("--roots", nargs="*", default=None)
     ap.add_argument("--nmin", type=int, default=200, help="records needed to call a run complete")
     a = ap.parse_args()
@@ -347,7 +432,8 @@ def main():
     if not cells:
         print("no results under", a.roots or DEFAULT_ROOTS)
         return
-    fns = {"q6": sec_q6, "tf": sec_tf, "div": sec_div, "len": sec_len, "kl": sec_kl, "sweep": sec_sweep}
+    fns = {"q6": sec_q6, "tf": sec_tf, "div": sec_div, "len": sec_len, "kl": sec_kl, "sweep": sec_sweep,
+           "boundary": sec_boundary}
     for s in a.sections:
         fns[s](cells, a.nmin)
 
