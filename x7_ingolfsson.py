@@ -815,15 +815,28 @@ def main():
     ap.add_argument("--arms", default="")
     ap.add_argument("--draws", default="0,1,2")
     ap.add_argument("--group", type=int, default=8, help="cells run in lockstep with one fp32 pass")
+    ap.add_argument("--chain", default="", help="file with one argument line per run, executed in order "
+                                                "(fewer SLURM jobs; each run resumes on its own)")
     ap.add_argument("--analyze", default="")
     ap.add_argument("--summary", default="x7_summary.json")
     a = ap.parse_args()
     if a.analyze:
         analyze(a.analyze, a.summary)
         return
+    print(f"device {DEV} {torch.cuda.get_device_name(0) if DEV == 'cuda' else ''}", flush=True)
+    if a.chain:
+        import shlex
+        lines = [ln.strip() for ln in open(os.path.expanduser(a.chain)) if ln.strip() and not ln.startswith("#")]
+        for i, ln in enumerate(lines):
+            sub = ap.parse_args(shlex.split(ln))
+            print(f"=== chain {i + 1}/{len(lines)}: {ln}", flush=True)
+            torch.manual_seed(0)
+            np.random.seed(0)
+            run(sub)
+        print("CHAIN DONE", flush=True)
+        return
     torch.manual_seed(0)
     np.random.seed(0)
-    print(f"device {DEV} {torch.cuda.get_device_name(0) if DEV == 'cuda' else ''}", flush=True)
     run(a)
 
 
