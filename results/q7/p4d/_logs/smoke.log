@@ -1,0 +1,8 @@
+base rc=127
+resume1 rc=0
+resume2 rc=0
+fork rc=0
+jac rc=0
+noise rc=0
+clip rc=0
+SMOKE_DONE

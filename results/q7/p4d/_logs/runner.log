@@ -1,0 +1,11 @@
+2026-09-24 19:14:38 runner start (pid 161779)
+2026-09-24 19:14:38 launched q7_base_s0 seed=0 card=3 pid=161810 (card had 0 procs) overrides: +q7_fork_iters=[7]
+2026-09-24 19:16:08 launched q7_base_s1 seed=1 card=4 pid=163290 (card had 1 procs) overrides: +q7_fork_iters=[7]
+2026-09-24 19:17:38 launched q7_base_s2 seed=2 card=5 pid=164182 (card had 0 procs) overrides: +q7_fork_iters=[7]
+2026-09-24 19:19:09 launched qat_naive_s0 seed=0 card=3 pid=166855 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0
+2026-09-24 19:20:40 launched qat_naive_s2 seed=2 card=5 pid=169137 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0
+Thu Sep 24 19:24:44 UTC 2026 runner already active
+2026-09-24 19:25:04 runner start (pid 177816)
+2026-09-24 19:35:16 launched qat_naive_s1 seed=1 card=4 pid=195387 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0
+Thu Sep 24 20:06:09 UTC 2026 runner already active
+2026-09-24 20:06:33 runner start (pid 223003)

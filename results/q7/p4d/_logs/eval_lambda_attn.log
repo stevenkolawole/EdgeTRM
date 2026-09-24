@@ -1,0 +1,57 @@
+[q7_eval] trm_sudoku_attn_w512_s0/step_65100: fp32 64.8 w4t 65.5 (fidH 0.888) jac 0.231; 27 cells in 875s
+[q7_eval] trm_sudoku_attn_w512_s1/step_65100: fp32 62.9 w4t 59.5 (fidH 0.837) jac_fro2 0.262 jac_spec mean 8.806 max 15.672; 27 cells in 1346s
+Traceback (most recent call last):
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 266, in <module>
+    main()
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 261, in main
+    evaluate_checkpoint(ck, out, n=a.n, nsup=a.nsup, quants=qs, sigmas=sig, draws=a.draws,
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 189, in evaluate_checkpoint
+    rec.update(_jac_stats(m, inp, lab))
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 89, in _jac_stats
+    _, jv = torch.func.jvp(f, (z0,), (v,))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/eager_transforms.py", line 1042, in jvp
+    return _jvp_with_argnums(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/eager_transforms.py", line 1101, in _jvp_with_argnums
+    result_duals = func(*duals)
+                   ^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 70, in f
+    return inner.L_level(zz, inj, cos_sin=cs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/recursive_reasoning/trm.py", line 114, in forward
+    hidden_states = layer(hidden_states=hidden_states, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/recursive_reasoning/trm.py", line 95, in forward
+    out = self.mlp_t(hidden_states)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/layers.py", line 161, in forward
+    return self.down_proj(F.silu(gate) * up)
+                          ^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/functional.py", line 2380, in silu
+    return torch._C._nn.silu(input)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 256.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 22.94 MiB is free. Process 163382 has 16.26 GiB memory in use. Including non-PyTorch memory, this process has 23.19 GiB memory in use. Of the allocated memory 22.19 GiB is allocated by PyTorch, and 523.78 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+ALL_DONE

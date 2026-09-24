@@ -1,0 +1,4 @@
+[q7_eval] trm_sudoku_mlp_w256_s0/step_65100: fp32 59.9 w4t 0.0 (fidH 0.220) jac 0.171; 27 cells in 310s
+[q7_eval] trm_sudoku_mlp_w256_s1/step_65100: fp32 62.3 w4t 0.0 (fidH 0.154) jac 0.202; 27 cells in 308s
+[q7_eval] trm_sudoku_mlp_w256_s2/step_65100: fp32 64.0 w4t 0.0 (fidH 0.209) jac_fro2 0.142 jac_spec mean 3.264 max 6.042; 27 cells in 311s
+ALL_DONE
