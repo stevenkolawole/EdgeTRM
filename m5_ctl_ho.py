@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""M5 unified test-time controller, selected on dev rows and scored on held-out rows (p5 exhibit, one platform).
+"""M5 unified test-time controller, selected on dev rows and scored on held-out rows (p4d exhibit, one platform;
+moved from p5 on Sep 25 13:00 UTC, see tools/m5_p4d_lines.py for the scope: exit trajectories to 64 steps, K16 rollouts).
 
 The method, per puzzle, for a compressed recursive reasoner:
   E  exit: deterministic trajectory stopped by the model's own halting head (rule chosen on the dev fp32 cell,
@@ -22,7 +23,7 @@ are paired (same held-out puzzles).
 Row sets: released Sudoku models and trained seeds: dev = test rows 0-999, held out = 1000-1999. Mazes (the test set has
 1000 rows): dev 0-499, held out 500-999. Deep-thinking mazes (no head, no sampler): answer-stability exit vs fixed budget,
 dev rows 0-499, held out 500-999.
-Records (all p5, H200): results/m5/ctl/p5/ = p5 results/m5ctl/ (tools/m5_p5_ctl_lines.py).
+Records (all p4d, A100): results/m5/ctl/p4d/ = p4d ~/m5/ctl/; DT from results/m5/phi/p4d/ = p4d ~/m5/phi/.
 
     python m5_ctl_ho.py                     # tables + results/breadth/m5_ctl_ho.json
 """
@@ -37,12 +38,13 @@ import numpy as np
 import analyze_m5 as A
 from m5_controller import fire_mask, first
 
-ROOT = Path(os.environ.get("M5_CTL_DIR", A.HERE / "results" / "m5" / "ctl" / "p5"))
+ROOT = Path(os.environ.get("M5_CTL_DIR", A.HERE / "results" / "m5" / "ctl" / "p4d"))
+DT_ROOT = Path(os.environ.get("M5_DT_DIR", A.HERE / "results" / "m5" / "phi" / "p4d"))   # DT: the m5phi runs (same p4d records)
 BUDGETS = [4, 8, 16, 32, 64, 128, 256, 512]
 NB = 2000
-RELEASED = {"sudoku_mlp": "fp32,noise0.15@s0,noise0.15@s2,noise0.1@s0,w3a,w3c,w3g32,w4c,w4t",
-            "sudoku_attn": "fp32,noise0.5@s0,noise0.5@s1,noise0.5@s2,noise0.7@s0,noise0.7@s1,noise0.7@s2,w3a,w3c,w3g32,w4c,w4t",
-            "hrm_sudoku": "fp32,noise1.0@s0,noise1.0@s1,noise1.0@s2,w2a,w2g32,w3c,w3g32,w4c,w4t"}
+RELEASED = {"sudoku_mlp": "fp32,noise0.15@s0,noise0.15@s2,w3g32,w4c,w4t",
+            "sudoku_attn": "fp32,noise0.7@s0,noise0.7@s1,noise0.7@s2,w3c,w4c",
+            "hrm_sudoku": "fp32,noise1.0@s0,noise1.0@s1,w2g32,w4c,w4t"}
 MAZES = {"maze_attn": "fp32,noise1.0@s0,noise1.5@s0,w2a,w4t", "hrm_maze": "fp32,noise1.0@s0,noise1.5@s0,w2a,w2g32"}
 H = {"sudoku_mlp": 3, "sudoku_attn": 3, "hrm_sudoku": 2, "maze_attn": 3, "hrm_maze": 2}
 METHODS = ["fixed", "E", "P", "S", "E+P", "E+S", "S+P", "E+S+P"]
@@ -241,11 +243,11 @@ def rules_for(fam_ref_dev, task):
 def families():
     fams = []
     for task, cells in RELEASED.items():
-        fams.append({"name": task, "task": task, "kind": "sudoku", "K": 32, "cells": cells.split(",")})
+        fams.append({"name": task, "task": task, "kind": "sudoku", "K": 16, "cells": cells.split(",")})
     for arch, task in (("attn512", "sudoku_attn"), ("mlp512", "sudoku_mlp")):
         for s in range(3):
             fams.append({"name": f"{arch}_s{s}", "task": task, "kind": "sudoku", "K": 16, "sub": f"var/{arch}_s{s}",
-                         "tag": f"_{arch}s{s}", "cells": ["fp32", "w4c", "w3c", "w3g32"]})
+                         "tag": f"_{arch}s{s}", "cells": ["fp32", "w4c", "w3c"]})
     for task, cells in MAZES.items():
         fams.append({"name": task, "task": task, "kind": "maze", "K": 16, "cells": cells.split(",")})
     return fams
@@ -335,9 +337,9 @@ def report(allres, rng):
 def dt_ho(rng):
     """deep-thinking mazes: stability exit (p, cap B) vs fixed B, chosen on rows 0-499, scored on 500-999."""
     out = {}
-    print("\n=== DT mazes (p5): answer-stability exit vs fixed budget, chosen on rows 0-499, held out 500-999")
+    print("\n=== DT mazes (p4d): answer-stability exit vs fixed budget, chosen on rows 0-499, held out 500-999")
     for size in (13, 25, 33):
-        for f in sorted(glob.glob(str(ROOT / f"dt_maze{size}" / "*.npz"))):
+        for f in sorted(glob.glob(str(DT_ROOT / f"dt_maze{size}" / "*.npz"))):
             if ".tmp" in f:
                 continue
             d = np.load(f)
