@@ -1,0 +1,34 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Thu Sep 24 23:53:16 UTC 2026 [q7_train] ft_fp32_s1 seed=1 host=ip-172-31-15-144 cuda=4 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100
+Setup EMA
+  0%|          | 0/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260924_235321-v2xhc7km
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  1%|          | 108/12000 [01:00<1:50:32,  1.79it/s]  1%|▏         | 158/12000 [01:20<1:50:04,  1.79it/s]  2%|▏         | 262/12000 [02:00<1:27:12,  2.24it/s]  3%|▎         | 312/12000 [02:20<1:26:50,  2.24it/s]  3%|▎         | 416/12000 [03:00<1:20:49,  2.39it/s]  4%|▍         | 465/12000 [03:20<1:20:29,  2.39it/s]  5%|▍         | 570/12000 [04:00<1:17:34,  2.46it/s]  5%|▌         | 619/12000 [04:20<1:17:14,  2.46it/s]  6%|▌         | 724/12000 [05:00<1:15:22,  2.49it/s]  6%|▋         | 772/12000 [05:20<1:15:03,  2.49it/s]  7%|▋         | 878/12000 [06:00<1:13:38,  2.52it/s]  8%|▊         | 926/12000 [06:20<1:13:19,  2.52it/s]  9%|▊         | 1032/12000 [07:01<1:12:15,  2.53it/s]  9%|▉         | 1080/12000 [07:20<1:11:56,  2.53it/s] 10%|▉         | 1186/12000 [08:01<1:10:59,  2.54it/s] 10%|█         | 1233/12000 [08:20<1:10:40,  2.54it/s] 11%|█         | 1340/12000 [09:01<1:09:48,  2.55it/s] 12%|█▏        | 1387/12000 [09:20<1:09:29,  2.55it/s] 12%|█▏        | 1494/12000 [10:01<1:08:39,  2.55it/s] 13%|█▎        | 1540/12000 [10:20<1:08:21,  2.55it/s] 14%|█▎        | 1648/12000 [11:01<1:07:35,  2.55it/s] 14%|█▍        | 1694/12000 [11:20<1:07:17,  2.55it/s] 15%|█▌        | 1802/12000 [12:02<1:06:32,  2.55it/s] 15%|█▌        | 1847/12000 [12:20<1:06:15,  2.55it/s]

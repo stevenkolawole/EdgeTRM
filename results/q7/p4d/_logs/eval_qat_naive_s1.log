@@ -1,0 +1,6 @@
+Fri Sep 25 05:17:02 UTC 2026 [q7_evalrun] eval_qat_naive_s1: --rundir /home/ubuntu/q7/ckpt/qat_naive_s1
+[q7_eval] qat_naive_s1/step_3000: fp32 2.1 w4t 57.5 (fidH 0.498/ref 0.818) S0.02 1.39 S0.1 1.36 Sq0.1 1.72 jac_fro2 0.162; 6 cells in 196s
+[q7_eval] qat_naive_s1/step_6000: fp32 2.1 w4t 55.3 (fidH 0.485/ref 0.883) S0.02 1.26 S0.1 1.34 Sq0.1 1.31 jac_fro2 0.156; 6 cells in 194s
+[q7_eval] qat_naive_s1/step_9000: fp32 2.0 w4t 56.3 (fidH 0.509/ref 0.873) S0.02 1.25 S0.1 1.28 Sq0.1 1.19 jac_fro2 0.175; 6 cells in 194s
+[q7_eval] qat_naive_s1/step_12000: fp32 2.1 w4t 61.2 (fidH 0.497/ref 0.871) S0.02 1.19 S0.1 1.24 Sq0.1 1.12 jac_fro2 0.179; 42 cells in 1101s
+Fri Sep 25 05:45:10 UTC 2026 [q7_evalrun] eval_qat_naive_s1 exited rc=0

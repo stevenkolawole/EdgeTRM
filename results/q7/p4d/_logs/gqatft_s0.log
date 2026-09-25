@@ -1,0 +1,106 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 00:16:02 UTC 2026 [q7_train] gqatft_s0 seed=0 host=ip-172-31-15-144 cuda=3 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_ramp_steps=6000
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+Setup EMA
+  0%|          | 0/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_001609-3f6jboci
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+Error executing job with overrides: ['arch=trm', 'data_paths=[/home/ubuntu/edgetrm_src/TinyRecursiveModels/data/sudoku-extreme-1k-aug-1000]', 'evaluators=[]', 'epochs=9216', 'eval_interval=2304', 'lr_warmup_steps=500', 'checkpoint_every_eval=True', 'lr=1e-4', 'puzzle_emb_lr=1e-4', 'weight_decay=1.0', 'puzzle_emb_weight_decay=1.0', 'global_batch_size=768', 'arch.mlp_t=True', 'arch.pos_encodings=none', 'arch.L_layers=2', 'arch.H_cycles=3', 'arch.L_cycles=6', 'arch.hidden_size=256', 'arch.num_heads=4', 'ema=True', 'seed=0', '+run_name=gqatft_s0', '+checkpoint_path=/home/ubuntu/q7/ckpt/gqatft_s0', '+load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100', '+q7_reg=qat', '+q7_bits=4', '+q7_start_step=0', '+q7_ramp_steps=6000']
+Traceback (most recent call last):
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 1092, in launch
+    metrics = train_batch(config, train_state, batch, global_batch_size, rank=RANK, world_size=WORLD_SIZE)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 720, in train_batch
+    train_state.carry, loss, metrics, _, _ = train_state.model(carry=train_state.carry, batch=batch, return_keys=[])
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 574, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/losses.py", line 50, in forward
+    def forward(
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 745, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1184, in forward
+    return compiled_fn(full_args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 310, in runtime_wrapper
+    all_outs = call_func_at_runtime_with_args(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/utils.py", line 126, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+                            ^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/utils.py", line 100, in g
+    return f(*args)
+           ^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/autograd/function.py", line 575, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 1585, in forward
+    fw_outs = call_func_at_runtime_with_args(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/utils.py", line 126, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+                            ^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 490, in wrapper
+    return compiled_fn(runtime_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 672, in inner_fn
+    outs = compiled_fn(args)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_inductor/output_code.py", line 466, in __call__
+    return self.current_callable(inputs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_inductor/utils.py", line 2128, in run
+    return model(new_inputs)
+           ^^^^^^^^^^^^^^^^^
+  File "/tmp/torchinductor_ubuntu/co/ccozgtjfbcmh6tpexc6g5tczhte3kzgcjoc6tojk5fj4lgwk5bd4.py", line 3868, in call
+    buf386 = empty_strided_cuda((768, 256, 512), (131072, 512, 1), torch.bfloat16)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 192.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 2.12 MiB is free. Process 8521 has 16.28 GiB memory in use. Process 13838 has 1.40 GiB memory in use. Process 13939 has 15.87 GiB memory in use. Including non-PyTorch memory, this process has 5.36 GiB memory in use. Process 14148 has 558.00 MiB memory in use. Of the allocated memory 4.77 GiB is allocated by PyTorch, and 93.29 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+[1;34mwandb[0m: 
+[1;34mwandb[0m: You can sync this run to the cloud by running:
+[1;34mwandb[0m: [1mwandb sync /home/ubuntu/q7/wandb/wandb/offline-run-20260925_001609-3f6jboci[0m
+[1;34mwandb[0m: Find logs at: [1;35m../../q7/wandb/wandb/offline-run-20260925_001609-3f6jboci/logs[0m
+  0%|          | 0/12000 [00:25<?, ?it/s]
+Fri Sep 25 00:16:36 UTC 2026 [q7_train] gqatft_s0 exited rc=1 DONE=n0 (OOM from the 00:16 runner over-launch, not counted)

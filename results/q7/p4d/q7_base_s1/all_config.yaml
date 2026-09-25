@@ -42,6 +42,8 @@ min_eval_interval: 0
 project_name: Sudoku-extreme-1k-aug-1000-ACT-torch
 puzzle_emb_lr: 0.0001
 puzzle_emb_weight_decay: 1.0
+q7_act_bits: 0
+q7_act_calib_steps: 20
 q7_bits: 4
 q7_clip_k: 0.0
 q7_eval_batches: 3
@@ -56,6 +58,8 @@ q7_lambda: 0.0
 q7_max_steps: 0
 q7_ramp_steps: 0
 q7_reg: none
+q7_sens_sub: 64
+q7_sens_target: 0.0
 q7_sigma: 0.0
 q7_start_frac: 0.0
 q7_start_step: -1

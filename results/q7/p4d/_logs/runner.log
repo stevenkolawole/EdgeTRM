@@ -9,3 +9,49 @@ Thu Sep 24 19:24:44 UTC 2026 runner already active
 2026-09-24 19:35:16 launched qat_naive_s1 seed=1 card=4 pid=195387 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0
 Thu Sep 24 20:06:09 UTC 2026 runner already active
 2026-09-24 20:06:33 runner start (pid 223003)
+2026-09-24 21:28:06 cleaned resume.pt of qat_naive_s0
+2026-09-24 21:28:07 launched qat_lsq_s0 seed=0 card=3 pid=265490 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=lsq +q7_bits=4
+2026-09-24 21:29:38 cleaned resume.pt of qat_naive_s2
+2026-09-24 21:29:39 launched qat_lsq_s2 seed=2 card=5 pid=266140 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=lsq +q7_bits=4
+2026-09-24 21:46:24 cleaned resume.pt of qat_naive_s1
+2026-09-24 21:46:24 launched qat_lsq_s1 seed=1 card=4 pid=271028 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=lsq +q7_bits=4
+2026-09-24 23:25:19 runner start (pid 299011)
+2026-09-24 23:30:25 launched zz_smoke_sens seed=0 card=3 pid=302753 (card had 1 procs) overrides: epochs=10 eval_interval=5 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_eval_n=100
+2026-09-24 23:31:56 launched eval_lambda_S seed=0 card=5 pid=303565 (card had 1 procs) overrides: lambda_mlp_w256_s0 lambda_mlp_w256_s1 lambda_mlp_w256_s2 lambda_attn_w512_s0 lambda_attn_w512_s1
+2026-09-24 23:33:26 cleaned resume.pt of qat_lsq_s0
+2026-09-24 23:33:26 cleaned resume.pt of qat_lsq_s2
+2026-09-24 23:33:26 launched ft_fp32_s0 seed=0 card=3 pid=303993 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+2026-09-24 23:40:02 cleaned resume.pt of zz_smoke_sens
+2026-09-24 23:40:03 launched ft_fp32_s2 seed=2 card=5 pid=307783 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100
+2026-09-24 23:46:38 launched zz_smoke_gqat seed=0 card=4 pid=310104 (card had 1 procs) overrides: epochs=10 eval_interval=5 +q7_reg=qat +q7_bits=4 +q7_start_step=2 +q7_ramp_steps=6 +q7_eval_n=100
+2026-09-24 23:48:08 cleaned resume.pt of qat_lsq_s1
+2026-09-24 23:53:13 cleaned resume.pt of zz_smoke_gqat
+2026-09-24 23:53:14 launched ft_fp32_s1 seed=1 card=4 pid=311991 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100
+2026-09-25 00:11:03 runner start (pid 8329)
+2026-09-25 00:11:03 launched q7_base_s0 seed=0 card=3 pid=8381 (card had 0 procs) overrides: +q7_fork_iters=[7]
+2026-09-25 00:12:33 launched q7_base_s1 seed=1 card=4 pid=9786 (card had 0 procs) overrides: +q7_fork_iters=[7]
+2026-09-25 00:14:04 launched q7_base_s2 seed=2 card=5 pid=11734 (card had 0 procs) overrides: +q7_fork_iters=[7]
+Terminated
+2026-09-25 00:15:53 runner start (pid 13705), cards 3 4
+2026-09-25 00:15:53 launched q7_base_s2 seed=2 card=3 pid=13738 (card had 1 procs) overrides: +q7_fork_iters=[7]
+2026-09-25 00:15:56 launched sensft_s0 seed=0 card=3 pid=13830 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_ramp_steps=500 +q7_start_step=0
+2026-09-25 00:15:58 launched gqatft_s0 seed=0 card=3 pid=13930 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_ramp_steps=6000
+2026-09-25 00:16:01 launched ft_fp32_s0 seed=0 card=3 pid=14032 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+2026-09-25 00:16:03 launched sensft_s1 seed=1 card=4 pid=14140 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_ramp_steps=500 +q7_start_step=0
+2026-09-25 00:16:05 launched gqatft_s1 seed=1 card=4 pid=14295 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_ramp_steps=6000
+2026-09-25 00:16:08 launched sensft_s2 seed=2 card=4 pid=14534 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_ramp_steps=500 +q7_start_step=0
+2026-09-25 00:17:17 runner start (pid 17006), cards 3 4
+2026-09-25 00:19:53 launched sensft_s0 seed=0 card=3 pid=22489 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_ramp_steps=500 +q7_start_step=0
+2026-09-25 03:58:01 runner start (pid 540596), cards 3 4
+2026-09-25 03:58:02 launched q7_base_s0 seed=0 card=3 pid=540645 (card had 1 procs) overrides: +q7_fork_iters=[7]
+2026-09-25 03:58:04 launched q7_base_s1 seed=1 card=4 pid=540764 (card had 1 procs) overrides: +q7_fork_iters=[7]
+2026-09-25 03:58:09 launched sensfth_s1 seed=1 card=4 pid=541293 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_jac_every=4 +q7_ramp_steps=500 +q7_start_step=0
+2026-09-25 03:59:50 runner start (pid 546370), cards 3 4
+2026-09-25 04:09:13 cleaned resume.pt of sensft_s1
+2026-09-25 04:09:14 launched sensfth_s0 seed=0 card=4 pid=567437 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_jac_every=4 +q7_ramp_steps=500 +q7_start_step=0
+2026-09-25 04:13:14 launched sensfth_s1 seed=1 card=3 pid=576406 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_jac_every=4 +q7_ramp_steps=500 +q7_start_step=0
+2026-09-25 04:14:32 cleaned resume.pt of sensft_s0
+2026-09-25 05:16:57 launched eval_qat_naive_s0 seed=0 card=3 pid=711104 (card had 1 procs) overrides: qat_naive_s0
+2026-09-25 05:17:00 launched eval_qat_naive_s1 seed=1 card=4 pid=711359 (card had 1 procs) overrides: qat_naive_s1
+2026-09-25 05:45:35 launched sensftl_s0 seed=0 card=3 pid=775304 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_sens_min_steps=8 +q7_jac_every=4 +q7_ramp_steps=500 +q7_start_step=0
+2026-09-25 05:45:38 launched sensftl_s1 seed=1 card=4 pid=775511 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_sens_min_steps=8 +q7_jac_every=4 +q7_ramp_steps=500 +q7_start_step=0

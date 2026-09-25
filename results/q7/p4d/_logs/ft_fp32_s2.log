@@ -1,0 +1,49 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Thu Sep 24 23:40:05 UTC 2026 [q7_train] ft_fp32_s2 seed=2 host=ip-172-31-15-144 cuda=5 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100
+Setup EMA
+  0%|          | 0/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260924_234012-i6f86r8u
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  1%|          | 106/12000 [01:00<1:52:52,  1.76it/s]  1%|▏         | 156/12000 [01:20<1:52:24,  1.76it/s]  2%|▏         | 259/12000 [02:00<1:28:06,  2.22it/s]  3%|▎         | 309/12000 [02:20<1:27:43,  2.22it/s]  3%|▎         | 413/12000 [03:00<1:21:24,  2.37it/s]  4%|▍         | 462/12000 [03:20<1:21:03,  2.37it/s]  5%|▍         | 566/12000 [04:00<1:18:02,  2.44it/s]  5%|▌         | 615/12000 [04:20<1:17:42,  2.44it/s]  6%|▌         | 720/12000 [05:01<1:15:44,  2.48it/s]  6%|▋         | 768/12000 [05:20<1:15:25,  2.48it/s]  7%|▋         | 874/12000 [06:01<1:13:59,  2.51it/s]  8%|▊         | 921/12000 [06:20<1:13:40,  2.51it/s]  9%|▊         | 1028/12000 [07:01<1:12:30,  2.52it/s]  9%|▉         | 1074/12000 [07:20<1:12:12,  2.52it/s] 10%|▉         | 1182/12000 [08:02<1:11:13,  2.53it/s] 10%|█         | 1227/12000 [08:20<1:10:55,  2.53it/s] 11%|█         | 1336/12000 [09:02<1:09:59,  2.54it/s] 12%|█▏        | 1381/12000 [09:20<1:09:41,  2.54it/s] 12%|█▏        | 1490/12000 [10:02<1:08:49,  2.55it/s] 13%|█▎        | 1534/12000 [10:20<1:08:32,  2.55it/s] 14%|█▎        | 1644/12000 [11:02<1:07:45,  2.55it/s] 14%|█▍        | 1687/12000 [11:20<1:07:28,  2.55it/s] 15%|█▍        | 1798/12000 [12:03<1:06:40,  2.55it/s] 15%|█▌        | 1841/12000 [12:20<1:06:24,  2.55it/s] 16%|█▋        | 1952/12000 [13:03<1:05:36,  2.55it/s] 17%|█▋        | 1995/12000 [13:20<1:05:19,  2.55it/s] 18%|█▊        | 2106/12000 [14:03<1:04:33,  2.55it/s] 18%|█▊        | 2148/12000 [14:20<1:04:16,  2.55it/s] 19%|█▉        | 2260/12000 [15:03<1:03:32,  2.55it/s] 19%|█▉        | 2301/12000 [15:20<1:03:16,  2.55it/s] 20%|██        | 2414/12000 [16:03<1:02:31,  2.55it/s] 20%|██        | 2455/12000 [16:20<1:02:15,  2.55it/s] 21%|██▏       | 2568/12000 [17:04<1:01:32,  2.55it/s] 22%|██▏       | 2608/12000 [17:20<1:01:16,  2.55it/s] 23%|██▎       | 2722/12000 [18:04<1:00:33,  2.55it/s] 23%|██▎       | 2761/12000 [18:20<1:00:17,  2.55it/s] 24%|██▍       | 2876/12000 [19:04<59:32,  2.55it/s]   24%|██▍       | 2914/12000 [19:20<59:17,  2.55it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+[q7_eval] ft_fp32_s2/step_3000: fp32 66.0 w4t 0.0 (fidH 0.198/ref 0.199) S0.02 1.29 S0.1 1.35 jac_fro2 0.145; 4 cells in 148s
+[Rank 0, World Size 1]: Epoch 2304
+TRAIN
+ 25%|██▌       | 3001/12000 [22:47<1:52:38,  1.33it/s] 25%|██▌       | 3032/12000 [23:00<1:52:15,  1.33it/s] 26%|██▋       | 3155/12000 [23:48<1:34:09,  1.57it/s] 27%|██▋       | 3185/12000 [24:00<1:33:50,  1.57it/s] 28%|██▊       | 3309/12000 [24:48<1:21:29,  1.78it/s] 28%|██▊       | 3338/12000 [25:00<1:21:13,  1.78it/s] 29%|██▉       | 3463/12000 [25:48<1:12:36,  1.96it/s]

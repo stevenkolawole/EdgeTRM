@@ -1,0 +1,41 @@
+Fri Sep 25 04:10:01 AM UTC 2026 job 10558528 restart=0 node=babel-o9-28 gpu=NVIDIA L40S
+[preflight] cuda True NVIDIA L40S 2.10.0+cu128
+Fri Sep 25 04:10:03 AM UTC 2026 [q7_train] q7_base_s2 seed=2 host=babel-o9-28 cuda=0 extra: +q7_fork_iters=[7]
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Setup EMA
+Resuming from checkpoint: /home/skolawol/q7/ckpt/q7_base_s2/resume.pt
+  Resumed: step=37500, outer_iter=5, skip_batches=4950
+ 58%|█████▊    | 37500/65104 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /tmp/skolawol/q7_wandb/wandb/offline-run-20260925_001007-94muagtz
+wandb: View this run in the terminal with `wandb leet`
+[q7_eval] q7_base_s2/step_13020: fp32 29.5 w4t 19.4 (fidH 0.902) S0.02 1.46 S0.1 1.43 jac_fro2 0.184; 0 cells in 14s
+[q7_eval] q7_base_s2/step_19530: fp32 42.6 w4t 30.0 (fidH 0.863) S0.02 0.82 S0.1 0.85 jac_fro2 0.178; 0 cells in 13s
+[q7_eval] q7_base_s2/step_26040: fp32 54.7 w4t 21.1 (fidH 0.793) S0.02 1.06 S0.1 1.06 jac_fro2 0.182; 0 cells in 13s
+[q7_eval] q7_base_s2/step_32550: fp32 59.2 w4t 8.7 (fidH 0.652) S0.02 1.15 S0.1 1.17 jac_fro2 0.175; 0 cells in 14s
+[q7_eval] q7_base_s2/step_6510: fp32 12.9 w4t 9.0 (fidH 0.958) S0.02 1.32 S0.1 1.34 jac_fro2 0.130; 0 cells in 14s
+[Rank 0, World Size 1]: Epoch 25000
+TRAIN
+ 58%|█████▊    | 37501/65104 [02:22<1093:23:07, 142.60s/it] 58%|█████▊    | 37747/65104 [03:22<4:55:28,  1.54it/s]     58%|█████▊    | 37818/65104 [03:40<4:54:42,  1.54it/s] 58%|█████▊    | 37993/65104 [04:22<3:05:44,  2.43it/s] 58%|█████▊    | 38063/65104 [04:40<3:05:15,  2.43it/s] 59%|█████▊    | 38238/65104 [05:22<2:30:12,  2.98it/s] 59%|█████▉    | 38308/65104 [05:40<2:29:49,  2.98it/s] 59%|█████▉    | 38483/65104 [06:22<2:13:01,  3.34it/s] 59%|█████▉    | 38553/65104 [06:40<2:12:40,  3.34it/s][2026-09-25T00:17:13.440] error: *** JOB 10558528 ON babel-o9-28 CANCELLED AT 2026-09-25T00:17:13 DUE TO JOB REQUEUE ***

@@ -1,0 +1,34 @@
+Fri Sep 25 04:00:36 AM UTC 2026 job 10558464 restart=0 node=babel-p9-20 gpu=NVIDIA L40S
+[preflight] cuda True NVIDIA L40S 2.10.0+cu128
+Fri Sep 25 04:00:37 AM UTC 2026 [q7_train] q7_gqat_s1 seed=1 host=babel-p9-20 cuda=0 extra: +q7_reg=qat +q7_bits=4 +q7_start_step=13020 +q7_ramp_steps=26040
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Setup EMA
+  0%|          | 0/65104 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /tmp/skolawol/q7_wandb/wandb/offline-run-20260925_000043-1glbsbbf
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  0%|          | 103/65104 [01:00<10:32:11,  1.71it/s]  0%|          | 185/65104 [01:20<10:31:23,  1.71it/s]  1%|          | 351/65104 [02:00<5:44:51,  3.13it/s]   1%|          | 432/65104 [02:20<5:44:25,  3.13it/s]  1%|          | 598/65104 [03:00<5:00:32,  3.58it/s]  1%|          | 678/65104 [03:20<5:00:09,  3.58it/s]  1%|▏         | 845/65104 [04:00<4:42:36,  3.79it/s]  1%|▏         | 925/65104 [04:20<4:42:15,  3.79it/s]  2%|▏         | 1092/65104 [05:00<4:33:07,  3.91it/s]  2%|▏         | 1172/65104 [05:20<4:32:46,  3.91it/s]  2%|▏         | 1339/65104 [06:00<4:27:11,  3.98it/s]  2%|▏         | 1419/65104 [06:20<4:26:51,  3.98it/s]  2%|▏         | 1586/65104 [07:00<4:23:16,  4.02it/s]  3%|▎         | 1666/65104 [07:20<4:22:56,  4.02it/s]  3%|▎         | 1833/65104 [08:00<4:20:19,  4.05it/s]  3%|▎         | 1912/65104 [08:20<4:19:59,  4.05it/s]  3%|▎         | 2080/65104 [09:00<4:18:07,  4.07it/s]  3%|▎         | 2159/65104 [09:20<4:17:47,  4.07it/s]  4%|▎         | 2327/65104 [10:00<4:16:15,  4.08it/s]  4%|▎         | 2406/65104 [10:20<4:15:56,  4.08it/s]  4%|▍         | 2574/65104 [11:00<4:14:43,  4.09it/s]  4%|▍         | 2652/65104 [11:20<4:14:24,  4.09it/s]  4%|▍         | 2821/65104 [12:00<4:13:19,  4.10it/s]  4%|▍         | 2899/65104 [12:20<4:13:00,  4.10it/s]  5%|▍         | 3068/65104 [13:00<4:12:05,  4.10it/s]  5%|▍         | 3146/65104 [13:20<4:11:46,  4.10it/s]  5%|▌         | 3315/65104 [14:01<4:10:53,  4.10it/s]  5%|▌         | 3393/65104 [14:20<4:10:34,  4.10it/s]  5%|▌         | 3562/65104 [15:01<4:09:48,  4.11it/s]  6%|▌         | 3639/65104 [15:20<4:09:29,  4.11it/s]  6%|▌         | 3809/65104 [16:01<4:08:40,  4.11it/s]  6%|▌         | 3886/65104 [16:20<4:08:21,  4.11it/s][2026-09-25T00:17:14.130] error: *** JOB 10558464 ON babel-p9-20 CANCELLED AT 2026-09-25T00:17:14 DUE to SIGNAL Terminated ***

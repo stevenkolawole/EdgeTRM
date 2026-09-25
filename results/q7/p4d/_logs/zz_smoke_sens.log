@@ -1,0 +1,124 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Thu Sep 24 23:30:28 UTC 2026 [q7_train] zz_smoke_sens seed=0 host=ip-172-31-15-144 cuda=3 extra: epochs=10 eval_interval=5 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_eval_n=100
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Setup EMA
+  0%|          | 0/13 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260924_233034-7857othk
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+Traceback (most recent call last):
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 461, in q7_inline_eval
+    rec = q7_eval.evaluate_checkpoint(ck, out, n=config.q7_eval_n, label=f"{config.run_name}/step_{step}")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 316, in evaluate_checkpoint
+    rec.update(_sens_stats(mk, lambda mm: None, inp, lab, batch, nsup))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 135, in _sens_stats
+    x = m.inner._input_embeddings(torch.from_numpy(inp[:n]).to(dev),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/recursive_reasoning/trm.py", line 174, in _input_embeddings
+    embedding = torch.cat((puzzle_embedding.view(-1, self.puzzle_emb_len, self.config.hidden_size), embedding), dim=-2)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Sizes of tensors must match except in dimension 1. Expected size 256 but got size 100 for tensor number 1 in the list.
+[Rank 0, World Size 1]: Epoch 5
+TRAIN
+ 54%|█████▍    | 7/13 [01:01<00:52,  8.82s/it]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+ 92%|█████████▏| 12/13 [01:20<00:08,  8.82s/it]  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+Traceback (most recent call last):
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 461, in q7_inline_eval
+    rec = q7_eval.evaluate_checkpoint(ck, out, n=config.q7_eval_n, label=f"{config.run_name}/step_{step}")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 316, in evaluate_checkpoint
+    rec.update(_sens_stats(mk, lambda mm: None, inp, lab, batch, nsup))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 135, in _sens_stats
+    x = m.inner._input_embeddings(torch.from_numpy(inp[:n]).to(dev),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/recursive_reasoning/trm.py", line 174, in _input_embeddings
+    embedding = torch.cat((puzzle_embedding.view(-1, self.puzzle_emb_len, self.config.hidden_size), embedding), dim=-2)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Sizes of tensors must match except in dimension 1. Expected size 256 but got size 100 for tensor number 1 in the list.
+wandb: 
+wandb: Run history:
+wandb:            num_params ▁
+wandb:           q7/jac_fro2 ▃█▄▁▇▄██▃█▄▆
+wandb:           q7/strength ▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:        train/accuracy ▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:           train/count ▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:  train/exact_accuracy ▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:         train/lm_loss ▁▃▆█▆▆▆▃▆▄▆▂
+wandb:              train/lr ▁▂▂▃▄▄▅▅▆▇▇█
+wandb: train/q_halt_accuracy ▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:     train/q_halt_loss ▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                    +1 ...
+wandb: 
+wandb: Run summary:
+wandb:            num_params 1483778
+wandb:           q7/jac_fro2 12.78519
+wandb:           q7/strength 1
+wandb:        train/accuracy 0
+wandb:           train/count 0
+wandb:  train/exact_accuracy 0
+wandb:         train/lm_loss 2.56062
+wandb:              train/lr 0.0
+wandb: train/q_halt_accuracy 0
+wandb:     train/q_halt_loss 0.00672
+wandb:                    +1 ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /home/ubuntu/q7/wandb/wandb/offline-run-20260924_233034-7857othk
+wandb: Find logs at: /home/ubuntu/q7/wandb/wandb/offline-run-20260924_233034-7857othk/logs
+ 92%|█████████▏| 12/13 [01:29<00:07,  7.48s/it]
+Thu Sep 24 23:32:06 UTC 2026 [q7_train] zz_smoke_sens exited rc=0 DONE=yes

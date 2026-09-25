@@ -1,0 +1,156 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 03:58:12 UTC 2026 [q7_train] sensfth_s1 seed=1 host=ip-172-31-15-144 cuda=4 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_jac_every=4 +q7_ramp_steps=500 +q7_start_step=0
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100
+Setup EMA
+  0%|          | 0/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_035818-xwus48ol
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+Error executing job with overrides: ['arch=trm', 'data_paths=[/home/ubuntu/edgetrm_src/TinyRecursiveModels/data/sudoku-extreme-1k-aug-1000]', 'evaluators=[]', 'epochs=9216', 'eval_interval=2304', 'lr_warmup_steps=500', 'checkpoint_every_eval=True', 'lr=1e-4', 'puzzle_emb_lr=1e-4', 'weight_decay=1.0', 'puzzle_emb_weight_decay=1.0', 'global_batch_size=768', 'arch.mlp_t=True', 'arch.pos_encodings=none', 'arch.L_layers=2', 'arch.H_cycles=3', 'arch.L_cycles=6', 'arch.hidden_size=256', 'arch.num_heads=4', 'ema=True', 'seed=1', '+run_name=sensfth_s1', '+checkpoint_path=/home/ubuntu/q7/ckpt/sensfth_s1', '+load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100', '+q7_reg=sens', '+q7_sigma=0.1', '+q7_lambda=1.0', '+q7_sens_target=0.7', '+q7_jac_every=4', '+q7_ramp_steps=500', '+q7_start_step=0']
+Traceback (most recent call last):
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 1098, in launch
+    metrics = train_batch(config, train_state, batch, global_batch_size, rank=RANK, world_size=WORLD_SIZE)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 737, in train_batch
+    q7_jac = q7_sensitivity_penalty(config, train_state)       # logged under q7/jac_fro2 = S estimate
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 684, in q7_sensitivity_penalty
+    h1, l1 = q7_act_step(cp, inner.config, zH, zL, x, cs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 645, in q7_act_step
+    zL = level(zL, zH + x, cos_sin=cs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/recursive_reasoning/trm.py", line 114, in forward
+    hidden_states = layer(hidden_states=hidden_states, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/recursive_reasoning/trm.py", line 102, in forward
+    out = self.mlp(hidden_states)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/layers.py", line 160, in forward
+    gate, up = self.gate_up_proj(x).chunk(2, dim=-1)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/layers.py", line 60, in forward
+    return F.linear(input, self.weight.to(input.dtype), bias=self.bias.to(input.dtype) if self.bias is not None else None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 38.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 29.31 MiB is free. Process 14388 has 19.67 GiB memory in use. Process 540857 has 1.40 GiB memory in use. Including non-PyTorch memory, this process has 18.38 GiB memory in use. Of the allocated memory 17.47 GiB is allocated by PyTorch, and 415.16 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+[1;34mwandb[0m: 
+[1;34mwandb[0m: You can sync this run to the cloud by running:
+[1;34mwandb[0m: [1mwandb sync /home/ubuntu/q7/wandb/wandb/offline-run-20260925_035818-xwus48ol[0m
+[1;34mwandb[0m: Find logs at: [1;35m../../q7/wandb/wandb/offline-run-20260925_035818-xwus48ol/logs[0m
+  0%|          | 3/12000 [00:27<30:03:09,  9.02s/it]
+Fri Sep 25 03:58:46 UTC 2026 [q7_train] sensfth_s1 exited rc=1 DONE=n0 (OOM: runner over-launch, not counted)
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 04:13:16 UTC 2026 [q7_train] sensfth_s1 seed=1 host=ip-172-31-15-144 cuda=3 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_jac_every=4 +q7_ramp_steps=500 +q7_start_step=0
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100
+Setup EMA
+  0%|          | 0/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_041322-5o38qjpx
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  1%|          | 76/12000 [01:00<2:37:30,  1.26it/s]  1%|          | 111/12000 [01:20<2:37:02,  1.26it/s]  2%|▏         | 184/12000 [02:00<2:05:07,  1.57it/s]  2%|▏         | 219/12000 [02:20<2:04:44,  1.57it/s]  2%|▏         | 292/12000 [03:01<1:56:50,  1.67it/s]  3%|▎         | 326/12000 [03:20<1:56:29,  1.67it/s]  3%|▎         | 400/12000 [04:01<1:52:45,  1.71it/s]  4%|▎         | 433/12000 [04:20<1:52:26,  1.71it/s]  4%|▍         | 509/12000 [05:01<1:49:36,  1.75it/s]  5%|▍         | 541/12000 [05:20<1:49:18,  1.75it/s]  5%|▌         | 616/12000 [06:02<1:48:01,  1.76it/s]  5%|▌         | 647/12000 [06:20<1:47:43,  1.76it/s]  6%|▌         | 724/12000 [07:02<1:46:32,  1.76it/s]  6%|▋         | 755/12000 [07:20<1:46:15,  1.76it/s]  7%|▋         | 832/12000 [08:03<1:45:09,  1.77it/s]  7%|▋         | 861/12000 [08:20<1:44:53,  1.77it/s]  8%|▊         | 940/12000 [09:04<1:43:57,  1.77it/s]  8%|▊         | 967/12000 [09:20<1:43:42,  1.77it/s]  9%|▊         | 1048/12000 [10:05<1:42:52,  1.77it/s]  9%|▉         | 1075/12000 [10:20<1:42:37,  1.77it/s] 10%|▉         | 1156/12000 [11:05<1:41:45,  1.78it/s] 10%|▉         | 1182/12000 [11:20<1:41:30,  1.78it/s] 11%|█         | 1264/12000 [12:06<1:40:41,  1.78it/s] 11%|█         | 1288/12000 [12:20<1:40:28,  1.78it/s] 11%|█▏        | 1372/12000 [13:07<1:39:40,  1.78it/s] 12%|█▏        | 1395/12000 [13:20<1:39:27,  1.78it/s] 12%|█▏        | 1480/12000 [14:07<1:38:35,  1.78it/s] 13%|█▎        | 1502/12000 [14:20<1:38:23,  1.78it/s] 13%|█▎        | 1588/12000 [15:08<1:37:36,  1.78it/s] 13%|█▎        | 1608/12000 [15:20<1:37:25,  1.78it/s] 14%|█▍        | 1696/12000 [16:09<1:36:35,  1.78it/s] 14%|█▍        | 1715/12000 [16:20<1:36:25,  1.78it/s] 15%|█▌        | 1804/12000 [17:10<1:35:36,  1.78it/s] 15%|█▌        | 1839/12000 [17:30<1:35:16,  1.78it/s] 16%|█▌        | 1912/12000 [18:10<1:34:33,  1.78it/s] 16%|█▌        | 1947/12000 [18:30<1:34:13,  1.78it/s] 17%|█▋        | 2020/12000 [19:11<1:33:35,  1.78it/s] 17%|█▋        | 2053/12000 [19:30<1:33:16,  1.78it/s] 18%|█▊        | 2128/12000 [20:12<1:32:33,  1.78it/s] 18%|█▊        | 2159/12000 [20:30<1:32:15,  1.78it/s] 19%|█▊        | 2236/12000 [21:13<1:31:30,  1.78it/s] 19%|█▉        | 2267/12000 [21:30<1:31:13,  1.78it/s] 20%|█▉        | 2344/12000 [22:13<1:30:29,  1.78it/s] 20%|█▉        | 2373/12000 [22:30<1:30:13,  1.78it/s] 20%|██        | 2452/12000 [23:14<1:29:29,  1.78it/s] 21%|██        | 2479/12000 [23:30<1:29:14,  1.78it/s] 21%|██▏       | 2560/12000 [24:15<1:28:29,  1.78it/s] 22%|██▏       | 2587/12000 [24:30<1:28:14,  1.78it/s] 22%|██▏       | 2668/12000 [25:16<1:27:29,  1.78it/s] 22%|██▏       | 2693/12000 [25:30<1:27:15,  1.78it/s] 23%|██▎       | 2776/12000 [26:16<1:26:28,  1.78it/s] 23%|██▎       | 2799/12000 [26:30<1:26:15,  1.78it/s] 24%|██▍       | 2884/12000 [27:17<1:25:26,  1.78it/s] 24%|██▍       | 2907/12000 [27:30<1:25:13,  1.78it/s] 25%|██▍       | 2992/12000 [28:18<1:24:24,  1.78it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+ 25%|██▌       | 3000/12000 [28:30<1:24:20,  1.78it/s]  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+[q7_eval] sensfth_s1/step_3000: fp32 12.9 w4t 0.2 (fidH 0.462/ref 0.373) S0.02 0.60 S0.1 0.59 jac_fro2 0.103; 4 cells in 147s
+[Rank 0, World Size 1]: Epoch 2304
+TRAIN
+ 25%|██▌       | 3001/12000 [31:15<3:03:14,  1.22s/it] 25%|██▌       | 3027/12000 [31:30<3:02:43,  1.22s/it] 26%|██▌       | 3108/12000 [32:15<2:25:03,  1.02it/s] 26%|██▌       | 3134/12000 [32:30<2:24:38,  1.02it/s] 27%|██▋       | 3216/12000 [33:16<2:02:07,  1.20it/s] 27%|██▋       | 3240/12000 [33:30<2:01:47,  1.20it/s] 28%|██▊       | 3324/12000 [34:17<1:47:32,  1.34it/s] 28%|██▊       | 3347/12000 [34:30<1:47:15,  1.34it/s] 29%|██▊       | 3432/12000 [35:17<1:37:52,  1.46it/s] 29%|██▉       | 3454/12000 [35:30<1:37:37,  1.46it/s] 30%|██▉       | 3540/12000 [36:18<1:31:11,  1.55it/s] 30%|██▉       | 3560/12000 [36:30<1:30:58,  1.55it/s] 30%|███       | 3648/12000 [37:19<1:26:21,  1.61it/s] 31%|███       | 3667/12000 [37:30<1:26:09,  1.61it/s] 31%|███▏      | 3756/12000 [38:19<1:22:46,  1.66it/s] 31%|███▏      | 3774/12000 [38:30<1:22:35,  1.66it/s] 32%|███▏      | 3864/12000 [39:20<1:20:00,  1.69it/s] 32%|███▏      | 3899/12000 [39:40<1:19:40,  1.69it/s] 33%|███▎      | 3972/12000 [40:21<1:17:46,  1.72it/s] 33%|███▎      | 4005/12000 [40:40<1:17:27,  1.72it/s] 34%|███▍      | 4080/12000 [41:22<1:15:59,  1.74it/s] 34%|███▍      | 4112/12000 [41:40<1:15:41,  1.74it/s] 35%|███▍      | 4188/12000 [42:22<1:14:25,  1.75it/s] 35%|███▌      | 4219/12000 [42:40<1:14:07,  1.75it/s] 36%|███▌      | 4296/12000 [43:23<1:13:00,  1.76it/s] 36%|███▌      | 4326/12000 [43:40<1:12:43,  1.76it/s] 37%|███▋      | 4404/12000 [44:24<1:11:44,  1.76it/s] 37%|███▋      | 4432/12000 [44:40<1:11:28,  1.76it/s] 38%|███▊      | 4512/12000 [45:24<1:10:33,  1.77it/s] 38%|███▊      | 4539/12000 [45:40<1:10:18,  1.77it/s] 38%|███▊      | 4620/12000 [46:25<1:09:24,  1.77it/s] 39%|███▊      | 4646/12000 [46:40<1:09:10,  1.77it/s] 39%|███▉      | 4728/12000 [47:26<1:08:21,  1.77it/s] 40%|███▉      | 4752/12000 [47:40<1:08:08,  1.77it/s] 40%|████      | 4836/12000 [48:26<1:07:08,  1.78it/s] 40%|████      | 4859/12000 [48:40<1:06:55,  1.78it/s] 41%|████      | 4944/12000 [49:27<1:06:04,  1.78it/s] 41%|████▏     | 4967/12000 [49:40<1:05:51,  1.78it/s] 42%|████▏     | 5052/12000 [50:27<1:04:58,  1.78it/s] 42%|████▏     | 5074/12000 [50:40<1:04:45,  1.78it/s] 43%|████▎     | 5160/12000 [51:28<1:03:56,  1.78it/s] 43%|████▎     | 5181/12000 [51:40<1:03:44,  1.78it/s] 44%|████▍     | 5268/12000 [52:28<1:02:54,  1.78it/s] 44%|████▍     | 5288/12000 [52:40<1:02:43,  1.78it/s] 45%|████▍     | 5376/12000 [53:29<1:01:49,  1.79it/s] 45%|████▍     | 5395/12000 [53:40<1:01:38,  1.79it/s] 46%|████▌     | 5484/12000 [54:29<1:00:48,  1.79it/s] 46%|████▌     | 5503/12000 [54:40<1:00:38,  1.79it/s] 47%|████▋     | 5592/12000 [55:30<59:51,  1.78it/s]   47%|████▋     | 5627/12000 [55:50<59:32,  1.78it/s] 48%|████▊     | 5700/12000 [56:30<58:46,  1.79it/s] 48%|████▊     | 5735/12000 [56:50<58:26,  1.79it/s] 48%|████▊     | 5808/12000 [57:31<57:48,  1.79it/s] 49%|████▊     | 5843/12000 [57:50<57:29,  1.79it/s] 49%|████▉     | 5916/12000 [58:31<56:43,  1.79it/s] 50%|████▉     | 5949/12000 [58:50<56:25,  1.79it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+[q7_eval] sensfth_s1/step_6000: fp32 10.3 w4t 0.4 (fidH 0.508/ref 0.357) S0.02 0.56 S0.1 0.55 jac_fro2 0.129; 4 cells in 146s
+[Rank 0, World Size 1]: Epoch 4608
+TRAIN
+ 50%|█████     | 6001/12000 [1:01:58<1:43:15,  1.03s/it] 50%|█████     | 6022/12000 [1:02:10<1:42:53,  1.03s/it] 51%|█████     | 6108/12000 [1:02:58<1:27:02,  1.13it/s] 51%|█████     | 6128/12000 [1:03:10<1:26:44,  1.13it/s]

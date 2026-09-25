@@ -1,0 +1,34 @@
+Fri Sep 25 04:12:30 AM UTC 2026 job 10558529 restart=0 node=babel-p5-28 gpu=NVIDIA L40S
+[preflight] cuda True NVIDIA L40S 2.10.0+cu128
+Fri Sep 25 04:12:32 AM UTC 2026 [q7_train] q7_gqat_s2 seed=2 host=babel-p5-28 cuda=0 extra: +q7_reg=qat +q7_bits=4 +q7_start_step=13020 +q7_ramp_steps=26040
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Setup EMA
+  0%|          | 0/65104 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /tmp/skolawol/q7_wandb/wandb/offline-run-20260925_001237-fpp394j9
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  0%|          | 75/65104 [01:00<14:28:01,  1.25it/s]  0%|          | 157/65104 [01:20<14:26:55,  1.25it/s]  0%|          | 322/65104 [02:00<6:08:23,  2.93it/s]   1%|          | 403/65104 [02:20<6:07:55,  2.93it/s]  1%|          | 568/65104 [03:00<5:11:03,  3.46it/s]  1%|          | 647/65104 [03:20<5:10:41,  3.46it/s]  1%|          | 813/65104 [04:00<4:49:27,  3.70it/s]  1%|▏         | 892/65104 [04:20<4:49:06,  3.70it/s][2026-09-25T00:17:13.500] error: *** JOB 10558529 ON babel-p5-28 CANCELLED AT 2026-09-25T00:17:13 DUE TO JOB REQUEUE ***

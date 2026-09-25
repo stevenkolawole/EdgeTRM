@@ -1,0 +1,7 @@
+Thu Sep 24 23:31:58 UTC 2026 [q7_evalrun] eval_lambda_S: --rundir /home/ubuntu/q7/ckpt/lambda_mlp_w256_s0 --rundir /home/ubuntu/q7/ckpt/lambda_mlp_w256_s1 --rundir /home/ubuntu/q7/ckpt/lambda_mlp_w256_s2 --rundir /home/ubuntu/q7/ckpt/lambda_attn_w512_s0 --rundir /home/ubuntu/q7/ckpt/lambda_attn_w512_s1
+[q7_eval] lambda_mlp_w256_s0/step_65100: fp32 59.9 w4t 0.0 (fidH 0.220) S0.02 1.25 S0.1 1.28 jac_fro2 0.168; 0 cells in 44s
+[q7_eval] lambda_mlp_w256_s1/step_65100: fp32 62.3 w4t 0.0 (fidH 0.154) S0.02 2.04 S0.1 2.10 jac_fro2 0.197; 0 cells in 43s
+[q7_eval] lambda_mlp_w256_s2/step_65100: fp32 64.0 w4t 0.0 (fidH 0.209) S0.02 1.28 S0.1 1.35 jac_fro2 0.142; 0 cells in 33s
+[q7_eval] lambda_attn_w512_s0/step_65100: fp32 64.8 w4t 65.5 (fidH 0.888) S0.02 0.70 S0.1 0.72 jac_fro2 0.231; 0 cells in 123s
+[q7_eval] lambda_attn_w512_s1/step_65100: fp32 62.9 w4t 59.5 (fidH 0.837) S0.02 0.82 S0.1 0.82 jac_fro2 0.262; 0 cells in 99s
+Thu Sep 24 23:37:45 UTC 2026 [q7_evalrun] eval_lambda_S exited rc=0

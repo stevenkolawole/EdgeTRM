@@ -1,0 +1,112 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Thu Sep 24 23:33:28 UTC 2026 [q7_train] ft_fp32_s0 seed=0 host=ip-172-31-15-144 cuda=3 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+Setup EMA
+  0%|          | 0/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260924_233334-mzhj57mx
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  1%|          | 104/12000 [01:00<1:54:40,  1.73it/s]  1%|▏         | 154/12000 [01:20<1:54:11,  1.73it/s]  2%|▏         | 257/12000 [02:00<1:28:30,  2.21it/s]  3%|▎         | 307/12000 [02:20<1:28:07,  2.21it/s]  3%|▎         | 410/12000 [03:00<1:21:46,  2.36it/s]  4%|▍         | 459/12000 [03:20<1:21:25,  2.36it/s]  5%|▍         | 563/12000 [04:00<1:18:22,  2.43it/s]  5%|▌         | 612/12000 [04:20<1:18:02,  2.43it/s]  6%|▌         | 716/12000 [05:00<1:16:00,  2.47it/s]  6%|▋         | 765/12000 [05:20<1:15:40,  2.47it/s]  7%|▋         | 869/12000 [06:00<1:14:17,  2.50it/s]  8%|▊         | 917/12000 [06:20<1:13:58,  2.50it/s]  9%|▊         | 1022/12000 [07:01<1:12:54,  2.51it/s]  9%|▉         | 1069/12000 [07:20<1:12:35,  2.51it/s] 10%|▉         | 1175/12000 [08:01<1:11:34,  2.52it/s] 10%|█         | 1222/12000 [08:20<1:11:16,  2.52it/s] 11%|█         | 1328/12000 [09:01<1:10:23,  2.53it/s] 11%|█▏        | 1374/12000 [09:20<1:10:04,  2.53it/s] 12%|█▏        | 1481/12000 [10:01<1:09:16,  2.53it/s] 13%|█▎        | 1526/12000 [10:20<1:08:58,  2.53it/s] 14%|█▎        | 1633/12000 [11:01<1:08:16,  2.53it/s] 14%|█▍        | 1679/12000 [11:20<1:07:58,  2.53it/s] 15%|█▍        | 1786/12000 [12:01<1:07:08,  2.54it/s] 15%|█▌        | 1832/12000 [12:20<1:06:49,  2.54it/s] 16%|█▌        | 1939/12000 [13:02<1:06:05,  2.54it/s] 17%|█▋        | 1984/12000 [13:20<1:05:47,  2.54it/s] 17%|█▋        | 2092/12000 [14:02<1:05:05,  2.54it/s] 18%|█▊        | 2135/12000 [14:20<1:04:48,  2.54it/s] 19%|█▊        | 2245/12000 [15:02<1:04:06,  2.54it/s] 19%|█▉        | 2288/12000 [15:20<1:03:49,  2.54it/s] 20%|█▉        | 2399/12000 [16:03<1:02:57,  2.54it/s] 20%|██        | 2442/12000 [16:20<1:02:40,  2.54it/s] 21%|██▏       | 2553/12000 [17:03<1:01:52,  2.54it/s] 22%|██▏       | 2595/12000 [17:20<1:01:36,  2.54it/s] 23%|██▎       | 2707/12000 [18:03<1:00:46,  2.55it/s] 23%|██▎       | 2748/12000 [18:20<1:00:30,  2.55it/s] 24%|██▍       | 2861/12000 [19:04<59:44,  2.55it/s]   24%|██▍       | 2901/12000 [19:20<59:28,  2.55it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+[q7_eval] ft_fp32_s0/step_3000: fp32 60.3 w4t 0.0 (fidH 0.230/ref 0.232) S0.02 1.29 S0.1 1.36 jac_fro2 0.179; 4 cells in 148s
+[Rank 0, World Size 1]: Epoch 2304
+TRAIN
+ 25%|██▌       | 3001/12000 [22:52<1:51:04,  1.35it/s] 25%|██▌       | 3045/12000 [23:10<1:50:31,  1.35it/s] 26%|██▋       | 3155/12000 [23:52<1:33:24,  1.58it/s] 27%|██▋       | 3199/12000 [24:10<1:32:56,  1.58it/s] 28%|██▊       | 3309/12000 [24:53<1:21:05,  1.79it/s] 28%|██▊       | 3352/12000 [25:10<1:20:41,  1.79it/s] 29%|██▉       | 3463/12000 [25:53<1:12:23,  1.97it/s] 29%|██▉       | 3505/12000 [26:10<1:12:02,  1.97it/s] 30%|███       | 3617/12000 [26:53<1:06:09,  2.11it/s] 30%|███       | 3658/12000 [27:10<1:05:50,  2.11it/s] 31%|███▏      | 3771/12000 [27:53<1:01:32,  2.23it/s] 32%|███▏      | 3812/12000 [28:10<1:01:13,  2.23it/s] 33%|███▎      | 3925/12000 [28:54<58:03,  2.32it/s]   33%|███▎      | 3965/12000 [29:10<57:46,  2.32it/s] 34%|███▍      | 4078/12000 [29:54<55:24,  2.38it/s] 34%|███▍      | 4118/12000 [30:10<55:07,  2.38it/s] 35%|███▌      | 4232/12000 [30:54<53:13,  2.43it/s] 36%|███▌      | 4271/12000 [31:10<52:57,  2.43it/s] 37%|███▋      | 4385/12000 [31:54<51:28,  2.47it/s] 37%|███▋      | 4424/12000 [32:10<51:12,  2.47it/s][preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 00:16:03 UTC 2026 [q7_train] ft_fp32_s0 seed=0 host=ip-172-31-15-144 cuda=3 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+Setup EMA
+Resuming from checkpoint: /home/ubuntu/q7/ckpt/ft_fp32_s0/resume.pt
+  Resumed: step=4000, outer_iter=1, skip_batches=1000
+ 33%|███▎      | 4000/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_001611-gz397qlt
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 2304
+TRAIN
+Error executing job with overrides: ['arch=trm', 'data_paths=[/home/ubuntu/edgetrm_src/TinyRecursiveModels/data/sudoku-extreme-1k-aug-1000]', 'evaluators=[]', 'epochs=9216', 'eval_interval=2304', 'lr_warmup_steps=500', 'checkpoint_every_eval=True', 'lr=1e-4', 'puzzle_emb_lr=1e-4', 'weight_decay=1.0', 'puzzle_emb_weight_decay=1.0', 'global_batch_size=768', 'arch.mlp_t=True', 'arch.pos_encodings=none', 'arch.L_layers=2', 'arch.H_cycles=3', 'arch.L_cycles=6', 'arch.hidden_size=256', 'arch.num_heads=4', 'ema=True', 'seed=0', '+run_name=ft_fp32_s0', '+checkpoint_path=/home/ubuntu/q7/ckpt/ft_fp32_s0', '+load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100']
+Traceback (most recent call last):
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 1092, in launch
+    metrics = train_batch(config, train_state, batch, global_batch_size, rank=RANK, world_size=WORLD_SIZE)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 712, in train_batch
+    train_state.carry = train_state.model.initial_carry(batch)  # type: ignore
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/losses.py", line 48, in initial_carry
+    return self.model.initial_carry(*args, **kwargs)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/recursive_reasoning/trm.py", line 242, in initial_carry
+    inner_carry=self.inner.empty_carry(batch_size),  # Empty is expected, it will be reseted in first pass as all sequences are halted.
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/recursive_reasoning/trm.py", line 186, in empty_carry
+    z_H=torch.empty(batch_size, self.config.seq_len + self.puzzle_emb_len, self.config.hidden_size, dtype=self.forward_dtype),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/utils/_device.py", line 104, in __torch_function__
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 38.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 12.12 MiB is free. Process 8521 has 16.28 GiB memory in use. Process 13838 has 1.40 GiB memory in use. Process 13939 has 15.86 GiB memory in use. Process 14109 has 5.36 GiB memory in use. Including non-PyTorch memory, this process has 558.00 MiB memory in use. Of the allocated memory 37.67 MiB is allocated by PyTorch, and 20.33 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+[1;34mwandb[0m: 
+[1;34mwandb[0m: You can sync this run to the cloud by running:
+[1;34mwandb[0m: [1mwandb sync /home/ubuntu/q7/wandb/wandb/offline-run-20260925_001611-gz397qlt[0m
+[1;34mwandb[0m: Find logs at: [1;35m../../q7/wandb/wandb/offline-run-20260925_001611-gz397qlt/logs[0m
+ 33%|███▎      | 4000/12000 [00:25<?, ?it/s]
+Fri Sep 25 00:16:38 UTC 2026 [q7_train] ft_fp32_s0 exited rc=1 DONE=n0 (OOM from the 00:16 runner over-launch, not counted)

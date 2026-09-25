@@ -1,0 +1,109 @@
+Fri Sep 25 04:33:56 AM UTC 2026 job 10558653 restart=0 node=babel-x9-32 gpu=NVIDIA L40S
+[preflight] cuda True NVIDIA L40S 2.10.0+cu128
+Fri Sep 25 04:33:59 AM UTC 2026 [q7_train2] mazemlp_aug_w1024 seed=0 host=babel-x9-32 cuda=0 recipe: data_paths=[/home/skolawol/q7/data/maze-30x30-hard-1k-aug8] epochs=3200 eval_interval=800 lr_warmup_steps=2000 lr=1e-4 puzzle_emb_lr=1e-4 weight_decay=1.0 puzzle_emb_weight_decay=1.0 global_batch_size=128 arch.mlp_t=True arch.pos_encodings=none arch.L_layers=2 arch.H_cycles=3 arch.L_cycles=4 arch.hidden_size=1024 arch.num_heads=16 ema=True extra: +q7_eval_n=200
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Setup EMA
+  0%|          | 0/25000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /tmp/skolawol/q7_wandb/wandb/offline-run-20260925_003404-dfwrar6h
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+Error executing job with overrides: ['arch=trm', 'evaluators=[]', 'checkpoint_every_eval=True', 'data_paths=[/home/skolawol/q7/data/maze-30x30-hard-1k-aug8]', 'epochs=3200', 'eval_interval=800', 'lr_warmup_steps=2000', 'lr=1e-4', 'puzzle_emb_lr=1e-4', 'weight_decay=1.0', 'puzzle_emb_weight_decay=1.0', 'global_batch_size=128', 'arch.mlp_t=True', 'arch.pos_encodings=none', 'arch.L_layers=2', 'arch.H_cycles=3', 'arch.L_cycles=4', 'arch.hidden_size=1024', 'arch.num_heads=16', 'ema=True', 'seed=0', '+run_name=mazemlp_aug_w1024', '+checkpoint_path=/home/skolawol/q7/ckpt/mazemlp_aug_w1024', '+q7_eval_n=200']
+Traceback (most recent call last):
+  File "/home/skolawol/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 1102, in launch
+    metrics = train_batch(config, train_state, batch, global_batch_size, rank=RANK, world_size=WORLD_SIZE)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 729, in train_batch
+    train_state.carry, loss, metrics, _, _ = train_state.model(carry=train_state.carry, batch=batch, return_keys=[])
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 465, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 953, in compile_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/edgetrm_src/TinyRecursiveModels/models/losses.py", line 50, in forward
+    def forward(
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_dynamo/eval_frame.py", line 1181, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_functorch/aot_autograd.py", line 1148, in forward
+    return compiled_fn(full_args)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 343, in runtime_wrapper
+    all_outs = call_func_at_runtime_with_args(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/utils.py", line 134, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+                            ^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/utils.py", line 108, in g
+    return f(*args)
+           ^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/autograd/function.py", line 583, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 2152, in forward
+    fw_outs = call_func_at_runtime_with_args(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/utils.py", line 134, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+                            ^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 531, in wrapper
+    return compiled_fn(runtime_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 729, in inner_fn
+    outs = compiled_fn(args)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_inductor/output_code.py", line 638, in __call__
+    return self.current_callable(inputs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_inductor/utils.py", line 3220, in run
+    out = model(new_inputs)
+          ^^^^^^^^^^^^^^^^^
+  File "/tmp/torchinductor_skolawol/bn/cbn2npxuo6b5ybyyq7z4x6oohhaeflkpabyp5e2kilfnwt63p7ue.py", line 9202, in call
+    buf383 = empty_strided_cuda((131072, 5120), (5120, 1), torch.bfloat16)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 44.42 GiB of which 92.12 MiB is free. Including non-PyTorch memory, this process has 44.32 GiB memory in use. Of the allocated memory 43.23 GiB is allocated by PyTorch, and 600.11 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+[1;34mwandb[0m: 
+[1;34mwandb[0m: You can sync this run to the cloud by running:
+[1;34mwandb[0m: [1mwandb sync /tmp/skolawol/q7_wandb/wandb/offline-run-20260925_003404-dfwrar6h[0m
+[1;34mwandb[0m: Find logs at: [1;35m../../../../tmp/skolawol/q7_wandb/wandb/offline-run-20260925_003404-dfwrar6h/logs[0m
+  0%|          | 0/25000 [00:34<?, ?it/s]
+Fri Sep 25 04:34:40 AM UTC 2026 [q7_train] mazemlp_aug_w1024 exited rc=1 DONE=no

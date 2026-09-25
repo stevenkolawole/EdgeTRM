@@ -1,0 +1,85 @@
+Fri Sep 25 04:23:23 AM UTC 2026 job 10558678 restart=0 node=babel-s5-24 gpu=NVIDIA L40S
+[preflight] cuda True NVIDIA L40S 2.10.0+cu128
+Fri Sep 25 04:23:26 AM UTC 2026 [q7_train2] var_mlp512_s4 seed=4 host=babel-s5-24 cuda=0 recipe: data_paths=[/home/skolawol/q7/data/sudoku-extreme-1k-aug-1000] epochs=50000 eval_interval=5000 lr_warmup_steps=2000 lr=1e-4 puzzle_emb_lr=1e-4 weight_decay=1.0 puzzle_emb_weight_decay=1.0 global_batch_size=768 arch.mlp_t=True arch.pos_encodings=none arch.L_layers=2 arch.H_cycles=3 arch.L_cycles=6 arch.hidden_size=512 arch.num_heads=8 ema=True extra: +q7_light_intermediate=True
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Setup EMA
+  0%|          | 0/65104 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /tmp/skolawol/q7_wandb/wandb/offline-run-20260925_002331-3kjjgija
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  0%|          | 47/65104 [01:00<23:14:42,  1.29s/it]  0%|          | 83/65104 [01:20<23:13:56,  1.29s/it]  0%|          | 160/65104 [02:00<12:41:07,  1.42it/s]  0%|          | 196/65104 [02:20<12:40:42,  1.42it/s]  0%|          | 273/65104 [03:01<11:04:07,  1.63it/s]  0%|          | 308/65104 [03:20<11:03:45,  1.63it/s]  1%|          | 386/65104 [04:01<10:26:08,  1.72it/s]  1%|          | 420/65104 [04:20<10:25:48,  1.72it/s]  1%|          | 499/65104 [05:02<10:06:19,  1.78it/s]  1%|          | 532/65104 [05:20<10:06:00,  1.78it/s]  1%|          | 611/65104 [06:02<9:55:30,  1.80it/s]   1%|          | 644/65104 [06:20<9:55:12,  1.80it/s]  1%|          | 723/65104 [07:02<9:48:33,  1.82it/s]  1%|          | 755/65104 [07:20<9:48:15,  1.82it/s]  1%|▏         | 835/65104 [08:02<9:43:10,  1.84it/s]  1%|▏         | 868/65104 [08:20<9:42:52,  1.84it/s]  1%|▏         | 948/65104 [09:02<9:38:59,  1.85it/s]  2%|▏         | 980/65104 [09:20<9:38:42,  1.85it/s]  2%|▏         | 1060/65104 [10:03<9:37:20,  1.85it/s]  2%|▏         | 1091/65104 [10:20<9:37:03,  1.85it/s]  2%|▏         | 1172/65104 [11:03<9:35:00,  1.85it/s]  2%|▏         | 1202/65104 [11:20<9:34:44,  1.85it/s]  2%|▏         | 1284/65104 [12:03<9:33:09,  1.86it/s]  2%|▏         | 1314/65104 [12:20<9:32:53,  1.86it/s]  2%|▏         | 1396/65104 [13:03<9:31:23,  1.86it/s]  2%|▏         | 1426/65104 [13:20<9:31:07,  1.86it/s][2026-09-25T00:37:26.010] error: *** JOB 10558678 ON babel-s5-24 CANCELLED AT 2026-09-25T00:37:26 DUE TO PREEMPTION ***
+Fri Sep 25 04:46:16 AM UTC 2026 job 10558678 restart=1 node=babel-n9-32 gpu=NVIDIA L40S
+[preflight] cuda True NVIDIA L40S 2.10.0+cu128
+Fri Sep 25 04:46:18 AM UTC 2026 [q7_train2] var_mlp512_s4 seed=4 host=babel-n9-32 cuda=0 recipe: data_paths=[/home/skolawol/q7/data/sudoku-extreme-1k-aug-1000] epochs=50000 eval_interval=5000 lr_warmup_steps=2000 lr=1e-4 puzzle_emb_lr=1e-4 weight_decay=1.0 puzzle_emb_weight_decay=1.0 global_batch_size=768 arch.mlp_t=True arch.pos_encodings=none arch.L_layers=2 arch.H_cycles=3 arch.L_cycles=6 arch.hidden_size=512 arch.num_heads=8 ema=True extra: +q7_light_intermediate=True
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Setup EMA
+Resuming from checkpoint: /home/skolawol/q7/ckpt/var_mlp512_s4/resume.pt
+  Resumed: step=1000, outer_iter=0, skip_batches=1000
+  2%|▏         | 1000/65104 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /tmp/skolawol/q7_wandb/wandb/offline-run-20260925_004622-bbutv4zi
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  2%|▏         | 1031/65104 [01:00<34:30:18,  1.94s/it]  2%|▏         | 1068/65104 [01:20<34:29:06,  1.94s/it]  2%|▏         | 1144/65104 [02:00<13:27:56,  1.32it/s]  2%|▏         | 1181/65104 [02:20<13:27:28,  1.32it/s]  2%|▏         | 1257/65104 [03:00<11:15:22,  1.58it/s]  2%|▏         | 1294/65104 [03:20<11:14:58,  1.58it/s]  2%|▏         | 1371/65104 [04:00<10:25:41,  1.70it/s]  2%|▏         | 1407/65104 [04:20<10:25:20,  1.70it/s]  2%|▏         | 1484/65104 [05:00<10:01:01,  1.76it/s]  2%|▏         | 1520/65104 [05:20<10:00:40,  1.76it/s]  2%|▏         | 1597/65104 [06:00<9:46:52,  1.80it/s]   3%|▎         | 1633/65104 [06:20<9:46:32,  1.80it/s]  3%|▎         | 1711/65104 [07:01<9:37:20,  1.83it/s]  3%|▎         | 1746/65104 [07:20<9:37:01,  1.83it/s]  3%|▎         | 1825/65104 [08:01<9:30:55,  1.85it/s]  3%|▎         | 1859/65104 [08:20<9:30:37,  1.85it/s]  3%|▎         | 1939/65104 [09:02<9:26:21,  1.86it/s]  3%|▎         | 1972/65104 [09:20<9:26:03,  1.86it/s]  3%|▎         | 2052/65104 [10:02<9:23:19,  1.87it/s]  3%|▎         | 2085/65104 [10:20<9:23:01,  1.87it/s]  3%|▎         | 2166/65104 [11:02<9:20:34,  1.87it/s]  3%|▎         | 2198/65104 [11:20<9:20:17,  1.87it/s]  4%|▎         | 2280/65104 [12:03<9:18:26,  1.87it/s]  4%|▎         | 2311/65104 [12:20<9:18:10,  1.87it/s]  4%|▎         | 2394/65104 [13:04<9:16:38,  1.88it/s]  4%|▎         | 2424/65104 [13:20<9:16:22,  1.88it/s]  4%|▍         | 2507/65104 [14:04<9:15:23,  1.88it/s]  4%|▍         | 2536/65104 [14:20<9:15:08,  1.88it/s]  4%|▍         | 2621/65104 [15:04<9:13:52,  1.88it/s]  4%|▍         | 2650/65104 [15:20<9:13:37,  1.88it/s]  4%|▍         | 2735/65104 [16:05<9:12:29,  1.88it/s]  4%|▍         | 2763/65104 [16:20<9:12:14,  1.88it/s]  4%|▍         | 2849/65104 [17:05<9:11:14,  1.88it/s]  4%|▍         | 2876/65104 [17:20<9:10:59,  1.88it/s]  5%|▍         | 2963/65104 [18:06<9:10:02,  1.88it/s]  5%|▍         | 2989/65104 [18:20<9:09:48,  1.88it/s]  5%|▍         | 3076/65104 [19:06<9:09:10,  1.88it/s]  5%|▍         | 3102/65104 [19:20<9:08:56,  1.88it/s]  5%|▍         | 3190/65104 [20:06<9:07:55,  1.88it/s]  5%|▍         | 3215/65104 [20:20<9:07:41,  1.88it/s]  5%|▌         | 3304/65104 [21:07<9:06:44,  1.88it/s]  5%|▌         | 3328/65104 [21:20<9:06:32,  1.88it/s]  5%|▌         | 3418/65104 [22:07<9:05:39,  1.88it/s]  5%|▌         | 3441/65104 [22:20<9:05:27,  1.88it/s]  5%|▌         | 3531/65104 [23:07<9:04:53,  1.88it/s]  5%|▌         | 3554/65104 [23:20<9:04:40,  1.88it/s]  6%|▌         | 3645/65104 [24:08<9:03:48,  1.88it/s]  6%|▌         | 3667/65104 [24:20<9:03:36,  1.88it/s]  6%|▌         | 3759/65104 [25:08<9:02:44,  1.88it/s]  6%|▌         | 3780/65104 [25:20<9:02:33,  1.88it/s]  6%|▌         | 3873/65104 [26:09<9:01:39,  1.88it/s]  6%|▌         | 3893/65104 [26:20<9:01:29,  1.88it/s]  6%|▌         | 3987/65104 [27:09<9:00:35,  1.88it/s]  6%|▌         | 4006/65104 [27:20<9:00:25,  1.88it/s]  6%|▋         | 4100/65104 [28:09<9:00:15,  1.88it/s]  6%|▋         | 4119/65104 [28:20<9:00:05,  1.88it/s]  6%|▋         | 4213/65104 [29:10<8:59:29,  1.88it/s]  6%|▋         | 4231/65104 [29:20<8:59:20,  1.88it/s]  7%|▋         | 4326/65104 [30:10<8:58:41,  1.88it/s]  7%|▋         | 4363/65104 [30:30<8:58:21,  1.88it/s]  7%|▋         | 4439/65104 [31:10<8:57:47,  1.88it/s]  7%|▋         | 4476/65104 [31:30<8:57:28,  1.88it/s]  7%|▋         | 4552/65104 [32:10<8:57:14,  1.88it/s]  7%|▋         | 4588/65104 [32:30<8:56:54,  1.88it/s]  7%|▋         | 4665/65104 [33:10<8:56:13,  1.88it/s]  7%|▋         | 4701/65104 [33:30<8:55:54,  1.88it/s]  7%|▋         | 4778/65104 [34:10<8:55:13,  1.88it/s]  7%|▋         | 4814/65104 [34:30<8:54:54,  1.88it/s]  8%|▊         | 4891/65104 [35:11<8:54:12,  1.88it/s]  8%|▊         | 4926/65104 [35:30<8:53:53,  1.88it/s]  8%|▊         | 5004/65104 [36:11<8:53:25,  1.88it/s]  8%|▊         | 5039/65104 [36:30<8:53:06,  1.88it/s]  8%|▊         | 5117/65104 [37:11<8:52:16,  1.88it/s]  8%|▊         | 5152/65104 [37:30<8:51:57,  1.88it/s]  8%|▊         | 5230/65104 [38:11<8:51:08,  1.88it/s]  8%|▊         | 5264/65104 [38:30<8:50:50,  1.88it/s]  8%|▊         | 5343/65104 [39:11<8:50:01,  1.88it/s]  8%|▊         | 5377/65104 [39:30<8:49:43,  1.88it/s]  8%|▊         | 5456/65104 [40:11<8:48:57,  1.88it/s]  8%|▊         | 5490/65104 [40:30<8:48:39,  1.88it/s]  9%|▊         | 5569/65104 [41:11<8:48:12,  1.88it/s]  9%|▊         | 5603/65104 [41:30<8:47:54,  1.88it/s]  9%|▊         | 5682/65104 [42:12<8:47:05,  1.88it/s]  9%|▉         | 5715/65104 [42:30<8:46:48,  1.88it/s]  9%|▉         | 5795/65104 [43:12<8:46:01,  1.88it/s]  9%|▉         | 5828/65104 [43:30<8:45:43,  1.88it/s]  9%|▉         | 5908/65104 [44:12<8:44:57,  1.88it/s]  9%|▉         | 5941/65104 [44:30<8:44:39,  1.88it/s]  9%|▉         | 6021/65104 [45:12<8:44:14,  1.88it/s]  9%|▉         | 6054/65104 [45:30<8:43:57,  1.88it/s]  9%|▉         | 6134/65104 [46:12<8:43:11,  1.88it/s]  9%|▉         | 6166/65104 [46:30<8:42:54,  1.88it/s] 10%|▉         | 6247/65104 [47:12<8:42:05,  1.88it/s] 10%|▉         | 6279/65104 [47:30<8:41:48,  1.88it/s] 10%|▉         | 6360/65104 [48:12<8:41:00,  1.88it/s] 10%|▉         | 6392/65104 [48:30<8:40:43,  1.88it/s] 10%|▉         | 6473/65104 [49:12<8:40:03,  1.88it/s] 10%|▉         | 6504/65104 [49:30<8:39:46,  1.88it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+[q7_eval] var_mlp512_s4/step_6510: fp32 19.4 w4t 16.2 (fidH 0.973) S0.02 1.29 S0.1 1.29 jac_fro2 0.114; 4 cells in 119s
+[Rank 0, World Size 1]: Epoch 5000
+TRAIN
+ 10%|█         | 6511/65104 [52:07<16:58:20,  1.04s/it] 10%|█         | 6535/65104 [52:20<16:57:55,  1.04s/it] 10%|█         | 6624/65104 [53:07<14:03:03,  1.16it/s] 10%|█         | 6647/65104 [53:20<14:02:43,  1.16it/s] 10%|█         | 6737/65104 [54:07<12:14:05,  1.33it/s] 10%|█         | 6760/65104 [54:20<12:13:47,  1.33it/s] 11%|█         | 6850/65104 [55:07<11:03:22,  1.46it/s] 11%|█         | 6872/65104 [55:20<11:03:07,  1.46it/s] 11%|█         | 6963/65104 [56:08<10:16:15,  1.57it/s] 11%|█         | 6985/65104 [56:20<10:16:01,  1.57it/s] 11%|█         | 7076/65104 [57:08<9:44:27,  1.65it/s]  11%|█         | 7097/65104 [57:20<9:44:15,  1.65it/s] 11%|█         | 7189/65104 [58:08<9:22:07,  1.72it/s] 11%|█         | 7210/65104 [58:20<9:21:55,  1.72it/s] 11%|█         | 7302/65104 [59:08<9:06:25,  1.76it/s] 11%|█         | 7323/65104 [59:20<9:06:13,  1.76it/s] 11%|█▏        | 7415/65104 [1:00:09<8:55:12,  1.80it/s] 11%|█▏        | 7435/65104 [1:00:20<8:55:01,  1.80it/s] 12%|█▏        | 7528/65104 [1:01:09<8:47:26,  1.82it/s] 12%|█▏        | 7548/65104 [1:01:20<8:47:15,  1.82it/s] 12%|█▏        | 7641/65104 [1:02:09<8:41:30,  1.84it/s] 12%|█▏        | 7660/65104 [1:02:20<8:41:20,  1.84it/s] 12%|█▏        | 7754/65104 [1:03:09<8:37:06,  1.85it/s] 12%|█▏        | 7773/65104 [1:03:20<8:36:56,  1.85it/s]
