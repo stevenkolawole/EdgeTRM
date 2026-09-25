@@ -255,9 +255,15 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
         ck_path, lsq_steps, act_scales = _lsq_split(ckpt)
         arch = bs._variant_arch(ckpt)
         H = arch.get("H_cycles", 3)
-        inp, lab = bs.load_qa("sudoku", n)
+        maze = any("maze" in str(p_) for p_ in (cfg.get("data_paths") or []))
+        task, kind = ("maze_attn", "maze") if maze else ("sudoku_mlp", "sudoku")
+        if maze and batch == 256:
+            batch = 32
+        if (maze or not arch.get("mlp_t", True)) and list(sigmas) == SIGMAS:
+            sigmas = SIGMAS + [1.0, 1.5]     # wide basins (attention mixer, mazes) need the longer grid
+        inp, lab = bs.load_qa(kind, n)
         out = Path(out)
-        rec = {"ckpt": str(ckpt), "label": label, "n": int(len(inp)), "nsup": nsup, "H_cycles": H,
+        rec = {"ckpt": str(ckpt), "label": label, "task": task, "n": int(len(inp)), "nsup": nsup, "H_cycles": H,
                "arch": arch, "ref_ckpt": ref_ckpt, "records": []}
         if out.exists():
             try:
@@ -302,17 +308,17 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
         ref_zH2 = None
         if ref_ckpt:
             bs.CKPT_OVERRIDE = str(_lsq_split(ref_ckpt)[0])
-            mr, _ = bs.build("sudoku_mlp", H, nsup, batch)
+            mr, _ = bs.build(task, H, nsup, batch)
             rc, _, ref_zH2, _ = bs.run(mr, inp, lab, batch, nsup)
             rec["ref_fp32_pexact"] = float(rc.mean())
             del mr
         bs.CKPT_OVERRIDE = ck_path
-        m, _ = bs.build("sudoku_mlp", H, nsup, batch)
+        m, _ = bs.build(task, H, nsup, batch)
         ref_c, ref_cell, ref_zH, ref_zL = bs.run(m, inp, lab, batch, nsup)
         if "jac_spec_mean" not in rec:
             rec.update(_jac_stats(m, inp, lab))
         del m
-        mk = lambda: bs.build("sudoku_mlp", H, nsup, batch)[0]  # noqa: E731
+        mk = lambda: bs.build(task, H, nsup, batch)[0]  # noqa: E731
         if "S_0.02" not in rec:
             rec.update(_sens_stats(mk, lambda mm: None, inp, lab, batch, nsup))
         if quant_noise and "Sq_0.02" not in rec:     # sensitivity around the deployed (quantized) point
@@ -326,7 +332,7 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
                 c, cell, zH, fH, fL = ref_c, ref_cell, ref_zH, 1.0, 1.0
             else:
                 base, _, nz = spec.partition("~")
-                mq, _ = bs.build("sudoku_mlp", H, nsup, batch)
+                mq, _ = bs.build(task, H, nsup, batch)
                 if base.startswith("w4lsq"):
                     _quantize_lsq_(mq, lsq_steps, 4)
                 elif base.startswith("w4t+"):
