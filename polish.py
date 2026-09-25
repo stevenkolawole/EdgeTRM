@@ -537,6 +537,7 @@ def main():
     ap.add_argument("--extra_sched", default="", help="additional schedules (';'-separated), run for every polish model")
     ap.add_argument("--only_extra", action="store_true", help="run only --extra_sched (plus the append read-out)")
     ap.add_argument("--per_step", action="store_true", help="per-input correctness at every step of c and of P alone")
+    ap.add_argument("--ckpt", default="", help="TRM: evaluate this trained checkpoint (step_N; all_config.yaml beside it)")
     ap.add_argument("--batch", type=int, default=0)
     ap.add_argument("--n_calib", type=int, default=128)
     ap.add_argument("--fp32_ext", type=int, default=0, help="fp32 depth curve length (default 2T)")
@@ -559,6 +560,8 @@ def main():
         batch = a.batch or t["batch"]
         inp, lab = bs.load_qa(t["data"], a.offset + a.n)
     inp, lab = inp[a.offset:], lab[a.offset:]
+    if a.ckpt:                                           # a trained TRM variant (breadth_sweep --ckpt semantics)
+        bs.CKPT_OVERRIDE = a.ckpt
     _FACTORY["args"] = (a.task, T, batch)
     MAZE["on"] = (not is_dt) and (bs.TRM_TASKS.get(a.task) or bs.HRM_TASKS[a.task])["data"] == "maze"
     m_cpu, family, meta = build_fp32(a.task, T, batch)
@@ -581,7 +584,7 @@ def main():
     out_path = Path(a.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     blob = {"task": a.task, "family": family, "n": int(len(inp)), "offset": a.offset, "T": T, "ks": ks,
-            "inner_js": inner_js, "meta": meta, "shapes": shapes,
+            "inner_js": inner_js, "meta": meta, "shapes": shapes, "ckpt": a.ckpt,
             "gpu": torch.cuda.get_device_name(0) if dev == "cuda" else "cpu", "torch": torch.__version__,
             "records": []}
     if out_path.exists():
@@ -680,6 +683,8 @@ def main():
                 need[pre_].add(a_)
             c_curve = np.zeros(T, int)
             c_at = [[] for _ in range(T)]
+            res_marks = {T - k for k in ks if k < T} | {T}
+            c_res = {t: [] for t in res_marks}
             chead = []
             with torch.no_grad():
                 for ci, (s, e) in enumerate(chunks):
@@ -689,9 +694,14 @@ def main():
                     cache = {"c": {0: stp.z0()}, "f": {0: stp.z0()}}
                     z = stp.z0()
                     for t_ in range(T):
+                        zp_ = z
                         z = stp.step(z, "c")
                         if (t_ + 1) in need["c"]:
                             cache["c"][t_ + 1] = z
+                        if a.per_step and (t_ + 1) in res_marks:     # residual of the cheap map where a polish starts
+                            fz, fp_ = stp.flat(z), stp.flat(zp_)
+                            c_res[t_ + 1].append((torch.linalg.vector_norm(fz - fp_, dim=1) /
+                                                  torch.linalg.vector_norm(fz, dim=1)).cpu())
                         cc_ = stp.readout(z, "c", y)["correct"]
                         c_curve[t_] += int(cc_.sum())
                         if a.per_step:
@@ -730,7 +740,9 @@ def main():
                 recs[sname] = r
             extra_bits = {n: polish_extra_bits(pname, cell[0], shp) for n, shp in shapes.items()}
             rec = {"cell": cell[0], "draw": cell[1], "polish": pname, "c_curve": (c_curve / len(inp)).tolist(),
-                   **({"c_at": [enc(torch.cat(v)) for v in c_at]} if a.per_step else {}),
+                   **({"c_at": [enc(torch.cat(v)) for v in c_at],
+                       "c_res": {str(t): np.round(torch.cat(v).numpy(), 5).tolist() for t, v in c_res.items() if v}}
+                      if a.per_step else {}),
                    "schedules": recs, "polish_extra_bits": extra_bits,
                    "cell_bits": {n: storage_bits(cell[0], shp) for n, shp in shapes.items()},
                    "secs": time.time() - t1}
