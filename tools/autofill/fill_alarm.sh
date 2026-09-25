@@ -17,7 +17,13 @@ while true; do
     bl=$(awk '/backlog_lines/{print $3}' <<<"$s")
     [ -n "$bl" ] && [ "$bl" -lt 4 ] && out="$out $name:backlog=$bl;"
   done
-  grep -q EMPTY_BACKLOG <<<"$bb" && out="$out babel:$(grep EMPTY_BACKLOG <<<"$bb" | awk '{print $1}' | tr '\n' ',')empty;"
+  # an empty Babel backlog matters only if that partition is below its cap (held/pending + running)
+  for part in general preempt; do
+    if grep -q "^$part EMPTY_BACKLOG" <<<"$bb"; then
+      hp=$(grep -oE "^$part held_or_pending=[0-9]+" <<<"$bb" | cut -d= -f2); cap=$(grep -oE "^$part .*cap=[0-9]+" <<<"$bb" | grep -oE "cap=[0-9]+" | cut -d= -f2)
+      [ -n "$hp" ] && [ -n "$cap" ] && [ "$hp" -lt "$cap" ] && out="$out babel:$part:empty_backlog_below_cap($hp/$cap);"
+    fi
+  done
   if [ -n "$out" ] && [ "$out" != "$prev" ]; then echo "$(date -u +%H:%M) ALERT$out"; fi
   prev="$out"
   sleep 180
