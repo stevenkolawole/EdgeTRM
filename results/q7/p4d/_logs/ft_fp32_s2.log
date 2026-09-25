@@ -123,3 +123,34 @@ Processing batch 3: all
 Running 0 evaluator(s)...
 All evaluators completed!
 SAVE CHECKPOINT
+[q7_eval] ft_fp32_s2/step_12000: fp32 67.4 w4t 0.0 (fidH 0.206/ref 0.212) S0.02 1.30 S0.1 1.36 jac_fro2 0.149; 27 cells in 745s
+wandb: 
+wandb: Run history:
+wandb:            num_params ▁
+wandb:           q7/strength ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:        train/accuracy █▄▂▁▃▃▃▄▄▃▃▃▂▂▂▂▃▄▂▂▃▄▄▄▄▃▃▂▃▃▂▃▃▃▁▃▄▃▃▄
+wandb:           train/count ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:  train/exact_accuracy ▄▅▅▄▄▅▇▄▇▂▄▅▅▅▅▆▇▂▄▆▃▁▇▄▄▄▅▆█▆▆▆▄▆▆▇▇▅▇▅
+wandb:         train/lm_loss ▄▅▄▆▅▂▅▅▁▃▃▃▄▃█▅▃▄▃▃▃▂▄▃▃▄▅▅▃▅▂▄▂▃▄▅▄▄▃▁
+wandb:              train/lr ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train/q_halt_accuracy ▄▆▆████▆███████▅█▆▆▆█▆▄▆█▆▆▄██▆█▆██▆▄▁▃▆
+wandb:     train/q_halt_loss ▂▅▃▄▅▄▂▁▁▅▄▂▂▁▄▃▁▆▃▂▃▂▅▁▅▃▅▄▃▄▁▄▅▄▁▂▃▂█▂
+wandb:           train/steps ▃▆▄▄▅▄▂▆▃▃▄█▇▁▆▃▅▂▁▄▆▁▃█▅▆▄▃▅▃▄▅▃▅▅▃▆▄▃▄
+wandb: 
+wandb: Run summary:
+wandb:            num_params 1483778
+wandb:           q7/strength 0
+wandb:        train/accuracy 0.91029
+wandb:           train/count 1
+wandb:  train/exact_accuracy 0.71429
+wandb:         train/lm_loss 0.65711
+wandb:              train/lr 0.0001
+wandb: train/q_halt_accuracy 1
+wandb:     train/q_halt_loss 0.00378
+wandb:           train/steps 9.21905
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /home/ubuntu/q7/wandb/wandb/offline-run-20260925_105156-ylcbm1iq
+wandb: Find logs at: /home/ubuntu/q7/wandb/wandb/offline-run-20260925_105156-ylcbm1iq/logs
+100%|██████████| 12000/12000 [1:15:44<00:00,  1.98it/s]
+Fri Sep 25 12:07:42 UTC 2026 [q7_train] ft_fp32_s2 exited rc=0 DONE=yes

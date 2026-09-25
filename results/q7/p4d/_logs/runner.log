@@ -82,3 +82,4 @@ Terminated
 2026-09-25 11:24:29 cleaned resume.pt of gqatft_s1
 2026-09-25 11:24:30 launched qat_lsq_b0 seed=3 card=3 pid=1434925 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/q7/ckpt/q7_base_s0/step_65100 +q7_reg=lsq +q7_bits=4
 2026-09-25 11:59:09 launched ft_fp32_b0 seed=3 card=3 pid=1474900 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/q7/ckpt/q7_base_s0/step_65100
+2026-09-25 12:08:21 launched qat_lsq_an_s0 seed=0 card=4 pid=1540588 (card had 1 procs) overrides: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=lsq +q7_bits=4 +q7_act_noise=0.1

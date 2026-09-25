@@ -1,0 +1,47 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 12:08:23 UTC 2026 [q7_train] qat_lsq_an_s0 seed=0 host=ip-172-31-15-144 cuda=4 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=lsq +q7_bits=4 +q7_act_noise=0.1
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+[q7] LSQ installed: 10 step sizes
+[q7] activation noise sigma 0.1 on 10 linears (training only)
+Setup EMA
+  0%|          | 0/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_120829-a5c8rn8m
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  0%|          | 1/12000 [02:05<416:46:27, 125.04s/it]  1%|          | 97/12000 [03:05<5:03:29,  1.53s/it]    1%|          | 120/12000 [03:20<5:02:53,  1.53s/it]  2%|▏         | 193/12000 [04:05<3:17:06,  1.00s/it]  2%|▏         | 215/12000 [04:20<3:16:44,  1.00s/it]  2%|▏         | 289/12000 [05:06<2:42:19,  1.20it/s]  3%|▎         | 310/12000 [05:20<2:42:01,  1.20it/s]  3%|▎         | 385/12000 [06:06<2:25:29,  1.33it/s]  3%|▎         | 406/12000 [06:20<2:25:14,  1.33it/s]  4%|▍         | 481/12000 [07:06<2:15:50,  1.41it/s]  4%|▍         | 501/12000 [07:20<2:15:35,  1.41it/s]  5%|▍         | 577/12000 [08:07<2:09:37,  1.47it/s]  5%|▍         | 597/12000 [08:20<2:09:23,  1.47it/s]  6%|▌         | 673/12000 [09:07<2:05:21,  1.51it/s]  6%|▌         | 692/12000 [09:20<2:05:08,  1.51it/s]  6%|▋         | 769/12000 [10:08<2:02:12,  1.53it/s]  7%|▋         | 787/12000 [10:20<2:02:00,  1.53it/s]  7%|▋         | 865/12000 [11:08<1:59:47,  1.55it/s]  7%|▋         | 883/12000 [11:20<1:59:36,  1.55it/s]  8%|▊         | 961/12000 [12:08<1:57:45,  1.56it/s]  8%|▊         | 978/12000 [12:20<1:57:34,  1.56it/s]  9%|▉         | 1057/12000 [13:09<1:56:09,  1.57it/s]  9%|▉         | 1074/12000 [13:20<1:55:58,  1.57it/s] 10%|▉         | 1153/12000 [14:09<1:54:42,  1.58it/s] 10%|▉         | 1169/12000 [14:20<1:54:32,  1.58it/s] 10%|█         | 1249/12000 [15:09<1:53:20,  1.58it/s] 11%|█         | 1264/12000 [15:20<1:53:11,  1.58it/s] 11%|█         | 1345/12000 [16:10<1:52:07,  1.58it/s] 11%|█▏        | 1376/12000 [16:30<1:51:48,  1.58it/s] 12%|█▏        | 1441/12000 [17:10<1:50:56,  1.59it/s] 12%|█▏        | 1471/12000 [17:30<1:50:37,  1.59it/s] 13%|█▎        | 1537/12000 [18:10<1:49:50,  1.59it/s] 13%|█▎        | 1567/12000 [18:30<1:49:31,  1.59it/s] 14%|█▎        | 1633/12000 [19:11<1:48:46,  1.59it/s] 14%|█▍        | 1662/12000 [19:30<1:48:27,  1.59it/s] 14%|█▍        | 1729/12000 [20:11<1:47:45,  1.59it/s] 15%|█▍        | 1758/12000 [20:30<1:47:27,  1.59it/s] 15%|█▌        | 1825/12000 [21:12<1:46:46,  1.59it/s] 15%|█▌        | 1853/12000 [21:30<1:46:28,  1.59it/s] 16%|█▌        | 1922/12000 [22:12<1:45:25,  1.59it/s] 16%|█▋        | 1950/12000 [22:30<1:45:07,  1.59it/s] 17%|█▋        | 2021/12000 [23:12<1:43:20,  1.61it/s] 17%|█▋        | 2050/12000 [23:30<1:43:02,  1.61it/s] 18%|█▊        | 2120/12000 [24:13<1:41:49,  1.62it/s] 18%|█▊        | 2148/12000 [24:30<1:41:32,  1.62it/s] 19%|█▊        | 2221/12000 [25:13<1:39:43,  1.63it/s] 19%|█▊        | 2246/12000 [25:30<1:39:28,  1.63it/s] 19%|█▉        | 2320/12000 [26:14<1:38:36,  1.64it/s] 20%|█▉        | 2345/12000 [26:30<1:38:21,  1.64it/s] 20%|██        | 2419/12000 [27:14<1:37:31,  1.64it/s] 20%|██        | 2445/12000 [27:30<1:37:15,  1.64it/s] 21%|██        | 2518/12000 [28:14<1:36:27,  1.64it/s] 21%|██        | 2544/12000 [28:30<1:36:11,  1.64it/s] 22%|██▏       | 2619/12000 [29:15<1:34:51,  1.65it/s] 22%|██▏       | 2642/12000 [29:30<1:34:37,  1.65it/s] 23%|██▎       | 2718/12000 [30:15<1:33:59,  1.65it/s] 23%|██▎       | 2742/12000 [30:30<1:33:44,  1.65it/s] 23%|██▎       | 2817/12000 [31:15<1:33:08,  1.64it/s] 24%|██▎       | 2841/12000 [31:30<1:32:53,  1.64it/s] 24%|██▍       | 2918/12000 [32:16<1:31:31,  1.65it/s] 24%|██▍       | 2940/12000 [32:30<1:31:18,  1.65it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
