@@ -6,11 +6,11 @@
   "bound": "weights_on_chip",
   "n": 1,
   "mj_per_answer": 19.8983564288,
-  "acc": 0.011,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 1808.9414935272728
+  "acc": 0.01,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 1989.83564288
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -19,11 +19,11 @@
   "bound": "weights_dram",
   "n": 1,
   "mj_per_answer": 42.197036748799995,
-  "acc": 0.011,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 3836.094249890909
+  "acc": 0.01,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 4219.703674879999
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -32,11 +32,11 @@
   "bound": "weights_on_chip",
   "n": 2,
   "mj_per_answer": 39.7967128576,
-  "acc": 0.032,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 1243.6472767999999
+  "acc": 0.02,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 1989.83564288
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -45,11 +45,11 @@
   "bound": "weights_dram",
   "n": 2,
   "mj_per_answer": 84.39407349759999,
-  "acc": 0.032,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 2637.3147968
+  "acc": 0.02,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 4219.703674879999
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -58,11 +58,11 @@
   "bound": "weights_on_chip",
   "n": 4,
   "mj_per_answer": 79.5934257152,
-  "acc": 0.424,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 187.72034366792454
+  "acc": 0.36,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 221.0928492088889
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -71,11 +71,11 @@
   "bound": "weights_dram",
   "n": 4,
   "mj_per_answer": 168.78814699519998,
-  "acc": 0.424,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 398.0852523471698
+  "acc": 0.36,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 468.8559638755555
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -84,11 +84,11 @@
   "bound": "weights_on_chip",
   "n": 8,
   "mj_per_answer": 159.1868514304,
-  "acc": 0.618,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 257.5839019909385
+  "acc": 0.58,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 274.4600886731035
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -97,11 +97,11 @@
   "bound": "weights_dram",
   "n": 8,
   "mj_per_answer": 337.57629399039996,
-  "acc": 0.618,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 546.2399579132685
+  "acc": 0.58,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 582.0280930868965
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -110,11 +110,10 @@
   "bound": "weights_on_chip",
   "n": 16,
   "mj_per_answer": 318.3737028608,
-  "acc": 0.702,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 453.5237932490029
+  "acc": null,
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
+  "runtime": "-",
+  "mj_per_solved": null
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -123,11 +122,10 @@
   "bound": "weights_dram",
   "n": 16,
   "mj_per_answer": 675.1525879807999,
-  "acc": 0.702,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 961.7558233344729
+  "acc": null,
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
+  "runtime": "-",
+  "mj_per_solved": null
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -136,11 +134,11 @@
   "bound": "weights_on_chip",
   "n": 1,
   "mj_per_answer": 6.531222272000001,
-  "acc": 0.011,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 593.7474792727273
+  "acc": 0.01,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 653.1222272000001
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -149,11 +147,11 @@
   "bound": "weights_dram",
   "n": 1,
   "mj_per_answer": 17.680562432000002,
-  "acc": 0.011,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 1607.3238574545458
+  "acc": 0.01,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 1768.0562432000002
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -162,11 +160,11 @@
   "bound": "weights_on_chip",
   "n": 2,
   "mj_per_answer": 13.062444544000002,
-  "acc": 0.032,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 408.20139200000006
+  "acc": 0.02,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 653.1222272000001
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -175,11 +173,11 @@
   "bound": "weights_dram",
   "n": 2,
   "mj_per_answer": 35.361124864000004,
-  "acc": 0.032,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 1105.0351520000002
+  "acc": 0.02,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 1768.0562432000002
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -188,11 +186,11 @@
   "bound": "weights_on_chip",
   "n": 4,
   "mj_per_answer": 26.124889088000003,
-  "acc": 0.424,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 61.615304452830195
+  "acc": 0.36,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 72.56913635555557
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -201,11 +199,11 @@
   "bound": "weights_dram",
   "n": 4,
   "mj_per_answer": 70.72224972800001,
-  "acc": 0.424,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 166.79775879245287
+  "acc": 0.36,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 196.45069368888892
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -214,11 +212,11 @@
   "bound": "weights_on_chip",
   "n": 8,
   "mj_per_answer": 52.24977817600001,
-  "acc": 0.618,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 84.54656662783172
+  "acc": 0.58,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 90.08582444137933
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -227,11 +225,11 @@
   "bound": "weights_dram",
   "n": 8,
   "mj_per_answer": 141.44449945600002,
-  "acc": 0.618,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 228.87459458899679
+  "acc": 0.58,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": 243.8698266482759
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -240,11 +238,10 @@
   "bound": "weights_on_chip",
   "n": 16,
   "mj_per_answer": 104.49955635200001,
-  "acc": 0.702,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 148.8597668831909
+  "acc": null,
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
+  "runtime": "-",
+  "mj_per_solved": null
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -253,11 +250,10 @@
   "bound": "weights_dram",
   "n": 16,
   "mj_per_answer": 282.88899891200003,
-  "acc": 0.702,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 402.975781925926
+  "acc": null,
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
+  "runtime": "-",
+  "mj_per_solved": null
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1818,8 +1814,8 @@
   "mj_per_answer": 9.31634302976,
   "acc": 0.0,
   "acc_n": 50,
-  "acc_source": "host sim of compiled QDQ graph, test 0-49",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": Infinity
  },
  {
@@ -1831,8 +1827,8 @@
   "mj_per_answer": 14.72633982976,
   "acc": 0.0,
   "acc_n": 50,
-  "acc_source": "host sim of compiled QDQ graph, test 0-49",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": Infinity
  },
  {
@@ -1842,11 +1838,11 @@
   "bound": "weights_on_chip",
   "n": 2,
   "mj_per_answer": 18.63268605952,
-  "acc": 0.02,
+  "acc": 0.0,
   "acc_n": 50,
-  "acc_source": "host sim of compiled QDQ graph, test 0-49",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 931.6343029760001
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": Infinity
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1855,11 +1851,11 @@
   "bound": "weights_dram",
   "n": 2,
   "mj_per_answer": 29.45267965952,
-  "acc": 0.02,
+  "acc": 0.0,
   "acc_n": 50,
-  "acc_source": "host sim of compiled QDQ graph, test 0-49",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 1472.633982976
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": Infinity
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1868,11 +1864,11 @@
   "bound": "weights_on_chip",
   "n": 4,
   "mj_per_answer": 37.26537211904,
-  "acc": 0.74,
+  "acc": 0.0,
   "acc_n": 50,
-  "acc_source": "host sim of compiled QDQ graph, test 0-49",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 50.35861097167568
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": Infinity
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1881,11 +1877,11 @@
   "bound": "weights_dram",
   "n": 4,
   "mj_per_answer": 58.90535931904,
-  "acc": 0.74,
+  "acc": 0.0,
   "acc_n": 50,
-  "acc_source": "host sim of compiled QDQ graph, test 0-49",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 79.60183691762163
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": Infinity
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1894,11 +1890,11 @@
   "bound": "weights_on_chip",
   "n": 8,
   "mj_per_answer": 74.53074423808,
-  "acc": 0.84,
+  "acc": 0.0,
   "acc_n": 50,
-  "acc_source": "host sim of compiled QDQ graph, test 0-49",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 88.72707647390477
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": Infinity
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1907,11 +1903,11 @@
   "bound": "weights_dram",
   "n": 8,
   "mj_per_answer": 117.81071863808,
-  "acc": 0.84,
+  "acc": 0.0,
   "acc_n": 50,
-  "acc_source": "host sim of compiled QDQ graph, test 0-49",
-  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
-  "mj_per_solved": 140.25085552152382
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
+  "mj_per_solved": Infinity
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1921,7 +1917,7 @@
   "n": 16,
   "mj_per_answer": 149.06148847616,
   "acc": null,
-  "acc_source": "no device-faithful accuracy for this graph yet",
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
   "runtime": "-",
   "mj_per_solved": null
  },
@@ -1933,7 +1929,7 @@
   "n": 16,
   "mj_per_answer": 235.62143727616,
   "acc": null,
-  "acc_source": "no device-faithful accuracy for this graph yet",
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
   "runtime": "-",
   "mj_per_solved": null
  },

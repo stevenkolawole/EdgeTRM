@@ -4,26 +4,26 @@ Accuracy is taken from the graph whose cost is counted (device-faithful): host s
 
 | energy source | task | format | bound | n | exact | accuracy runtime | accuracy source | mJ/answer | mJ/solved |
 |---|---|---|---|---|---|---|---|---|---|
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_on_chip | 1 | 1.1 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 19.90 | 1808.94 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_dram | 1 | 1.1 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 42.20 | 3836.09 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_on_chip | 2 | 3.2 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 39.80 | 1243.65 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_dram | 2 | 3.2 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 84.39 | 2637.31 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_on_chip | 4 | 42.4 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 79.59 | 187.72 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_dram | 4 | 42.4 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 168.79 | 398.09 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_on_chip | 8 | 61.8 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 159.19 | 257.58 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_dram | 8 | 61.8 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 337.58 | 546.24 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_on_chip | 16 | 70.2 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 318.37 | 453.52 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_dram | 16 | 70.2 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 675.15 | 961.76 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_on_chip | 1 | 1.1 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 6.53 | 593.75 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_dram | 1 | 1.1 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 17.68 | 1607.32 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_on_chip | 2 | 3.2 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 13.06 | 408.20 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_dram | 2 | 3.2 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 35.36 | 1105.04 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_on_chip | 4 | 42.4 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 26.12 | 61.62 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_dram | 4 | 42.4 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 70.72 | 166.80 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_on_chip | 8 | 61.8 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 52.25 | 84.55 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_dram | 8 | 61.8 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 141.44 | 228.87 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_on_chip | 16 | 70.2 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 104.50 | 148.86 |
-| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_dram | 16 | 70.2 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, 1000_1000 (start_count) (n=1000) | 282.89 | 402.98 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_on_chip | 1 | 1.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 19.90 | 1989.84 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_dram | 1 | 1.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 42.20 | 4219.70 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_on_chip | 2 | 2.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 39.80 | 1989.84 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_dram | 2 | 2.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 84.39 | 4219.70 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_on_chip | 4 | 36.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 79.59 | 221.09 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_dram | 4 | 36.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 168.79 | 468.86 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_on_chip | 8 | 58.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 159.19 | 274.46 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_dram | 8 | 58.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 337.58 | 582.03 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_on_chip | 16 | - | - | on-device chain ran fewer steps; host runtime not substituted | 318.37 | - |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp32 | weights_dram | 16 | - | - | on-device chain ran fewer steps; host runtime not substituted | 675.15 | - |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_on_chip | 1 | 1.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 6.53 | 653.12 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_dram | 1 | 1.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 17.68 | 1768.06 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_on_chip | 2 | 2.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 13.06 | 653.12 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_dram | 2 | 2.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 35.36 | 1768.06 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_on_chip | 4 | 36.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 26.12 | 72.57 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_dram | 4 | 36.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 70.72 | 196.45 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_on_chip | 8 | 58.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 52.25 | 90.09 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_dram | 8 | 58.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 141.44 | 243.87 |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_on_chip | 16 | - | - | on-device chain ran fewer steps; host runtime not substituted | 104.50 | - |
+| estimate (Horowitz 45 nm) | sudoku_mlp | fp16 | weights_dram | 16 | - | - | on-device chain ran fewer steps; host runtime not substituted | 282.89 | - |
 | estimate (Horowitz 45 nm) | sudoku_mlp | w8a8 | weights_on_chip | 1 | 0.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 1.04 | inf (0 solved) |
 | estimate (Horowitz 45 nm) | sudoku_mlp | w8a8 | weights_dram | 1 | 0.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 6.62 | inf (0 solved) |
 | estimate (Horowitz 45 nm) | sudoku_mlp | w8a8 | weights_on_chip | 2 | 2.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=100) | 2.09 | 104.39 |
@@ -144,16 +144,16 @@ Accuracy is taken from the graph whose cost is counted (device-faithful): host s
 | estimate (Horowitz 45 nm) | maze | fp16 | weights_dram | 8 | 88.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 566.85 | 644.15 |
 | estimate (Horowitz 45 nm) | maze | fp16 | weights_on_chip | 16 | - | - | no device-faithful accuracy for this graph yet | 960.58 | - |
 | estimate (Horowitz 45 nm) | maze | fp16 | weights_dram | 16 | - | - | no device-faithful accuracy for this graph yet | 1133.70 | - |
-| estimate (Horowitz 45 nm) | maze | w8a8 | weights_on_chip | 1 | 0.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 9.32 | inf (0 solved) |
-| estimate (Horowitz 45 nm) | maze | w8a8 | weights_dram | 1 | 0.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 14.73 | inf (0 solved) |
-| estimate (Horowitz 45 nm) | maze | w8a8 | weights_on_chip | 2 | 2.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 18.63 | 931.63 |
-| estimate (Horowitz 45 nm) | maze | w8a8 | weights_dram | 2 | 2.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 29.45 | 1472.63 |
-| estimate (Horowitz 45 nm) | maze | w8a8 | weights_on_chip | 4 | 74.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 37.27 | 50.36 |
-| estimate (Horowitz 45 nm) | maze | w8a8 | weights_dram | 4 | 74.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 58.91 | 79.60 |
-| estimate (Horowitz 45 nm) | maze | w8a8 | weights_on_chip | 8 | 84.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 74.53 | 88.73 |
-| estimate (Horowitz 45 nm) | maze | w8a8 | weights_dram | 8 | 84.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 117.81 | 140.25 |
-| estimate (Horowitz 45 nm) | maze | w8a8 | weights_on_chip | 16 | - | - | no device-faithful accuracy for this graph yet | 149.06 | - |
-| estimate (Horowitz 45 nm) | maze | w8a8 | weights_dram | 16 | - | - | no device-faithful accuracy for this graph yet | 235.62 | - |
+| estimate (Horowitz 45 nm) | maze | w8a8 | weights_on_chip | 1 | 0.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=50) | 9.32 | inf (0 solved) |
+| estimate (Horowitz 45 nm) | maze | w8a8 | weights_dram | 1 | 0.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=50) | 14.73 | inf (0 solved) |
+| estimate (Horowitz 45 nm) | maze | w8a8 | weights_on_chip | 2 | 0.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=50) | 18.63 | inf (0 solved) |
+| estimate (Horowitz 45 nm) | maze | w8a8 | weights_dram | 2 | 0.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=50) | 29.45 | inf (0 solved) |
+| estimate (Horowitz 45 nm) | maze | w8a8 | weights_on_chip | 4 | 0.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=50) | 37.27 | inf (0 solved) |
+| estimate (Horowitz 45 nm) | maze | w8a8 | weights_dram | 4 | 0.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=50) | 58.91 | inf (0 solved) |
+| estimate (Horowitz 45 nm) | maze | w8a8 | weights_on_chip | 8 | 0.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=50) | 74.53 | inf (0 solved) |
+| estimate (Horowitz 45 nm) | maze | w8a8 | weights_dram | 8 | 0.0 | QNN HTP on Samsung Galaxy S24 | ON DEVICE Samsung_Galaxy_S24 (n=50) | 117.81 | inf (0 solved) |
+| estimate (Horowitz 45 nm) | maze | w8a8 | weights_on_chip | 16 | - | - | on-device chain ran fewer steps; host runtime not substituted | 149.06 | - |
+| estimate (Horowitz 45 nm) | maze | w8a8 | weights_dram | 16 | - | - | on-device chain ran fewer steps; host runtime not substituted | 235.62 | - |
 | estimate (Horowitz 45 nm) | maze | w4a8 | weights_on_chip | 1 | 0.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 9.30 | inf (0 solved) |
 | estimate (Horowitz 45 nm) | maze | w4a8 | weights_dram | 1 | 0.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 12.00 | inf (0 solved) |
 | estimate (Horowitz 45 nm) | maze | w4a8 | weights_on_chip | 2 | 0.0 | ONNX Runtime CPU, fused integer QDQ kernels (host sim) | host sim of compiled QDQ graph, test 0-49 (n=50) | 18.59 | inf (0 solved) |

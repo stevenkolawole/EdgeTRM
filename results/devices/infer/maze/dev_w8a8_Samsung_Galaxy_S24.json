@@ -1,0 +1,88 @@
+{
+ "steps": [
+  {
+   "step": 0,
+   "job_id": "j5qlljj4p",
+   "exact": 0.0,
+   "cell": 0.30266666666666664
+  },
+  {
+   "step": 1,
+   "job_id": "j57eez6np",
+   "exact": 0.0,
+   "cell": 0.6056
+  },
+  {
+   "step": 2,
+   "job_id": "jpvll37z5",
+   "exact": 0.0,
+   "cell": 0.6150222222222222
+  },
+  {
+   "step": 3,
+   "job_id": "j5wlloyzp",
+   "exact": 0.0,
+   "cell": 0.6119111111111111
+  },
+  {
+   "step": 4,
+   "job_id": "jgk22zkog",
+   "exact": 0.0,
+   "cell": 0.6131333333333333
+  },
+  {
+   "step": 5,
+   "job_id": "jg9zzvelp",
+   "exact": 0.0,
+   "cell": 0.6129111111111111
+  },
+  {
+   "step": 6,
+   "job_id": "jp4yyok8p",
+   "exact": 0.0,
+   "cell": 0.6119555555555556
+  },
+  {
+   "step": 7,
+   "job_id": "jgk22nqwg",
+   "exact": 0.0,
+   "cell": 0.6114888888888889
+  }
+ ],
+ "jobs": [
+  {
+   "step": 0,
+   "job_id": "j5qlljj4p"
+  },
+  {
+   "step": 1,
+   "job_id": "j57eez6np"
+  },
+  {
+   "step": 2,
+   "job_id": "jpvll37z5"
+  },
+  {
+   "step": 3,
+   "job_id": "j5wlloyzp"
+  },
+  {
+   "step": 4,
+   "job_id": "jgk22zkog"
+  },
+  {
+   "step": 5,
+   "job_id": "jg9zzvelp"
+  },
+  {
+   "step": 6,
+   "job_id": "jp4yyok8p"
+  },
+  {
+   "step": 7,
+   "job_id": "jgk22nqwg"
+  }
+ ],
+ "n_steps": 8,
+ "done": true
+}
