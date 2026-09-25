@@ -184,7 +184,7 @@ def main():
     if a.chunk:
         chunk = a.chunk
     else:
-        per = 4096 if kind == "sudoku" else 192          # rows per forward batch
+        per = 2048 if kind == "sudoku" else 192          # rows per forward batch
         chunk = max(1, min(n, per // (1 if a.noise == "none" else a.K)))
     outdir = Path(a.outdir)
     outdir.mkdir(parents=True, exist_ok=True)
