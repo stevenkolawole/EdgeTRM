@@ -8,7 +8,7 @@ from torch import nn
 from pydantic import BaseModel
 import random
 from models.common import trunc_normal_init_
-from models.layers import rms_norm, LinearSwish, SwiGLU, Attention, RotaryEmbedding, CosSin, CastedEmbedding, CastedLinear
+from models.layers import rms_norm, LinearSwish, SwiGLU, Attention, RotaryEmbedding, CosSin, CastedEmbedding, CastedLinear, _find_multiple
 from models.sparse_embedding import CastedSparseEmbedding
 
 IGNORE_LABEL_ID = -100
@@ -61,13 +61,30 @@ class TinyRecursiveReasoningModel_ACTV1Config(BaseModel):
     mlp_t: bool = False # use mlp on L instead of transformer
     puzzle_emb_len: int = 16 # if non-zero, its specified to this value
     no_ACT_continue: bool =  True # No continue ACT loss, only use the sigmoid of the halt which makes much more sense
+    # Q7/X5 (Sep 25): axial MLP token mixer for square grids (0 = the dense MLP mixer). The grid tokens are mixed
+    # along rows, then along columns, by two small MLPs shared across rows/columns; the puzzle-embedding tokens
+    # read the whole sequence through a dense MLP (they carry the halting head's input). Default off.
+    mlp_t_grid: int = 0
 
 class TinyRecursiveReasoningModel_ACTV1Block(nn.Module):
     def __init__(self, config: TinyRecursiveReasoningModel_ACTV1Config) -> None:
         super().__init__()
 
         self.config = config
-        if self.config.mlp_t:
+        if self.config.mlp_t and self.config.mlp_t_grid > 0:
+            self.puzzle_emb_len = -(self.config.puzzle_emb_ndim // -self.config.hidden_size) if self.config.puzzle_emb_len == 0 else self.config.puzzle_emb_len
+            g = self.config.mlp_t_grid
+            assert g * g == self.config.seq_len, (g, self.config.seq_len)
+            ig = _find_multiple(round(config.expansion * g * 2 / 3), 16)   # 80 for g=30 (SwiGLU's 256 would be 17x)
+            self.mix_row_gate_up = CastedLinear(g, ig * 2, bias=False)
+            self.mix_row_down = CastedLinear(ig, g, bias=False)
+            self.mix_col_gate_up = CastedLinear(g, ig * 2, bias=False)
+            self.mix_col_down = CastedLinear(ig, g, bias=False)
+            L = self.config.seq_len + self.puzzle_emb_len
+            inter = _find_multiple(round(config.expansion * self.puzzle_emb_len * 2 / 3), 256)
+            self.mix_pz_gate_up = CastedLinear(L, inter * 2, bias=False)
+            self.mix_pz_down = CastedLinear(inter, self.puzzle_emb_len, bias=False)
+        elif self.config.mlp_t:
             self.puzzle_emb_len = -(self.config.puzzle_emb_ndim // -self.config.hidden_size) if self.config.puzzle_emb_len == 0 else self.config.puzzle_emb_len
             self.mlp_t = SwiGLU(
                 hidden_size=self.config.seq_len + self.puzzle_emb_len, # L
@@ -90,7 +107,22 @@ class TinyRecursiveReasoningModel_ACTV1Block(nn.Module):
     def forward(self, cos_sin: CosSin, hidden_states: torch.Tensor) -> torch.Tensor:
         # B, L, D = hidden_states.shape
         # Post Norm
-        if self.config.mlp_t:
+        if self.config.mlp_t and self.config.mlp_t_grid > 0:
+            B, Ltot, D = hidden_states.shape
+            P, g = self.puzzle_emb_len, self.config.mlp_t_grid
+            pz, gr = hidden_states[:, :P], hidden_states[:, P:].reshape(B, g, g, D)
+            x = gr.permute(0, 1, 3, 2)                                   # B, row, D, col: mix along a row
+            a, b = self.mix_row_gate_up(x).chunk(2, dim=-1)
+            x = rms_norm(x + self.mix_row_down(F.silu(a) * b), variance_epsilon=self.norm_eps)
+            x = x.permute(0, 3, 2, 1)                                    # B, col, D, row: mix along a column
+            a, b = self.mix_col_gate_up(x).chunk(2, dim=-1)
+            x = rms_norm(x + self.mix_col_down(F.silu(a) * b), variance_epsilon=self.norm_eps)
+            gr = x.permute(0, 3, 1, 2).reshape(B, g * g, D)              # back to B, row*col, D
+            h = torch.cat((pz, gr), dim=1).transpose(1, 2)               # B, D, L
+            gate, up = self.mix_pz_gate_up(h).chunk(2, dim=-1)
+            pz_t = rms_norm(pz.transpose(1, 2) + self.mix_pz_down(F.silu(gate) * up), variance_epsilon=self.norm_eps)
+            hidden_states = torch.cat((pz_t.transpose(1, 2), gr), dim=1)
+        elif self.config.mlp_t:
             hidden_states = hidden_states.transpose(1,2)
             out = self.mlp_t(hidden_states)
             hidden_states = rms_norm(hidden_states + out, variance_epsilon=self.norm_eps)

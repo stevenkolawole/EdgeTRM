@@ -120,6 +120,8 @@ def build_trm(task, H, nsup, batch):
                num_heads=heads, pos_encodings=t["pos"], halt_max_steps=nsup, halt_exploration_prob=0.1,
                forward_dtype="float32", mlp_t=t["mlp_t"], puzzle_emb_ndim=hidden, puzzle_emb_len=plen,
                no_ACT_continue=True)
+    if CKPT_OVERRIDE and arch.get("mlp_t_grid"):          # axial MLP mixer variants (Q7/X5); default unchanged
+        cfg["mlp_t_grid"] = arch["mlp_t_grid"]
     m = TinyRecursiveReasoningModel_ACTV1(cfg).eval()
     miss, unexp = m.load_state_dict(sd, strict=False)
     assert not miss and not unexp, (miss[:3], unexp[:3])
