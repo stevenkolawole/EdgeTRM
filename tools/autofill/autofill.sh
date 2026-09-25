@@ -17,7 +17,7 @@ INTERVAL=${INTERVAL:-90}
 MAXPROC=${MAXPROC:-3}
 POWER_LOW=${POWER_LOW:-250}
 MARGIN_GB=${MARGIN_GB:-3}
-COOLDOWN=${COOLDOWN:-300}
+COOLDOWN=${COOLDOWN:-120}
 mkdir -p "$ROOT/logs" "$ROOT/state"
 touch "$ROOT/backlog.txt" "$ROOT/launched.txt"
 STATUS="$ROOT/status.txt"
@@ -41,6 +41,7 @@ reap() {  # finished jobs: record exit code; requeue once if it failed within RE
       touch "$ROOT/state/retried_$tag"
       echo "$(date -u +%FT%TZ) tag=$tag REQUEUED once (fast failure; see logs/$tag.fail1.log)" >> "$ROOT/launched.txt"
     fi
+    c=$(cat "$ROOT/state/card_$tag" 2>/dev/null); [ -n "$c" ] && rm -f "$ROOT/state/cool_$c"
     rm -f "$f"
   done
 }
@@ -75,7 +76,7 @@ while true; do
           read -r prio mem owner tag cmd <<<"$line"
           flock "$ROOT/backlog.lock" bash -c "grep -vxF -- \"\$1\" '$ROOT/backlog.txt' > '$ROOT/backlog.tmp'; mv '$ROOT/backlog.tmp' '$ROOT/backlog.txt'" _ "$line"
           echo "$now" > "$cool"; rm -f "$low"
-          printf '%s\n' "$line" > "$ROOT/state/line_$tag"; echo "$now" > "$ROOT/state/start_$tag"
+          printf '%s\n' "$line" > "$ROOT/state/line_$tag"; echo "$now" > "$ROOT/state/start_$tag"; echo "$idx" > "$ROOT/state/card_$tag"
           ( export CUDA_VISIBLE_DEVICES=$idx; nohup bash -c "$cmd; echo AUTOFILL_EXIT=\$?" > "$ROOT/logs/$tag.log" 2>&1 & echo $! > "$ROOT/state/pid_$tag" )
           echo "$(date -u +%FT%TZ) card=$idx owner=$owner tag=$tag prio=$prio mem=$mem pid=$(cat "$ROOT/state/pid_$tag")" >> "$ROOT/launched.txt"
           st="LAUNCHED:$tag"
