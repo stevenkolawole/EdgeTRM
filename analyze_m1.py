@@ -24,7 +24,7 @@ def load(paths):
     D = {}
     for p in paths:
         b = json.load(open(p))
-        t = D.setdefault(b["task"], {"fp32": b["fp32"], "T": b["T"], "ks": b["ks"], "inner": b["inner_js"],
+        t = D.setdefault(f"{b['task']} (T={b['T']})", {"fp32": b["fp32"], "T": b["T"], "ks": b["ks"], "inner": b["inner_js"],
                                      "shapes": b["shapes"], "n": b["n"], "recs": {}, "files": []})
         if abs(t["fp32"]["acc"] - b["fp32"]["acc"]) > 1e-9 or t["n"] != b["n"]:
             print(f"WARNING {p}: fp32 {b['fp32']['acc']} / n {b['n']} differ from {t['files']}")
@@ -98,6 +98,36 @@ def pol_bits(c, p, r, shapes):
     return bits_per_weight(r["polish_extra_bits"], shapes)
 
 
+def mcnemar(a, b):
+    """exact two-sided McNemar p-value for paired 0/1 strings (a vs b); returns (n_a_only, n_b_only, p)."""
+    from math import comb
+    x = np.frombuffer(a.encode(), np.uint8) - 48
+    y = np.frombuffer(b.encode(), np.uint8) - 48
+    n10, n01 = int(((x == 1) & (y == 0)).sum()), int(((x == 0) & (y == 1)).sum())
+    n = n10 + n01
+    if n == 0:
+        return n10, n01, 1.0
+    k = min(n10, n01)
+    p = sum(comb(n, i) for i in range(k + 1)) / 2 ** n * 2
+    return n10, n01, min(1.0, p)
+
+
+def per_input(t, groups, name, steps):
+    """per-input correctness string of a single-precision run `name` after `steps` steps, if recorded."""
+    T = t["T"]
+    if name == "fp32":
+        return t["fp32"].get("at", {}).get(str(steps))
+    for (c, p), rs in groups.items():
+        r = rs[0]
+        if c == name and "c_at" in r and steps <= len(r["c_at"]):
+            return r["c_at"][steps - 1]
+        if p == name and f"P{T}" in r["schedules"]:
+            at = r["schedules"][f"P{T}"].get("at", {})
+            if str(steps) in at:
+                return at[str(steps)]
+    return None
+
+
 def frontier(t, groups, cells, pols, S):
     """Each hybrid c(T-k)+P(k) against every single-precision run (fp32, the polish model, the compressed
     model, any quantized baseline in the file) with no more weight-bit traffic (bits x steps, in units of
@@ -154,9 +184,17 @@ def frontier(t, groups, cells, pols, S):
                 bv, bn, bs = best(cost)
                 mv, mn, ms = best(cost, mem)
                 pv, pn, ps = best(cost, mem, only=per_tensor)
+                hyb = r["schedules"][sname]["correct"]
+
+                def ptest(name, st):
+                    alt = per_input(t, groups, name, st)
+                    if alt is None or len(alt) != len(hyb):
+                        return ""
+                    n10, n01, pval = mcnemar(hyb, alt)
+                    return f" (p={pval:.2g}, {n10}/{n01})"
                 print(f"| {c} | {p} | {k} | {100*acc:.1f} | {cost:.2f} | {mem:.1f} | {bn} ({bs}) | {100*bv:.1f} | "
-                      f"{100*(acc-bv):+.1f} | {mn} ({ms}) | {100*mv:.1f} | {100*(acc-mv):+.1f} | {pn} ({ps}) | {100*pv:.1f} | "
-                      f"{100*(acc-pv):+.1f} |")
+                      f"{100*(acc-bv):+.1f}{ptest(bn, bs)} | {mn} ({ms}) | {100*mv:.1f} | {100*(acc-mv):+.1f}{ptest(mn, ms)} | "
+                      f"{pn} ({ps}) | {100*pv:.1f} | {100*(acc-pv):+.1f}{ptest(pn, ps)} |")
 
 
 def main():

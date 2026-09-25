@@ -49,13 +49,25 @@ def main():
             if p.exists():
                 sess[f"w{wb}a{ab}"] = ort.InferenceSession(str(p), so, providers=["CPUExecutionProvider"])
     print("graphs:", list(sess), flush=True)
-    inp, lab = A.load_data(a.task, list(range(a.start, a.start + a.count)))
+    if a.task == "arc":                            # canonical ARC-AGI-1 rows, each with its own puzzle embedding
+        inp, lab, pids = I.arc_rows(a.start + a.count)
+        inp, lab, pids = inp[a.start:], lab[a.start:], pids[a.start:]
+        m, cfg, sd = A.build(a.task, 1)
+        embs = sd["inner.puzzle_emb.weights"][I.torch_index(pids)].float().numpy()
+        seq = cfg["seq_len"] + A.PLEN
+        zH0 = np.broadcast_to(m.inner.H_init.detach().numpy(), (1, seq, 512)).astype(np.float32).copy()
+        zL0 = np.broadcast_to(m.inner.L_init.detach().numpy(), (1, seq, 512)).astype(np.float32).copy()
+        del m
+    else:
+        inp, lab = A.load_data(a.task, list(range(a.start, a.start + a.count)))
+        zH0, zL0, emb = I.initial_state(a.task)
+        embs = None
     inp = inp.astype(np.int32)
-    zH0, zL0, emb = I.initial_state(a.task)
     N = inp.shape[0]
 
     def step(key, zH, zL, i):
-        o = sess[key].run(I.OUTS, {"z_H": zH, "z_L": zL, "inputs": inp[i:i + 1], "puzzle_embedding": emb})
+        e = embs[i:i + 1] if embs is not None else emb
+        o = sess[key].run(I.OUTS, {"z_H": zH, "z_L": zL, "inputs": inp[i:i + 1], "puzzle_embedding": e})
         return o[0], o[1], o[2].argmax(-1)[0]
 
     def traj(key, i, zH, zL, n, keep=()):
@@ -80,7 +92,8 @@ def main():
     cheap = [k for k in sess if k.endswith("a8")]
     for i in range(start, N):
         y = lab[i]
-        ok = lambda p: int((p == y).all())
+        msk = y != 0                               # ARC: token exact over non-pad cells (arc_breadth pexact_token)
+        ok = (lambda p: int((p[msk] == y[msk]).all())) if a.task == "arc" else (lambda p: int((p == y).all()))
         # fp32 from scratch: per-step curve
         fp, _, _ = traj("fp32", i, zH0, zL0, T)
         corr.setdefault("fp32_curve", []).append([ok(p) for p in fp])
