@@ -1,0 +1,11 @@
+NVIDIA L40S 4.57.1
+Fri Sep 25 03:21:54 AM UTC 2026 host babel-u5-24 restart 3: --model huginn --steps 32 --quants w3a --decodes pfx1,pfx8,pfx32,prefill --n 200 --batch 12 --outdir /home/skolawol/breadth_results/lm/q6
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:06,  2.18s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.94s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:06<00:02,  2.20s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:07<00:00,  1.70s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:07<00:00,  1.85s/it]
+23:22:07 huginn_s32_w3a_core: tf nll 0.991  tf_acc 0.750  agree 0.829  kl 0.334  fid 0.7822  ans_acc 0.670  (16 linears quantized)
+23:22:07 huginn_s32_w3a_core pfx1           acc 3.5  degen 68.0  loop 18.5  capped 68.0  len 399  (n=200, 0s)
+23:22:07 huginn_s32_w3a_core pfx8           acc 5.5  degen 70.0  loop 19.5  capped 70.0  len 404  (n=200, 0s)
+23:22:07 huginn_s32_w3a_core pfx32          acc 3.5  degen 67.5  loop 28.5  capped 67.5  len 397  (n=200, 0s)
+23:22:07 huginn_s32_w3a_core prefill        acc 3.5  degen 67.5  loop 25.0  capped 67.5  len 402  (n=200, 0s)
+23:22:08 done
+Fri Sep 25 03:22:08 AM UTC 2026 done rc=0

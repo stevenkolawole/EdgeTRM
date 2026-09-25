@@ -1,0 +1,10 @@
+NVIDIA L40S 4.57.1
+Fri Sep 25 02:04:26 AM UTC 2026 host babel-u5-24 restart 2: --model huginn --steps 32 --quants bf16 --decodes topk20t0.7s0,topk20t0.7s1,topk20t0.7s2 --n 200 --batch 12 --outdir /home/skolawol/breadth_results/lm/q6
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:06,  2.21s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.94s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:06<00:02,  2.22s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:07<00:00,  1.75s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:07<00:00,  1.88s/it]
+22:04:40 huginn_s32_bf16_core: tf nll 0.849  tf_acc 0.810  agree 1.000  kl 0.000  fid 1.0000  ans_acc 0.870  (0 linears quantized)
+22:04:40 huginn_s32_bf16_core topk20t0.7s0   acc 31.5  degen 2.5  loop 0.0  capped 2.5  len 242  (n=200, 0s)
+22:04:40 huginn_s32_bf16_core topk20t0.7s1   acc 26.0  degen 1.0  loop 0.0  capped 1.0  len 247  (n=200, 0s)
+22:04:40 huginn_s32_bf16_core topk20t0.7s2   acc 29.0  degen 2.0  loop 0.0  capped 2.0  len 252  (n=200, 0s)
+22:04:40 done
+Fri Sep 25 02:04:41 AM UTC 2026 done rc=0

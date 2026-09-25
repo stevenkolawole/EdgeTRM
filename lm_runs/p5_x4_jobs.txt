@@ -1,0 +1,9 @@
+# threshold band: quantizers whose latent fidelity should fall in 0.75-0.90, greedy + teacher forced, n=200, with p5 bf16 references
+--model olmo_rec32 --steps 32 --quants bf16,w3a,w3g128 --decodes greedy --n 500 --batch 16 --outdir /opt/dlami/nvme/edgetrm/results/X4/n500
+--model olmo_rec32 --steps 32 --quants w3g32,w3c,w4a --decodes greedy --n 200 --batch 16 --outdir /opt/dlami/nvme/edgetrm/results/X4/band
+--model ouro14 --steps 4 --quants bf16,w4a,w4g128 --decodes greedy --n 200 --batch 48 --outdir /opt/dlami/nvme/edgetrm/results/X4/band
+--model ouro14 --steps 4 --quants w5c,w5t,w6t --decodes greedy --n 200 --batch 48 --outdir /opt/dlami/nvme/edgetrm/results/X4/band
+--model ouro26 --steps 4 --quants bf16,w4a,w4g128 --decodes greedy --n 200 --batch 24 --outdir /opt/dlami/nvme/edgetrm/results/X4/band
+--model ouro26 --steps 4 --quants w4c,w5t,w6t --decodes greedy --n 200 --batch 24 --outdir /opt/dlami/nvme/edgetrm/results/X4/band
+--model huginn --steps 32 --quants bf16,w3g32,w3g128 --decodes greedy --n 200 --batch 24 --outdir /opt/dlami/nvme/edgetrm/results/X4/band
+--model huginn --steps 32 --quants w3c,w4a,w4t --decodes greedy --n 200 --batch 24 --outdir /opt/dlami/nvme/edgetrm/results/X4/band

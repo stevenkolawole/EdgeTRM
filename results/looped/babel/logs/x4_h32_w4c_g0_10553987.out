@@ -1,0 +1,8 @@
+NVIDIA L40S 4.57.1
+Fri Sep 25 12:50:12 AM UTC 2026 host babel-q9-20 restart 2: --model huginn --steps 32 --quants w4c --decodes greedy --n 200 --batch 12 --outdir /home/skolawol/breadth_results/lm/q6
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [01:01<03:05, 61.72s/it]Loading checkpoint shards:  50%|█████     | 2/4 [01:29<01:23, 41.78s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:50<00:32, 32.10s/it]Loading checkpoint shards: 100%|██████████| 4/4 [02:06<00:00, 25.88s/it]Loading checkpoint shards: 100%|██████████| 4/4 [02:06<00:00, 31.62s/it]
+20:52:30 huginn_s32_w4c_core: tf nll 0.811  tf_acc 0.801  agree 0.929  kl 0.083  fid 0.9297  ans_acc 0.450  (16 linears quantized)
+20:52:31 huginn_s32_w4c_core greedy         acc 31.0  degen 6.5  loop 3.0  capped 6.5  len 239  (n=200, 0s)
+20:52:32 done
+Fri Sep 25 12:52:32 AM UTC 2026 done rc=0

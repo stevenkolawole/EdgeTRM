@@ -1,0 +1,19 @@
+NVIDIA L40S 4.57.1
+Thu Sep 24 09:22:56 PM UTC 2026 host babel-q9-24 restart 0: --model huginn --steps 32 --quants bf16 --decodes greedy --n 8 --batch 4 --max_new 64 --outdir /home/skolawol/breadth_results/lm/smoke_huginn
+A new version of the following files was downloaded from https://huggingface.co/tomg-group-umd/huginn-0125:
+- raven_config_minimal.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+`torch_dtype` is deprecated! Use `dtype` instead!
+A new version of the following files was downloaded from https://huggingface.co/tomg-group-umd/huginn-0125:
+- raven_modeling_minimal.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [02:27<07:22, 147.48s/it]Fetching 4 files: 100%|██████████| 4/4 [02:27<00:00, 36.89s/it] 
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:06<00:18,  6.17s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:08<00:07,  3.87s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:10<00:03,  3.22s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:37<00:00, 12.28s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:37<00:00,  9.26s/it]
+17:26:11 huginn_s32_bf16_core: computing bf16 reference (8 problems)
+17:26:15   reference done in 4s
+17:26:15 huginn_s32_bf16_core: tf nll 0.908  tf_acc 0.777  agree 1.000  kl 0.000  fid 1.0000  ans_acc 0.875  (0 linears quantized)
+17:26:28     greedy batch 0: 4 problems in 12s (max gen 64)
+17:26:40     greedy batch 1: 4 problems in 12s (max gen 64)
+17:26:40 huginn_s32_bf16_core greedy         acc 0.0  degen 100.0  loop 0.0  capped 100.0  len 64  (n=8, 25s)
+17:26:40 done
+Thu Sep 24 09:26:41 PM UTC 2026 done rc=0

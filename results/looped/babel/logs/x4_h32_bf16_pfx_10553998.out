@@ -1,0 +1,15 @@
+NVIDIA L40S 4.57.1
+Fri Sep 25 01:26:11 AM UTC 2026 host babel-m5-16 restart 2: --model huginn --steps 32 --quants bf16 --decodes prefill --n 200 --batch 12 --outdir /home/skolawol/breadth_results/lm/q6
+A new version of the following files was downloaded from https://huggingface.co/tomg-group-umd/huginn-0125:
+- raven_config_minimal.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+`torch_dtype` is deprecated! Use `dtype` instead!
+A new version of the following files was downloaded from https://huggingface.co/tomg-group-umd/huginn-0125:
+- raven_modeling_minimal.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 61.60it/s]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:53<02:39, 53.31s/it]Loading checkpoint shards:  50%|█████     | 2/4 [01:31<01:28, 44.41s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [02:11<00:42, 42.32s/it]Loading checkpoint shards: 100%|██████████| 4/4 [02:33<00:00, 34.22s/it]Loading checkpoint shards: 100%|██████████| 4/4 [02:33<00:00, 38.29s/it]
+21:28:52 huginn_s32_bf16_core: tf nll 0.849  tf_acc 0.810  agree 1.000  kl 0.000  fid 1.0000  ans_acc 0.870  (0 linears quantized)
+21:28:52 huginn_s32_bf16_core prefill        acc 35.5  degen 4.5  loop 1.0  capped 4.5  len 238  (n=200, 0s)
+21:28:52 done
+Fri Sep 25 01:28:53 AM UTC 2026 done rc=0
