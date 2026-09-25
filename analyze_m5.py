@@ -604,6 +604,25 @@ def cmd_device(a):
                     res[(model, name, prec)] = row
                     print(f"  {name[:32]:32s} {prec:5s} {ms:8.1f} {row['ms_ans_fixed']:10.0f} {row['ms_ans_sel']:10.0f} "
                           f"{row['ms_solved_fixed']:12.0f} {row['ms_solved_sel']:13.0f} {row['ms_solved_native']:13.0f}")
+    # H=1 graphs (the deployable carry-in/carry-out step, X3): exit read after every H cycle
+    h1prof = json.load(open(RB / "m5_aihub_h1_profiles.json")) if (RB / "m5_aihub_h1_profiles.json").exists() else []
+    print("\n=== H=1 step graph, fp32 model, exit at H-cycle granularity (M5 records)")
+    for model, dtask in DEV_TASK.items():
+        cells = {s: c for s, c in load_m5(model).items() if c.h1 is not None}
+        if "fp32" not in cells:
+            continue
+        h = HDEF[model]
+        c1 = h1_cell(cells["fp32"]).trunc(16 * h)
+        sel1 = select_rule(c1)
+        ok, st = score(c1, exit_steps(c1, *sel1))
+        fa = c1.c[:, -1].mean()
+        lat = [(f"{r['device']} ({r['prec']}, AI Hub)", r["ms"]) for r in h1prof if r["task"] == dtask and r["prec"] == "fp32"]
+        lat += [(f"Ethos-{k[1]}" + (" (Vela est., INT8)" if "FVP" not in k[1] else " (INT8)"), v) for k, v in MCU.items() if k[0] == dtask and k[2] == 1]
+        print(f"  {model}: fixed {16 * h} H=1 steps acc {100 * fa:.1f}; {rule_name(*sel1)} at H=1: acc {100 * ok.mean():.1f}, {st.mean():.1f} H=1 steps")
+        for name, ms in lat:
+            row = {"ms_step_h1": ms, "ms_solved_fixed": ms * 16 * h / fa, "ms_solved_exit_h1": ms * st.mean() / ok.mean()}
+            res[(model, name, "H1")] = row
+            print(f"    {name:40s} {ms:8.2f} ms/H=1 step: ms/solved fixed {row['ms_solved_fixed']:8.0f} -> exit {row['ms_solved_exit_h1']:8.0f}")
     return res
 
 
