@@ -271,6 +271,69 @@ def predict_section(groups, fits):
     return res
 
 
+def variant_cells(nsup=16):
+    """The 13 trained Sudoku variants (p4d, results/breadth/p4d/variants_noise: weight noise 0.05-0.7 x 3 draws
+    + w8c/w4c/w3g32/w4t, n=1000, H=3), each cell against the same file's fp32 at the same nsup."""
+    g = defaultdict(list)
+    for f in sorted((HERE / "results/breadth/p4d/variants_noise").glob("trm_sudoku_*.json")):
+        name = f.stem.replace("_seed1", "").replace("_seed2", "")
+        recs = json.load(open(f))["records"]
+        sp = lambda r: r["quant"]["spec"] if isinstance(r["quant"], dict) else r["quant"]  # noqa: E731
+        fp = {r["nsup"]: r for r in recs if sp(r) == "fp32"}
+        for r in recs:
+            if sp(r) == "fp32" or r["nsup"] != nsup or nsup not in fp or not fp[nsup]["pexact"]:
+                continue
+            if "seed" in f.stem and not sp(r).startswith("noise"):
+                continue                      # seed files repeat the deterministic quantizers
+            g["VAR:" + name].append((r["fidelity_H"], r["n"], round(r["pexact"] * r["n"]), fp[nsup]["pexact"],
+                                     {"spec": sp(r), "file": f.name}))
+    return g
+
+
+def variant_section():
+    groups = variant_cells()
+    fits = {}
+    for gname in sorted(groups):
+        P, K = profile(arrays(groups[gname]))
+        j = int(P.argmax())
+        fits[gname] = {"m": float(M_GRID[j]), "k": float(K[j]), "ci": ci_from_profile(P, CHI2[1] / 2),
+                       "p0": groups[gname][0][3]}
+    Sd = {}
+    for f in (HERE / "results/breadth/p4d/x2/sens").glob("sens_var_*.json"):
+        recs = json.load(open(f))["records"]
+        v = [r["delta_med"] / 0.05 for r in recs if abs((r.get("sigma") or -1) - 0.05) < 1e-9]
+        Sd["VAR:trm_sudoku_" + f.stem[len("sens_var_"):]] = float(np.median(v)) if v else None
+    print("\n## Within one task: the 13 trained Sudoku variants (p4d fidelity cells, p4d S)\n")
+    print("| variant | fp32 exact | cells | midpoint m | 95% profile CI | S (p4d, sigma 0.05) |")
+    print("|---|---|---|---|---|---|")
+    for gname, v in fits.items():
+        print(f"| {gname[4:]} | {100 * v['p0']:.1f} | {len(groups[gname])} | {v['m']:.3f} | {v['ci'][0]:.3f}-{v['ci'][1]:.3f} | "
+              f"{Sd.get(gname) if Sd.get(gname) is None else round(Sd[gname], 2)} |")
+    res = {}
+    for label, keep in (("all 13", lambda g: True),
+                        ("fp32 >= 30% (drops the undertrained attention w256)", lambda g: fits[g]["p0"] >= 0.30),
+                        ("MLP mixers only", lambda g: "mlp" in g), ("attention mixers, fp32 >= 30%", lambda g: "attn" in g and fits[g]["p0"] >= 0.30)):
+        gs = [g for g in fits if keep(g) and Sd.get(g)]
+        if len(gs) < 3:
+            continue
+        xs = [math.log(Sd[g]) for g in gs]
+        ys = [fits[g]["m"] for g in gs]
+        coef, pred, r2 = loo_fit(xs, ys)
+        err = np.abs(np.array(ys) - pred)
+        base = np.sqrt(np.mean([(ys[i] - np.mean(np.delete(ys, i))) ** 2 for i in range(len(ys))]))
+        rho = spearman_np(xs, ys)
+        print(f"\n{label}: {len(gs)} variants, m vs log S slope {coef[1]:+.3f}, R^2 {r2:.2f}, Spearman {rho:+.2f}, "
+              f"LOO RMSE {np.sqrt(np.mean(err ** 2)):.3f} (baseline {base:.3f}), worst {err.max():.3f}")
+        res[label] = {"n": len(gs), "slope": float(coef[1]), "r2": float(r2), "spearman": rho,
+                      "loo_rmse": float(np.sqrt(np.mean(err ** 2))), "baseline": float(base)}
+    return {"fits": fits, "S": Sd, "tests": res}
+
+
+def spearman_np(x, y):
+    rx, ry = np.argsort(np.argsort(x)), np.argsort(np.argsort(y))
+    return float(np.corrcoef(rx, ry)[0, 1])
+
+
 def main():
     import sys
     sys.path.insert(0, str(HERE))
@@ -282,12 +345,18 @@ def main():
     ap.add_argument("--trm-platform", default="root", choices=["root", "all"],
                     help="root = only the breadth/*.json grid files (one platform); all = include babel/ and p4d/ draws")
     ap.add_argument("--json", default=None)
+    ap.add_argument("--variants", action="store_true", help="within-Sudoku test on the 13 trained variants (p4d)")
     ap.add_argument("--s-platform", default="babel", choices=["babel", "p4d"],
                     help="TRM/HRM sensitivity S source: X2's Babel fit or its p4d refit (same platform as the grid)")
     ap.add_argument("--predict", action="store_true", help="fit the per-group midpoint on label-free predictors (needs --with-trm)")
     a = ap.parse_args()
     global S_PLATFORM
     S_PLATFORM = a.s_platform
+    if a.variants:
+        out = {"variants": variant_section()}
+        if a.json:
+            json.dump(out, open(a.json, "w"), indent=1)
+        return
     lm = lm_cells(a.roots or A.POOL_ROOTS, a.cut)
     out = {"lm": run(lm, "Looped LMs: one midpoint?")}
     if a.with_trm:
