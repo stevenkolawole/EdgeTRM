@@ -124,8 +124,9 @@ def main():
           f"({len(cand)} with INT8 polish and a quantized cheap map); across every M1 dev record: {n_h} hybrid "
           f"schedules, {n_all} schedules of any kind.\n")
     print("| T | frozen pick (dev) | dev acc | comparator (dev pick) | dev acc | dev delta, p | dev p x m_ckpt | dev p x m_all | "
-          "held-out hybrid | held-out comparator | held-out delta (discordant) | held-out p | fp32 dev max <= 2T | fp32 held-out max <= 2T |")
-    print("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
+          "held-out hybrid | held-out comparator | held-out delta (discordant) | held-out p | fp32 dev max <= 2T | fp32 held-out max <= 2T | "
+          "held-out vs fp32 at its best depth <= 2T |")
+    print("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for T in sorted({h["T"] for h in cand}):
         pick = max((h for h in cand if h["T"] == T), key=lambda h: h["acc"])
         cost, mem = cost_mem(pick, shapes)
@@ -154,8 +155,17 @@ def main():
                 held = f"{100*h['acc']:.1f} | {bn} {bs}: {100*hruns[bn][0][bs-1]:.1f} (no per-input) | -- | --"
         else:
             held = "not run | not run | -- | --"
+        # paired test vs fp32 at its best depth <= 2T (held-out)
+        vsf = "--"
+        if hh and hruns.get("fp32"):
+            fcur = hruns["fp32"][0][:2 * T]
+            sbest = int(np.argmax(fcur)) + 1
+            fa = hruns["fp32"][1].get(sbest)
+            if fa is not None and len(fa) == len(hh[0]["corr"]):
+                n10, n01, p = MF.mcnemar(hh[0]["corr"], fa)
+                vsf = f"fp32@{sbest}: {100*fa.mean():.1f}, {100*(hh[0]['acc']-fa.mean()):+.1f} ({n10}/{n01}), p={p:.2g}"
         print(f"| {T} | {name} | {100*pick['acc']:.1f} | {bn} {bs} | {100*bv:.1f} | {dp} | {pm1} | {pm2} | {held} | "
-              f"{100*fdev:.1f} | {'--' if fhel is None else f'{100*fhel:.1f}'} |")
+              f"{100*fdev:.1f} | {'--' if fhel is None else f'{100*fhel:.1f}'} | {vsf} |")
     if per_task:
         print("\nschedules compared on dev, by task and checkpoint: " +
               "; ".join(f"{t}{' ' + c.split('/')[-2] if c else ''}: {n}" for (t, c), n in sorted(per_task.items())))
