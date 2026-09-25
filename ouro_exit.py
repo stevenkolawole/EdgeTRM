@@ -16,6 +16,10 @@ KV cache of every loop is filled); the exit changes which loop's state is read, 
 an early-exit runtime could skip, not a measured saving.
 Weight specs: X4's (bf16, w8c, w4g32, w4c, w3a, ...; scope 'core' = every Linear in the shared stack; the
 exit gate and LM head stay bf16).
+Loop sweep (--loops 1,2,3,4): the same greedy generation with total_ut_steps = L (tau 1.0 = read loop L). Ouro keeps
+one KV cache per loop and loop i attends only to loop-i states of earlier tokens, so reading loop L of a 4-loop
+model equals running L loops; per-problem correctness at L = 1..4 gives the visit-then-lose share (right with fewer
+loops, wrong with 4) and the oracle loop-count exit (right at any L), against which the gate's recovery is measured.
 
     PYTHONPATH=~/pylibs/tf4554 python ouro_exit.py --model ouro14 --quants bf16,w4g32,w4c --taus 1.0,0.7,0.5 \
         --n 200 --outdir ~/breadth_results/m5/ouro
@@ -70,6 +74,7 @@ def main():
     ap.add_argument("--quants", default="bf16,w4g32,w4c")
     ap.add_argument("--taus", default="1.0,0.7,0.5")
     ap.add_argument("--steps", type=int, default=4)
+    ap.add_argument("--loops", default="", help="also run fixed loop counts L (tau 1.0), e.g. 1,2,3")
     ap.add_argument("--n", type=int, default=200)
     ap.add_argument("--max_new", type=int, default=512)
     ap.add_argument("--batch", type=int, default=16)
@@ -83,30 +88,37 @@ def main():
     summ_path = od / f"{a.model}_summary.json"
     summ = json.load(open(summ_path)) if summ_path.exists() else {}
     log = lambda s: print(time.strftime("%H:%M:%S ") + s, flush=True)  # noqa: E731
+    cfgs = [(L_, 1.0) for L_ in [int(x) for x in a.loops.split(",") if x] if L_ != a.steps]
     for spec in [q for q in a.quants.split(",") if q]:
         model = tok = None
-        for tau in [float(t) for t in a.taus.split(",") if t]:
-            key = f"{spec}|tau{tau}"
+        runs = [(a.steps, float(t)) for t in a.taus.split(",") if t] + cfgs
+        for steps, tau in runs:
+            key = f"{spec}|tau{tau}" if steps == a.steps else f"{spec}|L{steps}"
             if key in summ:
                 log(f"{key}: done")
                 continue
-            if model is None:
-                model, tok = fam.build(a.steps)
+            if model is None or getattr(model, "_m5_steps", None) != steps:
+                del model
+                torch.cuda.empty_cache()
+                model, tok = fam.build(steps)
+                model._m5_steps = steps
                 nq = LD.quantize_(fam, model, L.parse_quant(spec), "core")
-                log(f"{a.model} {spec}: {nq} linears quantized")
+                log(f"{a.model} {spec} loops {steps}: {nq} linears quantized")
             model.early_exit_threshold = tau
             rec = ExitRecorder(model)
             t0 = time.time()
+            tag = f"tau{tau}" if steps == a.steps else f"L{steps}"
             recs, secs = LD.gen_pass(fam, model, tok, data, "greedy", a.max_new, a.batch,
-                                     od / f"{a.model}_{spec}_tau{tau}.jsonl", log)
+                                     od / f"{a.model}_{spec}_{tag}.jsonl", log)
             rec.close()
             s = LD.summarize(recs)
             s.update({"mean_exit_loop": (sum(rec.steps) / len(rec.steps)) if rec.steps else None, "tau": tau,
-                      "spec": spec, "loops": a.steps, "secs": time.time() - t0})
+                      "spec": spec, "loops": steps, "secs": time.time() - t0,
+                      "correct": [int(r["correct"]) for r in recs]})
             summ[key] = s
             json.dump(summ, open(str(summ_path) + ".tmp", "w"), indent=1)
             os.replace(str(summ_path) + ".tmp", summ_path)
-            log(f"{a.model} {spec} tau {tau}: acc {100 * s['acc']:.1f}  mean exit loop {s['mean_exit_loop']:.2f}  "
+            log(f"{a.model} {spec} {tag}: acc {100 * s['acc']:.1f}  mean exit loop {s['mean_exit_loop']:.2f}  "
                 f"degenerate {100 * s['degenerate']:.1f}%")
         del model
         torch.cuda.empty_cache()
