@@ -43,6 +43,7 @@ import torch.nn.functional as F
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
+import breadth_sweep as bs  # noqa: E402
 from breadth_sweep import (DEV, HRM_TASKS, TRM_TASKS, _ActNoise, _ActQuant, _linears, build,  # noqa: E402
                            parse_quant, quantize_weights_)
 
@@ -202,7 +203,11 @@ def main():
     ap.add_argument("--ref_wait", action="store_true", help="do not run fp32 here: wait for --ref_cache (written by "
                                                           "another process on the same puzzles) and pair against it")
     ap.add_argument("--checkpoint", action="store_true", help="chunk-level resume (<out>.partial.pt)")
+    ap.add_argument("--ckpt", default="", help="TRM tasks: a trained variant's step_N file (arch from its all_config.yaml)")
     a = ap.parse_args()
+    if a.ckpt:
+        assert a.task in TRM_TASKS, "--ckpt applies to TRM tasks only"
+        bs.CKPT_OVERRIDE = a.ckpt
 
     meta = load_meta()
     if a.set == "strat":
@@ -233,7 +238,7 @@ def main():
         quants = ["fp32"] + quants
     out_path = Path(a.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    doc = {"task": a.task, "set": a.set, "rows": rows, "rating": rat, "K": a.K, "records": []}
+    doc = {"task": a.task, "set": a.set, "rows": rows, "rating": rat, "K": a.K, "ckpt": a.ckpt, "records": []}
     if out_path.exists():
         try:
             old = json.load(open(out_path))
