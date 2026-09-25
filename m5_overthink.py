@@ -5,8 +5,9 @@ Claim tested (AUDIT_SEP25 item 70): within each model, visit-then-lose V rises a
 halting head recovers part of it. Not claimed: that fp32 never overthinks (it does, on some models; the fp32 rows are
 reported per model and per trained seed).
 
-Records: p4d A100, one self-contained exhibit (fp32 references included), exit_sweep.py --phi / dt_exit.py --phi
-(p4d autofill lines from tools/m5_p4d_lines.py, tags m5p_*), p4d ~/m5/phi/ pulled to results/m5/phi/p4d/. phi and V come from the SAME trajectory: phi = cos(z_H at step k, z_H of an fp32 run of the same
+Records: Babel L40S, one self-contained exhibit (fp32 references included), exit_sweep.py --phi / dt_exit.py --phi
+(Babel preempt backlog files 10_M2_m5p_<cell>.sbatch, same cells as tools/m5_p4d_lines.py m5p_*), Babel
+~/breadth_results/m5phi/ pulled to results/m5/phi/babel/. phi and V come from the SAME trajectory: phi = cos(z_H at step k, z_H of an fp32 run of the same
 puzzle at step k, in the same process), per puzzle. Cells: every released model (TRM MLP / attention Sudoku, HRM Sudoku,
 TRM / HRM Maze) x weight quantizer, weight-noise and activation-noise draws (3 seeds each, every draw its own cell), the six
 trained seeds (attn512 / mlp512 s0-2, each with its own fp32 reference), and the deep-thinking mazes (13 / 25 / 33).
@@ -39,7 +40,7 @@ import numpy as np
 import analyze_m5 as A
 
 RB = A.RB
-PHI = Path(os.environ.get("M5_PHI_DIR", A.HERE / "results" / "m5" / "phi" / "p4d"))
+PHI = Path(os.environ.get("M5_PHI_DIR", A.HERE / "results" / "m5" / "phi" / "babel"))
 NB = 2000
 MIN_ERR = 20
 RELEASED = ["sudoku_mlp", "sudoku_attn", "hrm_sudoku", "maze_attn", "hrm_maze"]

@@ -39,7 +39,7 @@ import analyze_m5 as A
 from m5_controller import fire_mask, first
 
 ROOT = Path(os.environ.get("M5_CTL_DIR", A.HERE / "results" / "m5" / "ctl" / "p4d"))
-DT_ROOT = Path(os.environ.get("M5_DT_DIR", A.HERE / "results" / "m5" / "phi" / "p4d"))   # DT: the m5phi runs (same p4d records)
+DT_ROOT = Path(os.environ.get("M5_DT_DIR", A.HERE / "results" / "m5" / "ctl" / "p4d_dt"))   # DT controller records (none on p4d yet)
 BUDGETS = [4, 8, 16, 32, 64, 128, 256, 512]
 NB = 2000
 RELEASED = {"sudoku_mlp": "fp32,noise0.15@s0,noise0.15@s2,w3g32,w4c,w4t",
