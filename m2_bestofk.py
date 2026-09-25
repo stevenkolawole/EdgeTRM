@@ -222,7 +222,8 @@ def gmatch_perturb_(m, master, bits, gran, gen):
 
 
 @torch.no_grad()
-def run_cell_multi(get_model, get_xform, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_steps, hash_w):
+def run_cell_multi(get_model, get_xform, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_steps, hash_w,
+                   step_hook=None):
     """K deterministic (or kicked) rollouts; rollout k runs model get_model(k) on the puzzles transformed by
     get_xform(k) (None = identity). Correctness and the checker are frame-invariant; answer hashes are taken in the
     original frame so votes pool across transforms. Same output arrays as run_cell (no polish)."""
@@ -245,6 +246,8 @@ def run_cell_multi(get_model, get_xform, inp, lab, kind, bfs, K, D, noise, sigma
             carry = init_inner(m, B, x.shape[1] + m.inner.puzzle_emb_len, m.inner.config.hidden_size)
             gen = torch.Generator(device=DEV).manual_seed(int(seed) * 1000003 + 7 * ci + 100003 * k)
             for t in range(D):
+                if step_hook is not None:
+                    step_hook(k, t)
                 if noise in ("ptrm", "rel") and sigma > 0:
                     eps = torch.randn(carry.z_L.shape, generator=gen, device=DEV, dtype=carry.z_L.dtype)
                     carry = type(carry)(z_H=carry.z_H, z_L=carry.z_L + sigma * eps)
@@ -317,7 +320,7 @@ def main():
     ap.add_argument("--polish_from", default="last", choices=("last", "best"),
                     help="polish from each rollout's last state, or from its state at its max-q step (kept on the fly)")
     ap.add_argument("--master", default="fp32", help="weights the draws are made from: fp32 or an RTN spec (e.g. w8c)")
-    ap.add_argument("--wsample", default="none", choices=("none", "sr", "sr0", "wnoise", "gmatch"),
+    ap.add_argument("--wsample", default="none", choices=("none", "sr", "sr0", "wnoise", "gmatch", "dither"),
                     help="sr: each rollout uses its own stochastic-rounding draw of the weights on the spec's grid; "
                          "sr0: the same with draw 0 = round-to-nearest")
     ap.add_argument("--tta", action="store_true", help="rollout k runs on a random Sudoku symmetry of each puzzle (k=0 identity)")
@@ -370,6 +373,7 @@ def main():
             print(f"  {spec}: all cells done", flush=True)
             continue
         get_model = None
+        step_hook = None
         if a.ensemble:
             import breadth_sweep as bsw
             base, wseed = split_spec(spec)
@@ -388,7 +392,7 @@ def main():
         elif a.wsample != "none":
             base, wseed = split_spec(spec)
             q = parse_quant(base)
-            if a.wsample == "wnoise":
+            if a.wsample in ("wnoise",):
                 assert q["gran"] == "noise", "wnoise needs a noise<sigma> spec"
             else:
                 assert q["bits"] is not None and q["gran"] not in (None, "noise"), "wsample needs a quantizer spec"
@@ -400,6 +404,11 @@ def main():
             master = [mod.weight.data.clone() for mod in _linears(m)]
             get_model = weight_setter(m, master, q["sigma"] if a.wsample == "wnoise" else q["bits"], q["gran"],
                                       a.wsample == "sr0", 7919 * (wseed or 0) + 17, gmatch=a.wsample == "gmatch")
+            if a.wsample == "dither":                # SR weights RE-DRAWN before every supervision step (dithered quantization)
+                _dseed = 7919 * (wseed or 0) + 17
+                get_model = lambda k, _m=m: _m
+                step_hook = lambda k, t, _m=m, _ms=master, _q=q, _s=_dseed: sr_quantize_(
+                    _m, _ms, _q["bits"], _q["gran"], torch.Generator(device=DEV).manual_seed(_s * 7907 + 100003 * (k + 1) + t))
         else:
             m, meta, q, wseed = build_spec(a.task, spec, a.D, 256)
             if a.tta:
@@ -417,7 +426,7 @@ def main():
                 else:
                     get_xform = lambda k: None
                 corr, qh, rms, hs, chk, vsh, pol = run_cell_multi(get_model, get_xform, inp, lab, kind, bfs, K, a.D,
-                                                                  a.noise, sg, seed, ch, chk_steps, hash_w)
+                                                                  a.noise, sg, seed, ch, chk_steps, hash_w, step_hook)
             else:
                 corr, qh, rms, hs, chk, vsh, pol = run_cell(m, mref, inp, lab, kind, bfs, K, a.D, a.noise, sg, seed,
                                                             chunk, chk_steps, a.polish, hash_w, a.polish_from)
