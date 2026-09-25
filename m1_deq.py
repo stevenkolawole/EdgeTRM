@@ -57,7 +57,21 @@ def main():
     models, qinfo = {}, {}
     for s in sorted(set(cheaps + pols)):
         m = D.load_mdeq(a.model).to(D.DEV).eval()
-        qinfo[s] = D.perturb_(m, s, a.seed)
+        import re
+        mm = re.fullmatch(r"n(\d+)([tac])(\d+)", s)
+        if mm:                                      # nested (Matryoshka) slice: top b bits of the B-bit grid (polish.q_nested)
+            import polish as P
+            rel = []
+            with torch.no_grad():
+                for _, get, put in D.weight_slots(m):
+                    W = get()
+                    Wq = P.q_nested(W.reshape(W.shape[0], -1).float(), int(mm.group(1)), mm.group(2),
+                                    int(mm.group(3))).reshape(W.shape).to(W.dtype)
+                    rel.append(float((Wq - W).norm() / W.norm().clamp_min(1e-12)))
+                    put(Wq)
+            qinfo[s] = {"spec": s, "weight_rel_err_mean": float(np.mean(rel)), "n_tensors": len(rel)}
+        else:
+            qinfo[s] = D.perturb_(m, s, a.seed)
         models[s] = m
     out_path = Path(a.out)
     state = out_path.with_suffix(".state.pt")
