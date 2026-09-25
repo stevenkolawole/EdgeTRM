@@ -122,13 +122,16 @@ def main():
     ap.add_argument("--scores", default="a_dT,a_dTrm,a_noise,a_kl,range,greedy")
     ap.add_argument("--sigma0", type=float, default=0.02)
     ap.add_argument("--ks", default="0,5,10,15,20,30,40,60,80,120,160,240,360")
-    ap.add_argument("--greedy_max", type=int, default=60)
+    ap.add_argument("--greedy_max", type=int, default=60, help="unused (forward greedy replaced)")
+    ap.add_argument("--greedy_block", type=int, default=25)
     ap.add_argument("--random_draws", type=int, default=3)
     ap.add_argument("--batch", type=int, default=100)
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--export", default="", help="dir with data_<task>.npz and groups_<task>.json (default <graphs>/export)")
     ap.add_argument("--n_score", type=int, default=0, help="use only the first n scoring puzzles (0 = all 64)")
     ap.add_argument("--greedy_cand", type=int, default=0, help="greedy over the top-M tensors by a_dTrm (0 = all)")
+    ap.add_argument("--wfmt", default="", help="override every MatMul weight: w4c (per-channel INT4, the w4a8 graph's"
+                                                " form, Ethos-U A8W4) or w4t (per-tensor INT4, TFLM FC)")
     ap.add_argument("--confirm", default="", help="comma list of curve keys (score@k) to re-evaluate on evalbig")
     a = ap.parse_args()
     assert a.device == "cpu" or torch.cuda.is_available(), "NO CUDA"
@@ -146,6 +149,12 @@ def main():
     t0 = time.time()
     A = Act(a.task, a.graphs, device=a.device, batch=a.batch, export=a.export or None, n_score=a.n_score)
     names = A.names
+    if a.wfmt:
+        ws = A.r.matmul_weights()
+        A.r.set_weight_fmt({w: a.wfmt for w in ws})
+        blob["wfmt"] = a.wfmt
+        blob["n_weights_overridden"] = len(ws)
+        print(f"  weights -> {a.wfmt}: {len(ws)} MatMul/Gemm weight tensors", flush=True)
     blob.update({"task": a.task, "T": A.T, "n_tensors": len(names), "n_elements": A.N_el,
                  "device": torch.cuda.get_device_name(0) if a.device != "cpu" else "cpu", "n_score": len(A.D["score_inp"]),
                  "numel": A.numel,
@@ -219,25 +228,25 @@ def main():
         save()
         print(f"  a_kl done ({time.time()-ts:.0f}s); top {sorted(sc['a_kl'].items(), key=lambda kv: -kv[1])[:5]}", flush=True)
     if need("greedy"):
+        # reverse greedy in blocks: from all-16 (inside the basin), demote to 8 bit, a block at a time, the tensors
+        # whose demotion (given the ones already demoted) raises delta_T least; the keep-16 order is the reverse
+        # of the demotion order. Label-free; captures interactions at the block level.
         ts = time.time()
-        keep, trace = [], [sc["delta_all8"]]
-        cand = list(names)
-        if a.greedy_cand and "a_dTrm" in sc:
-            cand = sorted(names, key=lambda t: -sc["a_dTrm"][t])[:a.greedy_cand]
-        for it in range(a.greedy_max):
-            best, bd = None, float("inf")
-            for t in cand:
-                d = S.delta(set(names) - set(keep) - {t})
-                if d < bd:
-                    best, bd = t, d
-            keep.append(best)
-            cand.remove(best)
-            trace.append(bd)
-            if it % 5 == 0:
-                print(f"    greedy {it+1}: +{best} ({A.grp.get(best)}) delta_T {bd:.4f} ({time.time()-ts:.0f}s)", flush=True)
-                sc["greedy_partial"] = {"order": keep, "trace": trace}
-                save()
-        sc["greedy"] = {"order": keep, "trace": trace}
+        part = sc.get("greedy_partial", {})
+        demoted, trace = part.get("demoted", []), part.get("trace", [])
+        remaining = [t for t in names if t not in set(demoted)]
+        while remaining:
+            base = set(demoted)
+            ds = {t: S.delta(base | {t}) for t in remaining}
+            blk = max(1, min(a.greedy_block, len(remaining) // 4 or 1))
+            chosen = sorted(remaining, key=lambda t: ds[t])[:blk]
+            demoted += chosen
+            remaining = [t for t in remaining if t not in set(chosen)]
+            trace.append([len(demoted), S.delta(set(demoted))])
+            sc["greedy_partial"] = {"demoted": demoted, "trace": trace}
+            save()
+            print(f"    greedy: {len(demoted)} demoted, delta_T {trace[-1][1]:.4f} ({time.time()-ts:.0f}s)", flush=True)
+        sc["greedy"] = {"order": demoted[::-1], "trace": trace}
         sc.pop("greedy_partial", None)
         save()
 
@@ -248,16 +257,13 @@ def main():
         if name in sc:
             orders[name] = sorted(names, key=lambda t: -sc[name][t])
     if "greedy" in sc:
-        g = sc["greedy"]["order"]
-        orders["greedy"] = g + [t for t in sorted(names, key=lambda t: -sc.get("a_dTrm", {}).get(t, 0)) if t not in g]
+        orders["greedy"] = sc["greedy"]["order"]
     rng = np.random.default_rng(7)
     for d in range(a.random_draws):
         orders[f"random{d}"] = [names[i] for i in rng.permutation(len(names))]
     blob["orders"] = orders
     for k in ks:
         for name, order in orders.items():
-            if name == "greedy" and k > len(sc["greedy"]["order"]):
-                continue
             keep = order[:k]
             r = evaluate(f"{name}@{k}", keep, meta={"method": name, "k": k})
             blob.setdefault("curve", {}).setdefault(name, {})[str(k)] = f"eval|{name}@{k}"
@@ -268,7 +274,7 @@ def main():
         for k in ks:
             for name, order in orders.items():
                 key = f"{name}@{k}"
-                if key in dmap or (name == "greedy" and k > len(sc["greedy"]["order"])):
+                if key in dmap:
                     continue
                 dmap[key] = S.delta(set(names) - set(order[:k]))
         dmap["x3_B2_rms16"] = S.delta(set(names) - set(b2))

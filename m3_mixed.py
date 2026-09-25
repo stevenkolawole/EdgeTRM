@@ -85,6 +85,8 @@ def qtensor(W, fmt):
         k = int(g[1:])
         Q = torch.empty_like(Wf)
         for rows in torch.tensor_split(torch.arange(Wf.shape[0], device=Wf.device), k):
+            if len(rows) == 0:
+                continue
             sl = Wf[rows]
             s = (r * sl.abs().max() / qmax).clamp_min(1e-12)
             Q[rows] = torch.round(sl / s).clamp(-qmax, qmax) * s
@@ -132,9 +134,11 @@ def fmt_bits(fmt, W):
 
 # ----------------------------------------------------------------------------- model context
 class Ctx:
-    """The model on the GPU, its weight groups, the fp32 originals, and a cache of quantized copies."""
+    """The model on the GPU, its weight groups, the fp32 originals, and a cache of quantized copies.
+    split=k: every tensor's output channels are cut into k contiguous slices and each slice is its own group
+    (its own per-tensor scale); a slice of a tensor is expressible as a separate op + concat."""
 
-    def __init__(self, task, T, batch):
+    def __init__(self, task, T, batch, split=1):
         self.task, self.T, self.batch = task, T, batch
         if task in C.DT_TASKS:
             self.family = "dt"
@@ -149,11 +153,25 @@ class Ctx:
             self.pl = self.m.inner.puzzle_emb_len
         for p_ in self.m.parameters():
             p_.requires_grad_(False)
-        self.groups = [n for n, _ in mods]
-        self.mod = dict(mods)
-        self.W0 = {n: mod.weight.data.clone() for n, mod in mods}
-        self.numel = {n: self.W0[n].numel() for n in self.groups}
+        self.tensors = [n for n, _ in mods]
+        self.tmod = dict(mods)
+        self.T0 = {n: mod.weight.data.clone() for n, mod in mods}
+        self.groups, self.W0, self.tensor_of, self.rows = [], {}, {}, {}
+        for n in self.tensors:
+            R = self.T0[n].shape[0]
+            k = min(split, R) if split > 1 and self.T0[n].numel() >= 4096 else 1
+            parts = torch.tensor_split(torch.arange(R, device=self.T0[n].device), k)
+            for i, rows in enumerate(parts):
+                g = n if k == 1 else f"{n}#{i}"
+                self.groups.append(g)
+                self.tensor_of[g] = n
+                self.rows[g] = None if k == 1 else rows
+                self.W0[g] = self.T0[n] if k == 1 else self.T0[n][rows].clone()
+        self.slices_of = {n: [g for g in self.groups if self.tensor_of[g] == n] for n in self.tensors}
+        self.mod = {g: self.tmod[self.tensor_of[g]] for g in self.groups}
+        self.numel = {g: self.W0[g].numel() for g in self.groups}
         self.N = sum(self.numel.values())
+        self.cur = {g: self.W0[g] for g in self.groups}
         self._qc = {}
 
     def Wq(self, g, fmt):
@@ -164,13 +182,26 @@ class Ctx:
             self._qc[k] = qtensor(self.W0[g], fmt)
         return self._qc[k]
 
+    def _apply(self, n):
+        sl = self.slices_of[n]
+        if len(sl) == 1:
+            self.tmod[n].weight.data = self.cur[sl[0]]
+        else:
+            W = torch.empty_like(self.T0[n])
+            for g in sl:
+                W[self.rows[g]] = self.cur[g]
+            self.tmod[n].weight.data = W
+
     def set(self, alloc):
         """alloc: {group: fmt} (missing groups -> fp32)."""
         for g in self.groups:
-            self.mod[g].weight.data = self.Wq(g, alloc.get(g, "fp32"))
+            self.cur[g] = self.Wq(g, alloc.get(g, "fp32"))
+        for n in self.tensors:
+            self._apply(n)
 
     def set_one(self, g, W):
-        self.mod[g].weight.data = W
+        self.cur[g] = W
+        self._apply(self.tensor_of[g])
 
     def bits(self, alloc):
         return sum(self.numel[g] * fmt_bits(alloc.get(g, "fp32"), self.W0[g]) if alloc.get(g, "fp32") != "fp32"
@@ -308,7 +339,7 @@ class ScoreSet:
         Micro-batches of `mb` inputs (the double-backward graph of a recursion is large)."""
         ctx = self.ctx
         ctx.set({})
-        params = [ctx.mod[g].weight for g in ctx.groups]
+        params = [ctx.tmod[n].weight for n in ctx.tensors]
         for p_ in params:
             p_.requires_grad_(True)
         tr = {g: 0.0 for g in ctx.groups}
@@ -337,14 +368,22 @@ class ScoreSet:
                     else:
                         tflat = c["logits"][sl].argmax(-1)
                     loss = F.cross_entropy(lg[msk], tflat[msk], reduction="sum") / msk.sum()
-                    grads = torch.autograd.grad(loss, params, create_graph=True)
+                    gl = torch.autograd.grad(loss, params, create_graph=True, allow_unused=True)
+                    used_i = [i for i, g_ in enumerate(gl) if g_ is not None]      # q_head is not in the answer loss
+                    grads = [gl[i] for i in used_i]
+                    pu = [params[i] for i in used_i]
                     for k in range(n_vec):
-                        vs = [torch.randint(0, 2, p_.shape, generator=gen, device=DEV).float() * 2 - 1 for p_ in params]
-                        Hv = torch.autograd.grad(grads, params, grad_outputs=vs, retain_graph=k < n_vec - 1)
-                        for g, v, h in zip(ctx.groups, vs, Hv):
-                            tr[g] += float((v * h).sum()) * nb / n_vec
+                        vs = [torch.randint(0, 2, p_.shape, generator=gen, device=DEV).float() * 2 - 1 for p_ in pu]
+                        Hv = torch.autograd.grad(grads, pu, grad_outputs=vs, retain_graph=k < n_vec - 1, allow_unused=True)
+                        for n, v, h in zip([ctx.tensors[i] for i in used_i], vs, Hv):
+                            if h is None:
+                                continue
+                            vh = (v * h).reshape(h.shape[0], -1).sum(1)
+                            for g in ctx.slices_of[n]:
+                                r_ = ctx.rows[g]
+                                tr[g] += float(vh.sum() if r_ is None else vh[r_].sum()) * nb / n_vec
                         del Hv
-                del grads, loss, lg, z
+                del grads, gl, loss, lg, z
                 torch.cuda.empty_cache()
         for p_ in params:
             p_.requires_grad_(False)
@@ -355,16 +394,54 @@ class ScoreSet:
 CLIPS = [round(x, 3) for x in np.linspace(0.25, 1.0, 16)]
 
 
-def choose_clips(ctx, S, lo, hi, how):
-    """Per group, the clip ratio of the low format: 'mse' = min ||Q(W) - W||^2 (data-free), 'dT' = min
-    delta_T with only this group at the low format and the rest high (label-free, unlabeled inputs)."""
+@torch.no_grad()
+def layer_inputs(ctx, S, max_rows=8192):
+    """Inputs each tensor sees on the fp32 trajectory of the scoring puzzles (rows subsampled)."""
+    got = {n: [] for n in ctx.tensors}
+    hs = []
+    for n in ctx.tensors:
+        def hook(mod, args, n=n):
+            x = args[0].detach().reshape(-1, args[0].shape[-1]) if ctx.family != "dt" else None
+            if x is not None:
+                idx = torch.randint(0, x.shape[0], (min(512, x.shape[0]),), device=x.device)
+                got[n].append(x[idx].float())
+        hs.append(ctx.tmod[n].register_forward_pre_hook(hook))
+    ctx.set({})
+    for c in S.chunks:
+        Fn = ctx.rec(c["x"])
+        z = Fn.z0()
+        for _ in range(ctx.T):
+            z = Fn(z)
+        ctx.logits(Fn, z)
+        ctx.m.inner.q_head(z[:, 0, 0]) if ctx.family != "dt" else None
+    for h in hs:
+        h.remove()
     out = {}
+    for n, L in got.items():
+        X = torch.cat(L) if L else None
+        if X is not None and X.shape[0] > max_rows:
+            X = X[torch.randperm(X.shape[0], device=X.device)[:max_rows]]
+        out[n] = X
+    return out
+
+
+def choose_clips(ctx, S, lo, hi, how):
+    """Per group, the clip ratio of the low format: 'mse' = min ||Q(W) - W||^2 (data-free), 'omse' = min
+    ||X (Q(W) - W)^T||^2 on the layer's own inputs along the fp32 trajectory (standard data-aware PTQ), 'dT' =
+    min delta_T with only this group at the low format and the rest high (label-free, unlabeled inputs)."""
+    out = {}
+    X = layer_inputs(ctx, S) if how == "omse" else None
     for g in ctx.groups:
         best, bv = 1.0, float("inf")
         for r in CLIPS:
             f = f"{lo}@{r}"
             if how == "mse":
                 v = float((ctx.Wq(g, f) - ctx.W0[g]).float().pow(2).sum())
+            elif how == "omse":
+                Xg = X[ctx.tensor_of[g]]
+                D = (ctx.Wq(g, f) - ctx.W0[g]).float()
+                v = float((Xg @ D.reshape(D.shape[0], -1).T).pow(2).sum()) if Xg is not None else \
+                    float(D.pow(2).sum())
             else:
                 v = S.delta_T({**{h: hi for h in ctx.groups}, g: f})
             if v < bv:
@@ -373,9 +450,10 @@ def choose_clips(ctx, S, lo, hi, how):
     return out
 
 
-def group_scores(ctx, S, lo, hi, sigma0, draws, want, log):
-    """{score name: {group: value}}; larger = more damage at the low format."""
-    out = {}
+def group_scores(ctx, S, lo, hi, sigma0, draws, want, log, out=None):
+    """{score name: {group: value}}; larger = more damage at the low format. `out`: partial results to reuse."""
+    out = out if out is not None else {}
+    want = {w for w in want if w not in out or (w in ("lin", "dT_traj") and "lin" not in out)}
     base_hi = {g: hi for g in ctx.groups}
     if "dT_q" in want:
         out["dT_q"] = {g: S.delta_T({**base_hi, g: lo[g]}) for g in ctx.groups}
@@ -459,13 +537,16 @@ def order_by(score, ctx, lo, hi):
     return sorted(ctx.groups, key=lambda g: -(score[g] / max(cost[g], 1e-12)))
 
 
-def alloc_for_budget(ctx, order, lo, hi, budget):
-    """Keep groups high in `order` while the average bits stay <= budget (skip the ones that do not fit)."""
+def alloc_for_budget(ctx, order, lo, hi, budget, prefix=False):
+    """Keep groups high in `order` while the average bits stay <= budget: skip the ones that do not fit
+    (knapsack fill), or, with prefix=True, stop at the first one that does not fit (tests the ranking)."""
     alloc = dict(lo)
     for g in order:
         trial = {**alloc, g: hi}
         if ctx.bits(trial) <= budget + 1e-9:
             alloc = trial
+        elif prefix:
+            break
     return alloc
 
 
@@ -486,7 +567,12 @@ def main():
     ap.add_argument("--budgets", default="", help="average-bit targets; default lo+{0.1,0.25,0.5,1,2}")
     ap.add_argument("--uniform", default="", help="uniform baseline formats")
     ap.add_argument("--random_draws", type=int, default=5)
-    ap.add_argument("--clip", default="none", choices=["none", "mse", "dT"],
+    ap.add_argument("--ckpt", default="", help="TRM: a trained variant's step_N file (arch from its all_config.yaml)")
+    ap.add_argument("--split", type=int, default=1, help="groups = k output-channel slices per tensor")
+    ap.add_argument("--singles", type=int, default=1, help="evaluate every tensor alone low / alone high")
+    ap.add_argument("--xfer", default="", help="another run's output JSON: evaluate its allocation orders here (seed transfer)")
+    ap.add_argument("--clips_from", default="", help="use the clip ratios chosen in another run (seed transfer)")
+    ap.add_argument("--clip", default="none", choices=["none", "mse", "omse", "dT"],
                     help="clip ratio of the low format per group: none (absmax), mse (data-free), dT (label-free)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
@@ -524,7 +610,11 @@ def main():
         tmp.replace(out)
 
     t0 = time.time()
-    ctx = Ctx(a.task, T, batch)
+    if a.ckpt:
+        bs.CKPT_OVERRIDE = a.ckpt
+        blob["ckpt"] = a.ckpt
+    ctx = Ctx(a.task, T, batch, split=a.split)
+    blob["split"] = a.split
     blob["groups"] = [{"name": g, "numel": ctx.numel[g], "shape": list(ctx.W0[g].shape),
                        "bits_lo": fmt_bits(a.lo, ctx.W0[g]), "bits_hi": fmt_bits(a.hi, ctx.W0[g])} for g in ctx.groups]
     print(f"{a.task} ({ctx.family}): {len(ctx.groups)} groups, {ctx.N} weights, T={T}, eval n={a.n}, "
@@ -569,7 +659,13 @@ def main():
         print(f"  score {name}: top {[(g, round(d[g], 5)) for g in top]} ({time.time()-ts:.0f}s)", flush=True)
 
     # low format per group (optionally with a chosen clip ratio)
-    if a.clip == "none":
+    if a.clips_from:
+        src = json.load(open(a.clips_from))
+        blob["clips"] = src["clips"]
+        blob["clips_from"] = a.clips_from
+        LO = {g: f"{a.lo}@{blob['clips'][g]}" for g in ctx.groups}
+        evaluate(f"uniform_lo_clip:xfer", dict(LO), {"method": "uniform", "fmt": f"{a.lo}+clip_from_{Path(a.clips_from).stem}"})
+    elif a.clip == "none":
         LO = {g: a.lo for g in ctx.groups}
     else:
         if "clips" not in blob:
@@ -584,7 +680,12 @@ def main():
     # scores (on the unlabeled scoring inputs)
     if "scores" not in blob or set(blob.get("score_list", [])) != want:
         S = S or ScoreSet(ctx, sc_inp, sc_lab)
-        sc = group_scores(ctx, S, LO, a.hi, a.sigma0, a.draws, want, log)
+        part = blob.setdefault("scores_partial", {})
+
+        def log2(name, d):
+            log(name, d)
+            save()
+        sc = group_scores(ctx, S, LO, a.hi, a.sigma0, a.draws, want, log2, out=part)
         max_b = fmt_bits(a.hi, next(iter(ctx.W0.values())))
         gorder, gtrace = greedy_dT(ctx, S, LO, a.hi, max_b)
         sc["dT_greedy_order"], sc["dT_greedy_trace"] = gorder, gtrace
@@ -610,12 +711,28 @@ def main():
     for d in range(a.random_draws):
         orders[f"random{d}"] = [ctx.groups[i] for i in rng.permutation(len(ctx.groups))]
     blob["orders"] = orders
+    # ground truth for the score comparison: accuracy with one tensor alone low (rest high) / alone high
+    if a.singles and len(ctx.groups) <= 40:
+        for g in ctx.groups:
+            evaluate(f"single_lo:{g}", {**{h: a.hi for h in ctx.groups}, g: LO[g]}, {"method": "single_lo", "group": g})
+            evaluate(f"single_hi:{g}", {**LO, g: a.hi}, {"method": "single_hi", "group": g})
+    if a.xfer:
+        src = json.load(open(a.xfer))
+        assert [g["name"] for g in src["groups"]] == ctx.groups, "transfer needs the same tensor names"
+        for name in ("dT_q", "dT_noise", "kl", "lin", "hawq", "dT_greedy"):
+            if name in src.get("orders", {}):
+                orders[f"xfer_{name}"] = src["orders"][name]
+        blob["xfer_from"] = a.xfer
     for B in budgets:
         for name, order in orders.items():
             alloc = alloc_for_budget(ctx, order, LO, a.hi, B)
             key = "alloc:" + ",".join(sorted(g for g in ctx.groups if alloc[g] == a.hi))
             evaluate(key, alloc, {"method": "mixed"})
             blob.setdefault("curve", {}).setdefault(name, {})[f"{B:.3f}"] = key
+            alloc = alloc_for_budget(ctx, order, LO, a.hi, B, prefix=True)
+            key = "alloc:" + ",".join(sorted(g for g in ctx.groups if alloc[g] == a.hi))
+            evaluate(key, alloc, {"method": "mixed"})
+            blob.setdefault("curve_prefix", {}).setdefault(name, {})[f"{B:.3f}"] = key
         save()
     print(f"done ({time.time()-t0:.0f}s)", flush=True)
 

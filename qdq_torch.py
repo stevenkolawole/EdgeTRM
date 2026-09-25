@@ -41,7 +41,23 @@ def _np(t):
 
 
 def load_graph(path):
-    m = onnx.load(str(path), load_external_data=True)
+    """onnx.load with external data read by hand (onnx refuses hard-linked data files, which the shared
+    AI Hub artifacts on p4d are)."""
+    path = Path(path)
+    m = onnx.load(str(path), load_external_data=False)
+    cache = {}
+    for t in m.graph.initializer:
+        if t.data_location != onnx.TensorProto.EXTERNAL:
+            continue
+        info = {e.key: e.value for e in t.external_data}
+        f = path.parent / info["location"]
+        if f not in cache:
+            cache[f] = np.memmap(f, dtype=np.uint8, mode="r")
+        off = int(info.get("offset", 0))
+        n = int(info["length"]) if "length" in info else len(cache[f]) - off
+        t.raw_data = cache[f][off:off + n].tobytes()
+        del t.external_data[:]
+        t.data_location = onnx.TensorProto.DEFAULT
     return m
 
 
@@ -80,6 +96,15 @@ class QDQRunner:
         for n in self.nodes:
             if n.op_type == "Constant":
                 self.const[n.output[0]] = torch.from_numpy(_np(n.attribute[0].t).copy()).to(self.dev)
+        last = {}
+        for i, n in enumerate(self.nodes):
+            for x in n.input:
+                last[x] = i
+        keep = set(self.outputs) | set(self.const)
+        self.free_after = {}
+        for x, i in last.items():
+            if x not in keep:
+                self.free_after.setdefault(i, []).append(x)
         self.enc16 = act_encodings(g)
         self.enc8 = act_encodings(load_graph(path8).graph) if path8 else {}
         self.act_names = sorted(self.enc16)
@@ -117,6 +142,20 @@ class QDQRunner:
     def set_act_encoding(self, name, scale, zp, zp_type, bits_tag):
         """a custom encoding (e.g. 4-bit, or a re-calibrated 8-bit) for one tensor, selectable by bits_tag."""
         self._enc_t[(name, bits_tag)] = self._enc((np.asarray(scale, np.float32), np.asarray(zp, np.float64), zp_type, 1))
+
+    def matmul_weights(self):
+        """float initializer names of the weights that feed a MatMul / Gemm (through their Q/DQ)."""
+        cons = {}
+        for n in self.nodes:
+            for x in n.input:
+                cons.setdefault(x, []).append(n)
+        out = []
+        for qout, qn in self.wq.items():
+            for dq in cons.get(qout, []):
+                if dq.op_type == "DequantizeLinear" and any(c.op_type in ("MatMul", "Gemm") for c in cons.get(dq.output[0], [])):
+                    out.append(qn.input[0])
+                    break
+        return sorted(set(out))
 
     def set_weight_fmt(self, fmts):
         """{weight initializer name: fmt or None (graph's own encoding)}."""
@@ -156,8 +195,11 @@ class QDQRunner:
         env.update(feeds)
         env[""] = None
         fq_out = set()
-        for n in self.nodes:
+        for i_n, n in enumerate(self.nodes):
             op = n.op_type
+            if not return_env and i_n - 1 in self.free_after:
+                for x in self.free_after[i_n - 1]:
+                    env.pop(x, None)
             if op == "Constant":
                 continue
             ins = [env[i] if i else None for i in n.input]
