@@ -23,6 +23,14 @@ for part in general preempt; do
   echo "$part held_or_pending=$n running=$run cap=${CAP[$part]} backlog=$(ls $B/babel_backlog/$part | wc -l)"
   while [ "$n" -lt "${CAP[$part]}" ]; do
     f=$(ls $B/babel_backlog/$part/*.sbatch 2>/dev/null | sort | head -1)
+    # general has room but no general work: borrow preempt work (preempt is congested; general is not)
+    if [ -z "$f" ] && [ "$part" = general ]; then
+      j=$(squeue -u $USER -h -p preempt -t PD -o "%i %r" | grep -v JobHeldUser | awk '$2!="Dependency"{print $1}' | head -1)
+      if [ -n "$j" ] && scontrol update jobid=$j partition=general qos=normal >/dev/null 2>&1; then
+        echo "general MOVED pending preempt job $j"; n=$((n+1)); continue
+      fi
+      f=$(ls $B/babel_backlog/preempt/*.sbatch 2>/dev/null | sort | head -1)
+    fi
     [ -z "$f" ] && { echo "$part EMPTY_BACKLOG"; break; }
     if out=$(sbatch --partition=$part "$f" 2>&1); then
       echo "$part SUBMITTED $(basename $f): $out"; mv "$f" $B/babel_submitted/
