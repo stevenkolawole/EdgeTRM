@@ -1,0 +1,11 @@
+Fri Sep 25 11:19:23 UTC 2026 [q7_evalrun] eval_m6_rescore: --last --rundir /home/ubuntu/q7/ckpt/lambda_mlp_w256_s0 --rundir /home/ubuntu/q7/ckpt/lambda_mlp_w256_s1 --rundir /home/ubuntu/q7/ckpt/lambda_mlp_w256_s2 --rundir /home/ubuntu/q7/ckpt/lambda_attn_w512_s0 --rundir /home/ubuntu/q7/ckpt/lambda_attn_w512_s1 --rundir /home/ubuntu/q7/ckpt/ft_fp32_s0 --rundir /home/ubuntu/q7/ckpt/qat_naive_s0 --rundir /home/ubuntu/q7/ckpt/qat_naive_s1 --rundir /home/ubuntu/q7/ckpt/qat_naive_s2 --rundir /home/ubuntu/q7/ckpt/qat_lsq_s0 --rundir /home/ubuntu/q7/ckpt/qat_lsq_s1 --rundir /home/ubuntu/q7/ckpt/qat_lsq_s2 --rundir /home/ubuntu/q7/ckpt/gqatft_s0 --rundir /home/ubuntu/q7/ckpt/q7_lclip_s0 --rundir /home/ubuntu/q7/ckpt/q7_lclip_s1 --rundir /home/ubuntu/q7/ckpt/noiseft_s0 --rundir /home/ubuntu/q7/ckpt/q7_base_s0 --rundir /home/ubuntu/q7/ckpt/q7_base_s1
+[q7_eval] lambda_mlp_w256_s0/step_65100: fp32 59.9 w4t 0.0 (fidH 0.220) S0.02 1.25 S0.1 1.28 jac_fro2 0.168; 0 cells in 44s
+[q7_eval] lambda_mlp_w256_s1/step_65100: fp32 62.3 w4t 0.0 (fidH 0.154) S0.02 2.04 S0.1 2.10 jac_fro2 0.197; 0 cells in 42s
+[q7_eval] lambda_mlp_w256_s2/step_65100: fp32 64.0 w4t 0.0 (fidH 0.209) S0.02 1.28 S0.1 1.35 jac_fro2 0.142; 0 cells in 34s
+[q7_eval] lambda_attn_w512_s0/step_65100: fp32 64.8 w4t 65.5 (fidH 0.888) S0.02 0.70 S0.1 0.72 jac_fro2 0.231; 6 cells in 421s
+[q7_eval] lambda_attn_w512_s1/step_65100: fp32 62.9 w4t 59.5 (fidH 0.837) S0.02 0.82 S0.1 0.82 jac_fro2 0.262; 6 cells in 524s
+[q7_eval] qat_naive_s2/step_12000: fp32 9.9 w4t 56.4 (fidH 0.712/ref 0.879) S0.02 1.29 S0.1 1.27 Sq0.1 0.90 jac_fro2 0.227; 42 cells in 1062s
+[q7_eval] qat_lsq_s0/step_12000: fp32 56.0 w4t 58.8 (fidH 0.882/ref 0.732) w4lsq 55.9 (fidH 0.897/ref 0.750) S0.02 0.91 S0.1 0.88 Sq0.1 0.97 jac_fro2 0.172; 0 cells in 71s
+[q7_eval] qat_lsq_s1/step_12000: fp32 63.6 w4t 61.0 (fidH 0.921/ref 0.680) w4lsq 60.6 (fidH 0.925/ref 0.691) S0.02 1.21 S0.1 1.20 Sq0.1 1.32 jac_fro2 0.176; 0 cells in 71s
+[q7_eval] qat_lsq_s2/step_12000: fp32 62.1 w4t 56.7 (fidH 0.897/ref 0.647) w4lsq 59.3 (fidH 0.900/ref 0.649) S0.02 0.96 S0.1 0.95 Sq0.1 1.01 jac_fro2 0.146; 0 cells in 72s
+Fri Sep 25 11:58:28 UTC 2026 [q7_evalrun] eval_m6_rescore exited rc=0

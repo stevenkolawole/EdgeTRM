@@ -1,0 +1,34 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 11:59:11 UTC 2026 [q7_train] ft_fp32_b0 seed=3 host=ip-172-31-15-144 cuda=3 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/q7/ckpt/q7_base_s0/step_65100
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/q7/ckpt/q7_base_s0/step_65100
+Setup EMA
+  0%|          | 0/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_115916-11kecrb9
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  1%|          | 107/12000 [01:00<1:51:20,  1.78it/s]  1%|▏         | 157/12000 [01:20<1:50:52,  1.78it/s]  2%|▏         | 261/12000 [02:00<1:27:25,  2.24it/s]  3%|▎         | 311/12000 [02:20<1:27:03,  2.24it/s]  3%|▎         | 415/12000 [03:00<1:21:01,  2.38it/s]  4%|▍         | 464/12000 [03:20<1:20:40,  2.38it/s]  5%|▍         | 569/12000 [04:00<1:17:42,  2.45it/s]  5%|▌         | 618/12000 [04:20<1:17:22,  2.45it/s]  6%|▌         | 723/12000 [05:01<1:15:31,  2.49it/s]  6%|▋         | 771/12000 [05:20<1:15:11,  2.49it/s]  7%|▋         | 877/12000 [06:01<1:13:48,  2.51it/s]  8%|▊         | 924/12000 [06:20<1:13:30,  2.51it/s]  9%|▊         | 1031/12000 [07:01<1:12:22,  2.53it/s]  9%|▉         | 1078/12000 [07:20<1:12:03,  2.53it/s]

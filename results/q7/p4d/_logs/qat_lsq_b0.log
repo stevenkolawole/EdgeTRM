@@ -1,0 +1,50 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 11:24:32 UTC 2026 [q7_train] qat_lsq_b0 seed=3 host=ip-172-31-15-144 cuda=3 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/q7/ckpt/q7_base_s0/step_65100 +q7_reg=lsq +q7_bits=4
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/q7/ckpt/q7_base_s0/step_65100
+[q7] LSQ installed: 10 step sizes
+Setup EMA
+  0%|          | 0/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_112437-p4lunl67
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  0%|          | 1/12000 [01:02<208:42:43, 62.62s/it]  1%|▏         | 155/12000 [02:02<2:12:48,  1.49it/s]  2%|▏         | 198/12000 [02:20<2:12:19,  1.49it/s]  3%|▎         | 309/12000 [03:03<1:38:50,  1.97it/s]  3%|▎         | 351/12000 [03:20<1:38:28,  1.97it/s]  4%|▍         | 463/12000 [04:03<1:27:22,  2.20it/s]  4%|▍         | 505/12000 [04:20<1:27:03,  2.20it/s]  5%|▌         | 616/12000 [05:03<1:21:40,  2.32it/s]  5%|▌         | 658/12000 [05:20<1:21:22,  2.32it/s]  6%|▋         | 772/12000 [06:03<1:17:34,  2.41it/s]  7%|▋         | 812/12000 [06:20<1:17:17,  2.41it/s]  8%|▊         | 925/12000 [07:03<1:15:07,  2.46it/s]  8%|▊         | 965/12000 [07:20<1:14:51,  2.46it/s]  9%|▉         | 1078/12000 [08:03<1:13:13,  2.49it/s]  9%|▉         | 1118/12000 [08:20<1:12:57,  2.49it/s] 10%|█         | 1232/12000 [09:04<1:11:32,  2.51it/s] 11%|█         | 1272/12000 [09:20<1:11:16,  2.51it/s] 12%|█▏        | 1384/12000 [10:04<1:10:21,  2.51it/s] 12%|█▏        | 1425/12000 [10:20<1:10:05,  2.51it/s] 13%|█▎        | 1537/12000 [11:04<1:09:03,  2.52it/s] 13%|█▎        | 1576/12000 [11:20<1:08:48,  2.52it/s] 14%|█▍        | 1691/12000 [12:04<1:07:46,  2.53it/s] 14%|█▍        | 1730/12000 [12:20<1:07:31,  2.53it/s] 15%|█▌        | 1846/12000 [13:04<1:06:29,  2.55it/s] 16%|█▌        | 1884/12000 [13:20<1:06:14,  2.55it/s] 17%|█▋        | 2001/12000 [14:04<1:05:13,  2.56it/s] 17%|█▋        | 2040/12000 [14:20<1:04:57,  2.56it/s] 18%|█▊        | 2156/12000 [15:05<1:04:06,  2.56it/s] 18%|█▊        | 2193/12000 [15:20<1:03:51,  2.56it/s] 19%|█▉        | 2310/12000 [16:05<1:03:06,  2.56it/s] 20%|█▉        | 2347/12000 [16:20<1:02:51,  2.56it/s] 21%|██        | 2465/12000 [17:05<1:02:01,  2.56it/s] 21%|██        | 2501/12000 [17:20<1:01:47,  2.56it/s] 22%|██▏       | 2619/12000 [18:06<1:01:05,  2.56it/s] 22%|██▏       | 2654/12000 [18:20<1:00:51,  2.56it/s] 23%|██▎       | 2773/12000 [19:06<1:00:05,  2.56it/s] 23%|██▎       | 2808/12000 [19:20<59:51,  2.56it/s]   24%|██▍       | 2930/12000 [20:06<58:40,  2.58it/s] 25%|██▍       | 2964/12000 [20:20<58:27,  2.58it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+[q7_eval] qat_lsq_b0/step_3000: fp32 50.1 w4t 0.0 (fidH 0.405/ref 0.412) w4lsq 51.0 (fidH 0.894/ref 0.897) S0.02 1.02 S0.1 1.02 Sq0.1 0.96 jac_fro2 0.206; 9 cells in 281s
+[Rank 0, World Size 1]: Epoch 2304
+TRAIN
+ 25%|██▌       | 3001/12000 [26:10<2:55:03,  1.17s/it] 25%|██▌       | 3051/12000 [26:30<2:54:05,  1.17s/it] 26%|██▋       | 3156/12000 [27:10<2:13:10,  1.11it/s] 27%|██▋       | 3205/12000 [27:30<2:12:25,  1.11it/s] 28%|██▊       | 3314/12000 [28:11<1:45:52,  1.37it/s] 28%|██▊       | 3361/12000 [28:30<1:45:17,  1.37it/s] 29%|██▉       | 3469/12000 [29:11<1:28:32,  1.61it/s] 29%|██▉       | 3517/12000 [29:30<1:28:02,  1.61it/s] 30%|███       | 3624/12000 [30:11<1:16:44,  1.82it/s] 31%|███       | 3672/12000 [30:30<1:16:18,  1.82it/s] 31%|███▏      | 3779/12000 [31:11<1:08:32,  2.00it/s] 32%|███▏      | 3831/12000 [31:30<1:08:06,  2.00it/s] 33%|███▎      | 3939/12000 [32:12<1:02:00,  2.17it/s] 33%|███▎      | 3987/12000 [32:30<1:01:38,  2.17it/s] 34%|███▍      | 4099/12000 [33:12<57:20,  2.30it/s]   35%|███▍      | 4144/12000 [33:30<57:00,  2.30it/s] 36%|███▌      | 4335/12000 [34:12<46:32,  2.74it/s] 37%|███▋      | 4434/12000 [34:30<45:56,  2.74it/s] 38%|███▊      | 4620/12000 [35:12<37:10,  3.31it/s] 39%|███▉      | 4664/12000 [35:30<36:56,  3.31it/s] 40%|███▉      | 4774/12000 [36:13<38:57,  3.09it/s] 40%|████      | 4817/12000 [36:30<38:43,  3.09it/s] 41%|████      | 4928/12000 [37:13<40:10,  2.93it/s] 41%|████▏     | 4970/12000 [37:30<39:56,  2.93it/s] 42%|████▏     | 5082/12000 [38:13<40:52,  2.82it/s] 43%|████▎     | 5123/12000 [38:30<40:38,  2.82it/s] 44%|████▎     | 5236/12000 [39:14<41:07,  2.74it/s] 44%|████▍     | 5276/12000 [39:30<40:53,  2.74it/s] 45%|████▍     | 5390/12000 [40:14<41:02,  2.68it/s] 45%|████▌     | 5429/12000 [40:30<40:47,  2.68it/s] 46%|████▌     | 5543/12000 [41:14<40:41,  2.64it/s] 47%|████▋     | 5582/12000 [41:30<40:26,  2.64it/s] 47%|████▋     | 5697/12000 [42:14<40:08,  2.62it/s]

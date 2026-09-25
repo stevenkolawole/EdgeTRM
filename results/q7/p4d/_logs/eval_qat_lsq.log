@@ -1,0 +1,14 @@
+Fri Sep 25 10:37:34 UTC 2026 [q7_evalrun] eval_qat_lsq: --rundir /home/ubuntu/q7/ckpt/qat_lsq_s0 --rundir /home/ubuntu/q7/ckpt/qat_lsq_s1 --rundir /home/ubuntu/q7/ckpt/qat_lsq_s2
+[q7_eval] qat_lsq_s0/step_3000: fp32 54.0 w4t 0.0 (fidH 0.428/ref 0.416) w4lsq 54.9 (fidH 0.891/ref 0.889) S0.02 1.23 S0.1 1.28 Sq0.1 1.15 jac_fro2 0.172; 0 cells in 70s
+[q7_eval] qat_lsq_s0/step_6000: fp32 58.0 w4t 20.7 (fidH 0.707/ref 0.672) w4lsq 53.5 (fidH 0.903/ref 0.880) S0.02 1.02 S0.1 1.03 Sq0.1 1.03 jac_fro2 0.166; 0 cells in 69s
+[q7_eval] qat_lsq_s0/step_9000: fp32 57.9 w4t 51.2 (fidH 0.869/ref 0.796) w4lsq 55.3 (fidH 0.892/ref 0.822) S0.02 0.93 S0.1 0.94 Sq0.1 0.96 jac_fro2 0.158; 0 cells in 69s
+[q7_eval] qat_lsq_s0/step_12000: fp32 56.0 w4t 58.8 (fidH 0.882/ref 0.732) w4lsq 55.9 (fidH 0.897/ref 0.750) S0.02 0.91 S0.1 0.88 Sq0.1 0.97 jac_fro2 0.172; 0 cells in 69s
+[q7_eval] qat_lsq_s1/step_3000: fp32 58.0 w4t 0.8 (fidH 0.309/ref 0.289) w4lsq 60.1 (fidH 0.905/ref 0.907) S0.02 1.89 S0.1 1.99 Sq0.1 1.59 jac_fro2 0.204; 0 cells in 69s
+[q7_eval] qat_lsq_s1/step_6000: fp32 63.9 w4t 1.7 (fidH 0.458/ref 0.428) w4lsq 56.9 (fidH 0.920/ref 0.901) S0.02 1.44 S0.1 1.47 Sq0.1 1.41 jac_fro2 0.182; 0 cells in 69s
+[q7_eval] qat_lsq_s1/step_9000: fp32 61.2 w4t 51.6 (fidH 0.888/ref 0.781) w4lsq 58.0 (fidH 0.925/ref 0.823) S0.02 1.33 S0.1 1.37 Sq0.1 1.33 jac_fro2 0.190; 0 cells in 69s
+[q7_eval] qat_lsq_s1/step_12000: fp32 63.6 w4t 61.0 (fidH 0.921/ref 0.680) w4lsq 60.6 (fidH 0.925/ref 0.691) S0.02 1.21 S0.1 1.20 Sq0.1 1.32 jac_fro2 0.176; 0 cells in 69s
+[q7_eval] qat_lsq_s2/step_3000: fp32 57.3 w4t 0.4 (fidH 0.338/ref 0.316) w4lsq 58.3 (fidH 0.893/ref 0.901) S0.02 1.26 S0.1 1.33 Sq0.1 0.98 jac_fro2 0.167; 0 cells in 69s
+[q7_eval] qat_lsq_s2/step_6000: fp32 57.9 w4t 37.2 (fidH 0.823/ref 0.777) w4lsq 59.9 (fidH 0.906/ref 0.890) S0.02 0.99 S0.1 1.00 Sq0.1 0.95 jac_fro2 0.159; 0 cells in 69s
+[q7_eval] qat_lsq_s2/step_9000: fp32 58.7 w4t 57.6 (fidH 0.905/ref 0.796) w4lsq 58.7 (fidH 0.912/ref 0.801) S0.02 0.90 S0.1 0.91 Sq0.1 0.92 jac_fro2 0.151; 0 cells in 69s
+[q7_eval] qat_lsq_s2/step_12000: fp32 62.1 w4t 56.7 (fidH 0.897/ref 0.647) w4lsq 59.3 (fidH 0.900/ref 0.649) S0.02 0.96 S0.1 0.95 Sq0.1 1.01 jac_fro2 0.146; 0 cells in 69s
+Fri Sep 25 10:51:24 UTC 2026 [q7_evalrun] eval_qat_lsq exited rc=0
