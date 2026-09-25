@@ -34,13 +34,16 @@ reap() {  # finished jobs: record exit code; requeue once if it failed within RE
     rc=$(grep -oE 'AUTOFILL_EXIT=[0-9]+' "$ROOT/logs/$tag.log" 2>/dev/null | tail -1 | cut -d= -f2)
     start=$(cat "$ROOT/state/start_$tag" 2>/dev/null || echo 0)
     echo "$(date -u +%FT%TZ) tag=$tag END rc=${rc:-unknown} runtime=$(( $(date +%s) - start ))s" >> "$ROOT/launched.txt"
-    if [ "${rc:-1}" != "0" ] && [ $(( $(date +%s) - start )) -lt "$RETRY_WINDOW" ] && [ ! -e "$ROOT/state/retried_$tag" ] \
-       && [ -s "$ROOT/state/line_$tag" ]; then
-      line=$(cat "$ROOT/state/line_$tag")
-      mv "$ROOT/logs/$tag.log" "$ROOT/logs/$tag.fail1.log"
+    # retry: out-of-memory failures (card contention, transient) up to 3 times at any runtime; other fast failures once
+    local n oom
+    n=$(cat "$ROOT/state/retries_$tag" 2>/dev/null || echo 0)
+    oom=0; grep -qE 'OutOfMemoryError|CUDA out of memory' "$ROOT/logs/$tag.log" 2>/dev/null && oom=1
+    if [ "${rc:-1}" != "0" ] && [ -s "$ROOT/state/line_$tag" ] && \
+       { { [ "$oom" = 1 ] && [ "$n" -lt 3 ]; } || { [ $(( $(date +%s) - start )) -lt "$RETRY_WINDOW" ] && [ "$n" -lt 1 ]; }; }; then
+      n=$((n+1)); echo "$n" > "$ROOT/state/retries_$tag"
+      mv "$ROOT/logs/$tag.log" "$ROOT/logs/$tag.fail$n.log"
       flock "$ROOT/backlog.lock" bash -c "cat '$ROOT/state/line_$tag' >> '$ROOT/backlog.txt'"
-      touch "$ROOT/state/retried_$tag"
-      echo "$(date -u +%FT%TZ) tag=$tag REQUEUED once (fast failure; see logs/$tag.fail1.log)" >> "$ROOT/launched.txt"
+      echo "$(date -u +%FT%TZ) tag=$tag REQUEUED retry=$n oom=$oom (see logs/$tag.fail$n.log)" >> "$ROOT/launched.txt"
     fi
     c=$(cat "$ROOT/state/card_$tag" 2>/dev/null); [ -n "$c" ] && rm -f "$ROOT/state/cool_$c"
     rm -f "$f"
