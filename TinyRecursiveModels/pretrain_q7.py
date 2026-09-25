@@ -106,6 +106,7 @@ class PretrainConfig(pydantic.BaseModel):
     q7_sigma: float = 0.0           # noise: Gaussian weight noise, std = sigma x per-tensor weight std (fresh each step)
                                     # sens: the weight-noise level sigma_p of the sensitivity probe
     q7_sens_sub: int = 64           # sens: examples of the batch used for the probe
+    q7_sens_target: float = 0.0     # sens: hinge, penalise only S above this (0 = plain penalty on S)
     q7_bits: int = 4                # qat: per-tensor symmetric fake-quant bits (straight-through estimator)
     q7_clip_k: float = 0.0          # clip: |W| <= k x per-tensor std after every optimizer step
     q7_eval_batches: int = 3        # in-run eval on the first N test batches (0 = the full 422k test set, upstream behaviour)
@@ -386,7 +387,11 @@ def load_resume_checkpoint(
         print(f"Resuming from checkpoint: {resume_path}")
         payload = torch.load(resume_path, map_location="cuda")
 
-        train_state.model.load_state_dict(payload["model_state_dict"], assign=True)
+        # Q7 FIX (Sep 25): upstream used assign=True here, which REPLACES the parameter objects after the
+        # optimizers were built on the old ones: every resumed run then trained nothing (weights frozen,
+        # AdamW stepping orphaned tensors that never receive gradients). Copy into the existing parameters.
+        missing, unexpected = train_state.model.load_state_dict(payload["model_state_dict"], strict=False)
+        assert not unexpected and all("q7_act_s" in k for k in missing), (missing[:3], unexpected[:3])
         for opt, sd in zip(train_state.optimizers, payload["optimizer_states"]):
             opt.load_state_dict(sd)
         train_state.step = payload["step"]
@@ -730,7 +735,8 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
         (q7_s * config.q7_lambda * config.q7_jac_every * q7_jac).backward()
     if config.q7_reg == "sens" and q7_s > 0 and train_state.step % config.q7_jac_every == 0:
         q7_jac = q7_sensitivity_penalty(config, train_state)       # logged under q7/jac_fro2 = S estimate
-        (q7_s * config.q7_lambda * config.q7_jac_every * q7_jac).backward()
+        pen = torch.relu(q7_jac - config.q7_sens_target) if config.q7_sens_target > 0 else q7_jac
+        (q7_s * config.q7_lambda * config.q7_jac_every * pen).backward()
 
     # Allreduce
     if world_size > 1:

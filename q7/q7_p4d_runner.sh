@@ -71,7 +71,11 @@ while true; do
     cands=$CARDS; case " $CARDS " in *" $card "*) cands=$card ;; esac
     for c in $cands; do
       np=$(card_procs "$c")
-      if [ "$np" -lt 2 ] && [ "$np" -lt "$best" ]; then best=$np; target=$c; fi
+      # memory guard as well: a run needs up to ~20 GB (sens penalty); a run launched < 2 min ago may not
+      # have allocated yet, so a card with any launch in the last 120 s is skipped
+      fm=$(nvidia-smi --query-gpu=index,memory.free --format=csv,noheader,nounits | awk -F', ' -v c="$c" '$1==c{print $2}')
+      recent=$(find "$PIDS" -name '*.card' -newermt '-120 seconds' -exec grep -lx "$c" {} + 2>/dev/null | wc -l)
+      if [ "$np" -lt 2 ] && [ "${fm:-0}" -ge 20000 ] && [ "$recent" -eq 0 ] && [ "$np" -lt "$best" ]; then best=$np; target=$c; fi
     done
     [ -z "$target" ] && continue
     script=q7_train.sh; [ "${run#eval_}" != "$run" ] && script=q7_evalrun.sh

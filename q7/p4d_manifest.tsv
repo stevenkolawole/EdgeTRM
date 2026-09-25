@@ -2,18 +2,25 @@
 3	q7_base_s0	0	-	+q7_fork_iters=[7]
 4	q7_base_s1	1	-	+q7_fork_iters=[7]
 A	sensft_s0	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_ramp_steps=500 +q7_start_step=0
+A	sensft_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_ramp_steps=500 +q7_start_step=0
+A	sensfth_s0	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_jac_every=4 +q7_ramp_steps=500 +q7_start_step=0
 A	gqatft_s0	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_ramp_steps=6000
 A	ft_fp32_s0	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
-A	sensft_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_ramp_steps=500 +q7_start_step=0
+A	sensfth_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_jac_every=4 +q7_ramp_steps=500 +q7_start_step=0
 A	gqatft_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_ramp_steps=6000
 A	ft_fp32_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100
-A	sensft_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_ramp_steps=500 +q7_start_step=0
+A	sensfth_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_jac_every=4 +q7_ramp_steps=500 +q7_start_step=0
 A	gqatft_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_ramp_steps=6000
 A	ft_fp32_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100
-A	q7_base_s2	2	-	+q7_fork_iters=[7]
 A	eval_qat_naive_s0	0	/home/ubuntu/q7/ckpt/qat_naive_s0/DONE	qat_naive_s0
 A	eval_qat_naive_s1	1	/home/ubuntu/q7/ckpt/qat_naive_s1/DONE	qat_naive_s1
 A	eval_qat_naive_s2	2	/home/ubuntu/q7/ckpt/qat_naive_s2/DONE	qat_naive_s2
+A	q7_lsens_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_jac_every=4 +q7_ramp_steps=2000 +q7_start_step=52080
+A	q7_lsens_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.7 +q7_jac_every=4 +q7_ramp_steps=2000 +q7_start_step=52080
+A	q7_lgqat_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=qat +q7_bits=4 +q7_start_step=52080 +q7_ramp_steps=6000
+A	q7_lgqat_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=qat +q7_bits=4 +q7_start_step=52080 +q7_ramp_steps=6000
+A	q7_lsens2_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=sens +q7_sigma=0.1 +q7_lambda=1.0 +q7_sens_target=0.35 +q7_jac_every=4 +q7_ramp_steps=2000 +q7_start_step=52080
+A	q7_lsens01_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.05 +q7_jac_every=4 +q7_ramp_steps=2000 +q7_start_step=52080
 A	zz_smoke_sens	0	-	epochs=10 eval_interval=5 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_eval_n=100
 A	zz_smoke_gqat	0	-	epochs=10 eval_interval=5 +q7_reg=qat +q7_bits=4 +q7_start_step=2 +q7_ramp_steps=6 +q7_eval_n=100
 A	eval_lambda_S	0	-	lambda_mlp_w256_s0 lambda_mlp_w256_s1 lambda_mlp_w256_s2 lambda_attn_w512_s0 lambda_attn_w512_s1
@@ -23,26 +30,12 @@ A	qat_naive_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_chec
 A	qat_lsq_s0	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=lsq +q7_bits=4
 A	qat_lsq_s1	1	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=lsq +q7_bits=4
 A	qat_lsq_s2	2	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s2/step_65100 +q7_reg=lsq +q7_bits=4
-A	q7_lsens_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt,/home/ubuntu/q7/ckpt/zz_smoke_sens/DONE	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_ramp_steps=2000 +q7_start_step=52080
-A	q7_lsens_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt,/home/ubuntu/q7/ckpt/zz_smoke_sens/DONE	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_ramp_steps=2000 +q7_start_step=52080
-A	q7_lsens_s2	2	/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt,/home/ubuntu/q7/ckpt/zz_smoke_sens/DONE	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.5 +q7_ramp_steps=2000 +q7_start_step=52080
-A	q7_gqat_s0	0	/home/ubuntu/q7/ckpt/zz_smoke_gqat/DONE	+q7_reg=qat +q7_bits=4 +q7_start_step=13020 +q7_ramp_steps=26040
-A	q7_gqat_s1	1	/home/ubuntu/q7/ckpt/zz_smoke_gqat/DONE	+q7_reg=qat +q7_bits=4 +q7_start_step=13020 +q7_ramp_steps=26040
-A	q7_gqat_s2	2	/home/ubuntu/q7/ckpt/zz_smoke_gqat/DONE	+q7_reg=qat +q7_bits=4 +q7_start_step=13020 +q7_ramp_steps=26040
-A	q7_lgqat_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=qat +q7_bits=4 +q7_start_step=52080 +q7_ramp_steps=6000
-A	q7_lgqat_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=qat +q7_bits=4 +q7_start_step=52080 +q7_ramp_steps=6000
-A	q7_lgqat_s2	2	/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt +q7_reg=qat +q7_bits=4 +q7_start_step=52080 +q7_ramp_steps=6000
 A	q7_lqat_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=qat +q7_bits=4 +q7_start_step=52080
 A	q7_lqat_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=qat +q7_bits=4 +q7_start_step=52080
-A	q7_lqat_s2	2	/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt +q7_reg=qat +q7_bits=4 +q7_start_step=52080
 A	q7_lclip_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=clip +q7_clip_k=3 +q7_ramp_steps=2000 +q7_start_step=52080
 A	q7_lclip_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=clip +q7_clip_k=3 +q7_ramp_steps=2000 +q7_start_step=52080
-A	q7_lclip_s2	2	/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt +q7_reg=clip +q7_clip_k=3 +q7_ramp_steps=2000 +q7_start_step=52080
 A	q7_lnoise_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=noise +q7_sigma=0.3 +q7_ramp_steps=2000 +q7_start_step=52080
 A	q7_lnoise_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=noise +q7_sigma=0.3 +q7_ramp_steps=2000 +q7_start_step=52080
-A	q7_lnoise_s2	2	/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s2/resume_iter7.pt +q7_reg=noise +q7_sigma=0.3 +q7_ramp_steps=2000 +q7_start_step=52080
-A	q7_lsens2_s0	0	/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt,/home/ubuntu/q7/ckpt/zz_smoke_sens/DONE	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s0/resume_iter7.pt +q7_reg=sens +q7_sigma=0.1 +q7_lambda=2.0 +q7_ramp_steps=2000 +q7_start_step=52080
-A	q7_lsens01_s1	1	/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt,/home/ubuntu/q7/ckpt/zz_smoke_sens/DONE	+q7_fork_from=/home/ubuntu/q7/ckpt/q7_base_s1/resume_iter7.pt +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.1 +q7_ramp_steps=2000 +q7_start_step=52080
 A	zz_smoke_a4	0	-	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=lsq +q7_bits=4 +q7_act_bits=4 +q7_max_steps=60 +q7_eval_n=100
 A	qat_naive_a4_s0	0	/home/ubuntu/q7/ckpt/zz_smoke_a4/DONE	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_act_bits=4
 A	qat_naive_a4_s1	1	/home/ubuntu/q7/ckpt/zz_smoke_a4/DONE	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_act_bits=4
