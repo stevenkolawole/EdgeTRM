@@ -33,7 +33,10 @@ import numpy as np
 RULES = ("random", "maxq", "vote", "qvote", "hfirst", "maxq_any", "chk", "pass", "pass_any")
 
 
-def load_index(root):
+OFFSET = 0          # test-row offset of the cells a command reads (set from --offset; held-out sets use 1000)
+
+
+def load_index(root, any_offset=False):
     recs = []
     for f in sorted(Path(root).glob("index*.jsonl")):
         for line in open(f):
@@ -46,7 +49,8 @@ def load_index(root):
         if r["file"] in seen:
             continue
         seen.add(r["file"])
-        out.append(r)
+        if any_offset or r.get("offset", 0) == OFFSET:
+            out.append(r)
     return out
 
 
@@ -304,9 +308,9 @@ def cmd_compute(a):
     for (task, spec), rs in sorted(by.items()):
         if a.task and task != a.task:
             continue
-        seqs = sorted([r for r in rs if r["noise"] == "none"], key=lambda r: -r["D"])
-        pars = sorted([r for r in rs if r["K"] > 1 and r["D"] == 16 and abs(r["sigma"] - a.sigma_main) < 1e-9], key=lambda r: -r["K"])
-        hybs = sorted([r for r in rs if r["K"] > 1 and r["D"] > 16 and abs(r["sigma"] - a.sigma_main) < 1e-9], key=lambda r: -r["D"])
+        seqs = sorted([r for r in rs if r["noise"] == "none" and r["K"] == 1], key=lambda r: -r["D"])
+        pars = sorted([r for r in rs if r["K"] > 1 and r["D"] == 16 and abs(r["sigma"] - a.sigma_main) < 1e-9 and r.get("wsample", "none") == "none"], key=lambda r: -r["K"])
+        hybs = sorted([r for r in rs if r["K"] > 1 and r["D"] > 16 and abs(r["sigma"] - a.sigma_main) < 1e-9 and r.get("wsample", "none") == "none"], key=lambda r: -r["D"])
         if not seqs or not pars:
             continue
         kind = kind_of(task)
@@ -349,7 +353,7 @@ def cmd_compute(a):
 def _det_stats(root, recs, task, spec, n):
     """Deterministic cell (noise none, D >= 16): exact at step 16, at the max-q step <= 16, any step <= 16, at step 64."""
     for r in recs:
-        if r["task"] == task and r["spec"] == spec and r["noise"] == "none" and r["D"] >= 16 and r["n"] == n:
+        if r["task"] == task and r["spec"] == spec and r["noise"] == "none" and r["D"] >= 16 and r["n"] == n and r["K"] == 1:
             c = load_cell(root, r)
             C = c["corr"][0].astype(bool); Q = c["q"][0].astype(np.float32)
             ar = np.arange(C.shape[0])
@@ -365,7 +369,7 @@ def cmd_main(a):
     det = deterministic step 16 | det max-Q step | best-Q@K | maxq_any@K | pass@K | vote@K | fp32 polish."""
     recs = load_index(a.root)
     main = [r for r in recs if r["noise"] == "ptrm" and abs(r["sigma"] - a.sigma_main) < 1e-9 and r["D"] == 16 and r["n"] == a.n
-            and r.get("polish", 0) == a.main_polish and r.get("polish_from", "last") == "last"]
+            and r.get("polish", 0) == a.main_polish and r.get("polish_from", "last") == "last" and r.get("wsample", "none") == "none"]
     tasks = sorted({r["task"] for r in main}) if not a.task else [a.task]
     Ks = (1, 4, 8, 16, 32)
     for task in tasks:
@@ -458,7 +462,7 @@ def cmd_exit(a):
     against fixed best-Q@K (16 K steps) and the deterministic 16-step model."""
     recs = [r for r in load_index(a.root) if r["noise"] == "ptrm" and abs(r["sigma"] - a.sigma_main) < 1e-9 and r["D"] == 16
             and r["n"] == a.n and r.get("polish", 0) == a.main_polish and r.get("polish_from", "last") == "last"
-            and (not a.task or r["task"] == a.task) and kind_of(r["task"]) == "sudoku"]
+            and (not a.task or r["task"] == a.task) and kind_of(r["task"]) == "sudoku" and r.get("wsample", "none") == "none"]
     print("task spec K | best-Q@K (steps 16K) | exit thr=0: K_max 1 / 4 / 16 / K  acc (mean steps) | thr=-2 K_max K | thr=+2 K_max K")
     for r in sorted(recs, key=lambda r: (r["task"], r["spec"])):
         c = load_cell(a.root, r)
@@ -475,6 +479,50 @@ def cmd_exit(a):
         e2, s2 = sample_until_confident(C, Q, 2.0, K)
         print(f"{r['task']:11s} {r['spec']:13s} K{K:2d} | {100*bq:5.1f} ({16*K}) | " + " / ".join(parts) +
               f" | {100*e1.mean():5.1f} ({s1.mean():5.1f}) | {100*e2.mean():5.1f} ({s2.mean():5.1f})")
+
+
+def cmd_wsample(a):
+    """Quantization as the sampler: K stochastic-rounding draws of one master (draw 0 = round-to-nearest), each run
+    deterministically (or with kicks), selected by the halting head. Matched-compute references at S = 16 K steps:
+    fp32 one trajectory of S steps (seq), fp32 PTRM kicks best-Q@K (par), and PTRM kicks on the RTN model."""
+    recs = load_index(a.root)
+    sr = [r for r in recs if r.get("wsample", "none") != "none" and (not a.task or r["task"] == a.task)]
+    Ks = (1, 2, 4, 8, 16)
+
+    def ref_seq(task, S):
+        for r in recs:
+            if r["task"] == task and r["spec"] == "fp32" and r["noise"] == "none" and r["K"] == 1 and r["D"] >= S and r["n"] == a.n:
+                c = load_cell(a.root, r)
+                return float(c["corr"][0, :, S - 1].mean())
+        return None
+
+    def ref_par(task, spec, K):
+        for r in recs:
+            if (r["task"] == task and r["spec"] == spec and r["noise"] == "ptrm" and abs(r["sigma"] - 0.3) < 1e-9 and r["D"] == 16
+                    and r["K"] >= K and r["n"] == a.n and r.get("wsample", "none") == "none" and r.get("polish_from", "last") == "last"):
+                c = load_cell(a.root, r)
+                return float(np.mean(select(c, kind_of(task), K, 16, rules=("maxq",))["maxq"][a.metric if "maze" in task else "exact"]))
+        return None
+    print(f"offset {OFFSET}, n {a.n}. per K: best-Q (max-Q over (draw, step)) [pass]; refs at S = 16K: fp32 seq / fp32 kicks best-Q / RTN-model kicks best-Q")
+    for r in sorted(sr, key=lambda r: (r["task"], r["noise"], r["spec"])):
+        if r["n"] != a.n:
+            continue
+        c = load_cell(a.root, r)
+        kind = kind_of(r["task"])
+        mk = a.metric if kind == "maze" else "exact"
+        C = c["corr"][:, :, 15].astype(bool)
+        rtn = C[0].mean() if r["wsample"] == "sr0" else float("nan")
+        srs = C[1:].mean() if r["wsample"] == "sr0" else C.mean()
+        print(f"{r['task']:11s} {r['spec']:6s} {r['wsample']} {r['noise']}{r['sigma']:g}: RTN det {100*rtn:5.1f}, SR single {100*srs:5.1f} [{100*C.mean(1).min():.1f}-{100*C.mean(1).max():.1f}]")
+        for k in Ks:
+            if k > r["K"]:
+                continue
+            rules = ("maxq", "maxq_any", "pass") if mk == "exact" else ("maxq", "pass")
+            sel = select(c, kind, k, 16, rules=rules)
+            mqa = f" ({100*np.mean(sel['maxq_any']['exact']):5.1f})" if "maxq_any" in sel else ""
+            sq, pr, pq = ref_seq(r["task"], 16 * k), ref_par(r["task"], "fp32", k), ref_par(r["task"], r["spec"], k)
+            f = lambda v: "  -  " if v is None else f"{100*v:5.1f}"
+            print(f"    K={k:2d} S={16*k:3d}: {100*np.mean(sel['maxq'][mk]):5.1f}{mqa} [{100*np.mean(sel['pass'][mk]):5.1f}]   refs: {f(sq)} / {f(pr)} / {f(pq)}")
 
 
 def cmd_json(a):
@@ -507,7 +555,7 @@ def cmd_json(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main", "polish", "exit"))
+    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main", "polish", "exit", "wsample"))
     ap.add_argument("--sigma_main", type=float, default=0.3)
     ap.add_argument("--n", type=int, default=1000)
     ap.add_argument("--main_polish", type=int, default=2, help="main grid = the P2 cells (rescue cells with P4 excluded)")
@@ -515,8 +563,11 @@ def main():
     ap.add_argument("--task", default="")
     ap.add_argument("--D", type=int, default=16)
     ap.add_argument("--metric", default="exact", choices=("exact", "valid", "vshort"))
+    ap.add_argument("--offset", type=int, default=0)
     a = ap.parse_args()
-    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main, "polish": cmd_polish, "exit": cmd_exit}[a.cmd](a)
+    global OFFSET
+    OFFSET = a.offset
+    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main, "polish": cmd_polish, "exit": cmd_exit, "wsample": cmd_wsample}[a.cmd](a)
 
 
 if __name__ == "__main__":

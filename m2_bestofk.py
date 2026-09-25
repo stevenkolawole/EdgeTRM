@@ -152,6 +152,78 @@ def run_cell(m, mref, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_
     return corr, qh, rms, hs, chk, vsh, pol
 
 
+@torch.no_grad()
+def sr_quantize_(m, master, bits, gran, gen):
+    """Stochastic rounding of the master weights onto breadth_sweep's grid for (bits, gran): same scales (and zero
+    points) as round-to-nearest, but q = floor(W/s + u), u ~ U[0,1) (unbiased; E[q s] = W). One draw per call."""
+    import torch.nn.functional as F
+    for mod, W in zip(_linears(m), master):
+        U = torch.rand(W.shape, generator=gen, device=W.device, dtype=W.dtype)
+        if gran == "a":
+            qmax = 2 ** bits - 1
+            wmin = W.amin(dim=1, keepdim=True); wmax = W.amax(dim=1, keepdim=True)
+            scale = ((wmax - wmin) / qmax).clamp_min(1e-8)
+            zp = torch.round(-wmin / scale)
+            mod.weight.data = (torch.clamp(torch.floor(W / scale + U) + zp, 0, qmax) - zp) * scale
+            continue
+        qmax = 2 ** (bits - 1) - 1
+        if gran in ("t", "c"):
+            sc = (W.abs().max() if gran == "t" else W.abs().amax(dim=1, keepdim=True)) / qmax
+            sc = sc.clamp_min(1e-8)
+            mod.weight.data = torch.floor(W / sc + U).clamp(-qmax, qmax) * sc
+        else:
+            g = int(gran[1:])
+            out_f, in_f = W.shape
+            pad = (-in_f) % g
+            Wp = F.pad(W, (0, pad)).view(out_f, -1, g)
+            Up = F.pad(U, (0, pad)).view(out_f, -1, g)
+            sc = (Wp.abs().amax(dim=2, keepdim=True) / qmax).clamp_min(1e-8)
+            mod.weight.data = (torch.floor(Wp / sc + Up).clamp(-qmax, qmax) * sc).view(out_f, -1)[:, :in_f]
+
+
+@torch.no_grad()
+def run_cell_wsample(m, master, bits, gran, draw0_rtn, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_steps,
+                     hash_w):
+    """K rollouts, rollout k uses its own stochastic-rounding draw of the weights (draw 0 = round-to-nearest if
+    draw0_rtn); optional PTRM kicks on top. Same output arrays as run_cell (no polish)."""
+    n = inp.shape[0]
+    corr = np.zeros((K, n, D), np.uint8); qh = np.zeros((K, n, D), np.float16); rms = np.zeros(D)
+    hs = {k: np.zeros((K, n), np.int64) for k in chk_steps}
+    chk = {k: np.zeros((K, n), np.int16) for k in chk_steps}
+    vsh = {k: np.zeros((K, n), np.uint8) for k in chk_steps} if kind == "maze" else None
+    for k in range(K):
+        if k == 0 and draw0_rtn:
+            for mod, W in zip(_linears(m), master):
+                mod.weight.data = W.clone()
+            quantize_weights_(m, bits, gran)
+        else:
+            sr_quantize_(m, master, bits, gran, torch.Generator(device=DEV).manual_seed(int(seed) * 7907 + 1000 + k))
+        for ci, s in enumerate(range(0, n, chunk)):
+            x = torch.from_numpy(inp[s:s + chunk]).to(DEV); y = torch.from_numpy(lab[s:s + chunk]).to(DEV)
+            B = x.shape[0]
+            bt = {"inputs": x, "labels": y, "puzzle_identifiers": torch.zeros(B, dtype=torch.int32, device=DEV)}
+            carry = init_inner(m, B, x.shape[1] + m.inner.puzzle_emb_len, m.inner.config.hidden_size)
+            gen = torch.Generator(device=DEV).manual_seed(int(seed) * 1000003 + 7 * ci + 100003 * k)
+            for t in range(D):
+                if noise in ("ptrm", "rel") and sigma > 0:
+                    eps = torch.randn(carry.z_L.shape, generator=gen, device=DEV, dtype=carry.z_L.dtype)
+                    carry = type(carry)(z_H=carry.z_H, z_L=carry.z_L + sigma * eps)
+                carry, logits, (q_halt, _) = m.inner(carry, bt)
+                pred = logits.argmax(-1)
+                corr[k, s:s + B, t] = (pred == y).all(1).cpu().numpy()
+                qh[k, s:s + B, t] = q_halt.float().cpu().numpy()
+                rms[t] += float(carry.z_L.float().pow(2).mean().sqrt()) * B / (n * K)
+                if (t + 1) in chk_steps:
+                    hs[t + 1][k, s:s + B] = (pred.long() * hash_w).sum(1).cpu().numpy()
+                    if kind == "sudoku":
+                        chk[t + 1][k, s:s + B] = sudoku_check(pred, x)["chk"].cpu().numpy()
+                    else:
+                        mc = maze_check(pred.cpu().numpy(), x.cpu().numpy(), bfs[s:s + B])
+                        chk[t + 1][k, s:s + B] = np.minimum(mc["chk"], 32000)
+                        vsh[t + 1][k, s:s + B] = mc["vshort"]
+    return corr, qh, rms, hs, chk, vsh, None
+
+
 def quick_summary(corr, qh, hs, chk, D):
     """Headline numbers at the last step (the full read-out is m2_analyze.py)."""
     c, q = corr[:, :, D - 1].astype(bool), qh[:, :, D - 1].astype(np.float32)
@@ -180,6 +252,10 @@ def main():
     ap.add_argument("--polish", type=int, default=0, help="fp32 polish steps after the D compressed steps")
     ap.add_argument("--polish_from", default="last", choices=("last", "best"),
                     help="polish from each rollout's last state, or from its state at its max-q step (kept on the fly)")
+    ap.add_argument("--wsample", default="none", choices=("none", "sr", "sr0"),
+                    help="sr: each rollout uses its own stochastic-rounding draw of the weights on the spec's grid; "
+                         "sr0: the same with draw 0 = round-to-nearest")
+    ap.add_argument("--offset", type=int, default=0, help="first test row (held-out sets: e.g. 1000)")
     ap.add_argument("--outdir", required=True)
     ap.add_argument("--index", required=True)
     ap.add_argument("--tag", default="")
@@ -188,7 +264,8 @@ def main():
     assert a.allow_cpu or torch.cuda.is_available(), "NO CUDA on this node"
     t = TRM_TASKS.get(a.task) or HRM_TASKS[a.task]
     kind = t["data"]
-    inp, lab = load_qa(kind, a.n)
+    inp, lab = load_qa(kind, a.n + a.offset)
+    inp, lab = inp[a.offset:], lab[a.offset:]
     n = len(inp)
     bfs = np.array([bfs_dist(g, 30) for g in inp]) if kind == "maze" else None
     chk_steps = sorted({int(s) for s in a.chk_steps.split(",") if s.strip()} |
@@ -212,19 +289,33 @@ def main():
     for spec in specs:
         todo = []
         for sg in sigmas:
-            K = 1 if (a.noise == "none" or sg == 0) else a.K
-            name = f"{a.task}__{spec}__{a.noise}{sg:g}__D{a.D}_K{K}{('_P%d' % a.polish) if a.polish else ''}{'b' if a.polish and a.polish_from == 'best' else ''}{a.tag}.npz"
+            K = 1 if ((a.noise == "none" or sg == 0) and a.wsample == "none") else a.K
+            name = f"{a.task}__{spec}__{a.noise}{sg:g}__D{a.D}_K{K}{('_P%d' % a.polish) if a.polish else ''}{'b' if a.polish and a.polish_from == 'best' else ''}{('_' + a.wsample) if a.wsample != 'none' else ''}{('_o%d' % a.offset) if a.offset else ''}{a.tag}.npz"
             if not (outdir / name).exists():
                 todo.append((sg, K, name))
         if not todo:
             print(f"  {spec}: all cells done", flush=True)
             continue
-        m, meta, q, wseed = build_spec(a.task, spec, a.D, 256)
+        if a.wsample != "none":
+            base, wseed = split_spec(spec)
+            q = parse_quant(base)
+            assert q["bits"] is not None and q["gran"] not in (None, "noise"), "wsample needs a quantizer spec"
+            m, meta = build(a.task, None, a.D, 256)
+            m = m.to(DEV).eval()
+            master = [mod.weight.data.clone() for mod in _linears(m)]
+        else:
+            m, meta, q, wseed = build_spec(a.task, spec, a.D, 256)
         for sg, K, name in todo:
             t1 = time.time()
             seed = 7919 * (wseed or 0) + int(round(1000 * sg)) + 17
-            corr, qh, rms, hs, chk, vsh, pol = run_cell(m, mref, inp, lab, kind, bfs, K, a.D, a.noise, sg, seed,
-                                                        chunk, chk_steps, a.polish, hash_w, a.polish_from)
+            if a.wsample != "none":
+                ch = a.chunk or (1000 if kind == "sudoku" else 128)
+                corr, qh, rms, hs, chk, vsh, pol = run_cell_wsample(m, master, q["bits"], q["gran"], a.wsample == "sr0",
+                                                                    inp, lab, kind, bfs, K, a.D, a.noise, sg, seed, ch,
+                                                                    chk_steps, hash_w)
+            else:
+                corr, qh, rms, hs, chk, vsh, pol = run_cell(m, mref, inp, lab, kind, bfs, K, a.D, a.noise, sg, seed,
+                                                            chunk, chk_steps, a.polish, hash_w, a.polish_from)
             arrs = {"corr": corr, "q": qh, "zl_rms": rms}
             for k in chk_steps:
                 arrs[f"hash_{k}"] = hs[k]
@@ -241,7 +332,7 @@ def main():
             os.replace(tmp, outdir / name)
             summ = quick_summary(corr, qh, hs, chk, a.D)
             rec = {"task": a.task, "spec": spec, "wseed": wseed, "noise": a.noise, "sigma": sg, "K": K, "D": a.D,
-                   "polish": a.polish, "polish_from": a.polish_from, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
+                   "polish": a.polish, "polish_from": a.polish_from, "wsample": a.wsample, "offset": a.offset, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
                    "zl_rms_last": float(rms[-1]), "summary": summ, "secs": time.time() - t1,
                    "host": socket.gethostname(),
                    "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",
