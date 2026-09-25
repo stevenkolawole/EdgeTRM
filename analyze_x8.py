@@ -10,6 +10,7 @@
   python analyze_x8.py fid       # fidelity as a filter, not a ranker (existing breadth records)
   python analyze_x8.py indep     # cell independence: observed exact vs prod_i p_cell^L_i
   python analyze_x8.py ptrm      # PTRM reconciliation: single rollout vs best-of-K
+  python analyze_x8.py oof       # out-of-family validation of the fidelity threshold (fit on TRM/HRM only)
   python analyze_x8.py json      # everything -> results/breadth/x8_summary.json
   python analyze_x8.py all       # every table
 
@@ -965,6 +966,184 @@ def print_ptrm(res):
                   f"{100*r['pass']:.1f} | {100*r['bestq']:.1f} | {100*r['mode']:.1f} | {fmt(r['zL_rms'], 3)} |")
 
 
+
+# ----------------------------------------------------------------------------- 9. out-of-family validation
+def _eval_thr(phi, dmg, t):
+    phi, dmg = np.asarray(phi, float), np.asarray(dmg, bool)
+    pred = phi < t
+    tp = (pred & dmg).sum(); tn = (~pred & ~dmg).sum()
+    sens = tp / dmg.sum() if dmg.sum() else None
+    spec = tn / (~dmg).sum() if (~dmg).sum() else None
+    bal = (sens + spec) / 2 if sens is not None and spec is not None else None
+    return {"n": int(len(phi)), "n_damaged": int(dmg.sum()), "error": float((pred != dmg).mean()) if len(phi) else None,
+            "bal_acc": None if bal is None else float(bal), "sens": None if sens is None else float(sens),
+            "spec": None if spec is None else float(spec), "missed": int((~pred & dmg).sum()), "false_alarms": int((pred & ~dmg).sum()),
+            "auroc": auroc(-phi, dmg), "own_best": best_threshold(phi, dmg) if dmg.any() and (~dmg).any() else None}
+
+
+def heldout_cells():
+    """Held-out families (never used to fit the threshold). Each cell: phi, ret (exact unit), ret_cell
+    (cell unit) where defined, plus family/model labels."""
+    fam = defaultdict(list)
+    # looped LMs (X4, analyze_looped.boundary_cells): answer accuracy retained vs bf16 at the same loops,
+    # latent fidelity from the teacher-forced pass; cells with bf16 accuracy >= 10% only
+    try:
+        import analyze_looped as al
+        for r in al.boundary_cells(al.load(al.DEFAULT_ROOTS)):
+            if r["acc_bf16"] < 10:
+                continue
+            fam["looped LMs"].append({"model": r["model"], "cfg": f"{r['src']} s{r['loops']} {r['quant']}", "phi": r["fid"],
+                                      "ret": r["acc"] / r["acc_bf16"], "ret_cell": None, "nll_ratio": r["nll"] / r["nll_bf16"]})
+    except Exception as e:                                      # noqa: BLE001
+        print("looped LMs unavailable:", e)
+    # DEQs (X6): MDEQ-Small / MDEQ-XL top-1 at each (solver, budget) vs the same file's fp32; DEQ-Transformer
+    # perplexity; cosine to the fp32 equilibrium at the same budget
+    T = HERE / "results" / "transfer" / "babel"
+    for f in sorted(glob.glob(str(T / "deq_*.json"))):
+        if "check_orig" in f:
+            continue
+        recs = json.load(open(f))["records"]
+        fp = {r["solver"]: r for r in recs if r["spec"] == "fp32"}
+        for r in recs:
+            if r["spec"] == "fp32" or r["solver"] not in fp:
+                continue
+            f0 = fp[r["solver"]]
+            for b, b0 in zip(r["by_budget"], f0["by_budget"]):
+                if b0["top1"] < 0.10 or b["budget"] != b0["budget"]:
+                    continue
+                ret = b["top1"] / b0["top1"]
+                fam["DEQ (MDEQ-Small/XL, ImageNet)"].append({"model": f"{r['model']} {r['solver']}", "cfg": f"{Path(f).stem} {r['solver']} k{b['budget']} {r['spec']}",
+                                                            "phi": b["cos_mean"], "ret": ret, "ret_cell": ret})
+    for f in sorted(glob.glob(str(T / "deqlm_*.json"))):
+        recs = json.load(open(f))["records"]
+        fp = {(r["solver"], r["budget"]): r for r in recs if r["spec"] == "fp32"}
+        for r in recs:
+            k = (r["solver"], r["budget"])
+            if r["spec"] == "fp32" or k not in fp:
+                continue
+            # perplexity unit: retained = ppl_fp32 / ppl (damaged if ppl rises > 11%, the analogue of 0.9)
+            fam["DEQ-Transformer (WT103)"].append({"model": f"deqlm {r['solver']}", "cfg": f"{Path(f).stem} {r['solver']} k{r['budget']} {r['spec']}",
+                                                   "phi": r["cos_mean"], "ret": fp[k]["ppl"] / r["ppl"], "ret_cell": fp[k]["nll"] / r["nll"]})
+    # deep-thinking mazes: exact from dt_extrap_*, cell unit from the dt_cell_* reruns
+    dtc, dtcell = dt_cells()
+    for c in dtc:
+        fam["deep-thinking mazes"].append({"model": f"dt{c['size']}", "cfg": f"size {c['size']} it{c['iters']} {c['spec']}", "phi": c["phi"],
+                                           "ret": c["ret"], "ret_cell": None})
+    for c in dtcell:
+        if c["spec"] == "fp32":
+            continue
+        fam["deep-thinking mazes (per-cell reruns)"].append({"model": f"dt{c['size']}", "cfg": f"size {c['size']} it{c['iters']} {c['spec']} s{c['seed']}",
+                                                             "phi": c["phi"], "ret": c["ret"], "ret_cell": c["ret_cell"]})
+    # trained TRM variants (Q8 width/mixer/seed, maze MLP, Q7 regularised and QAT runs), paired with fp32 of the same file
+    vf = sorted(glob.glob(str(B / "p4d" / "variants_noise" / "*.json"))) + sorted(glob.glob(str(B / "variant_trm_*.json"))) \
+        + sorted(glob.glob(str(HERE / "results" / "q7" / "**" / "*.json"), recursive=True))
+    for f in vf:
+        try:
+            j = json.load(open(f))
+        except (json.JSONDecodeError, ValueError):
+            continue
+        recs = j.get("records") if isinstance(j, dict) else None
+        if not recs or "fidelity_H" not in recs[0]:
+            continue
+        spec = lambda r: r["quant"]["spec"] if isinstance(r["quant"], dict) else r["quant"]  # noqa: E731
+        H = lambda r: r.get("H_cycles", j.get("H_cycles"))  # noqa: E731
+        ns = lambda r: r.get("nsup", j.get("nsup"))  # noqa: E731
+        fp = {(H(r), ns(r)): r for r in recs if spec(r) == "fp32"}
+        for r in recs:
+            k = (H(r), ns(r))
+            if spec(r) == "fp32" or k not in fp:
+                continue
+            f0 = fp[k]
+            if "/q7/" in f:
+                mlab = f"{Path(f).parent.name}/{Path(f).stem}"
+                fname = ("trained TRM variants (Q7 finals, 65k steps)" if "lambda_finals" in f else
+                         "Q7 intermediate / QAT checkpoints (fp32 0-30%; not converged)")
+            else:
+                fname = "trained TRM variants (Q8: width / mixer / seed)"
+                mlab = Path(f).stem.replace("_seed1", "").replace("_seed2", "")
+                mlab = "maze_mlp_w512" if "maze_mlp" in mlab else mlab
+            fam[fname].append({"model": mlab, "cfg": f"{Path(f).parent.name}/{Path(f).stem} n{k[1]} {spec(r)}", "phi": r["fidelity_H"],
+                                                "ret": r["pexact"] / f0["pexact"] if f0["pexact"] >= 0.10 else None,
+                                                "ret_cell": r["cell"] / f0["cell"] if f0.get("cell") else None})
+    return fam
+
+
+def compute_oof():
+    """Fit phi thresholds on TRM/HRM cells only (default H, every nsup; as in the D analysis),
+    both units, pooled over output lengths and per length; apply unchanged to held-out families."""
+    trm = [c for t in TASKS for c in fid_cells(t)]
+    phi = np.array([c["phi"] for c in trm])
+    fit = {"exact": best_threshold(phi, np.array([c["ret"] < 0.9 for c in trm])),
+           "cell": best_threshold(phi, np.array([c["ret_cell"] < 0.99 for c in trm]))}
+    per_len = {}
+    for L, ts in (("81", ["sudoku_mlp", "sudoku_attn", "hrm_sudoku"]), ("900", ["maze_attn", "hrm_maze"])):
+        cs = [c for t in ts for c in fid_cells(t)]
+        ph = np.array([c["phi"] for c in cs])
+        per_len[L] = {"exact": best_threshold(ph, np.array([c["ret"] < 0.9 for c in cs])),
+                      "cell": best_threshold(ph, np.array([c["ret_cell"] < 0.99 for c in cs]))}
+    fit["collapse"] = best_threshold(phi, np.array([c["ret"] < 0.5 for c in trm]))
+    out = {"fit": {"n_cells": len(trm), "pooled": fit, "per_length": per_len}, "families": {}}
+    fam = heldout_cells()
+    for name, cs in fam.items():
+        res = {}
+        for unit, key, cut in (("exact", "ret", 0.9), ("cell", "ret_cell", 0.99)):
+            cc = [c for c in cs if c[key] is not None]
+            if not cc:
+                continue
+            ph = [c["phi"] for c in cc]
+            dm = [c[key] < cut for c in cc]
+            r = {"pooled_thr": _eval_thr(ph, dm, fit[unit][0])}
+            r["len81_thr"] = _eval_thr(ph, dm, per_len["81"][unit][0])
+            r["len900_thr"] = _eval_thr(ph, dm, per_len["900"][unit][0])
+            if unit == "exact":
+                dm50 = [c[key] < 0.5 for c in cc]
+                r["collapse50_pooled_thr"] = _eval_thr(ph, dm50, fit[unit][0])
+                r["collapse50_collapse_thr"] = _eval_thr(ph, dm50, fit["collapse"][0])
+            # where it breaks: the misclassified cells at the pooled threshold
+            t = fit[unit][0]
+            r["missed_cells"] = [(c["cfg"], round(c["phi"], 3), round(c[key], 3)) for c in cc if c[key] < cut and c["phi"] >= t][:12]
+            r["false_alarm_cells"] = [(c["cfg"], round(c["phi"], 3), round(c[key], 3)) for c in cc if c[key] >= cut and c["phi"] < t][:12]
+            per_model = {}
+            for m in sorted({c["model"] for c in cc}):
+                mc = [c for c in cc if c["model"] == m]
+                per_model[m] = _eval_thr([c["phi"] for c in mc], [c[key] < cut for c in mc], t)
+            r["per_model"] = per_model
+            res[unit] = r
+        out["families"][name] = res
+    return out
+
+
+def print_oof(res):
+    f = res["fit"]
+    print(f"\n### Out-of-family validation: thresholds fitted on {f['n_cells']} TRM/HRM cells only")
+    print(f"pooled: exact unit t = {f['pooled']['exact'][0]:.3f} (bal. acc {f['pooled']['exact'][2]:.2f}); collapse (retained < 0.5) t = {f['pooled']['collapse'][0]:.3f} (bal {f['pooled']['collapse'][2]:.2f}); "
+          f"cell unit t = {f['pooled']['cell'][0]:.3f} (bal. acc {f['pooled']['cell'][2]:.2f}); per length: "
+          + "; ".join(f"L={L}: exact {v['exact'][0]:.3f}, cell {v['cell'][0]:.3f}" for L, v in f["per_length"].items()))
+    print("| held-out family | unit | cells | damaged | AUROC | pooled t: error / bal.acc (missed, false alarms) | t(81): error / bal | t(900): error / bal | family's own best t / bal |")
+    print("|---|---|---|---|---|---|---|---|---|")
+    for name, r in res["families"].items():
+        for unit, v in r.items():
+            p = v["pooled_thr"]
+            ob = p["own_best"]
+            e = lambda x: f"{100*x['error']:.1f}% / {fmt(x['bal_acc'])}"  # noqa: E731
+            print(f"| {name} | {unit} | {p['n']} | {p['n_damaged']} | {fmt(p['auroc'])} | {e(p)} ({p['missed']}, {p['false_alarms']}) | "
+                  f"{e(v['len81_thr'])} | {e(v['len900_thr'])} | {fmt(ob[0], 3) if ob else '--'} / {fmt(ob[2]) if ob else '--'} |")
+            if "collapse50_pooled_thr" in v:
+                c = v["collapse50_pooled_thr"]
+                c2 = v["collapse50_collapse_thr"]
+                print(f"| {name} (collapse: retained < 0.5) | exact | {c['n']} | {c['n_damaged']} | {fmt(c['auroc'])} | {e(c)} ({c['missed']}, {c['false_alarms']}) | "
+                      f"collapse-fitted t: {e(c2)} ({c2['missed']}, {c2['false_alarms']}) | | "
+                      f"{fmt(c['own_best'][0], 3) if c['own_best'] else '--'} / {fmt(c['own_best'][2]) if c['own_best'] else '--'} |")
+    for name, r in res["families"].items():
+        for unit, v in r.items():
+            print(f"\n{name} [{unit}] per model at the pooled t: " + "; ".join(
+                f"{m}: n={x['n']} dmg={x['n_damaged']} err={100*x['error']:.0f}% bal={fmt(x['bal_acc'])}" for m, x in v["per_model"].items()))
+            if v["missed_cells"]:
+                print("  missed (damaged, phi >= t): " + "; ".join(f"{a} phi {b} ret {c}" for a, b, c in v["missed_cells"]))
+            if v["false_alarm_cells"]:
+                print("  false alarms (held, phi < t): " + "; ".join(f"{a} phi {b} ret {c}" for a, b, c in v["false_alarm_cells"]))
+
+
 # ----------------------------------------------------------------------------- main
 def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "all"
@@ -986,12 +1165,14 @@ def main():
         print_indep(compute_indep())
     if cmd in ("ptrm", "all"):
         print_ptrm(compute_ptrm())
+    if cmd in ("oof", "all"):
+        print_oof(compute_oof())
     if cmd == "json":
         sel = compute_select()
         bas = compute_basin(sel)
         fidr = compute_fid()
         doc = {"auroc": compute_auroc(), "select": sel, "basin": bas, "joint": compute_joint(bas, fidr), "early": compute_early(),
-               "checker": compute_checker(), "fid": fidr, "indep": compute_indep(), "ptrm": compute_ptrm(),
+               "checker": compute_checker(), "fid": fidr, "indep": compute_indep(), "ptrm": compute_ptrm(), "oof": compute_oof(),
                "conventions": __doc__}
         p = Path(os.environ["X8_OUT"]) if os.environ.get("X8_OUT") else B / "x8_summary.json"
         json.dump(doc, open(p, "w"), default=lambda o: None if o is None else (float(o) if isinstance(o, (np.floating,)) else int(o) if isinstance(o, np.integer) else str(o)))
