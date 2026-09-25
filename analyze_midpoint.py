@@ -32,6 +32,7 @@ np.seterr(over="ignore")
 HERE = Path(__file__).resolve().parent
 M_GRID = np.arange(0.30, 1.0001, 0.0005)
 LOGK = np.linspace(math.log(0.5), math.log(2000.0), 120)
+S_PLATFORM = "babel"
 CHI2 = {1: 3.841, 2: 5.991, 3: 7.815, 4: 9.488, 5: 11.070, 6: 12.592, 7: 14.067, 8: 15.507}
 
 
@@ -193,7 +194,15 @@ def lm_S(model, loops, sigma=0.05):
 def predictors(groups):
     """Label-free per-group predictors: (a) answer length (tokens of the bf16 greedy output for LMs; cells
     of the answer grid for TRM/HRM: Sudoku 81, Maze 900), (b) X2 sensitivity S (sigma 0.05)."""
-    x2 = {r["model"]: r["S"] for r in json.load(open(HERE / "results/breadth/x2_sens_fit.json"))["rows"]}
+    if S_PLATFORM == "p4d":      # single-platform S (X2 refit on p4d, same platform as the root TRM/HRM grid)
+        x2 = {}
+        for f in (HERE / "results/breadth/p4d/x2/sens").glob("sens_*.json"):
+            recs = json.load(open(f))["records"]
+            v = [r["delta_med"] / 0.05 for r in recs if abs((r.get("sigma") or -1) - 0.05) < 1e-9]
+            if v:
+                x2[f.stem[len("sens_"):]] = float(np.median(v))
+    else:
+        x2 = {r["model"]: r["S"] for r in json.load(open(HERE / "results/breadth/x2_sens_fit.json"))["rows"]}
     default_loops = {"ouro14": 4, "ouro26": 4, "huginn": 32, "olmo_rec32": 32}
     out = {}
     for g, cs in groups.items():
@@ -258,7 +267,7 @@ def predict_section(groups, fits):
               f"{err.max():.3f} | {gs[int(err.argmax())]} |")
         res[name] = {"groups": gs, "slope": float(coef[1]), "r2": float(r2), "loo_rmse": float(np.sqrt(np.mean(err ** 2))),
                      "baseline_rmse": float(base), "loo_max": float(err.max())}
-    print("\n(c) the fp32/bf16 answer margin is not implemented yet (needs the TRM/HRM per-puzzle logits).")
+    print("\n(c) answer-logit margin: LMs only, see lm_runs/lm_margin.py and results/looped/lm_margins_sep25.json (R2 <= 0.02 over the 4 LMs); not available for TRM/HRM.")
     return res
 
 
@@ -273,8 +282,12 @@ def main():
     ap.add_argument("--trm-platform", default="root", choices=["root", "all"],
                     help="root = only the breadth/*.json grid files (one platform); all = include babel/ and p4d/ draws")
     ap.add_argument("--json", default=None)
+    ap.add_argument("--s-platform", default="babel", choices=["babel", "p4d"],
+                    help="TRM/HRM sensitivity S source: X2's Babel fit or its p4d refit (same platform as the grid)")
     ap.add_argument("--predict", action="store_true", help="fit the per-group midpoint on label-free predictors (needs --with-trm)")
     a = ap.parse_args()
+    global S_PLATFORM
+    S_PLATFORM = a.s_platform
     lm = lm_cells(a.roots or A.POOL_ROOTS, a.cut)
     out = {"lm": run(lm, "Looped LMs: one midpoint?")}
     if a.with_trm:
