@@ -1,0 +1,219 @@
+{
+ "kind": "onnx",
+ "backend": "qnn_qdq_host",
+ "task": "sudoku_mlp",
+ "cell": "fp32self",
+ "graph": "/home/ubuntu/aihub_artifacts/h1/sudoku_mlp/stepc_H1.onnx",
+ "n": 32,
+ "steps": 16,
+ "vendor": null,
+ "n_fused_norms": 0,
+ "ort_level": "basic",
+ "T": 16,
+ "delta_T_median": 0.0,
+ "delta_T_mean": 1.0896749080513724e-07,
+ "delta_T_max": 5.192985099424635e-07,
+ "delta_T_H_median": 0.0,
+ "onestep_cell_agree": 1.0,
+ "onestep_qsign_agree": 1.0,
+ "delta_T_per_input": [
+  3.882907344742145e-07,
+  0.0,
+  0.0,
+  0.0,
+  5.192985099424635e-07,
+  0.0,
+  2.5604841485993425e-07,
+  2.5664793597169765e-07,
+  0.0,
+  0.0,
+  0.0,
+  2.4265038942781305e-07,
+  2.604293961919953e-07,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  2.5141967830200616e-07,
+  0.0,
+  0.0,
+  1.4133750697501264e-07,
+  4.061137401989891e-07,
+  5.127934454775287e-07,
+  0.0,
+  2.519299539427371e-07,
+  0.0,
+  0.0
+ ],
+ "t1_seconds": 2.5,
+ "n_settled": 22,
+ "answer_agree_settled": 1.0,
+ "cell_agree_settled": 1.0,
+ "n_halted": 22,
+ "answer_agree_halted": 1.0,
+ "cell_agree_halted": 1.0,
+ "changed_cells_mean": 55.71875,
+ "changed_agree": 0.9972098214285714,
+ "changed_agree_min": 0.9107142857142857,
+ "changed_agree_settled": 1.0,
+ "cell_agree": 0.998070987654321,
+ "cell_agree_min": 0.9382716049382716,
+ "answer_agree": 0.96875,
+ "cell_agree_per_step": [
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  0.9996141975308642,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  0.996141975308642,
+  0.9934413580246914,
+  0.998070987654321
+ ],
+ "phi_H": 0.9972285634134854,
+ "qsign_agree": 1.0,
+ "q_fp32_pos": 0.6875,
+ "q_cand_pos": 0.6875,
+ "t2_seconds": 18.7,
+ "n_shared_tensors": 490,
+ "n_act_pairs": 0,
+ "n_nonfinite_tensors": 0,
+ "nonfinite_examples": [],
+ "layer_local_max": 0.0,
+ "layer_local_p99": 0.0,
+ "layer_local_top": [],
+ "layer_prop_out": NaN,
+ "layer_prop_max": 0.0,
+ "layer_prop_top": [
+  {
+   "tensor": "/inner/embed_tokens/Gather_output_0",
+   "op": "Gather",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/Mul_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp_t/gate_up_proj/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp_t/Sigmoid_output_0",
+   "op": "Sigmoid",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp_t/Mul_2_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp_t/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp_t/down_proj/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/Mul_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/ReduceMean_output_0",
+   "op": "ReduceMean",
+   "rel_err": 0.0
+  }
+ ],
+ "layer_local_by_op": {},
+ "layer_prop_by_op": {
+  "Gather": {
+   "n": 2,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Mul": {
+   "n": 113,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Add": {
+   "n": 64,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "MatMul": {
+   "n": 57,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Sigmoid": {
+   "n": 28,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "ReduceMean": {
+   "n": 28,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Sqrt": {
+   "n": 28,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Div": {
+   "n": 28,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Gemm": {
+   "n": 1,
+   "median": 0.0,
+   "max": 0.0
+  }
+ },
+ "weight_err_max": 0.0,
+ "weight_err_median": 0.0,
+ "weight_err_top": [],
+ "layer_first_prop_gt_0.5": null,
+ "onnx_xrt_rel_median": 0.0,
+ "onnx_xrt_argmax_agree": 1.0,
+ "t0_seconds": 4.5,
+ "verdict": "PASS",
+ "rules": [],
+ "seconds": 26.1
+}

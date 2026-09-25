@@ -50,14 +50,22 @@ for extra in (HERE, pathlib.Path.home() / "x3", pathlib.Path.home() / "edgetrm_s
 # Decision thresholds. Defaults are the values fitted in m4_table.py (see M4.md); a JSON written by
 # `m4_table.py fit` overrides them with --thresholds.
 THRESHOLDS = {
-    "cell_agree_fail": 0.80,     # T2: final per-cell agreement with fp32 below this -> FAIL
-    "cell_agree_warn": 0.95,     # T2: below this -> WARN
-    "delta_fail": 0.45,          # T1: median one-step perturbation at fp32's end state above -> FAIL
-    "delta_warn": 0.20,          # T1: above -> WARN
-    "xrt_lsb_fail": 16,          # T0: an op whose output differs by more than this many LSB between
-                                 #     two runtimes of the same quantized graph -> FAIL (kernel bug)
-    "layer_local_warn": 0.5,     # T0: an activation Q/DQ pair whose local relative error exceeds
-                                 #     this (median over the check inputs) -> WARN (evidence only)
+    # T2 (rollout; primary): agreement with fp32 on the cells fp32 writes, over inputs fp32 itself settled on,
+    # and whole-answer agreement on the same inputs. Rounded from the fits in m4_table.py (M4.md): on 176
+    # same-runtime cells no BROKEN cell escapes FAIL and no not-OK cell gets PASS.
+    "written_fail": 0.80,        # below -> FAIL
+    "written_pass": 0.95,        # at or above (with answer agreement >= answer_pass) -> PASS, else WARN
+    "answer_fail": 0.50,         # whole-answer agreement below -> FAIL (long outputs: a maze keeps 0.92
+    "answer_pass": 0.90,         #   written-cell agreement while its answers break)
+    # T1 (one step at fp32's end state; the cheap tier when no rollout is run). 251 cells incl. X2's:
+    # no not-OK cell below delta_pass; 68/73 BROKEN above delta_fail.
+    "delta_pass": 0.12,
+    "delta_fail": 0.40,
+    # T0: an op whose output differs by more than this many LSB between reference and optimized kernels
+    # while its inputs agree within 1 LSB -> FAIL for the reference-kernel runtime (TFLite Micro)
+    "xrt_lsb_fail": 16,
+    "layer_local_warn": 0.5,     # evidence only (localises a failure)
+    "device_written_pass": 0.5,  # device probe: written-cell agreement with fp32 after 2 device steps
 }
 
 OUTS = ["z_H_out", "z_L_out", "logits", "q_halt"]
@@ -1052,7 +1060,7 @@ def device_probe(ref_step, chk, device_preds, k=2, threshold=0.5):
         ch = r["preds"][s_] != inp
         per.append(float((((device_preds[s_] == r["preds"][s_]) & ch).sum(-1) / np.maximum(ch.sum(-1), 1)).mean()))
     return dict(device_probe_steps=K, device_written_agree_per_step=per, device_written_agree=per[-1],
-                device_probe_pass=bool(per[-1] >= threshold))
+                device_probe_pass=bool(per[-1] >= threshold))  # threshold = THRESHOLDS["device_written_pass"]
 
 
 # =============================================================================== decision
@@ -1083,28 +1091,33 @@ def decide(ev, thr=None):
         verdict = bump("FAIL")
     if ev.get("n_nonfinite_tensors"):
         rules.append(f"T0 per-layer: {ev['n_nonfinite_tensors']} intermediate tensors are inf/nan where fp32 is "
-                     f"finite (e.g. {ev['nonfinite_examples'][0]})")
+                     f"finite (e.g. {(ev.get('nonfinite_examples') or ['?'])[0]})")
         verdict = bump("FAIL")
     if "cell_agree" in ev:
-        # on inputs fp32 itself has settled on (label-free); all inputs when too few settle
+        # T2 on inputs fp32 itself has settled on (label-free); all inputs when too few settle
         use_settled = ev.get("n_settled", 0) >= 5
         key = "changed_agree" if ev.get("changed_agree") is not None else "cell_agree"
         ca = ev.get(key + "_settled") if use_settled and ev.get(key + "_settled") is not None else ev[key]
-        tag = ("cells fp32 writes, " if key == "changed_agree" else "all cells, ") + \
-              ("fp32-settled inputs" if use_settled else "all inputs")
-        if ca < thr["cell_agree_fail"]:
-            rules.append(f"T2 cell agreement with fp32 ({tag}) {ca:.3f} < {thr['cell_agree_fail']}")
+        # whole-answer agreement only where fp32's own answer has settled (on unsettled inputs, e.g. ARC at 8
+        # steps, fp32's answer is still moving and disagreement is not a loss)
+        aa = ev.get("answer_agree_settled") if use_settled else None
+        tag = ("cells fp32 writes" if key == "changed_agree" else "all cells") + \
+              (", fp32-settled inputs" if use_settled else ", all inputs")
+        if ca < thr["written_fail"] or (aa is not None and aa < thr["answer_fail"]):
+            rules.append(f"T2 agreement with fp32 ({tag}) {ca:.3f} (< {thr['written_fail']}) / whole answers "
+                         f"{aa if aa is None else round(aa, 3)} (< {thr['answer_fail']})")
             verdict = bump("FAIL")
-        elif ca < thr["cell_agree_warn"]:
-            rules.append(f"T2 cell agreement with fp32 ({tag}) {ca:.3f} < {thr['cell_agree_warn']}")
+        elif ca < thr["written_pass"] or (aa is not None and aa < thr["answer_pass"]):
+            rules.append(f"T2 agreement with fp32 ({tag}) {ca:.3f} / whole answers "
+                         f"{aa if aa is None else round(aa, 3)}: between FAIL and PASS bands")
             verdict = bump("WARN")
     elif "delta_T_median" in ev:
         d = ev["delta_T_median"]
         if d > thr["delta_fail"]:
             rules.append(f"T1 one-step perturbation {d:.3f} > {thr['delta_fail']}")
             verdict = bump("FAIL")
-        elif d > thr["delta_warn"]:
-            rules.append(f"T1 one-step perturbation {d:.3f} > {thr['delta_warn']}")
+        elif d >= thr["delta_pass"]:
+            rules.append(f"T1 one-step perturbation {d:.3f} in [{thr['delta_pass']}, {thr['delta_fail']}]")
             verdict = bump("WARN")
     if ev.get("layer_local_max", 0) > thr["layer_local_warn"]:
         top = ev["layer_local_top"][0]
@@ -1127,7 +1140,7 @@ def cmd_onnx(a):
     cand = OnnxStep(a.graph, a.threads, vendor=a.vendor or None, opt_level=a.ort_level)
     cache = a.ref_cache or None
     ev = dict(kind="onnx", ref=str(a.ref), graph=str(a.graph), check=str(a.check), steps=a.steps,
-              vendor=a.vendor or None, n_fused_norms=cand.n_fused)
+              vendor=a.vendor or None, n_fused_norms=cand.n_fused, ort_level=a.ort_level)
     ev.update(map_and_rollout(ref, cand, chk, a.steps, ref_cache=cache, log=log, skip_rollout=a.no_rollout))
     if not a.no_layers:
         z = np.load(cache) if cache and pathlib.Path(cache).exists() else None
@@ -1166,10 +1179,22 @@ def finish(ev, a):
     thr = json.loads(pathlib.Path(a.thresholds).read_text()) if getattr(a, "thresholds", None) else None
     v, rules = decide(ev, thr)
     ev["verdict"], ev["rules"] = v, rules
+    # per-runtime verdicts: the cross-runtime evidence condemns the runtime whose kernels disagree
+    # (reference kernels = TFLite Micro), not the graph on the runtime that computes it correctly
+    if ev.get("kind") == "tflite" and ev.get("xrt_first_bad"):
+        e2 = {k: x for k, x in ev.items() if not k.startswith("xrt_")}
+        v2, r2 = decide(e2, thr)
+        ev["verdict_by_runtime"] = {"optimized kernels (XNNPACK / phone CPU)": v2,
+                                    "reference kernels (TFLite Micro)": v}
+    if ev.get("kind") == "onnx":
+        ev["predicts_backend"] = ("QDQ graph under " + ("reference QDQ semantics" if ev.get("ort_level", "basic") == "basic"
+                                  else "ONNX Runtime fused integer kernels")
+                                  + (f", vendor kernel model {ev['vendor']}" if ev.get("vendor") else ""))
     ev = _strip(ev)
     if a.out:
         pathlib.Path(a.out).write_text(json.dumps(ev, indent=1, default=float))
-    print(f"VERDICT {v}")
+    print(f"VERDICT {v}" + (f"  (by runtime: {ev['verdict_by_runtime']})" if ev.get("verdict_by_runtime") else "")
+          + (f"  [predicts: {ev['predicts_backend']}]" if ev.get("predicts_backend") else ""))
     for r in rules:
         print(f"  - {r}")
     keys = ["delta_T_median", "onestep_cell_agree", "cell_agree", "answer_agree", "phi_H", "qsign_agree",

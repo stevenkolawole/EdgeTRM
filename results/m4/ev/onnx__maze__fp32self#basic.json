@@ -1,0 +1,205 @@
+{
+ "kind": "onnx",
+ "backend": "qnn_qdq_host",
+ "task": "maze",
+ "cell": "fp32self",
+ "graph": "/home/ubuntu/aihub_artifacts/h1/maze/stepc_H1.onnx",
+ "n": 16,
+ "steps": 8,
+ "vendor": null,
+ "n_fused_norms": 0,
+ "ort_level": "basic",
+ "T": 8,
+ "delta_T_median": 2.1177594448499848e-07,
+ "delta_T_mean": 2.133357025174725e-07,
+ "delta_T_max": 2.2557035223451842e-07,
+ "delta_T_H_median": 1.3912235558692362e-07,
+ "onestep_cell_agree": 1.0,
+ "onestep_qsign_agree": 1.0,
+ "delta_T_per_input": [
+  2.1517980477464342e-07,
+  2.140431320778676e-07,
+  2.0900929571130873e-07,
+  2.107168733049268e-07,
+  2.066071380884241e-07,
+  2.1259668619877887e-07,
+  2.0902302764781868e-07,
+  2.2557035223451842e-07,
+  2.2553095783246164e-07,
+  2.1296614799800263e-07,
+  2.1106404472499693e-07,
+  2.094399741896389e-07,
+  2.1971896987220587e-07,
+  2.0900984243433676e-07,
+  2.1040714894463075e-07,
+  2.1248784424500002e-07
+ ],
+ "t1_seconds": 5.7,
+ "n_settled": 16,
+ "answer_agree_settled": 1.0,
+ "cell_agree_settled": 1.0,
+ "n_halted": 16,
+ "answer_agree_halted": 1.0,
+ "cell_agree_halted": 1.0,
+ "changed_cells_mean": 112.375,
+ "changed_agree": 1.0,
+ "changed_agree_min": 1.0,
+ "changed_agree_settled": 1.0,
+ "cell_agree": 1.0,
+ "cell_agree_min": 1.0,
+ "answer_agree": 1.0,
+ "cell_agree_per_step": [
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0
+ ],
+ "phi_H": 0.9999999999999876,
+ "qsign_agree": 1.0,
+ "q_fp32_pos": 1.0,
+ "q_cand_pos": 1.0,
+ "t2_seconds": 30.2,
+ "n_shared_tensors": 502,
+ "n_act_pairs": 0,
+ "n_nonfinite_tensors": 0,
+ "nonfinite_examples": [],
+ "layer_local_max": 0.0,
+ "layer_local_p99": 0.0,
+ "layer_local_top": [],
+ "layer_prop_out": NaN,
+ "layer_prop_max": 0.0,
+ "layer_prop_top": [
+  {
+   "tensor": "/inner/embed_tokens/Gather_output_0",
+   "op": "Gather",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/Mul_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/qkv_proj/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Neg_output_0",
+   "op": "Neg",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_1_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_2_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Neg_1_output_0",
+   "op": "Neg",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  }
+ ],
+ "layer_local_by_op": {},
+ "layer_prop_by_op": {
+  "Gather": {
+   "n": 2,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Mul": {
+   "n": 121,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Add": {
+   "n": 66,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "MatMul": {
+   "n": 61,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Neg": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Softmax": {
+   "n": 10,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "ReduceMean": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Sqrt": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Div": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Sigmoid": {
+   "n": 10,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Gemm": {
+   "n": 1,
+   "median": 0.0,
+   "max": 0.0
+  }
+ },
+ "weight_err_max": 0.0,
+ "weight_err_median": 0.0,
+ "weight_err_top": [],
+ "layer_first_prop_gt_0.5": null,
+ "onnx_xrt_rel_median": 2.1238000319442165e-07,
+ "onnx_xrt_argmax_agree": 1.0,
+ "t0_seconds": 12.7,
+ "verdict": "PASS",
+ "rules": [],
+ "seconds": 49.0
+}

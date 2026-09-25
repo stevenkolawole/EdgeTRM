@@ -1,0 +1,200 @@
+{
+ "kind": "onnx",
+ "backend": "qnn_qdq_host",
+ "task": "arc",
+ "cell": "fp32self",
+ "graph": "/home/ubuntu/aihub_artifacts/h1/arc/stepc_H1.onnx",
+ "n": 16,
+ "steps": 8,
+ "T": 8,
+ "delta_T_median": 0.0,
+ "delta_T_mean": 0.0,
+ "delta_T_max": 0.0,
+ "delta_T_H_median": 0.0,
+ "onestep_cell_agree": 1.0,
+ "onestep_qsign_agree": 1.0,
+ "delta_T_per_input": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "t1_seconds": 7.7,
+ "n_settled": 0,
+ "answer_agree_settled": null,
+ "cell_agree_settled": null,
+ "n_halted": 5,
+ "answer_agree_halted": 1.0,
+ "cell_agree_halted": 1.0,
+ "changed_cells_mean": 669.5,
+ "changed_agree": 1.0,
+ "changed_agree_min": 1.0,
+ "changed_agree_settled": null,
+ "cell_agree": 1.0,
+ "cell_agree_min": 1.0,
+ "answer_agree": 1.0,
+ "cell_agree_per_step": [
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0
+ ],
+ "phi_H": 1.0,
+ "qsign_agree": 1.0,
+ "q_fp32_pos": 0.3125,
+ "q_cand_pos": 0.3125,
+ "t2_seconds": 31.2,
+ "n_shared_tensors": 502,
+ "n_act_pairs": 0,
+ "n_nonfinite_tensors": 0,
+ "nonfinite_examples": [],
+ "layer_local_max": 0.0,
+ "layer_local_p99": 0.0,
+ "layer_local_top": [],
+ "layer_prop_out": NaN,
+ "layer_prop_max": 0.0,
+ "layer_prop_top": [
+  {
+   "tensor": "/inner/embed_tokens/Gather_output_0",
+   "op": "Gather",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/Mul_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/qkv_proj/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Neg_output_0",
+   "op": "Neg",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_1_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_2_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Neg_1_output_0",
+   "op": "Neg",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  }
+ ],
+ "layer_local_by_op": {},
+ "layer_prop_by_op": {
+  "Gather": {
+   "n": 2,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Mul": {
+   "n": 121,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Add": {
+   "n": 66,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "MatMul": {
+   "n": 61,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Neg": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Softmax": {
+   "n": 10,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "ReduceMean": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Sqrt": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Div": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Sigmoid": {
+   "n": 10,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Gemm": {
+   "n": 1,
+   "median": 0.0,
+   "max": 0.0
+  }
+ },
+ "weight_err_max": 0.0,
+ "weight_err_median": 0.0,
+ "weight_err_top": [],
+ "layer_first_prop_gt_0.5": null,
+ "t0_seconds": 29.1,
+ "verdict": "PASS",
+ "rules": [],
+ "seconds": 68.4
+}

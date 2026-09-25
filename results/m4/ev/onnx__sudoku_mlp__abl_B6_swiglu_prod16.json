@@ -1,0 +1,395 @@
+{
+ "kind": "onnx",
+ "backend": "qnn_qdq_host",
+ "task": "sudoku_mlp",
+ "cell": "abl_B6_swiglu_prod16",
+ "graph": "/home/ubuntu/aihub_artifacts/h1/sudoku_mlp/infer/qdq_w8a16/variant_B6_swiglu_prod16.onnx",
+ "n": 32,
+ "steps": 16,
+ "T": 16,
+ "delta_T_median": 1.1345326785620022,
+ "delta_T_mean": 1.1195484011332444,
+ "delta_T_max": 1.1733852894490624,
+ "delta_T_H_median": 1.1358825976971092,
+ "onestep_cell_agree": 0.8757716049382716,
+ "onestep_qsign_agree": 0.3125,
+ "delta_T_per_input": [
+  1.0595838712775256,
+  1.1389257392542576,
+  1.1168540442566273,
+  1.1296840187733075,
+  1.064712007777773,
+  1.1587581493968506,
+  1.1733852894490624,
+  1.1360604340501956,
+  1.133775320665813,
+  1.0859589726791246,
+  1.055433679045796,
+  1.1259782046137208,
+  1.1524875078380732,
+  1.1330880559740832,
+  1.1253811999658572,
+  1.1160016738601044,
+  1.1595418747734256,
+  1.1363678577421832,
+  1.1367171537589613,
+  1.150001770784684,
+  1.1352900364581917,
+  1.1411926152634442,
+  1.1241402097099427,
+  1.1465767859895442,
+  1.0600211632052001,
+  1.1404533162348434,
+  1.0246632910639382,
+  1.0590831427725613,
+  1.139740778554411,
+  1.1466029260828787,
+  1.0772377644396127,
+  1.1418499805518239
+ ],
+ "t1_seconds": 8.8,
+ "n_settled": 22,
+ "answer_agree_settled": 0.0,
+ "cell_agree_settled": 0.4382716049382716,
+ "n_halted": 22,
+ "answer_agree_halted": 0.0,
+ "cell_agree_halted": 0.4382716049382716,
+ "changed_cells_mean": 55.71875,
+ "changed_agree": 0.18520490217526447,
+ "changed_agree_min": 0.08620689655172414,
+ "changed_agree_settled": 0.1984256773026306,
+ "cell_agree": 0.4232253086419753,
+ "cell_agree_min": 0.32098765432098764,
+ "answer_agree": 0.0,
+ "cell_agree_per_step": [
+  0.3236882716049383,
+  0.4070216049382716,
+  0.4212962962962963,
+  0.4209104938271605,
+  0.4263117283950617,
+  0.4209104938271605,
+  0.41396604938271603,
+  0.4270833333333333,
+  0.41628086419753085,
+  0.4104938271604938,
+  0.4182098765432099,
+  0.4220679012345679,
+  0.4209104938271605,
+  0.4243827160493827,
+  0.4224537037037037,
+  0.42322530864197533
+ ],
+ "phi_H": 0.12601528619671307,
+ "qsign_agree": 0.3125,
+ "q_fp32_pos": 0.6875,
+ "q_cand_pos": 0.0,
+ "t2_seconds": 105.3,
+ "n_shared_tensors": 489,
+ "n_act_pairs": 498,
+ "n_nonfinite_tensors": 13,
+ "nonfinite_examples": [
+  "/inner/L_level/layers.0/Div_output_0",
+  "/inner/L_level/layers.0_1/Div_output_0",
+  "/inner/L_level/layers.0_2/Div_output_0",
+  "/inner/L_level/layers.0_3/Div_output_0",
+  "/inner/L_level/layers.0_4/Div_output_0"
+ ],
+ "layer_local_max": 0.5656985426988459,
+ "layer_local_p99": NaN,
+ "layer_local_top": [
+  {
+   "tensor": "/inner/L_level/layers.0/ReduceMean_1_output_0",
+   "op": "ReduceMean",
+   "rel_err": 0.5656985426988459
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/Mul_1_output_0",
+   "op": "Mul",
+   "rel_err": 0.3572338884550196
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp/down_proj/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.19157365566509788
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.13049500028869532
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp_t/down_proj/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.08589161400451228
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp/gate_up_proj/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.06956176332566688
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/Mul_1_output_0",
+   "op": "Mul",
+   "rel_err": 0.06607165473392781
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp_t/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.05538751382279976
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/Add_2_output_0",
+   "op": "Add",
+   "rel_err": 0.05377730761395979
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp/Mul_2_output_0",
+   "op": "Mul",
+   "rel_err": 0.05178568691421183
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.039327559426678774
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/Mul_output_0",
+   "op": "Mul",
+   "rel_err": 0.02912263256648715
+  }
+ ],
+ "layer_prop_out": 0.6384709494619574,
+ "layer_prop_max": 1000000000.0,
+ "layer_prop_top": [
+  {
+   "tensor": "/inner/L_level/layers.0/Div_output_0",
+   "op": "Div",
+   "rel_err": 1000000000.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/Div_output_0",
+   "op": "Div",
+   "rel_err": 1000000000.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0_1/Div_output_0",
+   "op": "Div",
+   "rel_err": 1000000000.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.1_1/Div_output_0",
+   "op": "Div",
+   "rel_err": 1000000000.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0_2/Div_output_0",
+   "op": "Div",
+   "rel_err": 1000000000.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0_3/Div_output_0",
+   "op": "Div",
+   "rel_err": 1000000000.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.1_3/Div_output_0",
+   "op": "Div",
+   "rel_err": 1000000000.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0_4/Div_output_0",
+   "op": "Div",
+   "rel_err": 1000000000.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0_5/Div_output_0",
+   "op": "Div",
+   "rel_err": 1000000000.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.1_5/Div_output_0",
+   "op": "Div",
+   "rel_err": 1000000000.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0_6/Div_output_0",
+   "op": "Div",
+   "rel_err": 1000000000.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.1_4/Div_output_0",
+   "op": "Div",
+   "rel_err": 500000000.283339
+  }
+ ],
+ "layer_local_by_op": {
+  "input": {
+   "n": 3,
+   "median": 0.012699964653419764,
+   "max": 0.012943335751372832
+  },
+  "Gather": {
+   "n": 2,
+   "median": 0.0038916626203244903,
+   "max": 0.007783325240648981
+  },
+  "Pad": {
+   "n": 1,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Reshape": {
+   "n": 1,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Concat": {
+   "n": 1,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Mul": {
+   "n": 113,
+   "median": 0.021668431382383564,
+   "max": 0.3572338884550196
+  },
+  "Add": {
+   "n": 64,
+   "median": 0.010864406014722546,
+   "max": 0.07210696164304528
+  },
+  "Transpose": {
+   "n": 28,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "MatMul": {
+   "n": 57,
+   "median": 0.03650318257526123,
+   "max": 0.31612627980284
+  },
+  "Slice": {
+   "n": 57,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Sigmoid": {
+   "n": 28,
+   "median": 0.0021485277425980012,
+   "max": 0.002898435310626497
+  },
+  "Cast": {
+   "n": 56,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "ReduceMean": {
+   "n": 28,
+   "median": 0.03844218330579152,
+   "max": 0.775456915908933
+  },
+  "Sqrt": {
+   "n": 28,
+   "median": 0.0032693370834016456,
+   "max": 0.007524446760379999
+  },
+  "Div": {
+   "n": 28,
+   "median": NaN,
+   "max": NaN
+  }
+ },
+ "layer_prop_by_op": {
+  "Gather": {
+   "n": 2,
+   "median": 0.5238455438222499,
+   "max": 1.0475194564985122
+  },
+  "Mul": {
+   "n": 113,
+   "median": 0.9130654808246927,
+   "max": 7.8265268039065425
+  },
+  "Add": {
+   "n": 64,
+   "median": 0.9300139802254427,
+   "max": 8.974295505566946
+  },
+  "MatMul": {
+   "n": 57,
+   "median": 0.7407492732257286,
+   "max": 3.4014742546695285
+  },
+  "Sigmoid": {
+   "n": 28,
+   "median": 0.2662985618141628,
+   "max": 0.3639499102545312
+  },
+  "ReduceMean": {
+   "n": 28,
+   "median": 1.8014995877812103,
+   "max": 9.971175332358811
+  },
+  "Sqrt": {
+   "n": 28,
+   "median": 0.6601338790927918,
+   "max": 2.297856797240924
+  },
+  "Div": {
+   "n": 28,
+   "median": 0.6082084138761192,
+   "max": 1000000000.0
+  },
+  "Gemm": {
+   "n": 1,
+   "median": 0.5555584237519068,
+   "max": 0.5555584237519068
+  }
+ },
+ "weight_err_max": 9.209357163271877e-05,
+ "weight_err_median": 2.502233293553217e-08,
+ "weight_err_top": [
+  {
+   "weight": "onnx::Gather_1070",
+   "rel_err": 9.209357163271877e-05,
+   "bits": 16,
+   "granularity": "tensor"
+  },
+  {
+   "weight": "onnx::MatMul_1083_copy_1",
+   "rel_err": 2.7971691903535906e-08,
+   "bits": 8,
+   "granularity": "channel"
+  },
+  {
+   "weight": "onnx::MatMul_1083_copy_2",
+   "rel_err": 2.7971691903535906e-08,
+   "bits": 8,
+   "granularity": "channel"
+  },
+  {
+   "weight": "onnx::MatMul_1083_copy_3",
+   "rel_err": 2.7971691903535906e-08,
+   "bits": 8,
+   "granularity": "channel"
+  },
+  {
+   "weight": "onnx::MatMul_1083_copy_4",
+   "rel_err": 2.7971691903535906e-08,
+   "bits": 8,
+   "granularity": "channel"
+  }
+ ],
+ "layer_first_prop_gt_0.5": {
+  "tensor": "/inner/L_level/layers.0/Div_output_0",
+  "op": "Div"
+ },
+ "t0_seconds": 7.0,
+ "verdict": "FAIL",
+ "rules": [
+  "T0 per-layer: 13 intermediate tensors are inf/nan where fp32 is finite (e.g. /inner/L_level/layers.0/Div_output_0)",
+  "T2 cell agreement with fp32 (cells fp32 writes, fp32-settled inputs) 0.198 < 0.8",
+  "T0 per-layer: activation /inner/L_level/layers.0/ReduceMean_1_output_0 (ReduceMean) local 8/16-bit error 0.57 (evidence)"
+ ],
+ "seconds": 122.8
+}

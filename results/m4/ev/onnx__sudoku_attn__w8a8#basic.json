@@ -1,0 +1,407 @@
+{
+ "kind": "onnx",
+ "backend": "qnn_qdq_host",
+ "task": "sudoku_attn",
+ "cell": "w8a8",
+ "graph": "/home/ubuntu/aihub_artifacts/h1/sudoku_attn/infer/qdq_w8a8/model.onnx",
+ "n": 32,
+ "steps": 16,
+ "vendor": null,
+ "n_fused_norms": 0,
+ "ort_level": "basic",
+ "T": 16,
+ "delta_T_median": 0.08461184578934228,
+ "delta_T_mean": 0.0864327606516549,
+ "delta_T_max": 0.12454623237577593,
+ "delta_T_H_median": 0.052963270325418574,
+ "onestep_cell_agree": 0.9934413580246912,
+ "onestep_qsign_agree": 1.0,
+ "delta_T_per_input": [
+  0.0839467402545108,
+  0.07970351663974913,
+  0.07900555543737486,
+  0.08926489231325806,
+  0.08434016567983309,
+  0.09025689676619787,
+  0.12454623237577593,
+  0.08915251233581539,
+  0.08320987665910576,
+  0.09294974702723986,
+  0.07543392038114086,
+  0.08570578536728984,
+  0.07514227228191829,
+  0.10392817178517595,
+  0.08613122100611803,
+  0.0838972565254124,
+  0.08621195795858962,
+  0.08476565951155887,
+  0.08846150469586166,
+  0.0916826032495221,
+  0.09105015519589699,
+  0.07598549157301145,
+  0.08511249860874437,
+  0.0828046506481759,
+  0.08324669163565702,
+  0.09238346696498674,
+  0.08113396055551143,
+  0.07865387963818357,
+  0.08340142623823066,
+  0.08445803206712567,
+  0.09334203001077772,
+  0.0765395694652064
+ ],
+ "t1_seconds": 16.3,
+ "n_settled": 20,
+ "answer_agree_settled": 1.0,
+ "cell_agree_settled": 1.0,
+ "n_halted": 21,
+ "answer_agree_halted": 1.0,
+ "cell_agree_halted": 1.0,
+ "changed_cells_mean": 55.71875,
+ "changed_agree": 0.9196515853701652,
+ "changed_agree_min": 0.40350877192982454,
+ "changed_agree_settled": 1.0,
+ "cell_agree": 0.9436728395061729,
+ "cell_agree_min": 0.5802469135802469,
+ "answer_agree": 0.6875,
+ "cell_agree_per_step": [
+  0.31905864197530864,
+  0.9490740740740741,
+  0.9347993827160493,
+  0.9293981481481481,
+  0.9174382716049383,
+  0.9085648148148148,
+  0.9131944444444444,
+  0.9232253086419753,
+  0.9278549382716049,
+  0.9347993827160493,
+  0.9255401234567902,
+  0.9317129629629629,
+  0.9278549382716049,
+  0.9301697530864198,
+  0.9351851851851852,
+  0.9436728395061729
+ ],
+ "phi_H": 0.9410688282190794,
+ "qsign_agree": 0.90625,
+ "q_fp32_pos": 0.65625,
+ "q_cand_pos": 0.75,
+ "t2_seconds": 235.4,
+ "n_shared_tensors": 699,
+ "n_act_pairs": 930,
+ "n_nonfinite_tensors": 0,
+ "nonfinite_examples": [],
+ "layer_local_max": 0.09562140400708037,
+ "layer_local_p99": 0.06898582254386593,
+ "layer_local_top": [
+  {
+   "tensor": "/inner/L_level/layers.1/mlp_4/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.09562140400708037
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp_2/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.0925357156657875
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp_5/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.09195241631995063
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp_3/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.09142662451820008
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp_1/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.09081931572168982
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.08993710694262289
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp_6/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.07221744298250779
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp_2/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.06985742088807775
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp_1/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.06931018748149814
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.06855585041723727
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp_4/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.06502638590805732
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/mlp_3/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.06310231302308339
+  }
+ ],
+ "layer_prop_out": 0.03303299650841227,
+ "layer_prop_max": 0.1607786763672016,
+ "layer_prop_top": [
+  {
+   "tensor": "/inner/L_level/layers.1/mlp/down_proj_5/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.1607786763672016
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp/down_proj_4/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.15510031595343088
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp/down_proj_1/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.15164577106639526
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp/down_proj_2/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.1446530114556213
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp/down_proj_3/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.14313007611587736
+  },
+  {
+   "tensor": "/inner/L_level/layers.1_5/Mul_2_output_0",
+   "op": "Mul",
+   "rel_err": 0.1331372741510078
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/self_attn/o_proj_5/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.13226904152759134
+  },
+  {
+   "tensor": "/inner/L_level/layers.1_4/Mul_2_output_0",
+   "op": "Mul",
+   "rel_err": 0.1314001352042376
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/self_attn_5/MatMul_1_output_0",
+   "op": "MatMul",
+   "rel_err": 0.13133827191498237
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/mlp_5/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.12980439880554073
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/self_attn/o_proj_3/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.12882610144513262
+  },
+  {
+   "tensor": "/inner/L_level/layers.1/self_attn_2/MatMul_1_output_0",
+   "op": "MatMul",
+   "rel_err": 0.1275153464167928
+  }
+ ],
+ "layer_local_by_op": {
+  "input": {
+   "n": 3,
+   "median": 0.010068348825307143,
+   "max": 0.011008299289248461
+  },
+  "Gather": {
+   "n": 2,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Pad": {
+   "n": 1,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Reshape": {
+   "n": 29,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Concat": {
+   "n": 29,
+   "median": 0.00936723100059527,
+   "max": 0.016302914517816087
+  },
+  "Mul": {
+   "n": 169,
+   "median": 0.01545488713390189,
+   "max": 0.09562140400708037
+  },
+  "Add": {
+   "n": 92,
+   "median": 0.011022468778420207,
+   "max": 0.021998497960579844
+  },
+  "MatMul": {
+   "n": 85,
+   "median": 0.0159524966403731,
+   "max": 0.02175151598799835
+  },
+  "Slice": {
+   "n": 126,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Cast": {
+   "n": 112,
+   "median": 0.0,
+   "max": 0.021899667651713764
+  },
+  "Transpose": {
+   "n": 56,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Neg": {
+   "n": 28,
+   "median": 0.015006663118115559,
+   "max": 0.02305325838090275
+  },
+  "Softmax": {
+   "n": 14,
+   "median": 0.03603664944197679,
+   "max": 0.044577723190133416
+  },
+  "ReduceMean": {
+   "n": 28,
+   "median": 0.0020902806339182884,
+   "max": 0.0033585659387234523
+  },
+  "Sqrt": {
+   "n": 28,
+   "median": 0.001519690416605234,
+   "max": 0.0020647213851230787
+  },
+  "Div": {
+   "n": 28,
+   "median": 0.0014080347276595156,
+   "max": 0.003609476288672259
+  },
+  "Sigmoid": {
+   "n": 14,
+   "median": 0.002074464360912062,
+   "max": 0.0022779202242038422
+  }
+ },
+ "layer_prop_by_op": {
+  "Gather": {
+   "n": 2,
+   "median": 0.03312360594646038,
+   "max": 0.058017685126985755
+  },
+  "Mul": {
+   "n": 169,
+   "median": 0.05753491655910966,
+   "max": 0.1331372741510078
+  },
+  "Add": {
+   "n": 92,
+   "median": 0.052531438029796165,
+   "max": 0.11329590309111277
+  },
+  "MatMul": {
+   "n": 85,
+   "median": 0.06341523592435737,
+   "max": 0.1607786763672016
+  },
+  "Neg": {
+   "n": 28,
+   "median": 0.03874423278782383,
+   "max": 0.0687898791871514
+  },
+  "Softmax": {
+   "n": 14,
+   "median": 0.07782887869572502,
+   "max": 0.10324966183371886
+  },
+  "ReduceMean": {
+   "n": 28,
+   "median": 0.022996198192810867,
+   "max": 0.06398929474572422
+  },
+  "Sqrt": {
+   "n": 28,
+   "median": 0.01202196216231272,
+   "max": 0.033069368262980375
+  },
+  "Div": {
+   "n": 28,
+   "median": 0.01285770515499075,
+   "max": 0.033021205285965013
+  },
+  "Sigmoid": {
+   "n": 14,
+   "median": 0.018683769018357693,
+   "max": 0.027183993236668716
+  },
+  "Gemm": {
+   "n": 1,
+   "median": 0.00558173690431433,
+   "max": 0.00558173690431433
+  }
+ },
+ "weight_err_max": 0.009797588836656221,
+ "weight_err_median": 2.5224365103141503e-08,
+ "weight_err_top": [
+  {
+   "weight": "onnx::Gather_2756",
+   "rel_err": 0.009797588836656221,
+   "bits": 8,
+   "granularity": "tensor"
+  },
+  {
+   "weight": "/inner/L_level/layers.0/self_attn/Constant_27_output_0",
+   "rel_err": 0.0043792529404713,
+   "bits": 8,
+   "granularity": "tensor"
+  },
+  {
+   "weight": "/inner/L_level/layers.0/self_attn/Constant_39_output_0",
+   "rel_err": 0.0043792529404713,
+   "bits": 8,
+   "granularity": "tensor"
+  },
+  {
+   "weight": "/inner/L_level/layers.1/self_attn/Constant_27_output_0",
+   "rel_err": 0.0043792529404713,
+   "bits": 8,
+   "granularity": "tensor"
+  },
+  {
+   "weight": "/inner/L_level/layers.1/self_attn/Constant_39_output_0",
+   "rel_err": 0.0043792529404713,
+   "bits": 8,
+   "granularity": "tensor"
+  }
+ ],
+ "layer_first_prop_gt_0.5": null,
+ "onnx_xrt_rel_median": 0.09918869282815473,
+ "onnx_xrt_argmax_agree": 1.0,
+ "t0_seconds": 39.4,
+ "verdict": "PASS",
+ "rules": [],
+ "seconds": 293.5
+}

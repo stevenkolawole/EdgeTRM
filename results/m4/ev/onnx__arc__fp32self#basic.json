@@ -1,0 +1,205 @@
+{
+ "kind": "onnx",
+ "backend": "qnn_qdq_host",
+ "task": "arc",
+ "cell": "fp32self",
+ "graph": "/home/ubuntu/aihub_artifacts/h1/arc/stepc_H1.onnx",
+ "n": 16,
+ "steps": 8,
+ "vendor": null,
+ "n_fused_norms": 0,
+ "ort_level": "basic",
+ "T": 8,
+ "delta_T_median": 4.974019083877404e-07,
+ "delta_T_mean": 5.238667914801689e-07,
+ "delta_T_max": 8.329327754212801e-07,
+ "delta_T_H_median": 4.424205406654481e-07,
+ "onestep_cell_agree": 1.0,
+ "onestep_qsign_agree": 1.0,
+ "delta_T_per_input": [
+  5.415774451133872e-07,
+  4.750857186891249e-07,
+  4.966255856231848e-07,
+  5.661623604793006e-07,
+  5.952085647749153e-07,
+  4.981782311522961e-07,
+  4.381440415392674e-07,
+  4.3259623421505345e-07,
+  4.190735491470392e-07,
+  4.929405067978902e-07,
+  6.299161274878622e-07,
+  8.329327754212801e-07,
+  5.445059107813513e-07,
+  4.574868207225008e-07,
+  4.4735026321895695e-07,
+  5.140845285192925e-07
+ ],
+ "t1_seconds": 6.2,
+ "n_settled": 0,
+ "answer_agree_settled": null,
+ "cell_agree_settled": null,
+ "n_halted": 5,
+ "answer_agree_halted": 1.0,
+ "cell_agree_halted": 1.0,
+ "changed_cells_mean": 669.5,
+ "changed_agree": 1.0,
+ "changed_agree_min": 1.0,
+ "changed_agree_settled": null,
+ "cell_agree": 1.0,
+ "cell_agree_min": 1.0,
+ "answer_agree": 1.0,
+ "cell_agree_per_step": [
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0
+ ],
+ "phi_H": 0.9999999999735976,
+ "qsign_agree": 1.0,
+ "q_fp32_pos": 0.3125,
+ "q_cand_pos": 0.3125,
+ "t2_seconds": 30.4,
+ "n_shared_tensors": 502,
+ "n_act_pairs": 0,
+ "n_nonfinite_tensors": 0,
+ "nonfinite_examples": [],
+ "layer_local_max": 0.0,
+ "layer_local_p99": 0.0,
+ "layer_local_top": [],
+ "layer_prop_out": NaN,
+ "layer_prop_max": 0.0,
+ "layer_prop_top": [
+  {
+   "tensor": "/inner/embed_tokens/Gather_output_0",
+   "op": "Gather",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/Mul_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/qkv_proj/MatMul_output_0",
+   "op": "MatMul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Neg_output_0",
+   "op": "Neg",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_1_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Add_output_0",
+   "op": "Add",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_2_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Neg_1_output_0",
+   "op": "Neg",
+   "rel_err": 0.0
+  },
+  {
+   "tensor": "/inner/L_level/layers.0/self_attn/Mul_3_output_0",
+   "op": "Mul",
+   "rel_err": 0.0
+  }
+ ],
+ "layer_local_by_op": {},
+ "layer_prop_by_op": {
+  "Gather": {
+   "n": 2,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Mul": {
+   "n": 121,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Add": {
+   "n": 66,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "MatMul": {
+   "n": 61,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Neg": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Softmax": {
+   "n": 10,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "ReduceMean": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Sqrt": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Div": {
+   "n": 20,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Sigmoid": {
+   "n": 10,
+   "median": 0.0,
+   "max": 0.0
+  },
+  "Gemm": {
+   "n": 1,
+   "median": 0.0,
+   "max": 0.0
+  }
+ },
+ "weight_err_max": 0.0,
+ "weight_err_median": 0.0,
+ "weight_err_top": [],
+ "layer_first_prop_gt_0.5": null,
+ "onnx_xrt_rel_median": 5.191016109416979e-07,
+ "onnx_xrt_argmax_agree": 1.0,
+ "t0_seconds": 13.8,
+ "verdict": "PASS",
+ "rules": [],
+ "seconds": 50.8
+}

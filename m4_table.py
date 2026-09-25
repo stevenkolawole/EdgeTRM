@@ -30,7 +30,7 @@ MATCH = {"w8c+a8all": {"qnn_qdq_host": "w8a8", "tflite_auto": "int8", "tflite_re
          "w4c+a16all": {"qnn_qdq_host": "w4a16", "tflite_auto": "w4a16_c", "qnn_device": "w4a16"},
          "w4t+a8all": {"tflite_auto": "w4a8_t"},
          "w8c+a8lin": {"tflite_auto": "w8a8_fc"}}
-TASK_ALIAS = {"maze_attn": "maze"}          # breadth-harness name -> AI Hub / TFLite name
+TASK_ALIAS = {"maze_attn": "maze"}          # breadth-harness name -> AI Hub / TFLite name (X2 rows too)          # breadth-harness name -> AI Hub / TFLite name
 
 
 def cls(r):
@@ -154,7 +154,8 @@ def load_rows():
                 if c["spec"] == "fp32" or c.get("deltaT_q") is None:
                     continue
                 ret = c["acc"] / acc0[task] if acc0.get(task) else None
-                rows.append(dict(mode="x2", backend="x2_harness", task=task, cell=f"{c['spec']}#{c.get('draw', 0)}",
+                rows.append(dict(mode="x2", backend="x2_harness", task=TASK_ALIAS.get(task, task),
+                                 cell=f"{c['spec']}#{c.get('draw', 0)}",
                                  family=family_of("x2_harness", c["spec"]), retained=ret, label=cls(ret),
                                  exact=c["acc"], exact_fp32=acc0.get(task), n_label=c["n"],
                                  delta_T_median=c["deltaT_q"][1], cell_agree=c.get("agree_mean"), phi_H=c.get("phi_H"),
@@ -403,24 +404,96 @@ def main():
         lines, res = summarize(rows, name, R)
         md += lines
         out.setdefault("summary", {})[name] = res
-    # held-out validation on the pooled table (every row that carries the feature)
-    md.append("\n## Held-out categories (threshold fitted on the other categories, applied unchanged)\n")
+    # held-out validation (DriftBench rule) on the same-runtime rows: the check run on the runtime that
+    # produced the label (graph mode, the torch path's own label runs, X2's harness cells)
+    SAME = [r for r in rows if r["mode"] in ("graph", "torch_self", "x2")]
+    CROSS = [r for r in rows if r["mode"] in ("torch_to_graph", "device_from_host_check")]
+    md.append("\n## Held-out categories, same-runtime rows (threshold fitted on the other categories, applied unchanged)\n")
+    md.append(f"{len(SAME)} rows (graph mode, torch path own labels, X2 harness). FA = false accept (a not-OK cell "
+              "passed), FR = false reject.\n")
+    md.append("| predictor | rule | leave one backend out | leave one model out | leave one config family out |")
+    md.append("|---|---|---|---|---|")
     out["heldout"] = {}
-    for pred, key, rule in [(p_, k_, r_) for p_ in PRED for r_ in ("balanced", "envelope")
-                            for k_ in ("backend", "task", "family")]:
-        if True:
-            h = heldout(rows, pred, key, rule=rule)
-            out["heldout"][f"{pred} | {key} | {rule}"] = h
-            tot = sum(x.get("n", 0) for x in h if "correct" in x)
-            cor = sum(x.get("correct", 0) for x in h)
-            fa = sum(x.get("false_accept", 0) for x in h)
-            fr = sum(x.get("false_reject", 0) for x in h)
-            md.append(f"- **{pred}** [{rule}], leave one {key} out: {cor}/{tot} correct, false accepts {fa}, "
-                      f"false rejects {fr}")
-            for x in h:
-                if "correct" in x and (x["false_accept"] or x["false_reject"]):
-                    md.append(f"    - {key}={x['category']}: thr {x['threshold']:.4g}, {x['correct']}/{x['n']} "
-                              f"(FA {x['false_accept_cells']}, FR {x['false_reject_cells']})")
+    for pred in PRED:
+        for rule in ("balanced", "envelope"):
+            cells_ = []
+            for key in ("backend", "task", "family"):
+                h = heldout(SAME, pred, key, rule=rule)
+                out["heldout"][f"{pred} | {key} | {rule}"] = h
+                tot = sum(x.get("n", 0) for x in h if "correct" in x)
+                cor = sum(x.get("correct", 0) for x in h)
+                fa = sum(x.get("false_accept", 0) for x in h)
+                fr = sum(x.get("false_reject", 0) for x in h)
+                cells_.append(f"{cor}/{tot} (FA {fa}, FR {fr})" if tot else "-")
+            md.append(f"| {pred} | {rule} | " + " | ".join(cells_) + " |")
+    md.append("\nErrors of the combined check (balanced rule):")
+    for key in ("backend", "task", "family"):
+        for x in out["heldout"][f"CHECK: T0 hard rules + T2 written cells (settled) | {key} | balanced"]:
+            if "correct" in x and (x["false_accept"] or x["false_reject"]):
+                md.append(f"- leave out {key}={x['category']}: threshold {x['threshold']:.3f}; FA {x['false_accept_cells']}; "
+                          f"FR {x['false_reject_cells']}")
+    # cross-runtime: thresholds fitted on all same-runtime rows, applied to predictions of another runtime
+    md.append("\n## Cross-runtime prediction (thresholds fitted on all same-runtime rows)\n")
+    md.append("| predictor | fitted threshold | rows | correct | false accepts | false rejects |")
+    md.append("|---|---|---|---|---|---|")
+    out["cross"] = {}
+    for pred in ("T1 delta_T", "CHECK: T0 hard rules + T2 written cells (settled)"):
+        feat, sign = PRED[pred]
+        tr = [r for r in SAME if score_of(r, feat, sign) is not None and r["label"] is not None]
+        t, _ = fit_threshold([score_of(r, feat, sign) for r in tr], [r["label"] != "OK" for r in tr])
+        te = [r for r in CROSS if score_of(r, feat, sign) is not None and r["label"] is not None]
+        res = []
+        for r in te:
+            bad, flag = r["label"] != "OK", score_of(r, feat, sign) > t
+            res.append((r, bad, flag))
+        fa = [f"{r['cell']}|{r['task']}|{r['backend']}" for r, b, fl in res if b and not fl]
+        fr = [f"{r['cell']}|{r['task']}|{r['backend']}" for r, b, fl in res if fl and not b]
+        out["cross"][pred] = dict(threshold=sign * t, n=len(res), false_accepts=fa, false_rejects=fr)
+        md.append(f"| {pred} | {sign * t:.3f} | {len(res)} | {len(res) - len(fa) - len(fr)} | {len(fa)} | {len(fr)} |")
+        md.append(f"|  FA: {'; '.join(fa)} |  FR: {'; '.join(fr)} | | | | |")
+    # the shipped three-level rule (release_check.decide with its THRESHOLDS), per row
+    import sys
+    sys.path.insert(0, str(HERE))
+    import release_check as R
+    md.append("\n## Shipped rule (release_check.decide, THRESHOLDS rounded from the fits; in-sample for the "
+              "same-runtime rows)\n")
+    md.append("| rows | label | PASS | WARN | FAIL |")
+    md.append("|---|---|---|---|---|")
+    out["shipped"] = {}
+    for name, sel in (("same-runtime (graph + torch own label)", lambda r: r["mode"] in ("graph", "torch_self")),
+                      ("cross-runtime (torch -> graph, host check -> device)",
+                       lambda r: r["mode"] in ("torch_to_graph", "device_from_host_check"))):
+        C = defaultdict(int)
+        errs = []
+        for r in rows:
+            if not sel(r) or r["label"] is None:
+                continue
+            ev_ = {k: r.get(k) for k in ("cell_agree", "cell_agree_settled", "changed_agree", "changed_agree_settled",
+                                         "answer_agree", "answer_agree_settled", "delta_T_median", "n_nonfinite_tensors")}
+            ev_ = {k: v for k, v in ev_.items() if v is not None}
+            ev_["n_settled"] = 99 if r.get("cell_agree_settled") is not None else 0
+            if r.get("xrt_bad"):
+                ev_["xrt_first_bad"] = {"op_index": -1, "op": "?", "maxdiff": 0, "in_diff_lsb": 0}
+            v, _ = R.decide(ev_)
+            C[(r["label"], v)] += 1
+            if (r["label"] == "BROKEN" and v != "FAIL") or (r["label"] == "OK" and v == "FAIL") or \
+                    (r["label"] != "OK" and v == "PASS"):
+                errs.append(f"{r['label']}->{v}: {r['cell']} ({r['task']}, {r['backend']})")
+        out["shipped"][name] = dict(counts={f"{a}->{b}": c for (a, b), c in C.items()}, errors=errs)
+        for lab in ("OK", "DEGRADED", "BROKEN"):
+            md.append(f"| {name} | {lab} | {C[(lab, 'PASS')]} | {C[(lab, 'WARN')]} | {C[(lab, 'FAIL')]} |")
+        if errs:
+            md.append(f"| {name}: errors | " + "; ".join(errs) + " | | | |")
+    # device probe (m4_device_probe.py)
+    dp = RES / "device_probe.json"
+    if dp.exists():
+        md.append("\n## Device probe (m4_device_probe.py; device outputs vs host fp32 on the first 16 inputs)\n")
+        md.append("| chain | device | z_H cos step 1 | written-cell agr. step 1 / 2 / 3 |")
+        md.append("|---|---|---|---|")
+        for r in json.loads(dp.read_text()):
+            w = r.get("written_agree_vs_host_fp32_per_step", [])
+            md.append(f"| {r['task']} {r['prec']} | {r['device']} | {r.get('zH_cos_vs_host_fp32', float('nan')):.3f} | "
+                      + " / ".join(f"{x:.3f}" for x in w[:3]) + " |")
     # the table itself
     md.append("\n## Table\n")
     md.append("| mode | backend | task | cell | family | retained | label | delta_T | cell agr. | cell agr. settled | "
