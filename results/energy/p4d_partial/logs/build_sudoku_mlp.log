@@ -1,0 +1,31 @@
+12:00:12 device NVIDIA A100-SXM4-40GB CUDA_VISIBLE_DEVICES 5
+/home/ubuntu/e1/e1_energy.py:530: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/home/ubuntu/e1/e1_energy.py:531: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[09/25/2026-12:12:16] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:12:16 sudoku_mlp dyn_H3_b1_int8 698.6 s 11.55 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 426, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 5
+[09/25/2026-12:12:22] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:12:22 sudoku_mlp x3_H3_b1_fp32 5.2 s 21.19 MB {'in:FP32|out:FP32': 425, 'in:FP32,Int32|out:FP32': 1} missing scales 0
+[09/25/2026-12:12:33] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:12:33 sudoku_mlp x3_H3_b1_fp16 11.0 s 11.54 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 425, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 4} missing scales 0
+[09/25/2026-12:12:45] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:12:45 sudoku_mlp x3_H3_b1_int8 11.8 s 11.54 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 425, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 4} missing scales 516
+[09/25/2026-12:12:51] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:12:51 sudoku_mlp x3_H3_b1_int8f32 5.6 s 21.19 MB {'in:FP32|out:FP32': 425, 'in:FP32,Int32|out:FP32': 1} missing scales 516
+[09/25/2026-12:16:37] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:16:37 sudoku_mlp dyn_H1_b1_int8 218.4 s 11.07 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 146, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 5
+[09/25/2026-12:16:39] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:16:39 sudoku_mlp x3_H1_b1_fp32 1.6 s 20.66 MB {'in:FP32|out:FP32': 145, 'in:FP32,Int32|out:FP32': 1} missing scales 0
+[09/25/2026-12:16:43] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:16:43 sudoku_mlp x3_H1_b1_fp16 3.7 s 11.06 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 145, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 4} missing scales 0
+[09/25/2026-12:16:47] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:16:47 sudoku_mlp x3_H1_b1_int8 4.5 s 11.06 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 145, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 4} missing scales 180
+[09/25/2026-12:16:49] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:16:49 sudoku_mlp x3_H1_b1_int8f32 2.1 s 20.66 MB {'in:FP32|out:FP32': 145, 'in:FP32,Int32|out:FP32': 1} missing scales 180
+[09/25/2026-12:17:43] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:17:43 sudoku_mlp dyn_H3_b256_fp32 53.3 s 22.43 MB {'in:Int32|out:FP32': 1, 'in:FP32|out:FP32': 427} missing scales 0
+[09/25/2026-12:18:34] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:18:34 sudoku_mlp dyn_H3_b256_fp16 50.9 s 13.94 MB {'in:FP32|out:FP16': 3, 'in:Int32|out:FP16': 1, 'in:FP16|out:FP16': 511, 'in:FP16|out:FP32': 5} missing scales 0
+[09/25/2026-12:19:02] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:19:02 sudoku_mlp dyn_H3_b256_int8 27.2 s 13.95 MB {'in:FP32|out:FP16': 3, 'in:Int32|out:FP16': 1, 'in:FP16|out:FP16': 511, 'in:FP16|out:FP32': 5} missing scales 5

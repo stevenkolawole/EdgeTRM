@@ -1,0 +1,31 @@
+12:20:47 device NVIDIA A100-SXM4-40GB CUDA_VISIBLE_DEVICES 5
+[09/25/2026-12:21:47] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:21:48 sudoku_mlp dyn_H3_b1_fp32 56.5 s 21.19 MB {'in:FP32|out:FP32': 426, 'in:FP32,Int32|out:FP32': 1} missing scales 0
+[09/25/2026-12:21:58] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:21:58 sudoku_mlp dyn_H3_b1_fp16 10.6 s 11.54 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 426, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 0
+/home/ubuntu/e1/e1_energy.py:559: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/home/ubuntu/e1/e1_energy.py:560: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[09/25/2026-12:22:05] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:22:05 sudoku_mlp dyn_H3_b1_int8f32 6.2 s 21.19 MB {'in:FP32|out:FP32': 426, 'in:FP32,Int32|out:FP32': 1} missing scales 5
+/home/ubuntu/e1/e1_energy.py:518: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+[09/25/2026-12:39:17] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:39:17 sudoku_mlp dyn_H3_b1_int8mm 1032.3 s 11.87 MB {'in:FP32|out:FP16': 89, 'in:FP16|out:FP16': 170, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 168, 'in:FP16|out:Int8': 85, 'in:Int8|out:FP32': 128, 'in:FP32|out:FP32': 46, 'in:FP32|out:Int8': 43, 'in:Int8|out:Int8': 406, 'in:FP16|out:FP32': 4} missing scales 5
+/home/ubuntu/e1/e1_energy.py:529: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:   103: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,512,97][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:   103: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,512,97][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Transpose_1]}. In computeCosts at optimizer/common/tactic/optimizer.cpp:4115)
+Traceback (most recent call last):
+  File "/home/ubuntu/e1/e1_energy.py", line 1036, in <module>
+    assert a.nvml_index is not None
+^^^^^^
+  File "/home/ubuntu/e1/e1_energy.py", line 1027, in main
+    log("device", torch.cuda.get_device_name(0), "CUDA_VISIBLE_DEVICES", os.environ.get("CUDA_VISIBLE_DEVICES"))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/e1/e1_energy.py", line 563, in stage_build
+    cprof.set_shape(inp.name, shp, shp, shp)
+^^^^^^^^^^^^^^
+AssertionError: dyn_H3_b1_int8all

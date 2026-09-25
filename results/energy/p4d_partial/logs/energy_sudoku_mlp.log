@@ -1,0 +1,129 @@
+12:20:47 device NVIDIA A100-SXM4-40GB CUDA_VISIBLE_DEVICES 6
+12:21:17 idle start 75.83 W 1410.0 MHz 40 C
+12:21:47 idle start 75.4 W 1410.0 MHz 40 C
+12:22:17 idle start 75.53 W 1410.0 MHz 40 C
+12:22:47 idle start 75.51 W 1410.0 MHz 40 C
+12:23:17 idle start 75.24 W 1410.0 MHz 40 C
+12:24:28 sudoku_mlp eager_fp32_b1_fixed w0 117.8 W 1904.12 mJ/step 16.170 ms/step 42.837 J/solved acc 0.711 1410.0 MHz clean
+12:25:28 sudoku_mlp eager_fp32_b1_fixed w1 118.1 W 1895.97 mJ/step 16.052 ms/step 43.284 J/solved acc 0.701 1410.0 MHz clean
+12:26:28 sudoku_mlp eager_fp32_b1_fixed w2 117.9 W 1892.13 mJ/step 16.044 ms/step 56.673 J/solved acc 0.534 1410.0 MHz clean
+12:27:28 sudoku_mlp eager_fp32_b1_fixed w3 118.0 W 1894.96 mJ/step 16.054 ms/step 34.778 J/solved acc 0.872 1410.0 MHz clean
+12:28:28 sudoku_mlp eager_fp32_b1_fixed w4 118.2 W 1896.67 mJ/step 16.052 ms/step 39.451 J/solved acc 0.769 1410.0 MHz clean
+12:29:39 sudoku_mlp eager_fp16_b1_fixed w0 88.3 W 1714.66 mJ/step 19.412 ms/step 36.960 J/solved acc 0.742 1410.0 MHz clean
+12:30:39 sudoku_mlp eager_fp16_b1_fixed w1 88.3 W 1701.40 mJ/step 19.278 ms/step 37.648 J/solved acc 0.723 1410.0 MHz clean
+12:31:39 sudoku_mlp eager_fp16_b1_fixed w2 87.9 W 1714.01 mJ/step 19.510 ms/step 66.998 J/solved acc 0.409 1410.0 MHz clean
+12:32:39 sudoku_mlp eager_fp16_b1_fixed w3 88.1 W 1702.94 mJ/step 19.337 ms/step 33.037 J/solved acc 0.825 1410.0 MHz clean
+12:33:39 sudoku_mlp eager_fp16_b1_fixed w4 87.9 W 1702.17 mJ/step 19.361 ms/step 30.365 J/solved acc 0.897 1410.0 MHz clean
+Traceback (most recent call last):
+  File "/home/ubuntu/e1/e1_energy.py", line 1036, in <module>
+    main()
+  File "/home/ubuntu/e1/e1_energy.py", line 1032, in main
+    stage_energy(a.task, a.nvml_index, a.win_s, a.nwin, a.idle_s, a.nidle, only)
+  File "/home/ubuntu/e1/e1_energy.py", line 938, in stage_energy
+    unit()
+  File "/home/ubuntu/e1/e1_energy.py", line 903, in unit
+    runner.step()
+  File "/home/ubuntu/e1/e1_energy.py", line 199, in step
+    self.g.replay()
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/cuda/graphs.py", line 88, in replay
+    super().replay()
+RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.
+12:39:07 device NVIDIA A100-SXM4-40GB CUDA_VISIBLE_DEVICES 6
+12:39:37 idle start 75.19 W 1410.0 MHz 39 C
+12:40:07 idle start 75.3 W 1410.0 MHz 39 C
+12:40:37 idle start 75.06 W 1410.0 MHz 39 C
+12:41:07 idle start 75.17 W 1410.0 MHz 39 C
+12:41:37 idle start 75.17 W 1410.0 MHz 39 C
+12:42:48 sudoku_mlp graph_fp16_b1_fixed w0 127.8 W 480.62 mJ/step 3.761 ms/step 10.674 J/solved acc 0.720 1410.0 MHz clean
+12:43:48 sudoku_mlp graph_fp16_b1_fixed w1 129.2 W 485.65 mJ/step 3.759 ms/step 10.786 J/solved acc 0.720 1410.0 MHz clean
+12:44:48 sudoku_mlp graph_fp16_b1_fixed w2 129.6 W 487.05 mJ/step 3.759 ms/step 10.817 J/solved acc 0.720 1410.0 MHz clean
+12:45:48 sudoku_mlp graph_fp16_b1_fixed w3 129.5 W 487.06 mJ/step 3.761 ms/step 10.817 J/solved acc 0.720 1410.0 MHz clean
+12:46:48 sudoku_mlp graph_fp16_b1_fixed w4 129.5 W 487.12 mJ/step 3.762 ms/step 10.792 J/solved acc 0.722 1410.0 MHz clean
+[09/25/2026-12:46:48] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+12:47:59 sudoku_mlp trt_fp32_b1_fixed w0 205.6 W 998.80 mJ/step 4.858 ms/step 23.756 J/solved acc 0.673 1410.0 MHz clean
+12:48:59 sudoku_mlp trt_fp32_b1_fixed w1 205.6 W 999.90 mJ/step 4.862 ms/step 23.570 J/solved acc 0.679 1410.0 MHz clean
+12:49:59 sudoku_mlp trt_fp32_b1_fixed w2 206.5 W 1003.99 mJ/step 4.862 ms/step 20.669 J/solved acc 0.777 1410.0 MHz clean
+12:50:59 sudoku_mlp trt_fp32_b1_fixed w3 206.2 W 1002.13 mJ/step 4.861 ms/step 22.754 J/solved acc 0.705 1410.0 MHz clean
+12:51:59 sudoku_mlp trt_fp32_b1_fixed w4 205.9 W 1000.67 mJ/step 4.860 ms/step 22.847 J/solved acc 0.701 1410.0 MHz clean
+[09/25/2026-12:51:59] [TRT] [W] Using default stream in enqueueV3() may lead to performance issues due to additional calls to cudaStreamSynchronize() by TensorRT to ensure correct synchronization. Please use non-default stream instead.
+12:53:09 sudoku_mlp trt_fp16_b1_fixed w0 135.4 W 372.96 mJ/step 2.754 ms/step 8.873 J/solved acc 0.673 1410.0 MHz clean
+12:54:09 sudoku_mlp trt_fp16_b1_fixed w1 134.7 W 370.92 mJ/step 2.755 ms/step 7.855 J/solved acc 0.756 1410.0 MHz clean
+12:55:09 sudoku_mlp trt_fp16_b1_fixed w2 134.8 W 371.38 mJ/step 2.755 ms/step 8.093 J/solved acc 0.734 1410.0 MHz clean
+12:55:32 device NVIDIA A100-SXM4-40GB CUDA_VISIBLE_DEVICES 6
+12:56:03 idle start 76.18 W 1410.0 MHz 40 C
+12:56:33 idle start 75.79 W 1410.0 MHz 40 C
+12:57:03 idle start 75.65 W 1410.0 MHz 40 C
+12:57:33 idle start 75.29 W 1410.0 MHz 40 C
+12:58:03 idle start 75.55 W 1410.0 MHz 40 C
+12:59:13 sudoku_mlp trt_fp32_b1_fixed w0 203.2 W 997.79 mJ/step 4.911 ms/step 23.822 J/solved acc 0.670 1410.0 MHz clean
+13:00:13 sudoku_mlp trt_fp32_b1_fixed w1 202.6 W 995.72 mJ/step 4.914 ms/step 23.452 J/solved acc 0.679 1410.0 MHz clean
+13:01:13 sudoku_mlp trt_fp32_b1_fixed w2 204.5 W 1004.77 mJ/step 4.913 ms/step 20.817 J/solved acc 0.772 1410.0 MHz clean
+13:02:13 sudoku_mlp trt_fp32_b1_fixed w3 205.1 W 1007.28 mJ/step 4.912 ms/step 22.760 J/solved acc 0.708 1410.0 MHz clean
+13:03:13 sudoku_mlp trt_fp32_b1_fixed w4 204.2 W 1003.31 mJ/step 4.913 ms/step 23.228 J/solved acc 0.691 1410.0 MHz clean
+13:04:23 sudoku_mlp trt_fp16_b1_fixed w0 133.9 W 374.10 mJ/step 2.794 ms/step 8.834 J/solved acc 0.678 1410.0 MHz clean
+13:05:23 sudoku_mlp trt_fp16_b1_fixed w1 133.6 W 371.90 mJ/step 2.784 ms/step 7.991 J/solved acc 0.745 1410.0 MHz clean
+13:06:23 sudoku_mlp trt_fp16_b1_fixed w2 133.7 W 372.07 mJ/step 2.783 ms/step 8.049 J/solved acc 0.740 1410.0 MHz clean
+13:07:24 sudoku_mlp trt_fp16_b1_fixed w3 133.6 W 372.07 mJ/step 2.785 ms/step 8.783 J/solved acc 0.678 1410.0 MHz clean
+13:08:24 sudoku_mlp trt_fp16_b1_fixed w4 133.7 W 372.28 mJ/step 2.785 ms/step 7.889 J/solved acc 0.755 1410.0 MHz clean
+13:09:34 sudoku_mlp trt_int8_b1_fixed w0 131.3 W 365.82 mJ/step 2.787 ms/step 8.657 J/solved acc 0.676 1410.0 MHz clean
+13:10:34 sudoku_mlp trt_int8_b1_fixed w1 132.6 W 369.83 mJ/step 2.788 ms/step 7.925 J/solved acc 0.747 1410.0 MHz clean
+13:11:34 sudoku_mlp trt_int8_b1_fixed w2 132.2 W 368.32 mJ/step 2.787 ms/step 7.972 J/solved acc 0.739 1410.0 MHz clean
+13:12:34 sudoku_mlp trt_int8_b1_fixed w3 131.4 W 366.12 mJ/step 2.787 ms/step 8.646 J/solved acc 0.678 1410.0 MHz clean
+13:13:34 sudoku_mlp trt_int8_b1_fixed w4 132.0 W 367.90 mJ/step 2.787 ms/step 7.798 J/solved acc 0.755 1410.0 MHz clean
+13:14:44 sudoku_mlp trt_int8mm_b1_fixed w0 128.5 W 916.20 mJ/step 7.133 ms/step 24.556 J/solved acc 0.597 1410.0 MHz clean
+13:15:44 sudoku_mlp trt_int8mm_b1_fixed w1 127.9 W 912.26 mJ/step 7.134 ms/step 17.772 J/solved acc 0.821 1410.0 MHz clean
+13:16:45 sudoku_mlp trt_int8mm_b1_fixed w2 127.5 W 909.18 mJ/step 7.132 ms/step 23.763 J/solved acc 0.612 1410.0 MHz clean
+13:17:45 sudoku_mlp trt_int8mm_b1_fixed w3 127.9 W 912.09 mJ/step 7.133 ms/step 18.277 J/solved acc 0.798 1410.0 MHz clean
+13:18:45 sudoku_mlp trt_int8mm_b1_fixed w4 127.5 W 909.23 mJ/step 7.132 ms/step 23.764 J/solved acc 0.612 1410.0 MHz clean
+13:19:55 sudoku_mlp eager_fp32_b1_exit w0 119.4 W 1865.24 mJ/step 15.619 ms/step 24.983 J/solved acc 0.632 1410.0 MHz clean
+13:20:55 sudoku_mlp eager_fp32_b1_exit w1 118.7 W 1869.70 mJ/step 15.746 ms/step 15.164 J/solved acc 0.779 1410.0 MHz clean
+13:21:55 sudoku_mlp eager_fp32_b1_exit w2 119.2 W 1860.15 mJ/step 15.609 ms/step 29.074 J/solved acc 0.577 1410.0 MHz clean
+13:22:55 sudoku_mlp eager_fp32_b1_exit w3 118.9 W 1857.18 mJ/step 15.615 ms/step 13.546 J/solved acc 0.812 1410.0 MHz clean
+13:23:55 sudoku_mlp eager_fp32_b1_exit w4 119.1 W 1858.43 mJ/step 15.599 ms/step 28.154 J/solved acc 0.591 1410.0 MHz clean
+13:25:06 sudoku_mlp eager_fp16_b1_exit w0 88.5 W 1659.60 mJ/step 18.745 ms/step 17.491 J/solved acc 0.709 1410.0 MHz clean
+13:26:06 sudoku_mlp eager_fp16_b1_exit w1 88.4 W 1656.83 mJ/step 18.747 ms/step 17.151 J/solved acc 0.706 1410.0 MHz clean
+13:27:06 sudoku_mlp eager_fp16_b1_exit w2 88.5 W 1650.83 mJ/step 18.644 ms/step 14.707 J/solved acc 0.756 1410.0 MHz clean
+13:28:06 sudoku_mlp eager_fp16_b1_exit w3 88.6 W 1656.22 mJ/step 18.700 ms/step 24.515 J/solved acc 0.601 1410.0 MHz clean
+13:29:06 sudoku_mlp eager_fp16_b1_exit w4 88.3 W 1650.45 mJ/step 18.681 ms/step 12.080 J/solved acc 0.800 1410.0 MHz clean
+13:30:16 sudoku_mlp graph_fp16_b1_exit w0 128.0 W 486.31 mJ/step 3.798 ms/step 5.029 J/solved acc 0.709 1410.0 MHz clean
+13:31:16 sudoku_mlp graph_fp16_b1_exit w1 128.0 W 487.27 mJ/step 3.806 ms/step 5.034 J/solved acc 0.709 1410.0 MHz clean
+13:32:16 sudoku_mlp graph_fp16_b1_exit w2 128.2 W 487.00 mJ/step 3.799 ms/step 4.513 J/solved acc 0.741 1410.0 MHz clean
+13:33:16 sudoku_mlp graph_fp16_b1_exit w3 128.1 W 487.14 mJ/step 3.802 ms/step 4.782 J/solved acc 0.724 1410.0 MHz clean
+13:34:16 sudoku_mlp graph_fp16_b1_exit w4 128.0 W 487.08 mJ/step 3.805 ms/step 4.835 J/solved acc 0.722 1410.0 MHz clean
+13:35:27 sudoku_mlp trt_fp16_b1_exit w0 130.7 W 367.72 mJ/step 2.814 ms/step 3.620 J/solved acc 0.723 1410.0 MHz clean
+13:36:27 sudoku_mlp trt_fp16_b1_exit w1 130.7 W 368.72 mJ/step 2.820 ms/step 3.623 J/solved acc 0.723 1410.0 MHz clean
+13:37:27 sudoku_mlp trt_fp16_b1_exit w2 130.6 W 367.76 mJ/step 2.815 ms/step 3.619 J/solved acc 0.723 1410.0 MHz clean
+13:38:27 sudoku_mlp trt_fp16_b1_exit w3 130.4 W 368.70 mJ/step 2.827 ms/step 3.640 J/solved acc 0.722 1410.0 MHz clean
+13:39:27 sudoku_mlp trt_fp16_b1_exit w4 130.6 W 368.11 mJ/step 2.819 ms/step 3.626 J/solved acc 0.723 1410.0 MHz clean
+13:40:37 sudoku_mlp trt_int8mm_b1_exit w0 128.4 W 907.39 mJ/step 7.065 ms/step 9.554 J/solved acc 0.701 1410.0 MHz clean
+13:41:37 sudoku_mlp trt_int8mm_b1_exit w1 127.2 W 900.85 mJ/step 7.083 ms/step 9.471 J/solved acc 0.701 1410.0 MHz clean
+13:42:37 sudoku_mlp trt_int8mm_b1_exit w2 127.6 W 900.81 mJ/step 7.060 ms/step 10.849 J/solved acc 0.655 1410.0 MHz clean
+13:43:37 sudoku_mlp trt_int8mm_b1_exit w3 128.1 W 904.02 mJ/step 7.055 ms/step 8.751 J/solved acc 0.725 1410.0 MHz clean
+13:44:37 sudoku_mlp trt_int8mm_b1_exit w4 128.2 W 907.13 mJ/step 7.074 ms/step 8.271 J/solved acc 0.739 1410.0 MHz clean
+13:45:53 sudoku_mlp eager_fp32_b256_fixed w0 361.1 W 662.29 mJ/step 1.834 ms/step 15.198 J/solved acc 0.697 1410.0 MHz clean
+13:46:53 sudoku_mlp eager_fp32_b256_fixed w1 372.4 W 683.06 mJ/step 1.834 ms/step 15.436 J/solved acc 0.708 1410.0 MHz clean
+13:47:53 sudoku_mlp eager_fp32_b256_fixed w2 375.4 W 688.43 mJ/step 1.834 ms/step 15.388 J/solved acc 0.716 1410.0 MHz clean
+13:48:53 sudoku_mlp eager_fp32_b256_fixed w3 371.4 W 681.15 mJ/step 1.834 ms/step 15.246 J/solved acc 0.715 1410.0 MHz clean
+13:49:53 sudoku_mlp eager_fp32_b256_fixed w4 371.3 W 680.96 mJ/step 1.834 ms/step 15.169 J/solved acc 0.718 1410.0 MHz clean
+13:51:06 sudoku_mlp eager_fp16_b256_fixed w0 376.3 W 221.43 mJ/step 0.588 ms/step 5.051 J/solved acc 0.701 1410.0 MHz clean
+13:52:06 sudoku_mlp eager_fp16_b256_fixed w1 376.4 W 221.47 mJ/step 0.588 ms/step 4.946 J/solved acc 0.716 1410.0 MHz clean
+13:53:06 sudoku_mlp eager_fp16_b256_fixed w2 376.6 W 221.59 mJ/step 0.588 ms/step 4.992 J/solved acc 0.710 1410.0 MHz clean
+13:54:06 sudoku_mlp eager_fp16_b256_fixed w3 376.8 W 221.68 mJ/step 0.588 ms/step 5.041 J/solved acc 0.704 1410.0 MHz clean
+13:55:07 sudoku_mlp eager_fp16_b256_fixed w4 377.2 W 221.90 mJ/step 0.588 ms/step 4.977 J/solved acc 0.713 1410.0 MHz clean
+13:56:18 sudoku_mlp trt_fp16_b256_fixed w0 398.5 W 120.00 mJ/step 0.301 ms/step 2.689 J/solved acc 0.714 1372.2 MHz clean
+13:57:19 sudoku_mlp trt_fp16_b256_fixed w1 398.6 W 119.99 mJ/step 0.301 ms/step 2.666 J/solved acc 0.720 1373.1 MHz clean
+13:58:19 sudoku_mlp trt_fp16_b256_fixed w2 398.6 W 119.96 mJ/step 0.301 ms/step 2.682 J/solved acc 0.716 1373.9 MHz clean
+13:59:20 sudoku_mlp trt_fp16_b256_fixed w3 398.6 W 119.97 mJ/step 0.301 ms/step 2.671 J/solved acc 0.719 1373.8 MHz clean
+14:00:20 sudoku_mlp trt_fp16_b256_fixed w4 397.8 W 119.73 mJ/step 0.301 ms/step 2.674 J/solved acc 0.717 1373.8 MHz clean
+14:01:32 sudoku_mlp trt_int8_b256_fixed w0 398.5 W 119.92 mJ/step 0.301 ms/step 2.687 J/solved acc 0.714 1373.6 MHz clean
+14:02:32 sudoku_mlp trt_int8_b256_fixed w1 398.0 W 119.77 mJ/step 0.301 ms/step 2.661 J/solved acc 0.720 1373.6 MHz clean
+14:03:33 sudoku_mlp trt_int8_b256_fixed w2 398.1 W 119.80 mJ/step 0.301 ms/step 2.678 J/solved acc 0.716 1373.6 MHz clean
+14:04:33 sudoku_mlp trt_int8_b256_fixed w3 398.7 W 119.97 mJ/step 0.301 ms/step 2.671 J/solved acc 0.719 1373.8 MHz clean
+14:05:33 sudoku_mlp trt_int8_b256_fixed w4 398.1 W 119.78 mJ/step 0.301 ms/step 2.675 J/solved acc 0.717 1373.9 MHz clean
+14:06:47 sudoku_mlp trt_int8mm_b256_fixed w0 310.8 W 206.12 mJ/step 0.663 ms/step 4.720 J/solved acc 0.699 1410.0 MHz clean
+14:07:50 sudoku_mlp trt_int8mm_b256_fixed w1 309.0 W 204.91 mJ/step 0.663 ms/step 4.690 J/solved acc 0.699 1410.0 MHz clean
+14:08:52 sudoku_mlp trt_int8mm_b256_fixed w2 308.5 W 204.59 mJ/step 0.663 ms/step 4.678 J/solved acc 0.700 1410.0 MHz clean
+14:09:55 sudoku_mlp trt_int8mm_b256_fixed w3 307.9 W 204.24 mJ/step 0.663 ms/step 4.668 J/solved acc 0.700 1410.0 MHz clean
+14:10:57 sudoku_mlp trt_int8mm_b256_fixed w4 308.5 W 204.61 mJ/step 0.663 ms/step 4.592 J/solved acc 0.713 1410.0 MHz clean
+14:11:27 idle end 79.59 W 1410.0 MHz 43 C
+14:11:57 idle end 76.61 W 1410.0 MHz 41 C

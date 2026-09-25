@@ -1,0 +1,29 @@
+12:13:20 device NVIDIA A100-SXM4-40GB CUDA_VISIBLE_DEVICES 5
+/home/ubuntu/e1/e1_energy.py:553: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/home/ubuntu/e1/e1_energy.py:554: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[09/25/2026-12:36:15] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:36:16 sudoku_attn dyn_H3_b1_int8 1347.7 s 16.48 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 469, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 6
+[09/25/2026-12:36:28] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:36:29 sudoku_attn x3_H3_b1_fp32 12.5 s 29.59 MB {'in:FP32|out:FP32': 552, 'in:FP32,Int32|out:FP32': 1} missing scales 0
+[09/25/2026-12:36:59] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:37:00 sudoku_attn x3_H3_b1_fp16 30.4 s 16.46 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 468, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 4} missing scales 0
+[09/25/2026-12:37:35] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:37:35 sudoku_attn x3_H3_b1_int8 34.8 s 16.47 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 468, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 4} missing scales 764
+[09/25/2026-12:37:52] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:37:52 sudoku_attn x3_H3_b1_int8f32 16.4 s 29.59 MB {'in:FP32|out:FP32': 552, 'in:FP32,Int32|out:FP32': 1} missing scales 764
+/home/ubuntu/e1/e1_energy.py:513: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+TRT Severity.ERROR IBuilder::buildSerializedNetwork: Error Code 4: API Usage Error (No non-int8 implementation of layer /inner/L_level/layers.0/self_attn/qkv_proj/MatMul is supported. Please provide missing int8 scales to use available int8 implementation. In filterPTQFormats at optimizer/common/tactic/optimizer.cpp:5086)
+Traceback (most recent call last):
+  File "/home/ubuntu/e1/e1_energy.py", line 1018, in <module>
+    import torch
+    ^^^^^^
+  File "/home/ubuntu/e1/e1_energy.py", line 1009, in main
+    ap.add_argument("--task", required=True, choices=list(TASKS))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/e1/e1_energy.py", line 557, in stage_build
+    shp = (cb,) + tuple(inp.shape)[1:]
+^^^^^^^^^^^^^^
+AssertionError: x3_H3_b1_int8mm

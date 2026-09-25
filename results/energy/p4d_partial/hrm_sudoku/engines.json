@@ -1,0 +1,239 @@
+{
+ "dyn_H2_b1_int8": {
+  "onnx": "/home/ubuntu/e1/work/hrm_sudoku/stepc_dyn_H2.onnx",
+  "H": 2,
+  "B": 1,
+  "prec": "int8",
+  "build_s": 743.3,
+  "size_MB": 56.32,
+  "trt": "10.13.3.9",
+  "n_layers": 279,
+  "by_io_dtype": {
+   "in:FP32|out:FP16": 3,
+   "in:FP16,Int32|out:FP16": 1,
+   "in:FP16|out:FP16": 270,
+   "in:FP16|out:FP32": 5
+  },
+  "norm_like_layers_by_io_dtype": {
+   "in:FP16|out:FP16": 48
+  },
+  "n_layers_precision_constrained": 0,
+  "warnings": {
+   "n": 8,
+   "missing_int8_scale": 6,
+   "missing_examples": [
+    "Missing scale and zero-point for tensor inputs, expect fall back to non-int8 implementation for any layer consuming or producing given tensor",
+    "Missing scale and zero-point for tensor /inner/Cast_output_0, expect fall back to non-int8 implementation for any layer consuming or producing given tensor",
+    "Missing scale and zero-point for tensor onnx::Gather_4647_output, expect fall back to non-int8 implementation for any layer consuming or producing given tensor",
+    "Missing scale and zero-point for tensor /inner/H_level/layers.3/self_attn_1/Slice_7_output_0, expect fall back to non-int8 implementation for any layer consumin",
+    "Missing scale and zero-point for tensor ONNXTRT_castHelper_8750_output, expect fall back to non-int8 implementation for any layer consuming or producing given t",
+    "Missing scale and zero-point for tensor ONNXTRT_castHelper_8748_output, expect fall back to non-int8 implementation for any layer consuming or producing given t"
+   ],
+   "other": [
+    "Detected layernorm nodes in FP16.",
+    "Running layernorm after self-attention with FP16 Reduce or Pow may cause overflow. Forcing Reduce or Pow Layers in FP32 precision, or exporting the model to use INormalizationLayer (available with ONN"
+   ]
+  },
+  "calib": {
+   "cache": "calib_dyn_H2.cache",
+   "calibrated_in_this_build": true,
+   "batch": 64,
+   "rows": [
+    1000,
+    1128
+   ],
+   "algo": "IInt8EntropyCalibrator2",
+   "samples": "2 distinct random steps (of 16) per calibration puzzle, carry entering the step, fp32 eager rollout",
+   "n": 256,
+   "samples_row_step_head": [
+    [
+     1002,
+     0
+    ],
+    [
+     1009,
+     0
+    ],
+    [
+     1011,
+     0
+    ],
+    [
+     1014,
+     0
+    ],
+    [
+     1032,
+     0
+    ],
+    [
+     1045,
+     0
+    ],
+    [
+     1050,
+     0
+    ],
+    [
+     1072,
+     0
+    ]
+   ]
+  }
+ },
+ "dyn_H2_b1_fp32": {
+  "onnx": "/home/ubuntu/e1/work/hrm_sudoku/stepc_dyn_H2.onnx",
+  "H": 2,
+  "B": 1,
+  "prec": "fp32",
+  "build_s": 6.0,
+  "size_MB": 110.52,
+  "trt": "10.13.3.9",
+  "n_layers": 319,
+  "by_io_dtype": {
+   "in:FP32,Int32|out:FP32": 1,
+   "in:FP32|out:FP32": 318
+  },
+  "norm_like_layers_by_io_dtype": {
+   "in:FP32|out:FP32": 72
+  },
+  "n_layers_precision_constrained": 0,
+  "warnings": {
+   "n": 1,
+   "missing_int8_scale": 0,
+   "missing_examples": [],
+   "other": [
+    "WARNING The logger passed into createInferBuilder differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the exi"
+   ]
+  }
+ },
+ "dyn_H2_b1_fp16": {
+  "onnx": "/home/ubuntu/e1/work/hrm_sudoku/stepc_dyn_H2.onnx",
+  "H": 2,
+  "B": 1,
+  "prec": "fp16",
+  "build_s": 13.4,
+  "size_MB": 56.31,
+  "trt": "10.13.3.9",
+  "n_layers": 279,
+  "by_io_dtype": {
+   "in:FP32|out:FP16": 3,
+   "in:FP16,Int32|out:FP16": 1,
+   "in:FP16|out:FP16": 270,
+   "in:FP16|out:FP32": 5
+  },
+  "norm_like_layers_by_io_dtype": {
+   "in:FP16|out:FP16": 48
+  },
+  "n_layers_precision_constrained": 0,
+  "warnings": {
+   "n": 3,
+   "missing_int8_scale": 0,
+   "missing_examples": [],
+   "other": [
+    "Detected layernorm nodes in FP16.",
+    "Running layernorm after self-attention with FP16 Reduce or Pow may cause overflow. Forcing Reduce or Pow Layers in FP32 precision, or exporting the model to use INormalizationLayer (available with ONN",
+    "WARNING The logger passed into createInferBuilder differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the exi"
+   ]
+  }
+ },
+ "dyn_H2_b1_int8f32": {
+  "onnx": "/home/ubuntu/e1/work/hrm_sudoku/stepc_dyn_H2.onnx",
+  "H": 2,
+  "B": 1,
+  "prec": "int8f32",
+  "build_s": 7.7,
+  "size_MB": 110.52,
+  "trt": "10.13.3.9",
+  "n_layers": 319,
+  "by_io_dtype": {
+   "in:FP32,Int32|out:FP32": 1,
+   "in:FP32|out:FP32": 318
+  },
+  "norm_like_layers_by_io_dtype": {
+   "in:FP32|out:FP32": 72
+  },
+  "n_layers_precision_constrained": 0,
+  "warnings": {
+   "n": 7,
+   "missing_int8_scale": 6,
+   "missing_examples": [
+    "Missing scale and zero-point for tensor inputs, expect fall back to non-int8 implementation for any layer consuming or producing given tensor",
+    "Missing scale and zero-point for tensor /inner/Cast_output_0, expect fall back to non-int8 implementation for any layer consuming or producing given tensor",
+    "Missing scale and zero-point for tensor onnx::Gather_4647_output, expect fall back to non-int8 implementation for any layer consuming or producing given tensor",
+    "Missing scale and zero-point for tensor ONNXTRT_castHelper_8748_output, expect fall back to non-int8 implementation for any layer consuming or producing given t",
+    "Missing scale and zero-point for tensor /inner/H_level/layers.3/self_attn_1/Slice_7_output_0, expect fall back to non-int8 implementation for any layer consumin",
+    "Missing scale and zero-point for tensor ONNXTRT_castHelper_8750_output, expect fall back to non-int8 implementation for any layer consuming or producing given t"
+   ],
+   "other": [
+    "WARNING The logger passed into createInferBuilder differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the exi"
+   ]
+  },
+  "calib": {
+   "cache": "calib_dyn_H2.cache",
+   "calibrated_in_this_build": false,
+   "batch": 64,
+   "rows": [
+    1000,
+    1128
+   ],
+   "algo": "IInt8EntropyCalibrator2",
+   "samples": "2 distinct random steps (of 16) per calibration puzzle, carry entering the step, fp32 eager rollout"
+  }
+ },
+ "dyn_H2_b1_int8mm": {
+  "onnx": "/home/ubuntu/e1/work/hrm_sudoku/stepc_dyn_H2.onnx",
+  "H": 2,
+  "B": 1,
+  "prec": "int8mm",
+  "build_s": 2480.5,
+  "size_MB": 33.87,
+  "trt": "10.13.3.9",
+  "n_layers": 1254,
+  "by_io_dtype": {
+   "in:FP32|out:FP16": 77,
+   "in:-|out:FP16": 96,
+   "in:FP16,Int32|out:FP16": 1,
+   "in:-|out:Int8": 144,
+   "in:FP16|out:Int8": 97,
+   "in:Int8|out:FP32": 122,
+   "in:FP32|out:FP32": 76,
+   "in:FP16|out:FP16": 194,
+   "in:FP32|out:Int8": 97,
+   "in:Int8|out:Int8": 346,
+   "in:FP16|out:FP32": 4
+  },
+  "norm_like_layers_by_io_dtype": {
+   "in:FP16|out:FP16": 48
+  },
+  "n_layers_precision_constrained": 146,
+  "warnings": {
+   "n": 9,
+   "missing_int8_scale": 6,
+   "missing_examples": [
+    "Missing scale and zero-point for tensor inputs, expect fall back to non-int8 implementation for any layer consuming or producing given tensor",
+    "Missing scale and zero-point for tensor /inner/Cast_output_0, expect fall back to non-int8 implementation for any layer consuming or producing given tensor",
+    "Missing scale and zero-point for tensor onnx::Gather_4647_output, expect fall back to non-int8 implementation for any layer consuming or producing given tensor",
+    "Missing scale and zero-point for tensor ONNXTRT_castHelper_8750_output, expect fall back to non-int8 implementation for any layer consuming or producing given t",
+    "Missing scale and zero-point for tensor /inner/H_level/layers.3/self_attn_1/Slice_7_output_0, expect fall back to non-int8 implementation for any layer consumin",
+    "Missing scale and zero-point for tensor ONNXTRT_castHelper_8748_output, expect fall back to non-int8 implementation for any layer consuming or producing given t"
+   ],
+   "other": [
+    "Detected layernorm nodes in FP16.",
+    "Running layernorm after self-attention with FP16 Reduce or Pow may cause overflow. Forcing Reduce or Pow Layers in FP32 precision, or exporting the model to use INormalizationLayer (available with ONN",
+    "WARNING The logger passed into createInferBuilder differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the exi"
+   ]
+  },
+  "calib": {
+   "cache": "calib_dyn_H2.cache",
+   "calibrated_in_this_build": false,
+   "batch": 64,
+   "rows": [
+    1000,
+    1128
+   ],
+   "algo": "IInt8EntropyCalibrator2",
+   "samples": "2 distinct random steps (of 16) per calibration puzzle, carry entering the step, fp32 eager rollout"
+  }
+ }
+}

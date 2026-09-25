@@ -1,0 +1,33 @@
+12:38:01 device NVIDIA A100-SXM4-40GB CUDA_VISIBLE_DEVICES 5
+/home/ubuntu/e1/e1_energy.py:559: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/home/ubuntu/e1/e1_energy.py:560: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[09/25/2026-12:50:42] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:50:42 hrm_sudoku dyn_H2_b1_int8 743.3 s 56.32 MB {'in:FP32|out:FP16': 3, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP16': 270, 'in:FP16|out:FP32': 5} missing scales 6
+[09/25/2026-12:50:49] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:50:49 hrm_sudoku dyn_H2_b1_fp32 6.0 s 110.52 MB {'in:FP32,Int32|out:FP32': 1, 'in:FP32|out:FP32': 318} missing scales 0
+[09/25/2026-12:51:03] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:51:03 hrm_sudoku dyn_H2_b1_fp16 13.4 s 56.31 MB {'in:FP32|out:FP16': 3, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP16': 270, 'in:FP16|out:FP32': 5} missing scales 0
+[09/25/2026-12:51:11] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+12:51:11 hrm_sudoku dyn_H2_b1_int8f32 7.7 s 110.52 MB {'in:FP32,Int32|out:FP32': 1, 'in:FP32|out:FP32': 318} missing scales 6
+/home/ubuntu/e1/e1_energy.py:518: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+[09/25/2026-13:32:31] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+13:32:32 hrm_sudoku dyn_H2_b1_int8mm 2480.5 s 33.87 MB {'in:FP32|out:FP16': 77, 'in:-|out:FP16': 96, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 144, 'in:FP16|out:Int8': 97, 'in:Int8|out:FP32': 122, 'in:FP32|out:FP32': 76, 'in:FP16|out:FP16': 194, 'in:FP32|out:Int8': 97, 'in:Int8|out:Int8': 346, 'in:FP16|out:FP32': 4} missing scales 6
+/home/ubuntu/e1/e1_energy.py:529: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:    56: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,82,512][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:    56: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,82,512][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Cast_1]}. In computeCosts at optimizer/common/tactic/optimizer.cpp:4115)
+Traceback (most recent call last):
+  File "/home/ubuntu/e1/e1_energy.py", line 1036, in <module>
+    assert torch.cuda.is_available(), "CUDA not available: abort"
+    ^^^^^^
+  File "/home/ubuntu/e1/e1_energy.py", line 1027, in main
+    ap.add_argument("--only", default=None, help="comma-separated engine/config names")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/e1/e1_energy.py", line 563, in stage_build
+    cprof.set_shape(inp.name, shp, shp, shp)
+^^^^^^^^^^^^^^
+AssertionError: dyn_H2_b1_int8all

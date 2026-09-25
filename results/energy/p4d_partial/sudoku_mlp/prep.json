@@ -1,0 +1,48 @@
+{
+ "H3": {
+  "dyn_vs_torch_maxabs": [
+   1.4781951904296875e-05,
+   3.2179057598114014e-05,
+   0.000148773193359375,
+   2.86102294921875e-06,
+   0.0
+  ],
+  "size_MB": 20.581007,
+  "x3_file": "/home/ubuntu/aihub_artifacts/h1/sudoku_mlp/stepc_H3.onnx",
+  "x3_outputs": [
+   "z_H_out",
+   "z_L_out",
+   "logits",
+   "q_halt"
+  ],
+  "dyn_vs_x3_maxabs_b1": [
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "H1": {
+  "dyn_vs_torch_maxabs": [
+   5.841255187988281e-06,
+   8.195638656616211e-06,
+   8.392333984375e-05,
+   5.245208740234375e-06,
+   0.0
+  ],
+  "size_MB": 20.272119,
+  "x3_file": "/home/ubuntu/aihub_artifacts/h1/sudoku_mlp/stepc_H1.onnx",
+  "x3_outputs": [
+   "z_H_out",
+   "z_L_out",
+   "logits",
+   "q_halt"
+  ],
+  "dyn_vs_x3_maxabs_b1": [
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ }
+}
