@@ -48,6 +48,7 @@ CHAINS = [("sudoku_mlp", "Samsung Galaxy S24", "w8a8"), ("sudoku_mlp", "Samsung 
           ("maze", "Samsung Galaxy S24", "w4a16"), ("maze", "Dragonwing RB3 Gen 2 Vision Kit", "w4a16"),
           ("maze", "Samsung Galaxy S24", "fp32"), ("maze", "Samsung Galaxy S24", "w8a8"),
           ("sudoku_attn", "Samsung Galaxy S24", "w4a16"), ("sudoku_attn", "Samsung Galaxy S24", "w8a8")]
+CHAINS = list(dict.fromkeys(CHAINS))   # a duplicated entry gave two Chain objects one state file (Sep 25 fix)
 NSTEPS = {"sudoku_mlp": 8, "sudoku_attn": 8, "maze": 8}
 
 
