@@ -148,6 +148,37 @@ def main():
             kex, kcl = score(z0["preds"][k - 1], lab)          # host fp32 at the same step count
             out.append(rec("qnn_device", task, prec, ex, cl, kex, kcl, f, 0, family_of(prec),
                            {"device": dev.replace("_", " "), "steps": int(k)}))
+    # ---------------- M4's own QDQ label runs (~/m4/onnx_labels): reference QDQ semantics (ORT basic) for
+    # every cell, and ORT-all labels of the vendor-emulated (fused RMSNorm) variants
+    od = M4 / "onnx_labels"
+    if od.exists():
+        recs = {}
+        for f in sorted(od.glob("*.json")):
+            e = json.loads(f.read_text())
+            recs[(e["task"], e["cell"], e["level"])] = (f, e)
+        for (task, cell, level), (f, e) in sorted(recs.items()):
+            if cell == "fp32self":
+                continue
+            ref = recs.get((task, "fp32self", level))
+            if ref is None and level == "all":
+                # X3's ORT-all fp32 host run on the same inputs
+                src = ART / task / "infer" / ("host_fp32_100.npz" if task == "arc" else "host_fp32.npz")
+                if not src.exists():
+                    continue
+                z0 = np.load(src)
+                lab0 = z0["lab"] if task == "arc" else labels(task, 0, z0["preds"].shape[1])
+                rex, rcl = score(z0["preds"][-1], lab0, task == "arc")
+            elif ref is None:
+                continue
+            else:
+                rex = np.asarray(ref[1]["correct"], float)
+                rcl = np.full(rex.shape, ref[1]["cell_acc"])
+            ex = np.asarray(e["correct"], float)
+            backend = "qnn_qdq_ref" if level == "basic" else "qnn_qdq_host"
+            if backend == "qnn_qdq_host" and "@" not in cell:
+                continue                                    # X3's own ORT-all labels are used for these
+            out.append(rec(backend, task, cell, ex, np.full(ex.shape, e["cell_acc"]), rex, rcl, f, 0,
+                           family_of(cell.split("@")[0]) if "@" not in cell else "vendor_emulation"))
     # ---------------- TFLite chains (M4)
     for task in ("sudoku_mlp", "sudoku_attn", "maze"):
         td = M4 / "tflite" / task
@@ -155,7 +186,17 @@ def main():
             refs = sorted(td.glob(f"label_fp32_{rt}_*.json")) or sorted(td.glob("label_fp32_auto_*.json"))
             for f in sorted(td.glob(f"label_*_{rt}_*.json")):
                 e = json.loads(f.read_text())
-                if not e.get("ok") or e["variant"] == "fp32":
+                if e["variant"] == "fp32":
+                    continue
+                if not e.get("ok"):
+                    # a runtime that cannot execute the graph solves nothing (e.g. the reference kernels'
+                    # RSQRT on a non-positive REDUCE_SUM result); other errors are not labels
+                    if "failed to invoke" in e.get("error", "") and refs:
+                        r0 = json.loads(refs[0].read_text())
+                        out.append(dict(backend=f"tflite_{rt}", task=task, cell=e["variant"],
+                                        family=family_of(e["variant"]), n=e["n"], start=e["start"], exact=0.0,
+                                        cellacc=0.0, exact_fp32=r0["exact"], cellacc_fp32=r0["cell"],
+                                        retained=0.0, source=str(f), runtime_error=e["error"][:200]))
                     continue
                 rf = [r for r in refs if json.loads(r.read_text()).get("n") == e["n"]
                       and json.loads(r.read_text()).get("start") == e["start"]]

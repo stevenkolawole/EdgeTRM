@@ -146,7 +146,7 @@ def stage_label(task, variant, runtime, n, start=0):
         rec.update(ok=True, exact=float(corr[-1].mean()), cell=float((r["preds"][-1] == lab).mean()),
                    exact_per_step=[float(x) for x in corr.mean(1)], correct=[bool(x) for x in corr[-1]],
                    distinct_logit_argmax=int(len(np.unique(r["preds"][-1]))),
-                   secs=round(time.time() - t0, 1))
+                   secs=round(time.time() - t0, 1), resolver=step.resolver_used)
         np.savez_compressed(out.with_suffix(".npz"), preds=r["preds"], q=r["q"], lab=lab)
     except Exception as e:  # noqa: BLE001
         rec.update(error=f"{type(e).__name__}: {e}", traceback=traceback.format_exc()[-2500:])

@@ -44,6 +44,8 @@ def family_of(backend, cell):
         if "@" in cell:
             return "weight_group"
         return "weight_noise" if cell.startswith("noise") else "weight_quant"
+    if "@" in cell:
+        return "vendor_emulation"
     if cell.startswith("abl_A"):
         return "act_group_8bit"
     if cell.startswith("abl_B"):
@@ -68,15 +70,37 @@ def load_rows():
     ev = {}
     for f in sorted((RES / "ev").glob("onnx__*.json")):
         e = json.loads(f.read_text())
-        ev[("onnx", e["task"], e["cell"])] = e
+        lvl = e.get("ort_level", "all")
+        ev[("onnx" if lvl == "all" else "onnx_basic", e["task"], e["cell"])] = e
     for f in sorted((RES / "ev").glob("tflite__*.json")):
         _, task, v = f.stem.split("__")
         e = json.loads(f.read_text())
         ev[("tflite", task, v)] = e
     # graph-mode rows: the check run on the very artifact whose label we have
+    # device labels, predicted by the host check under each kernel model (literal QDQ, fused RMSNorm)
     for (backend, task, cell, dev), L in lab.items():
-        if backend in ("qnn_qdq_host", "qnn_device"):
+        if backend != "qnn_device":
+            continue
+        for suf, tag in (("", "literal QDQ"), ("@qnnfused", "fused norm, 8-bit out"),
+                         ("@qnnfused16", "fused norm, float stream")):
+            e = ev.get(("onnx_basic", task, cell + suf)) or ev.get(("onnx", task, cell + suf))
+            if e is None:
+                continue
+            r = dict(mode="device_from_host_check", backend=backend, device=dev, task=task,
+                     cell=f"{cell} [{tag}]", family=family_of(backend, cell), retained=L["retained"],
+                     label=cls(L["retained"]), exact=L["exact"], exact_fp32=L["exact_fp32"], n_label=L["n"])
+            for k in ("delta_T_median", "cell_agree", "cell_agree_settled", "answer_agree", "answer_agree_settled",
+                      "changed_agree", "changed_agree_settled", "phi_H", "qsign_agree", "layer_local_max",
+                      "n_nonfinite_tensors"):
+                r[k] = e.get(k)
+            rows.append(r)
+    for (backend, task, cell, dev), L in lab.items():
+        if backend == "qnn_device":
+            continue
+        if backend == "qnn_qdq_host":
             e = ev.get(("onnx", task, cell))
+        elif backend == "qnn_qdq_ref":
+            e = ev.get(("onnx_basic", task, cell))
         elif backend in ("tflite_auto", "tflite_ref"):
             e = ev.get(("tflite", task, cell))
         else:
@@ -87,6 +111,7 @@ def load_rows():
                  retained=L["retained"], label=cls(L["retained"]), exact=L["exact"], exact_fp32=L["exact_fp32"],
                  n_label=L["n"], evidence_src=e.get("graph"))
         for k in ("delta_T_median", "cell_agree", "cell_agree_settled", "answer_agree", "answer_agree_settled",
+                  "changed_agree", "changed_agree_settled",
                   "phi_H", "qsign_agree", "layer_local_max", "layer_prop_out", "n_nonfinite_tensors",
                   "xrt_max_lsb", "tflm_vs_opt_max_lsb", "onestep_cell_agree", "weight_err_max"):
             r[k] = e.get(k)
@@ -100,6 +125,7 @@ def load_rows():
         task = e["task"]
         base = dict(task=TASK_ALIAS.get(task, task), cell=cfg)
         feats = {k: e.get(k) for k in ("delta_T_median", "cell_agree", "cell_agree_settled", "answer_agree",
+                                       "changed_agree", "changed_agree_settled",
                                        "answer_agree_settled", "phi_H", "qsign_agree", "kick_growth_median")}
         ret = e["label_exact"] / e["label_exact_fp32"] if e.get("label_exact_fp32") else None
         rows.append(dict(mode="torch_self", backend=e["backend"], family=family_of(e["backend"], cfg),
@@ -142,13 +168,43 @@ PRED = {  # name -> (feature, direction): +1 means larger is worse
     "T2 cell agreement (all)": ("cell_agree", -1),
     "T2 cell agreement (fp32-settled)": ("cell_agree_settled", -1),
     "T2 answer agreement (fp32-settled)": ("answer_agree_settled", -1),
+    "T2 written-cell agreement (all)": ("changed_agree", -1),
+    "T2 written-cell agreement (fp32-settled)": ("changed_agree_settled", -1),
     "T2 phi_H": ("phi_H", -1),
     "T0 max local act. error": ("layer_local_max", +1),
     "T2 halting-sign agreement": ("qsign_agree", -1),
+    "T2 check quantity (settled if available)": ("_t2", -1),
+    "CHECK: T0 hard rules + T2 written cells (settled)": ("_combined:changed_agree_settled", -1),
+    "CHECK: T0 hard rules + T2 whole answer (settled)": ("_combined:answer_agree_settled", -1),
 }
 
 
+def t2_score(r):
+    """The check's T2 quantity: cell agreement on fp32-settled inputs when available, else all inputs."""
+    for k in ("changed_agree_settled", "changed_agree", "cell_agree_settled", "cell_agree"):
+        if r.get(k) is not None:
+            return r[k]
+    return None
+
+
+def hard_fail(r):
+    """T0 rules that are not fitted: kernel disagreement between runtimes (> 16 LSB) and non-finite
+    intermediates where fp32 is finite."""
+    return bool(r.get("xrt_bad")) or bool(r.get("n_nonfinite_tensors"))
+
+
 def score_of(r, feat, sign):
+    if feat.startswith("_combined"):
+        key = feat.split(":")[1] if ":" in feat else None
+        t2 = r.get(key) if key else t2_score(r)
+        if t2 is None and key:
+            t2 = r.get(key.replace("_settled", ""))
+        if t2 is None:
+            return None
+        return 1e6 if hard_fail(r) else -float(t2)
+    if feat == "_t2":
+        t2 = t2_score(r)
+        return None if t2 is None else -float(t2)
     v = r.get(feat)
     return None if v is None else sign * float(v)
 
@@ -235,6 +291,96 @@ def summarize(rows, subset_name, R):
     return lines, res
 
 
+
+# ------------------------------------------------------------------------------------------ case studies
+def _ev(name):
+    f = RES / "ev" / name
+    return json.loads(f.read_text()) if f.exists() else None
+
+
+def _evt(task, cfg):
+    f = RES / "ev_torch" / f"torch__{task}__{cfg}.json"
+    return json.loads(f.read_text()) if f.exists() else None
+
+
+def _verdict(e):
+    if e is None:
+        return None, []
+    import sys
+    sys.path.insert(0, str(HERE))
+    import release_check as R
+    return R.decide(e)
+
+
+def _fmt_ev(e):
+    if e is None:
+        return "not run"
+    v, rules = _verdict(e)
+    parts = [f"**{v}**", f"delta_T {e.get('delta_T_median', float('nan')):.3f}"]
+    for k, lab in (("changed_agree_settled", "written-cell agr. (settled)"), ("answer_agree_settled", "answer agr. (settled)"),
+                   ("cell_agree", "cell agr.")):
+        if e.get(k) is not None:
+            parts.append(f"{lab} {e[k]:.3f}")
+    if e.get("n_nonfinite_tensors"):
+        parts.append(f"{e['n_nonfinite_tensors']} inf/nan tensors")
+    if e.get("layer_local_top"):
+        t = e["layer_local_top"][0]
+        parts.append(f"top local Q/DQ error {t['rel_err']:.2f} at {t['tensor'].split('/')[-1]} ({t['op']})")
+    if e.get("layer_first_prop_gt_0.5"):
+        parts.append(f"first tensor with propagated error > 0.5: {e['layer_first_prop_gt_0.5']['tensor'].split('/inner/')[-1]}")
+    if e.get("xrt_first_bad"):
+        b = e["xrt_first_bad"]
+        parts.append(f"cross-runtime: op {b.get('op_index')} {b.get('op')} "
+                     + (f"fails on reference kernels" if b.get("error") else f"differs {b.get('maxdiff'):.0f} LSB (inputs {b.get('in_diff_lsb', 0):.1f})"))
+    if e.get("onnx_xrt_rel_median") is not None:
+        parts.append(f"ORT basic-vs-all one-step carry diff {e['onnx_xrt_rel_median']:.3f}")
+    return "; ".join(parts)
+
+
+def _lab(labels, backend, task, cell, device=None):
+    for L in labels:
+        if L["backend"] == backend and L["task"] == task and L["cell"] == cell and not L.get("slice") \
+                and (device is None or L.get("device") == device):
+            return f"{L['exact'] * 100:.0f}% vs fp32 {L['exact_fp32'] * 100:.0f}% (n={L['n']}, retained {L['retained']:.2f})"
+    return "no label"
+
+
+def case_studies():
+    labels = json.loads((RES / "labels.json").read_text()) if (RES / "labels.json").exists() else []
+    md = ["\n## Case studies\n"]
+    md.append("### A. Sudoku-MLP w8a8 (AI Hub all-op 8-bit activations; RMSNorm variance path)\n")
+    md.append(f"- Labels: QDQ host sim (ORT all, X3) {_lab(labels, 'qnn_qdq_host', 'sudoku_mlp', 'w8a8')}; "
+              f"reference QDQ semantics {_lab(labels, 'qnn_qdq_ref', 'sudoku_mlp', 'w8a8')}; "
+              f"S24 on device {_lab(labels, 'qnn_device', 'sudoku_mlp', 'w8a8')}; "
+              f"TFLite int8 (XNNPACK) {_lab(labels, 'tflite_auto', 'sudoku_mlp', 'int8')}.")
+    for name, e in (("check on the exported QDQ graph (ORT all)", _ev("onnx__sudoku_mlp__w8a8.json")),
+                    ("check on the exported QDQ graph (reference QDQ semantics)", _ev("onnx__sudoku_mlp__w8a8#basic.json")),
+                    ("QNN kernel emulation: fused RMSNorm, 8-bit norm output", _ev("onnx__sudoku_mlp__w8a8@qnnfused#basic.json") or _ev("onnx__sudoku_mlp__w8a8@qnnfused.json")),
+                    ("QNN kernel emulation: fused RMSNorm, normalised stream unquantized", _ev("onnx__sudoku_mlp__w8a8@qnnfused16#basic.json") or _ev("onnx__sudoku_mlp__w8a8@qnnfused16.json")),
+                    ("model + config before export: w8c + every op output 8-bit (toolchain emulation)", _evt("sudoku_mlp", "w8c+a8all")),
+                    ("model + config, harness-style: w8c + 8-bit linear inputs only", _evt("sudoku_mlp", "w8c+a8lin")),
+                    ("TFLite int8 graph", _ev("tflite__sudoku_mlp__int8.json"))):
+        md.append(f"- {name}: {_fmt_ev(e)}")
+    md.append("\n### B. TFLite Micro REDUCE_SUM (reference kernels)\n")
+    for task in ("sudoku_mlp", "sudoku_attn", "maze"):
+        for v in ("int8", "w8a16"):
+            e = _ev(f"tflite__{task}__{v}.json")
+            if e is None:
+                continue
+            md.append(f"- {task} {v}: labels XNNPACK {_lab(labels, 'tflite_auto', task, v)}, reference kernels "
+                      f"{_lab(labels, 'tflite_ref', task, v)}; check: {_fmt_ev(e)}")
+    md.append("\n### C. ARC w8a8 (partial loss)\n")
+    for v in ("w8a8", "w4a8", "w8a16", "w4a16"):
+        e = _ev(f"onnx__arc__{v}.json")
+        md.append(f"- ARC {v}: label {_lab(labels, 'qnn_qdq_host', 'arc', v)}; check: {_fmt_ev(e)}")
+    md.append("\n### D. Attention models\n")
+    for task in ("sudoku_attn", "maze"):
+        for v in ("w8a8", "w4a8", "w8a16", "w4a16"):
+            e = _ev(f"onnx__{task}__{v}.json")
+            md.append(f"- {task} {v}: label {_lab(labels, 'qnn_qdq_host', task, v)}; check: {_fmt_ev(e)}")
+    return md
+
+
 def main():
     rows = load_rows()
     RES.mkdir(parents=True, exist_ok=True)
@@ -247,6 +393,7 @@ def main():
     for name, sel in (("graph mode: check run on the labelled artifact", lambda r: r["mode"] == "graph"),
                       ("torch path, cross-backend (model + config -> compiled graph label)", lambda r: r["mode"] == "torch_to_graph"),
                       ("torch path, own label", lambda r: r["mode"] == "torch_self"),
+                      ("device labels from the host check", lambda r: r["mode"] == "device_from_host_check"),
                       ("X2 torch harness", lambda r: r["mode"] == "x2"),
                       ("all rows", lambda r: True)):
         R = [r for r in rows if sel(r)]
@@ -288,6 +435,7 @@ def main():
                   f"{r['cell']} | {r['family']} | {f(r['retained'])} | {r['label']} | {f(r.get('delta_T_median'))} | "
                   f"{f(r.get('cell_agree'))} | {f(r.get('cell_agree_settled'))} | {f(r.get('phi_H'))} | "
                   f"{f(r.get('layer_local_max'))} | {f(r.get('xrt_max_lsb'))} |")
+    md += case_studies()
     (RES / "m4_table.json").write_text(json.dumps(out, indent=1, default=float))
     (RES / "m4_readout.md").write_text("\n".join(md) + "\n")
     print("\n".join(md[:80]))

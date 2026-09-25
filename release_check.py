@@ -98,20 +98,170 @@ def load_check(path, n=None):
                 zH0=d["z_H0"], zL0=d["z_L0"], index=d["index"][:k])
 
 
+def _external_locations(m):
+    locs = set()
+    for t in m.graph.initializer:
+        for kv in t.external_data:
+            if kv.key == "location":
+                locs.add(kv.value)
+    return sorted(locs)
+
+
+def fuse_rmsnorm_qdq(m, out_float=False):
+    """Vendor-kernel emulation (QNN): the QNN converter fuses RMSNorm (x*x -> mean -> +eps -> sqrt -> 1/.
+    -> x * .) into one op whose internals are not quantized; only its input and output carry
+    activation encodings. On an exported QDQ graph this removes the Q/DQ pairs inside every RMSNorm:
+    each chain node (ReduceMean, Add eps, Sqrt, Div, and the normalising Mul) reads the float source
+    of a dequantized chain tensor or constant directly. The norm input (the residual stream) and the
+    norm output keep their encodings. Returns (model, number of norms fused)."""
+    g = m.graph
+    prod = {o: n for n in g.node for o in n.output}
+
+    def src_of(t):
+        """float tensor behind DQ(Q(t)), else t"""
+        d = prod.get(t)
+        if d is not None and d.op_type == "DequantizeLinear":
+            q = prod.get(d.input[0])
+            if q is not None and q.op_type == "QuantizeLinear":
+                return q.input[0]
+        return t
+
+    fused = 0
+    for r in [n for n in g.node if n.op_type == "ReduceMean"]:
+        sq = prod.get(src_of(r.input[0]))
+        if sq is None or sq.op_type not in ("Mul", "Pow"):
+            continue
+        if sq.op_type == "Mul" and src_of(sq.input[0]) != src_of(sq.input[1]):
+            continue
+        xin = src_of(sq.input[0])
+        chain = [r]
+        cur = r
+        ok = True
+        for want in ("Add", "Sqrt", "Div"):
+            nxt = [n for n in g.node if any(src_of(i) == cur.output[0] for i in n.input) and n.op_type == want]
+            if not nxt:
+                ok = False
+                break
+            cur = nxt[0]
+            chain.append(cur)
+        if not ok:
+            continue
+        # the normalising multiply: x * (1/sqrt(.))
+        muls = [n for n in g.node if n.op_type == "Mul" and any(src_of(i) == cur.output[0] for i in n.input)]
+        chain += muls[:1]
+        if out_float and muls:
+            # variant: the fused norm's output also stays in high precision (its consumers read it raw)
+            # the normalised stream stays high precision through layout ops (transpose, cast, reshape)
+            PASS_OPS = {"Cast", "Transpose", "Reshape", "Identity", "Squeeze", "Unsqueeze", "Flatten"}
+            F = {muls[0].output[0]}
+            grew = True
+            while grew:
+                grew = False
+                for n in g.node:
+                    if n.op_type in PASS_OPS and src_of(n.input[0]) in F and n.output[0] not in F:
+                        F.add(n.output[0]); grew = True
+            for n in g.node:
+                if n.op_type in ("QuantizeLinear", "DequantizeLinear"):
+                    continue
+                for k, i in enumerate(n.input):
+                    if i not in F and src_of(i) in F:
+                        n.input[k] = src_of(i)
+        for n in chain:
+            for k, i in enumerate(n.input):
+                s_ = src_of(i)
+                if s_ != i and s_ != xin:        # keep the quantized norm input x
+                    n.input[k] = s_
+        fused += 1
+    return m, fused
+
+
+def _float_constants(m):
+    """Emulation variant: scalar/elementwise Constant-node operands are used unquantized (a kernel that
+    folds them in higher precision); weight initializers keep their encodings."""
+    g = m.graph
+    prod = {o: n for n in g.node for o in n.output}
+    consts = {n.output[0] for n in g.node if n.op_type == "Constant"}
+    k_ = 0
+    for n in g.node:
+        if n.op_type in ("QuantizeLinear", "DequantizeLinear"):
+            continue
+        for k, i in enumerate(n.input):
+            d = prod.get(i)
+            if d is not None and d.op_type == "DequantizeLinear":
+                q = prod.get(d.input[0])
+                if q is not None and q.op_type == "QuantizeLinear" and q.input[0] in consts:
+                    n.input[k] = q.input[0]
+                    k_ += 1
+    return k_
+
+
+def _inline_external(m, base):
+    import onnx
+    for t in m.graph.initializer:
+        ext = {kv.key: kv.value for kv in t.external_data}
+        if ext.get("location"):
+            with open(base / ext["location"], "rb") as f:
+                f.seek(int(ext.get("offset", 0)))
+                raw = f.read(int(ext["length"])) if "length" in ext else f.read()
+            del t.external_data[:]
+            t.data_location = onnx.TensorProto.DEFAULT
+            t.raw_data = raw
+
+
+def _init_arrays(path):
+    """Initializer values without onnx's external-data loader (reads the external file directly)."""
+    import onnx
+    from onnx import numpy_helper
+    m = onnx.load(str(path), load_external_data=False)
+    base = pathlib.Path(path).resolve().parent
+    out = {}
+    for t in m.graph.initializer:
+        ext = {kv.key: kv.value for kv in t.external_data}
+        if ext.get("location"):
+            with open(base / ext["location"], "rb") as f:
+                f.seek(int(ext.get("offset", 0)))
+                raw = f.read(int(ext["length"])) if "length" in ext else f.read()
+            t2 = onnx.TensorProto()
+            t2.CopyFrom(t)
+            del t2.external_data[:]
+            t2.data_location = onnx.TensorProto.DEFAULT
+            t2.raw_data = raw
+            out[t.name] = numpy_helper.to_array(t2)
+        else:
+            out[t.name] = numpy_helper.to_array(t)
+    return out
+
+
 # =============================================================================== runners
 class OnnxStep:
     """One carry step on ONNX Runtime (batch 1 graphs, as AI Hub exports them)."""
 
-    def __init__(self, path, threads=4, extra_outputs=None):
+    def __init__(self, path, threads=4, extra_outputs=None, vendor=None, opt_level="basic"):
+        """opt_level 'basic' keeps the reference QDQ semantics (float ops between Q/DQ); 'all' lets ORT
+        fuse Q/DQ into integer QLinear kernels, which changes the arithmetic of graphs that mix 8- and
+        16-bit encodings (M3, Sep 25): a different runtime, not a different model."""
         import onnxruntime as ort
         so = ort.SessionOptions()
         so.intra_op_num_threads = threads
         so.log_severity_level = 3
+        so.graph_optimization_level = {"basic": ort.GraphOptimizationLevel.ORT_ENABLE_BASIC,
+                                       "all": ort.GraphOptimizationLevel.ORT_ENABLE_ALL,
+                                       "none": ort.GraphOptimizationLevel.ORT_DISABLE_ALL}[opt_level]
+        self.opt_level = opt_level
         self.path = str(path)
         self.extra = list(extra_outputs or [])
-        if self.extra:
+        self.n_fused = 0
+        if self.extra or vendor:
+            # graph with extra outputs, external data read into memory by hand (onnx's loader refuses
+            # hard-linked external files and ORT refuses paths outside the model directory; the artifact
+            # directories stay read-only for the check)
             import onnx
-            m = onnx.load(self.path)                     # external data loaded in memory
+            m = onnx.load(self.path, load_external_data=False)
+            _inline_external(m, pathlib.Path(self.path).resolve().parent)
+            if vendor in ("qnn", "qnn16", "qnn16c"):
+                m, self.n_fused = fuse_rmsnorm_qdq(m, out_float=vendor != "qnn")
+            if vendor == "qnn16c":
+                _float_constants(m)
             have = {o.name for o in m.graph.output}
             for name in self.extra:
                 if name not in have:
@@ -169,6 +319,23 @@ def _cos(a, b):
 
 
 # =============================================================================== T1 / T2 (any runner)
+def changed_cell_agreement(fin_c, fin_r, inputs, settled):
+    """Agreement on the cells fp32 writes (its final prediction differs from the input token): the
+    Sudoku blanks, the maze path, the ARC output grid. Copied cells (givens, walls) agree trivially and
+    swamp a whole-grid agreement on long outputs (a maze with 900 cells keeps 0.98 agreement while
+    every path is wrong). Label-free: uses the input and fp32's own answer."""
+    fin_c, fin_r, inputs = np.asarray(fin_c), np.asarray(fin_r), np.asarray(inputs)
+    L = min(fin_r.shape[-1], inputs.shape[-1])
+    ch = fin_r[:, :L] != inputs[:, :L]
+    agree = (fin_c[:, :L] == fin_r[:, :L]) & ch
+    per = agree.sum(-1) / np.maximum(ch.sum(-1), 1)
+    out = dict(changed_cells_mean=float(ch.sum(-1).mean()), changed_agree=float(per.mean()),
+               changed_agree_min=float(per.min()))
+    settled = np.asarray(settled, bool)
+    out["changed_agree_settled"] = float(per[settled].mean()) if settled.any() else None
+    return out
+
+
 def map_and_rollout(ref_step, cand_step, chk, T, ref_cache=None, log=None, skip_rollout=False):
     """T1 and T2 evidence for a candidate step against the fp32 step. `ref_cache` (npz path) keeps the
     fp32 rollout so a sweep over candidates computes it once."""
@@ -225,6 +392,7 @@ def map_and_rollout(ref_step, cand_step, chk, T, ref_cache=None, log=None, skip_
         ev[f"n_{name}"] = int(msk.sum())
         ev[f"answer_agree_{name}"] = float((fin_c[msk] == fin_r[msk]).all(-1).mean()) if msk.any() else None
         ev[f"cell_agree_{name}"] = float((fin_c[msk] == fin_r[msk]).mean()) if msk.any() else None
+    ev.update(changed_cell_agreement(fin_c, fin_r, chk["inputs"], settled))
     ev.update(cell_agree=float(cell.mean()), cell_agree_min=float(cell.min()),
               answer_agree=float((fin_c == fin_r).all(-1).mean()),
               cell_agree_per_step=[float((c["preds"][s] == ref["preds"][s]).mean()) for s in range(T)],
@@ -242,13 +410,17 @@ COMPUTE_OPS = {"MatMul", "Gemm", "Add", "Sub", "Mul", "Div", "Sqrt", "Reciprocal
                "LayerNormalization", "SimplifiedLayerNormalization"}
 
 
-def onnx_layer_map(cand_path):
+def onnx_layer_map(cand_path, vendor=None):
     """Tensor names for the per-layer comparison: compute-op outputs of the candidate that also exist
     in the fp32 graph (AIMET/QDQ graphs keep the fp32 names), activation Q/DQ pairs (x -> DQ(Q(x))),
     and quantized weights (initializer -> DQ(Q(w)) or initializer Q-weights)."""
     import onnx
     from onnx import numpy_helper
     m = onnx.load(str(cand_path), load_external_data=False)
+    if vendor in ("qnn", "qnn16", "qnn16c"):
+        m, _ = fuse_rmsnorm_qdq(m, out_float=vendor != "qnn")
+    if vendor == "qnn16c":
+        _float_constants(m)
     g = m.graph
     inits = {i.name for i in g.initializer}
     consts = {n.output[0] for n in g.node if n.op_type == "Constant"}
@@ -264,6 +436,7 @@ def onnx_layer_map(cand_path):
             continue
         x = n.input[0]
         dqs = [c for c in cons.get(n.output[0], []) if c.op_type == "DequantizeLinear"]
+        dqs = [c for c in dqs if cons.get(c.output[0])]          # skip pairs a fusion left unused
         if not dqs:
             continue
         if x in inits or x in consts:
@@ -281,15 +454,17 @@ def onnx_layer_map(cand_path):
                 op_of={o: prod[o].op_type for o in compute}, n_nodes=len(g.node))
 
 
-def onnx_per_layer(ref_path, cand_path, chk, ref_states, samples=(0, 1), threads=4, top=12):
+def onnx_per_layer(ref_path, cand_path, chk, ref_states, samples=(0, 1), threads=4, top=12, vendor=None,
+                   opt_level="basic"):
     """T0 on an ONNX candidate: one step at fp32's end state for `samples` check inputs, every shared
     compute tensor compared with the fp32 graph, every activation Q/DQ pair's local error."""
-    lm = onnx_layer_map(cand_path)
+    lm = onnx_layer_map(cand_path, vendor)
     import onnx
     ref_names = {o for n in onnx.load(str(ref_path), load_external_data=False).graph.node for o in n.output}
     shared = [t for t in lm["compute"] if t in ref_names]
     pair_names = [x for x, _, _ in lm["act_pairs"]] + [y for _, y, _ in lm["act_pairs"]]
-    cand = OnnxStep(cand_path, threads, extra_outputs=sorted(set(shared + pair_names)))
+    cand = OnnxStep(cand_path, threads, extra_outputs=sorted(set(shared + pair_names)), vendor=vendor,
+                    opt_level=opt_level)
     ref = OnnxStep(ref_path, threads, extra_outputs=shared)
     prop, local, nonfinite = {}, {}, set()
     for i in samples:
@@ -310,10 +485,7 @@ def onnx_per_layer(ref_path, cand_path, chk, ref_states, samples=(0, 1), threads
     # weights: static error of every quantized weight (needs the initializer values)
     werr = []
     if lm["weight_pairs"]:
-        m = onnx.load(str(cand_path))
-        from onnx import numpy_helper
-        vals = {i.name: numpy_helper.to_array(i) for i in m.graph.initializer}
-        del m
+        vals = _init_arrays(cand_path)
         # evaluate DQ(Q(w)) by running only those nodes would need a subgraph; use the scale/zp directly
         wq = _onnx_weight_errors(cand_path, vals)
         werr = wq
@@ -336,6 +508,23 @@ def onnx_per_layer(ref_path, cand_path, chk, ref_states, samples=(0, 1), threads
     first = next((t for t in shared if prop.get(t, 0) > 0.5), None)
     ev["layer_first_prop_gt_0.5"] = dict(tensor=first, op=lm["op_of"].get(first)) if first else None
     return ev
+
+
+def onnx_xrt(cand_path, chk, ref_states, threads=4, vendor=None, samples=(0, 1, 2, 3)):
+    """T0 across runtimes for an ONNX QDQ graph (ML-EXray): one step at fp32's end state under reference
+    QDQ semantics (ORT basic) and under ORT's integer-kernel fusions (ORT all); relative difference of
+    the new carry. A large value means the graph's numerics depend on the runtime's kernels."""
+    a = OnnxStep(cand_path, threads, vendor=vendor, opt_level="basic")
+    b = OnnxStep(cand_path, threads, vendor=vendor, opt_level="all")
+    d, agree = [], []
+    for i in samples:
+        if i >= len(ref_states[0]):
+            break
+        args = (ref_states[0][i], ref_states[1][i], chk["inputs"][i:i + 1], chk["emb"][i])
+        oa, ob = a(*args), b(*args)
+        d.append(_rel(np.concatenate([oa[0].ravel(), oa[1].ravel()]), np.concatenate([ob[0].ravel(), ob[1].ravel()])))
+        agree.append(float((oa[2].argmax(-1) == ob[2].argmax(-1)).mean()))
+    return dict(onnx_xrt_rel_median=float(np.median(d)), onnx_xrt_argmax_agree=float(np.mean(agree)))
 
 
 def _by_op(d):
@@ -421,6 +610,11 @@ class TfliteStep:
     quantized I/O is (de)quantized with the graph's own parameters, as a deployment would."""
 
     def __init__(self, path, threads=4, resolver="auto", preserve=False):
+        self._args = (path, threads, preserve)
+        self.resolver_used = resolver
+        self._build(path, threads, resolver, preserve)
+
+    def _build(self, path, threads, resolver, preserve):
         from ai_edge_litert import interpreter as I
         kind = {"auto": I.OpResolverType.AUTO, "builtin": I.OpResolverType.BUILTIN_WITHOUT_DEFAULT_DELEGATES,
                 "ref": I.OpResolverType.BUILTIN_REF}[resolver]
@@ -455,7 +649,17 @@ class TfliteStep:
     def __call__(self, zH, zL, inp, emb):
         src = [zH, zL, inp, emb.reshape(1, -1) if emb.ndim == 1 else emb]
         feed = {n: self._q(src[k], self.in_det[n]) for k, n in enumerate(self.in_names)}
-        o = self.runner(**feed)
+        try:
+            o = self.runner(**feed)
+        except ValueError:
+            if self.resolver_used != "auto":
+                raise
+            # the XNNPACK delegate leaves some outputs unallocated on a few graphs (FC-only int8 with
+            # float I/O): fall back to the builtin kernels, as a phone runtime would
+            self.resolver_used = "builtin (fallback)"
+            path, threads, preserve = self._args
+            self._build(path, threads, "builtin", preserve)
+            o = self.runner(**feed)
         vals = [self._dq(o[n], self.out_det[n]) for n in self.out_names]
         return vals[0], vals[1], vals[2], float(np.asarray(vals[3]).reshape(-1)[0])
 
@@ -479,7 +683,16 @@ def tflite_xrt(graph, chk, ref_states, sample=0, tflm_python=None):
         feed = {n: TfliteStep._q(src[k], det[n]) for k, n in enumerate(sorted(det))}
         sig(**feed)
         return it, feed
-    a, feed = run(I.OpResolverType.BUILTIN_REF)
+    try:
+        a, feed = run(I.OpResolverType.BUILTIN_REF)
+    except RuntimeError as e:
+        # the reference kernels (TFLite Micro's) cannot even execute the graph on this input
+        import re
+        mm = re.search(r"Node number (\d+) \((\w+)\)", str(e))
+        bad = dict(op_index=int(mm.group(1)) if mm else -1, op=mm.group(2) if mm else "?", maxdiff=float("inf"),
+                   in_diff_lsb=0.0, unit="lsb", error=str(e)[:300])
+        return dict(xrt_pair="builtin_ref_vs_builtin_opt", xrt_ref_error=str(e)[:300], xrt_first_bad=bad,
+                    xrt_max_lsb=float("inf"))
     b, _ = run(I.OpResolverType.BUILTIN_WITHOUT_DEFAULT_DELEGATES)
     m = fu.read_model(str(graph))
     sg = m.subgraphs[0]
@@ -496,10 +709,43 @@ def tflite_xrt(graph, chk, ref_states, sample=0, tflm_python=None):
             else:
                 d = float(np.abs(x.astype(np.int64) - y.astype(np.int64)).max()); unit = "lsb"
             rows.append(dict(op_index=k, op=name, tensor=int(o), dtype=str(x.dtype), maxdiff=d, unit=unit))
+    # local disagreement: an op whose output differs by far more than its inputs do (a kernel that
+    # computes something else), as opposed to divergence inherited from upstream ops. Input differences
+    # are expressed in LSB of the op's output scale (float inputs: |diff| / output scale).
+    tdiff = {}
+    for k, op in enumerate(sg.operators):
+        for o in op.outputs:
+            try:
+                x, y = a.get_tensor(o), b.get_tensor(o)
+            except ValueError:
+                continue
+            tdiff[int(o)] = (x, y)
+    for r in rows:
+        op = sg.operators[r["op_index"]]
+        q = sg.tensors[r["tensor"]].quantization
+        oscale = float(q.scale[0]) if (q is not None and q.scale is not None and len(q.scale)) else None
+        ind = 0.0
+        for i in op.inputs:
+            if i < 0 or int(i) not in tdiff:
+                continue
+            x, y = tdiff[int(i)]
+            if x.dtype == np.float32:
+                d = float(np.abs(x - y).max())
+                ind = max(ind, d / oscale if oscale else d)
+            else:
+                qi = sg.tensors[i].quantization
+                iscale = float(qi.scale[0]) if (qi is not None and qi.scale is not None and len(qi.scale)) else 1.0
+                d = float(np.abs(x.astype(np.int64) - y.astype(np.int64)).max())
+                ind = max(ind, d * iscale / oscale if oscale else d)
+        r["in_diff_lsb"] = ind
     worst = sorted([r for r in rows if r["unit"] == "lsb"], key=lambda r: -r["maxdiff"])
-    first_bad = next((r for r in rows if r["unit"] == "lsb" and r["maxdiff"] > THRESHOLDS["xrt_lsb_fail"]), None)
+    thr = THRESHOLDS["xrt_lsb_fail"]
+    first_bad = next((r for r in rows if r["unit"] == "lsb" and r["maxdiff"] > thr
+                      and r["in_diff_lsb"] <= 1.0), None)
+    first_any = next((r for r in rows if r["unit"] == "lsb" and r["maxdiff"] > thr), None)
     out = dict(xrt_pair="builtin_ref_vs_builtin_opt", xrt_ops=len(rows),
-               xrt_max_lsb=worst[0]["maxdiff"] if worst else 0.0, xrt_worst=worst[:6], xrt_first_bad=first_bad)
+               xrt_max_lsb=worst[0]["maxdiff"] if worst else 0.0, xrt_worst=worst[:6], xrt_first_bad=first_bad,
+               xrt_first_propagated=first_any)
     if tflm_python:
         import subprocess
         import tempfile
@@ -742,6 +988,7 @@ def torch_check(task, wspec="fp32", amode="none", H=None, T=16, check=None, n=32
             ev[f"n_{name}"] = int(msk.sum())
             ev[f"answer_agree_{name}"] = float((pr[msk] == pc[msk]).all(-1).float().mean()) if msk.any() else None
             ev[f"cell_agree_{name}"] = float((pr[msk] == pc[msk]).float().mean()) if msk.any() else None
+        ev.update(changed_cell_agreement(pc.cpu().numpy(), pr.cpu().numpy(), x.cpu().numpy(), settled.cpu().numpy()))
         if kicks and act is None and not cb:
             # random-kick growth along the candidate's own trajectory (X2): 16-step nonlinear growth of
             # a random kick of relative size 1e-3 at the candidate's end state (label- and reference-free)
@@ -799,10 +1046,15 @@ def decide(ev, thr=None):
     def bump(v):
         order = {"PASS": 0, "WARN": 1, "FAIL": 2}
         return v if order[v] > order[verdict] else verdict
-    if ev.get("xrt_first_bad") or ev.get("tflm_first_bad"):
-        bad = ev.get("tflm_first_bad") or ev.get("xrt_first_bad")
-        rules.append(f"T0 cross-runtime: op {bad['op_index']} {bad['op']} differs by {bad['maxdiff']:.0f} LSB "
-                     f"between runtimes of the same graph (> {thr['xrt_lsb_fail']})")
+    if ev.get("xrt_first_bad"):
+        bad = ev["xrt_first_bad"]
+        if bad.get("error"):
+            rules.append(f"T0 cross-runtime: the reference kernels fail at op {bad['op_index']} {bad['op']}: "
+                         f"{bad['error'][:120]}")
+        else:
+          rules.append(f"T0 cross-runtime: op {bad['op_index']} {bad['op']} differs by {bad['maxdiff']:.0f} LSB "
+                       f"between reference and optimized kernels while its inputs differ by "
+                       f"{bad.get('in_diff_lsb', 0):.0f} (kernel disagreement, > {thr['xrt_lsb_fail']})")
         verdict = bump("FAIL")
     if ev.get("n_nonfinite_tensors"):
         rules.append(f"T0 per-layer: {ev['n_nonfinite_tensors']} intermediate tensors are inf/nan where fp32 is "
@@ -810,9 +1062,11 @@ def decide(ev, thr=None):
         verdict = bump("FAIL")
     if "cell_agree" in ev:
         # on inputs fp32 itself has settled on (label-free); all inputs when too few settle
-        use_settled = ev.get("cell_agree_settled") is not None and ev.get("n_settled", 0) >= 5
-        ca = ev["cell_agree_settled"] if use_settled else ev["cell_agree"]
-        tag = "fp32-settled inputs" if use_settled else "all inputs"
+        use_settled = ev.get("n_settled", 0) >= 5
+        key = "changed_agree" if ev.get("changed_agree") is not None else "cell_agree"
+        ca = ev.get(key + "_settled") if use_settled and ev.get(key + "_settled") is not None else ev[key]
+        tag = ("cells fp32 writes, " if key == "changed_agree" else "all cells, ") + \
+              ("fp32-settled inputs" if use_settled else "all inputs")
         if ca < thr["cell_agree_fail"]:
             rules.append(f"T2 cell agreement with fp32 ({tag}) {ca:.3f} < {thr['cell_agree_fail']}")
             verdict = bump("FAIL")
@@ -844,10 +1098,11 @@ def _strip(ev):
 def cmd_onnx(a):
     chk = load_check(a.check, a.n)
     log = (lambda s: print(s, flush=True)) if a.verbose else None
-    ref = OnnxStep(a.ref, a.threads)
-    cand = OnnxStep(a.graph, a.threads)
+    ref = OnnxStep(a.ref, a.threads, opt_level=a.ort_level)
+    cand = OnnxStep(a.graph, a.threads, vendor=a.vendor or None, opt_level=a.ort_level)
     cache = a.ref_cache or None
-    ev = dict(kind="onnx", ref=str(a.ref), graph=str(a.graph), check=str(a.check), steps=a.steps)
+    ev = dict(kind="onnx", ref=str(a.ref), graph=str(a.graph), check=str(a.check), steps=a.steps,
+              vendor=a.vendor or None, n_fused_norms=cand.n_fused)
     ev.update(map_and_rollout(ref, cand, chk, a.steps, ref_cache=cache, log=log, skip_rollout=a.no_rollout))
     if not a.no_layers:
         z = np.load(cache) if cache and pathlib.Path(cache).exists() else None
@@ -857,7 +1112,8 @@ def cmd_onnx(a):
             states = (np.stack([s[0] for s in r["kept"][a.steps]]), np.stack([s[1] for s in r["kept"][a.steps]]))
         t0 = time.time()
         ev.update(onnx_per_layer(a.ref, a.graph, chk, states, samples=tuple(range(min(2, chk["inputs"].shape[0]))),
-                                 threads=a.threads))
+                                 threads=a.threads, vendor=a.vendor or None, opt_level=a.ort_level))
+        ev.update(onnx_xrt(a.graph, chk, states, threads=a.threads, vendor=a.vendor or None))
         ev["t0_seconds"] = round(time.time() - t0, 1)
     finish(ev, a)
 
@@ -868,7 +1124,13 @@ def cmd_tflite(a):
     cand = TfliteStep(a.graph, a.threads, resolver=a.resolver)
     ev = dict(kind="tflite", ref=str(a.ref), graph=str(a.graph), resolver=a.resolver, check=str(a.check),
               steps=a.steps)
-    ev.update(map_and_rollout(ref, cand, chk, a.steps, ref_cache=a.ref_cache or None, skip_rollout=a.no_rollout))
+    if a.xrt_only and a.out and pathlib.Path(a.out).exists():
+        ev = json.loads(pathlib.Path(a.out).read_text())
+        for k in [k for k in ev if k.startswith(("xrt_", "tflm_"))]:
+            ev.pop(k)
+    else:
+        ev.update(map_and_rollout(ref, cand, chk, a.steps, ref_cache=a.ref_cache or None,
+                                  skip_rollout=a.no_rollout))
     if a.xrt:
         z = np.load(a.ref_cache)
         ev.update(tflite_xrt(a.graph, chk, (z["sT_H"], z["sT_L"]), tflm_python=a.tflm_python))
@@ -905,9 +1167,16 @@ def main():
         q.add_argument("--verbose", action="store_true")
         if name == "onnx":
             q.add_argument("--no_layers", action="store_true")
+            q.add_argument("--ort_level", default="basic", choices=["basic", "all"],
+                           help="ONNX Runtime graph optimisation: basic = reference QDQ semantics; all = "
+                                "ORT integer-kernel fusions (a different runtime)")
+            q.add_argument("--vendor", default="", choices=["", "qnn", "qnn16", "qnn16c"],
+                           help="emulate a vendor's fused kernels on the QDQ graph (qnn: RMSNorm fused, "
+                                "internals not quantized; qnn16: norm output also unquantized)")
         else:
             q.add_argument("--resolver", default="auto", choices=["auto", "builtin", "ref"])
             q.add_argument("--xrt", action="store_true")
+            q.add_argument("--xrt_only", action="store_true", help="recompute only the cross-runtime T0 into --out")
             q.add_argument("--tflm_python", default="")
     q = sp.add_parser("torch")
     q.add_argument("--task", required=True); q.add_argument("--config", default="fp32",
