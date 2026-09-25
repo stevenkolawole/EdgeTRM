@@ -334,6 +334,141 @@ def spearman_np(x, y):
     return float(np.corrcoef(rx, ry)[0, 1])
 
 
+# ----------------------------------------------------------------------------- calibration budget
+def fast_cut(phi, lab):
+    """Cut t (collapse predicted iff phi < t) minimising errors; midpoint of the optimal interval."""
+    o = np.argsort(phi)
+    ph, lb = phi[o], lab[o].astype(int)
+    # errors for a cut placed below position i (cells 0..i-1 predicted collapse): (#held among first i) + (#collapsed after)
+    held_before = np.r_[0, np.cumsum(1 - lb)]
+    col_after = lb.sum() - np.r_[0, np.cumsum(lb)]
+    err = held_before + col_after
+    e = err.min()
+    idx = np.where(err == e)[0]
+    def cut_at(i):
+        if i == 0:
+            return ph[0] - 1e-3
+        if i == len(ph):
+            return ph[-1] + 1e-3
+        return (ph[i - 1] + ph[i]) / 2
+    return (cut_at(idx[0]) + cut_at(idx[-1])) / 2
+
+
+def calib_groups():
+    """{group: [(phi, correct_q (np.bool array), correct_ref (np.bool array))]} with per-example labels, one
+    platform per group where possible: LMs from the analyze_looped pool rows (their own directory/platform),
+    TRM/HRM from the p4d root grid (default H; reference accuracy >= 10%), variants from p4d variants_noise."""
+    import analyze_looped as A
+    import analyze_x8 as X
+    G = defaultdict(list)
+    rows, _ = A.pool_rows(A.POOL_ROOTS, 50.0)
+    lam = {}
+    for model, gen_files, nogen in A.LAMBDA_FILES:
+        for fn in gen_files:
+            p = A.LAMBDA / fn
+            if p.exists():
+                for r in json.load(open(p))["records"]:
+                    if r.get("correct"):
+                        lam.setdefault((model, r["steps"], r["quant"]["spec"]), np.array(r["correct"], bool))
+    cache = {}
+    for r in rows:
+        if r["platform"] == "lambda":
+            q, b = lam.get((r["model"], r["loops"], r["quant"])), lam.get((r["model"], r["loops"], "bf16"))
+        else:
+            root = HERE / "results/looped" / r["platform"] / r["dir"]
+            if root not in cache:
+                cache[root] = A.load([root])
+            cells = cache[root]
+            cq, cb = cells.get((r["model"], r["loops"], r["quant"], "core")), cells.get((r["model"], r["loops"], "bf16", "core"))
+            if not cq or not cb:
+                continue
+            g, gb = cq["gen"]["greedy"], cb["gen"]["greedy"]
+            idx = sorted(set(g) & set(gb))
+            q = np.array([g[i]["correct"] for i in idx], bool)
+            b = np.array([gb[i]["correct"] for i in idx], bool)
+        if q is not None and b is not None and len(q) == len(b):
+            G["LM:" + r["model"]].append((r["fid"], q, b))
+    for task in X.TASKS:
+        fcache = {}
+        for c in X.fid_cells(task):
+            if "/" in c["file"]:
+                continue
+            f = X.B / c["file"]
+            if f not in fcache:
+                fcache[f] = {(r["H_cycles"], r["nsup"], r["quant"]["spec"] if isinstance(r["quant"], dict) else r["quant"]): r
+                             for r in json.load(open(f))["records"]}
+            idx = fcache[f]
+            rq, rb = idx.get((c["H"], c["nsup"], c["spec"])), idx.get((c["H"], c["nsup"], "fp32"))
+            if not rq or not rb or not rq.get("correct") or rb["pexact"] < 0.10:
+                continue
+            G["TRM:" + task].append((c["phi"], np.array(rq["correct"], bool), np.array(rb["correct"], bool)))
+    for f in sorted((HERE / "results/breadth/p4d/variants_noise").glob("trm_sudoku_*.json")):
+        name = f.stem.replace("_seed1", "").replace("_seed2", "")
+        recs = json.load(open(f))["records"]
+        sp = lambda r: r["quant"]["spec"] if isinstance(r["quant"], dict) else r["quant"]  # noqa: E731
+        fp = {r["nsup"]: r for r in recs if sp(r) == "fp32"}
+        for r in recs:
+            if sp(r) == "fp32" or r["nsup"] != 16 or 16 not in fp or fp[16]["pexact"] < 0.10:
+                continue
+            if "seed" in f.stem and not sp(r).startswith("noise"):
+                continue
+            G["VAR:" + name].append((r["fidelity_H"], np.array(r["correct"], bool), np.array(fp[16]["correct"], bool)))
+    return G
+
+
+def calib_section(ncals=(10, 25, 50, 100, 200), reps=200, cut=0.5, seed=0):
+    G = calib_groups()
+    rng = np.random.default_rng(seed)
+    print("\n## Calibration budget: labelled examples needed to place each model's fidelity cut\n")
+    print(f"Per repeat ({reps}): draw n_cal examples (the same example ids for every cell of the model, paired with its "
+          f"reference), estimate each cell's retention, label collapse (< {cut:.0%}), fit the error-minimising φ cut, and "
+          "score held/collapsed for ALL cells against the full-n labels. Cells: accuracy mean [5th percentile].\n")
+    hdr = " | ".join(f"n_cal {k}" for k in ncals)
+    print(f"| group | cells (collapsed) | full n | full-n cut acc | {hdr} |")
+    print("|---|---|---|---|" + "---|" * len(ncals))
+    out = {}
+    for gname in sorted(G):
+        cs = G[gname]
+        phi = np.array([c[0] for c in cs])
+        full = np.array([(c[1].mean() / c[2].mean() if c[2].mean() > 0 else 0.0) < cut for c in cs])
+        if full.all() or not full.any():
+            continue
+        nmin = min(len(c[1]) for c in cs)
+        t_full = fast_cut(phi, full)
+        acc_full = float(((phi < t_full) == full).mean())
+        row, res = [], {}
+        for k in ncals:
+            if k > nmin:
+                row.append("–")
+                continue
+            accs = []
+            for _ in range(reps):
+                perm = rng.permutation(max(len(c[1]) for c in cs))
+                est, keep = [], []
+                for c in cs:
+                    ids = perm[perm < len(c[1])][:k]
+                    rb = c[2][ids].mean()
+                    if rb == 0:
+                        keep.append(False)
+                        est.append(True)
+                        continue
+                    keep.append(True)
+                    est.append(c[1][ids].mean() / rb < cut)
+                keep = np.array(keep)
+                est = np.array(est)
+                if keep.sum() < 2 or est[keep].all() or not est[keep].any():
+                    t = np.median(phi)             # no information: fall back to the median fidelity
+                else:
+                    t = fast_cut(phi[keep], est[keep])
+                accs.append(float(((phi < t) == full).mean()))
+            accs = np.array(accs)
+            res[k] = {"mean": float(accs.mean()), "p5": float(np.percentile(accs, 5))}
+            row.append(f"{accs.mean():.3f} [{np.percentile(accs, 5):.3f}]")
+        out[gname] = {"n_cells": len(cs), "n_collapsed": int(full.sum()), "n_full_min": nmin, "acc_full_cut": acc_full, "by_ncal": res}
+        print(f"| {gname} | {len(cs)} ({int(full.sum())}) | {nmin} | {acc_full:.3f} | " + " | ".join(row) + " |")
+    return out
+
+
 def main():
     import sys
     sys.path.insert(0, str(HERE))
@@ -345,6 +480,7 @@ def main():
     ap.add_argument("--trm-platform", default="root", choices=["root", "all"],
                     help="root = only the breadth/*.json grid files (one platform); all = include babel/ and p4d/ draws")
     ap.add_argument("--json", default=None)
+    ap.add_argument("--calib", action="store_true", help="labelled-example budget for placing each model's cut")
     ap.add_argument("--variants", action="store_true", help="within-Sudoku test on the 13 trained variants (p4d)")
     ap.add_argument("--s-platform", default="babel", choices=["babel", "p4d"],
                     help="TRM/HRM sensitivity S source: X2's Babel fit or its p4d refit (same platform as the grid)")
@@ -352,6 +488,11 @@ def main():
     a = ap.parse_args()
     global S_PLATFORM
     S_PLATFORM = a.s_platform
+    if a.calib:
+        out = {"calib": calib_section()}
+        if a.json:
+            json.dump(out, open(a.json, "w"), indent=1)
+        return
     if a.variants:
         out = {"variants": variant_section()}
         if a.json:
