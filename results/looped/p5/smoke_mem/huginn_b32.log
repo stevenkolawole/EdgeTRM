@@ -1,0 +1,69 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:00,  9.35it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:00<00:00,  8.45it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:00<00:00,  8.76it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:00<00:00, 10.69it/s]
+10:56:30 huginn_s32_w4t_core: computing bf16 reference (32 problems)
+10:56:40   reference done in 10s
+10:56:54 huginn_s32_w4t_core: tf nll 1.272  tf_acc 0.692  agree 0.755  kl 0.586  fid 0.6996  ans_acc 0.031  (16 linears quantized)
+Traceback (most recent call last):
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 754, in <module>
+    "marker_token_ids": marker_ids(tok),
+
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 737, in main
+    if q["spec"] in ("bf16", "fp32") and ref_recs is not None:
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 596, in gen_pass
+    if fam.stop_strings:
+              ^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 294, in generate
+    return model.generate(input_ids, attention_mask=attn, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/huginn/raven_modeling_minimal.py", line 1121, in generate
+    return super().generate(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/pylibs/tf4554/transformers/generation/utils.py", line 2617, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/pylibs/tf4554/transformers/generation/utils.py", line 3601, in _sample
+    outputs = model_forward(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/huginn/raven_modeling_minimal.py", line 682, in forward
+    x, num_steps_no_grad, num_steps_with_grad, xk, block_idx = self.iterate_forward(
+                                                               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/huginn/raven_modeling_minimal.py", line 751, in iterate_forward
+    x, block_idx = self.core_block_forward(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/huginn/raven_modeling_minimal.py", line 777, in core_block_forward
+    x = block(x, freqs_cis, block_idx, mask, past_key_values)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/huginn/raven_modeling_minimal.py", line 533, in forward
+    attn_out = self.attn(self.norm_1(x), freqs_cis, step_idx, mask, past_key_values)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/huginn/raven_modeling_minimal.py", line 479, in forward
+    k, v = past_key_values.update(k, v, block_idx)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 224, in _fast_update
+    self._x4k[step_idx] = torch.cat([self._x4k[step_idx], key_states], dim=-2)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 188.00 MiB. GPU 0 has a total capacity of 139.80 GiB of which 187.94 MiB is free. Including non-PyTorch memory, this process has 57.08 GiB memory in use. Process 3021602 has 76.49 GiB memory in use. Process 3022871 has 6.03 GiB memory in use. Of the allocated memory 55.11 GiB is allocated by PyTorch, and 1.30 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

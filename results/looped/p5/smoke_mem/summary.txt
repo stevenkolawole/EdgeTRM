@@ -1,0 +1,3 @@
+olmo_rec32 batch 64 rc=1 
+ouro26 batch 64 rc=1 
+huginn batch 32 rc=1 

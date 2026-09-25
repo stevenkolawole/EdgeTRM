@@ -1,0 +1,73 @@
+10:53:26 ouro26_s4_w4t_core: computing bf16 reference (64 problems)
+10:53:51   reference done in 25s
+10:54:17 ouro26_s4_w4t_core: tf nll 12.701  tf_acc 0.000  agree 0.000  kl 12.039  fid 0.0106  ans_acc 0.000  (336 linears quantized)
+Traceback (most recent call last):
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 754, in <module>
+    main()
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 737, in main
+    recs, secs = gen_pass(fam, model, tok, data, dec, a.max_new, a.batch, tdir / f"{dec}.jsonl", log,
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 596, in gen_pass
+    out = fam.generate(model, input_ids, attn, max_new_tokens=max_new - min(npre), pad_token_id=pad,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 188, in generate
+    return model.generate(input_ids, attention_mask=attn, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/pylibs/tf4554/transformers/generation/utils.py", line 2617, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/pylibs/tf4554/transformers/generation/utils.py", line 3601, in _sample
+    outputs = model_forward(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/pylibs/tf4554/transformers/utils/generic.py", line 959, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/ByteDance/Ouro-2.6B/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py", line 704, in forward
+    outputs, hidden_states_list, gate_list = self.model(
+                                             ^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/pylibs/tf4554/transformers/utils/generic.py", line 1083, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/ByteDance/Ouro-2.6B/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py", line 602, in forward
+    hidden_states = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/pylibs/tf4554/transformers/modeling_layers.py", line 93, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/ByteDance/Ouro-2.6B/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py", line 412, in forward
+    hidden_states, _ = self.self_attn(
+                       ^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/ByteDance/Ouro-2.6B/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py", line 325, in forward
+    key_states, value_states = past_key_value.update(
+                               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/ByteDance/Ouro-2.6B/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py", line 186, in update
+    self.value_cache[layer_idx] = torch.cat([cached_value, value_states], dim=2)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 124.00 MiB. GPU 0 has a total capacity of 139.80 GiB of which 47.88 MiB is free. Process 3011372 has 13.81 GiB memory in use. Including non-PyTorch memory, this process has 53.66 GiB memory in use. Process 3019738 has 72.27 GiB memory in use. Of the allocated memory 51.54 GiB is allocated by PyTorch, and 1.46 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

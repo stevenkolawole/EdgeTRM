@@ -1,0 +1,65 @@
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  5.85it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 10.01it/s]
+10:52:16 olmo_rec32_s32_w4t_core: computing bf16 reference (64 problems)
+10:52:44   reference done in 28s
+10:53:11 olmo_rec32_s32_w4t_core: tf nll 10.446  tf_acc 0.008  agree 0.008  kl 9.629  fid 0.1124  ans_acc 0.000  (24 linears quantized)
+Traceback (most recent call last):
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 754, in <module>
+    main()
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 737, in main
+    recs, secs = gen_pass(fam, model, tok, data, dec, a.max_new, a.batch, tdir / f"{dec}.jsonl", log,
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 596, in gen_pass
+    out = fam.generate(model, input_ids, attn, max_new_tokens=max_new - min(npre), pad_token_id=pad,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/EdgeTRM/looped_decode.py", line 294, in generate
+    return model.generate(input_ids, attention_mask=attn, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/olmo_rec32/raven_modeling_minimal.py", line 983, in generate
+    return super().generate(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/pylibs/tf4554/transformers/generation/utils.py", line 2617, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/pylibs/tf4554/transformers/generation/utils.py", line 3598, in _sample
+    outputs = self(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/olmo_rec32/raven_modeling_minimal.py", line 678, in forward
+    x, num_steps_no_grad, num_steps_with_grad, xk, block_idx = self.iterate_forward(
+                                                               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/olmo_rec32/raven_modeling_minimal.py", line 747, in iterate_forward
+    x, block_idx = self.core_block_forward(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/olmo_rec32/raven_modeling_minimal.py", line 772, in core_block_forward
+    x = block(x, freqs_cis, block_idx, mask, past_key_values)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/olmo_rec32/raven_modeling_minimal.py", line 475, in forward
+    x = self.norm_2(self.mlp(x)) + x
+                    ^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/venv/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/dlami/nvme/edgetrm/hf_cache/modules/transformers_modules/olmo_rec32/raven_modeling_minimal.py", line 450, in forward
+    x = self.nonlin(x_fc_1) * x_fc_2
+        ~~~~~~~~~~~~~~~~~~~~^~~~~~~~
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 306.00 MiB. GPU 0 has a total capacity of 139.80 GiB of which 211.88 MiB is free. Process 3011372 has 13.81 GiB memory in use. Process 3014894 has 62.80 GiB memory in use. Including non-PyTorch memory, this process has 62.97 GiB memory in use. Of the allocated memory 62.21 GiB is allocated by PyTorch, and 100.76 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
