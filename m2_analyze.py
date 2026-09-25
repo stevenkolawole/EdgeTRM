@@ -277,48 +277,73 @@ def cmd_calib(a):
               f"within {wp:.3f} ({pairs}) ECE {e:.3f} FP {fmt(fp)} eff {eff:.2f}")
 
 
+def slice_cell(cell, n):
+    """First n puzzles of a cell (every cell evaluates the first rows of the test set)."""
+    out = {}
+    for k, v in cell.items():
+        if k in ("zl_rms",):
+            out[k] = v
+        elif k == "bfs":
+            out[k] = v[:n]
+        elif v.ndim >= 2:
+            out[k] = v[:, :n]
+        else:
+            out[k] = v
+    return out
+
+
 def cmd_compute(a):
-    """Matched compute: seq (noise none, K 1, D big) vs par (D16, K=S/16) vs hybrid (D64 or D32)."""
+    """Matched compute S = K x D supervision steps per puzzle, on the same puzzles (first n of the smaller cell):
+    seq = one deterministic trajectory of S steps (answer at S, or at the max-q step <= S);
+    par = K = S/16 noisy rollouts of 16 steps (best-Q; best-Q over (rollout, step); pass@K);
+    hyb = K = S/D rollouts of D = 32 or 64 steps (best-Q over (rollout, step))."""
     recs = load_index(a.root)
     by = defaultdict(list)
     for r in recs:
         by[(r["task"], r["spec"])].append(r)
     for (task, spec), rs in sorted(by.items()):
-        seq = [r for r in rs if r["noise"] == "none" and r["D"] >= 64]
-        par = [r for r in rs if r["K"] > 1 and r["D"] == 16 and r.get("polish", 0) == 0 and (a.sigma is None or abs(r["sigma"] - a.sigma) < 1e-9)]
-        hyb = [r for r in rs if r["K"] > 1 and r["D"] >= 32 and (a.sigma is None or abs(r["sigma"] - a.sigma) < 1e-9)]
-        if not seq or not par:
+        if a.task and task != a.task:
+            continue
+        seqs = sorted([r for r in rs if r["noise"] == "none"], key=lambda r: -r["D"])
+        pars = sorted([r for r in rs if r["K"] > 1 and r["D"] == 16 and abs(r["sigma"] - a.sigma_main) < 1e-9], key=lambda r: -r["K"])
+        hybs = sorted([r for r in rs if r["K"] > 1 and r["D"] > 16 and abs(r["sigma"] - a.sigma_main) < 1e-9], key=lambda r: -r["D"])
+        if not seqs or not pars:
             continue
         kind = kind_of(task)
-        sc = load_cell(a.root, seq[0])
-        pc = load_cell(a.root, par[0])
-        hc = load_cell(a.root, hyb[0]) if hyb else None
-        Dseq = seq[0]["D"]
-        print(f"{task} {spec}  (seq D={Dseq}; par sigma={par[0]['sigma']} K={par[0]['K']}; hybrid {'D%d K%d' % (hyb[0]['D'], hyb[0]['K']) if hyb else '-'})")
-        print("   S   | seq last  seq maxq-step | par maxq  par vote  par pass | hyb(D32) maxq | hyb(D64) maxq")
+        mk = a.metric if kind == "maze" else "exact"
+        sq, pr = seqs[0], pars[0]
+        n = min(sq["n"], pr["n"], *(h["n"] for h in hybs)) if hybs else min(sq["n"], pr["n"])
+        sc, pc = slice_cell(load_cell(a.root, sq), n), slice_cell(load_cell(a.root, pr), n)
+        hc = slice_cell(load_cell(a.root, hybs[0]), n) if hybs else None
+        Dseq = sq["D"]
+        print(f"{task} {spec}: n={n}; seq D={Dseq}; par K={pr['K']} (sigma {pr['sigma']}); hyb {'D%d K%d' % (hybs[0]['D'], hybs[0]['K']) if hybs else '-'}; metric {mk}")
+        print("     S | seq@S  seq maxq<=S | par bestQ  par maxq_any  par pass | hyb D32 maxq_any | hyb D64 maxq_any")
+        ar = np.arange(n)
         for S in (16, 32, 64, 128, 256, 512):
-            if S > Dseq:
+            if S > max(Dseq, 16 * pr["K"]):
                 break
-            c = sc["corr"][0, :, :S].astype(bool)
-            q = sc["q"][0, :, :S].astype(np.float32)
-            seq_last = c[:, S - 1].mean()
-            seq_q = c[np.arange(c.shape[0]), q.argmax(1)].mean()
+            if S <= Dseq:
+                c = sc["corr"][0, :, :S].astype(bool)
+                q = sc["q"][0, :, :S].astype(np.float32)
+                s1, s2 = fmt(c[:, S - 1].mean()), fmt(c[ar, q.argmax(1)].mean())
+                if kind == "maze" and mk != "exact" and f"chk_{S}" in sc:
+                    s1 = fmt(((sc[f"chk_{S}"][0] == 0) if mk == "valid" else sc[f"vshort_{S}"][0].astype(bool)).mean())
+                    s2 = "  -  "
+            else:
+                s1 = s2 = "  -  "
             K = S // 16
-            ptxt = "   -        -        -   "
-            if K <= par[0]["K"]:
-                s = select(pc, kind, K, 16, rules=("maxq", "vote", "pass"))
-                ptxt = f"{fmt(np.mean(s['maxq']['exact']))}    {fmt(np.mean(s['vote']['exact']))}    {fmt(np.mean(s['pass']['exact']))}"
-            h32 = h64 = "  -  "
-            if hc is not None:
+            ptxt = "  -        -          -   "
+            if K <= pr["K"]:
+                rules = ("maxq", "maxq_any", "pass") if mk == "exact" else ("maxq", "pass")
+                sel = select(pc, kind, K, 16, rules=rules)
+                ptxt = f"{fmt(np.mean(sel['maxq'][mk]))}      {fmt(np.mean(sel['maxq_any'][mk])) if 'maxq_any' in sel else '  -  '}     {fmt(np.mean(sel['pass'][mk]))}"
+            hv = {}
+            if hc is not None and mk == "exact":
                 for dd in (32, 64):
                     kk = S // dd
-                    if dd <= hyb[0]["D"] and 1 <= kk <= hyb[0]["K"] and f"hash_{dd}" in hc:
-                        s = select(hc, kind, kk, dd, rules=("maxq",))
-                        if dd == 32:
-                            h32 = fmt(np.mean(s["maxq"]["exact"]))
-                        else:
-                            h64 = fmt(np.mean(s["maxq"]["exact"]))
-            print(f"  {S:4d} | {fmt(seq_last)}     {fmt(seq_q)}     | {ptxt} | {h32}         | {h64}")
+                    if dd <= hybs[0]["D"] and 1 <= kk <= hybs[0]["K"]:
+                        hv[dd] = fmt(np.mean(select(hc, kind, kk, dd, rules=("maxq_any",))["maxq_any"]["exact"]))
+            print(f"  {S:4d} | {s1}  {s2}      | {ptxt} | {hv.get(32, '  -  ')}            | {hv.get(64, '  -  ')}")
 
 
 def _det_stats(root, recs, task, spec, n):
@@ -418,7 +443,6 @@ def main():
     ap.add_argument("--task", default="")
     ap.add_argument("--D", type=int, default=16)
     ap.add_argument("--metric", default="exact", choices=("exact", "valid", "vshort"))
-    ap.add_argument("--sigma", type=float, default=None)
     a = ap.parse_args()
     {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main}[a.cmd](a)
 
