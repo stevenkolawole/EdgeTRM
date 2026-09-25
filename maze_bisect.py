@@ -23,10 +23,22 @@ import aihub_infer as I  # noqa: E402
 from aihub_acct import write_io_enc  # noqa: E402
 from aihub_sched import named_outputs  # noqa: E402
 
-TASK, N, DEV, OS_ = "maze", 20, "Samsung Galaxy S24", "14"
-VARIANTS = ["M0_all8", "Ma_rope16", "Mb_concat16", "Mc_scores16", "Md_notlinear16"]
+# BISECT_TASK=sudoku_attn runs the sequence-length control: the same RoPE-8-bit graph pattern (same
+# architecture: 2 layers, 512 hidden, 8 heads, RoPE) at seq 97 instead of 916 (audit item 111).
+TASK = os.environ.get("BISECT_TASK", "maze")
+N = 20
+# BISECT_DEV=e8 runs the inference on the Snapdragon 8 Elite QRD, reusing the S24 record's DLCs (qnn_dlc is
+# device-agnostic); results go to bisect_e8.json
+DEV, OS_ = {"s24": ("Samsung Galaxy S24", "14"), "e8": ("Snapdragon 8 Elite QRD", "15")}[os.environ.get("BISECT_DEV", "s24")]
+VARIANTS = {"maze": ["M0_all8", "Ma_rope16", "Mb_concat16", "Mc_scores16", "Md_notlinear16",
+                     "Me_ropeconst16", "Mf_ropemul16", "Mg_rope_scores16", "Mh_notlinear_notscores16"],
+            "sudoku_attn": ["M0_all8", "Ma_rope16", "Mc_scores16"],
+            "maze_s97": ["M0_all8", "Ma_rope16", "Mc_scores16"]}[TASK]
 D = I.idir(TASK)
-REC = D / "bisect.json"
+REC = D / ("bisect.json" if DEV.startswith("Samsung") else "bisect_e8.json")
+if not REC.exists() and (D / "bisect.json").exists():
+    REC.write_text(json.dumps({v: {k: e[k] for k in ("model_id", "compile") if k in e}
+                               for v, e in json.loads((D / "bisect.json").read_text()).items()}, indent=1))
 
 
 def load():
@@ -63,12 +75,12 @@ def submit():
             os.link(D / "qdq_w8a16" / f"variant_{v}.onnx", up / "model.onnx")
             write_io_enc(up / "model.onnx", D / f"io_enc_bisect_{v}.json")
         if "model_id" not in e:
-            e["model_id"] = C.upload_model(str(up), name=f"x3_acct2_maze_bisect_{v}").model_id
+            e["model_id"] = C.upload_model(str(up), name=f"x3_acct2_{TASK}_bisect_{v}").model_id
             save(r)
         if "compile" not in e:
             e["compile"] = C.submit_compile_job(model=C.get_model(e["model_id"]), device=hub.Device(DEV, OS_),
                                                 options="--target_runtime qnn_dlc --quantize_io",
-                                                name=f"x3_acct2_maze_bisect_{v}").job_id
+                                                name=f"x3_acct2_{TASK}_bisect_{v}").job_id
             save(r)
             print(v, "compile", e["compile"], flush=True)
     while True:
@@ -88,7 +100,7 @@ def submit():
                 pending += 1
                 continue
             ij = C.submit_inference_job(model=cj.get_target_model(), device=hub.Device(DEV, OS_),
-                                        inputs=feeds(v, cj.get_target_shapes()), name=f"x3_acct2_maze_bisect_{v}_s0")
+                                        inputs=feeds(v, cj.get_target_shapes()), name=f"x3_acct2_{TASK}_bisect_{v}_s0_{os.environ.get('BISECT_DEV', 's24')}")
             e["inference"] = ij.job_id
             save(r)
             print(v, "inference", ij.job_id, flush=True)

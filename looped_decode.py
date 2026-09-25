@@ -144,6 +144,25 @@ class Ouro(Family):
 
     def build(self, steps):
         from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
+        if os.environ.get("X4_OURO_AUTOPATCH") == "1" and not Path(self.model_id).exists():
+            # fetch the snapshot and apply patch_ouro's two fixes (transformers 4.54-4.55 cache API) in place
+            from huggingface_hub import snapshot_download
+            snap = Path(snapshot_download(self.model_id))
+            f = snap / "modeling_ouro.py"
+            src = f.read_text()
+            head = "class UniversalTransformerCache(Cache):\n"
+            if head in src and "shadow the base-class property" not in src:
+                src = src.replace(head, head + "    key_cache = None  # shadow the base-class property (transformers>=4.55) with a plain attribute\n"
+                                  "    value_cache = None\n", 1)
+            anchor = "        self.max_cache_size = max_cache_size\n"
+            if anchor in src and "def get_mask_sizes" not in src:
+                src = src.replace(anchor, anchor + "\n    def get_mask_sizes(self, cache_position, layer_idx=0):\n"
+                                  "        query_length = cache_position.shape[0]\n"
+                                  "        past = self.get_seq_length() if hasattr(self, 'get_seq_length') else 0\n"
+                                  "        return query_length + past, 0\n", 1)
+            if src != f.read_text():
+                real = f.resolve()
+                real.write_text(src)
         cfg = AutoConfig.from_pretrained(self.model_id, trust_remote_code=True)
         cfg.total_ut_steps = steps
         model = AutoModelForCausalLM.from_pretrained(self.model_id, config=cfg, torch_dtype=torch.bfloat16,

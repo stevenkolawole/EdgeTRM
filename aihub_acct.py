@@ -38,7 +38,10 @@ PLANS = {
     "acct2": [("sudoku_mlp", "w4a16", S24, "precompiled_qnn_onnx", 1),
               ("sudoku_mlp", "w8a8rms16", S24, "qnn_dlc", 8),
               # device-legal rebuilds (embedding table encoding follows its 8-bit Gather output)
-              ("sudoku_mlp", "w8a8rms16u", S24, "qnn_dlc", 8)],
+              ("sudoku_mlp", "w8a8rms16u", S24, "qnn_dlc", 8),
+              # Maze bisection Ma_rope16 (RoPE Mul/Add, Neg/Concat, cos/sin at 16 bit): accuracy chain on the
+              # 50 mazes, against the host run of the same graph (audit item 111)
+              ("maze", "w8a8rope16", S24, "qnn_dlc", 8), ("maze", "w8a8rope16", E8, "qnn_dlc", 8)],
     "acct3": [(t, p, d, "qnn_dlc", 8) for d in (S24, E8)
               for t, p in (("sudoku_mlp", "fp32"), ("sudoku_mlp", "w8a8"), ("sudoku_mlp", "w8a16"),
                            ("sudoku_mlp", "w8a8sqvar16u"), ("sudoku_attn", "fp32"), ("sudoku_attn", "w8a8"),
@@ -59,6 +62,7 @@ def source_path(task, prec):
                        "w8a8sqvar16t": ("qdq_w8a16", "variant_B2abt_sq_var16.onnx"),
                        "w8a8rms16u": ("qdq_w8a16", "variant_B2u_rms16.onnx"),
                        "w8a8sqvar16u": ("qdq_w8a16", "variant_B2abu_sq_var16.onnx"),
+                       "w8a8rope16": ("qdq_w8a16", "variant_Ma_rope16.onnx"),
                        "m3g40": ("qdq_w8a16", "variant_m3_greedy_40_legal.onnx"),
                        "m3g60": ("qdq_w8a16", "variant_m3_greedy_60_legal.onnx"),
                        "m3adT40": ("qdq_w8a16", "variant_m3_a_dT_40_legal.onnx")}.get(prec, (f"qdq_{prec}", "model.onnx"))

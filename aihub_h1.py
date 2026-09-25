@@ -56,6 +56,11 @@ TASKS = {
                         vocab=11, L_cycles=6, mlp_t=False, pos="rope", data="sudoku", n_cal=32, n_test=100),
     "maze": dict(ckpt=CKPT / "maze_hard" / "model.pt", seq_len=900, vocab=6, L_cycles=4, mlp_t=False,
                  pos="rope", data="maze", n_cal=16, n_test=50),
+    # sequence-length control for the Maze device fault (audit item 111): the Maze weights at seq 97
+    # (81 grid cells, the first 81 of each 30x30 maze; labels truncated the same way, so accuracy is
+    # meaningless here and only device-vs-host agreement is measured)
+    "maze_s97": dict(ckpt=CKPT / "maze_hard" / "model.pt", seq_len=81, vocab=6, L_cycles=4, mlp_t=False,
+                     pos="rope", data="maze", n_cal=16, n_test=50, trunc=81),
     "arc": dict(ckpt=CKPT / "arc_v1_public" / "step_518071", seq_len=900, vocab=12, L_cycles=4, mlp_t=False,
                 pos="rope", data="arc", n_cal=16, n_test=0),
 }
@@ -239,6 +244,9 @@ def load_data(task, idx):
     sys.path.insert(0, str(HERE))
     import breadth_sweep as B
     inp, lab = B.load_qa(TASKS[task]["data"], max(idx) + 1)
+    k = TASKS[task].get("trunc")
+    if k:
+        return inp[idx][:, :k], lab[idx][:, :k]
     return inp[idx], lab[idx]
 
 

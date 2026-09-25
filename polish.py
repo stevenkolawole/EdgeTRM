@@ -716,7 +716,7 @@ def main():
     # fp32 reference trajectory per chunk: end state, prediction, depth curve (kept on the CPU)
     t0 = time.time()
     ref = []
-    Text = a.fp32_ext or 2 * T                           # fp32 depth curve beyond T: control for the append schedules
+    Text = max(a.fp32_ext or 2 * T, T)                   # fp32 depth curve beyond T (never shorter than T: the reference is at T)
     f_curve = np.zeros(Text, int)
     f_at = {k: [] for k in sorted(set(ks + [T] + [T + k for k in ks] + [Text] + (list(range(1, Text + 1)) if a.per_step else [])))
             if k <= Text}

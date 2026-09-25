@@ -464,6 +464,13 @@ VARIANTS = {
     "Mb_concat16": dict(eight={"attn_concat"}, sixteen_default=False, propagate_movement=True),
     "Mc_scores16": dict(eight={"attn_scores"}, sixteen_default=False, propagate_movement=True),
     "Md_notlinear16": dict(eight=set(GROUPS) - {"linear_out"}, sixteen_default=False, propagate_movement=True),
+    # second round (Ma restores the device, Md does not): split RoPE; test whether 16-bit scores break the device
+    "Me_ropeconst16": dict(eight={"attn_rope_const"}, sixteen_default=False, propagate_movement=True),
+    "Mf_ropemul16": dict(eight={"attn_rope"}, sixteen_default=False, propagate_movement=True),
+    "Mg_rope_scores16": dict(eight={"attn_rope", "attn_rope_const", "attn_concat", "attn_scores"},
+                             sixteen_default=False, propagate_movement=True),
+    "Mh_notlinear_notscores16": dict(eight=set(GROUPS) - {"linear_out", "attn_scores"}, sixteen_default=False,
+                                     propagate_movement=True),
     # B2b2 (RMSNorm variance path alone at 16) does not rescue w8a8: greedy unions kept at 16 bit
     "B23_rms_resid16": dict(eight=RMS | {"rms_const", "residual", "inject"}, sixteen_default=False),
     "B26_rms_swiglu16": dict(eight=RMS | {"rms_const", "swiglu_prod"}, sixteen_default=False),
