@@ -77,7 +77,7 @@ while true; do
       recent=$(find "$PIDS" -name '*.card' -newermt '-120 seconds' -exec grep -lx "$c" {} + 2>/dev/null | wc -l)
       if [ "$np" -lt 2 ] && [ "${fm:-0}" -ge 20000 ] && [ "$recent" -eq 0 ] && [ "$np" -lt "$best" ]; then best=$np; target=$c; fi
     done
-    [ -z "$target" ] && continue
+    [ -z "$target" ] && break   # keep priority: nothing below a blocked eligible run launches this pass
     script=q7_train.sh; [ "${run#eval_}" != "$run" ] && script=q7_evalrun.sh
     # shellcheck disable=SC2086
     if [ "$script" = q7_evalrun.sh ]; then set -- $over; else set -- "$seed" $over; fi

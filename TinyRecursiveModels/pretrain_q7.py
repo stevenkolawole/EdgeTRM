@@ -94,7 +94,7 @@ class PretrainConfig(pydantic.BaseModel):
     freeze_weights: bool = False # If True, freeze weights and only learn the embeddings
 
     # ---- Q7 (trainable basin width). Pass on the command line with a "+" prefix (+q7_reg=jac ...).
-    # q7_reg: none | jac | sens | noise | qat | clip | lsq. Active from step q7_start_frac*total_steps; its strength
+    # q7_reg: none | jac | sens | noise | qat | clip | lsq | sam | asam. Active from step q7_start_frac*total_steps; its strength
     # ramps linearly from 0 to full over q7_ramp_steps (jac lambda, noise sigma, clip threshold).
     q7_reg: str = "none"
     q7_start_frac: float = 0.0
@@ -108,6 +108,7 @@ class PretrainConfig(pydantic.BaseModel):
     q7_sens_sub: int = 64           # sens: examples of the batch used for the probe
     q7_sens_target: float = 0.0     # sens: hinge, penalise only S above this (0 = plain penalty on S)
     q7_sens_min_steps: int = 0      # sens: probe only puzzles whose carry has run >= this many ACT steps
+    q7_rho: float = 0.05            # sam / asam: neighbourhood radius (Foret et al. 2021; ASAM: Kwon et al. 2021)
                                     # (late states, near the end state X2 measures S at); 0 = every puzzle
     q7_bits: int = 4                # qat: per-tensor symmetric fake-quant bits (straight-through estimator)
     q7_clip_k: float = 0.0          # clip: |W| <= k x per-tensor std after every optimizer step
@@ -560,6 +561,35 @@ def q7_param_groups(model: nn.Module, config: "PretrainConfig"):
     return [{"params": rest}, {"params": steps, "weight_decay": 0.0}]
 
 
+def q7_sam_second_pass(config, train_state, carry_in, batch, global_batch_size, strength):
+    """SAM (Foret et al. 2021) / ASAM (Kwon et al. 2021): the gradient already in .grad is taken at W; move to
+    W + e, e = rho g / ||g|| (ASAM: rho T^2 g / ||T g||, T = |W|), recompute the loss gradient there from the SAME
+    input carry and batch, move back; the optimizer then steps with the gradient at W + e. Parameters only
+    (the sparse puzzle embedding keeps its first-pass gradient: its local-weights buffer is saved and restored)."""
+    params = [p for p in train_state.model.parameters() if p.grad is not None]
+    inner = _q7_inner(train_state.model)
+    pe = getattr(inner, "puzzle_emb", None)
+    pe_grad = pe.local_weights.grad.clone() if (pe is not None and pe.local_weights.grad is not None) else None
+    rho = config.q7_rho * strength
+    with torch.no_grad():
+        if config.q7_reg == "asam":
+            norm = torch.sqrt(sum(((p.abs() * p.grad) ** 2).sum() for p in params)).clamp_min(1e-12)
+            eps = [rho * p.abs() * p.abs() * p.grad / norm for p in params]
+        else:
+            norm = torch.sqrt(sum((p.grad ** 2).sum() for p in params)).clamp_min(1e-12)
+            eps = [rho * p.grad / norm for p in params]
+        for p, e in zip(params, eps):
+            p.add_(e)
+            p.grad = None
+    _, loss2, _, _, _ = train_state.model(carry=carry_in, batch=batch, return_keys=[])
+    ((1 / global_batch_size) * loss2).backward()
+    with torch.no_grad():
+        for p, e in zip(params, eps):
+            p.sub_(e)
+    if pe is not None and pe_grad is not None:
+        pe.local_weights.grad = pe_grad
+
+
 def q7_strength(config: PretrainConfig, train_state: TrainState) -> float:
     """0 before the regularizer starts, then a linear ramp to 1 over q7_ramp_steps."""
     if config.q7_reg == "none":
@@ -733,9 +763,13 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
     q7_saved = q7_perturb_(config, q7_w, q7_s) if config.q7_reg in ("noise", "qat") and q7_s > 0 else []
 
     # Forward
+    q7_carry_in = train_state.carry
     train_state.carry, loss, metrics, _, _ = train_state.model(carry=train_state.carry, batch=batch, return_keys=[])
 
     ((1 / global_batch_size) * loss).backward()
+
+    if config.q7_reg in ("sam", "asam") and q7_s > 0:
+        q7_sam_second_pass(config, train_state, q7_carry_in, batch, global_batch_size, q7_s)
 
     if q7_saved:
         q7_restore_(config, q7_w, q7_saved)   # gradient taken at the perturbed point, applied to the clean weights
