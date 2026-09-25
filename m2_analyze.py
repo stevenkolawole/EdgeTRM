@@ -493,6 +493,10 @@ def cmd_wsample(a):
         for r in recs:
             if r["task"] == task and r["spec"] == "fp32" and r["noise"] == "none" and r["K"] == 1 and r["D"] >= S and r["n"] == a.n:
                 c = load_cell(a.root, r)
+                if "maze" in task and a.metric != "exact":
+                    if f"chk_{S}" not in c:
+                        return None
+                    return float(((c[f"chk_{S}"][0] == 0) if a.metric == "valid" else c[f"vshort_{S}"][0].astype(bool)).mean())
                 return float(c["corr"][0, :, S - 1].mean())
         return None
 
