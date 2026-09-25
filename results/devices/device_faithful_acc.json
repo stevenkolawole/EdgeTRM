@@ -1881,6 +1881,150 @@
   "source": "ON DEVICE Samsung_Galaxy_S24_acct2"
  },
  {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.561358024691358,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6718518518518518,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 3,
+  "exact": 0.22,
+  "cell": 0.7623456790123457,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 4,
+  "exact": 0.37,
+  "cell": 0.7909876543209876,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 5,
+  "exact": 0.5,
+  "cell": 0.8295061728395061,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 6,
+  "exact": 0.54,
+  "cell": 0.8432098765432099,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 7,
+  "exact": 0.57,
+  "cell": 0.8425925925925926,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 8,
+  "exact": 0.58,
+  "cell": 0.8495061728395061,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.5580246913580247,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6641975308641975,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 3,
+  "exact": 0.22,
+  "cell": 0.7572839506172839,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 4,
+  "exact": 0.37,
+  "cell": 0.79,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 5,
+  "exact": 0.46,
+  "cell": 0.8185185185185185,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 6,
+  "exact": 0.53,
+  "cell": 0.8295061728395061,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 7,
+  "exact": 0.57,
+  "cell": 0.8423456790123457,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8sqvar16u",
+  "step": 8,
+  "exact": 0.61,
+  "cell": 0.8423456790123457,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
   "task": "sudoku_attn",
   "prec": "fp32",
   "step": 1,

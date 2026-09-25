@@ -48,8 +48,14 @@ import aihub_infer as I  # noqa: E402
 
 TASK = "sudoku_mlp"
 GROUPS = ["carry_in", "carry_out", "embed", "inject", "residual", "rms_sq", "rms_var", "rms_rsqrt", "rms_out",
-          "rms_const", "linear_out", "swiglu_prod", "swiglu_other", "attn", "head", "const"]
+          "rms_const", "linear_out", "swiglu_prod", "swiglu_other", "attn", "attn_rope", "attn_rope_const",
+          "attn_concat", "attn_scores", "head", "const"]
 RMS = {"rms_sq", "rms_var", "rms_rsqrt", "rms_out"}
+# attention sub-groups (op-name suffix inside self_attn, TRM Attention export): RoPE = q/k * cos + rotate_half(q/k) * sin
+ATTN_CONCAT = {"Concat_1", "Concat_2", "Neg", "Neg_1"}                      # rotate_half: -x2 ++ x1
+ATTN_ROPE = {"Mul", "Mul_1", "Mul_2", "Mul_3", "Add", "Add_1"}              # * cos, * sin, sum
+ATTN_SCORES = {"Mul_4", "Mul_5", "Softmax"}                                 # scale, softmax (+ the two matmuls)
+ATTN_ALL = {"attn", "attn_rope", "attn_rope_const", "attn_concat", "attn_scores"}
 import re  # noqa: E402
 _RMS_CONST = re.compile(r"^/inner/L_level/layers\.\d+(_\d+)?/Constant(_\d+)?_output_0$")
 PASS = {"Cast", "Transpose", "Reshape", "Identity", "Squeeze", "Unsqueeze", "Pad", "Concat", "Slice", "Flatten"}
@@ -127,12 +133,14 @@ def classify(g):
             act_in = [x for x in n.input if x and x not in inits and not x.startswith("/inner/Constant")
                       and "Constant" not in x]
             if op == "Constant":
-                r = "rms_const" if _RMS_CONST.match(t) else "const"
+                r = "rms_const" if _RMS_CONST.match(t) else ("attn_rope_const" if "self_attn" in t else "const")
             elif "self_attn" in nm and op not in ("MatMul", "Gemm") and op not in PASS:
-                r = "attn"
+                suf = nm.rsplit("/", 1)[-1]
+                r = ("attn_concat" if suf in ATTN_CONCAT else "attn_rope" if suf in ATTN_ROPE
+                     else "attn_scores" if suf in ATTN_SCORES else "attn")
             elif "self_attn" in nm and op in ("MatMul", "Gemm") and all(x not in inits for x in n.input) \
                     and not any("Identity" in x or "onnx::MatMul" in x for x in n.input):
-                r = "attn"            # q.k^T and attn.v: activation x activation
+                r = "attn_scores"     # q.k^T and attn.v: activation x activation
             elif op in PASS or op == "QuantizeLinear" or op == "DequantizeLinear":
                 r = group(act_in[0]) if act_in else "const"
             elif op == "Gather":
@@ -450,6 +458,12 @@ VARIANTS = {
     "B2u_rms16": dict(eight=RMS | {"const"}, sixteen_default=False, propagate_movement=True),
     "B2abu_sq_var16": dict(eight={"rms_sq", "rms_var", "rms_rsqrt", "rms_const"}, sixteen_default=False,
                            propagate_movement=True),
+    # Maze w8a8 device-failure bisection (all 8 bit except the named groups at 16; both HTP legality rules)
+    "M0_all8": dict(eight=set(), sixteen_default=False, propagate_movement=True),
+    "Ma_rope16": dict(eight={"attn_rope", "attn_rope_const", "attn_concat"}, sixteen_default=False, propagate_movement=True),
+    "Mb_concat16": dict(eight={"attn_concat"}, sixteen_default=False, propagate_movement=True),
+    "Mc_scores16": dict(eight={"attn_scores"}, sixteen_default=False, propagate_movement=True),
+    "Md_notlinear16": dict(eight=set(GROUPS) - {"linear_out"}, sixteen_default=False, propagate_movement=True),
     # B2b2 (RMSNorm variance path alone at 16) does not rescue w8a8: greedy unions kept at 16 bit
     "B23_rms_resid16": dict(eight=RMS | {"rms_const", "residual", "inject"}, sixteen_default=False),
     "B26_rms_swiglu16": dict(eight=RMS | {"rms_const", "swiglu_prod"}, sixteen_default=False),
