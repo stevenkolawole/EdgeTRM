@@ -5,12 +5,13 @@ Claim tested (AUDIT_SEP25 item 70): within each model, visit-then-lose V rises a
 halting head recovers part of it. Not claimed: that fp32 never overthinks (it does, on some models; the fp32 rows are
 reported per model and per trained seed).
 
-Records: Babel L40S, exit_sweep.py --phi / dt_exit.py --phi (tools/m5_babel_jobs.py, "d" files), pulled to
-results/breadth/babel/m5phi/. phi and V come from the SAME trajectory: phi = cos(z_H at step k, z_H of an fp32 run of the same
+Records: p5 H200, one self-contained exhibit (fp32 references included), exit_sweep.py --phi / dt_exit.py --phi
+(p5 autofill lines tools/m5_p5_phi_lines.txt, tags m5phi_*), p5 results/m5phi/ pulled to results/m5/phi/p5/. phi and V come from the SAME trajectory: phi = cos(z_H at step k, z_H of an fp32 run of the same
 puzzle at step k, in the same process), per puzzle. Cells: every released model (TRM MLP / attention Sudoku, HRM Sudoku,
 TRM / HRM Maze) x weight quantizer, weight-noise and activation-noise draws (3 seeds each, every draw its own cell), the six
 trained seeds (attn512 / mlp512 s0-2, each with its own fp32 reference), and the deep-thinking mazes (13 / 25 / 33).
-MDEQ rows (X6, Babel: cosine to the fp32 equilibrium from the same Broyden run) are listed for completeness.
+MDEQ rows (X6, Babel: cosine to the fp32 equilibrium from the same Broyden run) are listed for completeness only; they are
+another platform and enter no pooled statistic.
 
 Per cell, over the n puzzles, K = 16 default-H supervision steps (DT: T iterations):
   acc       exact accuracy at step K;  oracle = right at some step <= K
@@ -38,7 +39,7 @@ import numpy as np
 import analyze_m5 as A
 
 RB = A.RB
-PHI = Path(os.environ.get("M5_PHI_DIR", RB / "babel" / "m5phi"))
+PHI = Path(os.environ.get("M5_PHI_DIR", A.HERE / "results" / "m5" / "phi" / "p5"))
 NB = 2000
 MIN_ERR = 20
 RELEASED = ["sudoku_mlp", "sudoku_attn", "hrm_sudoku", "maze_attn", "hrm_maze"]
