@@ -77,6 +77,20 @@ def quantize_(fam, model, q, scope):
 L.parse_quant = parse_quant
 D.quantize_ = quantize_
 
+def _load_gsm8k_hf_home(n):
+    """looped_lm_eval.load_gsm8k with the parquet under $HF_HOME (p5 keeps the cache off $HOME)."""
+    import glob as _glob
+    import os as _os
+    import pandas as pd
+    root = _os.environ.get("HF_HOME", str(Path.home() / "hf_cache"))
+    files = sorted(_glob.glob(root + "/hub/datasets--openai--gsm8k/snapshots/*/main/test-*.parquet"))
+    assert files, f"GSM8K parquet not found under {root}/hub"
+    df = pd.concat([pd.read_parquet(f) for f in files]).reset_index(drop=True)
+    rows = df.iloc[:n]
+    return [(q, a.split("####")[-1].strip().replace(",", ""), a) for q, a in zip(rows["question"], rows["answer"])]
+
+
+L.load_gsm8k = _load_gsm8k_hf_home
 _orig_gsm = L.load_gsm8k
 _OFF = int(__import__("os").environ.get("M1_GSM_OFFSET", "0"))
 if _OFF:                                             # held-out questions: test[OFF:OFF+n] (use a separate --refdir/--outdir)
