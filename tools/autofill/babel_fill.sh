@@ -15,6 +15,9 @@ set -u
 B=$HOME/autofill; mkdir -p $B/babel_backlog/general $B/babel_backlog/preempt $B/babel_submitted
 declare -A CAP=([general]=8 [preempt]=24)
 echo "# $(date -u +%FT%TZ) babel_fill"
+# $HOME quota guard: jobs write their output under $HOME, so a full quota makes every job fail at once
+avail_kb=$(df -Pk $HOME | awk 'NR==2{print $4}')
+if [ "${avail_kb:-0}" -lt 5000000 ]; then echo "HOME_QUOTA_LOW avail_kb=$avail_kb: not submitting"; exit 0; fi
 for part in general preempt; do
   # count GPUs held or requested (running + pending) in this partition
   # (user-held jobs, e.g. the paused EpiKV array, do not count)
@@ -32,11 +35,14 @@ for part in general preempt; do
       f=$(ls $B/babel_backlog/preempt/*.sbatch 2>/dev/null | sort | head -1)
     fi
     [ -z "$f" ] && { echo "$part EMPTY_BACKLOG"; break; }
-    if out=$(sbatch --partition=$part "$f" 2>&1); then
-      echo "$part SUBMITTED $(basename $f): $out"; mv "$f" $B/babel_submitted/
+    # move first, so a failed move can never cause a duplicate submission
+    g=$B/babel_submitted/$(basename $f)
+    mv "$f" "$g" 2>/dev/null || { echo "$part MOVE_FAILED $(basename $f): not submitting"; break; }
+    if out=$(sbatch --partition=$part "$g" 2>&1); then
+      echo "$part SUBMITTED $(basename $f): $out"
       n=$((n+1))
     else
-      echo "$part FAILED $(basename $f): $out"; mv "$f" "$f.failed"; break
+      echo "$part FAILED $(basename $f): $out"; mv "$g" "$f.failed"; break
     fi
   done
 done
