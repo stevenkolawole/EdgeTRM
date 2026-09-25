@@ -3825,6 +3825,78 @@
   "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
  },
  {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.2887777777777778,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.5697555555555556,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.5760444444444445,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.5749555555555556,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.5732222222222222,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.5746888888888889,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.5734,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.5720888888888889,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
   "task": "arc",
   "prec": "fp32",
   "step": 1,
