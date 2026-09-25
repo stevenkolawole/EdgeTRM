@@ -428,6 +428,55 @@ def cmd_polish(a):
         print(line)
 
 
+def sample_until_confident(C, Q, thr, Kmax=None):
+    """M2 x M5. C, Q: [K, n, D] exact and halting logit per rollout and step. Rollouts are run one after another;
+    within a rollout the model exits at the first step with q > thr (M5's early exit) and that answer is returned;
+    if the rollout never crosses, the next rollout starts (fresh noise). If no rollout crosses within Kmax, the answer
+    with the highest q over every (rollout, step) seen is returned. Returns (exact per puzzle, steps used per puzzle)."""
+    K, n, D = C.shape
+    K = min(K, Kmax or K)
+    C, Q = C[:K], Q[:K]
+    crossed = Q > thr
+    anyc = crossed.any(2)                                   # [K, n]
+    first_t = np.where(anyc, crossed.argmax(2), D)          # [K, n] (D = never)
+    first_k = np.where(anyc.any(0), anyc.argmax(0), K)      # [n]
+    ar = np.arange(n)
+    ok = first_k < K
+    kk = np.minimum(first_k, K - 1)
+    tt = np.minimum(first_t[kk, ar], D - 1)
+    exact = np.where(ok, C[kk, ar, tt], False)
+    steps = np.where(ok, first_k * D + tt + 1, K * D).astype(float)
+    # fallback: max-q over everything
+    flat = Q.transpose(1, 0, 2).reshape(n, -1).argmax(1)
+    fk, ft = np.unravel_index(flat, (K, D))
+    exact = np.where(ok, exact, C[fk, ar, ft])
+    return exact.astype(bool), steps
+
+
+def cmd_exit(a):
+    """Sample until confident (M2 x M5): accuracy and mean supervision steps per puzzle vs threshold and K_max,
+    against fixed best-Q@K (16 K steps) and the deterministic 16-step model."""
+    recs = [r for r in load_index(a.root) if r["noise"] == "ptrm" and abs(r["sigma"] - a.sigma_main) < 1e-9 and r["D"] == 16
+            and r["n"] == a.n and r.get("polish", 0) == a.main_polish and r.get("polish_from", "last") == "last"
+            and (not a.task or r["task"] == a.task) and kind_of(r["task"]) == "sudoku"]
+    print("task spec K | best-Q@K (steps 16K) | exit thr=0: K_max 1 / 4 / 16 / K  acc (mean steps) | thr=-2 K_max K | thr=+2 K_max K")
+    for r in sorted(recs, key=lambda r: (r["task"], r["spec"])):
+        c = load_cell(a.root, r)
+        C = c["corr"].astype(bool); Q = c["q"].astype(np.float32)
+        K = r["K"]
+        bq = float(np.mean(select(c, "sudoku", K, 16, rules=("maxq",))["maxq"]["exact"]))
+        parts = []
+        for km in (1, 4, 16, K):
+            if km > K:
+                continue
+            e, st = sample_until_confident(C, Q, 0.0, km)
+            parts.append(f"{100*e.mean():5.1f} ({st.mean():5.1f})")
+        e1, s1 = sample_until_confident(C, Q, -2.0, K)
+        e2, s2 = sample_until_confident(C, Q, 2.0, K)
+        print(f"{r['task']:11s} {r['spec']:13s} K{K:2d} | {100*bq:5.1f} ({16*K}) | " + " / ".join(parts) +
+              f" | {100*e1.mean():5.1f} ({s1.mean():5.1f}) | {100*e2.mean():5.1f} ({s2.mean():5.1f})")
+
+
 def cmd_json(a):
     recs = load_index(a.root)
     out = []
@@ -458,7 +507,7 @@ def cmd_json(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main", "polish"))
+    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main", "polish", "exit"))
     ap.add_argument("--sigma_main", type=float, default=0.3)
     ap.add_argument("--n", type=int, default=1000)
     ap.add_argument("--main_polish", type=int, default=2, help="main grid = the P2 cells (rescue cells with P4 excluded)")
@@ -467,7 +516,7 @@ def main():
     ap.add_argument("--D", type=int, default=16)
     ap.add_argument("--metric", default="exact", choices=("exact", "valid", "vshort"))
     a = ap.parse_args()
-    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main, "polish": cmd_polish}[a.cmd](a)
+    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main, "polish": cmd_polish, "exit": cmd_exit}[a.cmd](a)
 
 
 if __name__ == "__main__":
