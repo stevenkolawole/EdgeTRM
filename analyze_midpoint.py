@@ -21,6 +21,7 @@ gives a flat profile over its gap, i.e. a CI that is the bracket itself).
 """
 import argparse
 import json
+import re
 import math
 from collections import defaultdict
 from pathlib import Path
@@ -387,7 +388,7 @@ def calib_groups():
             q = np.array([g[i]["correct"] for i in idx], bool)
             b = np.array([gb[i]["correct"] for i in idx], bool)
         if q is not None and b is not None and len(q) == len(b):
-            G["LM:" + r["model"]].append((r["fid"], q, b))
+            G["LM:" + r["model"]].append((r["fid"], q, b, r["quant"]))
     for task in X.TASKS:
         fcache = {}
         for c in X.fid_cells(task):
@@ -401,7 +402,7 @@ def calib_groups():
             rq, rb = idx.get((c["H"], c["nsup"], c["spec"])), idx.get((c["H"], c["nsup"], "fp32"))
             if not rq or not rb or not rq.get("correct") or rb["pexact"] < 0.10:
                 continue
-            G["TRM:" + task].append((c["phi"], np.array(rq["correct"], bool), np.array(rb["correct"], bool)))
+            G["TRM:" + task].append((c["phi"], np.array(rq["correct"], bool), np.array(rb["correct"], bool), c["spec"]))
     for f in sorted((HERE / "results/breadth/p4d/variants_noise").glob("trm_sudoku_*.json")):
         name = f.stem.replace("_seed1", "").replace("_seed2", "")
         recs = json.load(open(f))["records"]
@@ -412,7 +413,7 @@ def calib_groups():
                 continue
             if "seed" in f.stem and not sp(r).startswith("noise"):
                 continue
-            G["VAR:" + name].append((r["fidelity_H"], np.array(r["correct"], bool), np.array(fp[16]["correct"], bool)))
+            G["VAR:" + name].append((r["fidelity_H"], np.array(r["correct"], bool), np.array(fp[16]["correct"], bool), sp(r)))
     return G
 
 
@@ -469,6 +470,61 @@ def calib_section(ncals=(10, 25, 50, 100, 200), reps=200, cut=0.5, seed=0):
     return out
 
 
+def spec_family(spec):
+    if spec.startswith("noise") or spec.startswith("an"):
+        return "noise"
+    m = re.match(r"w(\d+)([a-z]+)(\d*)", spec)
+    return {"t": "per-tensor", "c": "per-channel", "a": "asym-channel", "g": "group"}.get(m.group(2), m.group(2)) if m else spec
+
+
+def lofo_section(ncal=50, reps=200, cut=0.5, seed=0):
+    """Fit the cut from n_cal labelled examples on all cells EXCEPT one weight-format family, classify the held-out
+    family's cells against their full-n labels; rotate over families."""
+    G = calib_groups()
+    rng = np.random.default_rng(seed)
+    print(f"\n## Reusing a per-model cut for a new compression family (fit on the other families, n_cal = {ncal}, {reps} repeats)\n")
+    print("| group | families (cells, collapsed) | held-out accuracy, all families pooled | worst family (acc) | in-family fit, same cells |")
+    print("|---|---|---|---|---|")
+    out = {}
+    for gname in sorted(G):
+        cs = G[gname]
+        phi = np.array([c[0] for c in cs])
+        full = np.array([(c[1].mean() / c[2].mean() if c[2].mean() > 0 else 0.0) < cut for c in cs])
+        fam = np.array([spec_family(c[3]) for c in cs])
+        fams = sorted(set(fam))
+        if len(fams) < 2 or full.all() or not full.any():
+            continue
+        nmin = min(len(c[1]) for c in cs)
+        k = min(ncal, nmin)
+        correct_by_fam = defaultdict(list)
+        for _ in range(reps):
+            perm = rng.permutation(max(len(c[1]) for c in cs))
+            est, keep = [], []
+            for c in cs:
+                ids = perm[perm < len(c[1])][:k]
+                rb = c[2][ids].mean()
+                keep.append(rb > 0)
+                est.append(True if rb == 0 else c[1][ids].mean() / rb < cut)
+            est, keep = np.array(est), np.array(keep)
+            for F in fams:
+                tr = keep & (fam != F)
+                if tr.sum() < 2 or est[tr].all() or not est[tr].any():
+                    t = np.median(phi[fam != F])
+                else:
+                    t = fast_cut(phi[tr], est[tr])
+                te = fam == F
+                correct_by_fam[F].extend(((phi[te] < t) == full[te]).tolist())
+        per = {F: float(np.mean(v)) for F, v in correct_by_fam.items()}
+        pooled = float(np.mean([x for v in correct_by_fam.values() for x in v]))
+        worst = min(per, key=per.get)
+        desc = ", ".join(f"{F} {int((fam == F).sum())}/{int(full[fam == F].sum())}" for F in fams)
+        t_full = fast_cut(phi, full)
+        infam = float(((phi < t_full) == full).mean())
+        out[gname] = {"pooled": pooled, "per_family": per, "n_cal": k}
+        print(f"| {gname} | {desc} | {pooled:.3f} | {worst} ({per[worst]:.3f}) | {infam:.3f} |")
+    return out
+
+
 def main():
     import sys
     sys.path.insert(0, str(HERE))
@@ -480,6 +536,7 @@ def main():
     ap.add_argument("--trm-platform", default="root", choices=["root", "all"],
                     help="root = only the breadth/*.json grid files (one platform); all = include babel/ and p4d/ draws")
     ap.add_argument("--json", default=None)
+    ap.add_argument("--lofo", action="store_true", help="leave-one-quantizer-family-out reuse of the 50-example cut")
     ap.add_argument("--calib", action="store_true", help="labelled-example budget for placing each model's cut")
     ap.add_argument("--variants", action="store_true", help="within-Sudoku test on the 13 trained variants (p4d)")
     ap.add_argument("--s-platform", default="babel", choices=["babel", "p4d"],
@@ -488,6 +545,11 @@ def main():
     a = ap.parse_args()
     global S_PLATFORM
     S_PLATFORM = a.s_platform
+    if a.lofo:
+        out = {"lofo": lofo_section()}
+        if a.json:
+            json.dump(out, open(a.json, "w"), indent=1)
+        return
     if a.calib:
         out = {"calib": calib_section()}
         if a.json:
