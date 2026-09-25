@@ -133,8 +133,10 @@ def storage_bits(spec, shape):
     """Bits to store one weight matrix under a spec (codes + scales; fp16 scales, int zero points)."""
     o, i_ = shape
     N = o * i_
-    if spec in ("fp32",) or spec.startswith("noise") or re.fullmatch(r"e[wnm].*", spec):
+    if spec in ("fp32", "tta") or spec.startswith("noise") or re.fullmatch(r"e[wnm].*|ck\d", spec):
         return 32 * N
+    if re.fullmatch(r"w\d+[ct]S", spec):
+        spec = spec[:-1]
     if spec == "bf16":
         return 16 * N
     m = re.fullmatch(r"mx(\d+)", spec)
@@ -199,6 +201,38 @@ def make_cell(m_fp32_cpu, family, spec, draw):
             C.dt_quantize_(m, None, "noise", sigma)
         else:
             bs.quantize_weights_(m, None, "noise", sigma)
+        return m
+    if spec == "tta":                               # fp32 weights; the puzzle symmetry is applied in the stepper
+        return clone_fp32(m_fp32_cpu)
+    mck = re.fullmatch(r"ck(\d)", spec)
+    if mck:                                         # another trained checkpoint (attention-512 seed) as the cheap solver
+        import breadth_sweep as bs_
+        old_ck = bs_.CKPT_OVERRIDE
+        bs_.CKPT_OVERRIDE = str(Path.home() / "edgetrm_ckpt" / "variants" / f"trm_sudoku_attn_w512_s{mck.group(1)}" / "step_65100")
+        try:
+            task, T, batch = _FACTORY["args"]
+            m, _, _ = build_fp32(task, T, batch)
+        finally:
+            bs_.CKPT_OVERRIDE = old_ck
+        m.eval()
+        for p_ in m.parameters():
+            p_.requires_grad_(False)
+        return m
+    msr = re.fullmatch(r"w(\d+)([ct])S", spec)
+    if msr:                                         # stochastic rounding to the same grid, one draw per `draw`
+        m = clone_fp32(m_fp32_cpu)
+        b, g = int(msr.group(1)), msr.group(2)
+        qmax = 2 ** (b - 1) - 1
+        with torch.no_grad():
+            for li, (_, mod) in enumerate(linear_items(m, family)):
+                W = mod.weight.data
+                W2 = W.reshape(W.shape[0], -1).float()
+                sc = (W2.abs().amax(1, keepdim=True) if g == "c" else W2.abs().max()) / qmax
+                sc = sc.clamp_min(1e-8)
+                gen = torch.Generator().manual_seed(30_000 + 1000 * draw + li)
+                u = torch.rand(W2.shape, generator=gen)
+                q = torch.floor(W2 / sc + u).clamp(-qmax, qmax)
+                mod.weight.data = (q * sc).reshape(W.shape).to(W.dtype)
         return m
     me = re.fullmatch(r"e(.+)", spec)
     if me and me.group(1)[0] in "wnm":
@@ -271,9 +305,16 @@ def polish_extra_bits(pspec, cspec, shape, rank=None):
 
 
 # ----------------------------------------------------------------------------- steppers
+CELL_PERM = {"perm": None}     # TTA cheap map: permutation of the answer cells applied to key 'c' (set per cell in main)
+
+
 class TRMStepper:
     """One supervision step of TRM/HRM on the state (z_H, z_L), with a per-block-application choice of
-    weights: the first N-j applications use model `key`, the last j use model `pol` (N = H x (L+1))."""
+    weights: the first N-j applications use model `key`, the last j use model `pol` (N = H x (L+1)).
+    Each model uses its own input embeddings (a cross-checkpoint cheap map has different ones). If CELL_PERM is set,
+    model 'c' runs on the symmetry-transformed puzzle (TTA): its input tokens are permuted, and the state is carried
+    in that frame while 'c' steps run and mapped back (inverse permutation of the cell tokens) for any other model,
+    the read-out and the displacement. States are (z_H, z_L, frame)."""
 
     def __init__(self, models, family, x_tok):
         torch = _torch()
@@ -284,45 +325,68 @@ class TRMStepper:
         self.H, self.L = cfg.H_cycles, cfg.L_cycles
         self.N = self.H * (self.L + 1)
         self.pl = any_inner.puzzle_emb_len
-        pid = torch.zeros(x_tok.shape[0], dtype=torch.int32, device=x_tok.device)
+        B, n = x_tok.shape
+        self.perm = None
+        if CELL_PERM["perm"] is not None and "c" in self.inn:
+            p = CELL_PERM["perm"].to(x_tok.device)                     # (n,) cell permutation
+            self.perm = torch.cat([torch.arange(self.pl, device=x_tok.device), self.pl + p])
+            self.inv = torch.argsort(self.perm)
+        pid = torch.zeros(B, dtype=torch.int32, device=x_tok.device)
         with torch.no_grad():
-            xs = {k: inn._input_embeddings(x_tok, pid).float() for k, inn in self.inn.items()}
-        x0 = next(iter(xs.values()))
-        for k, v in xs.items():
-            assert torch.equal(v, x0), f"input embeddings differ for {k} (embeddings must not be perturbed)"
-        self.x = x0
+            self.xs = {}
+            for k, inn in self.inn.items():
+                xt = x_tok[:, CELL_PERM["perm"].to(x_tok.device)] if (k == "c" and self.perm is not None) else x_tok
+                self.xs[k] = inn._input_embeddings(xt, pid).float()
+        self.x = self.xs.get("f", next(iter(self.xs.values())))
         self.cs = any_inner.rotary_emb() if hasattr(any_inner, "rotary_emb") else None
-        B, S, D = self.x.shape
-        self._z0 = (any_inner.H_init.float().expand(B, S, D).clone(), any_inner.L_init.float().expand(B, S, D).clone())
+        S, D = self.x.shape[1], self.x.shape[2]
+        self._z0 = {k: (inn.H_init.float().expand(B, S, D).clone(), inn.L_init.float().expand(B, S, D).clone(), "orig")
+                    for k, inn in self.inn.items()}
 
-    def z0(self):
-        return self._z0
+    def z0(self, key="f"):
+        return self._z0.get(key, next(iter(self._z0.values())))
+
+    def _frame(self, z, want):
+        if len(z) == 2:
+            z = (z[0], z[1], "orig")
+        if self.perm is None or z[2] == want:
+            return z
+        idx = self.perm if want == "aug" else self.inv          # aug[i] = orig[perm[i]]; orig = aug[inv]
+        return (z[0][:, idx], z[1][:, idx], want)
+
+    def _want(self, key):
+        return "aug" if (key == "c" and self.perm is not None) else "orig"
 
     def step(self, z, key, pol=None, j=0):
         """j > 0: the last j block applications use `pol`; j = -1: the z_H updates use `pol` (z_L updates `key`);
         j = -2: the z_L updates use `pol` (z_H updates `key`)."""
-        zH, zL = z
+        if pol is not None and self.perm is not None:
+            assert self._want(key) == self._want(pol), "mixed steps across frames are not defined"
+        z = self._frame(z, self._want(key))
+        zH, zL, fr = z
         idx = 0
 
         def pick(i, is_h):
             if pol is None:
-                return self.inn[key]
+                return key
             if j == -1:
-                return self.inn[pol if is_h else key]
+                return pol if is_h else key
             if j == -2:
-                return self.inn[key if is_h else pol]
-            return self.inn[pol] if i >= self.N - j else self.inn[key]
+                return key if is_h else pol
+            return pol if i >= self.N - j else key
         for _ in range(self.H):
             for _ in range(self.L):
-                zL = pick(idx, False).L_level(zL, zH + self.x, cos_sin=self.cs)
+                k_ = pick(idx, False)
+                zL = self.inn[k_].L_level(zL, zH + self.xs[k_], cos_sin=self.cs)
                 idx += 1
-            inn = pick(idx, True)
+            k_ = pick(idx, True)
+            inn = self.inn[k_]
             zH = (inn.L_level if self.family == "trm" else inn.H_level)(zH, zL, cos_sin=self.cs)
             idx += 1
-        return (zH, zL)
+        return (zH, zL, fr)
 
     def readout(self, z, key, y):
-        torch = _torch()
+        z = self._frame(z, "orig")
         lg = self.inn[key].lm_head(z[0])[:, self.pl:].float()
         pred = lg.argmax(-1)
         mask = y != 0
@@ -330,9 +394,9 @@ class TRMStepper:
         return {"correct": cc.sum(-1) == mask.sum(-1),
                 "cellacc": cc.sum(-1).float() / mask.sum(-1).clamp_min(1).float(), "pred": pred}
 
-    @staticmethod
-    def flat(z):
+    def flat(self, z):
         torch = _torch()
+        z = self._frame(z, "orig")
         return torch.cat([z[0].flatten(1), z[1].flatten(1)], 1)
 
 
@@ -345,7 +409,7 @@ class DTStepper:
         with torch.no_grad():
             self._z0 = next(iter(models.values())).projection(x)
 
-    def z0(self):
+    def z0(self, key="f"):
         return self._z0
 
     def step(self, z, key, pol=None, j=0):
@@ -360,8 +424,7 @@ class DTStepper:
         eq = pred == y.view(B, -1)
         return {"correct": eq.all(1), "cellacc": eq.float().mean(1), "pred": pred}
 
-    @staticmethod
-    def flat(z):
+    def flat(self, z):
         return z.flatten(1)
 
 
@@ -507,6 +570,21 @@ def act_scales(m_ref, family, stp_cls, inp, lab, T, batch, dev):
     return {n: (acc[n] / max(cnt[n], 1)).cpu() if acc[n] is not None else torch_.ones(shp[n]) for n in acc}
 
 
+def sudoku_perm(draw):
+    """A random validity-preserving Sudoku symmetry as a cell permutation p (aug cell i = orig cell p[i]):
+    band and stack permutations, row / column permutations within them, transpose with probability 1/2."""
+    torch = _torch()
+    g = np.random.default_rng(40_000 + draw)
+    def lines():
+        bands = g.permutation(3)
+        return [3 * b + r for b in bands for r in g.permutation(3)]
+    R, Cc = lines(), lines()
+    p = np.array([9 * R[r] + Cc[c] for r in range(9) for c in range(9)])
+    if g.random() < 0.5:
+        p = p.reshape(9, 9).T.reshape(-1)
+    return torch.as_tensor(p, dtype=torch.long)
+
+
 def load_calib(task, n, T):
     """Unlabeled calibration inputs disjoint from the evaluation rows."""
     import contraction as C
@@ -551,6 +629,7 @@ def main():
     ap.add_argument("--only_extra", action="store_true", help="run only --extra_sched (plus the append read-out)")
     ap.add_argument("--per_step", action="store_true", help="per-input correctness at every step of c and of P alone")
     ap.add_argument("--ckpt", default="", help="TRM: evaluate this trained checkpoint (step_N; all_config.yaml beside it)")
+    ap.add_argument("--attractors", type=int, default=0, help="fp32: distinct answers from K random initial carries")
     ap.add_argument("--batch", type=int, default=0)
     ap.add_argument("--n_calib", type=int, default=128)
     ap.add_argument("--fp32_ext", type=int, default=0, help="fp32 depth curve length (default 2T)")
@@ -647,11 +726,39 @@ def main():
                     ref.append({"end": stp.flat(z).cpu(), "pred": ro["pred"].cpu(), "correct": ro["correct"].int().cpu()})
                     if MAZE["on"]:
                         ref[-1]["valid"], ref[-1]["shortest"] = maze_valid(x, ro["pred"], y)
+    attr_rec = None
+    if a.attractors and family != "dt":              # distinct fp32 answers from K random initial carries (T steps)
+        t1 = time.time()
+        nd, fc_, dflt = [], [], []
+        g = torch.Generator(device=dev).manual_seed(123)
+        with torch.no_grad():
+            for ci, (s0, e0) in enumerate(chunks):
+                x = torch.from_numpy(inp[s0:e0]).to(dev)
+                y = torch.from_numpy(lab[s0:e0]).to(dev)
+                stp = stp_cls({"f": m_ref}, family, x)
+                preds, oks = [ref[ci]["pred"].to(dev)], []
+                for _ in range(a.attractors):
+                    zH0, zL0, _fr = stp.z0("f")
+                    z = (torch.randn(zH0.shape, generator=g, device=dev), torch.randn(zL0.shape, generator=g, device=dev), "orig")
+                    for _t in range(T):
+                        z = stp.step(z, "f")
+                    ro = stp.readout(z, "f", y)
+                    preds.append(ro["pred"])
+                    oks.append(ro["correct"].float())
+                P_ = torch.stack(preds, 1)                             # (B, K+1, cells)
+                B_ = P_.shape[0]
+                nd += [len({tuple(P_[b, k].tolist()) for k in range(P_.shape[1])}) for b in range(B_)]
+                fc_ += torch.stack(oks, 1).mean(1).cpu().tolist()
+        attr_rec = {"K": a.attractors, "n_distinct": nd, "frac_random_init_correct": fc_}
+        print(f"  attractors: K={a.attractors} random carries, mean distinct answers {np.mean(nd):.2f}, "
+              f"frac inputs with >1 answer {np.mean(np.array(nd) > 1):.3f} ({time.time()-t1:.0f}s)", flush=True)
     f_correct = torch.cat([r["correct"] for r in ref]).numpy()
     blob["fp32"] = {"acc": float(f_correct.mean()), "curve": (f_curve / len(inp)).tolist(), "T_ext": Text,
                     "correct": "".join(map(str, f_correct.tolist())),
                     "at": {str(k): "".join(map(str, torch.cat(v).tolist())) for k, v in f_at.items()},
                     "secs": time.time() - t0}
+    if attr_rec is not None:
+        blob["fp32"]["attractors"] = attr_rec
     if MAZE["on"]:
         for kk in ("valid", "shortest"):
             v = np.concatenate([r[kk] for r in ref])
@@ -673,6 +780,7 @@ def main():
         t0 = time.time()
         mc_cpu = make_cell(m_cpu, family, cell[0], cell[1])
         mc = mc_cpu.to(dev)
+        CELL_PERM["perm"] = sudoku_perm(cell[1]) if cell[0] == "tta" else None
         for pname in todo:
             t1 = time.time()
             mp = make_polish(m_cpu, mc_cpu, family, pname, scales)
@@ -704,8 +812,8 @@ def main():
                     x = torch.from_numpy(inp[s:e]).to(dev)
                     y = torch.from_numpy(lab[s:e]).to(dev)
                     stp = stp_cls(models, family, x)
-                    cache = {"c": {0: stp.z0()}, "f": {0: stp.z0()}}
-                    z = stp.z0()
+                    cache = {"c": {0: stp.z0("c")}, "f": {0: stp.z0("f")}}
+                    z = stp.z0("c")
                     for t_ in range(T):
                         zp_ = z
                         z = stp.step(z, "c")
@@ -720,7 +828,7 @@ def main():
                         if a.per_step:
                             c_at[t_].append(cc_.int().cpu())
                     if need["f"] - {0}:
-                        z = stp.z0()
+                        z = stp.z0("f")
                         for t_ in range(max(need["f"])):
                             z = stp.step(z, "f")
                             if (t_ + 1) in need["f"]:
@@ -775,6 +883,7 @@ def main():
                 del mp
             torch.cuda.empty_cache()
         del mc
+        CELL_PERM["perm"] = None
         torch.cuda.empty_cache()
         print(f"  cell {cell} done ({time.time()-t0:.0f}s)", flush=True)
     print("wrote", out_path, len(blob["records"]), "records", flush=True)
