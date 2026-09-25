@@ -115,6 +115,7 @@ class PretrainConfig(pydantic.BaseModel):
     q7_max_steps: int = 0           # smoke tests: stop after this many optimizer steps (0 = no limit)
     q7_inline_eval: bool = True     # after each checkpoint save, run q7_eval.evaluate_checkpoint in this process
     q7_eval_n: int = 1000           # puzzles for the inline evaluation
+    q7_light_intermediate: bool = False  # intermediate checkpoints get the light cell set (full set at the end)
     q7_act_bits: int = 0            # >0: static per-tensor symmetric activation fake-quant at every CastedLinear
                                     # input (STE), scale = absmax / Qp over the first q7_act_calib_steps steps,
                                     # then frozen and stored as buffer q7_act_s (runs uncompiled)
@@ -463,7 +464,10 @@ def q7_inline_eval(config: "PretrainConfig", step: int):
         if here not in sys.path:
             sys.path.insert(0, here)
         import q7_eval
-        rec = q7_eval.evaluate_checkpoint(ck, out, n=config.q7_eval_n, label=f"{config.run_name}/step_{step}")
+        final = step >= int(config.epochs * 1000 / config.global_batch_size) - config.global_batch_size // 128
+        light = True if (config.q7_light_intermediate and not final) else None
+        rec = q7_eval.evaluate_checkpoint(ck, out, n=config.q7_eval_n, label=f"{config.run_name}/step_{step}",
+                                          light=light)
         fp = next(r for r in rec["records"] if r["quant"]["spec"] == "fp32")
         w4t = next(r for r in rec["records"] if r["quant"]["spec"] == "w4t")
         q7_log(config, {"step": step, "kind": "q7_eval", "fp32": fp["pexact"], "w4t": w4t["pexact"],
