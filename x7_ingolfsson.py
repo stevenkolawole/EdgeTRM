@@ -615,10 +615,14 @@ def run(a):
     batch = a.batch or t["batch"]
     kind = (bs.TRM_TASKS.get(task) or bs.HRM_TASKS[task])["data"]
     lo, hi = t["pool"]
-    allq, alla = bs.load_qa(kind, max(hi, n))
-    inp, lab = allq[:n], alla[:n]
+    if getattr(a, "pool", ""):
+        lo, hi = (int(x) for x in a.pool.split(","))
+    r0 = getattr(a, "row0", 0) or 0
+    allq, alla = bs.load_qa(kind, max(hi, r0 + n))
+    inp, lab = allq[r0:r0 + n], alla[r0:r0 + n]
+    assert len(inp) == n, f"only {len(inp)} test rows from {r0}"
     cinp_all, clab_all = allq[lo:hi], alla[lo:hi]
-    assert n <= lo, "evaluation rows overlap the calibration pool"
+    assert r0 + n <= lo or hi <= r0, "evaluation rows overlap the calibration pool"
     maze_d = None
     if kind == "maze":
         maze_d = [bfs_dist(r) for r in inp]
@@ -627,7 +631,8 @@ def run(a):
         print(f"maze: reference path length == BFS shortest - 1 for {agree*100:.1f}% of {len(lab)}", flush=True)
     out_path = Path(a.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    data = {"task": task, "mode": a.mode, "n": n, "records": [], "calib_n": CALIB_N, "calib_pool": [lo, hi]}
+    data = {"task": task, "mode": a.mode, "n": n, "records": [], "calib_n": CALIB_N, "calib_pool": [lo, hi],
+            "eval_rows": [r0, r0 + n]}
     if out_path.exists():
         try:
             data = json.load(open(out_path))
@@ -907,6 +912,8 @@ def main():
     ap.add_argument("--draws", default="0,1,2")
     ap.add_argument("--group", type=int, default=8, help="cells run in lockstep with one fp32 pass")
     ap.add_argument("--axes", default="", help="depth mode: comma list of nsup,H,L (default all three)")
+    ap.add_argument("--row0", type=int, default=0, help="first test row evaluated (independent replication)")
+    ap.add_argument("--pool", default="", help="calibration pool rows lo,hi (must not overlap the evaluated rows)")
     ap.add_argument("--chain", default="", help="file with one argument line per run, executed in order "
                                                 "(fewer SLURM jobs; each run resumes on its own)")
     ap.add_argument("--analyze", default="")
