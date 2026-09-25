@@ -1,0 +1,4997 @@
+[
+ {
+  "tensor": "puzzle_embedding",
+  "group": "embed",
+  "scale": 0.0010716397082433105,
+  "zp": 136,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "z_H",
+  "group": "carry_in",
+  "scale": 0.0438072644174099,
+  "zp": 115,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "z_L",
+  "group": "carry_in",
+  "scale": 0.036644838750362396,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/Constant_10_output_0",
+  "group": "const",
+  "scale": 0.0887349545955658,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Constant_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Constant_1_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Constant_2_output_0",
+  "group": "rms_const",
+  "scale": 1.2495195278461324e-07,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Constant_3_output_0",
+  "group": "rms_const",
+  "scale": 0.003921564668416977,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/embed_tokens/Gather_output_0",
+  "group": "embed",
+  "scale": 0.0010716397082433105,
+  "zp": 136,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/Pad_output_0",
+  "group": "embed",
+  "scale": 0.0010716397082433105,
+  "zp": 136,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/Reshape_2_output_0",
+  "group": "embed",
+  "scale": 0.0010716397082433105,
+  "zp": 136,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/Concat_1_output_0",
+  "group": "embed",
+  "scale": 0.0010716397082433105,
+  "zp": 136,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/Mul_output_0",
+  "group": "embed",
+  "scale": 0.024149460718035698,
+  "zp": 136,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/Add_output_0",
+  "group": "inject",
+  "scale": 0.04771480709314346,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/Add_output_0",
+  "group": "inject",
+  "scale": 0.07273261994123459,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Transpose_output_0",
+  "group": "inject",
+  "scale": 0.07273261994123459,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/gate_up_proj/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.2235940396785736,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.2235940396785736,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.2235940396785736,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.11988569051027298,
+  "zp": 2,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.2601751387119293,
+  "zp": 153,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/down_proj/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.37325629591941833,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Add_output_0",
+  "group": "residual",
+  "scale": 0.38751840591430664,
+  "zp": 135,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Cast_output_0",
+  "group": "residual",
+  "scale": 0.38751840591430664,
+  "zp": 135,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 10.738016128540039,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 5.091601371765137,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 5.091601371765137,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.14132456481456757,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.01566312275826931,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.05238192155957222,
+  "zp": 102,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.05238192155957222,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.05238192155957222,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/gate_up_proj/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.10938741266727448,
+  "zp": 137,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.10938741266727448,
+  "zp": 137,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.10938741266727448,
+  "zp": 137,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.043522804975509644,
+  "zp": 6,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.3660086989402771,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/down_proj/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.11017783731222153,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.12865498661994934,
+  "zp": 114,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.12865498661994934,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 1.6408206224441528,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.12407247722148895,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.12407247722148895,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.026963314041495323,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.00418938510119915,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.040640465915203094,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.040640465915203094,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Transpose_output_0",
+  "group": "rms_out",
+  "scale": 0.040640465915203094,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/gate_up_proj/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.19648107886314392,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.19648107886314392,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.19648107886314392,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.12103330343961716,
+  "zp": 2,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.09258352220058441,
+  "zp": 125,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/down_proj/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.06015156954526901,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Add_output_0",
+  "group": "residual",
+  "scale": 0.05585380643606186,
+  "zp": 89,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Cast_output_0",
+  "group": "residual",
+  "scale": 0.05585380643606186,
+  "zp": 89,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 0.3712168335914612,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 0.29334113001823425,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 0.29334113001823425,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.033882323652505875,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.03273932635784149,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.0653628334403038,
+  "zp": 115,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.0653628334403038,
+  "zp": 115,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.0653628334403038,
+  "zp": 115,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/gate_up_proj/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.12816593050956726,
+  "zp": 91,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.12816593050956726,
+  "zp": 91,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.12816593050956726,
+  "zp": 91,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.08993509411811829,
+  "zp": 4,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.5662367343902588,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/down_proj/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.08043920248746872,
+  "zp": 84,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.07100439071655273,
+  "zp": 154,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.07100439071655273,
+  "zp": 154,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 0.4373893439769745,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.03362300992012024,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.03362301364541054,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.011483235284686089,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.006489180494099855,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.03565693646669388,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.03565693646669388,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level_1/Add_output_0",
+  "group": "inject",
+  "scale": 0.071896031498909,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Transpose_output_0",
+  "group": "inject",
+  "scale": 0.071896031498909,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/gate_up_proj_1/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.22223271429538727,
+  "zp": 142,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_1/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.22223271429538727,
+  "zp": 142,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_1/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.22223271429538727,
+  "zp": 142,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_1/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_1/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.09663789719343185,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_1/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.25984498858451843,
+  "zp": 153,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/down_proj_1/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.36551347374916077,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Add_output_0",
+  "group": "residual",
+  "scale": 0.380812406539917,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Cast_output_0",
+  "group": "residual",
+  "scale": 0.380812406539917,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 10.064818382263184,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 4.891829013824463,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 4.891829013824463,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.13829395174980164,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.012926497496664524,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.041563283652067184,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.041563283652067184,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.041563283652067184,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/gate_up_proj_1/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.10960635542869568,
+  "zp": 135,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_1/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.10960635542869568,
+  "zp": 135,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_1/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.10960635542869568,
+  "zp": 135,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_1/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_1/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.04463060945272446,
+  "zp": 6,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_1/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.3876744210720062,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/down_proj_1/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.1082591712474823,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.1299830675125122,
+  "zp": 114,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.1299830675125122,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 1.44173002243042,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.13395167887210846,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.13395166397094727,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.022933034226298332,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.0038969754241406918,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.04198601841926575,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_1/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.04198601841926575,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Transpose_output_0",
+  "group": "rms_out",
+  "scale": 0.04198601841926575,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/gate_up_proj_1/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.1993253082036972,
+  "zp": 97,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_1/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.1993253082036972,
+  "zp": 97,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_1/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.1993253082036972,
+  "zp": 97,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_1/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_1/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.10777822136878967,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_1/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.09208540618419647,
+  "zp": 129,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/down_proj_1/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.062404073774814606,
+  "zp": 89,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Add_output_0",
+  "group": "residual",
+  "scale": 0.0587938167154789,
+  "zp": 102,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Cast_output_0",
+  "group": "residual",
+  "scale": 0.0587938167154789,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 0.3633502125740051,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 0.2690209746360779,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 0.26902100443840027,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.03245513141155243,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.03755074739456177,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06542302668094635,
+  "zp": 114,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06542302668094635,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06542302668094635,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/gate_up_proj_1/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.1281598061323166,
+  "zp": 88,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_1/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.1281598061323166,
+  "zp": 88,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_1/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.1281598061323166,
+  "zp": 88,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_1/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_1/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.09043519198894501,
+  "zp": 4,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_1/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.550888180732727,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/down_proj_1/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.07925011962652206,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.06980150938034058,
+  "zp": 156,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.06980150938034058,
+  "zp": 156,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 0.417095422744751,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.03446599841117859,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.03446599468588829,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.011625542305409908,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.006231389939785004,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.03615439310669899,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_1/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.03615439310669899,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level_2/Add_output_0",
+  "group": "inject",
+  "scale": 0.07142341881990433,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Transpose_output_0",
+  "group": "inject",
+  "scale": 0.07142341881990433,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/gate_up_proj_2/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.22263209521770477,
+  "zp": 143,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_2/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.22263209521770477,
+  "zp": 143,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_2/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.22263209521770477,
+  "zp": 143,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_2/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_2/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.09589160978794098,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_2/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.26554957032203674,
+  "zp": 153,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/down_proj_2/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.4151090383529663,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Add_output_0",
+  "group": "residual",
+  "scale": 0.3893050253391266,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Cast_output_0",
+  "group": "residual",
+  "scale": 0.3893050253391266,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 12.377324104309082,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 6.207523345947266,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 6.207523345947266,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.15586243569850922,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.009247946552932262,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.04312223941087723,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.04312223941087723,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.04312223941087723,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/gate_up_proj_2/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.10936173051595688,
+  "zp": 121,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_2/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.10936173051595688,
+  "zp": 121,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_2/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.10936173051595688,
+  "zp": 121,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_2/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_2/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.044307176023721695,
+  "zp": 6,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_2/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.383673757314682,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/down_proj_2/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.10743258893489838,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.12984752655029297,
+  "zp": 114,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.12984752655029297,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 1.4017211198806763,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.1325559914112091,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.1325559765100479,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.022797469049692154,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.003747091628611088,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.03793778643012047,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_2/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.03793778643012047,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Transpose_output_0",
+  "group": "rms_out",
+  "scale": 0.03793778643012047,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/gate_up_proj_2/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.200028657913208,
+  "zp": 118,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_2/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.200028657913208,
+  "zp": 118,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_2/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.200028657913208,
+  "zp": 118,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_2/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_2/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.11176160722970963,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_2/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.0919397622346878,
+  "zp": 129,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/down_proj_2/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.05504591390490532,
+  "zp": 89,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Add_output_0",
+  "group": "residual",
+  "scale": 0.052082814276218414,
+  "zp": 89,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Cast_output_0",
+  "group": "residual",
+  "scale": 0.052082814276218414,
+  "zp": 89,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 0.293673038482666,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 0.19417044520378113,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 0.19417046010494232,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.027587424963712692,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.03363550826907158,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06441369652748108,
+  "zp": 112,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06441369652748108,
+  "zp": 112,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06441369652748108,
+  "zp": 112,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/gate_up_proj_2/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.12864331901073456,
+  "zp": 86,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_2/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.12864331901073456,
+  "zp": 86,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_2/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.12864331901073456,
+  "zp": 86,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_2/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_2/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.09092254936695099,
+  "zp": 4,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_2/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.5404577851295471,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/down_proj_2/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.08015502244234085,
+  "zp": 89,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.07025657594203949,
+  "zp": 138,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.07025657594203949,
+  "zp": 138,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 0.4225859045982361,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.03350010886788368,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.033500105142593384,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.011464793235063553,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.0058711813762784,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.03526253625750542,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_2/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.03526253625750542,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level_3/Add_output_0",
+  "group": "inject",
+  "scale": 0.07157829403877258,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Transpose_output_0",
+  "group": "inject",
+  "scale": 0.07157829403877258,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/gate_up_proj_3/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.22279545664787292,
+  "zp": 142,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_3/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.22279545664787292,
+  "zp": 142,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_3/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.22279545664787292,
+  "zp": 142,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_3/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_3/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.09690473973751068,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_3/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.2730467617511749,
+  "zp": 153,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/down_proj_3/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.4100028872489929,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Add_output_0",
+  "group": "residual",
+  "scale": 0.3848230540752411,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Cast_output_0",
+  "group": "residual",
+  "scale": 0.3848230540752411,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 11.984745025634766,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 6.045938014984131,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 6.045938014984131,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.15385468304157257,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.009821964427828789,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.03995968773961067,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.03995968773961067,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.03995968773961067,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/gate_up_proj_3/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.10890429466962814,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_3/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.10890429466962814,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_3/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.10890429466962814,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_3/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_3/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.04458125680685043,
+  "zp": 6,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_3/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.37100622057914734,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/down_proj_3/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.11421960592269897,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.13287486135959625,
+  "zp": 114,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.13287486135959625,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 1.4490795135498047,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.13292692601680756,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.13292694091796875,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.022811854258179665,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.003482762025669217,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.04111000522971153,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_3/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.04111000522971153,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Transpose_output_0",
+  "group": "rms_out",
+  "scale": 0.04111000522971153,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/gate_up_proj_3/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.1981353908777237,
+  "zp": 101,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_3/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.1981353908777237,
+  "zp": 101,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_3/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.1981353908777237,
+  "zp": 101,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_3/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_3/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.11042667925357819,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_3/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.09218064695596695,
+  "zp": 129,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/down_proj_3/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.05505003407597542,
+  "zp": 84,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Add_output_0",
+  "group": "residual",
+  "scale": 0.05229894816875458,
+  "zp": 102,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Cast_output_0",
+  "group": "residual",
+  "scale": 0.05229894816875458,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 0.29071423411369324,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 0.18838296830654144,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 0.18838298320770264,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.027154745534062386,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.037697914987802505,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06581634283065796,
+  "zp": 115,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06581634283065796,
+  "zp": 115,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06581634283065796,
+  "zp": 115,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/gate_up_proj_3/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.12791882455348969,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_3/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.12791882455348969,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_3/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.12791882455348969,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_3/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_3/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.09190191328525543,
+  "zp": 4,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_3/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.5381655693054199,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/down_proj_3/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.08412924408912659,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.06846537441015244,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.06846537441015244,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 0.4165704548358917,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.03445073589682579,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.03445073589682579,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.011617092415690422,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.005428658798336983,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.036179084330797195,
+  "zp": 114,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_3/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.036179084330797195,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level_4/Add_output_0",
+  "group": "inject",
+  "scale": 0.07072572410106659,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Transpose_output_0",
+  "group": "inject",
+  "scale": 0.07072572410106659,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/gate_up_proj_4/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.22225311398506165,
+  "zp": 137,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_4/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.22225311398506165,
+  "zp": 137,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_4/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.22225311398506165,
+  "zp": 137,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_4/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_4/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.0950089767575264,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_4/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.26144272089004517,
+  "zp": 153,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/down_proj_4/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.39975395798683167,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Add_output_0",
+  "group": "residual",
+  "scale": 0.40342265367507935,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Cast_output_0",
+  "group": "residual",
+  "scale": 0.40342265367507935,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 12.867748260498047,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 6.555190563201904,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 6.555190563201904,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.16013671457767487,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.009522912092506886,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.03958078473806381,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.03958078473806381,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.03958078473806381,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/gate_up_proj_4/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.10936309397220612,
+  "zp": 134,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_4/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.10936309397220612,
+  "zp": 134,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_4/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.10936309397220612,
+  "zp": 134,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_4/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_4/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.044452738016843796,
+  "zp": 6,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_4/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.39066195487976074,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/down_proj_4/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.10801032185554504,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.13394984602928162,
+  "zp": 114,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.13394984602928162,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 1.4510859251022339,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.13043929636478424,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.13043928146362305,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.02260683849453926,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.0033644153736531734,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.04170642048120499,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_4/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.04170642048120499,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Transpose_output_0",
+  "group": "rms_out",
+  "scale": 0.04170642048120499,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/gate_up_proj_4/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.19833071529865265,
+  "zp": 119,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_4/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.19833071529865265,
+  "zp": 119,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_4/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.19833071529865265,
+  "zp": 119,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_4/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_4/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.109517402946949,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_4/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.09208817034959793,
+  "zp": 129,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/down_proj_4/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.055814243853092194,
+  "zp": 89,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Add_output_0",
+  "group": "residual",
+  "scale": 0.05190645158290863,
+  "zp": 89,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Cast_output_0",
+  "group": "residual",
+  "scale": 0.05190645158290863,
+  "zp": 89,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 0.29354342818260193,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 0.18838728964328766,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 0.18838730454444885,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.02715706266462803,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.037769023329019547,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06417972594499588,
+  "zp": 112,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06417972594499588,
+  "zp": 112,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06417972594499588,
+  "zp": 112,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/gate_up_proj_4/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.1273210346698761,
+  "zp": 94,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_4/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.1273210346698761,
+  "zp": 94,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_4/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.1273210346698761,
+  "zp": 94,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_4/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_4/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.09091324359178543,
+  "zp": 4,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_4/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.5420673489570618,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/down_proj_4/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.08542749285697937,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.0712430328130722,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.0712430328130722,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 0.4215233325958252,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.033563073724508286,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.03356306999921799,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.011469061486423016,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.005447413772344589,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.035824187099933624,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_4/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.035824187099933624,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level_5/Add_output_0",
+  "group": "inject",
+  "scale": 0.07158118486404419,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Transpose_output_0",
+  "group": "inject",
+  "scale": 0.07158118486404419,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/gate_up_proj_5/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.21611882746219635,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_5/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.21611882746219635,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_5/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.21611882746219635,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_5/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_5/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.09649966657161713,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_5/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.26855337619781494,
+  "zp": 153,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/down_proj_5/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.3811141848564148,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Add_output_0",
+  "group": "residual",
+  "scale": 0.38508543372154236,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Cast_output_0",
+  "group": "residual",
+  "scale": 0.38508543372154236,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 10.414578437805176,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 5.2744598388671875,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 5.2744598388671875,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.14384588599205017,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.009876868687570095,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.04201464727520943,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.04201464727520943,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.04201464727520943,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/gate_up_proj_5/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.10969734936952591,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_5/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.10969734936952591,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_5/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.10969734936952591,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_5/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_5/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.04442001134157181,
+  "zp": 6,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_5/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.3773633539676666,
+  "zp": 117,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/down_proj_5/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.10899067670106888,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.12734965980052948,
+  "zp": 114,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.12734965980052948,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 1.453552007675171,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.13191819190979004,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.13191820681095123,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.022741472348570824,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.0032234482932835817,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.04221205785870552,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_5/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.04221205785870552,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Transpose_output_0",
+  "group": "rms_out",
+  "scale": 0.04221205785870552,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/gate_up_proj_5/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.19907355308532715,
+  "zp": 118,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_5/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.19907355308532715,
+  "zp": 118,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_5/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.19907355308532715,
+  "zp": 118,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_5/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_5/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.11135568469762802,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_5/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.09222805500030518,
+  "zp": 129,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/down_proj_5/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.05706197768449783,
+  "zp": 90,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Add_output_0",
+  "group": "residual",
+  "scale": 0.049751222133636475,
+  "zp": 89,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Cast_output_0",
+  "group": "residual",
+  "scale": 0.049751222133636475,
+  "zp": 89,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 0.2913282811641693,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 0.19210775196552277,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 0.19210776686668396,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.027457404881715775,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.03739721328020096,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06497053802013397,
+  "zp": 137,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06497053802013397,
+  "zp": 137,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.06497053802013397,
+  "zp": 137,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/gate_up_proj_5/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.12839198112487793,
+  "zp": 92,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_5/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.12839198112487793,
+  "zp": 92,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_5/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.12839198112487793,
+  "zp": 92,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_5/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_5/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.09071501344442368,
+  "zp": 4,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_5/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.550786554813385,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/down_proj_5/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.08513828366994858,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.07014460116624832,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.07014460116624832,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 0.5244736075401306,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.03445614129304886,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.03445613756775856,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.011617795564234257,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.005273537710309029,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_5/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.036464378237724304,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "z_L_out_updated",
+  "group": "carry_out",
+  "scale": 0.036464378237724304,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level_6/Add_output_0",
+  "group": "inject",
+  "scale": 0.06291661411523819,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Transpose_output_0",
+  "group": "inject",
+  "scale": 0.06291661411523819,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/gate_up_proj_6/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.22174957394599915,
+  "zp": 146,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_6/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.22174957394599915,
+  "zp": 146,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_6/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.22174957394599915,
+  "zp": 146,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_6/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_6/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.09307816624641418,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t_6/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.2639741897583008,
+  "zp": 137,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_t/down_proj_6/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.3740147650241852,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Add_output_0",
+  "group": "residual",
+  "scale": 0.3735378682613373,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Cast_output_0",
+  "group": "residual",
+  "scale": 0.3735378682613373,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 10.378069877624512,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 5.089266777038574,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 5.089266777038574,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.1412145346403122,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.010148570872843266,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.04180271923542023,
+  "zp": 127,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.04180271923542023,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.04180271923542023,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/gate_up_proj_6/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.10407432168722153,
+  "zp": 132,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_6/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.10407432168722153,
+  "zp": 132,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_6/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.10407432168722153,
+  "zp": 132,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_6/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_6/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.04497102275490761,
+  "zp": 6,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp_6/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.44535985589027405,
+  "zp": 153,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0/mlp/down_proj_6/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.10302469879388809,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.11896944046020508,
+  "zp": 114,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.11896944046020508,
+  "zp": 114,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 1.3739923238754272,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.06743943691253662,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.06743942946195602,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.016248364001512527,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.0038091677706688643,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.047638051211833954,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.0_6/Cast_3_output_0",
+  "group": "rms_out",
+  "scale": 0.047638051211833954,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Transpose_output_0",
+  "group": "rms_out",
+  "scale": 0.047638051211833954,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/gate_up_proj_6/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.1904672384262085,
+  "zp": 130,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_6/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.1904672384262085,
+  "zp": 130,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_6/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.1904672384262085,
+  "zp": 130,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_6/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_6/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.09966611117124557,
+  "zp": 3,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t_6/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.09756230562925339,
+  "zp": 118,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_t/down_proj_6/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.07379762083292007,
+  "zp": 89,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Add_output_0",
+  "group": "residual",
+  "scale": 0.06951988488435745,
+  "zp": 102,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Cast_output_0",
+  "group": "residual",
+  "scale": 0.06951988488435745,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Mul_output_0",
+  "group": "rms_sq",
+  "scale": 0.5025801658630371,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/ReduceMean_output_0",
+  "group": "rms_var",
+  "scale": 0.3905094265937805,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Add_1_output_0",
+  "group": "rms_var",
+  "scale": 0.39050939679145813,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Sqrt_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.0391264371573925,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Div_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.029880935326218605,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Mul_1_output_0",
+  "group": "rms_out",
+  "scale": 0.05797576159238815,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Cast_1_output_0",
+  "group": "rms_out",
+  "scale": 0.05797576159238815,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Transpose_1_output_0",
+  "group": "rms_out",
+  "scale": 0.05797576159238815,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/gate_up_proj_6/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.08302855491638184,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_6/Slice_output_0",
+  "group": "linear_out",
+  "scale": 0.08302855491638184,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_6/Slice_1_output_0",
+  "group": "linear_out",
+  "scale": 0.08302855491638184,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_6/Sigmoid_output_0",
+  "group": "swiglu_other",
+  "scale": 0.00390625,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_6/Mul_2_output_0",
+  "group": "swiglu_other",
+  "scale": 0.06746409088373184,
+  "zp": 4,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp_6/Mul_3_output_0",
+  "group": "swiglu_prod",
+  "scale": 0.3072236478328705,
+  "zp": 102,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1/mlp/down_proj_6/MatMul_output_0",
+  "group": "linear_out",
+  "scale": 0.05680665746331215,
+  "zp": 127,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Add_2_output_0",
+  "group": "residual",
+  "scale": 0.0646008625626564,
+  "zp": 140,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Cast_2_output_0",
+  "group": "residual",
+  "scale": 0.0646008625626564,
+  "zp": 140,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Mul_2_output_0",
+  "group": "rms_sq",
+  "scale": 0.285063773393631,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/ReduceMean_1_output_0",
+  "group": "rms_var",
+  "scale": 0.027680901810526848,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Add_3_output_0",
+  "group": "rms_var",
+  "scale": 0.027680903673171997,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Sqrt_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.01042050402611494,
+  "zp": 0,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Div_1_output_0",
+  "group": "rms_rsqrt",
+  "scale": 0.006240615621209145,
+  "zp": 0,
+  "name_in_dlc": false,
+  "scale_anywhere": false,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/L_level/layers.1_6/Mul_3_output_0",
+  "group": "rms_out",
+  "scale": 0.04412992298603058,
+  "zp": 105,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "z_H_out_updated",
+  "group": "carry_out",
+  "scale": 0.04412992298603058,
+  "zp": 105,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/lm_head/MatMul_output_0",
+  "group": "head",
+  "scale": 0.8561109900474548,
+  "zp": 164,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "/inner/Gather_output_0",
+  "group": "rms_out",
+  "scale": 0.04412992298603058,
+  "zp": 105,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ },
+ {
+  "tensor": "logits_qdq",
+  "group": "head",
+  "scale": 0.8561109900474548,
+  "zp": 164,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/q_head/Gemm_output_0",
+  "group": "head",
+  "scale": 0.057707205414772034,
+  "zp": 76,
+  "name_in_dlc": false,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "/inner/Cast_2_output_0",
+  "group": "head",
+  "scale": 0.057707205414772034,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": false
+ },
+ {
+  "tensor": "q_halt_qdq",
+  "group": "head",
+  "scale": 0.057707205414772034,
+  "zp": 76,
+  "name_in_dlc": true,
+  "scale_anywhere": true,
+  "scale_near_name": true
+ }
+]
