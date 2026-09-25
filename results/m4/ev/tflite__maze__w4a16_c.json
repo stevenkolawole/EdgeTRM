@@ -60,6 +60,10 @@
  "q_fp32_pos": 1.0,
  "q_cand_pos": 1.0,
  "t2_seconds": 1060.3,
+ "verdict": "FAIL",
+ "rules": [
+  "T0 cross-runtime: the reference kernels fail at op 56 RSQRT: tflite/kernels/elementwise.cc Rsqrt is only defined for positive valuesNode number 56 (RSQRT) failed to invoke."
+ ],
  "xrt_pair": "builtin_ref_vs_builtin_opt",
  "xrt_ref_error": "tflite/kernels/elementwise.cc Rsqrt is only defined for positive valuesNode number 56 (RSQRT) failed to invoke.",
  "xrt_first_bad": {
@@ -71,8 +75,8 @@
   "error": "tflite/kernels/elementwise.cc Rsqrt is only defined for positive valuesNode number 56 (RSQRT) failed to invoke."
  },
  "xrt_max_lsb": Infinity,
- "verdict": "FAIL",
- "rules": [
-  "T0 cross-runtime: the reference kernels fail at op 56 RSQRT: tflite/kernels/elementwise.cc Rsqrt is only defined for positive valuesNode number 56 (RSQRT) failed to invoke."
- ]
+ "verdict_by_runtime": {
+  "optimized kernels (XNNPACK / phone CPU)": "PASS",
+  "reference kernels (TFLite Micro)": "FAIL"
+ }
 }

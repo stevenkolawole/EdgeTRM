@@ -60,6 +60,10 @@
  "q_fp32_pos": 1.0,
  "q_cand_pos": 0.9375,
  "t2_seconds": 310.1,
+ "verdict": "FAIL",
+ "rules": [
+  "T0 cross-runtime: op 52 SUM differs by 128 LSB between reference and optimized kernels while its inputs differ by 0 (kernel disagreement, > 16)"
+ ],
  "xrt_pair": "builtin_ref_vs_builtin_opt",
  "xrt_ops": 632,
  "xrt_max_lsb": 255.0,
@@ -70,7 +74,8 @@
    "tensor": 288,
    "dtype": "int8",
    "maxdiff": 255.0,
-   "unit": "lsb"
+   "unit": "lsb",
+   "in_diff_lsb": 302.7080025851838
   },
   {
    "op_index": 307,
@@ -78,7 +83,8 @@
    "tensor": 347,
    "dtype": "int8",
    "maxdiff": 255.0,
-   "unit": "lsb"
+   "unit": "lsb",
+   "in_diff_lsb": 3099.8117961883545
   },
   {
    "op_index": 308,
@@ -86,7 +92,8 @@
    "tensor": 348,
    "dtype": "int8",
    "maxdiff": 255.0,
-   "unit": "lsb"
+   "unit": "lsb",
+   "in_diff_lsb": 552.2154154181364
   },
   {
    "op_index": 411,
@@ -94,7 +101,8 @@
    "tensor": 447,
    "dtype": "int8",
    "maxdiff": 255.0,
-   "unit": "lsb"
+   "unit": "lsb",
+   "in_diff_lsb": 6418.5766525268555
   },
   {
    "op_index": 412,
@@ -102,7 +110,8 @@
    "tensor": 448,
    "dtype": "int8",
    "maxdiff": 255.0,
-   "unit": "lsb"
+   "unit": "lsb",
+   "in_diff_lsb": 255.0
   },
   {
    "op_index": 492,
@@ -110,7 +119,8 @@
    "tensor": 526,
    "dtype": "int8",
    "maxdiff": 255.0,
-   "unit": "lsb"
+   "unit": "lsb",
+   "in_diff_lsb": 374.3466824009368
   }
  ],
  "xrt_first_bad": {
@@ -119,11 +129,21 @@
   "tensor": 100,
   "dtype": "int8",
   "maxdiff": 128.0,
-  "unit": "lsb"
+  "unit": "lsb",
+  "in_diff_lsb": 0.1449898845523456
+ },
+ "xrt_first_propagated": {
+  "op_index": 52,
+  "op": "SUM",
+  "tensor": 100,
+  "dtype": "int8",
+  "maxdiff": 128.0,
+  "unit": "lsb",
+  "in_diff_lsb": 0.1449898845523456
  },
  "tflm_error": "/python/tflite_micro/runtime.py\", line 159, in from_file\n    return Interpreter(\n        model_data,\n    ...<3 lines>...\n        alt_decompression_memory_size,\n    )\n  File \"/home/ubuntu/venvs/tflm313/lib/python3.13/site-packages/tflite_micro/python/tflite_micro/runtime.py\", line 120, in __init__\n    self._interpreter = _runtime.InterpreterWrapper(\n                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        model_data,\n        ^^^^^^^^^^^\n    ...<4 lines>...\n        alt_decompression_memory_size,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\nRuntimeError: TFLM failed to allocate tensors\n",
- "verdict": "FAIL",
- "rules": [
-  "T0 cross-runtime: op 52 SUM differs by 128 LSB between runtimes of the same graph (> 16)"
- ]
+ "verdict_by_runtime": {
+  "optimized kernels (XNNPACK / phone CPU)": "PASS",
+  "reference kernels (TFLite Micro)": "FAIL"
+ }
 }

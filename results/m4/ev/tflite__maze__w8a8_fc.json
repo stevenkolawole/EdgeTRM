@@ -60,6 +60,8 @@
  "q_fp32_pos": 1.0,
  "q_cand_pos": 1.0,
  "t2_seconds": 1174.8,
+ "verdict": "PASS",
+ "rules": [],
  "xrt_pair": "builtin_ref_vs_builtin_opt",
  "xrt_ops": 693,
  "xrt_max_lsb": 12.0,
@@ -121,7 +123,5 @@
  ],
  "xrt_first_bad": null,
  "xrt_first_propagated": null,
- "tflm_error": "/python/tflite_micro/runtime.py\", line 159, in from_file\n    return Interpreter(\n        model_data,\n    ...<3 lines>...\n        alt_decompression_memory_size,\n    )\n  File \"/home/ubuntu/venvs/tflm313/lib/python3.13/site-packages/tflite_micro/python/tflite_micro/runtime.py\", line 120, in __init__\n    self._interpreter = _runtime.InterpreterWrapper(\n                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        model_data,\n        ^^^^^^^^^^^\n    ...<4 lines>...\n        alt_decompression_memory_size,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\nRuntimeError: TFLM failed to allocate tensors\n",
- "verdict": "PASS",
- "rules": []
+ "tflm_error": "/python/tflite_micro/runtime.py\", line 159, in from_file\n    return Interpreter(\n        model_data,\n    ...<3 lines>...\n        alt_decompression_memory_size,\n    )\n  File \"/home/ubuntu/venvs/tflm313/lib/python3.13/site-packages/tflite_micro/python/tflite_micro/runtime.py\", line 120, in __init__\n    self._interpreter = _runtime.InterpreterWrapper(\n                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~^\n        model_data,\n        ^^^^^^^^^^^\n    ...<4 lines>...\n        alt_decompression_memory_size,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    )\n    ^\nRuntimeError: TFLM failed to allocate tensors\n"
 }
