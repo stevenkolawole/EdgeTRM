@@ -29,19 +29,19 @@ def main():
     for ax, (task, title) in zip(axes, MODELS):
         g = defaultdict(list)
         for e in S:
-            if e["task"] == task and e["D"] == 16 and e["K"] > 1 and abs(e["sigma"] - a.sigma) < 1e-9 and "sel" in e:
+            if e["task"] == task and e["D"] == 16 and e["K"] > 1 and e.get("polish") == 2 and e.get("n") == 1000 and abs(e["sigma"] - a.sigma) < 1e-9 and "sel" in e:
                 g[e["spec"].split("@s")[0]].append(e)
         specs = [s for s in (a.specs.split(",") if a.specs else sorted(g)) if s in g]
-        cmap = plt.get_cmap("tab10")
+        cmap = plt.get_cmap("tab20")
         for i, sp in enumerate(specs):
             es = g[sp]
             Ks = sorted(int(k) for k in es[0]["sel"])
             mq = np.array([[e["sel"][str(k)]["maxq"]["exact"] for k in Ks] for e in es]) * 100
             ps = np.array([[e["sel"][str(k)]["pass"]["exact"] for k in Ks] for e in es]) * 100
-            ax.plot(Ks, mq.mean(0), "-o", ms=3, color=cmap(i % 10), label=sp)
+            ax.plot(Ks, mq.mean(0), "-o", ms=3, color=cmap(i % 20), label=sp)
             if len(es) > 1:
-                ax.fill_between(Ks, mq.min(0), mq.max(0), color=cmap(i % 10), alpha=0.15)
-            ax.plot(Ks, ps.mean(0), ":", color=cmap(i % 10), lw=1)
+                ax.fill_between(Ks, mq.min(0), mq.max(0), color=cmap(i % 20), alpha=0.15)
+            ax.plot(Ks, ps.mean(0), ":", color=cmap(i % 20), lw=1)
         ax.set_xscale("log", base=2)
         ax.set_title(title)
         ax.set_xlabel("K rollouts (sigma=%.1f, D=16)" % a.sigma)
