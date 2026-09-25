@@ -107,6 +107,8 @@ class PretrainConfig(pydantic.BaseModel):
                                     # sens: the weight-noise level sigma_p of the sensitivity probe
     q7_sens_sub: int = 64           # sens: examples of the batch used for the probe
     q7_sens_target: float = 0.0     # sens: hinge, penalise only S above this (0 = plain penalty on S)
+    q7_sens_min_steps: int = 0      # sens: probe only puzzles whose carry has run >= this many ACT steps
+                                    # (late states, near the end state X2 measures S at); 0 = every puzzle
     q7_bits: int = 4                # qat: per-tensor symmetric fake-quant bits (straight-through estimator)
     q7_clip_k: float = 0.0          # clip: |W| <= k x per-tensor std after every optimizer step
     q7_eval_batches: int = 3        # in-run eval on the first N test batches (0 = the full 422k test set, upstream behaviour)
@@ -677,12 +679,17 @@ def q7_sensitivity_penalty(config: PretrainConfig, train_state: TrainState):
             W = src[nm].weight
             m.weight = W + torch.randn_like(W) * (config.q7_sigma * W.detach().std())
     c = train_state.carry
-    n = min(config.q7_sens_sub, c.inner_carry.z_L.shape[0])
+    if config.q7_sens_min_steps > 0:
+        idx = torch.nonzero(c.steps >= config.q7_sens_min_steps).flatten()[: config.q7_sens_sub]
+        if idx.numel() == 0:
+            return torch.zeros((), device=c.steps.device, requires_grad=False)
+    else:
+        idx = torch.arange(min(config.q7_sens_sub, c.inner_carry.z_L.shape[0]), device=c.steps.device)
     with torch.no_grad():
         cd = c.current_data
-        x = q7_input_embeddings(inner, cd["inputs"][:n], cd["puzzle_identifiers"][:n]).float()
-        zH = c.inner_carry.z_H[:n].float()
-        zL = c.inner_carry.z_L[:n].float()
+        x = q7_input_embeddings(inner, cd["inputs"][idx], cd["puzzle_identifiers"][idx]).float()
+        zH = c.inner_carry.z_H[idx].float()
+        zL = c.inner_carry.z_L[idx].float()
     cs = inner.rotary_emb() if hasattr(inner, "rotary_emb") else None
     h0, l0 = q7_act_step(level, inner.config, zH, zL, x, cs)
     h1, l1 = q7_act_step(cp, inner.config, zH, zL, x, cs)
@@ -740,7 +747,8 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
     if config.q7_reg == "sens" and q7_s > 0 and train_state.step % config.q7_jac_every == 0:
         q7_jac = q7_sensitivity_penalty(config, train_state)       # logged under q7/jac_fro2 = S estimate
         pen = torch.relu(q7_jac - config.q7_sens_target) if config.q7_sens_target > 0 else q7_jac
-        (q7_s * config.q7_lambda * config.q7_jac_every * pen).backward()
+        if pen.requires_grad:
+            (q7_s * config.q7_lambda * config.q7_jac_every * pen).backward()
 
     # Allreduce
     if world_size > 1:
