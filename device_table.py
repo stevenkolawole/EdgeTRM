@@ -211,19 +211,27 @@ def gran_matrix(comp, prof):
 
 
 def deadline(comp, prof, acc, deadlines_ms=(5, 10, 20, 50, 100, 200, 500, 1000, 2000)):
-    """For each device and deadline T: the (precision, n) with the highest harness accuracy whose
-    n x step(H=1) fits in T. Accuracy from the harness quantizer matching the device format."""
+    """Best exact accuracy within a wall-clock deadline T, per device. Each option pairs a latency and an
+    accuracy of the SAME graph: the deployable carry step (`stepc`, H=1) profiled on that device, with the
+    accuracy of that stepc graph (on that device's chain if one exists, else the host simulation of the
+    compiled graph), at n steps; time = n x step latency. (Audit Sep 25: the earlier version paired the
+    logits-only `step` graph's latency with harness accuracies.) `acc` is unused and kept for the call."""
+    df, _ = device_faithful()
     out = []
     for task in ("sudoku_mlp", "sudoku_attn", "maze", "arc"):
-        at = ACC_TASK[task]
         for dev in DEV_ORDER:
             opts = []
-            for prec, hq in HARNESS_Q.items():
-                c = cell(comp, prof, (task, "step", 1, prec, dev))
-                if not c or c["status"] != "RUN" or (at, hq) not in acc:
+            for (t, prec), steps in df.items():
+                if t != task:
                     continue
-                for n, a in acc[(at, hq)].items():
-                    opts.append({"prec": prec, "harness_q": hq, "n": n, "ms": n * c["ms"], "acc": a})
+                c = cell(comp, prof, (task, "stepc", 1, prec, dev))
+                if not c or c["status"] != "RUN":
+                    continue
+                for n, (a, cnt, src) in steps.items():
+                    if src.startswith("ON DEVICE") and dev.replace(" ", "_") not in src:
+                        continue      # another device's chain is not this device's accuracy
+                    opts.append({"prec": prec, "n": n, "ms": n * c["ms"], "acc": a, "acc_source": src,
+                                 "latency_graph": "stepc", "profile_job": c.get("profile_job")})
             if not opts:
                 continue
             best = {}
@@ -240,8 +248,8 @@ def deadline(comp, prof, acc, deadlines_ms=(5, 10, 20, 50, 100, 200, 500, 1000, 
             b = r["best_within"][T]
             cells.append("-" if b is None else f"{b['acc']*100:.1f} ({b['prec']}, n={b['n']})")
         md.append(f"| {r['task']} | {r['device']} | " + " | ".join(cells) + " |")
-    (DEV / "deadline.md").write_text("# Best exact accuracy within a wall-clock deadline (H=1, harness accuracy of "
-                                     "the matching quantizer x measured step latency)\n\n" + "\n".join(md) + "\n")
+    (DEV / "deadline.md").write_text("# Best exact accuracy within a wall-clock deadline (stepc graph: profiled step "
+                                     "latency x accuracy of the same graph)\n\n" + "\n".join(md) + "\n")
     return out
 
 
