@@ -458,7 +458,8 @@ def pool_rows(roots, cut=50.0):
             ab = 100 * sum(gb[i]["correct"] for i in idx) / len(idx)
             cand.append({"platform": plat, "dir": root.name, "model": model, "loops": steps, "quant": quant,
                          "n_gen": len(idx), "n_tf": len(c["tf"]["records"]), "acc": a, "acc_bf16": ab,
-                         "fid": t["fidelity"], "nll": t["nll"], "nll_bf16": tb["nll"], "kl": t.get("kl")})
+                         "fid": t["fidelity"], "nll": t["nll"], "nll_bf16": tb["nll"], "kl": t.get("kl"),
+                         "bf16_len": sum(gb[i]["n_gen"] for i in idx) / len(idx)})
     for model, gen_files, nogen in LAMBDA_FILES:
         gen, ng = {}, {}
         for f in gen_files:
@@ -476,7 +477,8 @@ def pool_rows(roots, cut=50.0):
                 continue
             cand.append({"platform": "lambda", "dir": "lambda", "model": model, "loops": st_, "quant": q,
                          "n_gen": g["n"], "n_tf": t.get("n", g["n"]), "acc": 100 * g["acc"], "acc_bf16": 100 * b["acc"],
-                         "fid": t["fidelity"], "nll": t["nll"], "nll_bf16": tb["nll"], "kl": None})
+                         "fid": t["fidelity"], "nll": t["nll"], "nll_bf16": tb["nll"], "kl": None,
+                         "bf16_len": b.get("gen_len")})
     best = {}
     for r in cand:
         k = (r["model"], r["quant"], r["loops"])

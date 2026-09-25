@@ -118,5 +118,95 @@
   "p": 0.0,
   "dispersion": 12.795898957387259,
   "p_scaled": 2.879136891165959e-233
+ },
+ "predict": {
+  "log10 answer length": {
+   "groups": [
+    "LM:huginn",
+    "LM:olmo_rec32",
+    "LM:ouro14",
+    "LM:ouro26",
+    "TRM:hrm_maze",
+    "TRM:hrm_sudoku",
+    "TRM:maze_attn",
+    "TRM:sudoku_attn",
+    "TRM:sudoku_mlp"
+   ],
+   "slope": 0.12062475917847576,
+   "r2": 0.2780497856792927,
+   "loo_rmse": 0.1052144391873551,
+   "baseline_rmse": 0.10749004314353966,
+   "loo_max": 0.2120366928257318
+  },
+  "log S": {
+   "groups": [
+    "LM:huginn",
+    "LM:ouro14",
+    "LM:ouro26",
+    "TRM:hrm_maze",
+    "TRM:hrm_sudoku",
+    "TRM:maze_attn",
+    "TRM:sudoku_attn",
+    "TRM:sudoku_mlp"
+   ],
+   "slope": -0.04250532021774518,
+   "r2": 0.13544092817660358,
+   "loo_rmse": 0.117206041008473,
+   "baseline_rmse": 0.10822991400585287,
+   "loo_max": 0.22427676215036663
+  },
+  "log10 answer length, TRM groups only": {
+   "groups": [
+    "TRM:hrm_maze",
+    "TRM:hrm_sudoku",
+    "TRM:maze_attn",
+    "TRM:sudoku_attn",
+    "TRM:sudoku_mlp"
+   ],
+   "slope": 0.1685381186277757,
+   "r2": 0.653813942067369,
+   "loo_rmse": 0.0996645624081098,
+   "baseline_rmse": 0.13348045268877398,
+   "loo_max": 0.1552500000000001
+  },
+  "log S, TRM groups only": {
+   "groups": [
+    "TRM:hrm_maze",
+    "TRM:hrm_sudoku",
+    "TRM:maze_attn",
+    "TRM:sudoku_attn",
+    "TRM:sudoku_mlp"
+   ],
+   "slope": -0.14424674363547912,
+   "r2": 0.9323411277301936,
+   "loo_rmse": 0.04247564508444385,
+   "baseline_rmse": 0.13348045268877398,
+   "loo_max": 0.0675429468520301
+  },
+  "log10 answer length, LM groups only": {
+   "groups": [
+    "LM:huginn",
+    "LM:olmo_rec32",
+    "LM:ouro14",
+    "LM:ouro26"
+   ],
+   "slope": -0.11743438864765256,
+   "r2": 0.5941755509063,
+   "loo_rmse": 0.19000515719862976,
+   "baseline_rmse": 0.05155229276073859,
+   "loo_max": 0.37266746455973077
+  },
+  "log S, LM groups only": {
+   "groups": [
+    "LM:huginn",
+    "LM:ouro14",
+    "LM:ouro26"
+   ],
+   "slope": -0.0798803518187261,
+   "r2": 0.6739873796618495,
+   "loo_rmse": 0.20485470048353352,
+   "baseline_rmse": 0.0499337060511235,
+   "loo_max": 0.34848548047400496
+  }
  }
 }

@@ -178,6 +178,90 @@ def run(groups, title):
             "p_scaled": chi2_sf(LR / disp, df)}
 
 
+def lm_S(model, loops, sigma=0.05):
+    """X2 one-loop sensitivity for a looped LM: median over draws of delta_med / sigma at `loops`."""
+    f = HERE / "results/breadth/babel/x2/sens" / f"lm_{model}.json"
+    if not f.exists():
+        return None
+    recs = json.load(open(f))["records"]
+    v = [r["delta_med"] / sigma for r in recs if r["loops"] == loops and abs((r.get("sigma") or -1) - sigma) < 1e-9]
+    if not v:
+        v = [r["delta_med"] / sigma for r in recs if r["loops"] == loops and r["spec"] in (f"n{sigma}", f"noise{sigma}")]
+    return float(np.median(v)) if v else None
+
+
+def predictors(groups):
+    """Label-free per-group predictors: (a) answer length (tokens of the bf16 greedy output for LMs; cells
+    of the answer grid for TRM/HRM: Sudoku 81, Maze 900), (b) X2 sensitivity S (sigma 0.05)."""
+    x2 = {r["model"]: r["S"] for r in json.load(open(HERE / "results/breadth/x2_sens_fit.json"))["rows"]}
+    default_loops = {"ouro14": 4, "ouro26": 4, "huginn": 32, "olmo_rec32": 32}
+    out = {}
+    for g, cs in groups.items():
+        fam, name = g.split(":", 1)
+        if fam == "TRM":
+            length = 900.0 if "maze" in name else 81.0
+            S = x2.get(name)
+        else:
+            lens = [c[4].get("bf16_len") for c in cs if c[4].get("bf16_len")]
+            length = float(np.mean(lens)) if lens else None
+            S = lm_S(name, default_loops.get(name, 4))
+        out[g] = {"length": length, "S": S}
+    return out
+
+
+def loo_fit(xs, ys):
+    """OLS y = a + b x; leave-one-out predictions."""
+    xs, ys = np.asarray(xs, float), np.asarray(ys, float)
+    A = np.c_[np.ones_like(xs), xs]
+    coef, *_ = np.linalg.lstsq(A, ys, rcond=None)
+    pred = []
+    for i in range(len(xs)):
+        k = np.arange(len(xs)) != i
+        c, *_ = np.linalg.lstsq(A[k], ys[k], rcond=None)
+        pred.append(c[0] + c[1] * xs[i])
+    pred = np.array(pred)
+    r2 = 1 - ((ys - A @ coef) ** 2).sum() / ((ys - ys.mean()) ** 2).sum()
+    return coef, pred, r2
+
+
+def predict_section(groups, fits):
+    P = predictors(groups)
+    print("\n## Can the per-group midpoint be predicted label-free?\n")
+    print("| group | midpoint m | answer length | log10 length | X2 sensitivity S |")
+    print("|---|---|---|---|---|")
+    for g in sorted(fits):
+        print(f"| {g} | {fits[g]['m']:.3f} | {P[g]['length'] if P[g]['length'] is None else round(P[g]['length'])} | "
+              f"{'' if not P[g]['length'] else f'{math.log10(P[g][chr(108)+chr(101)+chr(110)+chr(103)+chr(116)+chr(104)]):.2f}'} | "
+              f"{'' if P[g]['S'] is None else f'{P[g][chr(83)]:.2f}'} |")
+    ys_all = np.array([fits[g]["m"] for g in sorted(fits)])
+    print(f"\nBaseline (predict the mean of the other groups): LOO RMSE "
+          f"{np.sqrt(np.mean([(ys_all[i] - np.delete(ys_all, i).mean()) ** 2 for i in range(len(ys_all))])):.3f}\n")
+    print("| predictor | groups | slope | R^2 | LOO RMSE | LOO max abs error | worst group |")
+    print("|---|---|---|---|---|---|---|")
+    res = {}
+    L_ = lambda p: math.log10(p["length"]) if p["length"] else None  # noqa: E731
+    S_ = lambda p: math.log(p["S"]) if p["S"] else None  # noqa: E731
+    for name, fx, fam in (("log10 answer length", L_, None), ("log S", S_, None),
+                          ("log10 answer length", L_, "TRM"), ("log S", S_, "TRM"),
+                          ("log10 answer length", L_, "LM"), ("log S", S_, "LM")):
+        gs = [g for g in sorted(fits) if fx(P[g]) is not None and (fam is None or g.startswith(fam + ":"))]
+        if fam:
+            name = f"{name}, {fam} groups only"
+        if len(gs) < 3:
+            continue
+        xs = [fx(P[g]) for g in gs]
+        ys = [fits[g]["m"] for g in gs]
+        coef, pred, r2 = loo_fit(xs, ys)
+        err = np.abs(np.array(ys) - pred)
+        base = np.sqrt(np.mean([(ys[i] - np.mean(np.delete(ys, i))) ** 2 for i in range(len(ys))]))
+        print(f"| {name} | {len(gs)} | {coef[1]:+.3f} | {r2:.2f} | {np.sqrt(np.mean(err ** 2)):.3f} (baseline {base:.3f}) | "
+              f"{err.max():.3f} | {gs[int(err.argmax())]} |")
+        res[name] = {"groups": gs, "slope": float(coef[1]), "r2": float(r2), "loo_rmse": float(np.sqrt(np.mean(err ** 2))),
+                     "baseline_rmse": float(base), "loo_max": float(err.max())}
+    print("\n(c) the fp32/bf16 answer margin is not implemented yet (needs the TRM/HRM per-puzzle logits).")
+    return res
+
+
 def main():
     import sys
     sys.path.insert(0, str(HERE))
@@ -189,6 +273,7 @@ def main():
     ap.add_argument("--trm-platform", default="root", choices=["root", "all"],
                     help="root = only the breadth/*.json grid files (one platform); all = include babel/ and p4d/ draws")
     ap.add_argument("--json", default=None)
+    ap.add_argument("--predict", action="store_true", help="fit the per-group midpoint on label-free predictors (needs --with-trm)")
     a = ap.parse_args()
     lm = lm_cells(a.roots or A.POOL_ROOTS, a.cut)
     out = {"lm": run(lm, "Looped LMs: one midpoint?")}
@@ -196,6 +281,8 @@ def main():
         trm = trm_cells(a.trm_platform)
         out["trm"] = run(trm, "TRM/HRM tasks: one midpoint?")
         out["all"] = run({**lm, **trm}, "Looped LMs + TRM/HRM: one midpoint?")
+        if a.predict:
+            out["predict"] = predict_section({**lm, **trm}, out["all"]["groups"])
     if a.json:
         json.dump(out, open(a.json, "w"), indent=1)
 
