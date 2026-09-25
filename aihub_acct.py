@@ -35,10 +35,12 @@ S24, E8 = "Samsung Galaxy S24", "Snapdragon 8 Elite QRD"
 OS = {S24: "14", E8: "15"}
 PLANS = {
     "acct2": [("sudoku_mlp", "w4a16", S24, "precompiled_qnn_onnx", 1),
-              ("sudoku_mlp", "w8a8rms16", S24, "qnn_dlc", 8)],
+              ("sudoku_mlp", "w8a8rms16", S24, "qnn_dlc", 8),
+              # device-legal rebuilds (embedding table encoding follows its 8-bit Gather output)
+              ("sudoku_mlp", "w8a8rms16t", S24, "qnn_dlc", 8)],
     "acct3": [(t, p, d, "qnn_dlc", 8) for d in (S24, E8)
               for t, p in (("sudoku_mlp", "fp32"), ("sudoku_mlp", "w8a8"), ("sudoku_mlp", "w8a16"),
-                           ("sudoku_mlp", "w8a8sqvar16"), ("sudoku_attn", "fp32"), ("sudoku_attn", "w8a8"),
+                           ("sudoku_mlp", "w8a8sqvar16t"), ("sudoku_attn", "fp32"), ("sudoku_attn", "w8a8"),
                            ("sudoku_attn", "w8a16"), ("maze", "fp32"), ("maze", "w8a8"))],
 }
 
@@ -49,7 +51,9 @@ def source_path(task, prec):
         return A.ART / task / "stepc_H1.onnx"
     # an upload directory must hold exactly model.onnx + model.data (qdq_* dirs also hold ablation variants)
     base, onnx_file = {"w8a8rms16": ("qdq_w8a16", "variant_B2_rms16.onnx"),
-                       "w8a8sqvar16": ("qdq_w8a16", "variant_B2ab_sq_var16.onnx")}.get(prec, (f"qdq_{prec}", "model.onnx"))
+                       "w8a8sqvar16": ("qdq_w8a16", "variant_B2ab_sq_var16.onnx"),
+                       "w8a8rms16t": ("qdq_w8a16", "variant_B2t_rms16.onnx"),
+                       "w8a8sqvar16t": ("qdq_w8a16", "variant_B2abt_sq_var16.onnx")}.get(prec, (f"qdq_{prec}", "model.onnx"))
     up = d / f"upload_{prec}"
     if not (up / "model.onnx").exists():
         up.mkdir(exist_ok=True)

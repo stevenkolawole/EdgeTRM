@@ -325,6 +325,32 @@ def build_variant(task, name, eight, sixteen_default=True, edge_linear=False, pe
             keep = [a for a in node.attribute if a.name not in ("axis",)]
             del node.attribute[:]
             node.attribute.extend(keep + [helper.make_attribute(k, v) for k, v in attrs.items()])
+    # The HTP requires a Gather's table and output to share one encoding. The embedding table is a weight
+    # (initializer Q/DQ), so when the gathered output moves to 8 bit the table's encoding follows it; the
+    # w8a8 graph's encoding of the same table is used (Sep 25: mixed graph failed on device with
+    # "embed_tokens/Gather ... has incorrect Value -34869, expected -34816").
+    inits = {i.name for i in g.initializer}
+    wq16 = {n.input[0]: n for n in g.node if n.op_type == "QuantizeLinear" and n.input[0] in inits}
+    wq8 = {n.input[0]: n for n in g8.node if n.op_type == "QuantizeLinear" and n.input[0] in {i.name for i in g8.initializer}}
+    prod = {o: n for n in g.node for o in n.output}
+    n_table = 0
+    for n in g.node:
+        if n.op_type != "Gather":
+            continue
+        out_q = next((c for c in cons.get(n.output[0], []) if c.op_type == "QuantizeLinear"), None)
+        if out_q is None or out_q.input[1].endswith("_e8s") is False:
+            continue
+        dq = prod.get(n.input[0])
+        q = prod.get(dq.input[0]) if dq is not None and dq.op_type == "DequantizeLinear" else None
+        if q is None or q.op_type != "QuantizeLinear" or q.input[0] not in wq8:
+            continue
+        e = encoding(v8, wq8[q.input[0]])
+        sn, zn = q.name + "_e8s", q.name + "_e8z"
+        new.append(numpy_helper.from_array(np.asarray(e["scale"], np.float32), sn))
+        new.append(helper.make_tensor(zn, e["zp_type"], list(np.shape(e["zp"])), np.asarray(e["zp"]).reshape(-1).tolist()))
+        for node in [q, dq]:
+            node.input[1], node.input[2] = sn, zn
+        n_table += 1
     n_edge = 0
     if edge_linear:
         inits = {i.name for i in g.initializer}
@@ -371,7 +397,7 @@ def build_variant(task, name, eight, sixteen_default=True, edge_linear=False, pe
     onnx.save_model(m, str(out))            # big initializers stay external in model.data
     info = {"name": name, "path": str(out), "eight_groups": sorted(eight) if sixteen_default else
             sorted(set(GROUPS) - set(eight)), "sixteen_default": sixteen_default, "n_tensors_8bit": n8,
-            "n_edges_8bit": n_edge, "n_per_channel": n_pc, "perchannel_groups": list(perchannel),
+            "n_edges_8bit": n_edge, "n_gather_tables_8bit": n_table, "n_per_channel": n_pc, "perchannel_groups": list(perchannel),
             "missing": missing[:20], "n_missing": len(missing)}
     return info
 
@@ -389,6 +415,9 @@ VARIANTS = {
     "B2b2_rms_var_rsqrt16": dict(eight={"rms_var", "rms_rsqrt", "rms_const"}, sixteen_default=False),
     # B2 (all RMSNorm at 16) rescues w8a8; is the RMSNorm output needed at 16 too?
     "B2ab_sq_var16": dict(eight={"rms_sq", "rms_var", "rms_rsqrt", "rms_const"}, sixteen_default=False),
+    # device-legal rebuilds (Gather table encoding follows its 8-bit output; built after the Sep 25 fix)
+    "B2t_rms16": dict(eight=RMS | {"const"}, sixteen_default=False),
+    "B2abt_sq_var16": dict(eight={"rms_sq", "rms_var", "rms_rsqrt", "rms_const"}, sixteen_default=False),
     # B2b2 (RMSNorm variance path alone at 16) does not rescue w8a8: greedy unions kept at 16 bit
     "B23_rms_resid16": dict(eight=RMS | {"rms_const", "residual", "inject"}, sixteen_default=False),
     "B26_rms_swiglu16": dict(eight=RMS | {"rms_const", "swiglu_prod"}, sixteen_default=False),
