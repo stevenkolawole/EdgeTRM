@@ -533,7 +533,10 @@ def cmd_bins(a):
 
 DEV_TASK = {"sudoku_mlp": "sudoku_mlp", "sudoku_attn": "sudoku_attn", "maze_attn": "maze"}
 # device precision -> harness cell whose (accuracy, steps) the device row borrows
-DEV_PREC = {"fp32": "fp32", "int8": "w8c+a8", "int4": "w4c+a8"}
+# Only the FP16 (fp32 export) graph is paired with harness fp32 accuracy across devices: the S24 fp32 chain
+# equals the host fp32 per-step correctness on every puzzle (cmd_s24). INT8 rows use on-device accuracy only
+# (cmd_s24); every INT4 graph computes the wrong function on the HTP (X3, REWRITE_NOTES 47-49): no INT4 rows.
+DEV_PREC = {"fp32": "fp32"}
 DEV_SHOW = ["Samsung Galaxy S24", "Samsung Galaxy S26", "Snapdragon 8 Elite QRD", "Samsung Galaxy S21",
             "Dragonwing RB3 Gen 2 Vision Kit", "SA8295P ADP", "Snapdragon X Elite CRD"]
 # Arm Ethos-U INT8 step, Vela 5.2 at 500 MHz (results/devices/mcu_h1.md headline table), ms per step
@@ -589,10 +592,9 @@ def cmd_device(a):
         print(f"  {'device':32s} {'prec':5s} {'ms/step':>8s} {'ms/ans 16':>10s} {'ms/ans sel':>10s} {'ms/solved 16':>12s} {'ms/solved sel':>13s} {'ms/solved nat':>13s}")
         for dev in DEV_SHOW + ["MCU"]:
             for prec, (spec, d) in stats.items():
-                if dev == "MCU":
-                    if prec != "int8":
-                        continue
-                    items = [(f"Ethos-{k[1]} (Vela est.)" if "FVP" not in k[1] else f"Ethos-{k[1]}", v) for k, v in MCU.items() if k[0] == dtask and k[2] == 3]
+                if dev == "MCU":             # INT8 step, latency only (output correctness unchecked, X3 item 33)
+                    items = [(f"Ethos-{k[1]} INT8 (Vela est.; latency only)" if "FVP" not in k[1] else f"Ethos-{k[1]} INT8 (latency only)", v)
+                             for k, v in MCU.items() if k[0] == dtask and k[2] == 3]
                 else:
                     ms = lat.get((dtask, prec, dev))
                     items = [(dev, ms)] if ms else []
@@ -617,7 +619,8 @@ def cmd_device(a):
         ok, st = score(c1, exit_steps(c1, *sel1))
         fa = c1.c[:, -1].mean()
         lat = [(f"{r['device']} ({r['prec']}, AI Hub)", r["ms"]) for r in h1prof if r["task"] == dtask and r["prec"] == "fp32"]
-        lat += [(f"Ethos-{k[1]}" + (" (Vela est., INT8)" if "FVP" not in k[1] else " (INT8)"), v) for k, v in MCU.items() if k[0] == dtask and k[2] == 1]
+        lat += [(f"Ethos-{k[1]}" + (" INT8 (Vela est., latency only)" if "FVP" not in k[1] else " INT8 (latency only)"), v)
+                for k, v in MCU.items() if k[0] == dtask and k[2] == 1]
         print(f"  {model}: fixed {16 * h} H=1 steps acc {100 * fa:.1f}; {rule_name(*sel1)} at H=1: acc {100 * ok.mean():.1f}, {st.mean():.1f} H=1 steps")
         for name, ms in lat:
             row = {"ms_step_h1": ms, "ms_solved_fixed": ms * 16 * h / fa, "ms_solved_exit_h1": ms * st.mean() / ok.mean()}
@@ -850,6 +853,69 @@ def cmd_polish(a):
     return out
 
 
+DEV_CHAINS = RB.parent / "devices" / "infer_m5"      # X3's S24 chains (aihub_infer.py): per step preds + q_halt
+S24_H1_MS = {("sudoku_mlp", "fp32"): (3.738, "H=1 profile j5qll10op"), ("sudoku_mlp", "w8a8"): (3.514, "H=1 profile jp3zz7oz5"),
+             # no H=1 profile of these graphs yet: Sep-10 H=3 step / 3 (H3/H1 measured 3.04 fp32, 2.92 w8a8 on Sudoku-MLP)
+             ("sudoku_attn", "w8a8"): (11.384 / 3, "approx: H=3 profile jp8e0v1xp / 3"),
+             ("maze", "fp32"): (150.171 / 3, "approx: H=3 profile jgk271myg / 3")}
+DEV_MODEL = {"sudoku_mlp": "sudoku_mlp", "sudoku_attn": "sudoku_attn", "maze": "maze_attn"}
+
+
+def load_chain(task, prec, device="Samsung_Galaxy_S24"):
+    """slim copy of X3's chain (per-step exact correctness vs the test labels, q_halt), written from
+    p4d ~/aihub_artifacts/h1/<task>/infer/dev_<prec>_<device>.npz; unfinished chains are skipped."""
+    f = DEV_CHAINS / f"{task}__dev_{prec}_{device}.npz"
+    if not f.exists():
+        return None
+    d = np.load(f)
+    if not json.loads(str(d["info"]))["done"]:
+        return None
+    return Cell(DEV_MODEL[task], f"S24 {prec}", "device", d["correct"].T.astype(bool), d["q"].T.astype(np.float32))
+
+
+def cmd_s24(a):
+    """exit rules scored on X3's on-device S24 chains (QNN HTP, H=1 stepc graph, 8 H=1 steps, carry through the
+    quantized I/O). Rule chosen on the host fp32 M5 record (n=1000) at the same budget and granularity."""
+    out = {}
+    for task in ("sudoku_mlp", "sudoku_attn", "maze"):
+        model = DEV_MODEL[task]
+        host = load_m5(model).get("fp32")
+        if host is None:
+            continue
+        K = 8
+        ref = h1_cell(host).trunc(K)
+        sel = select_rule(ref)
+        okh, sth = score(ref, exit_steps(ref, *sel))
+        print(f"\n=== {task}: budget {K} H=1 steps; rule chosen on host fp32 (n=1000) = {rule_name(*sel)} "
+              f"(host fp32: {100*ref.c[:, -1].mean():.1f} -> {100*okh.mean():.1f} at {sth.mean():.2f} steps)")
+        hc = ref
+        for prec in ("fp32", "w8a8", "w8a16", "w4a16"):
+            c = load_chain(task, prec)
+            if c is None:
+                continue
+            n = c.n
+            agree = None
+            if prec == "fp32":
+                agree = float((c.c == hc.c[:n]).mean())
+            fixed = 100 * c.c[:, -1].mean()
+            rows = {}
+            for nm, rule in (("native", ("native", None)), ("sel", sel), ("pat2", ("pat", 2))):
+                ok, st = score(c, exit_steps(c, *rule))
+                d, ci = paired_ci(ok, c.c[:, -1])
+                rows[nm] = (100 * ok.mean(), d, ci, st.mean())
+            ms = S24_H1_MS.get((task, prec))
+            lat = ""
+            if ms and fixed > 0:
+                a_, d_, ci_, s_ = rows["sel"]
+                lat = (f"; S24 {ms[0]:.2f} ms/H=1 step ({ms[1]}): ms/solved fixed {ms[0] * K / (fixed / 100):.1f} -> exit "
+                       f"{ms[0] * s_ / max(a_ / 100, 1e-9):.1f}")
+            out[(task, prec)] = {"n": n, "fixed": fixed, "rules": rows, "ms": ms, "agree_host_fp32": agree}
+            print(f"  S24 {prec:6s} n={n}: fixed {fixed:5.1f} | " + " | ".join(
+                f"{nm} {v[0]:5.1f} ({v[1]:+.1f}±{v[2]:.1f}) {v[3]:.2f} st" for nm, v in rows.items()) + lat +
+                  (f"; per-step exact agreement with host fp32 {agree:.3f}" if agree is not None else ""))
+    return out
+
+
 def cmd_json(a):
     """figure-ready summary: per model / K / correctness definition, every cell's rule table (draws
     merged), plus Sudoku bins and device rows."""
@@ -881,7 +947,7 @@ def cmd_json(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["rules", "summary", "bins", "device", "json", "agree", "inner", "deep", "sample", "dt", "polish"])
+    ap.add_argument("cmd", choices=["rules", "summary", "bins", "device", "json", "agree", "inner", "deep", "sample", "dt", "polish", "s24"])
     ap.add_argument("--K", type=int, default=16)
     ap.add_argument("--models", nargs="+", default=MODELS)
     ap.add_argument("--show", default="")
@@ -907,6 +973,8 @@ def main():
         cmd_dt(a)
     elif a.cmd == "polish":
         cmd_polish(a)
+    elif a.cmd == "s24":
+        cmd_s24(a)
     elif a.cmd == "agree":
         for m in a.models:
             for row in check_agreement(m):
