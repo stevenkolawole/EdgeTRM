@@ -536,6 +536,7 @@ def main():
     ap.add_argument("--diag", default="fp32", help="polish models that also get the diagnostic schedules")
     ap.add_argument("--extra_sched", default="", help="additional schedules (';'-separated), run for every polish model")
     ap.add_argument("--only_extra", action="store_true", help="run only --extra_sched (plus the append read-out)")
+    ap.add_argument("--per_step", action="store_true", help="per-input correctness at every step of c and of P alone")
     ap.add_argument("--batch", type=int, default=0)
     ap.add_argument("--n_calib", type=int, default=128)
     ap.add_argument("--fp32_ext", type=int, default=0, help="fp32 depth curve length (default 2T)")
@@ -574,7 +575,7 @@ def main():
         cfg = m_cpu.inner.config
         L1 = cfg.L_cycles + 1
         inner_js = sorted({1, L1, 2 * L1} - {cfg.H_cycles * L1}) if a.inner == "auto" else \
-            [int(j) for j in a.inner.split(",") if j]
+            [int(j) for j in a.inner.split(",") if j and j != "none"]
     shapes = {n: list(mod.weight.shape[:1]) + [int(np.prod(mod.weight.shape[1:]))] for n, mod in linear_items(m_cpu, family)}
 
     out_path = Path(a.out)
@@ -612,7 +613,8 @@ def main():
     ref = []
     Text = a.fp32_ext or 2 * T                           # fp32 depth curve beyond T: control for the append schedules
     f_curve = np.zeros(Text, int)
-    f_at = {k: [] for k in sorted(set(ks + [T] + [T + k for k in ks] + [Text])) if k <= Text}
+    f_at = {k: [] for k in sorted(set(ks + [T] + [T + k for k in ks] + [Text] + (list(range(1, Text + 1)) if a.per_step else [])))
+            if k <= Text}
     with torch.no_grad():
         for (s, e) in chunks:
             x = torch.from_numpy(inp[s:e]).to(dev)
@@ -669,12 +671,15 @@ def main():
             parsed = {s: parse_schedule(s, "P") for s in dict.fromkeys(scheds)}
             app = f"c{T}.P{max(ks)}"
             marks = {app: {T + k for k in ks}}
+            if a.per_step:                                   # per-input read-out at every step of P alone (paired tests)
+                marks[f"P{T}"] = set(range(1, T + 1))
             per = {s: [] for s in parsed}
             need = {"c": set(), "f": set()}
             for st_, _h in parsed.values():
                 pre_, a_ = prefix_of(st_, T)
                 need[pre_].add(a_)
             c_curve = np.zeros(T, int)
+            c_at = [[] for _ in range(T)]
             chead = []
             with torch.no_grad():
                 for ci, (s, e) in enumerate(chunks):
@@ -687,7 +692,10 @@ def main():
                         z = stp.step(z, "c")
                         if (t_ + 1) in need["c"]:
                             cache["c"][t_ + 1] = z
-                        c_curve[t_] += int(stp.readout(z, "c", y)["correct"].sum())
+                        cc_ = stp.readout(z, "c", y)["correct"]
+                        c_curve[t_] += int(cc_.sum())
+                        if a.per_step:
+                            c_at[t_].append(cc_.int().cpu())
                     if need["f"] - {0}:
                         z = stp.z0()
                         for t_ in range(max(need["f"])):
@@ -722,6 +730,7 @@ def main():
                 recs[sname] = r
             extra_bits = {n: polish_extra_bits(pname, cell[0], shp) for n, shp in shapes.items()}
             rec = {"cell": cell[0], "draw": cell[1], "polish": pname, "c_curve": (c_curve / len(inp)).tolist(),
+                   **({"c_at": [enc(torch.cat(v)) for v in c_at]} if a.per_step else {}),
                    "schedules": recs, "polish_extra_bits": extra_bits,
                    "cell_bits": {n: storage_bits(cell[0], shp) for n, shp in shapes.items()},
                    "secs": time.time() - t1}

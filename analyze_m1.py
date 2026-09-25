@@ -75,6 +75,18 @@ def cell_order(c):
     return (1, float(m.group(1))) if m else (0, c)
 
 
+def cheap_bits(c, r, shapes):
+    """bits per weight read by one compressed step (nested: only the top b bits of the stored B-bit codes)."""
+    bc = bits_per_weight(r["cell_bits"], shapes)
+    m = re.fullmatch(r"n(\d+)([tac])(\d+)", c)
+    return bc - int(m.group(1)) + int(m.group(3)) if m else bc
+
+
+def per_tensor(name):
+    """weight formats a per-tensor-scale integer pipeline supports (INT8/INT4 per tensor, nested per tensor)."""
+    return bool(re.fullmatch(r"w\d+t|n\d+t\d+", name))
+
+
 def pol_bits(c, p, r, shapes):
     """bits per weight read by one step of the polish model."""
     if p == "fp32":
@@ -96,7 +108,7 @@ def frontier(t, groups, cells, pols, S):
         if c.startswith("noise") or c in ("fp32",):
             continue
         r = rs[0]
-        bc = bits_per_weight(r["cell_bits"], shapes)
+        bc = cheap_bits(c, r, shapes)
         pure.append((c, bc, r["c_curve"]))
         if p != "fp32" and f"P{T}" in r["schedules"] and r["schedules"][f"P{T}"]["curve"]:
             pure.append((p if not re.fullmatch(r"(lr|lq)\d+", p) else f"{c}+{p}", pol_bits(c, p, r, shapes),
@@ -105,10 +117,10 @@ def frontier(t, groups, cells, pols, S):
     for name, b, cur in pure:
         uniq.setdefault(name, (b, cur))
 
-    def best(cost, mem=1e9, exclude=()):
+    def best(cost, mem=1e9, exclude=(), only=None):
         bestv = (0.0, "--", 0)
         for name, (b, cur) in uniq.items():
-            if name in exclude or b > mem + 1e-6:
+            if name in exclude or b > mem + 1e-6 or (only is not None and not only(name)):
                 continue
             s = int(np.floor(cost * 32 / b + 1e-9))
             s = min(s, len(cur))
@@ -119,8 +131,8 @@ def frontier(t, groups, cells, pols, S):
     print("traffic in fp32-step units (bits x steps / 32). Alternatives: fp32, the polish model alone, and every "
           "compressed model in these files at any step count.\n")
     print("| cell | polish | k | hybrid acc | traffic | memory (bits/w) | best at <= traffic (steps) | its acc | delta | "
-          "best at <= traffic and <= memory (steps) | its acc | delta |")
-    print("|---|---|---|---|---|---|---|---|---|---|---|---|")
+          "best at <= traffic and <= memory (steps) | its acc | delta | per-tensor formats only: best (steps) | its acc | delta |")
+    print("|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for c in cells:
         if c.startswith("noise"):
             continue
@@ -129,19 +141,22 @@ def frontier(t, groups, cells, pols, S):
             if not rs:
                 continue
             r = rs[0]
-            bc, bp = bits_per_weight(r["cell_bits"], shapes), pol_bits(c, p, r, shapes)
+            bc, bp = cheap_bits(c, r, shapes), pol_bits(c, p, r, shapes)
             for k in t["ks"]:
                 sname = f"c{T-k}.P{k}"
                 if k >= T or sname not in r["schedules"]:
                     continue
                 acc = r["schedules"][sname]["acc"]
                 cost = ((T - k) * bc + k * bp) / 32
-                mem = bc if (re.fullmatch(r"n\d+[tac]\d+", c) and p != "fp32" and not re.fullmatch(r"(lr|lq)\d+", p)) \
-                    else bc + bits_per_weight(r["polish_extra_bits"], shapes)
+                bstore = bits_per_weight(r["cell_bits"], shapes)
+                mem = bstore if (re.fullmatch(r"n\d+[tac]\d+", c) and p != "fp32" and not re.fullmatch(r"(lr|lq)\d+", p)) \
+                    else bstore + bits_per_weight(r["polish_extra_bits"], shapes)
                 bv, bn, bs = best(cost)
                 mv, mn, ms = best(cost, mem)
+                pv, pn, ps = best(cost, mem, only=per_tensor)
                 print(f"| {c} | {p} | {k} | {100*acc:.1f} | {cost:.2f} | {mem:.1f} | {bn} ({bs}) | {100*bv:.1f} | "
-                      f"{100*(acc-bv):+.1f} | {mn} ({ms}) | {100*mv:.1f} | {100*(acc-mv):+.1f} |")
+                      f"{100*(acc-bv):+.1f} | {mn} ({ms}) | {100*mv:.1f} | {100*(acc-mv):+.1f} | {pn} ({ps}) | {100*pv:.1f} | "
+                      f"{100*(acc-pv):+.1f} |")
 
 
 def main():
@@ -258,7 +273,7 @@ def main():
                 if not rs:
                     continue
                 r = rs[0]
-                bc = bits_per_weight(r["cell_bits"], shapes)
+                bc = cheap_bits(c, r, shapes)
                 bx = bits_per_weight(r["polish_extra_bits"], shapes)
                 mlr = re.fullmatch(r"(lr|lq)\d+", p)
                 bp = bc + bx if mlr else (bits_per_weight(r["polish_extra_bits"], shapes)

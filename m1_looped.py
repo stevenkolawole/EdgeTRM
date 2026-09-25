@@ -2,9 +2,9 @@
 """M1 on looped LMs: compressed loops, then the last loop(s) in bf16 (precision switching per loop).
 
 Thin wrapper around X4's `looped_decode.py` (unchanged).  Extra quant specs:
-  <q>~P<i,j,...>   loops i, j, ... (0-based current_ut) use the bf16 weights for every token;
+  <q>~P<ij...>     loops i, j, ... (0-based current_ut, one digit each) use the bf16 weights for every token;
                    e.g. w4c~P3 on Ouro with 4 loops = loops 0-2 w4c, the last loop bf16
-  <q>~D<i,...>     the same, but only on decode steps (one new token); the prompt (prefill) runs fully compressed
+  <q>~D<ij...>     the same, but only on decode steps (one new token); the prompt (prefill) runs fully compressed
 Every Linear in the looped core holds both weights; a pre-hook on each decoder layer reads `current_ut`
 (Ouro passes it to every layer) and whether the call is a prefill (sequence length > 1), and the
 Linear's pre-hook points its weight at the bf16 or the compressed tensor.  Memory: both copies.
@@ -28,11 +28,11 @@ _orig_quantize = D.quantize_
 
 
 def parse_quant(spec):
-    m = re.fullmatch(r"(.+)~([PD])([\d,]+)", spec)
+    m = re.fullmatch(r"(.+)~([PD])(\d+)", spec)          # each digit is one loop index (e.g. ~P23 = loops 2 and 3)
     if not m:
         return _orig_parse(spec)
     q = dict(_orig_parse(m.group(1)))
-    q.update(spec=spec, polish_loops=[int(i) for i in m.group(3).split(",")], polish_decode_only=m.group(2) == "D")
+    q.update(spec=spec, polish_loops=[int(i) for i in m.group(3)], polish_decode_only=m.group(2) == "D")
     return q
 
 

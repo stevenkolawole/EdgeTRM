@@ -69,12 +69,16 @@ def main():
         return preds, st, (zH, zL)
 
     out_path = Path(a.out)
-    res = json.loads(out_path.read_text()) if out_path.exists() else {}
+    part = out_path.with_suffix(".partial.json")
     t0 = time.time()
-    names = []
-    corr = {}                                      # schedule -> per-puzzle correct (final) / per-step lists
+    corr, start = {}, 0                            # schedule -> per-puzzle correct (final) / per-step lists
+    if part.exists():                              # resume (p4d reboots daily)
+        pj = json.loads(part.read_text())
+        if pj.get("start") == a.start and pj.get("wbits") == a.wbits:
+            corr, start = pj["corr"], pj["done"]
+            print(f"resuming at puzzle {start}", flush=True)
     cheap = [k for k in sess if k.endswith("a8")]
-    for i in range(N):
+    for i in range(start, N):
         y = lab[i]
         ok = lambda p: int((p == y).all())
         # fp32 from scratch: per-step curve
@@ -98,7 +102,10 @@ def main():
                     corr.setdefault(f"{c}{T-k}+{pol}{k}", []).append(ok(p2[-1]))
                 ap_, _, _ = traj(pol, i, endc[0], endc[1], max(ks))
                 corr.setdefault(f"{c}{T}+{pol}_append", []).append([ok(p) for p in ap_])
-        if (i + 1) % 20 == 0:
+        if (i + 1) % 10 == 0 or i + 1 == N:
+            tmp = part.with_suffix(".tmp")
+            tmp.write_text(json.dumps({"start": a.start, "wbits": a.wbits, "done": i + 1, "corr": corr}))
+            tmp.replace(part)
             print(f"  {i+1}/{N} puzzles ({time.time()-t0:.0f}s)", flush=True)
     summ = {"task": a.task, "start": a.start, "count": N, "T": T, "ks": ks, "graphs": list(sess),
             "secs": time.time() - t0, "per_puzzle": corr, "acc": {}}

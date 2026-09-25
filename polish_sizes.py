@@ -62,8 +62,10 @@ def main():
     ap.add_argument("--specs", default="w4t,w4c,w4g32,w3g32,w3c,w8c,w8t,mx4")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
-    res = {}
+    res = json.load(open(a.out)) if Path(a.out).exists() else {}     # resumable per task
     for task in a.tasks.split(","):
+        if task in res:
+            continue
         m, family, _ = P.build_fp32(task, 16, 8)
         items = P.linear_items(m, family)
         Ws = {n: mod.weight.data.reshape(mod.weight.shape[0], -1).float().contiguous() for n, mod in items}
