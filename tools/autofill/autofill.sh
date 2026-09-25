@@ -11,6 +11,7 @@
 # A card is fillable when it has fewer than MAXPROC compute processes, enough free memory for the job plus a
 # margin, and its power has been below POWER_LOW for two consecutive checks (so jobs still loading are not
 # double-booked). After a launch the card cools down for COOLDOWN seconds.
+# A card with a file state/reserve_<idx> (content: owner/reason) is never filled; used for clean energy windows.
 set -u
 ROOT=${AUTOFILL_ROOT:-$HOME/autofill}
 INTERVAL=${INTERVAL:-90}
@@ -58,6 +59,7 @@ while true; do
       pw=${pw%.*}; used=$((mu/1024)); free=$(( (mt-mu)/1024 ))
       np=$(grep -c "$uuid" <<<"$procs" || true)
       st="busy"
+      if [ -e "$ROOT/state/reserve_$idx" ]; then echo "$idx $pw $used $free $np RESERVED:$(cat "$ROOT/state/reserve_$idx")"; continue; fi
       low="$ROOT/state/low_$idx"; cool="$ROOT/state/cool_$idx"
       if [ "$pw" -lt "$POWER_LOW" ]; then
         if [ -f "$low" ]; then lowcount=2; else lowcount=1; touch "$low"; fi
