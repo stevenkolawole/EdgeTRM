@@ -4,7 +4,8 @@ format run for any number of steps, pooled over all budgets T of one task (and o
 
 Cost models:
   bits  weight-bit traffic per inference = sum over steps of (bits per weight read by that step), in fp32-step units
-  s24   Samsung Galaxy S24 NPU latency from the Sep-10 AI Hub profiles of the H=3 supervision-step graph
+  s24v  the same with verified kernels only (FP16, INT8): every step at the cheapest verified kernel (conservative)
+  s24   Samsung Galaxy S24 NPU latency (ESTIMATE: the INT4 graph is unverified, REWRITE_NOTES 49) from the Sep-10 AI Hub profiles of the H=3 supervision-step graph
         (results/breadth/aihub_status.json): FP16 graph for fp32/bf16 weights, INT8 graph (w8a8) for 8-bit weights,
         INT4 graph (w4a8) for every <= 4-bit format (INT3 and nested top-bit slicing have no faster kernel: proxy).
         Latency is accounting only: the device graphs quantize activations too, the harness cells do not.
@@ -69,6 +70,20 @@ def s24_of(fmt, task):
     if fmt.startswith("w8"):
         return t["int8"]
     return t["int4"]
+
+
+def s24v_of(fmt, task):
+    """verified-kernel bound: only FP16 and INT8 graphs are correctness-checked on the S24 (REWRITE_NOTES 49: every
+    INT4-weight qnn_dlc graph computes the wrong function). Every step, cheap ones included, is costed at the cheapest
+    verified kernel; low-bit cheap steps get no speed-up, so any latency gain is accuracy per step only."""
+    t = S24_MS.get(task)
+    if t is None:
+        return None
+    if fmt in ("fp32", "bf16"):
+        return t["fp"]
+    if fmt.startswith("w8"):
+        return t["int8"]
+    return min(t["fp"], t["int8"])
 
 
 def main():
@@ -137,11 +152,15 @@ def main():
             return f"{n10}/{n01}, p={p:.2g}"
         return "n/a"
 
-    for model in ("bits", "s24"):
-        cf = (lambda n: bits[n] / 32) if model == "bits" else (lambda n: s24_of(n, a.task))
-        if model == "s24" and S24_MS.get(a.task) is None:
+    for model in ("bits", "s24", "s24v"):
+        cf = {"bits": (lambda n: bits[n] / 32), "s24": (lambda n: s24_of(n, a.task)),
+              "s24v": (lambda n: s24v_of(n, a.task))}[model]
+        if model != "bits" and S24_MS.get(a.task) is None:
             continue
-        unit = "fp32-step traffic" if model == "bits" else "S24 ms"
+        unit = {"bits": "fp32-step traffic",
+                "s24": "S24 ms, ESTIMATE on the unverified INT4 kernel (qnn INT4 graphs compute the wrong function, "
+                       "REWRITE_NOTES 49)",
+                "s24v": "S24 ms, conservative bound on verified kernels only (FP16/INT8; cheap steps get no speed-up)"}[model]
         print(f"\n## cost model: {model} ({unit})\n")
         print("| T | cheap | polish | k | acc | cost | memory b/w | best single format at <= cost, <= memory (steps) | acc | delta | paired | "
               "fp32 steps to match | fp32 cost to match / hybrid cost |")

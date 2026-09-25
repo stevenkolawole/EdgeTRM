@@ -133,7 +133,7 @@ def storage_bits(spec, shape):
     """Bits to store one weight matrix under a spec (codes + scales; fp16 scales, int zero points)."""
     o, i_ = shape
     N = o * i_
-    if spec in ("fp32",) or spec.startswith("noise"):
+    if spec in ("fp32",) or spec.startswith("noise") or re.fullmatch(r"e[wnm].*", spec):
         return 32 * N
     if spec == "bf16":
         return 16 * N
@@ -199,6 +199,19 @@ def make_cell(m_fp32_cpu, family, spec, draw):
             C.dt_quantize_(m, None, "noise", sigma)
         else:
             bs.quantize_weights_(m, None, "noise", sigma)
+        return m
+    me = re.fullmatch(r"e(.+)", spec)
+    if me and me.group(1)[0] in "wnm":
+        # shuffled-error control: W + (Q(W) - W) permuted within each tensor (same error values, rounding structure
+        # destroyed; full-precision arithmetic). Seeded by draw and tensor index.
+        with torch.no_grad():
+            for li, (_, mod) in enumerate(linear_items(m, family)):
+                W = mod.weight.data
+                W2 = W.reshape(W.shape[0], -1).float()
+                E = quant_2d(W2, me.group(1)) - W2
+                g = torch.Generator().manual_seed(20_000 + 1000 * draw + li)
+                perm = torch.randperm(E.numel(), generator=g)
+                mod.weight.data = (W2 + E.reshape(-1)[perm].reshape(E.shape)).reshape(W.shape).to(W.dtype)
         return m
     with torch.no_grad():
         for _, mod in linear_items(m, family):
