@@ -122,6 +122,8 @@ def per_input(t, groups, name, steps):
         r = rs[0]
         if c == name and "c_at" in r and steps <= len(r["c_at"]):
             return r["c_at"][steps - 1]
+        if c == name and steps == T and f"c{T}" in r["schedules"]:          # the fully compressed run at T
+            return r["schedules"][f"c{T}"]["correct"]
         if p == name and f"P{T}" in r["schedules"]:
             at = r["schedules"][f"P{T}"].get("at", {})
             if str(steps) in at:
