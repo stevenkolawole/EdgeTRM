@@ -41,6 +41,23 @@ for part in general preempt; do
       [ -n "$f" ] && ! grep -q -- "--requeue" "$f" && sed -i "2i #SBATCH --requeue" "$f"
     fi
     [ -z "$f" ] && { echo "$part EMPTY_BACKLOG"; break; }
+    # PACKING: small puzzle-model jobs (M1, M2 puzzle runs, M3, X2) use a few GB of a 48 GB L40S, so run up to 3
+    # of them concurrently inside one GPU allocation. LM decodes (X4, M2 m2o) and training (X5) stay one per GPU.
+    bf=$(basename $f); d=$(dirname $f)
+    if [[ $bf =~ ^[0-9]+_(M1|M2|M3|X2)_ ]] && [[ $bf != *m2o* ]]; then
+      mem=$(ls $d/*.sbatch 2>/dev/null | sort | while read x; do b=$(basename $x); [[ $b =~ ^[0-9]+_(M1|M2|M3|X2)_ ]] && [[ $b != *m2o* ]] && echo $x; done | head -3)
+      mkdir -p $B/packs $B/packlogs; pk=$B/packs/pack_$(date +%s)_$RANDOM.sbatch; ok=1; names=""
+      for x in $mem; do mv "$x" $B/babel_submitted/ 2>/dev/null || { ok=0; break; }; names="$names $(basename $x)"; done
+      [ "$ok" = 1 ] || { echo "$part MOVE_FAILED (pack): not submitting"; break; }
+      { echo '#!/bin/bash'; echo '#SBATCH --job-name=pack'; echo '#SBATCH --requeue'; echo '#SBATCH --gres=gpu:1'
+        echo '#SBATCH --constraint=L40S'; echo '#SBATCH --exclude=babel-o9-24,babel-o5-16,babel-p9-28,babel-t5-28,babel-p9-20'
+        echo '#SBATCH --cpus-per-task=12'; echo '#SBATCH --mem=96G'; echo '#SBATCH --time=12:00:00'
+        echo "#SBATCH --output=$B/packlogs/%x_%j.out"; echo "echo members:$names"
+        for n1 in $names; do echo "bash $B/babel_submitted/$n1 > $B/packlogs/${n1%.sbatch}.\$SLURM_JOB_ID.log 2>&1 &"; done
+        echo 'wait'; } > $pk
+      if out=$(sbatch --partition=$part --qos=${QOS[$part]} "$pk" 2>&1); then echo "$part PACKED$names: $out"; n=$((n+1)); continue
+      else echo "$part PACK_FAILED$names: $out"; for n1 in $names; do mv $B/babel_submitted/$n1 $d/$n1.failed; done; break; fi
+    fi
     # move first, so a failed move can never cause a duplicate submission
     g=$B/babel_submitted/$(basename $f)
     mv "$f" "$g" 2>/dev/null || { echo "$part MOVE_FAILED $(basename $f): not submitting"; break; }
