@@ -34,6 +34,11 @@ for part in general preempt; do
       fi
       f=$(ls $B/babel_backlog/preempt/*.sbatch 2>/dev/null | sort | head -1)
     fi
+    # preempt has room but no preempt work: borrow general-backlog work (submitted with --requeue so preemption resumes it)
+    if [ -z "$f" ] && [ "$part" = preempt ]; then
+      f=$(ls $B/babel_backlog/general/*.sbatch 2>/dev/null | sort | head -1)
+      [ -n "$f" ] && ! grep -q -- "--requeue" "$f" && sed -i "2i #SBATCH --requeue" "$f"
+    fi
     [ -z "$f" ] && { echo "$part EMPTY_BACKLOG"; break; }
     # move first, so a failed move can never cause a duplicate submission
     g=$B/babel_submitted/$(basename $f)
