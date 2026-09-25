@@ -111,7 +111,7 @@ def qtensor(W, fmt):
         o, i_ = Wf.shape
         pad = (-i_) % blk
         Wp = F.pad(Wf, (0, pad)).view(o, -1, blk)
-        am = Wp.abs().amax(2, keepdim=True).clamp_min(1e-12)
+        am = (r * Wp.abs().amax(2, keepdim=True)).clamp_min(1e-12)        # clip ratio applies to block scales too
         if g == "mx":
             s = torch.exp2(torch.ceil(torch.log2(am / qmax)))
         else:
@@ -621,11 +621,29 @@ def choose_clips(ctx, S, lo, hi, how, point="T"):
                 cur[g] = best
             print(f"  joint clip sweep {sweep + 1}: delta_T {S.delta_T({h: f'{lo}@{cur[h]}' for h in ctx.groups}):.4f}", flush=True)
         return cur
-    if how in ("omse", "dT", "dTj", "kl1"):
+    if how in ("omse", "dT", "dTj", "kl1", "klT", "blk"):
         X = layer_inputs(ctx, S) if point == "traj" else layer_inputs_at(ctx, S, point if point != "traj" else "T")
     else:
         X = None
     fallback = {}
+    calls, blk_of = None, {}
+    if how == "blk":                                     # BRECQ-style: the output of the block the tensor sits in
+        import m3_calib
+        blocks = m3_calib.block_modules(ctx)
+        _, _, calls = m3_calib.collect_inputs(ctx, S, [], blocks=blocks, max_block_calls=24)
+        for g in ctx.groups:
+            b = next((b for b in blocks if ctx.tensor_of[g].startswith(b + ".") or ctx.tensor_of[g] == b), None)
+            blk_of[g] = (b, blocks[b]) if b else None
+
+    def blk_val(g, f):
+        b, mod = blk_of[g]
+        ctx.set({g: f})
+        v = 0.0
+        with torch.no_grad():
+            for a_, kw, out_ in calls[b]:
+                v += float((mod(*a_, **kw) - out_).float().pow(2).sum())
+        ctx.set({})
+        return v
     for g in ctx.groups:
         best, bv = 1.0, float("inf")
         vals = []
@@ -637,12 +655,16 @@ def choose_clips(ctx, S, lo, hi, how, point="T"):
                 v = omse_val(ctx, X, g, f)
             elif how == "kl1":
                 v = S.kl1({**{h: hi for h in ctx.groups}, g: f}, point)
+            elif how == "klT":
+                v = S.kl({**{h: hi for h in ctx.groups}, g: f})
+            elif how == "blk":
+                v = blk_val(g, f) if blk_of.get(g) else omse_val(ctx, X, g, f)
             else:
                 v = S.delta_at({**{h: hi for h in ctx.groups}, g: f}, point)
             vals.append(v)
             if v < bv:
                 best, bv = r, v
-        if how in ("dT", "kl1") and (max(vals) - min(vals)) <= 1e-6 * max(abs(max(vals)), 1e-12):
+        if how in ("dT", "kl1", "klT") and (max(vals) - min(vals)) <= 1e-6 * max(abs(max(vals)), 1e-12):
             # the tensor is outside the step map (read-out head, input projection): delta_T cannot see it;
             # fall back to its own output error on the trajectory inputs
             vals = [omse_val(ctx, X, g, f"{lo}@{r}") for r in CLIPS]
@@ -785,7 +807,7 @@ def main():
     ap.add_argument("--act", default="", help="a<bits>: static per-tensor activation fake-quant at every linear input")
     ap.add_argument("--aclip", default="absmax", choices=["absmax", "pct", "mse", "dT"])
     ap.add_argument("--clips_from", default="", help="use the clip ratios chosen in another run (seed transfer)")
-    ap.add_argument("--clip", default="none", choices=["none", "mse", "omse", "dT", "dTj", "pct", "aciq", "kl1"],
+    ap.add_argument("--clip", default="none", choices=["none", "mse", "omse", "dT", "dTj", "pct", "aciq", "kl1", "klT", "blk"],
                     help="clip ratio of the low format per group: none (absmax), mse (data-free), dT (label-free)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()

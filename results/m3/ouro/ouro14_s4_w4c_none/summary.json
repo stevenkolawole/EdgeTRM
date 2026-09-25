@@ -1,0 +1,31 @@
+{
+ "tag": "ouro14_s4_w4c_none",
+ "clip": "none",
+ "calib": "",
+ "bits": 4,
+ "steps": 4,
+ "clips": {},
+ "delta_last_loop": 0.6482857167720795,
+ "n_cal": 16,
+ "cal": "gsm8k train[100:116]",
+ "tf": {
+  "nll": 1.053678014278412,
+  "tf_acc": 0.7509444588422776,
+  "tf_agree": 0.8439533889293671,
+  "kl": 0.29051021695137025,
+  "fidelity": 0.7361704671382904,
+  "tf_ans_acc": 0.39
+ },
+ "gen_greedy": {
+  "n": 200,
+  "acc": 0.07,
+  "degenerate": 0.9,
+  "loop": 0.665,
+  "capped": 0.97,
+  "has_marker": 0.215,
+  "mean_gen_len": 499.165,
+  "rep4": 0.8552620000000002,
+  "zlib_ratio": 0.11056850000000018
+ },
+ "secs": 948.1795616149902
+}
