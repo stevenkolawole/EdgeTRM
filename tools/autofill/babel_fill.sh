@@ -14,6 +14,7 @@ while true; do
 set -u
 B=$HOME/autofill; mkdir -p $B/babel_backlog/general $B/babel_backlog/preempt $B/babel_submitted
 declare -A CAP=([general]=8 [preempt]=24)
+declare -A QOS=([general]=normal [preempt]=preempt_qos)
 echo "# $(date -u +%FT%TZ) babel_fill"
 # $HOME quota guard: jobs write their output under $HOME, so a full quota makes every job fail at once
 avail_kb=$(df -Pk $HOME | awk 'NR==2{print $4}')
@@ -43,7 +44,7 @@ for part in general preempt; do
     # move first, so a failed move can never cause a duplicate submission
     g=$B/babel_submitted/$(basename $f)
     mv "$f" "$g" 2>/dev/null || { echo "$part MOVE_FAILED $(basename $f): not submitting"; break; }
-    if out=$(sbatch --partition=$part "$g" 2>&1); then
+    if out=$(sbatch --partition=$part --qos=${QOS[$part]} "$g" 2>&1); then
       echo "$part SUBMITTED $(basename $f): $out"
       n=$((n+1))
     else
