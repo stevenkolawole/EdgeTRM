@@ -23,6 +23,8 @@ BAND = (1.46, 1.92)
 
 def x5_width(m):
     f = HERE / "results" / "q7" / "babel" / f"var_{m}" / "eval_step_65100.json"
+    if not f.exists():                                         # staged copy of X5's Babel record (DONE marker seen)
+        f = HERE / "results" / "breadth" / "babel" / "x2" / "pred" / "x5_eval" / f"var_{m}_eval_step_65100.json"
     if not f.exists():
         return None
     d = json.load(open(f))
