@@ -57,6 +57,13 @@ def sigma_half(sig_acc, a0, higher_is_better=True):
 
 
 # ----------------------------------------------------------------------------- sigma_1/2 and quantizer outcomes
+QPLAT = {}      # model -> platform of its quantizer-cell labels
+
+
+def wplat(src):
+    return "p4d" if src.startswith("variants_noise") else "babel"
+
+
 def widths():
     W, Q = {}, defaultdict(dict)                    # W[model] = (sigma_half, note, fp32, source); Q[model][spec] = retained
     fd = json.load(open(B / "x2_contraction_figdata.json"))
@@ -69,6 +76,7 @@ def widths():
             for c in d["cells"]:
                 if c["kind"] == "quant" and c["retained"] is not None:
                     Q[name][c["spec"]] = c["acc"] / d["fp32_acc"]
+                    QPLAT[name] = "babel"
     for task, fn, H in [("sudoku_mlp", "sudoku_mlp_all", 3), ("sudoku_attn", "sudoku_attn_all", 3),
                         ("hrm_sudoku", "hrm_sudoku_all", 2), ("maze_attn", "maze_attn_n816", 3)]:
         recs = [r for r in json.load(open(B / f"{fn}.json"))["records"] if r["nsup"] == 16 and r["H_cycles"] == H]
@@ -76,6 +84,7 @@ def widths():
         for r in recs:
             if r["quant"]["spec"] != "fp32":
                 Q[task][r["quant"]["spec"]] = r["pexact"] / max(a0, 1e-9)
+        QPLAT[task] = "p4d"                        # the breadth-campaign grids ran on p4d
     for task, fn, H in [("hrm_maze", "hrm_maze_n816", 2)]:
         if (B / f"{fn}.json").exists():
             recs = [r for r in json.load(open(B / f"{fn}.json"))["records"] if r["nsup"] == 16 and r["H_cycles"] == H]
@@ -84,6 +93,7 @@ def widths():
                 for r in recs:
                     if r["quant"]["spec"] != "fp32":
                         Q[task][r["quant"]["spec"]] = r["pexact"] / max(a0, 1e-9)
+                QPLAT[task] = "p4d"
     wid = B / "babel" / "x2" / "sens"
     hm = defaultdict(list)                         # HRM maze: X2 width sweep (noise 0.5-3.0, n=500, 3 seeds)
     for f in sorted(glob.glob(str(wid / "wid_hrm_maze_seed*.json"))):
@@ -116,6 +126,7 @@ def widths():
         for s, vals in raw.items():
             if not s.startswith("noise") and s != "fp32":
                 Q[v][s] = float(np.median(vals)) / max(a0, 1e-9)
+                QPLAT[v] = "p4d" if v in q8 else "babel"
     for f in sorted(glob.glob(str(wid / "wid_*_quant.json"))):      # quantizer cells of X2-swept models
         v = Path(f).stem.replace("wid_", "").replace("_quant", "")
         recs = [r for r in json.load(open(f))["records"] if r["nsup"] == 16]
@@ -123,6 +134,7 @@ def widths():
         for r in recs:
             if a0 and r["quant"]["spec"] != "fp32":
                 Q[v][r["quant"]["spec"]] = r["pexact"] / max(a0, 1e-9)
+                QPLAT[v] = "babel"
     # MDEQ
     for model, pat in (("mdeq_small", "deq_small_*.json"), ("mdeq_xl", "deq_xl_*.json")):
         sa, a0s, qd = defaultdict(list), [], {}
@@ -142,6 +154,7 @@ def widths():
         W[model] = (sh, note, a0, "X6 Broyden k=100")
         for s, v in qd.items():
             Q[model][s] = v / a0
+            QPLAT[model] = "babel"
     # DEQ-Transformer (perplexity)
     sa, a0s, qd = defaultdict(list), [], {}
     for f in sorted(glob.glob(str(TR / "deqlm_*.json"))):
@@ -159,6 +172,7 @@ def widths():
     W["deq_transformer"] = (sh, note, a0, "X6 Anderson cap 60; half = ppl doubles")
     for s, v in qd.items():
         Q["deq_transformer"][s] = a0 / v                 # "retained" analogue: < 0.5 iff ppl > 2x fp32
+        QPLAT["deq_transformer"] = "babel"
     return W, Q
 
 
@@ -207,7 +221,12 @@ def r2(rows, delta):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--sens", default=str(B / "babel" / "x2" / "sens" / "sens_*.json"))
+    ap.add_argument("--sens", default=str(B / "*" / "x2" / "sens" / "sens_*.json"),
+                    help="sens files; the platform is the directory: results/breadth/<babel|p4d>/x2/sens")
+    ap.add_argument("--platform", default="same", choices=["same", "babel", "p4d"],
+                    help="same: each model's S from the platform of its sigma_1/2 (cross-platform models dropped); "
+                         "babel / p4d: only models whose sigma_1/2 AND S come from that platform")
+    ap.add_argument("--lm_platform", default="p4d", help="platform of the looped-LM deltas (labels are Lambda/p4d/Babel)")
     ap.add_argument("--out", default=str(B / "x2_sens_fit.json"))
     ap.add_argument("--sigma0", type=float, default=PRIMARY)
     ap.add_argument("--min_fp32", type=float, default=0.3, help="exclude models whose fp32 accuracy is below this")
@@ -216,30 +235,40 @@ def main(argv=None):
     S, D = {}, {}
     for f in sorted(glob.glob(a.sens)):
         j = json.load(open(f))
+        plat = Path(f).parts[-4]
         m = j["variant"]
         by = defaultdict(list)
         for r in j["records"]:
             if r["sigma"] is not None and "@" not in r["spec"]:
                 by[r["sigma"]].append(r["delta_med"])
             elif r["sigma"] is None:
-                D.setdefault(m, {})[r["spec"]] = r["delta_med"]
-        S[m] = {s: float(np.median(v)) / s for s, v in by.items()}
-        S[m]["_n"] = j["n"]
-        S[m]["_fp32_here"] = j.get("fp32_acc", j.get("fp32_ppl"))
+                D.setdefault((m, plat), {})[r["spec"]] = r["delta_med"]
+        S[(m, plat)] = {s: float(np.median(v)) / s for s, v in by.items()}
+        S[(m, plat)]["_n"] = j["n"]
+        S[(m, plat)]["_fp32_here"] = j.get("fp32_acc", j.get("fp32_ppl"))
     rows, skipped = [], []
     for m, (sh, note, a0, src) in sorted(W.items()):
-        if m not in S:
-            skipped.append((m, "no sensitivity measured yet"))
+        wp = wplat(src)
+        if a.platform != "same" and wp != a.platform:
+            skipped.append((m, f"sigma_1/2 on {wp}"))
             continue
-        if a.sigma0 not in S[m]:
+        if (m, wp) not in S:
+            other = [p for (mm, p) in S if mm == m]
+            skipped.append((m, f"sigma_1/2 on {wp}; S only on {other}" if other else "no sensitivity measured yet"))
+            continue
+        Sm = S[(m, wp)]
+        if a.sigma0 not in Sm:
             skipped.append((m, f"no delta at sigma {a.sigma0}"))
             continue
         low = family(m) != "DEQ" and m != "deq_transformer" and a0 < a.min_fp32
         rows.append({"model": m, "family": family(m), "sigma_half": sh, "bound": note, "fp32": a0, "source": src,
-                     "S": S[m][a.sigma0], "S_all": {str(k): v for k, v in S[m].items() if not str(k).startswith("_")},
-                     "low_fp32": bool(low)})
+                     "platform": wp, "S": Sm[a.sigma0],
+                     "S_all": {str(k): v for k, v in Sm.items() if not str(k).startswith("_")}, "low_fp32": bool(low)})
     fitrows = [r for r in rows if r["sigma_half"] is not None and not r["low_fp32"]]
-    res = {"sigma0": a.sigma0, "rows": rows, "skipped": skipped}
+    res = {"sigma0": a.sigma0, "platform_mode": a.platform, "rows": rows, "skipped": skipped}
+    # platform invariance of the measurement itself: models with S on both platforms
+    both = sorted({m for (m, p) in S if (m, "babel") in S and (m, "p4d") in S})
+    res["S_babel_vs_p4d"] = {m: {"babel": S[(m, "babel")].get(a.sigma0), "p4d": S[(m, "p4d")].get(a.sigma0)} for m in both}
     # all-model fit
     if len(fitrows) >= 3:
         d_all = fit_delta(fitrows)
@@ -278,21 +307,26 @@ def main(argv=None):
     dq = fit_delta(train) if len(train) >= 2 else None
     qc = []
     for m, specs in Q.items():
+        qp = QPLAT.get(m)
+        if a.platform != "same" and qp != a.platform:
+            continue
+        Dm = D.get((m, qp), {})
         for s, ret in specs.items():
-            if m in D and s in D[m]:
-                qc.append({"model": m, "family": family(m), "spec": s, "retained": ret, "delta": D[m][s],
-                           "collapse": ret < 0.5, "pred_collapse": (D[m][s] > dq) if dq else None})
+            if s in Dm:
+                qc.append({"model": m, "family": family(m), "spec": s, "retained": ret, "delta": Dm[s], "platform": qp,
+                           "collapse": ret < 0.5, "pred_collapse": (Dm[s] > dq) if dq else None})
     # looped LMs: delta of loop L at the bf16 state after L loops (sens_lm.py), labels from X4
     try:
         lab = lm_cells()
     except Exception as e:                        # the X4 read-out needs its result trees
         lab, res["lm_error"] = {}, repr(e)
-    for f in sorted(glob.glob(str(Path(a.sens).parent / "lm_*.json"))):
+    for f in sorted(glob.glob(str(B / a.lm_platform / "x2" / "sens" / "lm_*.json"))):
         j = json.load(open(f))
         for r in j["records"]:
             key = (j["model"], r["loops"], r["spec"])
             if key in lab:
                 qc.append({"model": f"{j['model']}@{r['loops']}", "family": "LM", "spec": r["spec"],
+                           "platform": f"labels Lambda/p4d/Babel, delta {a.lm_platform}",
                            "retained": lab[key], "delta": r["delta_med"], "collapse": lab[key] < 0.5,
                            "pred_collapse": (r["delta_med"] > dq) if dq else None})
     res["quant_cells"] = qc
@@ -312,12 +346,13 @@ def main(argv=None):
     json.dump(res, open(a.out, "w"), indent=1)
     # print
     f2 = lambda x, p=2: "--" if x is None else f"{x:.{p}f}"
-    print(f"### sensitivity at sigma0 = {a.sigma0} (S = median over draws of median-over-inputs delta_T / sigma0)")
-    print("| model | family | fp32 | sigma_1/2 | S(0.02) | S(0.05) | S(0.1) | S x sigma_1/2 | source |")
-    print("|---|---|---|---|---|---|---|---|---|")
+    print(f"### sensitivity at sigma0 = {a.sigma0} (S = median over draws of median-over-inputs delta_T / sigma0); "
+          f"platform mode: {a.platform}")
+    print("| model | family | platform | fp32 | sigma_1/2 | S(0.02) | S(0.05) | S(0.1) | S x sigma_1/2 | source |")
+    print("|---|---|---|---|---|---|---|---|---|---|")
     for r in rows:
         sa = r["S_all"]
-        print(f"| {r['model']}{' (low fp32)' if r['low_fp32'] else ''} | {r['family']} | {f2(r['fp32'], 3)} | "
+        print(f"| {r['model']}{' (low fp32)' if r['low_fp32'] else ''} | {r['family']} | {r['platform']} | {f2(r['fp32'], 3)} | "
               f"{f2(r['sigma_half']) if r['sigma_half'] else r['bound']} | {f2(sa.get('0.02'))} | {f2(sa.get('0.05'))} | "
               f"{f2(sa.get('0.1'))} | {f2(r['S'] * r['sigma_half']) if r['sigma_half'] else '--'} | {r['source']} |")
     if "all" in res:
@@ -342,6 +377,10 @@ def main(argv=None):
         for fam, v in res["quant_by_family"].items():
             print(f"   {fam}: {v['n']} cells ({v['n_collapse']} collapse), accuracy {v['accuracy']:.2f}, "
                   f"AUROC(delta) {f2(v['auroc_delta'])}")
+    if res["S_babel_vs_p4d"]:
+        print("\nS(0.05) on both platforms (same model, same protocol):")
+        for m, v in res["S_babel_vs_p4d"].items():
+            print(f"   {m}: Babel {f2(v['babel'])} vs p4d {f2(v['p4d'])}")
     if skipped:
         print("\nskipped:", skipped)
     print("wrote", a.out)
