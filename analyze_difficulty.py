@@ -10,6 +10,7 @@ results/breadth/sudoku_extreme_test_meta.json (built from sapientinc/sudoku-extr
     python analyze_difficulty.py strat    # stratified Babel sweep (difficulty_sweep.py), 6 bins x 1000, k = 1..64
     python analyze_difficulty.py deep     # deep Babel sweep, 300 per bin, k = 1..512
     python analyze_difficulty.py halt     # halting-head AUROC per rating bin and quantizer (angle C)
+    python analyze_difficulty.py gapdepth # deep cells: gap at 16/64/512 with CIs, depth trend test, draws pooled
     python analyze_difficulty.py glink    # which puzzles fail: fp32's solve step vs rating
     python analyze_difficulty.py json     # figure-ready JSON -> results/breadth/x1_difficulty_readout.json
     python analyze_difficulty.py fig [first1000|strat|deep]   # draft figure -> plots/x1_difficulty_<src>.{png,pdf}
@@ -147,6 +148,8 @@ def load_strat(task, kind="diff"):
     # kind: "deep" (K=512, p4d) | "diff" (K=64, 6000 puzzles, p4d) | "diff_babel" (the Babel K=64 MLP file)
     plat, pref = {"deep": ("p4d", "deep"), "diff": ("p4d", "diff"), "diff_babel": ("babel", "diff")}[kind]
     files = sorted(glob.glob(str(B / plat / "x1" / f"{pref}_{task}_*.json")))
+    if kind == "deep":                                   # robustness draws share the deep protocol and fp32
+        files += sorted(glob.glob(str(B / plat / "x1" / f"rb_{task}_*.json")))
     rows = None
     for f in files:
         d = json.load(open(f))
@@ -369,6 +372,64 @@ def halt(kind="diff"):
             print(f"| {s} | " + " | ".join(cells) + " |")
 
 
+def _ncdf(z):
+    return 0.5 * (1 + math.erf(z / math.sqrt(2)))
+
+
+def gapdepth():
+    """Per deep cell: paired gap to fp32 at 16 / 64 / 512 steps (95% CI), and the depth trend
+    D = gap(512) - gap(16) per puzzle, with CI and one-sided p for D > 0 (the gap shrinks = catch-up)
+    and for D < 0 (it grows). Noise specs are also pooled over draws: mean over draws with a t-interval
+    across draws (draw-to-draw spread is the dominant variance at the edge)."""
+    ks = (16, 64, 512)
+    tcrit = {1: 12.71, 2: 4.30, 3: 3.18, 4: 2.78, 5: 2.57}
+    for task, label, H in TASKS:
+        recs, rows = load_strat(task, "deep")
+        if not recs:
+            continue
+        v = np.array([ROW_RES[r] for r in rows])
+        masks = [("all", np.ones(len(v), bool)), ("hard", v >= 51)]
+        F = recs["fp32"]["B"]
+        print(f"\n### {label}: gap to fp32 (points) at 16 / 64 / 512 steps [95% CI], trend D = gap512 - gap16 "
+              f"(n all {len(v)}, hard {int((v >= 51).sum())})")
+        print("| quant | φ_H | subset | gap16 | gap64 | gap512 | D [95%] | p(D>0) | p(D<0) |")
+        print("|---|---|---|---|---|---|---|---|---|")
+        pooled = defaultdict(lambda: defaultdict(list))
+        for s_, r in sorted(recs.items(), key=lambda kv: kv[0]):
+            if s_.startswith("_") or s_ == "fp32":
+                continue
+            Bq = r["B"]
+            for nm, m in masks:
+                cells = []
+                for k in ks:
+                    g = paired_gap(Bq[m, k - 1], F[m, k - 1])
+                    cells.append(f"{100*g[0]:+.1f} [{100*g[1]:+.1f},{100*g[2]:+.1f}]")
+                d = (Bq[m, 511].astype(float) - F[m, 511]) - (Bq[m, 15].astype(float) - F[m, 15])
+                mu, se = d.mean(), d.std(ddof=1) / math.sqrt(len(d))
+                pp = 1 - _ncdf(mu / se) if se > 0 else float("nan")
+                print(f"| {s_} | {r['fid_H_mean']:.3f} | {nm} | " + " | ".join(cells)
+                      + f" | {100*mu:+.1f} [{100*(mu-1.96*se):+.1f},{100*(mu+1.96*se):+.1f}] | {pp:.3g} | {1-pp:.3g} |")
+                if "@s" in s_:
+                    for k in ks:
+                        pooled[(s_.split("@s")[0], nm)][k].append(Bq[m, k - 1].mean() - F[m, k - 1].mean())
+                    pooled[(s_.split("@s")[0], nm)]["D"].append(mu)
+                    pooled[(s_.split("@s")[0], nm)]["phi"].append(r["fid_H_mean"])
+        if pooled:
+            print(f"\n{label}: noise specs pooled over draws (mean over draws [95% t-interval across draws]; n draws)")
+            print("| spec | subset | draws | φ_H mean | gap16 | gap64 | gap512 | D | draws with D>0 |")
+            print("|---|---|---|---|---|---|---|---|---|")
+            for (base, nm), dd in sorted(pooled.items()):
+                nd = len(dd["D"])
+                def ci(x):
+                    x = np.array(x)
+                    if len(x) < 2:
+                        return f"{100*x.mean():+.1f}"
+                    h = tcrit.get(len(x) - 1, 2.0) * x.std(ddof=1) / math.sqrt(len(x))
+                    return f"{100*x.mean():+.1f} [{100*(x.mean()-h):+.1f},{100*(x.mean()+h):+.1f}]"
+                print(f"| {base} | {nm} | {nd} | {np.mean(dd['phi']):.3f} | {ci(dd[16])} | {ci(dd[64])} | {ci(dd[512])} | "
+                      f"{ci(dd['D'])} | {sum(x > 0 for x in dd['D'])}/{nd} |")
+
+
 # ------------------------------------------------------------------------ figure-ready JSON and draft figure
 def build_json():
     out = {"meta": {"difficulty": "sapientinc/sudoku-extreme test.csv `rating` = tdoku backtracks",
@@ -471,5 +532,5 @@ def fig():
 
 
 if __name__ == "__main__":
-    {"first": first, "strat": strat, "strat_babel": lambda: strat("diff_babel"), "deep": lambda: strat("deep"), "glink": glink, "halt": halt, "json": build_json,
+    {"first": first, "strat": strat, "strat_babel": lambda: strat("diff_babel"), "deep": lambda: strat("deep"), "glink": glink, "halt": halt, "gapdepth": gapdepth, "json": build_json,
      "fig": fig}[sys.argv[1]]()
