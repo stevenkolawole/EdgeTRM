@@ -238,7 +238,7 @@ def exit_steps(cell, rule, param=None):
         if cell.msp is None:
             return None
         return first_true(cell.msp > param)
-    if rule == "stab":
+    if rule in ("stab", "stabt"):
         m = stable_mask(cell, param)
         return None if m is None else first_true(m)
     if rule == "natcons":                                 # native AND answer unchanged since the previous step
@@ -264,6 +264,7 @@ def score(cell, t, idx=None):
 
 GRIDS = {"thr": np.round(np.arange(-4, 10.01, 0.25), 2),
          "res": np.array([10 ** e for e in np.arange(-4, 0.01, 0.1)]),
+         "stabt": np.array([1, 2, 3, 5, 8, 10, 15, 20, 30, 50, 80]),
          "msp": np.array([0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95, 0.97, 0.98, 0.99, 0.995, 0.999, 0.9999])}
 
 
@@ -325,7 +326,7 @@ RULESET = [("native", None), ("pat", 2), ("pat", 3), ("min", 2), ("min", 4),
 
 def rule_name(rule, p):
     return {"native": "native", "pat": f"pat{p}", "min": f"min{p}+nat", "thr": f"thr[{p}]", "res": f"res[{p}]",
-            "msp": f"msp[{p}]", "stab": f"stab{p}", "natstab": f"nat|stab{p}", "natcons": "nat&same", "oracle": "oracle"}[rule]
+            "msp": f"msp[{p}]", "stab": f"stab{p}", "natstab": f"nat|stab{p}", "natcons": "nat&same", "oracle": "oracle", "stabt": f"stab*[{p}]", "depth": "depth"}[rule]
 
 
 SEL_CANDIDATES = [("native", None), ("pat", 2), ("pat", 3), ("min", 2), ("min", 4)]   # need only q (all sources)
@@ -367,7 +368,7 @@ def evaluate(cell, ref, rules=RULESET):
         out["fp32_depth"] = fp32_depth(ref)
         rules = list(rules) + [("sel", sel), ("depth", out["fp32_depth"])]
     for rule, p in rules:
-        if rule in ("thr", "res", "msp"):
+        if rule in ("thr", "res", "msp", "stabt"):
             if ref is None:
                 continue
             t, params = crossfit(ref, cell, rule, p)
@@ -731,6 +732,105 @@ def cmd_sample(a):
                       f"   | best-Q@{Km} {bq:5.1f} at {Km * D} steps")
 
 
+DT_DIR = Path(os.environ.get("M5_DT_DIR", RB / "babel" / "m5"))
+DT_RULES = [("res", 0.5), ("res", 1.0), ("msp", 0.5), ("stabt", 0.5), ("stabt", 1.0), ("stab", 10), ("stab", 30), ("oracle", None)]
+
+
+def load_dt(size):
+    out = {}
+    for f in sorted(glob.glob(str(DT_DIR / f"dt_maze{size}" / "*.npz"))):
+        if ".tmp" in f:
+            continue
+        d = np.load(f)
+        info = json.loads(str(d["info"]))
+        c = d["correct"].astype(bool)
+        out[info["spec"]] = Cell(f"dt_maze{size}", info["spec"], "m5", c, np.zeros(c.shape, np.float32),
+                                 res=d["res"].astype(np.float32), msp=d["conf"].astype(np.float32), chg=d["chg"].astype(np.int32))
+    return out
+
+
+def cmd_dt(a):
+    """deep-thinking mazes (no halting head): label-free exits tuned on fp32, frozen, vs the fixed budget."""
+    res = {}
+    for size in (13, 25, 33):
+        cells = load_dt(size)
+        if "fp32" not in cells:
+            continue
+        ref = cells["fp32"]
+        d0 = fp32_depth(ref)
+        print(f"\n=== DT maze {size}x{size}, T={ref.K}, n={ref.n}; fixed depth chosen on fp32 (0.5 pt) = {d0}")
+        print(f"{'spec':14s} {'fixed':>5s} {'@d0':>5s} | " + " | ".join(f"{rule_name(r, p):>22s}" for r, p in DT_RULES))
+        for spec in sorted(cells, key=spec_order):
+            c = cells[spec]
+            r = evaluate(c, None, [])
+            parts = []
+            for rule, p in DT_RULES:
+                if rule in ("res", "msp", "stabt"):
+                    t, prm = crossfit(ref, c, rule, p)
+                else:
+                    t, prm = exit_steps(c, rule, p), None
+                ok, st = score(c, t)
+                parts.append(f"{100*ok.mean():5.1f} {100*ok.mean()-r['acc_fixed']:+5.1f} {st.mean():6.1f}")
+                res[(size, spec, rule_name(rule, p))] = {"acc": 100 * ok.mean(), "steps": float(st.mean()), "params": prm}
+            print(f"{spec:14s} {r['acc_fixed']:5.1f} {100*c.c[:, d0-1].mean():5.1f} | " + " | ".join(f"{x:>22s}" for x in parts))
+    return res
+
+
+POL_DIR = Path(os.environ.get("M5_POL_DIR", RB / "babel" / "m5" / "polish"))
+
+
+def load_polish(model):
+    out = {}
+    for f in sorted(glob.glob(str(POL_DIR / model / "*.npz"))):
+        if ".tmp" in f:
+            continue
+        d = np.load(f)
+        info = json.loads(str(d["info"]))
+        out[(info["cheap"], info["polish"])] = {k: d[k] for k in d.files if k != "info"} | {"info": info}
+    return out
+
+
+def polish_rows(model, d, sel):
+    """exit-then-polish variants for one (cheap, polish) record; returns list of (name, acc, cheap steps, polish steps)."""
+    c = d["c_cheap"].astype(bool); n, K = c.shape
+    cp = d["c_pol"].astype(bool); qp = d["q_pol"].astype(np.float32); J = cp.shape[2]
+    qc_ = d["q_cheap"].astype(np.float32)
+    cell = Cell(model, d["info"]["cheap"], "pol", c, qc_, qc=d["qc_cheap"].astype(np.float32) if IS_HRM[model] else None)
+    rows = [("cheap fixed", 100 * c[:, -1].mean(), K, 0)]
+    idx = np.arange(n)
+    for nm, rule in (("native", ("native", None)), ("sel", sel)):
+        t = exit_steps(cell, *rule)
+        rows.append((f"cheap {nm} exit", 100 * c[idx, t].mean(), (t + 1).mean(), 0))
+        for j in (1, 2, 4):
+            if j <= J:
+                rows.append((f"{nm} exit + P{j}", 100 * cp[idx, t, j - 1].mean(), (t + 1).mean(), j))
+        # polish until the polish head halts (q > 0), at most J polish steps
+        f = qp[idx, t] > 0
+        jj = np.where(f.any(1), f.argmax(1), J - 1)
+        rows.append((f"{nm} exit + P(head)", 100 * cp[idx, t, jj].mean(), (t + 1).mean(), (jj + 1).mean()))
+    for j in (1, 2, 4):
+        if j <= J:
+            rows.append((f"M1 append c{K}.P{j}", 100 * cp[:, -1, j - 1].mean(), K, j))
+            rows.append((f"M1 replace c{K - j}.P{j}", 100 * cp[:, K - j - 1, j - 1].mean(), K - j, j))
+    return rows
+
+
+def cmd_polish(a):
+    out = {}
+    for model in a.models:
+        recs = load_polish(model)
+        if not recs:
+            continue
+        ref = cells_for(model, 16).get("fp32")
+        sel = select_rule(ref) if ref is not None else ("native", None)
+        print(f"\n=== {model}: exit (compressed head) then polish; fp32 fixed-16 acc {100 * ref.c[:, -1].mean():.1f}; sel = {rule_name(*sel)}")
+        for (cs, ps), d in sorted(recs.items()):
+            rows = polish_rows(model, d, sel)
+            out[(model, cs, ps)] = rows
+            print(f"  {cs} -> polish {ps} (n={d['info']['n']}):  " + "; ".join(f"{nm} {acc:.1f} [{cst:.1f}+{pst:.1f}]" for nm, acc, cst, pst in rows))
+    return out
+
+
 def cmd_json(a):
     """figure-ready summary: per model / K / correctness definition, every cell's rule table (draws
     merged), plus Sudoku bins and device rows."""
@@ -762,7 +862,7 @@ def cmd_json(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["rules", "summary", "bins", "device", "json", "agree", "inner", "deep", "sample"])
+    ap.add_argument("cmd", choices=["rules", "summary", "bins", "device", "json", "agree", "inner", "deep", "sample", "dt", "polish"])
     ap.add_argument("--K", type=int, default=16)
     ap.add_argument("--models", nargs="+", default=MODELS)
     ap.add_argument("--show", default="")
@@ -784,6 +884,10 @@ def main():
         cmd_deep(a)
     elif a.cmd == "sample":
         cmd_sample(a)
+    elif a.cmd == "dt":
+        cmd_dt(a)
+    elif a.cmd == "polish":
+        cmd_polish(a)
     elif a.cmd == "agree":
         for m in a.models:
             for row in check_agreement(m):
