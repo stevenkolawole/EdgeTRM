@@ -132,8 +132,12 @@ def main():
     ap.add_argument("--maze_flags", action="store_true")
     ap.add_argument("--outdir", required=True)
     ap.add_argument("--allow_cpu", action="store_true")
+    ap.add_argument("--ckpt", default="", help="TRM: a trained variant's step_N file (breadth_sweep --ckpt semantics)")
     a = ap.parse_args()
     assert a.allow_cpu or torch.cuda.is_available(), "NO CUDA"
+    if a.ckpt:
+        import breadth_sweep as bs
+        bs.CKPT_OVERRIDE = a.ckpt
     t = TRM_TASKS.get(a.task) or HRM_TASKS[a.task]
     kind = t["data"]
     h_def = DEFAULT_H[a.task]
@@ -165,7 +169,7 @@ def main():
         r = run_spec(m, inp, lab, batch, a.K, kind, h_def, bfs, a.maze_flags and kind == "maze",
                      act_quant=q["act"], act_noise=q.get("anoise"), keep_head=keep_head, head32=head32)
         del m
-        info = {"task": a.task, "spec": spec, "quant": q, "seed": seed, "keep_head": keep_head, "H_run": 1, "H_default": h_def, "K": a.K,
+        info = {"task": a.task, "ckpt": a.ckpt, "spec": spec, "quant": q, "seed": seed, "keep_head": keep_head, "H_run": 1, "H_default": h_def, "K": a.K,
                 "n": int(len(inp)), "secs": time.time() - t1, "host": socket.gethostname(),
                 "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu", "torch": torch.__version__}
         tmp = str(path) + ".tmp.npz"
