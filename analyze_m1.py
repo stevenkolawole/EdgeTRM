@@ -25,6 +25,7 @@ def load(paths):
     for p in paths:
         b = json.load(open(p))
         t = D.setdefault(f"{b['task']} (T={b['T']})", {"fp32": b["fp32"], "T": b["T"], "ks": b["ks"], "inner": b["inner_js"],
+                                     "meta": b.get("meta", {}),
                                      "shapes": b["shapes"], "n": b["n"], "recs": {}, "files": []})
         if abs(t["fp32"]["acc"] - b["fp32"]["acc"]) > 1e-9 or t["n"] != b["n"]:
             print(f"WARNING {p}: fp32 {b['fp32']['acc']} / n {b['n']} differ from {t['files']}")
@@ -128,6 +129,34 @@ def per_input(t, groups, name, steps):
     return None
 
 
+def sched_cost(sname, bc, bp, H, L1):
+    """weight-bit traffic of a schedule in fp32-step units. Block-level tokens split one step's H x L1 block
+    applications: c|P%H (z_H updates = 1 of every L1 on P), c|P%L (the other L1-1), c|P@j (last j of H x L1)."""
+    import re as _re
+    if "/" in sname:
+        sname = sname.split("/")[0]
+    m = _re.fullmatch(r"\((.*)\)x(\d+)", sname)
+    if m:
+        return int(m.group(2)) * sched_cost(m.group(1), bc, bp, H, L1)
+    tot, N = 0.0, H * L1
+    for tok in sname.split("."):
+        h = _re.fullmatch(r"c\|P%([HL])(\d*)", tok)
+        if h:
+            n = int(h.group(2) or 1)
+            fp = 1.0 / L1 if h.group(1) == "H" else (L1 - 1.0) / L1
+            tot += n * ((1 - fp) * bc + fp * bp)
+            continue
+        h = _re.fullmatch(r"c\|P@(\d+)", tok)
+        if h:
+            j = int(h.group(1))
+            tot += (N - j) / N * bc + j / N * bp
+            continue
+        h = _re.fullmatch(r"([cPf])(\d+)", tok)
+        n = int(h.group(2))
+        tot += n * (bc if h.group(1) == "c" else (32.0 if h.group(1) == "f" else bp))
+    return tot / 32
+
+
 def frontier(t, groups, cells, pols, S):
     """Each hybrid c(T-k)+P(k) against every single-precision run (fp32, the polish model, the compressed
     model, any quantized baseline in the file) with no more weight-bit traffic (bits x steps, in units of
@@ -195,6 +224,39 @@ def frontier(t, groups, cells, pols, S):
                 print(f"| {c} | {p} | {k} | {100*acc:.1f} | {cost:.2f} | {mem:.1f} | {bn} ({bs}) | {100*bv:.1f} | "
                       f"{100*(acc-bv):+.1f}{ptest(bn, bs)} | {mn} ({ms}) | {100*mv:.1f} | {100*(acc-mv):+.1f}{ptest(mn, ms)} | "
                       f"{pn} ({ps}) | {100*pv:.1f} | {100*(acc-pv):+.1f}{ptest(pn, ps)} |")
+    H = t["meta"].get("H_cycles") or 1
+    L1 = (t["meta"].get("L_cycles") or 0) + 1
+    if t["meta"].get("H_cycles") is None:
+        return
+    print("\n### every schedule of the polish models, ranked by accuracy per traffic (polish fp32 / w8t / w8c; "
+          "block-level costs from H x (L+1))\n")
+    print("| cell | polish | schedule | acc | traffic | best single-precision at <= traffic and memory (steps) | its acc | delta |")
+    print("|---|---|---|---|---|---|---|---|")
+    for c in cells:
+        if c.startswith("noise"):
+            continue
+        for p in ("fp32", "w8t", "w8c"):
+            rs = groups.get((c, p))
+            if not rs:
+                continue
+            r = rs[0]
+            bc, bp = cheap_bits(c, r, shapes), pol_bits(c, p, r, shapes)
+            bstore = bits_per_weight(r["cell_bits"], shapes)
+            mem = bstore + (0 if re.fullmatch(r"n\d+[tac]\d+", c) and p != "fp32" else bits_per_weight(r["polish_extra_bits"], shapes))
+            rows = []
+            for sname, v in r["schedules"].items():
+                if sname.startswith(("f", "(c3.f", "(c7.f")) or ".f" in sname or sname.endswith("/hP") or sname == f"c{T}":
+                    continue
+                if sname == f"c{T}.P{max(t['ks'])}":
+                    continue                                   # append: longer than T
+                try:
+                    cost = sched_cost(sname, bc, bp, H, L1)
+                except (AttributeError, ValueError):
+                    continue
+                mv, mn, ms = best(cost, mem)
+                rows.append((v["acc"] - mv, sname, v["acc"], cost, mn, ms, mv))
+            for d, sname, acc, cost, mn, ms, mv in sorted(rows, reverse=True)[:6]:
+                print(f"| {c} | {p} | {sname} | {100*acc:.1f} | {cost:.2f} | {mn} ({ms}) | {100*mv:.1f} | {100*d:+.1f} |")
 
 
 def main():
