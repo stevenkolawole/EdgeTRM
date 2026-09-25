@@ -268,7 +268,7 @@ def score(cell, t, idx=None):
 GRIDS = {"thr": np.round(np.arange(-4, 10.01, 0.25), 2),
          "res": np.array([10 ** e for e in np.arange(-4, 0.01, 0.1)]),
          "stabt": np.array([1, 2, 3, 5, 8, 10, 15, 20, 30, 50, 80]),
-         "msp": np.array([0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95, 0.97, 0.98, 0.99, 0.995, 0.999, 0.9999])}
+         "msp": np.array([0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95, 0.97, 0.98, 0.99, 0.995, 0.999, 0.9995, 0.99975])}   # msp stored in fp16: 0.99975 means == 1.0
 
 
 def tune(ref, rule, budget, idx):

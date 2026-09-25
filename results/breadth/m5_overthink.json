@@ -1,0 +1,7632 @@
+[
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 70.8,
+  "oracle": 70.8,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 70.8,
+   "steps": 7.245,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 68.60000000000001,
+   "steps": 6.368,
+   "rescued": 0.0,
+   "premature": 2.1999999999999997,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 70.8,
+   "steps": 7.949,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 70.7,
+   "steps": 6.952,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "fp32",
+  "phi": 1.0,
+  "phi_src": "breadth (p4d)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 50.8,
+  "oracle": 51.800000000000004,
+  "V_abs": 1.0,
+  "V_rel": 2.032520325203252,
+  "head (fp32-chosen)": {
+   "acc": 51.1,
+   "steps": 11.963,
+   "rescued": 0.3,
+   "premature": 0.0,
+   "recovery": 0.30000000000000215
+  },
+  "head native": {
+   "acc": 51.5,
+   "steps": 10.265,
+   "rescued": 0.7000000000000001,
+   "premature": 0.0,
+   "recovery": 0.6999999999999978
+  },
+  "stability 2": {
+   "acc": 51.4,
+   "steps": 10.662,
+   "rescued": 0.6,
+   "premature": 0.0,
+   "recovery": 0.5999999999999972
+  },
+  "residual (tuned fp32)": {
+   "acc": 51.5,
+   "steps": 9.848,
+   "rescued": 0.7000000000000001,
+   "premature": 0.0,
+   "recovery": 0.6999999999999978,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "w3a",
+  "phi": 0.5943683200000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 17.299999999999997,
+  "oracle": 17.599999999999998,
+  "V_abs": 0.3,
+  "V_rel": 0.36275695284159615,
+  "head (fp32-chosen)": {
+   "acc": 17.2,
+   "steps": 15.792,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 17.2,
+   "steps": 15.57,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 17.2,
+   "steps": 13.917,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 17.299999999999997,
+   "steps": 15.75,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "w3c",
+  "phi": 0.30681638,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 51.2,
+  "oracle": 59.199999999999996,
+  "V_abs": 8.0,
+  "V_rel": 16.39344262295082,
+  "head (fp32-chosen)": {
+   "acc": 54.400000000000006,
+   "steps": 11.818,
+   "rescued": 3.2,
+   "premature": 0.0,
+   "recovery": 0.4000000000000007
+  },
+  "head native": {
+   "acc": 58.4,
+   "steps": 8.522,
+   "rescued": 7.3,
+   "premature": 0.1,
+   "recovery": 0.9000000000000002
+  },
+  "stability 2": {
+   "acc": 55.800000000000004,
+   "steps": 9.835,
+   "rescued": 4.6,
+   "premature": 0.0,
+   "recovery": 0.5750000000000007
+  },
+  "residual (tuned fp32)": {
+   "acc": 50.6,
+   "steps": 3.679,
+   "rescued": 5.6000000000000005,
+   "premature": 6.2,
+   "recovery": -0.07500000000000025,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "w3g32",
+  "phi": 0.56903219,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 68.10000000000001,
+  "oracle": 68.10000000000001,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 68.10000000000001,
+   "steps": 7.654,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 66.60000000000001,
+   "steps": 6.816,
+   "rescued": 0.0,
+   "premature": 1.5,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 68.10000000000001,
+   "steps": 8.324,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 66.60000000000001,
+   "steps": 5.577,
+   "rescued": 0.0,
+   "premature": 1.5,
+   "recovery": null,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "w4c",
+  "phi": 0.85781487,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 69.39999999999999,
+  "oracle": 69.39999999999999,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 69.39999999999999,
+   "steps": 7.969,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 68.2,
+   "steps": 7.213,
+   "rescued": 0.0,
+   "premature": 1.2,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 69.39999999999999,
+   "steps": 8.63,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 69.39999999999999,
+   "steps": 7.758,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "w4c+a8",
+  "phi": 0.7978735899999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 69.1,
+  "oracle": 69.1,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 69.1,
+   "steps": 7.42,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 67.7,
+   "steps": 6.603,
+   "rescued": 0.0,
+   "premature": 1.4000000000000001,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 69.1,
+   "steps": 8.109,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 68.60000000000001,
+   "steps": 6.804,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "w4g32",
+  "phi": 0.89029709,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 5.8999999999999995,
+  "oracle": 8.200000000000001,
+  "V_abs": 2.3,
+  "V_rel": 2.4442082890541976,
+  "head (fp32-chosen)": {
+   "acc": 5.8999999999999995,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 5.8999999999999995,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "stability 2": {
+   "acc": 6.3,
+   "steps": 15.19,
+   "rescued": 0.5,
+   "premature": 0.1,
+   "recovery": 0.1739130434782609
+  },
+  "residual (tuned fp32)": {
+   "acc": 6.0,
+   "steps": 14.265,
+   "rescued": 0.2,
+   "premature": 0.1,
+   "recovery": 0.04347826086956542,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "w4t",
+  "phi": 0.30432063000000004,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 71.3,
+  "oracle": 71.3,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 71.3,
+   "steps": 7.187,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 69.19999999999999,
+   "steps": 6.277,
+   "rescued": 0.0,
+   "premature": 2.1,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 71.3,
+   "steps": 7.902,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 71.0,
+   "steps": 6.937,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": null,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "w8c",
+  "phi": 0.9401402799999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 71.3,
+  "oracle": 71.3,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 71.3,
+   "steps": 7.602,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 69.89999999999999,
+   "steps": 6.883,
+   "rescued": 0.0,
+   "premature": 1.4000000000000001,
+   "recovery": null
+  },
+  "family": "sudoku_mlp",
+  "spec": "w8c+a8",
+  "phi": 0.8382938799999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 70.7,
+  "oracle": 70.7,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 70.7,
+   "steps": 7.248,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 68.89999999999999,
+   "steps": 6.477,
+   "rescued": 0.0,
+   "premature": 1.7999999999999998,
+   "recovery": null
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.05@s0",
+  "phi": 0.90248055,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 69.19999999999999,
+  "oracle": 69.19999999999999,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 69.19999999999999,
+   "steps": 7.383,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 67.4,
+   "steps": 6.521,
+   "rescued": 0.0,
+   "premature": 1.7999999999999998,
+   "recovery": null
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.05@s1",
+  "phi": 0.89745166,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 69.89999999999999,
+  "oracle": 69.89999999999999,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 69.89999999999999,
+   "steps": 7.383,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 67.60000000000001,
+   "steps": 6.51,
+   "rescued": 0.0,
+   "premature": 2.3,
+   "recovery": null
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.05@s2",
+  "phi": 0.90190878,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 65.9,
+  "oracle": 66.10000000000001,
+  "V_abs": 0.2,
+  "V_rel": 0.5865102639296188,
+  "head (fp32-chosen)": {
+   "acc": 66.10000000000001,
+   "steps": 7.783,
+   "rescued": 0.2,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 63.0,
+   "steps": 6.992,
+   "rescued": 0.2,
+   "premature": 3.1,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 65.5,
+   "steps": 7.386,
+   "rescued": 0.2,
+   "premature": 0.6,
+   "recovery": null,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.1",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 26.400000000000002,
+  "oracle": 53.5,
+  "V_abs": 27.1,
+  "V_rel": 36.82065217391305,
+  "head (fp32-chosen)": {
+   "acc": 32.5,
+   "steps": 13.52,
+   "rescued": 6.1,
+   "premature": 0.0,
+   "recovery": 0.22509225092250917
+  },
+  "head native": {
+   "acc": 49.6,
+   "steps": 9.769,
+   "rescued": 23.3,
+   "premature": 0.1,
+   "recovery": 0.8560885608856089
+  },
+  "stability 2": {
+   "acc": 30.9,
+   "steps": 12.931,
+   "rescued": 4.7,
+   "premature": 0.2,
+   "recovery": 0.16605166051660505
+  },
+  "residual (tuned fp32)": {
+   "acc": 33.2,
+   "steps": 5.332,
+   "rescued": 10.8,
+   "premature": 4.0,
+   "recovery": 0.2509225092250923,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.15@s0",
+  "phi": 0.6217395699999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 26.1,
+  "oracle": 56.3,
+  "V_abs": 30.2,
+  "V_rel": 40.8660351826793,
+  "head (fp32-chosen)": {
+   "acc": 37.3,
+   "steps": 12.206,
+   "rescued": 11.200000000000001,
+   "premature": 0.0,
+   "recovery": 0.3708609271523178
+  },
+  "head native": {
+   "acc": 53.6,
+   "steps": 8.94,
+   "rescued": 28.000000000000004,
+   "premature": 0.5,
+   "recovery": 0.9105960264900663
+  },
+  "stability 2": {
+   "acc": 34.5,
+   "steps": 12.203,
+   "rescued": 8.6,
+   "premature": 0.2,
+   "recovery": 0.2781456953642384
+  },
+  "residual (tuned fp32)": {
+   "acc": 40.699999999999996,
+   "steps": 5.595,
+   "rescued": 16.7,
+   "premature": 2.1,
+   "recovery": 0.4834437086092714,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.15@s1",
+  "phi": 0.6180099399999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 36.8,
+  "oracle": 57.599999999999994,
+  "V_abs": 20.8,
+  "V_rel": 32.91139240506329,
+  "head (fp32-chosen)": {
+   "acc": 44.5,
+   "steps": 12.112,
+   "rescued": 7.7,
+   "premature": 0.0,
+   "recovery": 0.3701923076923079
+  },
+  "head native": {
+   "acc": 55.400000000000006,
+   "steps": 8.835,
+   "rescued": 19.2,
+   "premature": 0.6,
+   "recovery": 0.8942307692307697
+  },
+  "stability 2": {
+   "acc": 43.1,
+   "steps": 11.69,
+   "rescued": 6.5,
+   "premature": 0.2,
+   "recovery": 0.30288461538461564
+  },
+  "residual (tuned fp32)": {
+   "acc": 43.9,
+   "steps": 5.331,
+   "rescued": 12.0,
+   "premature": 4.9,
+   "recovery": 0.34134615384615397,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.15@s2",
+  "phi": 0.6330994300000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 65.60000000000001,
+  "oracle": 66.10000000000001,
+  "V_abs": 0.5,
+  "V_rel": 1.4534883720930232,
+  "head (fp32-chosen)": {
+   "acc": 65.8,
+   "steps": 7.924,
+   "rescued": 0.2,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 64.2,
+   "steps": 7.188,
+   "rescued": 0.5,
+   "premature": 1.9,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 65.8,
+   "steps": 8.576,
+   "rescued": 0.2,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 64.5,
+   "steps": 6.287,
+   "rescued": 0.3,
+   "premature": 1.4000000000000001,
+   "recovery": null,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.1@s0",
+  "phi": 0.85065139,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 66.7,
+  "oracle": 67.0,
+  "V_abs": 0.3,
+  "V_rel": 0.9009009009009009,
+  "head (fp32-chosen)": {
+   "acc": 66.7,
+   "steps": 7.798,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 65.3,
+   "steps": 6.993,
+   "rescued": 0.3,
+   "premature": 1.7000000000000002,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 66.7,
+   "steps": 8.456,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 65.5,
+   "steps": 6.58,
+   "rescued": 0.1,
+   "premature": 1.3,
+   "recovery": null,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.1@s1",
+  "phi": 0.85786654,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 66.60000000000001,
+  "oracle": 66.60000000000001,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 66.60000000000001,
+   "steps": 7.854,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 65.3,
+   "steps": 7.109,
+   "rescued": 0.0,
+   "premature": 1.3,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 66.60000000000001,
+   "steps": 8.501,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 65.60000000000001,
+   "steps": 6.492,
+   "rescued": 0.0,
+   "premature": 1.0,
+   "recovery": null,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.1@s2",
+  "phi": 0.85815052,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 3.9,
+  "oracle": 13.100000000000001,
+  "V_abs": 9.2,
+  "V_rel": 9.573361082206036,
+  "head (fp32-chosen)": {
+   "acc": 3.9,
+   "steps": 15.958,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 4.8,
+   "steps": 15.556,
+   "rescued": 0.8999999999999999,
+   "premature": 0.0,
+   "recovery": 0.09782608695652172
+  },
+  "residual (tuned fp32)": {
+   "acc": 5.0,
+   "steps": 6.063,
+   "rescued": 1.7999999999999998,
+   "premature": 0.7000000000000001,
+   "recovery": 0.11956521739130434,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.2",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 5.3,
+  "oracle": 18.099999999999998,
+  "V_abs": 12.8,
+  "V_rel": 13.51636747624076,
+  "head (fp32-chosen)": {
+   "acc": 5.3,
+   "steps": 15.916,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 10.0,
+   "steps": 14.801,
+   "rescued": 4.7,
+   "premature": 0.0,
+   "recovery": 0.3671875000000001
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.2@s0",
+  "phi": 0.54536025,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 7.7,
+  "oracle": 22.900000000000002,
+  "V_abs": 15.2,
+  "V_rel": 16.468039003250272,
+  "head (fp32-chosen)": {
+   "acc": 7.8,
+   "steps": 15.786,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": 0.006578947368421028
+  },
+  "head native": {
+   "acc": 15.2,
+   "steps": 14.213,
+   "rescued": 7.6,
+   "premature": 0.1,
+   "recovery": 0.4934210526315788
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.2@s1",
+  "phi": 0.54217362,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 10.100000000000001,
+  "oracle": 28.299999999999997,
+  "V_abs": 18.2,
+  "V_rel": 20.24471635150167,
+  "head (fp32-chosen)": {
+   "acc": 10.299999999999999,
+   "steps": 15.83,
+   "rescued": 0.2,
+   "premature": 0.0,
+   "recovery": 0.010989010989010855
+  },
+  "head native": {
+   "acc": 16.3,
+   "steps": 14.642,
+   "rescued": 6.3,
+   "premature": 0.1,
+   "recovery": 0.3406593406593407
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.2@s2",
+  "phi": 0.554729,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 1.3,
+  "oracle": 1.9,
+  "V_abs": 0.6,
+  "V_rel": 0.60790273556231,
+  "head (fp32-chosen)": {
+   "acc": 1.3,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 1.6,
+   "steps": 15.625,
+   "rescued": 0.5,
+   "premature": 0.2,
+   "recovery": 0.5000000000000002
+  },
+  "residual (tuned fp32)": {
+   "acc": 1.3,
+   "steps": 5.3,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "noise0.3",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 69.69999999999999,
+  "oracle": 69.69999999999999,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 69.69999999999999,
+   "steps": 7.527,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 67.80000000000001,
+   "steps": 6.769,
+   "rescued": 0.0,
+   "premature": 1.9,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 69.69999999999999,
+   "steps": 8.211,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 69.69999999999999,
+   "steps": 7.327,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "anoise0.1@s0",
+  "phi": 0.89087169,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 69.39999999999999,
+  "oracle": 69.39999999999999,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 69.39999999999999,
+   "steps": 7.596,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 68.30000000000001,
+   "steps": 6.886,
+   "rescued": 0.0,
+   "premature": 1.0999999999999999,
+   "recovery": null
+  },
+  "family": "sudoku_mlp",
+  "spec": "anoise0.1@s1",
+  "phi": 0.8967300699999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 70.3,
+  "oracle": 70.3,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 70.3,
+   "steps": 7.403,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 68.89999999999999,
+   "steps": 6.677,
+   "rescued": 0.0,
+   "premature": 1.4000000000000001,
+   "recovery": null
+  },
+  "family": "sudoku_mlp",
+  "spec": "anoise0.1@s2",
+  "phi": 0.89757633,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 32.0,
+  "oracle": 46.400000000000006,
+  "V_abs": 14.399999999999999,
+  "V_rel": 21.176470588235293,
+  "head (fp32-chosen)": {
+   "acc": 35.199999999999996,
+   "steps": 14.3,
+   "rescued": 3.2,
+   "premature": 0.0,
+   "recovery": 0.22222222222222185
+  },
+  "head native": {
+   "acc": 40.8,
+   "steps": 11.906,
+   "rescued": 8.799999999999999,
+   "premature": 0.0,
+   "recovery": 0.6111111111111107
+  },
+  "residual (tuned fp32)": {
+   "acc": 32.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "anoise0.3",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 32.800000000000004,
+  "oracle": 45.9,
+  "V_abs": 13.100000000000001,
+  "V_rel": 19.49404761904762,
+  "head (fp32-chosen)": {
+   "acc": 34.9,
+   "steps": 14.259,
+   "rescued": 2.1,
+   "premature": 0.0,
+   "recovery": 0.16030534351145
+  },
+  "head native": {
+   "acc": 41.3,
+   "steps": 11.892,
+   "rescued": 8.7,
+   "premature": 0.2,
+   "recovery": 0.6488549618320608
+  },
+  "stability 2": {
+   "acc": 40.300000000000004,
+   "steps": 12.435,
+   "rescued": 7.5,
+   "premature": 0.0,
+   "recovery": 0.5725190839694659
+  },
+  "residual (tuned fp32)": {
+   "acc": 32.800000000000004,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0,
+   "params": [
+    0.25118864315095973,
+    0.25118864315095973
+   ]
+  },
+  "family": "sudoku_mlp",
+  "spec": "anoise0.3@s0",
+  "phi": null,
+  "phi_src": null,
+  "src": "m5",
+  "sel_rule": "pat2"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 66.0,
+  "oracle": 66.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 65.5,
+   "steps": 7.758,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 65.5,
+   "steps": 7.758,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 66.0,
+   "steps": 9.008,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 65.60000000000001,
+   "steps": 8.025,
+   "rescued": 0.0,
+   "premature": 0.4,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "fp32",
+  "phi": 1.0,
+  "phi_src": "breadth (p4d)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 61.8,
+  "oracle": 61.8,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 61.3,
+   "steps": 8.496,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 61.3,
+   "steps": 8.496,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 61.8,
+   "steps": 9.769,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 61.7,
+   "steps": 9.111,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "w3a",
+  "phi": 0.86428042,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 59.699999999999996,
+  "oracle": 60.199999999999996,
+  "V_abs": 0.5,
+  "V_rel": 1.2406947890818858,
+  "head (fp32-chosen)": {
+   "acc": 58.8,
+   "steps": 9.156,
+   "rescued": 0.3,
+   "premature": 1.2,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 58.8,
+   "steps": 9.156,
+   "rescued": 0.3,
+   "premature": 1.2,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 60.0,
+   "steps": 10.454,
+   "rescued": 0.4,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 59.599999999999994,
+   "steps": 9.908,
+   "rescued": 0.1,
+   "premature": 0.2,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "w3c",
+  "phi": 0.82804197,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 66.4,
+  "oracle": 66.8,
+  "V_abs": 0.4,
+  "V_rel": 1.1904761904761905,
+  "head (fp32-chosen)": {
+   "acc": 66.10000000000001,
+   "steps": 7.933,
+   "rescued": 0.4,
+   "premature": 0.7000000000000001,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 66.10000000000001,
+   "steps": 7.933,
+   "rescued": 0.4,
+   "premature": 0.7000000000000001,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 66.8,
+   "steps": 9.253,
+   "rescued": 0.4,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 66.0,
+   "steps": 8.482,
+   "rescued": 0.4,
+   "premature": 0.8,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "w3g32",
+  "phi": 0.89037574,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 0.0,
+  "oracle": 0.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 0.0,
+   "steps": 15.949,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 0.0,
+   "steps": 15.949,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 0.0,
+   "steps": 3.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 0.0,
+   "steps": 15.536,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "w3t",
+  "phi": 0.017861919999999996,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 65.60000000000001,
+  "oracle": 65.7,
+  "V_abs": 0.1,
+  "V_rel": 0.29069767441860467,
+  "head (fp32-chosen)": {
+   "acc": 65.2,
+   "steps": 7.891,
+   "rescued": 0.1,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 65.2,
+   "steps": 7.891,
+   "rescued": 0.1,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 65.7,
+   "steps": 9.163,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 65.5,
+   "steps": 8.412,
+   "rescued": 0.1,
+   "premature": 0.2,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "w4c",
+  "phi": 0.92295592,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 65.8,
+  "oracle": 65.8,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 65.5,
+   "steps": 7.954,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 65.5,
+   "steps": 7.954,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 65.8,
+   "steps": 9.251,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 65.2,
+   "steps": 8.331,
+   "rescued": 0.0,
+   "premature": 0.6,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "w4c+a8",
+  "phi": 0.92620705,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 66.8,
+  "oracle": 66.8,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 66.60000000000001,
+   "steps": 7.702,
+   "rescued": 0.0,
+   "premature": 0.2,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 66.60000000000001,
+   "steps": 7.702,
+   "rescued": 0.0,
+   "premature": 0.2,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 66.8,
+   "steps": 8.959,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 66.5,
+   "steps": 8.056,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "w4g32",
+  "phi": 0.94180303,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 62.9,
+  "oracle": 62.9,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 62.8,
+   "steps": 8.402,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 62.8,
+   "steps": 8.402,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 62.9,
+   "steps": 9.467,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 62.1,
+   "steps": 8.205,
+   "rescued": 0.0,
+   "premature": 0.8,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "w4t",
+  "phi": 0.87542816,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 66.9,
+  "oracle": 67.0,
+  "V_abs": 0.1,
+  "V_rel": 0.3021148036253776,
+  "head (fp32-chosen)": {
+   "acc": 66.7,
+   "steps": 7.727,
+   "rescued": 0.1,
+   "premature": 0.3,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 66.7,
+   "steps": 7.727,
+   "rescued": 0.1,
+   "premature": 0.3,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 67.0,
+   "steps": 9.011,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 66.7,
+   "steps": 8.069,
+   "rescued": 0.1,
+   "premature": 0.3,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "w8c",
+  "phi": 0.95795404,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 67.2,
+  "oracle": 67.2,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 66.7,
+   "steps": 7.668,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 66.7,
+   "steps": 7.668,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 66.8,
+   "steps": 10.191,
+   "rescued": 0.0,
+   "premature": 0.4,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.1",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 65.9,
+  "oracle": 65.9,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 65.5,
+   "steps": 7.826,
+   "rescued": 0.0,
+   "premature": 0.4,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 65.5,
+   "steps": 7.826,
+   "rescued": 0.0,
+   "premature": 0.4,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 65.3,
+   "steps": 9.97,
+   "rescued": 0.0,
+   "premature": 0.6,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.2",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 65.3,
+  "oracle": 65.3,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 65.0,
+   "steps": 8.044,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 65.0,
+   "steps": 8.044,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 64.8,
+   "steps": 11.583,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.3",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 66.10000000000001,
+  "oracle": 66.10000000000001,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 66.0,
+   "steps": 7.935,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 66.0,
+   "steps": 7.935,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.3@s0",
+  "phi": 0.91259325,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 66.4,
+  "oracle": 66.4,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 66.4,
+   "steps": 7.968,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 66.4,
+   "steps": 7.968,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.3@s1",
+  "phi": 0.90790438,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 65.10000000000001,
+  "oracle": 65.10000000000001,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 64.60000000000001,
+   "steps": 7.933,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 64.60000000000001,
+   "steps": 7.933,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.3@s2",
+  "phi": 0.90901015,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 61.3,
+  "oracle": 61.3,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 61.3,
+   "steps": 8.555,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 61.3,
+   "steps": 8.555,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 61.3,
+   "steps": 9.664,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 60.099999999999994,
+   "steps": 8.352,
+   "rescued": 0.0,
+   "premature": 1.2,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.5@s0",
+  "phi": 0.8597967999999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 60.5,
+  "oracle": 60.5,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 60.099999999999994,
+   "steps": 8.691,
+   "rescued": 0.0,
+   "premature": 0.4,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 60.099999999999994,
+   "steps": 8.691,
+   "rescued": 0.0,
+   "premature": 0.4,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 60.4,
+   "steps": 9.8,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 59.599999999999994,
+   "steps": 7.996,
+   "rescued": 0.0,
+   "premature": 0.8999999999999999,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.5@s1",
+  "phi": 0.8545337500000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 57.8,
+  "oracle": 58.4,
+  "V_abs": 0.6,
+  "V_rel": 1.4218009478672986,
+  "head (fp32-chosen)": {
+   "acc": 58.099999999999994,
+   "steps": 9.032,
+   "rescued": 0.6,
+   "premature": 0.3,
+   "recovery": 0.49999999999999406
+  },
+  "head native": {
+   "acc": 58.099999999999994,
+   "steps": 9.032,
+   "rescued": 0.6,
+   "premature": 0.3,
+   "recovery": 0.49999999999999406
+  },
+  "stability 2": {
+   "acc": 58.4,
+   "steps": 9.863,
+   "rescued": 0.6,
+   "premature": 0.0,
+   "recovery": 1.0
+  },
+  "residual (tuned fp32)": {
+   "acc": 56.99999999999999,
+   "steps": 7.789,
+   "rescued": 0.6,
+   "premature": 1.4000000000000001,
+   "recovery": -1.3333333333333373,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.5@s2",
+  "phi": 0.83596793,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 44.4,
+  "oracle": 45.7,
+  "V_abs": 1.3,
+  "V_rel": 2.338129496402878,
+  "head (fp32-chosen)": {
+   "acc": 45.300000000000004,
+   "steps": 10.63,
+   "rescued": 1.3,
+   "premature": 0.4,
+   "recovery": 0.6923076923076944
+  },
+  "head native": {
+   "acc": 45.300000000000004,
+   "steps": 10.63,
+   "rescued": 1.3,
+   "premature": 0.4,
+   "recovery": 0.6923076923076944
+  },
+  "stability 2": {
+   "acc": 45.6,
+   "steps": 11.56,
+   "rescued": 1.3,
+   "premature": 0.1,
+   "recovery": 0.9230769230769222
+  },
+  "residual (tuned fp32)": {
+   "acc": 41.8,
+   "steps": 8.637,
+   "rescued": 1.0999999999999999,
+   "premature": 3.6999999999999997,
+   "recovery": -1.9999999999999944,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.7@s0",
+  "phi": 0.75516484,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 44.800000000000004,
+  "oracle": 44.800000000000004,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 44.7,
+   "steps": 10.754,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 44.7,
+   "steps": 10.754,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 44.800000000000004,
+   "steps": 11.492,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 41.8,
+   "steps": 8.235,
+   "rescued": 0.0,
+   "premature": 3.0,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.7@s1",
+  "phi": 0.76998442,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 25.1,
+  "oracle": 29.5,
+  "V_abs": 4.3999999999999995,
+  "V_rel": 5.874499332443258,
+  "head (fp32-chosen)": {
+   "acc": 29.4,
+   "steps": 12.608,
+   "rescued": 4.3999999999999995,
+   "premature": 0.1,
+   "recovery": 0.977272727272727
+  },
+  "head native": {
+   "acc": 29.4,
+   "steps": 12.608,
+   "rescued": 4.3999999999999995,
+   "premature": 0.1,
+   "recovery": 0.977272727272727
+  },
+  "stability 2": {
+   "acc": 29.4,
+   "steps": 12.038,
+   "rescued": 4.3,
+   "premature": 0.0,
+   "recovery": 0.977272727272727
+  },
+  "residual (tuned fp32)": {
+   "acc": 27.1,
+   "steps": 7.046,
+   "rescued": 4.3,
+   "premature": 2.3,
+   "recovery": 0.4545454545454547,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "noise0.7@s2",
+  "phi": 0.6230488900000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 1.7999999999999998,
+  "oracle": 3.1,
+  "V_abs": 1.3,
+  "V_rel": 1.3238289205702647,
+  "head (fp32-chosen)": {
+   "acc": 1.7999999999999998,
+   "steps": 13.757,
+   "rescued": 1.0,
+   "premature": 1.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 1.7999999999999998,
+   "steps": 13.757,
+   "rescued": 1.0,
+   "premature": 1.0,
+   "recovery": 0.0
+  },
+  "family": "sudoku_attn",
+  "spec": "noise1.0@s0",
+  "phi": 0.45365873,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 3.5999999999999996,
+  "oracle": 8.0,
+  "V_abs": 4.3999999999999995,
+  "V_rel": 4.564315352697095,
+  "head (fp32-chosen)": {
+   "acc": 6.9,
+   "steps": 14.8,
+   "rescued": 3.9,
+   "premature": 0.6,
+   "recovery": 0.7500000000000001
+  },
+  "head native": {
+   "acc": 6.9,
+   "steps": 14.8,
+   "rescued": 3.9,
+   "premature": 0.6,
+   "recovery": 0.7500000000000001
+  },
+  "family": "sudoku_attn",
+  "spec": "noise1.0@s1",
+  "phi": 0.49141061,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 0.5,
+  "oracle": 6.5,
+  "V_abs": 6.0,
+  "V_rel": 6.030150753768845,
+  "head (fp32-chosen)": {
+   "acc": 5.7,
+   "steps": 15.17,
+   "rescued": 5.2,
+   "premature": 0.0,
+   "recovery": 0.8666666666666667
+  },
+  "head native": {
+   "acc": 5.7,
+   "steps": 15.17,
+   "rescued": 5.2,
+   "premature": 0.0,
+   "recovery": 0.8666666666666667
+  },
+  "family": "sudoku_attn",
+  "spec": "noise1.0@s2",
+  "phi": 0.43482254,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 63.800000000000004,
+  "oracle": 63.800000000000004,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 63.6,
+   "steps": 8.433,
+   "rescued": 0.0,
+   "premature": 0.2,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 63.6,
+   "steps": 8.433,
+   "rescued": 0.0,
+   "premature": 0.2,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 63.800000000000004,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "anoise0.3",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 63.5,
+  "oracle": 63.5,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 63.4,
+   "steps": 8.402,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 63.4,
+   "steps": 8.402,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 63.5,
+   "steps": 9.658,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 63.5,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "anoise0.3@s0",
+  "phi": 0.9129774299999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 64.60000000000001,
+  "oracle": 64.60000000000001,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 64.1,
+   "steps": 8.365,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 64.1,
+   "steps": 8.365,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": null
+  },
+  "family": "sudoku_attn",
+  "spec": "anoise0.3@s1",
+  "phi": 0.90929781,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 64.1,
+  "oracle": 64.1,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 63.800000000000004,
+   "steps": 8.334,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 63.800000000000004,
+   "steps": 8.334,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": null
+  },
+  "family": "sudoku_attn",
+  "spec": "anoise0.3@s2",
+  "phi": 0.91482133,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 44.4,
+  "oracle": 44.5,
+  "V_abs": 0.1,
+  "V_rel": 0.17985611510791366,
+  "head (fp32-chosen)": {
+   "acc": 43.7,
+   "steps": 11.257,
+   "rescued": 0.1,
+   "premature": 0.8,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 43.7,
+   "steps": 11.257,
+   "rescued": 0.1,
+   "premature": 0.8,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 44.4,
+   "steps": 12.103,
+   "rescued": 0.1,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 44.4,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.10000000000000062
+   ]
+  },
+  "family": "sudoku_attn",
+  "spec": "anoise0.5@s0",
+  "phi": 0.804794,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 45.1,
+  "oracle": 45.1,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 44.3,
+   "steps": 11.049,
+   "rescued": 0.0,
+   "premature": 0.8,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 44.3,
+   "steps": 11.049,
+   "rescued": 0.0,
+   "premature": 0.8,
+   "recovery": null
+  },
+  "family": "sudoku_attn",
+  "spec": "anoise0.5@s1",
+  "phi": 0.8082996499999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 45.9,
+  "oracle": 45.9,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 45.1,
+   "steps": 11.082,
+   "rescued": 0.0,
+   "premature": 0.8,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 45.1,
+   "steps": 11.082,
+   "rescued": 0.0,
+   "premature": 0.8,
+   "recovery": null
+  },
+  "family": "sudoku_attn",
+  "spec": "anoise0.5@s2",
+  "phi": 0.8133651299999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 49.4,
+  "oracle": 49.4,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 49.4,
+   "steps": 10.567,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 49.4,
+   "steps": 10.567,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 49.4,
+   "steps": 11.412,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 49.1,
+   "steps": 9.982,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "fp32",
+  "phi": 1.0,
+  "phi_src": "breadth (p4d)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 11.600000000000001,
+  "oracle": 11.600000000000001,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 11.600000000000001,
+   "steps": 15.996,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 11.600000000000001,
+   "steps": 15.996,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 11.600000000000001,
+   "steps": 13.953,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 7.5,
+   "steps": 5.287,
+   "rescued": 0.0,
+   "premature": 4.1000000000000005,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "w2a",
+  "phi": 0.68278557,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 14.299999999999999,
+  "oracle": 14.7,
+  "V_abs": 0.4,
+  "V_rel": 0.46674445740956827,
+  "head (fp32-chosen)": {
+   "acc": 14.299999999999999,
+   "steps": 15.936,
+   "rescued": 0.1,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 14.299999999999999,
+   "steps": 15.936,
+   "rescued": 0.1,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 14.399999999999999,
+   "steps": 14.541,
+   "rescued": 0.2,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 9.3,
+   "steps": 6.024,
+   "rescued": 0.2,
+   "premature": 5.2,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "w2g32",
+  "phi": 0.6947021000000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 48.9,
+  "oracle": 48.9,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 46.2,
+   "steps": 10.523,
+   "rescued": 0.0,
+   "premature": 2.7,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 46.2,
+   "steps": 10.523,
+   "rescued": 0.0,
+   "premature": 2.7,
+   "recovery": null
+  },
+  "family": "hrm_sudoku",
+  "spec": "w3a",
+  "phi": 0.9386336599999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 46.1,
+  "oracle": 46.1,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 46.1,
+   "steps": 11.145,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 46.1,
+   "steps": 11.145,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 46.1,
+   "steps": 11.761,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 45.5,
+   "steps": 10.412,
+   "rescued": 0.0,
+   "premature": 0.6,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "w3c",
+  "phi": 0.92817369,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 47.199999999999996,
+  "oracle": 47.199999999999996,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 47.199999999999996,
+   "steps": 10.735,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 47.199999999999996,
+   "steps": 10.735,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 47.199999999999996,
+   "steps": 11.559,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 47.0,
+   "steps": 10.454,
+   "rescued": 0.0,
+   "premature": 0.2,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "w3g32",
+  "phi": 0.95074394,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 0.0,
+  "oracle": 0.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "hrm_sudoku",
+  "spec": "w3t",
+  "phi": 0.33336011,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 48.699999999999996,
+  "oracle": 48.699999999999996,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 48.699999999999996,
+   "steps": 10.632,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 48.699999999999996,
+   "steps": 10.632,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 48.699999999999996,
+   "steps": 11.457,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 47.9,
+   "steps": 9.889,
+   "rescued": 0.0,
+   "premature": 0.8,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "w4c",
+  "phi": 0.95752886,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 47.099999999999994,
+  "oracle": 47.099999999999994,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 47.099999999999994,
+   "steps": 11.195,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 47.099999999999994,
+   "steps": 11.195,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 47.099999999999994,
+   "steps": 11.653,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 47.099999999999994,
+   "steps": 10.69,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "w4t",
+  "phi": 0.93470749,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 49.5,
+  "oracle": 49.5,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 49.5,
+   "steps": 10.584,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 49.5,
+   "steps": 10.584,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 49.5,
+   "steps": 11.423,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 49.2,
+   "steps": 10.045,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "w8c",
+  "phi": 0.9776741600000002,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 50.3,
+  "oracle": 50.3,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 47.9,
+   "steps": 10.366,
+   "rescued": 0.0,
+   "premature": 2.4,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 47.9,
+   "steps": 10.366,
+   "rescued": 0.0,
+   "premature": 2.4,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 50.1,
+   "steps": 11.033,
+   "rescued": 0.0,
+   "premature": 0.2,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.1",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 48.199999999999996,
+  "oracle": 48.199999999999996,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 46.2,
+   "steps": 10.514,
+   "rescued": 0.0,
+   "premature": 2.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 46.2,
+   "steps": 10.514,
+   "rescued": 0.0,
+   "premature": 2.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 47.9,
+   "steps": 11.046,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.2",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 48.3,
+  "oracle": 48.3,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 45.9,
+   "steps": 10.529,
+   "rescued": 0.0,
+   "premature": 2.4,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 45.9,
+   "steps": 10.529,
+   "rescued": 0.0,
+   "premature": 2.4,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 48.1,
+   "steps": 11.09,
+   "rescued": 0.0,
+   "premature": 0.2,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.3",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 48.8,
+  "oracle": 48.8,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 47.3,
+   "steps": 10.525,
+   "rescued": 0.0,
+   "premature": 1.5,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 47.3,
+   "steps": 10.525,
+   "rescued": 0.0,
+   "premature": 1.5,
+   "recovery": null
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.3@s0",
+  "phi": 0.9468141599999998,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 47.0,
+  "oracle": 47.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 45.1,
+   "steps": 10.673,
+   "rescued": 0.0,
+   "premature": 1.9,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 45.1,
+   "steps": 10.673,
+   "rescued": 0.0,
+   "premature": 1.9,
+   "recovery": null
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.3@s1",
+  "phi": 0.94650654,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 47.199999999999996,
+  "oracle": 47.199999999999996,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 44.9,
+   "steps": 10.722,
+   "rescued": 0.0,
+   "premature": 2.3,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 44.9,
+   "steps": 10.722,
+   "rescued": 0.0,
+   "premature": 2.3,
+   "recovery": null
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.3@s2",
+  "phi": 0.94922061,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 44.7,
+  "oracle": 44.7,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 44.7,
+   "steps": 11.14,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 44.7,
+   "steps": 11.14,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 44.7,
+   "steps": 11.908,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 43.8,
+   "steps": 9.981,
+   "rescued": 0.0,
+   "premature": 0.8999999999999999,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.5@s0",
+  "phi": 0.9217326499999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 42.6,
+  "oracle": 42.6,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 42.6,
+   "steps": 11.34,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 42.6,
+   "steps": 11.34,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 42.6,
+   "steps": 12.057,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 41.9,
+   "steps": 10.055,
+   "rescued": 0.0,
+   "premature": 0.7000000000000001,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.5@s1",
+  "phi": 0.91523553,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 44.800000000000004,
+  "oracle": 44.800000000000004,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 44.800000000000004,
+   "steps": 11.241,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 44.800000000000004,
+   "steps": 11.241,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 44.800000000000004,
+   "steps": 11.97,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 43.1,
+   "steps": 9.178,
+   "rescued": 0.0,
+   "premature": 1.7000000000000002,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.5@s2",
+  "phi": 0.9184139499999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 41.099999999999994,
+  "oracle": 41.099999999999994,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 39.0,
+   "steps": 11.481,
+   "rescued": 0.0,
+   "premature": 2.1,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 39.0,
+   "steps": 11.481,
+   "rescued": 0.0,
+   "premature": 2.1,
+   "recovery": null
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.7@s0",
+  "phi": 0.8878196399999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 38.5,
+  "oracle": 38.5,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 36.3,
+   "steps": 11.793,
+   "rescued": 0.0,
+   "premature": 2.1999999999999997,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 36.3,
+   "steps": 11.793,
+   "rescued": 0.0,
+   "premature": 2.1999999999999997,
+   "recovery": null
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.7@s1",
+  "phi": 0.87666356,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 40.5,
+  "oracle": 40.5,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 37.5,
+   "steps": 11.768,
+   "rescued": 0.0,
+   "premature": 3.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 37.5,
+   "steps": 11.768,
+   "rescued": 0.0,
+   "premature": 3.0,
+   "recovery": null
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise0.7@s2",
+  "phi": 0.8804223000000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 25.6,
+  "oracle": 25.6,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 25.5,
+   "steps": 13.426,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 25.5,
+   "steps": 13.426,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 25.6,
+   "steps": 13.751,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 21.6,
+   "steps": 7.714,
+   "rescued": 0.0,
+   "premature": 4.0,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise1.0@s0",
+  "phi": 0.80062232,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 21.9,
+  "oracle": 21.9,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 21.8,
+   "steps": 13.686,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 21.8,
+   "steps": 13.686,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 21.9,
+   "steps": 13.963,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 19.5,
+   "steps": 7.727,
+   "rescued": 0.0,
+   "premature": 2.4,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise1.0@s1",
+  "phi": 0.7891809599999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 21.099999999999998,
+  "oracle": 21.2,
+  "V_abs": 0.1,
+  "V_rel": 0.1267427122940431,
+  "head (fp32-chosen)": {
+   "acc": 20.4,
+   "steps": 14.011,
+   "rescued": 0.0,
+   "premature": 0.7000000000000001,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 20.4,
+   "steps": 14.011,
+   "rescued": 0.0,
+   "premature": 0.7000000000000001,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 21.099999999999998,
+   "steps": 13.96,
+   "rescued": 0.1,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 14.899999999999999,
+   "steps": 5.166,
+   "rescued": 0.1,
+   "premature": 6.3,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "noise1.0@s2",
+  "phi": 0.78322541,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 45.300000000000004,
+  "oracle": 45.300000000000004,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 42.6,
+   "steps": 11.295,
+   "rescued": 0.0,
+   "premature": 2.7,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 42.6,
+   "steps": 11.295,
+   "rescued": 0.0,
+   "premature": 2.7,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 45.300000000000004,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "anoise0.3",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 44.1,
+  "oracle": 44.1,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 44.1,
+   "steps": 11.791,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 44.1,
+   "steps": 11.791,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 44.1,
+   "steps": 12.406,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 44.1,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "anoise0.3@s0",
+  "phi": 0.92562735,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 44.0,
+  "oracle": 44.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 41.0,
+   "steps": 11.346,
+   "rescued": 0.0,
+   "premature": 3.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 41.0,
+   "steps": 11.346,
+   "rescued": 0.0,
+   "premature": 3.0,
+   "recovery": null
+  },
+  "family": "hrm_sudoku",
+  "spec": "anoise0.3@s1",
+  "phi": 0.9268225099999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 45.300000000000004,
+  "oracle": 45.300000000000004,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 41.099999999999994,
+   "steps": 11.402,
+   "rescued": 0.0,
+   "premature": 4.2,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 41.099999999999994,
+   "steps": 11.402,
+   "rescued": 0.0,
+   "premature": 4.2,
+   "recovery": null
+  },
+  "family": "hrm_sudoku",
+  "spec": "anoise0.3@s2",
+  "phi": 0.92550009,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 11.3,
+  "oracle": 13.4,
+  "V_abs": 2.1,
+  "V_rel": 2.367531003382187,
+  "head (fp32-chosen)": {
+   "acc": 11.1,
+   "steps": 15.313,
+   "rescued": 0.2,
+   "premature": 0.4,
+   "recovery": -0.09523809523809576
+  },
+  "head native": {
+   "acc": 11.1,
+   "steps": 15.313,
+   "rescued": 0.2,
+   "premature": 0.4,
+   "recovery": -0.09523809523809576
+  },
+  "stability 2": {
+   "acc": 11.600000000000001,
+   "steps": 15.365,
+   "rescued": 0.3,
+   "premature": 0.0,
+   "recovery": 0.1428571428571432
+  },
+  "residual (tuned fp32)": {
+   "acc": 11.3,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0,
+   "params": [
+    0.1258925411794175,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_sudoku",
+  "spec": "anoise0.5@s0",
+  "phi": 0.7890203899999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 11.1,
+  "oracle": 13.4,
+  "V_abs": 2.3,
+  "V_rel": 2.5871766029246346,
+  "head (fp32-chosen)": {
+   "acc": 9.3,
+   "steps": 14.969,
+   "rescued": 0.7000000000000001,
+   "premature": 2.5,
+   "recovery": -0.7826086956521732
+  },
+  "head native": {
+   "acc": 9.3,
+   "steps": 14.969,
+   "rescued": 0.7000000000000001,
+   "premature": 2.5,
+   "recovery": -0.7826086956521732
+  },
+  "family": "hrm_sudoku",
+  "spec": "anoise0.5@s1",
+  "phi": 0.79015109,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 12.3,
+  "oracle": 13.3,
+  "V_abs": 1.0,
+  "V_rel": 1.1402508551881414,
+  "head (fp32-chosen)": {
+   "acc": 10.2,
+   "steps": 14.955,
+   "rescued": 0.4,
+   "premature": 2.5,
+   "recovery": -2.1000000000000014
+  },
+  "head native": {
+   "acc": 10.2,
+   "steps": 14.955,
+   "rescued": 0.4,
+   "premature": 2.5,
+   "recovery": -2.1000000000000014
+  },
+  "family": "hrm_sudoku",
+  "spec": "anoise0.5@s2",
+  "phi": 0.79149671,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 0.0,
+  "oracle": 0.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "hrm_sudoku",
+  "spec": "anoise0.7@s0",
+  "phi": 0.57894325,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 87.0,
+  "oracle": 87.8,
+  "V_abs": 0.8,
+  "V_rel": 6.153846153846154,
+  "head (fp32-chosen)": {
+   "acc": 87.0,
+   "steps": 2.027,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 86.2,
+   "steps": 1.181,
+   "rescued": 0.4,
+   "premature": 1.2,
+   "recovery": -1.0
+  },
+  "stability 2": {
+   "acc": 87.0,
+   "steps": 3.152,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "residual (tuned fp32)": {
+   "acc": 86.7,
+   "steps": 2.025,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": -0.3749999999999978,
+   "params": [
+    0.10000000000000062,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "fp32",
+  "phi": 1.0,
+  "phi_src": "breadth (p4d)",
+  "src": "m5",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 70.0,
+  "oracle": 71.89999999999999,
+  "V_abs": 1.9,
+  "V_rel": 6.333333333333333,
+  "head (fp32-chosen)": {
+   "acc": 70.3,
+   "steps": 5.698,
+   "rescued": 0.6,
+   "premature": 0.3,
+   "recovery": 0.15789473684210448
+  },
+  "head native": {
+   "acc": 70.3,
+   "steps": 5.698,
+   "rescued": 0.6,
+   "premature": 0.3,
+   "recovery": 0.15789473684210448
+  },
+  "stability 2": {
+   "acc": 70.0,
+   "steps": 4.861,
+   "rescued": 0.5,
+   "premature": 0.5,
+   "recovery": 0.0
+  },
+  "residual (tuned fp32)": {
+   "acc": 62.1,
+   "steps": 2.392,
+   "rescued": 1.0999999999999999,
+   "premature": 9.0,
+   "recovery": -4.157894736842123,
+   "params": [
+    0.10000000000000062,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "w2a",
+  "phi": 0.8723976016044617,
+  "phi_src": "breadth (p4d)",
+  "src": "m5",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 0.0,
+  "oracle": 0.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "maze_attn",
+  "spec": "w2c",
+  "phi": -0.022327857092022896,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 25.4,
+  "oracle": 29.799999999999997,
+  "V_abs": 4.3999999999999995,
+  "V_rel": 5.898123324396783,
+  "head (fp32-chosen)": {
+   "acc": 25.4,
+   "steps": 15.813,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 25.4,
+   "steps": 15.813,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "stability 2": {
+   "acc": 25.8,
+   "steps": 7.598,
+   "rescued": 1.0999999999999999,
+   "premature": 0.7000000000000001,
+   "recovery": 0.09090909090909143
+  },
+  "residual (tuned fp32)": {
+   "acc": 15.9,
+   "steps": 2.588,
+   "rescued": 1.5,
+   "premature": 11.0,
+   "recovery": -2.159090909090909,
+   "params": [
+    0.10000000000000062,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "w2g32",
+  "phi": 0.7646872997283936,
+  "phi_src": "breadth (p4d)",
+  "src": "m5",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 0.0,
+  "oracle": 0.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 0.0,
+   "steps": 2.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 0.0,
+   "steps": 1.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 0.0,
+   "steps": 4.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 0.0,
+   "steps": 2.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "w2t",
+  "phi": 0.02884662337601185,
+  "phi_src": "breadth (p4d)",
+  "src": "m5",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 86.6,
+  "oracle": 87.2,
+  "V_abs": 0.6,
+  "V_rel": 4.477611940298507,
+  "head (fp32-chosen)": {
+   "acc": 86.6,
+   "steps": 2.058,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 86.0,
+   "steps": 1.197,
+   "rescued": 0.4,
+   "premature": 1.0,
+   "recovery": -0.9999999999999764
+  },
+  "family": "maze_attn",
+  "spec": "w3a",
+  "phi": 0.9937793612480164,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 86.4,
+  "oracle": 87.0,
+  "V_abs": 0.6,
+  "V_rel": 4.411764705882353,
+  "head (fp32-chosen)": {
+   "acc": 86.4,
+   "steps": 2.057,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 86.0,
+   "steps": 1.215,
+   "rescued": 0.2,
+   "premature": 0.6,
+   "recovery": -0.6666666666666825
+  },
+  "stability 2": {
+   "acc": 86.5,
+   "steps": 3.187,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": 0.16666666666665877
+  },
+  "residual (tuned fp32)": {
+   "acc": 86.1,
+   "steps": 2.021,
+   "rescued": 0.0,
+   "premature": 0.3,
+   "recovery": -0.5000000000000236,
+   "params": [
+    0.10000000000000062,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "w3c",
+  "phi": 0.9894232153892517,
+  "phi_src": "breadth (p4d)",
+  "src": "m5",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 86.7,
+  "oracle": 87.5,
+  "V_abs": 0.8,
+  "V_rel": 6.015037593984962,
+  "head (fp32-chosen)": {
+   "acc": 86.8,
+   "steps": 2.051,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": 0.12499999999999334
+  },
+  "head native": {
+   "acc": 86.1,
+   "steps": 1.192,
+   "rescued": 0.4,
+   "premature": 1.0,
+   "recovery": -0.7500000000000133
+  },
+  "family": "maze_attn",
+  "spec": "w3g32",
+  "phi": 0.9964668154716492,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 0.0,
+  "oracle": 0.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "maze_attn",
+  "spec": "w3t",
+  "phi": 0.4010501205921173,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 86.7,
+  "oracle": 87.6,
+  "V_abs": 0.8999999999999999,
+  "V_rel": 6.7669172932330826,
+  "head (fp32-chosen)": {
+   "acc": 86.8,
+   "steps": 2.028,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": 0.11111111111110585
+  },
+  "head native": {
+   "acc": 86.3,
+   "steps": 1.179,
+   "rescued": 0.6,
+   "premature": 1.0,
+   "recovery": -0.44444444444445497
+  },
+  "family": "maze_attn",
+  "spec": "w4a",
+  "phi": 0.9986737966537476,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 86.9,
+  "oracle": 87.8,
+  "V_abs": 0.8999999999999999,
+  "V_rel": 6.870229007633588,
+  "head (fp32-chosen)": {
+   "acc": 86.8,
+   "steps": 2.026,
+   "rescued": 0.0,
+   "premature": 0.1,
+   "recovery": -0.11111111111112164
+  },
+  "head native": {
+   "acc": 86.3,
+   "steps": 1.173,
+   "rescued": 0.4,
+   "premature": 1.0,
+   "recovery": -0.6666666666666825
+  },
+  "stability 2": {
+   "acc": 86.9,
+   "steps": 3.152,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "residual (tuned fp32)": {
+   "acc": 86.4,
+   "steps": 2.02,
+   "rescued": 0.0,
+   "premature": 0.5,
+   "recovery": -0.5555555555555608,
+   "params": [
+    0.10000000000000062,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "w4c",
+  "phi": 0.9983554299999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 87.0,
+  "oracle": 87.8,
+  "V_abs": 0.8,
+  "V_rel": 6.153846153846154,
+  "head (fp32-chosen)": {
+   "acc": 87.1,
+   "steps": 2.026,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": 0.12499999999999334
+  },
+  "head native": {
+   "acc": 86.9,
+   "steps": 1.183,
+   "rescued": 0.5,
+   "premature": 0.6,
+   "recovery": -0.12499999999999334
+  },
+  "family": "maze_attn",
+  "spec": "w4g128",
+  "phi": 0.999062716960907,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 86.8,
+  "oracle": 87.6,
+  "V_abs": 0.8,
+  "V_rel": 6.0606060606060606,
+  "head (fp32-chosen)": {
+   "acc": 86.8,
+   "steps": 2.029,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 86.5,
+   "steps": 1.18,
+   "rescued": 0.5,
+   "premature": 0.8,
+   "recovery": -0.3749999999999978
+  },
+  "family": "maze_attn",
+  "spec": "w4g32",
+  "phi": 0.999353289604187,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 86.2,
+  "oracle": 86.7,
+  "V_abs": 0.5,
+  "V_rel": 3.6231884057971016,
+  "head (fp32-chosen)": {
+   "acc": 86.2,
+   "steps": 2.076,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 85.9,
+   "steps": 1.241,
+   "rescued": 0.3,
+   "premature": 0.6,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 86.2,
+   "steps": 3.213,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 86.1,
+   "steps": 2.02,
+   "rescued": 0.1,
+   "premature": 0.2,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "w4t",
+  "phi": 0.9919253499999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 87.0,
+  "oracle": 87.9,
+  "V_abs": 0.8999999999999999,
+  "V_rel": 6.923076923076923,
+  "head (fp32-chosen)": {
+   "acc": 87.0,
+   "steps": 2.028,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 86.2,
+   "steps": 1.183,
+   "rescued": 0.4,
+   "premature": 1.2,
+   "recovery": -0.8888888888888801
+  },
+  "family": "maze_attn",
+  "spec": "w8a",
+  "phi": 0.9999964833259583,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 87.1,
+  "oracle": 88.0,
+  "V_abs": 0.8999999999999999,
+  "V_rel": 6.976744186046512,
+  "head (fp32-chosen)": {
+   "acc": 87.2,
+   "steps": 2.027,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": 0.11111111111111989
+  },
+  "head native": {
+   "acc": 86.4,
+   "steps": 1.182,
+   "rescued": 0.5,
+   "premature": 1.2,
+   "recovery": -0.7777777777777602
+  },
+  "family": "maze_attn",
+  "spec": "w8c",
+  "phi": 0.9998568800000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 87.0,
+  "oracle": 87.7,
+  "V_abs": 0.7000000000000001,
+  "V_rel": 5.384615384615385,
+  "head (fp32-chosen)": {
+   "acc": 87.0,
+   "steps": 2.028,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 86.2,
+   "steps": 1.179,
+   "rescued": 0.4,
+   "premature": 1.2,
+   "recovery": -1.1428571428571341
+  },
+  "family": "maze_attn",
+  "spec": "w8t",
+  "phi": 0.9998961687088013,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 500,
+  "K": 16,
+  "acc": 89.0,
+  "oracle": 89.8,
+  "V_abs": 0.8,
+  "V_rel": 7.2727272727272725,
+  "head (fp32-chosen)": {
+   "acc": 88.8,
+   "steps": 2.042,
+   "rescued": 0.0,
+   "premature": 0.2,
+   "recovery": -0.25000000000000444
+  },
+  "head native": {
+   "acc": 88.8,
+   "steps": 1.174,
+   "rescued": 0.4,
+   "premature": 0.6,
+   "recovery": -0.25000000000000444
+  },
+  "residual (tuned fp32)": {
+   "acc": 88.8,
+   "steps": 2.05,
+   "rescued": 0.0,
+   "premature": 0.2,
+   "recovery": -0.25000000000000444,
+   "params": [
+    0.3981071705535002,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "noise0.1",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 500,
+  "K": 16,
+  "acc": 88.2,
+  "oracle": 88.6,
+  "V_abs": 0.4,
+  "V_rel": 3.389830508474576,
+  "head (fp32-chosen)": {
+   "acc": 88.2,
+   "steps": 2.066,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 87.0,
+   "steps": 1.21,
+   "rescued": 0.2,
+   "premature": 1.4000000000000001,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 87.6,
+   "steps": 2.052,
+   "rescued": 0.0,
+   "premature": 0.6,
+   "recovery": null,
+   "params": [
+    0.3981071705535002,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "noise0.2",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 500,
+  "K": 16,
+  "acc": 88.4,
+  "oracle": 89.0,
+  "V_abs": 0.6,
+  "V_rel": 5.172413793103448,
+  "head (fp32-chosen)": {
+   "acc": 88.4,
+   "steps": 2.058,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 87.8,
+   "steps": 1.218,
+   "rescued": 0.2,
+   "premature": 0.8,
+   "recovery": -1.0000000000000238
+  },
+  "residual (tuned fp32)": {
+   "acc": 88.0,
+   "steps": 2.062,
+   "rescued": 0.0,
+   "premature": 0.4,
+   "recovery": -0.6666666666666825,
+   "params": [
+    0.3981071705535002,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "noise0.3",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 86.3,
+  "oracle": 86.7,
+  "V_abs": 0.4,
+  "V_rel": 2.9197080291970803,
+  "head (fp32-chosen)": {
+   "acc": 86.3,
+   "steps": 2.041,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 85.39999999999999,
+   "steps": 1.213,
+   "rescued": 0.1,
+   "premature": 1.0,
+   "recovery": null
+  },
+  "family": "maze_attn",
+  "spec": "noise0.5@s0",
+  "phi": 0.9862056800000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 86.0,
+  "oracle": 86.7,
+  "V_abs": 0.7000000000000001,
+  "V_rel": 5.0,
+  "head (fp32-chosen)": {
+   "acc": 86.1,
+   "steps": 2.044,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": 0.14285714285713416
+  },
+  "head native": {
+   "acc": 84.89999999999999,
+   "steps": 1.199,
+   "rescued": 0.5,
+   "premature": 1.6,
+   "recovery": -1.5714285714285772
+  },
+  "family": "maze_attn",
+  "spec": "noise0.5@s1",
+  "phi": 0.9861054399999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 87.0,
+  "oracle": 87.6,
+  "V_abs": 0.6,
+  "V_rel": 4.615384615384615,
+  "head (fp32-chosen)": {
+   "acc": 87.0,
+   "steps": 2.038,
+   "rescued": 0.1,
+   "premature": 0.1,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 86.8,
+   "steps": 1.214,
+   "rescued": 0.5,
+   "premature": 0.7000000000000001,
+   "recovery": -0.33333333333334125
+  },
+  "family": "maze_attn",
+  "spec": "noise0.5@s2",
+  "phi": 0.98655528,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 85.2,
+  "oracle": 85.5,
+  "V_abs": 0.3,
+  "V_rel": 2.027027027027027,
+  "head (fp32-chosen)": {
+   "acc": 85.2,
+   "steps": 2.134,
+   "rescued": 0.1,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 82.3,
+   "steps": 1.372,
+   "rescued": 0.2,
+   "premature": 3.1,
+   "recovery": null
+  },
+  "family": "maze_attn",
+  "spec": "noise1.0",
+  "phi": null,
+  "phi_src": null,
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 85.2,
+  "oracle": 85.5,
+  "V_abs": 0.3,
+  "V_rel": 2.027027027027027,
+  "head (fp32-chosen)": {
+   "acc": 85.2,
+   "steps": 2.134,
+   "rescued": 0.1,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 82.3,
+   "steps": 1.372,
+   "rescued": 0.2,
+   "premature": 3.1,
+   "recovery": null
+  },
+  "stability 2": {
+   "acc": 85.3,
+   "steps": 3.309,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "residual (tuned fp32)": {
+   "acc": 84.8,
+   "steps": 2.031,
+   "rescued": 0.1,
+   "premature": 0.5,
+   "recovery": null,
+   "params": [
+    0.10000000000000062,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "noise1.0@s0",
+  "phi": null,
+  "phi_src": null,
+  "src": "m5",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 70.7,
+  "oracle": 74.1,
+  "V_abs": 3.4000000000000004,
+  "V_rel": 11.604095563139932,
+  "head (fp32-chosen)": {
+   "acc": 69.39999999999999,
+   "steps": 2.56,
+   "rescued": 1.7999999999999998,
+   "premature": 3.1,
+   "recovery": -0.3823529411764749
+  },
+  "head native": {
+   "acc": 65.2,
+   "steps": 2.107,
+   "rescued": 2.1999999999999997,
+   "premature": 7.7,
+   "recovery": -1.6176470588235334
+  },
+  "family": "maze_attn",
+  "spec": "noise1.5",
+  "phi": null,
+  "phi_src": null,
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 70.7,
+  "oracle": 74.1,
+  "V_abs": 3.4000000000000004,
+  "V_rel": 11.604095563139932,
+  "head (fp32-chosen)": {
+   "acc": 69.39999999999999,
+   "steps": 2.56,
+   "rescued": 1.7999999999999998,
+   "premature": 3.1,
+   "recovery": -0.3823529411764749
+  },
+  "head native": {
+   "acc": 65.2,
+   "steps": 2.107,
+   "rescued": 2.1999999999999997,
+   "premature": 7.7,
+   "recovery": -1.6176470588235334
+  },
+  "stability 2": {
+   "acc": 70.39999999999999,
+   "steps": 3.96,
+   "rescued": 0.2,
+   "premature": 0.5,
+   "recovery": -0.08823529411765062
+  },
+  "residual (tuned fp32)": {
+   "acc": 67.30000000000001,
+   "steps": 2.06,
+   "rescued": 1.7999999999999998,
+   "premature": 5.2,
+   "recovery": -1.0,
+   "params": [
+    0.10000000000000062,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "noise1.5@s0",
+  "phi": null,
+  "phi_src": null,
+  "src": "m5",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 0.0,
+  "oracle": 0.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 0.0,
+   "steps": 13.534,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 0.0,
+   "steps": 13.534,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "maze_attn",
+  "spec": "noise2.0",
+  "phi": null,
+  "phi_src": null,
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 500,
+  "K": 16,
+  "acc": 88.8,
+  "oracle": 89.60000000000001,
+  "V_abs": 0.8,
+  "V_rel": 7.142857142857143,
+  "head (fp32-chosen)": {
+   "acc": 88.8,
+   "steps": 2.038,
+   "rescued": 0.2,
+   "premature": 0.2,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 88.4,
+   "steps": 1.204,
+   "rescued": 0.4,
+   "premature": 0.8,
+   "recovery": -0.49999999999998224
+  },
+  "residual (tuned fp32)": {
+   "acc": 88.4,
+   "steps": 2.058,
+   "rescued": 0.2,
+   "premature": 0.6,
+   "recovery": -0.49999999999998224,
+   "params": [
+    0.3981071705535002,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "anoise0.3",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 86.3,
+  "oracle": 87.5,
+  "V_abs": 1.2,
+  "V_rel": 8.75912408759124,
+  "head (fp32-chosen)": {
+   "acc": 86.1,
+   "steps": 2.054,
+   "rescued": 0.5,
+   "premature": 0.7000000000000001,
+   "recovery": -0.16666666666666863
+  },
+  "head native": {
+   "acc": 84.5,
+   "steps": 1.3,
+   "rescued": 0.8999999999999999,
+   "premature": 2.7,
+   "recovery": -1.499999999999994
+  },
+  "family": "maze_attn",
+  "spec": "anoise0.5@s0",
+  "phi": 0.98581437,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 87.3,
+  "oracle": 88.4,
+  "V_abs": 1.0999999999999999,
+  "V_rel": 8.661417322834646,
+  "head (fp32-chosen)": {
+   "acc": 87.1,
+   "steps": 2.063,
+   "rescued": 0.4,
+   "premature": 0.6,
+   "recovery": -0.181818181818183
+  },
+  "head native": {
+   "acc": 85.5,
+   "steps": 1.319,
+   "rescued": 0.6,
+   "premature": 2.4,
+   "recovery": -1.6363636363636211
+  },
+  "family": "maze_attn",
+  "spec": "anoise0.5@s1",
+  "phi": 0.9859009200000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 84.6,
+  "oracle": 88.2,
+  "V_abs": 3.5999999999999996,
+  "V_rel": 23.376623376623378,
+  "head (fp32-chosen)": {
+   "acc": 85.0,
+   "steps": 2.131,
+   "rescued": 2.9000000000000004,
+   "premature": 2.5,
+   "recovery": 0.11111111111111242
+  },
+  "head native": {
+   "acc": 75.4,
+   "steps": 1.597,
+   "rescued": 2.7,
+   "premature": 11.899999999999999,
+   "recovery": -2.5555555555555465
+  },
+  "family": "maze_attn",
+  "spec": "anoise0.7",
+  "phi": null,
+  "phi_src": null,
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 84.0,
+  "oracle": 87.9,
+  "V_abs": 3.9,
+  "V_rel": 24.375,
+  "head (fp32-chosen)": {
+   "acc": 84.39999999999999,
+   "steps": 2.139,
+   "rescued": 3.2,
+   "premature": 2.8000000000000003,
+   "recovery": 0.10256410256410023
+  },
+  "head native": {
+   "acc": 75.3,
+   "steps": 1.605,
+   "rescued": 2.9000000000000004,
+   "premature": 11.600000000000001,
+   "recovery": -2.230769230769228
+  },
+  "stability 2": {
+   "acc": 85.39999999999999,
+   "steps": 3.823,
+   "rescued": 2.8000000000000003,
+   "premature": 1.4000000000000001,
+   "recovery": 0.35897435897435626
+  },
+  "residual (tuned fp32)": {
+   "acc": 82.69999999999999,
+   "steps": 9.004,
+   "rescued": 1.2,
+   "premature": 2.5,
+   "recovery": -0.33333333333333576,
+   "params": [
+    0.10000000000000062,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "anoise0.7@s0",
+  "phi": null,
+  "phi_src": null,
+  "src": "m5",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 21.3,
+  "oracle": 85.2,
+  "V_abs": 63.9,
+  "V_rel": 81.19440914866583,
+  "head (fp32-chosen)": {
+   "acc": 23.1,
+   "steps": 3.742,
+   "rescued": 17.299999999999997,
+   "premature": 15.5,
+   "recovery": 0.02816901408450705
+  },
+  "head native": {
+   "acc": 22.7,
+   "steps": 3.721,
+   "rescued": 16.900000000000002,
+   "premature": 15.5,
+   "recovery": 0.021909233176838787
+  },
+  "family": "maze_attn",
+  "spec": "anoise1.0",
+  "phi": null,
+  "phi_src": null,
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 23.799999999999997,
+  "oracle": 83.5,
+  "V_abs": 59.699999999999996,
+  "V_rel": 78.34645669291339,
+  "head (fp32-chosen)": {
+   "acc": 24.0,
+   "steps": 3.775,
+   "rescued": 15.0,
+   "premature": 14.799999999999999,
+   "recovery": 0.0033500837520938497
+  },
+  "head native": {
+   "acc": 23.5,
+   "steps": 3.754,
+   "rescued": 14.7,
+   "premature": 15.0,
+   "recovery": -0.005025125628140656
+  },
+  "stability 2": {
+   "acc": 32.0,
+   "steps": 11.054,
+   "rescued": 17.0,
+   "premature": 8.799999999999999,
+   "recovery": 0.13735343383584595
+  },
+  "residual (tuned fp32)": {
+   "acc": 21.099999999999998,
+   "steps": 9.036,
+   "rescued": 5.8999999999999995,
+   "premature": 8.6,
+   "recovery": -0.04522613065326632,
+   "params": [
+    0.10000000000000062,
+    0.5011872336272761
+   ]
+  },
+  "family": "maze_attn",
+  "spec": "anoise1.0@s0",
+  "phi": null,
+  "phi_src": null,
+  "src": "m5",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 0.0,
+  "oracle": 0.8,
+  "V_abs": 0.8,
+  "V_rel": 0.8,
+  "head (fp32-chosen)": {
+   "acc": 0.1,
+   "steps": 14.575,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": 0.125
+  },
+  "head native": {
+   "acc": 0.1,
+   "steps": 14.575,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": 0.125
+  },
+  "family": "maze_attn",
+  "spec": "anoise1.2",
+  "phi": null,
+  "phi_src": null,
+  "src": "resc",
+  "sel_rule": "min2+nat"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 74.2,
+  "oracle": 77.5,
+  "V_abs": 3.3000000000000003,
+  "V_rel": 12.790697674418604,
+  "head (fp32-chosen)": {
+   "acc": 74.2,
+   "steps": 3.252,
+   "rescued": 1.2,
+   "premature": 1.2,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 74.2,
+   "steps": 3.252,
+   "rescued": 1.2,
+   "premature": 1.2,
+   "recovery": 0.0
+  },
+  "stability 2": {
+   "acc": 74.1,
+   "steps": 4.591,
+   "rescued": 0.3,
+   "premature": 0.4,
+   "recovery": -0.030303030303032913
+  },
+  "residual (tuned fp32)": {
+   "acc": 73.4,
+   "steps": 2.73,
+   "rescued": 1.7999999999999998,
+   "premature": 2.6,
+   "recovery": -0.24242424242424176,
+   "params": [
+    0.1584893192461124,
+    0.07943282347242862
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "fp32",
+  "phi": 1.0,
+  "phi_src": "breadth (p4d)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 71.5,
+  "oracle": 75.6,
+  "V_abs": 4.1000000000000005,
+  "V_rel": 14.385964912280702,
+  "head (fp32-chosen)": {
+   "acc": 71.5,
+   "steps": 14.073,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 71.5,
+   "steps": 14.073,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "stability 2": {
+   "acc": 72.0,
+   "steps": 4.918,
+   "rescued": 1.0999999999999999,
+   "premature": 0.6,
+   "recovery": 0.12195121951219529
+  },
+  "residual (tuned fp32)": {
+   "acc": 70.3,
+   "steps": 2.923,
+   "rescued": 1.7999999999999998,
+   "premature": 3.0,
+   "recovery": -0.2926829268292694,
+   "params": [
+    0.1584893192461124,
+    0.07943282347242862
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "w2a",
+  "phi": 0.9553752541542053,
+  "phi_src": "breadth (p4d)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 0.0,
+  "oracle": 0.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "hrm_maze",
+  "spec": "w2c",
+  "phi": 0.3981751799583435,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 61.1,
+  "oracle": 66.7,
+  "V_abs": 5.6000000000000005,
+  "V_rel": 14.395886889460154,
+  "head (fp32-chosen)": {
+   "acc": 61.5,
+   "steps": 8.597,
+   "rescued": 0.4,
+   "premature": 0.0,
+   "recovery": 0.07142857142857116
+  },
+  "head native": {
+   "acc": 61.5,
+   "steps": 8.597,
+   "rescued": 0.4,
+   "premature": 0.0,
+   "recovery": 0.07142857142857116
+  },
+  "stability 2": {
+   "acc": 62.6,
+   "steps": 5.915,
+   "rescued": 1.6,
+   "premature": 0.1,
+   "recovery": 0.2678571428571428
+  },
+  "residual (tuned fp32)": {
+   "acc": 58.9,
+   "steps": 3.22,
+   "rescued": 2.7,
+   "premature": 4.9,
+   "recovery": -0.39285714285714324,
+   "params": [
+    0.1584893192461124,
+    0.07943282347242862
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "w2g32",
+  "phi": 0.94689612,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 0.0,
+  "oracle": 0.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "head (fp32-chosen)": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "head native": {
+   "acc": 0.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "hrm_maze",
+  "spec": "w2t",
+  "phi": -0.103126659989357,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 74.8,
+  "oracle": 77.60000000000001,
+  "V_abs": 2.8000000000000003,
+  "V_rel": 11.11111111111111,
+  "head (fp32-chosen)": {
+   "acc": 69.6,
+   "steps": 2.375,
+   "rescued": 1.7999999999999998,
+   "premature": 7.000000000000001,
+   "recovery": -1.8571428571428505
+  },
+  "head native": {
+   "acc": 69.6,
+   "steps": 2.375,
+   "rescued": 1.7999999999999998,
+   "premature": 7.000000000000001,
+   "recovery": -1.8571428571428505
+  },
+  "family": "hrm_maze",
+  "spec": "w3a",
+  "phi": 0.993415117263794,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 75.1,
+  "oracle": 77.4,
+  "V_abs": 2.3,
+  "V_rel": 9.236947791164658,
+  "head (fp32-chosen)": {
+   "acc": 69.39999999999999,
+   "steps": 2.425,
+   "rescued": 2.0,
+   "premature": 7.7,
+   "recovery": -2.478260869565206
+  },
+  "head native": {
+   "acc": 69.39999999999999,
+   "steps": 2.425,
+   "rescued": 2.0,
+   "premature": 7.7,
+   "recovery": -2.478260869565206
+  },
+  "family": "hrm_maze",
+  "spec": "w3c",
+  "phi": 0.9913716316223145,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 74.7,
+  "oracle": 77.7,
+  "V_abs": 3.0,
+  "V_rel": 11.857707509881424,
+  "head (fp32-chosen)": {
+   "acc": 70.19999999999999,
+   "steps": 2.378,
+   "rescued": 2.3,
+   "premature": 6.800000000000001,
+   "recovery": -1.5000000000000047
+  },
+  "head native": {
+   "acc": 70.19999999999999,
+   "steps": 2.378,
+   "rescued": 2.3,
+   "premature": 6.800000000000001,
+   "recovery": -1.5000000000000047
+  },
+  "family": "hrm_maze",
+  "spec": "w3g32",
+  "phi": 0.9953284859657288,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 61.8,
+  "oracle": 68.0,
+  "V_abs": 6.2,
+  "V_rel": 16.230366492146597,
+  "head (fp32-chosen)": {
+   "acc": 61.8,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "head native": {
+   "acc": 61.8,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "stability 2": {
+   "acc": 62.9,
+   "steps": 5.65,
+   "rescued": 1.7000000000000002,
+   "premature": 0.6,
+   "recovery": 0.17741935483870983
+  },
+  "residual (tuned fp32)": {
+   "acc": 60.8,
+   "steps": 3.106,
+   "rescued": 3.2,
+   "premature": 4.2,
+   "recovery": -0.16129032258064507,
+   "params": [
+    0.1584893192461124,
+    0.07943282347242862
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "w3t",
+  "phi": 0.9160723090171814,
+  "phi_src": "breadth (p4d)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 74.4,
+  "oracle": 78.2,
+  "V_abs": 3.8,
+  "V_rel": 14.84375,
+  "head (fp32-chosen)": {
+   "acc": 70.89999999999999,
+   "steps": 2.288,
+   "rescued": 2.7,
+   "premature": 6.2,
+   "recovery": -0.9210526315789518
+  },
+  "head native": {
+   "acc": 70.89999999999999,
+   "steps": 2.288,
+   "rescued": 2.7,
+   "premature": 6.2,
+   "recovery": -0.9210526315789518
+  },
+  "family": "hrm_maze",
+  "spec": "w4a",
+  "phi": 0.9974955916404724,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 74.6,
+  "oracle": 77.2,
+  "V_abs": 2.6,
+  "V_rel": 10.236220472440944,
+  "head (fp32-chosen)": {
+   "acc": 74.7,
+   "steps": 3.114,
+   "rescued": 1.4000000000000001,
+   "premature": 1.3,
+   "recovery": 0.038461538461541614
+  },
+  "head native": {
+   "acc": 74.7,
+   "steps": 3.114,
+   "rescued": 1.4000000000000001,
+   "premature": 1.3,
+   "recovery": 0.038461538461541614
+  },
+  "stability 2": {
+   "acc": 74.5,
+   "steps": 4.607,
+   "rescued": 0.3,
+   "premature": 0.4,
+   "recovery": -0.038461538461536146
+  },
+  "residual (tuned fp32)": {
+   "acc": 73.2,
+   "steps": 2.739,
+   "rescued": 1.5,
+   "premature": 2.9000000000000004,
+   "recovery": -0.5384615384615334,
+   "params": [
+    0.1584893192461124,
+    0.07943282347242862
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "w4c",
+  "phi": 0.9970977100000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 74.5,
+  "oracle": 77.7,
+  "V_abs": 3.2,
+  "V_rel": 12.549019607843137,
+  "head (fp32-chosen)": {
+   "acc": 71.0,
+   "steps": 2.324,
+   "rescued": 2.5,
+   "premature": 6.0,
+   "recovery": -1.0937499999999991
+  },
+  "head native": {
+   "acc": 71.0,
+   "steps": 2.324,
+   "rescued": 2.5,
+   "premature": 6.0,
+   "recovery": -1.0937499999999991
+  },
+  "family": "hrm_maze",
+  "spec": "w4g128",
+  "phi": 0.9977880716323853,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 73.9,
+  "oracle": 76.9,
+  "V_abs": 3.0,
+  "V_rel": 11.494252873563218,
+  "head (fp32-chosen)": {
+   "acc": 69.39999999999999,
+   "steps": 2.349,
+   "rescued": 2.1,
+   "premature": 6.6000000000000005,
+   "recovery": -1.5000000000000047
+  },
+  "head native": {
+   "acc": 69.39999999999999,
+   "steps": 2.349,
+   "rescued": 2.1,
+   "premature": 6.6000000000000005,
+   "recovery": -1.5000000000000047
+  },
+  "family": "hrm_maze",
+  "spec": "w4g32",
+  "phi": 0.998367428779602,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 75.0,
+  "oracle": 78.4,
+  "V_abs": 3.4000000000000004,
+  "V_rel": 13.6,
+  "head (fp32-chosen)": {
+   "acc": 74.5,
+   "steps": 3.371,
+   "rescued": 0.8999999999999999,
+   "premature": 1.4000000000000001,
+   "recovery": -0.14705882352941152
+  },
+  "head native": {
+   "acc": 74.5,
+   "steps": 3.371,
+   "rescued": 0.8999999999999999,
+   "premature": 1.4000000000000001,
+   "recovery": -0.14705882352941152
+  },
+  "stability 2": {
+   "acc": 75.2,
+   "steps": 4.623,
+   "rescued": 0.5,
+   "premature": 0.3,
+   "recovery": 0.05882352941176544
+  },
+  "residual (tuned fp32)": {
+   "acc": 73.9,
+   "steps": 2.737,
+   "rescued": 1.4000000000000001,
+   "premature": 2.5,
+   "recovery": -0.3235294117647037,
+   "params": [
+    0.1584893192461124,
+    0.07943282347242862
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "w4t",
+  "phi": 0.9932866200000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 74.4,
+  "oracle": 77.60000000000001,
+  "V_abs": 3.2,
+  "V_rel": 12.5,
+  "head (fp32-chosen)": {
+   "acc": 70.3,
+   "steps": 2.351,
+   "rescued": 2.3,
+   "premature": 6.4,
+   "recovery": -1.2812500000000016
+  },
+  "head native": {
+   "acc": 70.3,
+   "steps": 2.351,
+   "rescued": 2.3,
+   "premature": 6.4,
+   "recovery": -1.2812500000000016
+  },
+  "family": "hrm_maze",
+  "spec": "w8a",
+  "phi": 0.9996933341026306,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 74.4,
+  "oracle": 77.60000000000001,
+  "V_abs": 3.2,
+  "V_rel": 12.5,
+  "head (fp32-chosen)": {
+   "acc": 70.3,
+   "steps": 2.35,
+   "rescued": 2.3,
+   "premature": 6.4,
+   "recovery": -1.2812500000000016
+  },
+  "head native": {
+   "acc": 70.3,
+   "steps": 2.35,
+   "rescued": 2.3,
+   "premature": 6.4,
+   "recovery": -1.2812500000000016
+  },
+  "family": "hrm_maze",
+  "spec": "w8c",
+  "phi": 0.99961148,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 74.3,
+  "oracle": 77.60000000000001,
+  "V_abs": 3.3000000000000003,
+  "V_rel": 12.84046692607004,
+  "head (fp32-chosen)": {
+   "acc": 70.6,
+   "steps": 2.348,
+   "rescued": 2.5,
+   "premature": 6.2,
+   "recovery": -1.1212121212121182
+  },
+  "head native": {
+   "acc": 70.6,
+   "steps": 2.348,
+   "rescued": 2.5,
+   "premature": 6.2,
+   "recovery": -1.1212121212121182
+  },
+  "family": "hrm_maze",
+  "spec": "w8t",
+  "phi": 0.9994937777519226,
+  "phi_src": "breadth (p4d)",
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 500,
+  "K": 16,
+  "acc": 75.4,
+  "oracle": 78.4,
+  "V_abs": 3.0,
+  "V_rel": 12.195121951219512,
+  "head (fp32-chosen)": {
+   "acc": 73.2,
+   "steps": 2.32,
+   "rescued": 2.1999999999999997,
+   "premature": 4.3999999999999995,
+   "recovery": -0.7333333333333343
+  },
+  "head native": {
+   "acc": 73.2,
+   "steps": 2.32,
+   "rescued": 2.1999999999999997,
+   "premature": 4.3999999999999995,
+   "recovery": -0.7333333333333343
+  },
+  "residual (tuned fp32)": {
+   "acc": 75.2,
+   "steps": 3.35,
+   "rescued": 1.0,
+   "premature": 1.2,
+   "recovery": -0.06666666666666761,
+   "params": [
+    0.1995262314968893,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "noise0.1",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 500,
+  "K": 16,
+  "acc": 76.0,
+  "oracle": 78.4,
+  "V_abs": 2.4,
+  "V_rel": 10.0,
+  "head (fp32-chosen)": {
+   "acc": 72.2,
+   "steps": 2.348,
+   "rescued": 2.0,
+   "premature": 5.800000000000001,
+   "recovery": -1.5833333333333284
+  },
+  "head native": {
+   "acc": 72.2,
+   "steps": 2.348,
+   "rescued": 2.0,
+   "premature": 5.800000000000001,
+   "recovery": -1.5833333333333284
+  },
+  "residual (tuned fp32)": {
+   "acc": 75.2,
+   "steps": 3.274,
+   "rescued": 0.4,
+   "premature": 1.2,
+   "recovery": -0.33333333333333137,
+   "params": [
+    0.1995262314968893,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "noise0.2",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 500,
+  "K": 16,
+  "acc": 74.0,
+  "oracle": 77.0,
+  "V_abs": 3.0,
+  "V_rel": 11.538461538461538,
+  "head (fp32-chosen)": {
+   "acc": 69.19999999999999,
+   "steps": 2.442,
+   "rescued": 2.1999999999999997,
+   "premature": 7.000000000000001,
+   "recovery": -1.6000000000000039
+  },
+  "head native": {
+   "acc": 69.19999999999999,
+   "steps": 2.442,
+   "rescued": 2.1999999999999997,
+   "premature": 7.000000000000001,
+   "recovery": -1.6000000000000039
+  },
+  "residual (tuned fp32)": {
+   "acc": 73.4,
+   "steps": 3.402,
+   "rescued": 0.4,
+   "premature": 1.0,
+   "recovery": -0.1999999999999981,
+   "params": [
+    0.1995262314968893,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "noise0.3",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 74.0,
+  "oracle": 76.7,
+  "V_abs": 2.7,
+  "V_rel": 10.384615384615385,
+  "head (fp32-chosen)": {
+   "acc": 69.39999999999999,
+   "steps": 2.501,
+   "rescued": 2.1,
+   "premature": 6.7,
+   "recovery": -1.703703703703705
+  },
+  "head native": {
+   "acc": 69.39999999999999,
+   "steps": 2.501,
+   "rescued": 2.1,
+   "premature": 6.7,
+   "recovery": -1.703703703703705
+  },
+  "family": "hrm_maze",
+  "spec": "noise0.5@s0",
+  "phi": 0.98974379,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 72.7,
+  "oracle": 75.9,
+  "V_abs": 3.2,
+  "V_rel": 11.72161172161172,
+  "head (fp32-chosen)": {
+   "acc": 68.89999999999999,
+   "steps": 2.475,
+   "rescued": 2.4,
+   "premature": 6.2,
+   "recovery": -1.1875000000000024
+  },
+  "head native": {
+   "acc": 68.89999999999999,
+   "steps": 2.475,
+   "rescued": 2.4,
+   "premature": 6.2,
+   "recovery": -1.1875000000000024
+  },
+  "family": "hrm_maze",
+  "spec": "noise0.5@s1",
+  "phi": 0.99136539,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 72.39999999999999,
+  "oracle": 74.7,
+  "V_abs": 2.3,
+  "V_rel": 8.333333333333334,
+  "head (fp32-chosen)": {
+   "acc": 65.0,
+   "steps": 2.482,
+   "rescued": 1.7999999999999998,
+   "premature": 9.2,
+   "recovery": -3.2173913043478066
+  },
+  "head native": {
+   "acc": 65.0,
+   "steps": 2.482,
+   "rescued": 1.7999999999999998,
+   "premature": 9.2,
+   "recovery": -3.2173913043478066
+  },
+  "family": "hrm_maze",
+  "spec": "noise0.5@s2",
+  "phi": 0.98836536,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 68.7,
+  "oracle": 73.2,
+  "V_abs": 4.5,
+  "V_rel": 14.37699680511182,
+  "head (fp32-chosen)": {
+   "acc": 68.10000000000001,
+   "steps": 2.868,
+   "rescued": 3.5000000000000004,
+   "premature": 4.1000000000000005,
+   "recovery": -0.13333333333333208
+  },
+  "head native": {
+   "acc": 68.10000000000001,
+   "steps": 2.868,
+   "rescued": 3.5000000000000004,
+   "premature": 4.1000000000000005,
+   "recovery": -0.13333333333333208
+  },
+  "family": "hrm_maze",
+  "spec": "noise1.0",
+  "phi": null,
+  "phi_src": null,
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 68.7,
+  "oracle": 73.2,
+  "V_abs": 4.5,
+  "V_rel": 14.37699680511182,
+  "head (fp32-chosen)": {
+   "acc": 69.69999999999999,
+   "steps": 4.119,
+   "rescued": 1.7999999999999998,
+   "premature": 0.8,
+   "recovery": 0.22222222222221907
+  },
+  "head native": {
+   "acc": 69.69999999999999,
+   "steps": 4.119,
+   "rescued": 1.7999999999999998,
+   "premature": 0.8,
+   "recovery": 0.22222222222221907
+  },
+  "stability 2": {
+   "acc": 69.0,
+   "steps": 5.229,
+   "rescued": 0.8999999999999999,
+   "premature": 0.6,
+   "recovery": 0.06666666666666604
+  },
+  "residual (tuned fp32)": {
+   "acc": 67.10000000000001,
+   "steps": 3.112,
+   "rescued": 2.1999999999999997,
+   "premature": 3.8,
+   "recovery": -0.3555555555555543,
+   "params": [
+    0.1584893192461124,
+    0.07943282347242862
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "noise1.0@s0",
+  "phi": 0.96953756,
+  "phi_src": "X8 det (Babel)",
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 47.199999999999996,
+  "oracle": 57.49999999999999,
+  "V_abs": 10.299999999999999,
+  "V_rel": 19.507575757575758,
+  "head (fp32-chosen)": {
+   "acc": 42.8,
+   "steps": 4.206,
+   "rescued": 7.199999999999999,
+   "premature": 11.600000000000001,
+   "recovery": -0.42718446601941745
+  },
+  "head native": {
+   "acc": 42.8,
+   "steps": 4.206,
+   "rescued": 7.199999999999999,
+   "premature": 11.600000000000001,
+   "recovery": -0.42718446601941745
+  },
+  "family": "hrm_maze",
+  "spec": "noise1.5",
+  "phi": null,
+  "phi_src": null,
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 47.199999999999996,
+  "oracle": 57.49999999999999,
+  "V_abs": 10.299999999999999,
+  "V_rel": 19.507575757575758,
+  "head (fp32-chosen)": {
+   "acc": 52.800000000000004,
+   "steps": 7.171,
+   "rescued": 6.6000000000000005,
+   "premature": 1.0,
+   "recovery": 0.5436893203883505
+  },
+  "head native": {
+   "acc": 52.800000000000004,
+   "steps": 7.171,
+   "rescued": 6.6000000000000005,
+   "premature": 1.0,
+   "recovery": 0.5436893203883505
+  },
+  "stability 2": {
+   "acc": 50.5,
+   "steps": 7.273,
+   "rescued": 3.5000000000000004,
+   "premature": 0.2,
+   "recovery": 0.32038834951456363
+  },
+  "residual (tuned fp32)": {
+   "acc": 48.8,
+   "steps": 3.628,
+   "rescued": 6.3,
+   "premature": 4.7,
+   "recovery": 0.1553398058252429,
+   "params": [
+    0.1584893192461124,
+    0.07943282347242862
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "noise1.5@s0",
+  "phi": null,
+  "phi_src": null,
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 1.7000000000000002,
+  "oracle": 3.0,
+  "V_abs": 1.3,
+  "V_rel": 1.3224821973550356,
+  "head (fp32-chosen)": {
+   "acc": 0.3,
+   "steps": 8.254,
+   "rescued": 0.2,
+   "premature": 1.6,
+   "recovery": -1.076923076923077
+  },
+  "head native": {
+   "acc": 0.3,
+   "steps": 8.254,
+   "rescued": 0.2,
+   "premature": 1.6,
+   "recovery": -1.076923076923077
+  },
+  "family": "hrm_maze",
+  "spec": "noise2.0",
+  "phi": null,
+  "phi_src": null,
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 500,
+  "K": 16,
+  "acc": 74.0,
+  "oracle": 80.2,
+  "V_abs": 6.2,
+  "V_rel": 23.846153846153847,
+  "head (fp32-chosen)": {
+   "acc": 72.0,
+   "steps": 2.366,
+   "rescued": 4.6,
+   "premature": 6.6000000000000005,
+   "recovery": -0.32258064516129015
+  },
+  "head native": {
+   "acc": 72.0,
+   "steps": 2.366,
+   "rescued": 4.6,
+   "premature": 6.6000000000000005,
+   "recovery": -0.32258064516129015
+  },
+  "residual (tuned fp32)": {
+   "acc": 74.8,
+   "steps": 3.578,
+   "rescued": 2.6,
+   "premature": 1.7999999999999998,
+   "recovery": 0.1290322580645156,
+   "params": [
+    0.1995262314968893,
+    0.1258925411794175
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "anoise0.3",
+  "phi": null,
+  "phi_src": null,
+  "src": "resid",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 72.0,
+  "oracle": 77.8,
+  "V_abs": 5.800000000000001,
+  "V_rel": 20.714285714285715,
+  "head (fp32-chosen)": {
+   "acc": 69.5,
+   "steps": 2.641,
+   "rescued": 4.1000000000000005,
+   "premature": 6.6000000000000005,
+   "recovery": -0.4310344827586209
+  },
+  "head native": {
+   "acc": 69.5,
+   "steps": 2.641,
+   "rescued": 4.1000000000000005,
+   "premature": 6.6000000000000005,
+   "recovery": -0.4310344827586209
+  },
+  "family": "hrm_maze",
+  "spec": "anoise0.5@s0",
+  "phi": 0.98566228,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 73.1,
+  "oracle": 78.3,
+  "V_abs": 5.2,
+  "V_rel": 19.33085501858736,
+  "head (fp32-chosen)": {
+   "acc": 70.0,
+   "steps": 2.641,
+   "rescued": 3.4000000000000004,
+   "premature": 6.5,
+   "recovery": -0.5961538461538447
+  },
+  "head native": {
+   "acc": 70.0,
+   "steps": 2.641,
+   "rescued": 3.4000000000000004,
+   "premature": 6.5,
+   "recovery": -0.5961538461538447
+  },
+  "family": "hrm_maze",
+  "spec": "anoise0.5@s1",
+  "phi": 0.9865413799999999,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 71.8,
+  "oracle": 77.9,
+  "V_abs": 6.1,
+  "V_rel": 21.631205673758867,
+  "head (fp32-chosen)": {
+   "acc": 67.5,
+   "steps": 2.674,
+   "rescued": 3.3000000000000003,
+   "premature": 7.6,
+   "recovery": -0.7049180327868838
+  },
+  "head native": {
+   "acc": 67.5,
+   "steps": 2.674,
+   "rescued": 3.3000000000000003,
+   "premature": 7.6,
+   "recovery": -0.7049180327868838
+  },
+  "family": "hrm_maze",
+  "spec": "anoise0.5@s2",
+  "phi": 0.9862232200000001,
+  "phi_src": "X8 det (Babel)",
+  "src": "det",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 68.8,
+  "oracle": 77.9,
+  "V_abs": 9.1,
+  "V_rel": 29.166666666666668,
+  "head (fp32-chosen)": {
+   "acc": 65.8,
+   "steps": 3.017,
+   "rescued": 5.8999999999999995,
+   "premature": 8.9,
+   "recovery": -0.3296703296703294
+  },
+  "head native": {
+   "acc": 65.8,
+   "steps": 3.017,
+   "rescued": 5.8999999999999995,
+   "premature": 8.9,
+   "recovery": -0.3296703296703294
+  },
+  "family": "hrm_maze",
+  "spec": "anoise0.7",
+  "phi": null,
+  "phi_src": null,
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 69.0,
+  "oracle": 78.60000000000001,
+  "V_abs": 9.6,
+  "V_rel": 30.967741935483872,
+  "head (fp32-chosen)": {
+   "acc": 72.0,
+   "steps": 4.608,
+   "rescued": 5.2,
+   "premature": 2.1999999999999997,
+   "recovery": 0.3124999999999997
+  },
+  "head native": {
+   "acc": 72.0,
+   "steps": 4.608,
+   "rescued": 5.2,
+   "premature": 2.1999999999999997,
+   "recovery": 0.3124999999999997
+  },
+  "stability 2": {
+   "acc": 73.2,
+   "steps": 6.348,
+   "rescued": 4.6,
+   "premature": 0.4,
+   "recovery": 0.4374999999999999
+  },
+  "residual (tuned fp32)": {
+   "acc": 69.0,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0,
+   "params": [
+    0.1584893192461124,
+    0.07943282347242862
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "anoise0.7@s0",
+  "phi": null,
+  "phi_src": null,
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 43.5,
+  "oracle": 71.6,
+  "V_abs": 28.1,
+  "V_rel": 49.73451327433628,
+  "head (fp32-chosen)": {
+   "acc": 43.6,
+   "steps": 4.798,
+   "rescued": 15.4,
+   "premature": 15.299999999999999,
+   "recovery": 0.003558718861210016
+  },
+  "head native": {
+   "acc": 43.6,
+   "steps": 4.798,
+   "rescued": 15.4,
+   "premature": 15.299999999999999,
+   "recovery": 0.003558718861210016
+  },
+  "family": "hrm_maze",
+  "spec": "anoise1.0",
+  "phi": null,
+  "phi_src": null,
+  "src": "resc",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 16,
+  "acc": 40.1,
+  "oracle": 72.6,
+  "V_abs": 32.5,
+  "V_rel": 54.257095158597664,
+  "head (fp32-chosen)": {
+   "acc": 55.400000000000006,
+   "steps": 9.227,
+   "rescued": 20.0,
+   "premature": 4.7,
+   "recovery": 0.470769230769231
+  },
+  "head native": {
+   "acc": 55.400000000000006,
+   "steps": 9.227,
+   "rescued": 20.0,
+   "premature": 4.7,
+   "recovery": 0.470769230769231
+  },
+  "stability 2": {
+   "acc": 53.5,
+   "steps": 11.86,
+   "rescued": 14.099999999999998,
+   "premature": 0.7000000000000001,
+   "recovery": 0.4123076923076924
+  },
+  "residual (tuned fp32)": {
+   "acc": 40.1,
+   "steps": 16.0,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0,
+   "params": [
+    0.1584893192461124,
+    0.07943282347242862
+   ]
+  },
+  "family": "hrm_maze",
+  "spec": "anoise1.0@s0",
+  "phi": null,
+  "phi_src": null,
+  "src": "m5",
+  "sel_rule": "native"
+ },
+ {
+  "n": 1000,
+  "K": 200,
+  "acc": 100.0,
+  "oracle": 100.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "stability 2": {
+   "acc": 100.0,
+   "steps": 25.48,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 100.0,
+   "steps": 33.496,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze13",
+  "spec": "fp32",
+  "phi": 1.0,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 200,
+  "acc": 99.5,
+  "oracle": 99.8,
+  "V_abs": 0.3,
+  "V_rel": 60.0,
+  "stability 2": {
+   "acc": 99.3,
+   "steps": 27.333,
+   "rescued": 0.0,
+   "premature": 0.2,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 99.5,
+   "steps": 35.397,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze13",
+  "spec": "w3a",
+  "phi": 0.9792219122648239,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 200,
+  "acc": 100.0,
+  "oracle": 100.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "stability 2": {
+   "acc": 100.0,
+   "steps": 26.531,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 100.0,
+   "steps": 34.801,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze13",
+  "spec": "w4c",
+  "phi": 0.9919277430772782,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 200,
+  "acc": 96.39999999999999,
+  "oracle": 99.2,
+  "V_abs": 2.8000000000000003,
+  "V_rel": 77.77777777777777,
+  "stability 2": {
+   "acc": 97.8,
+   "steps": 29.115,
+   "rescued": 1.5,
+   "premature": 0.1,
+   "recovery": 0.5
+  },
+  "stability 10": {
+   "acc": 96.89999999999999,
+   "steps": 40.8,
+   "rescued": 0.5,
+   "premature": 0.0,
+   "recovery": 0.17857142857142785
+  },
+  "family": "dt_maze13",
+  "spec": "w4t",
+  "phi": 0.9882580757737159,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 200,
+  "acc": 100.0,
+  "oracle": 100.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "stability 2": {
+   "acc": 100.0,
+   "steps": 25.483,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 100.0,
+   "steps": 33.544,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze13",
+  "spec": "w8c",
+  "phi": 0.9998461042046547,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 200,
+  "acc": 98.6,
+  "oracle": 99.7,
+  "V_abs": 1.0999999999999999,
+  "V_rel": 78.57142857142857,
+  "stability 2": {
+   "acc": 99.1,
+   "steps": 30.629,
+   "rescued": 0.6,
+   "premature": 0.1,
+   "recovery": 0.45454545454545103
+  },
+  "stability 10": {
+   "acc": 99.0,
+   "steps": 41.325,
+   "rescued": 0.4,
+   "premature": 0.0,
+   "recovery": 0.363636363636366
+  },
+  "family": "dt_maze13",
+  "spec": "noise0.2@s0",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 200,
+  "acc": 100.0,
+  "oracle": 100.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "stability 2": {
+   "acc": 100.0,
+   "steps": 26.716,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 100.0,
+   "steps": 34.973,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze13",
+  "spec": "noise0.2@s1",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 200,
+  "acc": 99.8,
+  "oracle": 100.0,
+  "V_abs": 0.2,
+  "V_rel": 100.0,
+  "stability 2": {
+   "acc": 100.0,
+   "steps": 26.976,
+   "rescued": 0.2,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 100.0,
+   "steps": 35.531,
+   "rescued": 0.2,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze13",
+  "spec": "noise0.2@s2",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 400,
+  "acc": 100.0,
+  "oracle": 100.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "stability 2": {
+   "acc": 100.0,
+   "steps": 64.367,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 100.0,
+   "steps": 72.534,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze25",
+  "spec": "fp32",
+  "phi": 1.0,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 400,
+  "acc": 97.39999999999999,
+  "oracle": 97.7,
+  "V_abs": 0.3,
+  "V_rel": 11.538461538461538,
+  "stability 2": {
+   "acc": 96.8,
+   "steps": 69.17,
+   "rescued": 0.0,
+   "premature": 0.6,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 97.39999999999999,
+   "steps": 77.273,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze25",
+  "spec": "w3a",
+  "phi": 0.9793141493797303,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 400,
+  "acc": 99.4,
+  "oracle": 100.0,
+  "V_abs": 0.6,
+  "V_rel": 100.0,
+  "stability 2": {
+   "acc": 99.9,
+   "steps": 71.393,
+   "rescued": 0.6,
+   "premature": 0.1,
+   "recovery": 0.8333333333333413
+  },
+  "stability 10": {
+   "acc": 99.5,
+   "steps": 82.681,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": 0.16666666666665877
+  },
+  "family": "dt_maze25",
+  "spec": "w4c",
+  "phi": 0.9918450679183006,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 400,
+  "acc": 91.5,
+  "oracle": 94.89999999999999,
+  "V_abs": 3.4000000000000004,
+  "V_rel": 40.0,
+  "stability 2": {
+   "acc": 91.8,
+   "steps": 93.189,
+   "rescued": 0.6,
+   "premature": 0.3,
+   "recovery": 0.08823529411764644
+  },
+  "stability 10": {
+   "acc": 91.7,
+   "steps": 109.545,
+   "rescued": 0.2,
+   "premature": 0.0,
+   "recovery": 0.05882352941176569
+  },
+  "family": "dt_maze25",
+  "spec": "w4t",
+  "phi": 0.9881636645793915,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 400,
+  "acc": 100.0,
+  "oracle": 100.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "stability 2": {
+   "acc": 100.0,
+   "steps": 64.415,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 100.0,
+   "steps": 72.597,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze25",
+  "spec": "w8c",
+  "phi": 0.999805285513401,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 400,
+  "acc": 93.7,
+  "oracle": 98.2,
+  "V_abs": 4.5,
+  "V_rel": 71.42857142857143,
+  "stability 2": {
+   "acc": 95.89999999999999,
+   "steps": 101.999,
+   "rescued": 2.4,
+   "premature": 0.2,
+   "recovery": 0.4888888888888864
+  },
+  "stability 10": {
+   "acc": 94.5,
+   "steps": 125.765,
+   "rescued": 0.8,
+   "premature": 0.0,
+   "recovery": 0.17777777777777715
+  },
+  "family": "dt_maze25",
+  "spec": "noise0.2@s0",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 400,
+  "acc": 99.4,
+  "oracle": 100.0,
+  "V_abs": 0.6,
+  "V_rel": 100.0,
+  "stability 2": {
+   "acc": 99.8,
+   "steps": 67.783,
+   "rescued": 0.5,
+   "premature": 0.1,
+   "recovery": 0.6666666666666587
+  },
+  "stability 10": {
+   "acc": 99.9,
+   "steps": 76.545,
+   "rescued": 0.5,
+   "premature": 0.0,
+   "recovery": 0.8333333333333413
+  },
+  "family": "dt_maze25",
+  "spec": "noise0.2@s1",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 400,
+  "acc": 99.2,
+  "oracle": 100.0,
+  "V_abs": 0.8,
+  "V_rel": 100.0,
+  "stability 2": {
+   "acc": 99.8,
+   "steps": 70.157,
+   "rescued": 0.6,
+   "premature": 0.0,
+   "recovery": 0.7499999999999956
+  },
+  "stability 10": {
+   "acc": 99.7,
+   "steps": 83.81,
+   "rescued": 0.5,
+   "premature": 0.0,
+   "recovery": 0.6250000000000022
+  },
+  "family": "dt_maze25",
+  "spec": "noise0.2@s2",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 100.0,
+  "oracle": 100.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "stability 2": {
+   "acc": 100.0,
+   "steps": 103.152,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 100.0,
+   "steps": 111.211,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze33",
+  "spec": "fp32",
+  "phi": 1.0,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 95.3,
+  "oracle": 96.39999999999999,
+  "V_abs": 1.0999999999999999,
+  "V_rel": 23.404255319148938,
+  "stability 2": {
+   "acc": 94.69999999999999,
+   "steps": 110.532,
+   "rescued": 0.0,
+   "premature": 0.6,
+   "recovery": -0.5454545454545561
+  },
+  "stability 10": {
+   "acc": 95.3,
+   "steps": 118.692,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": 0.0
+  },
+  "family": "dt_maze33",
+  "spec": "w3a",
+  "phi": 0.9796476160883903,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 99.0,
+  "oracle": 99.5,
+  "V_abs": 0.5,
+  "V_rel": 50.0,
+  "stability 2": {
+   "acc": 99.3,
+   "steps": 118.402,
+   "rescued": 0.4,
+   "premature": 0.1,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 99.2,
+   "steps": 132.397,
+   "rescued": 0.2,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze33",
+  "spec": "w4c",
+  "phi": 0.9917575477361679,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 100.0,
+  "oracle": 100.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "stability 2": {
+   "acc": 100.0,
+   "steps": 103.36,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 100.0,
+   "steps": 111.431,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze33",
+  "spec": "w4g32",
+  "phi": 0.995049630343914,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 88.4,
+  "oracle": 91.7,
+  "V_abs": 3.3000000000000003,
+  "V_rel": 28.448275862068964,
+  "stability 2": {
+   "acc": 89.2,
+   "steps": 153.651,
+   "rescued": 1.0999999999999999,
+   "premature": 0.3,
+   "recovery": 0.24242424242424176
+  },
+  "stability 10": {
+   "acc": 88.5,
+   "steps": 173.823,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": 0.030303030303028607
+  },
+  "family": "dt_maze33",
+  "spec": "w4t",
+  "phi": 0.9876402278542519,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 100.0,
+  "oracle": 100.0,
+  "V_abs": 0.0,
+  "V_rel": 0.0,
+  "stability 2": {
+   "acc": 100.0,
+   "steps": 103.276,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 100.0,
+   "steps": 111.325,
+   "rescued": 0.0,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze33",
+  "spec": "w8c",
+  "phi": 0.9997448176145554,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 99.7,
+  "oracle": 99.8,
+  "V_abs": 0.1,
+  "V_rel": 33.333333333333336,
+  "stability 2": {
+   "acc": 99.8,
+   "steps": 104.303,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "stability 10": {
+   "acc": 99.8,
+   "steps": 112.431,
+   "rescued": 0.1,
+   "premature": 0.0,
+   "recovery": null
+  },
+  "family": "dt_maze33",
+  "spec": "w8c+a8",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 87.7,
+  "oracle": 95.6,
+  "V_abs": 7.9,
+  "V_rel": 64.22764227642277,
+  "stability 2": {
+   "acc": 91.4,
+   "steps": 178.039,
+   "rescued": 4.1000000000000005,
+   "premature": 0.4,
+   "recovery": 0.4683544303797477
+  },
+  "stability 10": {
+   "acc": 89.4,
+   "steps": 211.164,
+   "rescued": 1.7000000000000002,
+   "premature": 0.0,
+   "recovery": 0.2151898734177221
+  },
+  "family": "dt_maze33",
+  "spec": "noise0.2@s0",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 98.9,
+  "oracle": 100.0,
+  "V_abs": 1.0999999999999999,
+  "V_rel": 100.0,
+  "stability 2": {
+   "acc": 100.0,
+   "steps": 107.513,
+   "rescued": 1.0999999999999999,
+   "premature": 0.0,
+   "recovery": 1.0
+  },
+  "stability 10": {
+   "acc": 99.8,
+   "steps": 119.504,
+   "rescued": 0.8999999999999999,
+   "premature": 0.0,
+   "recovery": 0.8181818181818147
+  },
+  "family": "dt_maze33",
+  "spec": "noise0.2@s1",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 97.5,
+  "oracle": 100.0,
+  "V_abs": 2.5,
+  "V_rel": 100.0,
+  "stability 2": {
+   "acc": 99.7,
+   "steps": 112.178,
+   "rescued": 2.4,
+   "premature": 0.2,
+   "recovery": 0.8800000000000011
+  },
+  "stability 10": {
+   "acc": 98.9,
+   "steps": 134.959,
+   "rescued": 1.4000000000000001,
+   "premature": 0.0,
+   "recovery": 0.5600000000000023
+  },
+  "family": "dt_maze33",
+  "spec": "noise0.2@s2",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 4.1000000000000005,
+  "oracle": 5.5,
+  "V_abs": 1.4000000000000001,
+  "V_rel": 1.4598540145985401,
+  "stability 2": {
+   "acc": 4.7,
+   "steps": 434.881,
+   "rescued": 0.6,
+   "premature": 0.0,
+   "recovery": 0.4285714285714285
+  },
+  "stability 10": {
+   "acc": 4.3999999999999995,
+   "steps": 475.02,
+   "rescued": 0.3,
+   "premature": 0.0,
+   "recovery": 0.2142857142857136
+  },
+  "family": "dt_maze33",
+  "spec": "noise0.3@s0",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 72.2,
+  "oracle": 76.9,
+  "V_abs": 4.7,
+  "V_rel": 16.906474820143885,
+  "stability 2": {
+   "acc": 71.39999999999999,
+   "steps": 134.653,
+   "rescued": 2.1,
+   "premature": 2.9000000000000004,
+   "recovery": -0.17021276595744914
+  },
+  "stability 10": {
+   "acc": 73.2,
+   "steps": 163.454,
+   "rescued": 1.2,
+   "premature": 0.2,
+   "recovery": 0.21276595744680837
+  },
+  "family": "dt_maze33",
+  "spec": "noise0.3@s1",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "n": 1000,
+  "K": 500,
+  "acc": 56.39999999999999,
+  "oracle": 67.10000000000001,
+  "V_abs": 10.7,
+  "V_rel": 24.541284403669724,
+  "stability 2": {
+   "acc": 61.7,
+   "steps": 200.91,
+   "rescued": 6.4,
+   "premature": 1.0999999999999999,
+   "recovery": 0.4953271028037386
+  },
+  "stability 10": {
+   "acc": 59.4,
+   "steps": 275.743,
+   "rescued": 3.1,
+   "premature": 0.1,
+   "recovery": 0.28037383177570113
+  },
+  "family": "dt_maze33",
+  "spec": "noise0.3@s2",
+  "phi": null,
+  "phi_src": "dt_extrap (p4d)"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "fp32",
+  "n": 5000,
+  "K": 26,
+  "acc": 73.83999999999999,
+  "oracle": 78.53999999999999,
+  "V_abs": 4.7,
+  "V_rel": 17.966360856269112,
+  "phi": 1.0,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.02@s0",
+  "n": 5000,
+  "K": 26,
+  "acc": 73.8,
+  "oracle": 78.66,
+  "V_abs": 4.859999999999999,
+  "V_rel": 18.549618320610687,
+  "phi": 0.9959926605224609,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.05@s0",
+  "n": 5000,
+  "K": 26,
+  "acc": 72.82,
+  "oracle": 77.44,
+  "V_abs": 4.62,
+  "V_rel": 16.997792494481235,
+  "phi": 0.9759779572486877,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.1@s0",
+  "n": 5000,
+  "K": 26,
+  "acc": 67.06,
+  "oracle": 72.72,
+  "V_abs": 5.66,
+  "V_rel": 17.18275652701882,
+  "phi": 0.9173992872238159,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.15@s0",
+  "n": 5000,
+  "K": 26,
+  "acc": 59.160000000000004,
+  "oracle": 65.14,
+  "V_abs": 5.9799999999999995,
+  "V_rel": 14.642507345739471,
+  "phi": 0.8492173552513123,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.2@s0",
+  "n": 5000,
+  "K": 26,
+  "acc": 47.46,
+  "oracle": 53.239999999999995,
+  "V_abs": 5.779999999999999,
+  "V_rel": 11.00114198705748,
+  "phi": 0.7755284309387207,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.3@s0",
+  "n": 5000,
+  "K": 26,
+  "acc": 15.479999999999999,
+  "oracle": 19.06,
+  "V_abs": 3.58,
+  "V_rel": 4.235683861807856,
+  "phi": 0.6173936724662781,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.5@s0",
+  "n": 5000,
+  "K": 26,
+  "acc": 0.3,
+  "oracle": 0.6799999999999999,
+  "V_abs": 0.38,
+  "V_rel": 0.3811434302908726,
+  "phi": 0.34210604429244995,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.7@s0",
+  "n": 5000,
+  "K": 26,
+  "acc": 0.04,
+  "oracle": 0.32,
+  "V_abs": 0.27999999999999997,
+  "V_rel": 0.2801120448179272,
+  "phi": 0.18450477719306946,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise1.0@s0",
+  "n": 5000,
+  "K": 26,
+  "acc": 0.1,
+  "oracle": 0.26,
+  "V_abs": 0.16,
+  "V_rel": 0.16016016016016016,
+  "phi": 0.0733775869011879,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.02@s1",
+  "n": 5000,
+  "K": 26,
+  "acc": 73.48,
+  "oracle": 78.14,
+  "V_abs": 4.66,
+  "V_rel": 17.57164404223228,
+  "phi": 0.9961434602737427,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.05@s1",
+  "n": 5000,
+  "K": 26,
+  "acc": 72.72,
+  "oracle": 76.82,
+  "V_abs": 4.1000000000000005,
+  "V_rel": 15.029325513196481,
+  "phi": 0.9778881072998047,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.1@s1",
+  "n": 5000,
+  "K": 26,
+  "acc": 68.94,
+  "oracle": 73.7,
+  "V_abs": 4.760000000000001,
+  "V_rel": 15.325177076625886,
+  "phi": 0.9260068535804749,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.15@s1",
+  "n": 5000,
+  "K": 26,
+  "acc": 60.96,
+  "oracle": 66.2,
+  "V_abs": 5.24,
+  "V_rel": 13.422131147540984,
+  "phi": 0.8591525554656982,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.2@s1",
+  "n": 5000,
+  "K": 26,
+  "acc": 47.12,
+  "oracle": 52.16,
+  "V_abs": 5.04,
+  "V_rel": 9.531013615733738,
+  "phi": 0.7839113473892212,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.3@s1",
+  "n": 5000,
+  "K": 26,
+  "acc": 10.54,
+  "oracle": 12.139999999999999,
+  "V_abs": 1.6,
+  "V_rel": 1.7885088307623518,
+  "phi": 0.6241850852966309,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.5@s1",
+  "n": 5000,
+  "K": 26,
+  "acc": 0.18,
+  "oracle": 0.44,
+  "V_abs": 0.26,
+  "V_rel": 0.2604688439190543,
+  "phi": 0.3478136360645294,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.7@s1",
+  "n": 5000,
+  "K": 26,
+  "acc": 0.08,
+  "oracle": 0.33999999999999997,
+  "V_abs": 0.26,
+  "V_rel": 0.2602081665332266,
+  "phi": 0.19895541667938232,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise1.0@s1",
+  "n": 5000,
+  "K": 26,
+  "acc": 0.08,
+  "oracle": 0.12,
+  "V_abs": 0.04,
+  "V_rel": 0.040032025620496396,
+  "phi": 0.10262803733348846,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.02@s2",
+  "n": 5000,
+  "K": 26,
+  "acc": 73.83999999999999,
+  "oracle": 78.60000000000001,
+  "V_abs": 4.760000000000001,
+  "V_rel": 18.195718654434252,
+  "phi": 0.9965111613273621,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.05@s2",
+  "n": 5000,
+  "K": 26,
+  "acc": 73.66,
+  "oracle": 78.36,
+  "V_abs": 4.7,
+  "V_rel": 17.843583902809414,
+  "phi": 0.9797378778457642,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.1@s2",
+  "n": 5000,
+  "K": 26,
+  "acc": 70.74000000000001,
+  "oracle": 75.88000000000001,
+  "V_abs": 5.140000000000001,
+  "V_rel": 17.566643882433358,
+  "phi": 0.927116334438324,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.15@s2",
+  "n": 5000,
+  "K": 26,
+  "acc": 64.32,
+  "oracle": 70.08,
+  "V_abs": 5.76,
+  "V_rel": 16.143497757847534,
+  "phi": 0.8567482233047485,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.2@s2",
+  "n": 5000,
+  "K": 26,
+  "acc": 52.86,
+  "oracle": 59.199999999999996,
+  "V_abs": 6.34,
+  "V_rel": 13.449299957573187,
+  "phi": 0.7763774394989014,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.3@s2",
+  "n": 5000,
+  "K": 26,
+  "acc": 18.44,
+  "oracle": 21.52,
+  "V_abs": 3.08,
+  "V_rel": 3.7763609612555173,
+  "phi": 0.6011228561401367,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.5@s2",
+  "n": 5000,
+  "K": 26,
+  "acc": 0.27999999999999997,
+  "oracle": 0.6799999999999999,
+  "V_abs": 0.4,
+  "V_rel": 0.4011231448054553,
+  "phi": 0.3125634491443634,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise0.7@s2",
+  "n": 5000,
+  "K": 26,
+  "acc": 0.08,
+  "oracle": 0.26,
+  "V_abs": 0.18,
+  "V_rel": 0.1801441152922338,
+  "phi": 0.1634606271982193,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "noise1.0@s2",
+  "n": 5000,
+  "K": 26,
+  "acc": 0.08,
+  "oracle": 0.13999999999999999,
+  "V_abs": 0.06,
+  "V_rel": 0.0600480384307446,
+  "phi": 0.05996144562959671,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "w8c",
+  "n": 5000,
+  "K": 26,
+  "acc": 73.83999999999999,
+  "oracle": 78.52,
+  "V_abs": 4.68,
+  "V_rel": 17.889908256880734,
+  "phi": 0.998938262462616,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "w4g32",
+  "n": 5000,
+  "K": 26,
+  "acc": 66.64,
+  "oracle": 72.48,
+  "V_abs": 5.84,
+  "V_rel": 17.50599520383693,
+  "phi": 0.8824103474617004,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "w4g128",
+  "n": 5000,
+  "K": 26,
+  "acc": 61.480000000000004,
+  "oracle": 67.22,
+  "V_abs": 5.74,
+  "V_rel": 14.90134994807892,
+  "phi": 0.8519450426101685,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "w4c",
+  "n": 5000,
+  "K": 26,
+  "acc": 57.76,
+  "oracle": 63.580000000000005,
+  "V_abs": 5.82,
+  "V_rel": 13.778409090909092,
+  "phi": 0.8505056500434875,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "w4a",
+  "n": 5000,
+  "K": 26,
+  "acc": 67.92,
+  "oracle": 73.48,
+  "V_abs": 5.56,
+  "V_rel": 17.331670822942645,
+  "phi": 0.9008029103279114,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_small",
+  "spec": "w4t",
+  "n": 5000,
+  "K": 26,
+  "acc": 0.2,
+  "oracle": 0.3,
+  "V_abs": 0.1,
+  "V_rel": 0.10020040080160321,
+  "phi": 0.5404268503189087,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "fp32",
+  "n": 2000,
+  "K": 26,
+  "acc": 75.64999999999999,
+  "oracle": 80.30000000000001,
+  "V_abs": 4.65,
+  "V_rel": 19.096509240246405,
+  "phi": 1.0,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.3@s0",
+  "n": 2000,
+  "K": 26,
+  "acc": 58.35,
+  "oracle": 63.9,
+  "V_abs": 5.55,
+  "V_rel": 13.325330132052821,
+  "phi": 0.7691925764083862,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.5@s0",
+  "n": 2000,
+  "K": 26,
+  "acc": 9.0,
+  "oracle": 11.75,
+  "V_abs": 2.75,
+  "V_rel": 3.021978021978022,
+  "phi": 0.5341882109642029,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "w8c",
+  "n": 2000,
+  "K": 26,
+  "acc": 75.55,
+  "oracle": 80.25,
+  "V_abs": 4.7,
+  "V_rel": 19.222903885480573,
+  "phi": 0.9984742403030396,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "w4g32",
+  "n": 2000,
+  "K": 26,
+  "acc": 73.85000000000001,
+  "oracle": 79.7,
+  "V_abs": 5.8500000000000005,
+  "V_rel": 22.37093690248566,
+  "phi": 0.936771810054779,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "w4c",
+  "n": 2000,
+  "K": 26,
+  "acc": 69.5,
+  "oracle": 75.25,
+  "V_abs": 5.75,
+  "V_rel": 18.852459016393443,
+  "phi": 0.8680717945098877,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "w4t",
+  "n": 2000,
+  "K": 26,
+  "acc": 0.1,
+  "oracle": 0.25,
+  "V_abs": 0.15,
+  "V_rel": 0.15015015015015015,
+  "phi": 0.3479924201965332,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.7@s0",
+  "n": 2000,
+  "K": 26,
+  "acc": 0.35000000000000003,
+  "oracle": 0.75,
+  "V_abs": 0.4,
+  "V_rel": 0.4014049172102358,
+  "phi": 0.3442891240119934,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise1.0@s0",
+  "n": 2000,
+  "K": 26,
+  "acc": 0.1,
+  "oracle": 0.25,
+  "V_abs": 0.15,
+  "V_rel": 0.15015015015015015,
+  "phi": 0.18192866444587708,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "w4g128",
+  "n": 2000,
+  "K": 26,
+  "acc": 73.9,
+  "oracle": 78.85,
+  "V_abs": 4.95,
+  "V_rel": 18.96551724137931,
+  "phi": 0.9185468554496765,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "w4a",
+  "n": 2000,
+  "K": 26,
+  "acc": 72.95,
+  "oracle": 77.95,
+  "V_abs": 5.0,
+  "V_rel": 18.484288354898336,
+  "phi": 0.8993200063705444,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.05@s0",
+  "n": 2000,
+  "K": 26,
+  "acc": 75.2,
+  "oracle": 79.80000000000001,
+  "V_abs": 4.6,
+  "V_rel": 18.548387096774192,
+  "phi": 0.9885327219963074,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.1@s0",
+  "n": 2000,
+  "K": 26,
+  "acc": 74.35000000000001,
+  "oracle": 79.5,
+  "V_abs": 5.1499999999999995,
+  "V_rel": 20.077972709551656,
+  "phi": 0.9635247588157654,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.15@s0",
+  "n": 2000,
+  "K": 26,
+  "acc": 72.75,
+  "oracle": 77.64999999999999,
+  "V_abs": 4.9,
+  "V_rel": 17.98165137614679,
+  "phi": 0.926177978515625,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.2@s0",
+  "n": 2000,
+  "K": 26,
+  "acc": 69.75,
+  "oracle": 75.3,
+  "V_abs": 5.55,
+  "V_rel": 18.34710743801653,
+  "phi": 0.8794907331466675,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.1@s1",
+  "n": 2000,
+  "K": 26,
+  "acc": 74.45,
+  "oracle": 79.85,
+  "V_abs": 5.4,
+  "V_rel": 21.135029354207436,
+  "phi": 0.9569612741470337,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.2@s1",
+  "n": 2000,
+  "K": 26,
+  "acc": 69.55,
+  "oracle": 75.35,
+  "V_abs": 5.800000000000001,
+  "V_rel": 19.047619047619047,
+  "phi": 0.8628543019294739,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.3@s1",
+  "n": 2000,
+  "K": 26,
+  "acc": 56.39999999999999,
+  "oracle": 61.35,
+  "V_abs": 4.95,
+  "V_rel": 11.353211009174313,
+  "phi": 0.7400445938110352,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.5@s1",
+  "n": 2000,
+  "K": 26,
+  "acc": 5.4,
+  "oracle": 7.3,
+  "V_abs": 1.9,
+  "V_rel": 2.0084566596194504,
+  "phi": 0.4905916154384613,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.1@s2",
+  "n": 2000,
+  "K": 26,
+  "acc": 75.64999999999999,
+  "oracle": 80.05,
+  "V_abs": 4.3999999999999995,
+  "V_rel": 18.069815195071868,
+  "phi": 0.9648796319961548,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.2@s2",
+  "n": 2000,
+  "K": 26,
+  "acc": 72.5,
+  "oracle": 78.0,
+  "V_abs": 5.5,
+  "V_rel": 20.0,
+  "phi": 0.8893161416053772,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.3@s2",
+  "n": 2000,
+  "K": 26,
+  "acc": 65.85,
+  "oracle": 71.3,
+  "V_abs": 5.45,
+  "V_rel": 15.95900439238653,
+  "phi": 0.7874624133110046,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ },
+ {
+  "family": "mdeq_xl",
+  "spec": "noise0.5@s2",
+  "n": 2000,
+  "K": 26,
+  "acc": 20.849999999999998,
+  "oracle": 24.65,
+  "V_abs": 3.8,
+  "V_rel": 4.801010739102969,
+  "phi": 0.5526896715164185,
+  "phi_src": "X6 cos to fp32 equilibrium"
+ }
+]
