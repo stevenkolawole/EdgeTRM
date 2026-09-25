@@ -525,6 +525,52 @@ def lofo_section(ncal=50, reps=200, cut=0.5, seed=0):
     return out
 
 
+def noisecal_section(ncal=50, reps=200, cut=0.5, seed=0, band=(0.6, 0.95)):
+    """Deployable protocol: fit the cut ONLY from noise-dial cells (weight noise for TRM/HRM, activation noise
+    an<sigma> for LMs) with n_cal labelled examples, then classify every quantizer cell (no refit)."""
+    G = calib_groups()
+    rng = np.random.default_rng(seed)
+    print(f"\n## Noise-dial calibration: cut from noise cells only (n_cal = {ncal}, {reps} repeats), applied to all quantizer cells\n")
+    print("| group | noise cells (in φ band / collapsed) | noise φ range | quantizer cells (collapsed) | accuracy on quantizer cells "
+          "mean [5th pct] | full-n noise cut on quantizers | quantizer-fitted cut (in-family) |")
+    print("|---|---|---|---|---|---|---|")
+    out = {}
+    for gname in sorted(G):
+        cs = G[gname]
+        phi = np.array([c[0] for c in cs])
+        full = np.array([(c[1].mean() / c[2].mean() if c[2].mean() > 0 else 0.0) < cut for c in cs])
+        isn = np.array([spec_family(c[3]) == "noise" for c in cs])
+        if isn.sum() < 3 or (~isn).sum() < 2:
+            continue
+        inb = isn & (phi >= band[0]) & (phi <= band[1])
+        k = min(ncal, min(len(c[1]) for c in cs))
+        accs = []
+        for _ in range(reps):
+            perm = rng.permutation(max(len(c[1]) for c in cs))
+            est, keep = [], []
+            for c in cs:
+                ids = perm[perm < len(c[1])][:k]
+                rb = c[2][ids].mean()
+                keep.append(rb > 0)
+                est.append(True if rb == 0 else c[1][ids].mean() / rb < cut)
+            est, keep = np.array(est), np.array(keep)
+            tr = keep & isn
+            t = fast_cut(phi[tr], est[tr]) if tr.sum() >= 2 and est[tr].any() and not est[tr].all() else np.median(phi[isn])
+            accs.append(float(((phi[~isn] < t) == full[~isn]).mean()))
+        accs = np.array(accs)
+        tn = fast_cut(phi[isn], full[isn]) if full[isn].any() and not full[isn].all() else float("nan")
+        accn = float(((phi[~isn] < tn) == full[~isn]).mean()) if tn == tn else float("nan")
+        tq = fast_cut(phi[~isn], full[~isn]) if full[~isn].any() and not full[~isn].all() else float("nan")
+        accq = float(((phi[~isn] < tq) == full[~isn]).mean()) if tq == tq else float("nan")
+        out[gname] = {"noise_cells": int(isn.sum()), "noise_in_band": int(inb.sum()), "quant_cells": int((~isn).sum()),
+                      "acc_mean": float(accs.mean()), "acc_p5": float(np.percentile(accs, 5)), "full_noise_cut": tn,
+                      "acc_full_noise_cut": accn, "acc_quant_fit": accq}
+        print(f"| {gname} | {int(isn.sum())} ({int(inb.sum())} / {int(full[isn].sum())}) | {phi[isn].min():.2f}-{phi[isn].max():.2f} | "
+              f"{int((~isn).sum())} ({int(full[~isn].sum())}) | {accs.mean():.3f} [{np.percentile(accs, 5):.3f}] | "
+              f"{accn:.3f} (t={tn:.3f}) | {accq:.3f} |")
+    return out
+
+
 def main():
     import sys
     sys.path.insert(0, str(HERE))
@@ -536,6 +582,7 @@ def main():
     ap.add_argument("--trm-platform", default="root", choices=["root", "all"],
                     help="root = only the breadth/*.json grid files (one platform); all = include babel/ and p4d/ draws")
     ap.add_argument("--json", default=None)
+    ap.add_argument("--noisecal", action="store_true", help="fit the cut from noise-dial cells only, classify quantizer cells")
     ap.add_argument("--lofo", action="store_true", help="leave-one-quantizer-family-out reuse of the 50-example cut")
     ap.add_argument("--calib", action="store_true", help="labelled-example budget for placing each model's cut")
     ap.add_argument("--variants", action="store_true", help="within-Sudoku test on the 13 trained variants (p4d)")
@@ -545,6 +592,11 @@ def main():
     a = ap.parse_args()
     global S_PLATFORM
     S_PLATFORM = a.s_platform
+    if a.noisecal:
+        out = {"noisecal": noisecal_section()}
+        if a.json:
+            json.dump(out, open(a.json, "w"), indent=1)
+        return
     if a.lofo:
         out = {"lofo": lofo_section()}
         if a.json:

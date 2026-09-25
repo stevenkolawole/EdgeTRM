@@ -1,0 +1,174 @@
+{
+ "noisecal": {
+  "TRM:hrm_maze": {
+   "noise_cells": 27,
+   "noise_in_band": 0,
+   "quant_cells": 137,
+   "acc_mean": 0.8670072992700733,
+   "acc_p5": 0.7226277372262774,
+   "full_noise_cut": 0.9756407375335694,
+   "acc_full_noise_cut": 0.8905109489051095,
+   "acc_quant_fit": 0.9927007299270073
+  },
+  "TRM:maze_attn": {
+   "noise_cells": 27,
+   "noise_in_band": 2,
+   "quant_cells": 133,
+   "acc_mean": 0.9488721804511278,
+   "acc_p5": 0.7819548872180451,
+   "full_noise_cut": 0.9468759000301361,
+   "acc_full_noise_cut": 0.9624060150375939,
+   "acc_quant_fit": 1.0
+  },
+  "TRM:sudoku_attn": {
+   "noise_cells": 36,
+   "noise_in_band": 26,
+   "quant_cells": 132,
+   "acc_mean": 0.9924242424242423,
+   "acc_p5": 0.9924242424242424,
+   "full_noise_cut": 0.6672198176383972,
+   "acc_full_noise_cut": 0.9924242424242424,
+   "acc_quant_fit": 1.0
+  },
+  "TRM:sudoku_mlp": {
+   "noise_cells": 45,
+   "noise_in_band": 22,
+   "quant_cells": 154,
+   "acc_mean": 0.9303896103896103,
+   "acc_p5": 0.922077922077922,
+   "full_noise_cut": 0.6342382729053497,
+   "acc_full_noise_cut": 0.935064935064935,
+   "acc_quant_fit": 0.9935064935064936
+  },
+  "VAR:trm_sudoku_attn_w256_s0": {
+   "noise_cells": 21,
+   "noise_in_band": 10,
+   "quant_cells": 4,
+   "acc_mean": 0.93625,
+   "acc_p5": 0.75,
+   "full_noise_cut": 0.8231422305107117,
+   "acc_full_noise_cut": 1.0,
+   "acc_quant_fit": 1.0
+  },
+  "VAR:trm_sudoku_attn_w256_s1": {
+   "noise_cells": 21,
+   "noise_in_band": 12,
+   "quant_cells": 4,
+   "acc_mean": 0.82125,
+   "acc_p5": 0.75,
+   "full_noise_cut": 0.8767402768135071,
+   "acc_full_noise_cut": 0.75,
+   "acc_quant_fit": 1.0
+  },
+  "VAR:trm_sudoku_attn_w256_s2": {
+   "noise_cells": 21,
+   "noise_in_band": 18,
+   "quant_cells": 4,
+   "acc_mean": 0.94125,
+   "acc_p5": 0.75,
+   "full_noise_cut": 0.7952219843864441,
+   "acc_full_noise_cut": 1.0,
+   "acc_quant_fit": 1.0
+  },
+  "VAR:trm_sudoku_attn_w512_s0": {
+   "noise_cells": 21,
+   "noise_in_band": 16,
+   "quant_cells": 4,
+   "acc_mean": 0.56875,
+   "acc_p5": 0.25,
+   "full_noise_cut": NaN,
+   "acc_full_noise_cut": NaN,
+   "acc_quant_fit": NaN
+  },
+  "VAR:trm_sudoku_attn_w512_s1": {
+   "noise_cells": 21,
+   "noise_in_band": 21,
+   "quant_cells": 4,
+   "acc_mean": 0.995,
+   "acc_p5": 1.0,
+   "full_noise_cut": 0.7265433669090271,
+   "acc_full_noise_cut": 1.0,
+   "acc_quant_fit": NaN
+  },
+  "VAR:trm_sudoku_attn_w512_s2": {
+   "noise_cells": 21,
+   "noise_in_band": 21,
+   "quant_cells": 4,
+   "acc_mean": 0.765,
+   "acc_p5": 0.75,
+   "full_noise_cut": 0.7040063142776489,
+   "acc_full_noise_cut": 0.75,
+   "acc_quant_fit": 1.0
+  },
+  "VAR:trm_sudoku_mlp_w256_s0": {
+   "noise_cells": 21,
+   "noise_in_band": 12,
+   "quant_cells": 4,
+   "acc_mean": 0.82375,
+   "acc_p5": 0.75,
+   "full_noise_cut": 0.7885296046733856,
+   "acc_full_noise_cut": 0.75,
+   "acc_quant_fit": 1.0
+  },
+  "VAR:trm_sudoku_mlp_w256_s1": {
+   "noise_cells": 21,
+   "noise_in_band": 13,
+   "quant_cells": 4,
+   "acc_mean": 0.76625,
+   "acc_p5": 0.75,
+   "full_noise_cut": 0.8463587164878845,
+   "acc_full_noise_cut": 0.75,
+   "acc_quant_fit": 1.0
+  },
+  "VAR:trm_sudoku_mlp_w256_s2": {
+   "noise_cells": 21,
+   "noise_in_band": 12,
+   "quant_cells": 4,
+   "acc_mean": 1.0,
+   "acc_p5": 1.0,
+   "full_noise_cut": 0.8407305777072906,
+   "acc_full_noise_cut": 1.0,
+   "acc_quant_fit": 1.0
+  },
+  "VAR:trm_sudoku_mlp_w512_s0": {
+   "noise_cells": 21,
+   "noise_in_band": 11,
+   "quant_cells": 4,
+   "acc_mean": 1.0,
+   "acc_p5": 1.0,
+   "full_noise_cut": 0.6859248578548431,
+   "acc_full_noise_cut": 1.0,
+   "acc_quant_fit": 1.0
+  },
+  "VAR:trm_sudoku_mlp_w512_s1": {
+   "noise_cells": 21,
+   "noise_in_band": 9,
+   "quant_cells": 4,
+   "acc_mean": 1.0,
+   "acc_p5": 1.0,
+   "full_noise_cut": 0.6685921847820282,
+   "acc_full_noise_cut": 1.0,
+   "acc_quant_fit": 1.0
+  },
+  "VAR:trm_sudoku_mlp_w512_s2": {
+   "noise_cells": 21,
+   "noise_in_band": 9,
+   "quant_cells": 4,
+   "acc_mean": 1.0,
+   "acc_p5": 1.0,
+   "full_noise_cut": 0.7769287824630737,
+   "acc_full_noise_cut": 1.0,
+   "acc_quant_fit": 1.0
+  },
+  "VAR:trm_sudoku_mlp_w768_s0": {
+   "noise_cells": 21,
+   "noise_in_band": 9,
+   "quant_cells": 4,
+   "acc_mean": 1.0,
+   "acc_p5": 1.0,
+   "full_noise_cut": 0.6908828318119049,
+   "acc_full_noise_cut": 1.0,
+   "acc_quant_fit": 1.0
+  }
+ }
+}
