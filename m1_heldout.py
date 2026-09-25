@@ -72,14 +72,25 @@ def cost_mem(h, shapes):
     return cost, mem
 
 
+SHORT = []                                           # (format, steps needed, steps available) for the read-out
+
+
 def best_single(runs, shapes, cost, mem):
+    """Best single format at <= cost and <= memory on FULL curves: a format whose recorded curve is shorter than the
+    step count its traffic allows is not silently truncated; it is flagged in SHORT (audit Sep 25, item 54) and its
+    best value over the available steps is used as a lower bound only."""
     out = (0.0, None, 0)
     for n, (cur, _) in runs.items():
         if MF.mem_of(n, shapes) > mem + 1e-6:
             continue
-        s = min(int(np.floor(cost / (MF.bits_of(n, shapes) / 32) + 1e-9)), len(cur))
-        if s >= 1 and cur[s - 1] > out[0]:
-            out = (cur[s - 1], n, s)
+        need = int(np.floor(cost / (MF.bits_of(n, shapes) / 32) + 1e-9))
+        s = min(need, len(cur))
+        if need > len(cur):
+            SHORT.append((n, need, len(cur)))
+        if s >= 1:
+            sb = int(np.argmax(np.asarray(cur[:s]))) + 1       # best depth <= s (a format may peak before s)
+            if cur[sb - 1] > out[0]:
+                out = (cur[sb - 1], n, sb)
     return out
 
 
@@ -108,10 +119,14 @@ def main():
     ap.add_argument("--all", nargs="+", default=[], help="every M1 record file, for the conservative m")
     ap.add_argument("--exclude", default="div_|ens_|heldout|T512", help="dev files written after the pick (controls, T=512)")
     ap.add_argument("--polish", default="w8c,w8t")
+    ap.add_argument("--cmp_exclude", default="div_|ens_|heldout|ctl_", help="files whose curves are not single-format references")
     a = ap.parse_args()
-    dev_files = [(f, b) for f, b in load(a.dev, 0, a.task) if not re.search(a.exclude, f)]
+    all_dev = load(a.dev, 0, a.task)
+    dev_files = [(f, b) for f, b in all_dev if not re.search(a.exclude, f)]          # candidates for the pick
+    cmp_files = [(f, b) for f, b in all_dev if not re.search(a.cmp_exclude, f)]      # comparator curves: every run
     held_files = load(a.held, 1000, a.task)
-    druns, dhyb, shapes = pool(dev_files)
+    _, dhyb, shapes = pool(dev_files)
+    druns, _, _ = pool(cmp_files)
     hruns, hhyb, _ = pool(held_files)
     pols = set(a.polish.split(","))
     print(f"# frozen selection on dev (0-999), evaluation on held-out (1000-1999): {a.task}\n")
@@ -166,6 +181,9 @@ def main():
                 vsf = f"fp32@{sbest}: {100*fa.mean():.1f}, {100*(hh[0]['acc']-fa.mean()):+.1f} ({n10}/{n01}), p={p:.2g}"
         print(f"| {T} | {name} | {100*pick['acc']:.1f} | {bn} {bs} | {100*bv:.1f} | {dp} | {pm1} | {pm2} | {held} | "
               f"{100*fdev:.1f} | {'--' if fhel is None else f'{100*fhel:.1f}'} | {vsf} |")
+    if SHORT:
+        print("\ncomparator curves too short for the matched traffic (lower bounds only; run longer): " +
+              "; ".join(sorted({f"{n} needs {nd} steps, has {h}" for n, nd, h in SHORT})))
     if per_task:
         print("\nschedules compared on dev, by task and checkpoint: " +
               "; ".join(f"{t}{' ' + c.split('/')[-2] if c else ''}: {n}" for (t, c), n in sorted(per_task.items())))

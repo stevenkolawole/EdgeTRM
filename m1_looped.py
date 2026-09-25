@@ -101,3 +101,6 @@ if _OFF:                                             # held-out questions: test[
 
 if __name__ == "__main__":
     D.main()
+    if torch.cuda.is_available():                    # measured peak, for the autofill mem_GB column
+        print(f"M1_PEAK_GB reserved {torch.cuda.max_memory_reserved() / 2**30:.1f} "
+              f"allocated {torch.cuda.max_memory_allocated() / 2**30:.1f}", flush=True)

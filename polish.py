@@ -126,6 +126,13 @@ def quant_2d(W, spec):
     m = re.fullmatch(r"w(\d+)(t|c|a|g\d+)", spec)
     if m:
         return q_uniform(W, int(m.group(1)), m.group(2))
+    m = re.fullmatch(r"w(\d+)cc(\d\d)", spec)          # per-channel symmetric RTN, scale at clip% of the row absmax
+    if m:
+        torch = _torch()
+        b, clip = int(m.group(1)), int(m.group(2)) / 100.0
+        qmax = 2 ** (b - 1) - 1
+        sc = (clip * W.abs().amax(1, keepdim=True) / qmax).clamp_min(1e-8)
+        return torch.round(W / sc).clamp(-qmax, qmax) * sc
     raise ValueError(spec)
 
 
@@ -145,6 +152,9 @@ def storage_bits(spec, shape):
     m = re.fullmatch(r"n(\d+)([tac])(\d+)", spec)
     if m:                                          # the stored object is the B-bit model
         return storage_bits(f"w{m.group(1)}{m.group(2)}", shape)
+    mcc = re.fullmatch(r"w(\d+)cc\d\d", spec)
+    if mcc:
+        spec = f"w{mcc.group(1)}c"
     m = re.fullmatch(r"w(\d+)(t|c|a|g\d+)", spec)
     b, g = int(m.group(1)), m.group(2)
     if g == "t":
