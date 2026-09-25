@@ -23,7 +23,7 @@ while true; do
   for part in general preempt; do
     if grep -q "^$part EMPTY_BACKLOG" <<<"$bb"; then
       hp=$(grep -oE "^$part held_or_pending=[0-9]+" <<<"$bb" | cut -d= -f2); cap=$(grep -oE "^$part .*cap=[0-9]+" <<<"$bb" | grep -oE "cap=[0-9]+" | cut -d= -f2)
-      [ -n "$hp" ] && [ -n "$cap" ] && [ "$hp" -lt "$cap" ] && out="$out babel:$part:empty_backlog_below_cap($hp/$cap);"
+      [ -n "$hp" ] && [ -n "$cap" ] && [ "$hp" -lt $((cap-2)) ] && out="$out babel:$part:empty_backlog_below_cap($hp/$cap);"
     fi
   done
   if [ -n "$out" ] && [ "$out" != "$prev" ]; then echo "$(date -u +%H:%M) ALERT$out"; fi
