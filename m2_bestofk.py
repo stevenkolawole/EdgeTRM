@@ -192,7 +192,12 @@ def run_cell_wsample(m, master, bits, gran, draw0_rtn, inp, lab, kind, bfs, K, D
     chk = {k: np.zeros((K, n), np.int16) for k in chk_steps}
     vsh = {k: np.zeros((K, n), np.uint8) for k in chk_steps} if kind == "maze" else None
     for k in range(K):
-        if k == 0 and draw0_rtn:
+        if gran == "noise":                                   # weight-noise ensemble: draw k = its own Gaussian draw
+            for mod, W in zip(_linears(m), master):
+                mod.weight.data = W.clone()
+            torch.manual_seed(int(seed) * 7907 + 1000 + k)
+            quantize_weights_(m, None, "noise", bits)          # bits carries sigma here
+        elif k == 0 and draw0_rtn:
             for mod, W in zip(_linears(m), master):
                 mod.weight.data = W.clone()
             quantize_weights_(m, bits, gran)
@@ -252,7 +257,8 @@ def main():
     ap.add_argument("--polish", type=int, default=0, help="fp32 polish steps after the D compressed steps")
     ap.add_argument("--polish_from", default="last", choices=("last", "best"),
                     help="polish from each rollout's last state, or from its state at its max-q step (kept on the fly)")
-    ap.add_argument("--wsample", default="none", choices=("none", "sr", "sr0"),
+    ap.add_argument("--master", default="fp32", help="weights the draws are made from: fp32 or an RTN spec (e.g. w8c)")
+    ap.add_argument("--wsample", default="none", choices=("none", "sr", "sr0", "wnoise"),
                     help="sr: each rollout uses its own stochastic-rounding draw of the weights on the spec's grid; "
                          "sr0: the same with draw 0 = round-to-nearest")
     ap.add_argument("--offset", type=int, default=0, help="first test row (held-out sets: e.g. 1000)")
@@ -290,7 +296,7 @@ def main():
         todo = []
         for sg in sigmas:
             K = 1 if ((a.noise == "none" or sg == 0) and a.wsample == "none") else a.K
-            name = f"{a.task}__{spec}__{a.noise}{sg:g}__D{a.D}_K{K}{('_P%d' % a.polish) if a.polish else ''}{'b' if a.polish and a.polish_from == 'best' else ''}{('_' + a.wsample) if a.wsample != 'none' else ''}{('_o%d' % a.offset) if a.offset else ''}{a.tag}.npz"
+            name = f"{a.task}__{spec}__{a.noise}{sg:g}__D{a.D}_K{K}{('_P%d' % a.polish) if a.polish else ''}{'b' if a.polish and a.polish_from == 'best' else ''}{('_' + a.wsample) if a.wsample != 'none' else ''}{('_m' + a.master) if a.master != 'fp32' else ''}{('_o%d' % a.offset) if a.offset else ''}{a.tag}.npz"
             if not (outdir / name).exists():
                 todo.append((sg, K, name))
         if not todo:
@@ -299,9 +305,15 @@ def main():
         if a.wsample != "none":
             base, wseed = split_spec(spec)
             q = parse_quant(base)
-            assert q["bits"] is not None and q["gran"] not in (None, "noise"), "wsample needs a quantizer spec"
+            if a.wsample == "wnoise":
+                assert q["gran"] == "noise", "wnoise needs a noise<sigma> spec"
+            else:
+                assert q["bits"] is not None and q["gran"] not in (None, "noise"), "wsample needs a quantizer spec"
             m, meta = build(a.task, None, a.D, 256)
             m = m.to(DEV).eval()
+            if a.master != "fp32":
+                qm = parse_quant(a.master)
+                quantize_weights_(m, qm["bits"], qm["gran"])
             master = [mod.weight.data.clone() for mod in _linears(m)]
         else:
             m, meta, q, wseed = build_spec(a.task, spec, a.D, 256)
@@ -310,7 +322,8 @@ def main():
             seed = 7919 * (wseed or 0) + int(round(1000 * sg)) + 17
             if a.wsample != "none":
                 ch = a.chunk or (1000 if kind == "sudoku" else 128)
-                corr, qh, rms, hs, chk, vsh, pol = run_cell_wsample(m, master, q["bits"], q["gran"], a.wsample == "sr0",
+                corr, qh, rms, hs, chk, vsh, pol = run_cell_wsample(m, master, q["sigma"] if a.wsample == "wnoise" else q["bits"],
+                                                                    q["gran"], a.wsample == "sr0",
                                                                     inp, lab, kind, bfs, K, a.D, a.noise, sg, seed, ch,
                                                                     chk_steps, hash_w)
             else:
@@ -332,7 +345,7 @@ def main():
             os.replace(tmp, outdir / name)
             summ = quick_summary(corr, qh, hs, chk, a.D)
             rec = {"task": a.task, "spec": spec, "wseed": wseed, "noise": a.noise, "sigma": sg, "K": K, "D": a.D,
-                   "polish": a.polish, "polish_from": a.polish_from, "wsample": a.wsample, "offset": a.offset, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
+                   "polish": a.polish, "polish_from": a.polish_from, "wsample": a.wsample, "master": a.master, "offset": a.offset, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
                    "zl_rms_last": float(rms[-1]), "summary": summ, "secs": time.time() - t1,
                    "host": socket.gethostname(),
                    "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",
