@@ -3537,6 +3537,78 @@
   "source": "ON DEVICE Samsung_Galaxy_S24"
  },
  {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.30266666666666664,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.6056,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.6150222222222222,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.6119111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.6131333333333333,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.6129111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.6119555555555556,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.6114888888888889,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
   "task": "arc",
   "prec": "fp32",
   "step": 1,
