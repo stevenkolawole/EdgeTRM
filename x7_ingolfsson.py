@@ -84,7 +84,11 @@ def parse_cell(name):
     """-> dict(name, w=(kind, bits|sigma), a=(kind, bits|sigma), seed)."""
     base, seed = (name.split("@") + ["0"])[:2]
     seed = int(seed)
-    cell = {"name": name, "w": None, "a": None, "seed": seed}
+    cover = "all"
+    if "~" in base:                       # coverage: ~blk = only the recursive block's linears (heads stay fp32)
+        base, cover = base.split("~")
+        assert cover == "blk", name
+    cell = {"name": name, "w": None, "a": None, "seed": seed, "cover": cover}
     if base == "fp32":
         return cell
     for part in base.split("+"):
@@ -105,7 +109,7 @@ def parse_cell(name):
                 assert g in ("t", "c", "mx") or (g.startswith("g") and g[1:].isdigit()), part
                 cell["w"] = (g, bits)
             elif kind == "a":
-                assert g in ("ts", "td", "tok", "mx") or (g.startswith("g") and g[1:].isdigit()), part
+                assert g in ("ts", "tm", "td", "tok", "mx") or g.startswith("tp") or (g.startswith("g") and g[1:].isdigit()), part
                 cell["a"] = (g, bits)
             else:
                 raise ValueError(part)
@@ -161,14 +165,25 @@ def linears(m):
     return [mod for mod in m.modules() if mod.__class__.__name__ == "CastedLinear"]
 
 
+def covered(m, cover):
+    """per linear (same order as linears()): True if the cell's quantizers apply to it."""
+    names = [n for n, mod in m.named_modules() if mod.__class__.__name__ == "CastedLinear"]
+    if cover == "all":
+        return [True] * len(names)
+    return [(".L_level." in "." + n or ".H_level." in "." + n) for n in names]
+
+
 @torch.no_grad()
-def transform_weights_(m, spec, seed):
+def transform_weights_(m, spec, seed, cover="all"):
     """apply the weight part of a cell in place; returns per-tensor sigma_eq = RMS(dW)/std(W)."""
     if spec is None:
         return []
     kind, p = spec
     out = []
+    cov = covered(m, cover)
     for li, mod in enumerate(linears(m)):
+        if not cov[li]:
+            continue
         W = mod.weight.data
         if kind in ("wn", "wb"):
             gen = torch.Generator().manual_seed(_stable("w", seed, li))
@@ -212,7 +227,7 @@ class ActHook:
 
     def _perturb(self, x):
         k, p = self.kind, self.p
-        if k == "ts":
+        if k in ("ts", "tm") or k.startswith("tp"):
             return q_tensor(x, p, self.absmax)
         if k == "td":
             return q_tensor(x, p)
@@ -242,8 +257,22 @@ class ActHook:
     def __call__(self, mod, args):
         x = args[0]
         if self.observe:
-            m = x.detach().abs().amax()
-            self.obs_max = m if not torch.is_tensor(self.obs_max) else torch.maximum(self.obs_max, m)
+            a = x.detach().abs()
+            if self.kind == "ts":                 # max over every call
+                m = a.amax()
+                self.obs_max = m if not torch.is_tensor(self.obs_max) else torch.maximum(self.obs_max, m)
+            else:                                 # tm: mean of per-call absmax; tp<q>: mean of per-call q-th percentile
+                if self.kind == "tm":
+                    v = a.amax()
+                else:
+                    flat = a.flatten()
+                    if flat.numel() > (1 << 22):
+                        flat = flat[:: (flat.numel() // (1 << 22)) + 1]
+                    k = max(1, int(round(float(self.kind[2:]) / 100.0 * flat.numel())))
+                    v = flat.kthvalue(min(k, flat.numel())).values
+                self.obs_sum = v if not hasattr(self, "obs_sum") else self.obs_sum + v
+                self.obs_n = getattr(self, "obs_n", 0) + 1
+                self.obs_max = self.obs_sum / self.obs_n
             return None
         xq = self._perturb(x)
         eps = xq - x
@@ -361,11 +390,11 @@ def calibrate(task, cell, cinp, clab, batch):
     default depth (nsup 16) over the calibration puzzles."""
     t = TASKS[task]
     m, _ = build_model(task, t["H"], t["L"], 16, batch)
-    transform_weights_(m, cell["w"], cell["seed"])
+    transform_weights_(m, cell["w"], cell["seed"], cell["cover"])
     m = m.to(DEV)
     hooks = []
     for li, mod in enumerate(linears(m)):
-        h = ActHook("ts", cell["a"][1], cell["seed"], li)
+        h = ActHook(cell["a"][0], cell["a"][1], cell["seed"], li)
         h.observe = True
         hooks.append((h, mod.register_forward_pre_hook(h)))
     for s in range(0, len(cinp), batch):
@@ -373,7 +402,7 @@ def calibrate(task, cell, cinp, clab, batch):
         carry = init_carry(m, bt)
         for _ in range(16):
             carry, _ = m(carry, bt)
-    out = [float(h.obs_max) for h, _ in hooks]
+    out = [float(h.obs_max) if torch.is_tensor(h.obs_max) or h.obs_max else None for h, _ in hooks]
     for _, hd in hooks:
         hd.remove()
     del m
@@ -393,7 +422,8 @@ def evaluate(task, H, L, nsup, cells, inp, lab, batch, calib_cache, cinp_all, cl
         m = copy.deepcopy(base)
         W0 = [(mod.weight.data.clone().to(DEV), None if mod.bias is None else mod.bias.data.clone().to(DEV))
               for mod in linears(m)]
-        sig_w = transform_weights_(m, cell["w"], cell["seed"])
+        sig_w = transform_weights_(m, cell["w"], cell["seed"], cell["cover"])
+        cov = covered(m, cell["cover"])
         m = m.to(DEV)
         probes = []
         for li, mod in enumerate(linears(m)):
@@ -403,14 +433,18 @@ def evaluate(task, H, L, nsup, cells, inp, lab, batch, calib_cache, cinp_all, cl
         if cell["a"] is not None:
             kind, p = cell["a"]
             absmax = None
-            if kind == "ts":
-                key = (json.dumps(cell["w"]), p, cell["seed"])
+            static = kind in ("ts", "tm") or kind.startswith("tp")
+            if static:
+                key = (json.dumps(cell["w"]), p, cell["seed"]) if (kind == "ts" and cell["cover"] == "all") else \
+                      (json.dumps(cell["w"]), p, cell["seed"], kind, cell["cover"])
                 if key not in calib_cache:
                     rng = np.random.RandomState(_stable("calib", cell["seed"]))
                     idx = rng.choice(len(cinp_all), CALIB_N, replace=False)
                     calib_cache[key] = calibrate(task, cell, cinp_all[idx], clab_all[idx], batch)
                 absmax = calib_cache[key]
             for li, mod in enumerate(linears(m)):
+                if not cov[li]:
+                    continue
                 h = ActHook(kind, p, cell["seed"], li, coh_rows=t["coh"])
                 if absmax is not None:
                     h.absmax = absmax[li]
@@ -504,8 +538,11 @@ def evaluate(task, H, L, nsup, cells, inp, lab, batch, calib_cache, cinp_all, cl
                "coherence_steps": nsup,
                "rho_out_by_step": ({str(st): float(np.mean(v)) for st, v in sorted(rho.items())} if rho else None),
                "rho_out": float(np.mean([x for v in rho.values() for x in v])) if rho else None,
+               "cover": cell["cover"],
                "calib_absmax": (calib_cache.get((json.dumps(cell["w"]), cell["a"][1], cell["seed"]))
-                                if cell["a"] and cell["a"][0] == "ts" else None)}
+                                if cell["a"] and cell["a"][0] == "ts" and cell["cover"] == "all" else
+                                calib_cache.get((json.dumps(cell["w"]), cell["a"][1], cell["seed"], cell["a"][0], cell["cover"]))
+                                if cell["a"] and (cell["a"][0] == "tm" or cell["a"][0].startswith("tp")) else None)}
         if is_maze:
             rec["valid"] = (a["valid"] / n).tolist()
             rec["valid_shortest"] = (a["vshort"] / n).tolist()
