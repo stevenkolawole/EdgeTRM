@@ -279,7 +279,7 @@ def per_channel_encodings(task, tensors, n_cal=8):
     return enc
 
 
-def build_variant(task, name, eight, sixteen_default=True, edge_linear=False, perchannel=()):
+def build_variant(task, name, eight, sixteen_default=True, edge_linear=False, perchannel=(), propagate_movement=False):
     """eight: set of groups at the w8a8 encoding; everything else at w8a16 (or the reverse when
     sixteen_default=False: `eight` then lists the groups kept at 16 bit). perchannel: groups given
     per-channel UINT8 encodings. edge_linear: extra 8-bit Q/DQ on every MatMul activation input."""
@@ -351,6 +351,34 @@ def build_variant(task, name, eight, sixteen_default=True, edge_linear=False, pe
         for node in [q, dq]:
             node.input[1], node.input[2] = sn, zn
         n_table += 1
+    # The HTP also requires data-movement ops (Gather on activations, Reshape, Transpose, Slice, ...) to keep
+    # their input's encoding (Sep 25: "/inner/Gather ... incorrect Value -26880, expected -30915" when the
+    # q_head's z_H[:, 0] gather had a 16-bit input and an 8-bit output). The output takes the input's encoding.
+    n_prop = 0
+    if propagate_movement:
+        prod = {o: n for n in g.node for o in n.output}
+        cons = collections.defaultdict(list)
+        for n in g.node:
+            for x in n.input:
+                cons[x].append(n)
+        for n in g.node:
+            if n.op_type not in ("Gather", "Reshape", "Transpose", "Slice", "Squeeze", "Unsqueeze", "Flatten"):
+                continue
+            dq_in = prod.get(n.input[0])
+            if dq_in is None or dq_in.op_type != "DequantizeLinear" or n.input[0] in inits:
+                continue
+            q_in = prod.get(dq_in.input[0])
+            if q_in is None or q_in.op_type != "QuantizeLinear" or q_in.input[0] in inits:
+                continue          # embedding tables (weights) are handled above
+            q_out = next((c for c in cons.get(n.output[0], []) if c.op_type == "QuantizeLinear"), None)
+            if q_out is None or (q_out.input[1], q_out.input[2]) == (dq_in.input[1], dq_in.input[2]):
+                continue
+            for node in [q_out] + [c for c in cons[q_out.output[0]] if c.op_type == "DequantizeLinear"]:
+                node.input[1], node.input[2] = dq_in.input[1], dq_in.input[2]
+                keep = [a for a in node.attribute if a.name != "axis"]
+                del node.attribute[:]
+                node.attribute.extend(keep + [a for a in dq_in.attribute if a.name == "axis"])
+            n_prop += 1
     n_edge = 0
     if edge_linear:
         inits = {i.name for i in g.initializer}
@@ -397,7 +425,7 @@ def build_variant(task, name, eight, sixteen_default=True, edge_linear=False, pe
     onnx.save_model(m, str(out))            # big initializers stay external in model.data
     info = {"name": name, "path": str(out), "eight_groups": sorted(eight) if sixteen_default else
             sorted(set(GROUPS) - set(eight)), "sixteen_default": sixteen_default, "n_tensors_8bit": n8,
-            "n_edges_8bit": n_edge, "n_gather_tables_8bit": n_table, "n_per_channel": n_pc, "perchannel_groups": list(perchannel),
+            "n_edges_8bit": n_edge, "n_gather_tables_8bit": n_table, "n_movement_propagated": n_prop, "n_per_channel": n_pc, "perchannel_groups": list(perchannel),
             "missing": missing[:20], "n_missing": len(missing)}
     return info
 
@@ -418,6 +446,10 @@ VARIANTS = {
     # device-legal rebuilds (Gather table encoding follows its 8-bit output; built after the Sep 25 fix)
     "B2t_rms16": dict(eight=RMS | {"const"}, sixteen_default=False),
     "B2abt_sq_var16": dict(eight={"rms_sq", "rms_var", "rms_rsqrt", "rms_const"}, sixteen_default=False),
+    # + data-movement ops keep their input's encoding (second HTP rejection, Sep 25)
+    "B2u_rms16": dict(eight=RMS | {"const"}, sixteen_default=False, propagate_movement=True),
+    "B2abu_sq_var16": dict(eight={"rms_sq", "rms_var", "rms_rsqrt", "rms_const"}, sixteen_default=False,
+                           propagate_movement=True),
     # B2b2 (RMSNorm variance path alone at 16) does not rescue w8a8: greedy unions kept at 16 bit
     "B23_rms_resid16": dict(eight=RMS | {"rms_const", "residual", "inject"}, sixteen_default=False),
     "B26_rms_swiglu16": dict(eight=RMS | {"rms_const", "swiglu_prod"}, sixteen_default=False),
