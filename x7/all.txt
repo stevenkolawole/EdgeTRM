@@ -1,3 +1,6 @@
+--task maze_attn --mode biasnoise --draws 0 --arms wb --sigmas 0.3,0.5,0.7,1,1.5,2 --group 6 --out /home/ubuntu/x7/results/bn_maze_attn_d0wb2.json
+--task maze_attn --mode biasnoise --draws 1 --arms wb --sigmas 0.3,0.5,0.7,1,1.5,2 --group 6 --out /home/ubuntu/x7/results/bn_maze_attn_d1wb2.json
+--task maze_attn --mode biasnoise --draws 2 --arms wb --sigmas 0.3,0.5,0.7,1,1.5,2 --group 6 --out /home/ubuntu/x7/results/bn_maze_attn_d2wb2.json
 --task sudoku_mlp --mode biasnoise --draws 0 --group 16 --out /home/ubuntu/x7/results/bn_sudoku_mlp_d0.json
 --task maze_attn --mode biasnoise --draws 0 --arms an,af,ab --sigmas 0.2,0.3,0.5,0.7,1,1.5,2 --group 8 --out /home/ubuntu/x7/results/bn_maze_attn_d0a.json
 --task sudoku_mlp --mode biasnoise --draws 1 --group 16 --out /home/ubuntu/x7/results/bn_sudoku_mlp_d1.json
