@@ -603,6 +603,87 @@ def cmd_abc(a):
                     print(f"      cascade to fp32 (fp32 alone {100*fp[ev].mean():5.1f}, device alone {100*corr[ev].mean():5.1f}) by {nm}: " + "; ".join(parts))
 
 
+TUNED_SIGMA = {"sudoku_mlp": 0.3, "sudoku_attn": 1.0, "hrm_sudoku": 1.0}   # best fp32 kick best-Q@16 on rows 0-999, frozen
+
+
+def _kick_cell(recs, task, spec, sigma, K, n=1000):
+    cs = [r for r in recs if r["task"] == task and r["spec"] == spec and r["noise"] == "ptrm" and abs(r["sigma"] - sigma) < 1e-9
+          and r["D"] == 16 and r["K"] >= K and r["n"] == n and r.get("wsample", "none") == "none" and not r.get("ckpt")
+          and r.get("polish_from", "last") == "last"]
+    return sorted(cs, key=lambda r: r["K"])[-1] if cs else None
+
+
+def _pick(cell, k, rule="maxq"):
+    return select(cell, "sudoku", k, 16, rules=(rule,))[rule]["exact"].astype(float)
+
+
+def paired_ci(x, y, B=2000, seed=0):
+    d = np.asarray(x, float) - np.asarray(y, float)
+    rng = np.random.default_rng(seed)
+    idx = rng.integers(0, len(d), (B, len(d)))
+    m = d[idx].mean(1)
+    return float(d.mean()), float(np.percentile(m, 2.5)), float(np.percentile(m, 97.5))
+
+
+def pool_maxq(cells_k):
+    """cells_k: list of (cell, k). max-Q over the union of the first k rollouts of each source."""
+    C = np.concatenate([c["corr"][:k, :, 15] for c, k in cells_k], 0).astype(bool)
+    Q = np.concatenate([c["q"][:k, :, 15] for c, k in cells_k], 0).astype(np.float32)
+    return C[Q.argmax(0), np.arange(C.shape[1])].astype(float)
+
+
+def cmd_robust(a):
+    """SR vs tuned fp32 kicks (frozen sigma), paired CIs, predictors of when SR helps, and the portfolio."""
+    global OFFSET
+    def spearmanr(x, y):
+        rx, ry = np.argsort(np.argsort(x)), np.argsort(np.argsort(y))
+        return (float(np.corrcoef(rx, ry)[0, 1]),)
+    rows = []
+    for off in (0, 1000):
+        OFFSET = off
+        recs = load_index(a.root)
+        print(f"== rows {off}-{off + 999}; fp32 kicks at frozen sigma {TUNED_SIGMA}")
+        print("task spec | RTN | SR single (rel RTN) | agree(SR,RTN) | SR@4 / @16 / @32 | kick@4 / @16 / @32 | gain@16 [95% CI] | maxq(d,t)@16 | portfolio 8SR+4RTNk+4fp32k")
+        for r in sorted(recs, key=lambda r: (r["task"], r["spec"])):
+            if r.get("wsample") != "sr0" or r.get("master", "fp32") != "fp32" or r.get("tta") or r.get("ckpt") or r["noise"] != "none" or r["n"] != 1000:
+                continue
+            if r["task"] not in TUNED_SIGMA:
+                continue
+            c = load_cell(a.root, r)
+            K = r["K"]
+            C16 = c["corr"][:, :, 15].astype(bool)
+            H = c["hash_16"]
+            rtn, srs = C16[0].mean(), C16[1:].mean()
+            agree = (H[1:] == H[0:1]).mean()
+            kr = _kick_cell(recs, r["task"], "fp32", TUNED_SIGMA[r["task"]], 16)
+            if kr is None:
+                continue
+            kc = load_cell(a.root, kr)
+            sr = {k: _pick(c, k) for k in (4, 16, 32) if k <= K}
+            kk = {k: _pick(kc, k) for k in (4, 16, 32) if k <= kr["K"]}
+            g, lo, hi = paired_ci(sr[16], kk[16])
+            mqa = select(c, "sudoku", 16, 16, rules=("maxq_any",))["maxq_any"]["exact"].mean()
+            port = "  -  "
+            rk = _kick_cell(recs, r["task"], r["spec"].split("@s")[0], 0.3, 4)
+            if rk is not None:
+                pv = pool_maxq([(c, 8), (load_cell(a.root, rk), 4), (kc, 4)])
+                pg = paired_ci(pv, sr[16])
+                port = f"{100*pv.mean():5.1f} (vs SR@16 {100*pg[0]:+.1f}, vs kick@16 {100*paired_ci(pv, kk[16])[0]:+.1f})"
+            f = lambda d, k: f"{100*d[k].mean():5.1f}" if k in d else "  -  "  # noqa: E731
+            print(f"{r['task']:11s} {r['spec']:9s} | {100*rtn:5.1f} | {100*srs:5.1f} ({100*(srs-rtn):+5.1f}) | {agree:.2f} | "
+                  f"{f(sr,4)} / {f(sr,16)} / {f(sr,32)} | {f(kk,4)} / {f(kk,16)} / {f(kk,32)} | {100*g:+5.1f} [{100*lo:+.1f}, {100*hi:+.1f}] | {100*mqa:5.1f} | {port}")
+            rows.append((off, r["task"], r["spec"], srs - rtn, agree, g, srs))
+    OFFSET = 0
+    if len(rows) >= 5:
+        rel = [x[3] for x in rows]; ag = [x[4] for x in rows]; gn = [x[5] for x in rows]
+        print(f"\nacross {len(rows)} SR cells: Spearman(gain, SR single - RTN) = {spearmanr(rel, gn)[0]:.2f}; "
+              f"Spearman(gain, agreement with RTN) = {spearmanr(ag, gn)[0]:.2f}")
+        for thr in (-0.02, -0.05, -0.10):
+            sel = [x for x in rows if x[3] >= thr]
+            print(f"  rule 'use SR iff mean draw >= RTN {100*thr:+.0f} pts': {len(sel)} cells, SR wins {sum(x[5] > 0 for x in sel)}; "
+                  f"rejected {len(rows)-len(sel)} cells, SR wins {sum(x[5] > 0 for x in rows if x[3] < thr)}")
+
+
 def cmd_json(a):
     recs = load_index(a.root)
     out = []
@@ -633,7 +714,7 @@ def cmd_json(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main", "polish", "exit", "wsample", "abc"))
+    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main", "polish", "exit", "wsample", "abc", "robust"))
     ap.add_argument("--sigma_main", type=float, default=0.3)
     ap.add_argument("--n", type=int, default=1000)
     ap.add_argument("--main_polish", type=int, default=2, help="main grid = the P2 cells (rescue cells with P4 excluded)")
@@ -645,7 +726,7 @@ def main():
     a = ap.parse_args()
     global OFFSET
     OFFSET = a.offset
-    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main, "polish": cmd_polish, "exit": cmd_exit, "wsample": cmd_wsample, "abc": cmd_abc}[a.cmd](a)
+    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main, "polish": cmd_polish, "exit": cmd_exit, "wsample": cmd_wsample, "abc": cmd_abc, "robust": cmd_robust}[a.cmd](a)
 
 
 if __name__ == "__main__":

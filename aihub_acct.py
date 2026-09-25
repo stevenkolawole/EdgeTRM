@@ -10,6 +10,7 @@ Plans (task, precision, device, runtime, supervision steps):
          step 1) and the B2 fix w8a8rms16 (all activations 8 bit, every RMSNorm tensor uint16), 8 steps, S24
   acct3  M4's probe: Sudoku-MLP / Sudoku-attn fp32 (runs fp16 on HTP), w8a8, w8a16; Maze fp32, w8a8;
          the reference-QDQ override w8a8sqvar16 (x*x + variance path at 16 bit; wa_collapse B2ab);
+         M3's override sets m3g40 / m3g60 / m3adT40 (Sudoku-MLP);
          on the Galaxy S24 and the Snapdragon 8 Elite QRD, 8 steps, 100 test puzzles (Maze 50)
 
 Chain state: ~/aihub_artifacts/h1/<task>/infer/dev_<prec>_<device>_<acct>.{json,npz} (same format as
@@ -41,7 +42,9 @@ PLANS = {
     "acct3": [(t, p, d, "qnn_dlc", 8) for d in (S24, E8)
               for t, p in (("sudoku_mlp", "fp32"), ("sudoku_mlp", "w8a8"), ("sudoku_mlp", "w8a16"),
                            ("sudoku_mlp", "w8a8sqvar16u"), ("sudoku_attn", "fp32"), ("sudoku_attn", "w8a8"),
-                           ("sudoku_attn", "w8a16"), ("maze", "fp32"), ("maze", "w8a8"))],
+                           ("sudoku_attn", "w8a16"), ("maze", "fp32"), ("maze", "w8a8"))]
+             # M3 sensitivity-guided override sets (device-legal; request in X3.md, Sep 25 ~11:40), priority order
+             + [("sudoku_mlp", p, d, "qnn_dlc", 8) for p in ("m3g40", "m3g60", "m3adT40") for d in (S24, E8)],
 }
 
 
@@ -55,7 +58,10 @@ def source_path(task, prec):
                        "w8a8rms16t": ("qdq_w8a16", "variant_B2t_rms16.onnx"),
                        "w8a8sqvar16t": ("qdq_w8a16", "variant_B2abt_sq_var16.onnx"),
                        "w8a8rms16u": ("qdq_w8a16", "variant_B2u_rms16.onnx"),
-                       "w8a8sqvar16u": ("qdq_w8a16", "variant_B2abu_sq_var16.onnx")}.get(prec, (f"qdq_{prec}", "model.onnx"))
+                       "w8a8sqvar16u": ("qdq_w8a16", "variant_B2abu_sq_var16.onnx"),
+                       "m3g40": ("qdq_w8a16", "variant_m3_greedy_40_legal.onnx"),
+                       "m3g60": ("qdq_w8a16", "variant_m3_greedy_60_legal.onnx"),
+                       "m3adT40": ("qdq_w8a16", "variant_m3_a_dT_40_legal.onnx")}.get(prec, (f"qdq_{prec}", "model.onnx"))
     up = d / f"upload_{prec}"
     if not (up / "model.onnx").exists():
         up.mkdir(exist_ok=True)

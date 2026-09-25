@@ -48,6 +48,17 @@
   {
    "a_correct": 58,
    "b_correct": 58,
+   "a_only": 5,
+   "b_only": 5,
+   "n": 100,
+   "p_exact": 1.0,
+   "task": "sudoku_mlp",
+   "a": "dev:w8a8sqvar16u_Samsung_Galaxy_S24_acct3",
+   "b": "dev:fp32_Samsung_Galaxy_S24_acct3"
+  },
+  {
+   "a_correct": 58,
+   "b_correct": 58,
    "a_only": 0,
    "b_only": 0,
    "n": 100,
@@ -101,6 +112,17 @@
    "b": "host:w8a16"
   },
   {
+   "a_correct": 61,
+   "b_correct": 59,
+   "a_only": 4,
+   "b_only": 2,
+   "n": 100,
+   "p_exact": 0.6875,
+   "task": "sudoku_mlp",
+   "a": "dev:w8a8sqvar16u_Snapdragon_8_Elite_QRD_acct3",
+   "b": "dev:fp32_Snapdragon_8_Elite_QRD_acct3"
+  },
+  {
    "a_correct": 59,
    "b_correct": 58,
    "a_only": 1,
@@ -143,6 +165,17 @@
    "task": "sudoku_mlp",
    "a": "dev:fp32_Samsung_Galaxy_S24_acct3",
    "b": "dev:fp32_Snapdragon_8_Elite_QRD_acct3"
+  },
+  {
+   "a_correct": 58,
+   "b_correct": 61,
+   "a_only": 4,
+   "b_only": 7,
+   "n": 100,
+   "p_exact": 0.548828125,
+   "task": "sudoku_mlp",
+   "a": "dev:w8a8sqvar16u_Samsung_Galaxy_S24_acct3",
+   "b": "dev:w8a8sqvar16u_Snapdragon_8_Elite_QRD_acct3"
   },
   {
    "a_correct": 50,
@@ -319,6 +352,61 @@
    "task": "maze",
    "a": "dev:fp32_Samsung_Galaxy_S24_acct3",
    "b": "host:fp32"
+  },
+  {
+   "a_correct": 0,
+   "b_correct": 44,
+   "a_only": 0,
+   "b_only": 44,
+   "n": 50,
+   "p_exact": 1.1368683772161603e-13,
+   "task": "maze",
+   "a": "dev:w8a8_Snapdragon_8_Elite_QRD_acct3",
+   "b": "dev:fp32_Snapdragon_8_Elite_QRD_acct3"
+  },
+  {
+   "a_correct": 0,
+   "b_correct": 42,
+   "a_only": 0,
+   "b_only": 42,
+   "n": 50,
+   "p_exact": 4.547473508864641e-13,
+   "task": "maze",
+   "a": "dev:w8a8_Snapdragon_8_Elite_QRD_acct3",
+   "b": "host:w8a8"
+  },
+  {
+   "a_correct": 44,
+   "b_correct": 44,
+   "a_only": 0,
+   "b_only": 0,
+   "n": 50,
+   "p_exact": 1.0,
+   "task": "maze",
+   "a": "dev:fp32_Snapdragon_8_Elite_QRD_acct3",
+   "b": "host:fp32"
+  },
+  {
+   "a_correct": 0,
+   "b_correct": 0,
+   "a_only": 0,
+   "b_only": 0,
+   "n": 50,
+   "p_exact": 1.0,
+   "task": "maze",
+   "a": "dev:w8a8_Samsung_Galaxy_S24_acct3",
+   "b": "dev:w8a8_Snapdragon_8_Elite_QRD_acct3"
+  },
+  {
+   "a_correct": 44,
+   "b_correct": 44,
+   "a_only": 0,
+   "b_only": 0,
+   "n": 50,
+   "p_exact": 1.0,
+   "task": "maze",
+   "a": "dev:fp32_Samsung_Galaxy_S24_acct3",
+   "b": "dev:fp32_Snapdragon_8_Elite_QRD_acct3"
   },
   {
    "a_correct": 54,

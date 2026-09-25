@@ -169,7 +169,7 @@ def main():
                 for i in sorted(lp):
                     f.write(json.dumps(lp[i]) + "\n")
         log(f"draw {k}: acc {100 * acc:.1f} ({time.time() - t0:.0f}s)")
-    log("done")
+    log(f"done; peak reserved {torch.cuda.max_memory_reserved() / 2**30:.1f} GiB")
 
 
 if __name__ == "__main__":

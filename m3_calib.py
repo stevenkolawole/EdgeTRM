@@ -40,7 +40,14 @@ def scale_of(W, fmt_p):
     if fmt_p["gran"] == "c":
         s = (r * Wf.abs().amax(1) / qmax).clamp_min(1e-12)
         return s.view(-1, *([1] * (W.dim() - 1))), qmax
-    raise ValueError(f"calibrated rounding supports per-tensor/per-channel formats, not {fmt_p}")
+    if fmt_p["gran"].startswith("g") or fmt_p["gran"] == "mx":
+        k = fmt_p.get("block") or int(fmt_p["gran"][1:])
+        o, n = Wf.shape
+        pad = (-n) % k
+        am = (r * F.pad(Wf, (0, pad)).view(o, -1, k).abs().amax(2)).clamp_min(1e-12)       # [out, groups]
+        s = torch.exp2(torch.ceil(torch.log2(am / qmax))) if fmt_p["gran"] == "mx" else am / qmax
+        return s.repeat_interleave(k, dim=1)[:, :n].reshape(W.shape), qmax                  # elementwise scale
+    raise ValueError(f"calibrated rounding supports per-tensor/per-channel/grouped formats, not {fmt_p}")
 
 
 class SoftQuant(torch.nn.Module):
@@ -152,7 +159,8 @@ def gptq_tensor(W, Hm, s, qmax, blocksize=128, percdamp=0.01):
     L = torch.linalg.cholesky(Hm)
     Hinv = torch.cholesky_inverse(L)
     Hinv = torch.linalg.cholesky(Hinv, upper=True)
-    s2 = s.reshape(-1, 1) if s.numel() > 1 else s.reshape(1, 1)
+    full = s.numel() == W.numel()                        # grouped: one scale per element's group
+    s2 = s.reshape(W.shape) if full else (s.reshape(-1, 1) if s.numel() > 1 else s.reshape(1, 1))
     Q = torch.zeros_like(W)
     for i1 in range(0, cols, blocksize):
         i2 = min(i1 + blocksize, cols)
@@ -163,7 +171,8 @@ def gptq_tensor(W, Hm, s, qmax, blocksize=128, percdamp=0.01):
         for i in range(i2 - i1):
             w = W1[:, i:i + 1]
             d = Hinv1[i, i]
-            q = torch.clamp(torch.round(w / s2), -qmax, qmax) * s2
+            sc = s2[:, i1 + i:i1 + i + 1] if full else s2
+            q = torch.clamp(torch.round(w / sc), -qmax, qmax) * sc
             Q1[:, i:i + 1] = q
             err = (w - q) / d
             W1[:, i:] -= err @ Hinv1[i:i + 1, i:]
@@ -206,7 +215,8 @@ def calibrate(ctx, S, lo, method, parse_fmt, iters=1500, lr=1e-2, lam=1.0, batch
             if H[g] is None or H[g].shape[0] != Wf.shape[1]:
                 out[g] = torch.clamp(torch.round(W / s), -qmax, qmax) * s
                 continue
-            out[g] = gptq_tensor(Wf, H[g], s.reshape(-1), qmax).reshape(W.shape).to(W.dtype)
+            sg = s.reshape(Wf.shape) if s.numel() == W.numel() else s.reshape(-1)
+            out[g] = gptq_tensor(Wf, H[g], sg, qmax).reshape(W.shape).to(W.dtype)
         log(f"  gptq done ({time.time()-t0:.0f}s)")
         return out
     # AdaRound family

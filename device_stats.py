@@ -54,13 +54,13 @@ def correct(task, kind, name, lab):
 PAIRS = []
 for task in ("sudoku_mlp", "sudoku_attn", "maze"):
     for dev in ("Samsung_Galaxy_S24_acct3", "Snapdragon_8_Elite_QRD_acct3"):
-        for prec in ("w8a8", "w8a16", "w8a8sqvar16u"):
+        for prec in ("w8a8", "w8a16", "w8a8sqvar16u", "m3g40", "m3g60", "m3adT40"):
             PAIRS.append((task, ("dev", f"{prec}_{dev}"), ("dev", f"fp32_{dev}")))
             host = "w8a8" if prec == "w8a8" else ("w8a16" if prec == "w8a16" else None)
             if host:
                 PAIRS.append((task, ("dev", f"{prec}_{dev}"), ("host", host)))
         PAIRS.append((task, ("dev", f"fp32_{dev}"), ("host", "fp32")))
-    for prec in ("w8a8", "w8a16", "fp32"):
+    for prec in ("w8a8", "w8a16", "fp32", "w8a8sqvar16u", "m3g40", "m3g60", "m3adT40"):
         PAIRS.append((task, ("dev", f"{prec}_Samsung_Galaxy_S24_acct3"), ("dev", f"{prec}_Snapdragon_8_Elite_QRD_acct3")))
 PAIRS.append(("sudoku_mlp", ("dev", "w8a8rms16u_Samsung_Galaxy_S24_acct2"), ("dev", "fp32_Samsung_Galaxy_S24_acct3")))
 PAIRS.append(("sudoku_mlp", ("dev", "w8a8_Samsung_Galaxy_S24"), ("host", "w8a8")))

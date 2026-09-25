@@ -12,7 +12,7 @@ while true; do
     name=${pair%%:*}; s=${pair#*:}
     bad=$(grep -oE 'DAEMON_DEAD|UNREACHABLE' <<<"$s" | head -1)
     [ -n "$bad" ] && out="$out $name:$bad;"
-    idle=$(awk '$6=="IDLE_NO_FITTING_JOB"{printf "%s ", $1}' <<<"$s")
+    idle=$(awk '$6=="IDLE_NO_FITTING_JOB" && ($5==0 || $3<10){printf "%s ", $1}' <<<"$s")
     [ -n "$idle" ] && out="$out $name:idle_cards[$idle];"
     bl=$(awk '/backlog_lines/{print $3}' <<<"$s")
     [ -n "$bl" ] && [ "$bl" -lt 4 ] && out="$out $name:backlog=$bl;"

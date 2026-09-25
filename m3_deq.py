@@ -152,6 +152,7 @@ def main():
     ap.add_argument("--n", type=int, default=5000)
     ap.add_argument("--n_cal", type=int, default=256)
     ap.add_argument("--uniform", default="")
+    ap.add_argument("--cal_block", type=int, default=0, help="which block of n_cal calibration images (disjoint sets)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     assert torch.cuda.is_available(), "NO CUDA"
@@ -179,7 +180,9 @@ def main():
     for i, c in enumerate(y.tolist()):
         pos[i] = seen.get(c, 0)
         seen[c] = pos[i].item() + 1
-    cal_idx, ev_idx = idx[pos == per - 1][:a.n_cal], idx[pos != per - 1]
+    cal_pool = idx[pos == per - 1]
+    cal_idx, ev_idx = cal_pool[a.cal_block * a.n_cal:(a.cal_block + 1) * a.n_cal], idx[pos != per - 1]
+    blob["cal_block"] = a.cal_block
     ctx = DEQCtx(a.model)
     print(f"mdeq_{a.model}: {len(ctx.names)} weight tensors, eval {len(ev_idx)} images, calibration {len(cal_idx)} "
           f"unlabeled images ({time.time()-t0:.0f}s)", flush=True)
