@@ -52,9 +52,12 @@ class _ActQuant:
 
 
 @torch.no_grad()
-def run(net, x, y, T, batch):
+def run(net, x, y, T, batch, tsteps=(), href=None):
+    """tsteps: iterations (0-based) at which the recurrent state h is captured (href None: returned as "hcap", fp16 CPU)
+    or compared with the fp32 reference (cosine per maze, returned as "phi" [n, len(tsteps)])."""
     n = x.shape[0]
     out = {k: [] for k in ("correct", "res", "chg", "conf")}
+    hcap, phis = {t: [] for t in tsteps}, []
     for s in range(0, n, batch):
         xb = torch.from_numpy(x[s:s + batch]).float().to(DEV)
         yb = torch.from_numpy(y[s:s + batch]).long().to(DEV).view(xb.shape[0], -1)
@@ -62,6 +65,7 @@ def run(net, x, y, T, batch):
         mask = xb.max(1)[0].view(B, -1)                      # open cells (walls = 0)
         h = net.projection(xb)
         prevP, prevH = None, h
+        phi = []
         rec = {"correct": torch.zeros(B, T, dtype=torch.bool, device=DEV), "res": torch.zeros(B, T, dtype=torch.float16, device=DEV),
                "chg": torch.zeros(B, T, dtype=torch.int16, device=DEV), "conf": torch.zeros(B, T, dtype=torch.float16, device=DEV)}
         for t in range(T):
@@ -73,10 +77,22 @@ def run(net, x, y, T, batch):
             rec["chg"][:, t] = ((pred != prevP).sum(1) if prevP is not None else mask.sum(1)).clamp_max(32767).to(torch.int16)
             p = torch.softmax(o.float(), 1).amax(1).view(B, -1)
             rec["conf"][:, t] = torch.where(mask > 0, p, torch.full_like(p, 2.0)).amin(1)
+            if t in hcap:
+                if href is None:
+                    hcap[t].append(h.detach().half().cpu())
+                else:
+                    phi.append(torch.nn.functional.cosine_similarity(h.flatten(1), href[t][s:s + B].to(DEV).float().flatten(1), dim=-1))
             prevP, prevH = pred, h
         for k in out:
             out[k].append(rec[k].cpu().numpy())
-    return {k: np.concatenate(v) for k, v in out.items()}
+        if phi:
+            phis.append(torch.stack(phi, 1).float().cpu().numpy())
+    res = {k: np.concatenate(v) for k, v in out.items()}
+    if tsteps and href is None:
+        res["hcap"] = {t: torch.cat(v) for t, v in hcap.items()}
+    if phis:
+        res["phi"] = np.concatenate(phis)
+    return res
 
 
 def main():
@@ -88,12 +104,21 @@ def main():
     ap.add_argument("--batch", type=int, default=50)
     ap.add_argument("--outdir", required=True)
     ap.add_argument("--allow_cpu", action="store_true")
+    ap.add_argument("--phi", default="", help="iterations (1-based, e.g. 30,100,500) at which to store phi = cos(h, h of fp32 at the same "
+                    "iteration, same maze), from an fp32 reference run in the same process")
     a = ap.parse_args()
     assert a.allow_cpu or torch.cuda.is_available(), "NO CUDA"
     x = np.load(DATA / f"maze{a.size}_inputs.npy")[:a.n]
     y = np.load(DATA / f"maze{a.size}_solutions.npy")[:a.n]
     od = Path(a.outdir)
     od.mkdir(parents=True, exist_ok=True)
+    phi_steps = [int(v) for v in a.phi.split(",") if v]
+    tsteps, href = tuple(v - 1 for v in phi_steps), None
+    assert all(0 <= t < a.T for t in tsteps)
+    if phi_steps and any(not (od / f"{s}.npz").exists() for s in a.specs.split(",") if s):
+        t0 = time.time()
+        href = run(build_dt().to(DEV), x, y, a.T, a.batch, tsteps).pop("hcap")
+        print(f"  fp32 reference for phi at iterations {phi_steps} ({time.time() - t0:.0f}s)", flush=True)
     for spec in [s for s in a.specs.split(",") if s]:
         path = od / f"{spec}.npz"
         if path.exists():
@@ -116,10 +141,10 @@ def main():
             run(net, x[:a.batch], y[:a.batch], a.T, a.batch)
             for qa in obs:
                 qa.freeze()
-        r = run(net, x, y, a.T, a.batch)
+        r = run(net, x, y, a.T, a.batch, tsteps, href)
         for hh in handles:
             hh.remove()
-        info = {"task": f"dt_maze{a.size}", "spec": spec, "quant": q, "seed": seed, "T": a.T, "n": int(len(x)),
+        info = {"task": f"dt_maze{a.size}", "spec": spec, "quant": q, "seed": seed, "T": a.T, "n": int(len(x)), "phi_steps": phi_steps,
                 "secs": time.time() - t0, "host": socket.gethostname(),
                 "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu", "torch": torch.__version__}
         tmp = str(path) + ".tmp.npz"

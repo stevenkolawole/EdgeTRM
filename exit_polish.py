@@ -86,12 +86,18 @@ def main():
     ap.add_argument("--n", type=int, default=1000)
     ap.add_argument("--batch", type=int, default=0)
     ap.add_argument("--outdir", required=True)
+    ap.add_argument("--offset", type=int, default=0, help="first test row (held-out rows: e.g. 1000)")
+    ap.add_argument("--ckpt", default="", help="TRM: a trained variant's step_N file; cheap and polish models both use it")
     ap.add_argument("--allow_cpu", action="store_true")
     a = ap.parse_args()
     assert a.allow_cpu or torch.cuda.is_available(), "NO CUDA"
+    if a.ckpt:
+        import breadth_sweep as bsw
+        bsw.CKPT_OVERRIDE = a.ckpt
     t = TRM_TASKS.get(a.task) or HRM_TASKS[a.task]
     batch = a.batch or t["batch"]
-    inp, lab = load_qa(t["data"], a.n)
+    inp, lab = load_qa(t["data"], a.n + a.offset)
+    inp, lab = inp[a.offset:], lab[a.offset:]
     od = Path(a.outdir)
     od.mkdir(parents=True, exist_ok=True)
     for pspec in [p for p in a.polish.split(",") if p]:
@@ -107,7 +113,7 @@ def main():
             del mc
             torch.cuda.empty_cache()
             info = {"task": a.task, "cheap": cspec, "polish": pspec, "H": DEFAULT_H[a.task], "K": a.K, "J": a.J,
-                    "n": int(len(inp)), "secs": time.time() - t0, "host": socket.gethostname(),
+                    "n": int(len(inp)), "offset": a.offset, "ckpt": a.ckpt, "secs": time.time() - t0, "host": socket.gethostname(),
                     "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu"}
             tmp = str(path) + ".tmp.npz"
             np.savez_compressed(tmp, info=json.dumps(info), **r)

@@ -29,6 +29,8 @@ Resumable: specs whose npz exists are skipped.
 
     python exit_sweep.py --task sudoku_mlp --K 1536 --specs fp32,w4c,w3g32 --n 1000 \
         --outdir ~/breadth_results/m5/sudoku_mlp
+    --offset 1000: rows 1000.. of the test set (held-out); --phi 4,8,16: store phi = cos(z_H, fp32 z_H) at those
+    default-H steps from an in-process fp32 reference (same trajectories as the correctness records).
 """
 import argparse
 import json
@@ -49,8 +51,11 @@ DEFAULT_H = {"sudoku_mlp": 3, "sudoku_attn": 3, "maze_attn": 3, "hrm_sudoku": 2,
 
 
 @torch.no_grad()
-def trajectory(m, x, y, K, kind, h_def, bfs=None, maze_flags=False, head32=None):
+def trajectory(m, x, y, K, kind, h_def, bfs=None, maze_flags=False, head32=None, zsteps=(), zref=None):
+    """zsteps: H=1 step indices (0-based) at which z_H is captured (zref None: returned as "zcap", fp16 on the CPU)
+    or compared with the reference (zref = {k: [B, S, D]}: cosine per instance, returned as "phi" [B, len(zsteps)])."""
     B = x.shape[0]
+    zcap, phi = {}, []
     bt = {"inputs": x, "labels": y, "puzzle_identifiers": torch.zeros(B, dtype=torch.int32, device=DEV)}
     carry = explicit_carry(m, bt)
     ans = (x == SUD_BLANK) if kind == "sudoku" else (x != MZ_WALL)
@@ -83,16 +88,26 @@ def trajectory(m, x, y, K, kind, h_def, bfs=None, maze_flags=False, head32=None)
             chk = maze_check(pred.cpu().numpy(), x.cpu().numpy(), bfs)
             mz["valid"][:, k] = chk["valid"]
             mz["vshort"][:, k] = chk["vshort"]
+        if k in zsteps:
+            if zref is None:
+                zcap[k] = carry.inner_carry.z_H.detach().half().cpu()
+            else:
+                phi.append(torch.nn.functional.cosine_similarity(zH.flatten(1), zref[k].to(DEV).float().flatten(1), dim=-1))
         prevH, prevP = zH, pred
         # keep the model from resetting the carry at its own halt_max_steps
         carry.halted.zero_()
     out = {k: v.cpu().numpy() for k, v in rec.items()}
     if mz is not None:
         out.update(mz)
+    if zsteps and zref is None:
+        out["zcap"] = zcap
+    if phi:
+        out["phi"] = torch.stack(phi, 1).float().cpu().numpy()
     return out
 
 
-def run_spec(m, inp, lab, batch, K, kind, h_def, bfs, maze_flags, act_quant=None, act_noise=None, keep_head=False, head32=None):
+def run_spec(m, inp, lab, batch, K, kind, h_def, bfs, maze_flags, act_quant=None, act_noise=None, keep_head=False, head32=None,
+             zsteps=(), zref=None):
     m = m.to(DEV)
     handles, obs = [], []
     lins = [mod for mod in _linears(m) if not (keep_head and mod is m.inner.q_head)]
@@ -113,13 +128,17 @@ def run_spec(m, inp, lab, batch, K, kind, h_def, bfs, maze_flags, act_quant=None
             trajectory(m, x, y, 16 * h_def, kind, h_def)
             for q in obs:
                 q.freeze()
-        parts.append(trajectory(m, x, y, K, kind, h_def, bb, maze_flags, head32))
+        zr = None if zref is None else {k: v[s:s + x.shape[0]] for k, v in zref.items()}
+        parts.append(trajectory(m, x, y, K, kind, h_def, bb, maze_flags, head32, zsteps, zr))
         print(f"    chunk {ci} done ({s + x.shape[0]}/{inp.shape[0]})", flush=True)
     for h in handles:
         h.remove()
     m.cpu()
     torch.cuda.empty_cache()
-    return {k: np.concatenate([p[k] for p in parts]) for k in parts[0]}
+    out = {k: np.concatenate([p[k] for p in parts]) for k in parts[0] if k != "zcap"}
+    if "zcap" in parts[0]:
+        out["zcap"] = {k: torch.cat([p["zcap"][k] for p in parts]) for k in parts[0]["zcap"]}
+    return out
 
 
 def main():
@@ -133,6 +152,9 @@ def main():
     ap.add_argument("--outdir", required=True)
     ap.add_argument("--allow_cpu", action="store_true")
     ap.add_argument("--ckpt", default="", help="TRM: a trained variant's step_N file (breadth_sweep --ckpt semantics)")
+    ap.add_argument("--offset", type=int, default=0, help="first test row (held-out rows: e.g. 1000)")
+    ap.add_argument("--phi", default="", help="default-H steps (e.g. 4,8,16) at which to store phi = cos(z_H, z_H of fp32 at the same "
+                    "step, same puzzle), from an fp32 reference run in the same process (M5 overthinking: phi and V from one trajectory)")
     a = ap.parse_args()
     assert a.allow_cpu or torch.cuda.is_available(), "NO CUDA"
     if a.ckpt:
@@ -143,12 +165,24 @@ def main():
     h_def = DEFAULT_H[a.task]
     assert a.K % h_def == 0
     batch = a.batch or t["batch"]
-    inp, lab = load_qa(kind, a.n)
+    inp, lab = load_qa(kind, a.n + a.offset)
+    inp, lab = inp[a.offset:], lab[a.offset:]
     bfs = np.array([bfs_dist(g, 30) for g in inp]) if kind == "maze" else None
     od = Path(a.outdir)
     od.mkdir(parents=True, exist_ok=True)
     specs = [s.strip() for s in a.specs.split(",") if s.strip()]
     print(f"{a.task}: n={len(inp)} batch={batch} K={a.K} (H=1 steps; default H={h_def}) specs={specs}", flush=True)
+    phi_steps = [int(v) for v in a.phi.split(",") if v]
+    zsteps, zref = tuple(v * h_def - 1 for v in phi_steps), None
+    assert all(0 <= k < a.K for k in zsteps)
+    if phi_steps and any(not (od / f"{s}.npz").exists() for s in specs):
+        t1 = time.time()
+        m, meta = build(a.task, 1, a.K, batch)
+        torch.manual_seed(0)
+        r = run_spec(m, inp, lab, batch, a.K, kind, h_def, bfs, a.maze_flags and kind == "maze", zsteps=zsteps)
+        del m
+        zref = r.pop("zcap")
+        print(f"  fp32 reference for phi at default-H steps {phi_steps} ({time.time() - t1:.0f}s)", flush=True)
     for spec in specs:
         path = od / f"{spec}.npz"
         if path.exists():
@@ -167,9 +201,10 @@ def main():
         if keep_head:
             m.inner.q_head.weight.data = w_head
         r = run_spec(m, inp, lab, batch, a.K, kind, h_def, bfs, a.maze_flags and kind == "maze",
-                     act_quant=q["act"], act_noise=q.get("anoise"), keep_head=keep_head, head32=head32)
+                     act_quant=q["act"], act_noise=q.get("anoise"), keep_head=keep_head, head32=head32, zsteps=zsteps, zref=zref)
         del m
         info = {"task": a.task, "ckpt": a.ckpt, "spec": spec, "quant": q, "seed": seed, "keep_head": keep_head, "H_run": 1, "H_default": h_def, "K": a.K,
+                "phi_steps": phi_steps, "offset": a.offset,
                 "n": int(len(inp)), "secs": time.time() - t1, "host": socket.gethostname(),
                 "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu", "torch": torch.__version__}
         tmp = str(path) + ".tmp.npz"
