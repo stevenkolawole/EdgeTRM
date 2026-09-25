@@ -79,14 +79,18 @@ def main():
     ap.add_argument("--max_new", type=int, default=512)
     ap.add_argument("--batch", type=int, default=16)
     ap.add_argument("--outdir", required=True)
+    ap.add_argument("--per_cell", action="store_true", help="write <model>_<spec>_<config>.summary.json per config")
     a = ap.parse_args()
     assert torch.cuda.is_available(), "NO CUDA"
+    print("device", torch.cuda.get_device_name(0), flush=True)
     fam = LD.family(a.model)
     data = L.load_gsm8k(a.n)
     od = Path(a.outdir)
     od.mkdir(parents=True, exist_ok=True)
+    # one summary per model (serial driver) or, with --per_cell, one file per (model, spec, config) so that
+    # parallel processes never write the same file
     summ_path = od / f"{a.model}_summary.json"
-    summ = json.load(open(summ_path)) if summ_path.exists() else {}
+    summ = json.load(open(summ_path)) if (summ_path.exists() and not a.per_cell) else {}
     log = lambda s: print(time.strftime("%H:%M:%S ") + s, flush=True)  # noqa: E731
     cfgs = [(L_, 1.0) for L_ in [int(x) for x in a.loops.split(",") if x] if L_ != a.steps]
     for spec in [q for q in a.quants.split(",") if q]:
@@ -94,6 +98,10 @@ def main():
         runs = [(a.steps, float(t)) for t in a.taus.split(",") if t] + cfgs
         for steps, tau in runs:
             key = f"{spec}|tau{tau}" if steps == a.steps else f"{spec}|L{steps}"
+            cell_path = od / f"{a.model}_{spec}_{key.split('|')[1]}.summary.json"
+            if a.per_cell and cell_path.exists():
+                log(f"{key}: done")
+                continue
             if key in summ:
                 log(f"{key}: done")
                 continue
@@ -115,9 +123,13 @@ def main():
             s.update({"mean_exit_loop": (sum(rec.steps) / len(rec.steps)) if rec.steps else None, "tau": tau,
                       "spec": spec, "loops": steps, "secs": time.time() - t0,
                       "correct": [int(r["correct"]) for r in recs]})
-            summ[key] = s
-            json.dump(summ, open(str(summ_path) + ".tmp", "w"), indent=1)
-            os.replace(str(summ_path) + ".tmp", summ_path)
+            if a.per_cell:
+                json.dump({key: s}, open(str(cell_path) + ".tmp", "w"), indent=1)
+                os.replace(str(cell_path) + ".tmp", cell_path)
+            else:
+                summ[key] = s
+                json.dump(summ, open(str(summ_path) + ".tmp", "w"), indent=1)
+                os.replace(str(summ_path) + ".tmp", summ_path)
             log(f"{a.model} {spec} {tag}: acc {100 * s['acc']:.1f}  mean exit loop {s['mean_exit_loop']:.2f}  "
                 f"degenerate {100 * s['degenerate']:.1f}%")
         del model
