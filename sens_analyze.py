@@ -103,8 +103,11 @@ def widths():
         a0 = float(np.median(hm["fp32"]))
         sh, note = sigma_half({float(k[5:]): v for k, v in hm.items() if k.startswith("noise")}, a0)
         W["hrm_maze"] = (sh, note, a0, "X2 width sweep, n=500")
-    extra = [f for f in sorted(glob.glob(str(wid / "wid_*_seed*.json"))) if "hrm_maze" not in f]
     q8 = {Path(f).stem.split("_seed")[0] for f in glob.glob(str(B / "p4d" / "variants_noise" / "trm_sudoku_*.json"))}
+    # Babel width files are never merged into a p4d (Q8) model's row (one platform per row; audit item 102): a Babel
+    # width of a Q8 checkpoint lives under its own name (<variant>_babel, x2_model.sh)
+    extra = [f for f in sorted(glob.glob(str(wid / "wid_*_seed*.json")))
+             if "hrm_maze" not in f and Path(f).stem.split("_seed")[0].replace("wid_", "") not in q8]
     for f in sorted(glob.glob(str(B / "p4d" / "variants_noise" / "trm_sudoku_*.json"))) + extra:
         v = Path(f).stem.split("_seed")[0].replace("wid_", "")
         for r in json.load(open(f))["records"]:

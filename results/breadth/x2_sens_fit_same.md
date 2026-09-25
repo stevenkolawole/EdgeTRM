@@ -14,7 +14,7 @@
 | trm_sudoku_attn_w256_s0 (low fp32) | TRM | p4d | 0.104 | 0.37 | 1.04 | 1.03 | 1.06 | 0.38 | variants_noise (Q8), n=1000 |
 | trm_sudoku_attn_w256_s1 (low fp32) | TRM | p4d | 0.172 | 0.23 | 1.31 | 1.29 | 1.30 | 0.30 | variants_noise (Q8), n=1000 |
 | trm_sudoku_attn_w256_s2 (low fp32) | TRM | p4d | 0.282 | 0.28 | 1.21 | 1.21 | 1.25 | 0.34 | variants_noise (Q8), n=1000 |
-| trm_sudoku_attn_w512_s0 | TRM | p4d | 0.648 | 0.74 | 0.75 | 0.73 | 0.75 | 0.54 | variants_noise (Q8), n=1000 |
+| trm_sudoku_attn_w512_s0 | TRM | p4d | 0.648 | > 0.7 | 0.75 | 0.73 | 0.75 | -- | variants_noise (Q8), n=1000 |
 | trm_sudoku_attn_w512_s1 | TRM | p4d | 0.629 | 0.65 | 0.82 | 0.80 | 0.82 | 0.52 | variants_noise (Q8), n=1000 |
 | trm_sudoku_attn_w512_s2 | TRM | p4d | 0.534 | 0.60 | 0.80 | 0.85 | 0.83 | 0.51 | variants_noise (Q8), n=1000 |
 | trm_sudoku_mlp_w256_s0 | TRM | p4d | 0.599 | 0.14 | 1.29 | 1.46 | 1.33 | 0.21 | variants_noise (Q8), n=1000 |
@@ -25,29 +25,29 @@
 | trm_sudoku_mlp_w512_s2 | TRM | p4d | 0.842 | 0.13 | 1.63 | 1.60 | 1.70 | 0.20 | variants_noise (Q8), n=1000 |
 | trm_sudoku_mlp_w768_s0 | TRM | p4d | 0.753 | 0.15 | 2.05 | 2.47 | 3.63 | 0.37 | variants_noise (Q8), n=1000 |
 
-all fitted models (n=20): delta* = 0.352, R^2 (log, slope -1) = 0.71; free fit log sigma_1/2 = -1.04 + -1.04 log S
+all fitted models (n=19): delta* = 0.344, R^2 (log, slope -1) = 0.72; free fit log sigma_1/2 = -1.07 + -1.03 log S
 
-held out DEQ: fit on 17 models, delta* 0.332; median |log ratio| 0.75 (x2.11), worst x2.70
-   deq_transformer: predicted 0.598 vs measured 0.34 (ratio 1.75)
-   mdeq_small: predicted 0.108 vs measured 0.23 (ratio 0.47)
-   mdeq_xl: predicted 0.137 vs measured 0.37 (ratio 0.37)
+held out DEQ: fit on 16 models, delta* 0.322; median |log ratio| 0.78 (x2.18), worst x2.78
+   deq_transformer: predicted 0.580 vs measured 0.34 (ratio 1.69)
+   mdeq_small: predicted 0.105 vs measured 0.23 (ratio 0.46)
+   mdeq_xl: predicted 0.133 vs measured 0.37 (ratio 0.36)
 
-held out DT: fit on 18 models, delta* 0.360; median |log ratio| 0.23 (x1.25), worst x1.47
-   dt_maze13: predicted 0.393 vs measured 0.37 (ratio 1.07)
-   dt_maze33: predicted 0.386 vs measured 0.26 (ratio 1.47)
+held out DT: fit on 17 models, delta* 0.351; median |log ratio| 0.20 (x1.22), worst x1.43
+   dt_maze13: predicted 0.383 vs measured 0.37 (ratio 1.04)
+   dt_maze33: predicted 0.377 vs measured 0.26 (ratio 1.43)
 
-held out HRM: fit on 18 models, delta* 0.348; median |log ratio| 0.10 (x1.11), worst x1.15
-   hrm_maze: predicted 1.493 vs measured 1.71 (ratio 0.87)
-   hrm_sudoku: predicted 0.984 vs measured 1.05 (ratio 0.94)
+held out HRM: fit on 17 models, delta* 0.339; median |log ratio| 0.13 (x1.13), worst x1.18
+   hrm_maze: predicted 1.455 vs measured 1.71 (ratio 0.85)
+   hrm_sudoku: predicted 0.959 vs measured 1.05 (ratio 0.91)
 
-held out TRM: fit on 7 models, delta* 0.393; median |log ratio| 0.33 (x1.40), worst x2.37
+held out TRM: fit on 7 models, delta* 0.393; median |log ratio| 0.35 (x1.42), worst x2.37
    maze_attn: predicted 1.226 vs measured 1.71 (ratio 0.72)
    sudoku_attn: predicted 0.570 vs measured 0.80 (ratio 0.72)
    sudoku_mlp: predicted 0.226 vs measured 0.14 (ratio 1.64)
    trm_sudoku_attn_w256_s0: predicted 0.382 vs measured 0.37 (ratio 1.04) [low fp32, not scored]
    trm_sudoku_attn_w256_s1: predicted 0.304 vs measured 0.23 (ratio 1.31) [low fp32, not scored]
    trm_sudoku_attn_w256_s2: predicted 0.324 vs measured 0.28 (ratio 1.15) [low fp32, not scored]
-   trm_sudoku_attn_w512_s0: predicted 0.536 vs measured 0.74 (ratio 0.73)
+   trm_sudoku_attn_w512_s0: predicted 0.536 vs measured > 0.7 (ratio --)
    trm_sudoku_attn_w512_s1: predicted 0.490 vs measured 0.65 (ratio 0.75)
    trm_sudoku_attn_w512_s2: predicted 0.463 vs measured 0.60 (ratio 0.77)
    trm_sudoku_mlp_w256_s0: predicted 0.269 vs measured 0.14 (ratio 1.89)
@@ -58,21 +58,21 @@ held out TRM: fit on 7 models, delta* 0.393; median |log ratio| 0.33 (x1.40), wo
    trm_sudoku_mlp_w512_s2: predicted 0.245 vs measured 0.13 (ratio 1.95)
    trm_sudoku_mlp_w768_s0: predicted 0.159 vs measured 0.15 (ratio 1.06)
 
-held out TRM+HRM -> DT, DEQ: fit on 15 models, delta* 0.338; median |log ratio| 0.58 (x1.78), worst x2.65
-   deq_transformer: predicted 0.609 vs measured 0.34 (ratio 1.78)
-   dt_maze13: predicted 0.369 vs measured 0.37 (ratio 1.01)
-   dt_maze33: predicted 0.362 vs measured 0.26 (ratio 1.38)
-   mdeq_small: predicted 0.110 vs measured 0.23 (ratio 0.48)
-   mdeq_xl: predicted 0.140 vs measured 0.37 (ratio 0.38)
+held out TRM+HRM -> DT, DEQ: fit on 14 models, delta* 0.327; median |log ratio| 0.54 (x1.72), worst x2.74
+   deq_transformer: predicted 0.589 vs measured 0.34 (ratio 1.72)
+   dt_maze13: predicted 0.357 vs measured 0.37 (ratio 0.97)
+   dt_maze33: predicted 0.350 vs measured 0.26 (ratio 1.33)
+   mdeq_small: predicted 0.107 vs measured 0.23 (ratio 0.47)
+   mdeq_xl: predicted 0.136 vs measured 0.37 (ratio 0.37)
 
-leave-one-model-out: median x1.51, worst x2.67 (mdeq_xl)
+leave-one-model-out: median x1.52, worst x2.74 (mdeq_xl)
 
-quantizer collapse predicted by delta_T > delta* = 0.338 (fit on TRM+HRM noise widths):
-   TRM: 91 cells (23 collapse), accuracy 0.92, AUROC(delta) 0.98
+quantizer collapse predicted by delta_T > delta* = 0.327 (fit on TRM+HRM noise widths):
+   TRM: 91 cells (23 collapse), accuracy 0.90, AUROC(delta) 0.98
    HRM: 26 cells (3 collapse), accuracy 0.96, AUROC(delta) 1.00
    DT: 8 cells (0 collapse), accuracy 1.00, AUROC(delta) --
    DEQ: 18 cells (3 collapse), accuracy 0.56, AUROC(delta) 0.82
-   ALL: 143 cells (29 collapse), accuracy 0.89, AUROC(delta) 0.97
+   ALL: 143 cells (29 collapse), accuracy 0.87, AUROC(delta) 0.97
 
 S(0.05) on both platforms (same model, same protocol):
    hrm_maze: Babel 0.23 vs p4d 0.23

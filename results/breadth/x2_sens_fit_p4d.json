@@ -53,8 +53,8 @@
   {
    "model": "trm_sudoku_attn_w512_s0",
    "family": "TRM",
-   "sigma_half": 0.7372211159251068,
-   "bound": null,
+   "sigma_half": null,
+   "bound": "> 0.7",
    "fp32": 0.648,
    "source": "variants_noise (Q8), n=1000",
    "platform": "p4d",
@@ -328,55 +328,51 @@
   }
  },
  "all": {
-  "n": 10,
-  "delta_star": 0.30941391520770944,
-  "r2_slope_minus1": 0.6658219208719262,
+  "n": 9,
+  "delta_star": 0.290804399184143,
+  "r2_slope_minus1": 0.6164095768357447,
   "free_fit_intercept_slope": [
-   -1.0010673799352412,
-   -1.5516259965221315
+   -1.074069929351216,
+   -1.4227679528872723
   ]
  },
  "held_out": {},
  "loo": [
   {
-   "model": "trm_sudoku_attn_w512_s0",
-   "ratio": 0.5377882491212397
-  },
-  {
    "model": "trm_sudoku_attn_w512_s1",
-   "ratio": 0.5604122042556047
+   "ratio": 0.5188689726158574
   },
   {
    "model": "trm_sudoku_attn_w512_s2",
-   "ratio": 0.5722181378324211
+   "ratio": 0.5299378166973069
   },
   {
    "model": "trm_sudoku_mlp_w256_s0",
-   "ratio": 1.5579468580097495
+   "ratio": 1.4610104419753156
   },
   {
    "model": "trm_sudoku_mlp_w256_s1",
-   "ratio": 1.1480568783055933
+   "ratio": 1.0725232601979204
   },
   {
    "model": "trm_sudoku_mlp_w256_s2",
-   "ratio": 2.0024640346753437
+   "ratio": 1.8837707793428164
   },
   {
    "model": "trm_sudoku_mlp_w512_s0",
-   "ratio": 1.2928070283344975
+   "ratio": 1.2095439346082117
   },
   {
    "model": "trm_sudoku_mlp_w512_s1",
-   "ratio": 0.9590565828765037
+   "ratio": 0.8939455271395563
   },
   {
    "model": "trm_sudoku_mlp_w512_s2",
-   "ratio": 1.6054010116847655
+   "ratio": 1.5060767309671856
   },
   {
    "model": "trm_sudoku_mlp_w768_s0",
-   "ratio": 0.8133495873351445
+   "ratio": 0.7565706482644745
   }
  ],
  "quant_cells": [
@@ -1028,7 +1024,7 @@
    "delta": 0.29124507308006287,
    "platform": "p4d",
    "collapse": false,
-   "pred_collapse": false
+   "pred_collapse": true
   },
   {
    "model": "trm_sudoku_attn_w256_s0",
@@ -1551,7 +1547,7 @@
    "pred_collapse": true
   }
  ],
- "quant_delta_star_trm_hrm": 0.30941391520770944,
+ "quant_delta_star_trm_hrm": 0.290804399184143,
  "quant_by_family": {
   "TRM": {
    "n": 91,
@@ -1562,13 +1558,13 @@
   "HRM": {
    "n": 26,
    "n_collapse": 3,
-   "accuracy": 0.9615384615384616,
+   "accuracy": 0.9230769230769231,
    "auroc_delta": 1.0
   },
   "ALL": {
    "n": 117,
    "n_collapse": 26,
-   "accuracy": 0.905982905982906,
+   "accuracy": 0.8974358974358975,
    "auroc_delta": 0.9835164835164835
   }
  }

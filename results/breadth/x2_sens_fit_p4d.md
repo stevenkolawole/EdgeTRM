@@ -4,7 +4,7 @@
 | trm_sudoku_attn_w256_s0 (low fp32) | TRM | p4d | 0.104 | 0.37 | 1.04 | 1.03 | 1.06 | 0.38 | variants_noise (Q8), n=1000 |
 | trm_sudoku_attn_w256_s1 (low fp32) | TRM | p4d | 0.172 | 0.23 | 1.31 | 1.29 | 1.30 | 0.30 | variants_noise (Q8), n=1000 |
 | trm_sudoku_attn_w256_s2 (low fp32) | TRM | p4d | 0.282 | 0.28 | 1.21 | 1.21 | 1.25 | 0.34 | variants_noise (Q8), n=1000 |
-| trm_sudoku_attn_w512_s0 | TRM | p4d | 0.648 | 0.74 | 0.75 | 0.73 | 0.75 | 0.54 | variants_noise (Q8), n=1000 |
+| trm_sudoku_attn_w512_s0 | TRM | p4d | 0.648 | > 0.7 | 0.75 | 0.73 | 0.75 | -- | variants_noise (Q8), n=1000 |
 | trm_sudoku_attn_w512_s1 | TRM | p4d | 0.629 | 0.65 | 0.82 | 0.80 | 0.82 | 0.52 | variants_noise (Q8), n=1000 |
 | trm_sudoku_attn_w512_s2 | TRM | p4d | 0.534 | 0.60 | 0.80 | 0.85 | 0.83 | 0.51 | variants_noise (Q8), n=1000 |
 | trm_sudoku_mlp_w256_s0 | TRM | p4d | 0.599 | 0.14 | 1.29 | 1.46 | 1.33 | 0.21 | variants_noise (Q8), n=1000 |
@@ -15,14 +15,14 @@
 | trm_sudoku_mlp_w512_s2 | TRM | p4d | 0.842 | 0.13 | 1.63 | 1.60 | 1.70 | 0.20 | variants_noise (Q8), n=1000 |
 | trm_sudoku_mlp_w768_s0 | TRM | p4d | 0.753 | 0.15 | 2.05 | 2.47 | 3.63 | 0.37 | variants_noise (Q8), n=1000 |
 
-all fitted models (n=10): delta* = 0.309, R^2 (log, slope -1) = 0.67; free fit log sigma_1/2 = -1.00 + -1.55 log S
+all fitted models (n=9): delta* = 0.291, R^2 (log, slope -1) = 0.62; free fit log sigma_1/2 = -1.07 + -1.42 log S
 
-leave-one-model-out: median x1.58, worst x2.00 (trm_sudoku_mlp_w256_s2)
+leave-one-model-out: median x1.46, worst x1.93 (trm_sudoku_attn_w512_s1)
 
-quantizer collapse predicted by delta_T > delta* = 0.309 (fit on TRM+HRM noise widths):
+quantizer collapse predicted by delta_T > delta* = 0.291 (fit on TRM+HRM noise widths):
    TRM: 91 cells (23 collapse), accuracy 0.89, AUROC(delta) 0.98
-   HRM: 26 cells (3 collapse), accuracy 0.96, AUROC(delta) 1.00
-   ALL: 117 cells (26 collapse), accuracy 0.91, AUROC(delta) 0.98
+   HRM: 26 cells (3 collapse), accuracy 0.92, AUROC(delta) 1.00
+   ALL: 117 cells (26 collapse), accuracy 0.90, AUROC(delta) 0.98
 
 S(0.05) on both platforms (same model, same protocol):
    hrm_maze: Babel 0.23 vs p4d 0.23
