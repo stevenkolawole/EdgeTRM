@@ -594,8 +594,11 @@ def plan(task, mode, a):
                  for s in (SIGMAS_WB if (arm == "wb" and not a.sigmas) else sig)]
     if mode == "depth":
         confs = [(t["H"], t["L"], a.nsup or 32)]
-        confs += [(h, t["L"], 16) for h in t["Hs"] if h != t["H"]]
-        confs += [(t["H"], l, 16) for l in t["Ls"] if l != t["L"]]
+        axes = (getattr(a, "axes", "") or "nsup,H,L").split(",")
+        if "H" in axes:
+            confs += [(h, t["L"], 16) for h in t["Hs"] if h != t["H"]]
+        if "L" in axes:
+            confs += [(t["H"], l, 16) for l in t["Ls"] if l != t["L"]]
     else:
         confs = [(t["H"], t["L"], a.nsup or 16)]
     return [(H, L, ns, cells) for H, L, ns in confs]
@@ -903,6 +906,7 @@ def main():
     ap.add_argument("--arms", default="")
     ap.add_argument("--draws", default="0,1,2")
     ap.add_argument("--group", type=int, default=8, help="cells run in lockstep with one fp32 pass")
+    ap.add_argument("--axes", default="", help="depth mode: comma list of nsup,H,L (default all three)")
     ap.add_argument("--chain", default="", help="file with one argument line per run, executed in order "
                                                 "(fewer SLURM jobs; each run resumes on its own)")
     ap.add_argument("--analyze", default="")
