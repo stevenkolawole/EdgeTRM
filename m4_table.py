@@ -173,6 +173,7 @@ PRED = {  # name -> (feature, direction): +1 means larger is worse
     "T2 phi_H": ("phi_H", -1),
     "T0 max local act. error": ("layer_local_max", +1),
     "T2 halting-sign agreement": ("qsign_agree", -1),
+    "reference-free: random-kick growth (16 steps)": ("kick_growth_median", +1),
     "T2 check quantity (settled if available)": ("_t2", -1),
     "CHECK: T0 hard rules + T2 written cells (settled)": ("_combined:changed_agree_settled", -1),
     "CHECK: T0 hard rules + T2 whole answer (settled)": ("_combined:answer_agree_settled", -1),

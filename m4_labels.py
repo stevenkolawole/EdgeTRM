@@ -141,7 +141,7 @@ def main():
             z = np.load(f)
             meta = json.loads(f.with_suffix(".json").read_text()) if f.with_suffix(".json").exists() else {}
             k = z["preds"].shape[0]
-            if not meta.get("done") and k < meta.get("n_steps", NSTEPS[task]):
+            if not meta.get("done"):              # never read a chain still in flight
                 continue
             prec, dev = f.stem[4:].split("_", 1)
             ex, cl = score(z["preds"][-1], lab)
@@ -179,6 +179,29 @@ def main():
                 continue                                    # X3's own ORT-all labels are used for these
             out.append(rec(backend, task, cell, ex, np.full(ex.shape, e["cell_acc"]), rex, rcl, f, 0,
                            family_of(cell.split("@")[0]) if "@" not in cell else "vendor_emulation"))
+    # ---------------- M3's reference-QDQ-semantics runs of X3's ablation rows (torch QDQ executor,
+    # `EdgeTRM/qdq_torch.py`; Sudoku-MLP puzzles 0-99, 16 steps): used where M4 has no ORT-basic label
+    import re
+    have = {(r["backend"], r["task"], r["cell"]) for r in out}
+    z0 = np.load(ART / "sudoku_mlp" / "infer" / "host_fp32.npz")
+    lab0 = labels("sudoku_mlp", 0, z0["preds"].shape[1])
+    rex, rcl = score(z0["preds"][-1], lab0)
+    for logf in (HOME / "m3" / "val_mlp.log", HOME / "m3" / "val_mlp_B.log"):
+        if not logf.exists():
+            continue
+        for line in logf.read_text().splitlines():
+            mm = re.match(r"(\S+): torch exact ([0-9.]+) cell ([0-9.]+)", line)
+            if not mm:
+                continue
+            cell = "abl_" + mm.group(1)
+            if ("qnn_qdq_ref", "sudoku_mlp", cell) in have:
+                continue
+            ex_m, cl_m = float(mm.group(2)), float(mm.group(3))
+            r = dict(backend="qnn_qdq_ref", task="sudoku_mlp", cell=cell, family=family_of(cell), n=100, start=0,
+                     exact=ex_m, cellacc=cl_m, exact_fp32=float(rex.mean()), cellacc_fp32=float(rcl.mean()),
+                     retained=ex_m / float(rex.mean()), source=f"{logf} (M3 torch QDQ executor)")
+            out.append(r)
+            have.add(("qnn_qdq_ref", "sudoku_mlp", cell))
     # ---------------- TFLite chains (M4)
     for task in ("sudoku_mlp", "sudoku_attn", "maze"):
         td = M4 / "tflite" / task

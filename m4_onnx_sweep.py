@@ -90,9 +90,11 @@ def main():
     p.add_argument("--threads", type=int, default=4)
     p.add_argument("--tasks", default=",".join(TASK_CFG))
     p.add_argument("--ort_level", default="all", choices=["all", "basic"])
+    p.add_argument("--only", default="", help="comma list of cell names")
     a = p.parse_args()
     tasks = a.tasks.split(",")
-    todo = [c for c in cells() if c[0] in tasks]
+    only = set(a.only.split(",")) if a.only else None
+    todo = [c for c in cells() if c[0] in tasks and (only is None or c[1] in only)]
     # fp32 reference rollouts first (one per task), so the workers share them
     import release_check as R
     for task in tasks:

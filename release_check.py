@@ -28,7 +28,9 @@ One command per artifact:
     # a TFLite carry-step graph (interpreter; optional reference-kernel and TFLM cross-runtime check)
     python release_check.py tflite --ref stepc_fp32.tflite --graph stepc_int8.tflite --check ... --xrt
     # a torch model plus a quantization config (weights and/or activations; see torch_check)
-    python release_check.py torch --task sudoku_mlp --config w8c+aall8 --check ... --steps 16
+    python release_check.py torch --task sudoku_mlp --config w8c+a8all --H 1 --steps 16
+    # device-facing tier: the device's predictions for its first 2 steps on the check inputs
+    python release_check.py probe --ref stepc_H1.onnx --check check_sudoku_mlp.npz --device_preds dev.npz
 """
 import argparse
 import hashlib
@@ -1034,6 +1036,25 @@ def torch_check(task, wspec="fp32", amode="none", H=None, T=16, check=None, n=32
     return ev
 
 
+# =============================================================================== device probe
+def device_probe(ref_step, chk, device_preds, k=2, threshold=0.5):
+    """Device-facing tier: the device's own predictions for the first k supervision steps on the check
+    inputs (from the initial carry), compared with the host fp32 model on the cells fp32 writes. Validated on
+    10 AI Hub chains (M4.md): working 0.72-1.00 at step 2, failing 0.00-0.27. The reference is the fp32
+    model, not the exported graph's host simulation (which itself can be wrong, e.g. Sudoku-MLP w8a8)."""
+    device_preds = np.asarray(device_preds)
+    K = min(k, device_preds.shape[0])
+    r = rollout(ref_step, dict(chk, inputs=chk["inputs"][:device_preds.shape[1]],
+                               emb=chk["emb"][:device_preds.shape[1]]), K)
+    inp = chk["inputs"][:device_preds.shape[1]]
+    per = []
+    for s_ in range(K):
+        ch = r["preds"][s_] != inp
+        per.append(float((((device_preds[s_] == r["preds"][s_]) & ch).sum(-1) / np.maximum(ch.sum(-1), 1)).mean()))
+    return dict(device_probe_steps=K, device_written_agree_per_step=per, device_written_agree=per[-1],
+                device_probe_pass=bool(per[-1] >= threshold))
+
+
 # =============================================================================== decision
 def decide(ev, thr=None):
     """PASS / WARN / FAIL with the rules that fired. The primary rule is T2 (per-cell agreement of the
@@ -1055,6 +1076,10 @@ def decide(ev, thr=None):
           rules.append(f"T0 cross-runtime: op {bad['op_index']} {bad['op']} differs by {bad['maxdiff']:.0f} LSB "
                        f"between reference and optimized kernels while its inputs differ by "
                        f"{bad.get('in_diff_lsb', 0):.0f} (kernel disagreement, > {thr['xrt_lsb_fail']})")
+        verdict = bump("FAIL")
+    if ev.get("device_probe_pass") is False:
+        rules.append(f"DEVICE probe: written-cell agreement with fp32 after {ev['device_probe_steps']} device "
+                     f"steps {ev['device_written_agree']:.3f} < 0.5 (the vendor kernels compute a different function)")
         verdict = bump("FAIL")
     if ev.get("n_nonfinite_tensors"):
         rules.append(f"T0 per-layer: {ev['n_nonfinite_tensors']} intermediate tensors are inf/nan where fp32 is "
@@ -1185,6 +1210,11 @@ def main():
     q.add_argument("--check", default=None); q.add_argument("--n", type=int, default=32)
     q.add_argument("--draw", type=int, default=0); q.add_argument("--threads", type=int, default=16)
     q.add_argument("--out", default=""); q.add_argument("--thresholds", default="")
+    q = sp.add_parser("probe", help="device-facing tier: device predictions for the first steps vs host fp32")
+    q.add_argument("--ref", required=True); q.add_argument("--check", required=True)
+    q.add_argument("--device_preds", required=True, help="npz with preds [K, N, L] from the device, same inputs")
+    q.add_argument("--k", type=int, default=2); q.add_argument("--threads", type=int, default=4)
+    q.add_argument("--out", default=""); q.add_argument("--thresholds", default="")
     q = sp.add_parser("_tflm_dump"); q.add_argument("graph"); q.add_argument("inp"); q.add_argument("out")
     a = p.parse_args()
     if a.cmd == "prep":
@@ -1197,6 +1227,12 @@ def main():
         w, _, am = a.config.partition("+")
         am = am if am in ("a8all", "a16all", "a8lin") else "none"
         ev = torch_check(a.task, w, am, a.H, a.steps, a.check, a.n, draw=a.draw, threads=a.threads)
+        finish(ev, a)
+    elif a.cmd == "probe":
+        chk = load_check(a.check)
+        ref = TfliteStep(a.ref, a.threads) if a.ref.endswith(".tflite") else OnnxStep(a.ref, a.threads)
+        ev = dict(kind="device_probe", ref=a.ref, device_preds=a.device_preds)
+        ev.update(device_probe(ref, chk, np.load(a.device_preds)["preds"], a.k))
         finish(ev, a)
     elif a.cmd == "_tflm_dump":
         _tflm_dump(a.graph, a.inp, a.out)
