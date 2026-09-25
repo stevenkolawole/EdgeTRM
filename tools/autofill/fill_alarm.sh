@@ -18,6 +18,7 @@ while true; do
     bl=$(awk '/backlog_lines/{print $3}' <<<"$s")
     [ -n "$bl" ] && [ "$bl" -lt 4 ] && out="$out $name:backlog=$bl;"
   done
+  grep -q HOME_QUOTA_LOW <<<"$bb" && out="$out babel:HOME_QUOTA_LOW;"
   # an empty Babel backlog matters only if that partition is below its cap (held/pending + running)
   for part in general preempt; do
     if grep -q "^$part EMPTY_BACKLOG" <<<"$bb"; then
