@@ -81,6 +81,33 @@ def main():
         else:
             line += "-- | -- | -- | -- |"
         print(line)
+    # Rule 2 (committed before any held-out read, after rule 1 proved uninformative: every rule-1 pick sits at the
+    # converged ceiling): for each traffic cap C (fp32-iteration units), the pick is the hybrid with the highest dev
+    # accuracy at traffic <= C (ties: lower traffic); comparator = best single format at <= the pick's traffic and
+    # <= its memory; held-out: the same pick and comparator.
+    print("\n## rule 2: frozen picks per traffic cap C (fp32-iteration units; C = 1 is 4 INT8 iterations)\n")
+    print("| C | pick (dev) | dev acc | traffic | memory | comparator (dev) | dev acc | dev delta, p | "
+          "held-out pick | held-out comparator | held-out delta (discordant), p |")
+    print("|---|---|---|---|---|---|---|---|---|---|---|")
+    for C in [1.0, 1.25, 1.5, 1.75, 2.0, 2.5]:
+        cand = [r for r in rows if r["cost"] <= C + 1e-9]
+        if not cand:
+            continue
+        pk = max(cand, key=lambda r: (r["acc"], -r["cost"]))
+        bv, bn, bk = best_single(dev, pk["cost"], pk["mem"])
+        if bn is None:
+            continue
+        n10, n01, p = MF.mcnemar(arr(pk["corr"]), arr(dev["curve"][bn]["correct"][str(bk)]))
+        line = (f"| {C} | {pk['c']} {pk['t']} + {pk['p']} {pk['k']} | {100*pk['acc']:.1f} | {pk['cost']:.2f} | {pk['mem']:.0f} | "
+                f"{bn} {bk} | {100*bv:.1f} | {100*(pk['acc']-bv):+.1f}, {p:.2g} ({n10}/{n01}) | ")
+        if held is not None and str(bk) in held["curve"][bn]["correct"]:
+            hp = held["hybrid"][f"{pk['c']}|{pk['p']}"][f"{pk['t']}+{pk['k']}"]
+            hc = arr(held["curve"][bn]["correct"][str(bk)])
+            hn10, hn01, hpv = MF.mcnemar(arr(hp["correct"]), hc)
+            line += f"{100*hp['acc']:.1f} | {bn} {bk}: {100*hc.mean():.1f} | {100*(hp['acc']-hc.mean()):+.1f} ({hn10}/{hn01}), {hpv:.2g} |"
+        else:
+            line += "-- | -- | -- |"
+        print(line)
     # dev frontier: every hybrid vs best single at <= cost and memory
     print("\n## dev: every hybrid against the best single format at <= traffic and <= memory (top 12 by delta)\n")
     print("| hybrid | acc | traffic | memory | best single (its) | acc | delta |")
