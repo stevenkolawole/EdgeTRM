@@ -109,6 +109,9 @@ class PretrainConfig(pydantic.BaseModel):
     q7_sens_target: float = 0.0     # sens: hinge, penalise only S above this (0 = plain penalty on S)
     q7_sens_min_steps: int = 0      # sens: probe only puzzles whose carry has run >= this many ACT steps
     q7_rho: float = 0.05            # sam / asam: neighbourhood radius (Foret et al. 2021; ASAM: Kwon et al. 2021)
+    q7_act_noise: float = 0.0       # extra, combinable with any q7_reg: Gaussian noise at every CastedLinear input
+                                    # during training, std = this x the input's std (fresh every call)
+    q7_extra_wnoise: float = 0.0    # extra, combinable with any q7_reg: weight noise sigma x per-tensor std per step
                                     # (late states, near the end state X2 measures S at); 0 = every puzzle
     q7_bits: int = 4                # qat: per-tensor symmetric fake-quant bits (straight-through estimator)
     q7_clip_k: float = 0.0          # clip: |W| <= k x per-tensor std after every optimizer step
@@ -184,6 +187,8 @@ def create_model(config: PretrainConfig, train_metadata: PuzzleDatasetMetadata, 
             q7_install_lsq(model, config.q7_bits)
         if config.q7_act_bits > 0:
             q7_install_actq(model, config.q7_act_bits)
+        if config.q7_act_noise > 0:
+            q7_install_actnoise(model, config.q7_act_noise)
 
         # Broadcast parameters from rank 0
         if world_size > 1:
@@ -489,6 +494,33 @@ def _q7_grad_scale(x, g):
     return (x - x * g).detach() + x * g
 
 
+def _q7_linear_forward(self, input):
+    """CastedLinear forward with the Q7 training extras: weight-LSQ (module has q7_lsq_s) and activation noise
+    (module attribute q7_an > 0, training mode only). Without either attribute it equals the original forward."""
+    w = self.weight
+    s = getattr(self, "q7_lsq_s", None)
+    if s is not None:
+        from models import layers
+        qp = layers._q7_qp
+        ss = _q7_grad_scale(s, 1.0 / math.sqrt(w.numel() * qp))
+        w = _q7_round_ste(torch.clamp(w / ss, -qp, qp)) * ss
+    an = getattr(self, "q7_an", 0.0)
+    if an > 0 and self.training:
+        input = input + torch.randn_like(input) * (an * input.detach().std())
+    return torch.nn.functional.linear(input, w.to(input.dtype),
+                                      bias=self.bias.to(input.dtype) if self.bias is not None else None)
+
+
+def q7_install_actnoise(model: nn.Module, sigma: float):
+    from models import layers
+    layers.CastedLinear.forward = _q7_linear_forward
+    n = 0
+    for m in model.modules():
+        if m.__class__.__name__ == "CastedLinear":
+            m.q7_an = float(sigma); n += 1
+    print(f"[q7] activation noise sigma {sigma} on {n} linears (training only)")
+
+
 def q7_install_lsq(model: nn.Module, bits: int):
     """Weight-side LSQ: CastedLinear.forward uses clamp(round(W/s), -Qp, Qp) * s with a learned scalar s
     per tensor (symmetric, Qp = 2^(b-1)-1, the same grid as the w4t evaluation), straight-through rounding,
@@ -497,16 +529,8 @@ def q7_install_lsq(model: nn.Module, bits: int):
     from models import layers
     qp = 2 ** (bits - 1) - 1
 
-    def forward(self, input):
-        w = self.weight
-        s = getattr(self, "q7_lsq_s", None)
-        if s is not None:
-            ss = _q7_grad_scale(s, 1.0 / math.sqrt(w.numel() * qp))
-            w = _q7_round_ste(torch.clamp(w / ss, -qp, qp)) * ss
-        return torch.nn.functional.linear(input, w.to(input.dtype),
-                                          bias=self.bias.to(input.dtype) if self.bias is not None else None)
-
-    layers.CastedLinear.forward = forward
+    layers.CastedLinear.forward = _q7_linear_forward
+    layers._q7_qp = qp
     for m in model.modules():
         if m.__class__.__name__ == "CastedLinear" and not hasattr(m, "q7_lsq_s"):
             W = m.weight.detach().float()
@@ -761,6 +785,13 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
     q7_s = q7_strength(config, train_state)
     q7_w = _q7_linears(train_state.model) if q7_s > 0 else []
     q7_saved = q7_perturb_(config, q7_w, q7_s) if config.q7_reg in ("noise", "qat") and q7_s > 0 else []
+    q7_xw, q7_xeps = [], []
+    if config.q7_extra_wnoise > 0:
+        q7_xw = _q7_linears(train_state.model)
+        with torch.no_grad():
+            for W in q7_xw:
+                e = torch.randn_like(W) * (config.q7_extra_wnoise * W.std())
+                W.add_(e); q7_xeps.append(e)
 
     # Forward
     q7_carry_in = train_state.carry
@@ -773,6 +804,10 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
 
     if q7_saved:
         q7_restore_(config, q7_w, q7_saved)   # gradient taken at the perturbed point, applied to the clean weights
+    if q7_xeps:
+        with torch.no_grad():
+            for W, e in zip(q7_xw, q7_xeps):
+                W.sub_(e)
 
     q7_jac = None
     if config.q7_reg == "jac" and q7_s > 0 and train_state.step % config.q7_jac_every == 0:
