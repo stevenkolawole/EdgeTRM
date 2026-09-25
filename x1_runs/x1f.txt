@@ -1,3 +1,8 @@
 difficulty_sweep.py --K 64 --batch 1000 --checkpoint --task sudoku_attn --quants fp32,w4c,w4t,w3c,w3a,w4g32,w8c --out /home/ubuntu/x1/results/diff_sudoku_attn_q.json
 difficulty_sweep.py --K 64 --batch 1000 --checkpoint --task hrm_sudoku --quants fp32,w4c,w4t,w2g32,w2a,w3c,w4g32,w8c --out /home/ubuntu/x1/results/diff_hrm_sudoku_q.json
 difficulty_sweep.py --K 64 --batch 1000 --checkpoint --task sudoku_mlp --quants fp32,w4c,w3g32,w3a,w4t,w3c,w4g32,w8c --out /home/ubuntu/x1/results/diff_sudoku_mlp_q.json
+difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task hrm_sudoku --quants noise0.7@s0,noise0.7@s1,noise0.7@s2 --ref_wait --ref_cache /home/ubuntu/x1/results/ref_deep_hrm_sudoku.pt --out /home/ubuntu/x1/results/deep_hrm_sudoku_d.json
+difficulty_sweep.py --K 512 --per_bin 300 --batch 300 --checkpoint --task hrm_sudoku --quants w3c,w3a,noise0.5@s0 --ref_wait --ref_cache /home/ubuntu/x1/results/ref_deep_hrm_sudoku.pt --out /home/ubuntu/x1/results/deep_hrm_sudoku_e.json
+dt_extrap.py --task mazes --sizes 33,25 --iters 10,20,40,60,100,150,200,300,500,1000 --quants fp32,w3g32,w4c,w3a,w4t,w3c,w3t,w5c,w4a,noise0.15,noise0.2 --n 1000 --seed 0 --out /home/ubuntu/x1/results/dt_edge_mazes_s0.json
+dt_extrap.py --task mazes --sizes 33,25 --iters 10,20,40,60,100,150,200,300,500,1000 --quants fp32,noise0.15,noise0.2 --n 1000 --seed 1 --out /home/ubuntu/x1/results/dt_edge_mazes_s1.json
+dt_extrap.py --task mazes --sizes 33,25 --iters 10,20,40,60,100,150,200,300,500,1000 --quants fp32,noise0.15,noise0.2 --n 1000 --seed 2 --out /home/ubuntu/x1/results/dt_edge_mazes_s2.json
