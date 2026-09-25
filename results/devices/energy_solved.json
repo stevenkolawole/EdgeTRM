@@ -247,8 +247,8 @@
   "n": 1,
   "mj_per_answer": 1.0439397734400002,
   "acc": 0.0,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
   "mj_per_solved": Infinity
  },
  {
@@ -259,8 +259,8 @@
   "n": 1,
   "mj_per_answer": 6.618609853440001,
   "acc": 0.0,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
   "mj_per_solved": Infinity
  },
  {
@@ -270,10 +270,10 @@
   "bound": "weights_on_chip",
   "n": 2,
   "mj_per_answer": 2.0878795468800004,
-  "acc": 0.0,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "mj_per_solved": Infinity
+  "acc": 0.02,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "mj_per_solved": 104.39397734400002
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -282,10 +282,10 @@
   "bound": "weights_dram",
   "n": 2,
   "mj_per_answer": 13.237219706880001,
-  "acc": 0.0,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "mj_per_solved": Infinity
+  "acc": 0.02,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "mj_per_solved": 661.860985344
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -294,10 +294,10 @@
   "bound": "weights_on_chip",
   "n": 4,
   "mj_per_answer": 4.175759093760001,
-  "acc": 0.0,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "mj_per_solved": Infinity
+  "acc": 0.35,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "mj_per_solved": 11.930740267885717
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -306,10 +306,10 @@
   "bound": "weights_dram",
   "n": 4,
   "mj_per_answer": 26.474439413760003,
-  "acc": 0.0,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "mj_per_solved": Infinity
+  "acc": 0.35,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "mj_per_solved": 75.64125546788573
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -318,10 +318,10 @@
   "bound": "weights_on_chip",
   "n": 8,
   "mj_per_answer": 8.351518187520002,
-  "acc": 0.0,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "mj_per_solved": Infinity
+  "acc": 0.61,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "mj_per_solved": 13.691013422163937
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -330,10 +330,10 @@
   "bound": "weights_dram",
   "n": 8,
   "mj_per_answer": 52.948878827520005,
-  "acc": 0.0,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "mj_per_solved": Infinity
+  "acc": 0.61,
+  "acc_n": 100,
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "mj_per_solved": 86.80144070085247
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
