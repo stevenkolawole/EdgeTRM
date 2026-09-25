@@ -425,13 +425,25 @@ def sec_boundary(cells, nmin):
     print()
 
 
-POOL_ROOTS = ["results/looped/p4d/q6", "results/looped/p4d/olmo", "results/looped/p4d/olmo200",
+POOL_ROOTS = ["results/looped/p4d/q6", "results/looped/p4d/olmo", "results/looped/p4d/olmo200", "results/looped/p4d/olmo_b8",
               "results/looped/p4d/loops", "results/looped/p4d/n500", "results/looped/p4d/olmo500",
               "results/looped/babel/q6", "results/looped/p5/n500", "results/looped/p5/band"]
 PLATFORM_RANK = {"p5": 0, "p4d": 1, "babel": 2, "lambda": 3}
 
 
-def pool_rows(roots, cut=50.0):
+def cell_batch(root, model, steps, quant, scope="core"):
+    """Generation batch size of a cell's greedy decode (v2 summary per decode, else run meta)."""
+    p = Path(root) / f"{model}_s{steps}_{quant}_{scope}" / "summary.json"
+    if not p.exists():
+        return None
+    try:
+        d = json.load(open(p))
+    except json.JSONDecodeError:
+        return None
+    return (d.get("gen", {}).get("greedy", {}) or {}).get("batch") or d.get("meta", {}).get("batch")
+
+
+def pool_rows(roots, cut=50.0, single_platform=True):
     """One row per (model, quant, loops): greedy accuracy and teacher-forced record from the SAME result
     directory (one platform, one n), retained against that directory's own bf16 greedy at the same loops.
     Duplicates across directories/platforms are resolved by largest n, then platform (p5 > p4d > Babel >
@@ -453,13 +465,16 @@ def pool_rows(roots, cut=50.0):
             idx = sorted(set(g) & set(gb))
             if not idx:
                 continue
+            bq, bb = cell_batch(root, model, steps, quant, scope), cell_batch(root, model, steps, "bf16", scope)
+            if bq != bb:
+                continue                      # generation batch must match the bf16 reference's
             t, tb = c["tf"]["summary"], b["tf"]["summary"]
             a = 100 * sum(g[i]["correct"] for i in idx) / len(idx)
             ab = 100 * sum(gb[i]["correct"] for i in idx) / len(idx)
             cand.append({"platform": plat, "dir": root.name, "model": model, "loops": steps, "quant": quant,
                          "n_gen": len(idx), "n_tf": len(c["tf"]["records"]), "acc": a, "acc_bf16": ab,
                          "fid": t["fidelity"], "nll": t["nll"], "nll_bf16": tb["nll"], "kl": t.get("kl"),
-                         "bf16_len": sum(gb[i]["n_gen"] for i in idx) / len(idx)})
+                         "bf16_len": sum(gb[i]["n_gen"] for i in idx) / len(idx), "batch": bq})
     for model, gen_files, nogen in LAMBDA_FILES:
         gen, ng = {}, {}
         for f in gen_files:
@@ -478,7 +493,13 @@ def pool_rows(roots, cut=50.0):
             cand.append({"platform": "lambda", "dir": "lambda", "model": model, "loops": st_, "quant": q,
                          "n_gen": g["n"], "n_tf": t.get("n", g["n"]), "acc": 100 * g["acc"], "acc_bf16": 100 * b["acc"],
                          "fid": t["fidelity"], "nll": t["nll"], "nll_bf16": tb["nll"], "kl": None,
-                         "bf16_len": b.get("gen_len")})
+                         "bf16_len": b.get("gen_len"), "batch": 1})
+    if single_platform:                       # one platform per model: the one with the most distinct configs
+        per = defaultdict(lambda: defaultdict(set))
+        for r in cand:
+            per[r["model"]][r["platform"]].add((r["quant"], r["loops"]))
+        choice = {m: max(d, key=lambda p: (len(d[p]), -PLATFORM_RANK.get(p, 9))) for m, d in per.items()}
+        cand = [r for r in cand if r["platform"] == choice[r["model"]]]
     best = {}
     for r in cand:
         k = (r["model"], r["quant"], r["loops"])

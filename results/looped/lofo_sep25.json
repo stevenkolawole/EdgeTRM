@@ -1,168 +1,184 @@
 {
  "lofo": {
   "LM:huginn": {
-   "pooled": 0.9825806451612903,
+   "pooled": 0.9743333333333334,
    "per_family": {
-    "asym-channel": 0.988,
-    "group": 1.0,
+    "asym-channel": 0.967,
+    "group": 0.9966666666666667,
     "per-channel": 0.9618181818181818,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.9840625
   },
   "LM:olmo_rec32": {
-   "pooled": 0.8576190476190476,
+   "pooled": 0.9423529411764706,
    "per_family": {
-    "asym-channel": 0.406,
-    "group": 1.0,
-    "per-channel": 0.9975,
-    "per-tensor": 1.0
-   },
-   "n_cal": 50
-  },
-  "LM:ouro14": {
-   "pooled": 0.7774193548387097,
-   "per_family": {
-    "asym-channel": 1.0,
-    "group": 0.85,
-    "per-channel": 0.5714285714285714,
-    "per-tensor": 1.0
-   },
-   "n_cal": 50
-  },
-  "LM:ouro26": {
-   "pooled": 0.973103448275862,
-   "per_family": {
-    "asym-channel": 0.9025,
+    "asym-channel": 0.02,
     "group": 1.0,
     "per-channel": 1.0,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.8894444444444446
+  },
+  "LM:ouro14": {
+   "pooled": 0.769,
+   "per_family": {
+    "asym-channel": 1.0,
+    "group": 0.84,
+    "per-channel": 0.5735714285714286,
+    "per-tensor": 1.0
+   },
+   "n_cal": 50,
+   "half_split": 0.998125
+  },
+  "LM:ouro26": {
+   "pooled": 0.9989285714285714,
+   "per_family": {
+    "asym-channel": 1.0,
+    "group": 1.0,
+    "per-channel": 0.9976923076923077,
+    "per-tensor": 1.0
+   },
+   "n_cal": 50,
+   "half_split": 0.9963333333333333
   },
   "TRM:hrm_maze": {
-   "pooled": 0.9795731707317074,
+   "pooled": 0.9804878048780488,
    "per_family": {
     "asym-channel": 0.972972972972973,
     "group": 1.0,
     "noise": 0.9259259259259259,
     "per-channel": 1.0,
-    "per-tensor": 0.9907894736842106
+    "per-tensor": 0.9947368421052631
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.9739156626506023
   },
   "TRM:hrm_sudoku": {
    "pooled": 0.9990909090909091,
    "per_family": {
-    "asym-channel": 0.9966666666666667,
-    "group": 1.0,
+    "asym-channel": 0.9975,
+    "group": 0.99875,
     "per-channel": 1.0,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.999090909090909
   },
   "TRM:maze_attn": {
-   "pooled": 0.96509375,
+   "pooled": 0.9645,
    "per_family": {
-    "asym-channel": 0.8726388888888889,
+    "asym-channel": 0.87,
     "group": 1.0,
     "noise": 0.9629629629629629,
     "per-channel": 1.0,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.9880246913580247
   },
   "TRM:sudoku_attn": {
-   "pooled": 0.9754761904761905,
+   "pooled": 0.9767857142857143,
    "per_family": {
     "asym-channel": 1.0,
     "group": 1.0,
-    "noise": 0.9133333333333333,
+    "noise": 0.9194444444444444,
     "per-channel": 0.9722222222222222,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.9879166666666666
   },
   "TRM:sudoku_mlp": {
-   "pooled": 0.9425125628140704,
+   "pooled": 0.9413316582914573,
    "per_family": {
-    "asym-channel": 0.95,
-    "group": 0.85,
-    "noise": 0.8857777777777778,
+    "asym-channel": 0.9465476190476191,
+    "group": 0.8516071428571429,
+    "noise": 0.8827777777777778,
     "per-channel": 1.0,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.95865
   },
   "VAR:trm_sudoku_attn_w256_s0": {
-   "pooled": 0.9404,
+   "pooled": 0.9374,
    "per_family": {
-    "group": 0.665,
-    "noise": 0.9452380952380952,
+    "group": 0.715,
+    "noise": 0.94,
     "per-channel": 1.0,
-    "per-tensor": 0.995
+    "per-tensor": 0.98
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.8760714285714286
   },
   "VAR:trm_sudoku_attn_w256_s1": {
-   "pooled": 0.9264,
+   "pooled": 0.9248,
    "per_family": {
-    "group": 0.27,
-    "noise": 0.9473809523809524,
-    "per-channel": 1.0,
+    "group": 0.26,
+    "noise": 0.9464285714285714,
+    "per-channel": 0.995,
     "per-tensor": 0.995
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.8871428571428572
   },
   "VAR:trm_sudoku_attn_w256_s2": {
-   "pooled": 0.951,
-   "per_family": {
-    "group": 0.985,
-    "noise": 0.9523809523809523,
-    "per-channel": 1.0,
-    "per-tensor": 0.79
-   },
-   "n_cal": 50
-  },
-  "VAR:trm_sudoku_attn_w512_s1": {
-   "pooled": 0.7196,
+   "pooled": 0.9508,
    "per_family": {
     "group": 0.995,
+    "noise": 0.9523809523809523,
+    "per-channel": 1.0,
+    "per-tensor": 0.775
+   },
+   "n_cal": 50,
+   "half_split": 0.8957142857142858
+  },
+  "VAR:trm_sudoku_attn_w512_s1": {
+   "pooled": 0.7176,
+   "per_family": {
+    "group": 0.97,
     "noise": 0.6666666666666666,
     "per-channel": 1.0,
-    "per-tensor": 0.995
+    "per-tensor": 0.97
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.9178571428571428
   },
   "VAR:trm_sudoku_attn_w512_s2": {
-   "pooled": 0.791,
+   "pooled": 0.792,
    "per_family": {
     "group": 1.0,
     "noise": 0.7952380952380952,
     "per-channel": 1.0,
-    "per-tensor": 0.075
+    "per-tensor": 0.1
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.8382142857142858
   },
   "VAR:trm_sudoku_mlp_w256_s0": {
-   "pooled": 0.733,
+   "pooled": 0.723,
    "per_family": {
-    "group": 0.275,
-    "noise": 0.7166666666666667,
+    "group": 0.265,
+    "noise": 0.7052380952380952,
     "per-channel": 1.0,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.8989285714285715
   },
   "VAR:trm_sudoku_mlp_w256_s1": {
-   "pooled": 0.7316,
+   "pooled": 0.74,
    "per_family": {
-    "group": 0.05,
-    "noise": 0.7257142857142858,
+    "group": 0.035,
+    "noise": 0.7364285714285714,
     "per-channel": 1.0,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.9121428571428573
   },
   "VAR:trm_sudoku_mlp_w256_s2": {
    "pooled": 1.0,
@@ -172,7 +188,8 @@
     "per-channel": 1.0,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.9932142857142858
   },
   "VAR:trm_sudoku_mlp_w512_s0": {
    "pooled": 1.0,
@@ -182,7 +199,8 @@
     "per-channel": 1.0,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.9967857142857143
   },
   "VAR:trm_sudoku_mlp_w512_s1": {
    "pooled": 0.88,
@@ -192,7 +210,8 @@
     "per-channel": 1.0,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.9939285714285715
   },
   "VAR:trm_sudoku_mlp_w512_s2": {
    "pooled": 0.76,
@@ -202,7 +221,8 @@
     "per-channel": 1.0,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 1.0
   },
   "VAR:trm_sudoku_mlp_w768_s0": {
    "pooled": 0.96,
@@ -212,7 +232,8 @@
     "per-channel": 1.0,
     "per-tensor": 1.0
    },
-   "n_cal": 50
+   "n_cal": 50,
+   "half_split": 0.937857142857143
   }
  }
 }

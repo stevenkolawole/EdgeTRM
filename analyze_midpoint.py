@@ -483,7 +483,7 @@ def lofo_section(ncal=50, reps=200, cut=0.5, seed=0):
     G = calib_groups()
     rng = np.random.default_rng(seed)
     print(f"\n## Reusing a per-model cut for a new compression family (fit on the other families, n_cal = {ncal}, {reps} repeats)\n")
-    print("| group | families (cells, collapsed) | held-out accuracy, all families pooled | worst family (acc) | in-family fit, same cells |")
+    print("| group | families (cells, collapsed) | held-out accuracy, all families pooled | worst family (acc) | half-split baseline (fit/score disjoint cells, all families) |")
     print("|---|---|---|---|---|")
     out = {}
     for gname in sorted(G):
@@ -518,9 +518,8 @@ def lofo_section(ncal=50, reps=200, cut=0.5, seed=0):
         pooled = float(np.mean([x for v in correct_by_fam.values() for x in v]))
         worst = min(per, key=per.get)
         desc = ", ".join(f"{F} {int((fam == F).sum())}/{int(full[fam == F].sum())}" for F in fams)
-        t_full = fast_cut(phi, full)
-        infam = float(((phi < t_full) == full).mean())
-        out[gname] = {"pooled": pooled, "per_family": per, "n_cal": k}
+        infam = float(split_score(cs, k, reps, rng).mean())
+        out[gname] = {"pooled": pooled, "per_family": per, "n_cal": k, "half_split": infam}
         print(f"| {gname} | {desc} | {pooled:.3f} | {worst} ({per[worst]:.3f}) | {infam:.3f} |")
     return out
 
@@ -532,7 +531,7 @@ def noisecal_section(ncal=50, reps=200, cut=0.5, seed=0, band=(0.6, 0.95)):
     rng = np.random.default_rng(seed)
     print(f"\n## Noise-dial calibration: cut from noise cells only (n_cal = {ncal}, {reps} repeats), applied to all quantizer cells\n")
     print("| group | noise cells (in φ band / collapsed) | noise φ range | quantizer cells (collapsed) | accuracy on quantizer cells "
-          "mean [5th pct] | full-n noise cut on quantizers | quantizer-fitted cut (in-family) |")
+          "mean [5th pct] | full-n noise cut on quantizers | quantizer half-split baseline (full-n quantizer cut) |")
     print("|---|---|---|---|---|---|---|")
     out = {}
     for gname in sorted(G):
@@ -561,14 +560,84 @@ def noisecal_section(ncal=50, reps=200, cut=0.5, seed=0, band=(0.6, 0.95)):
         tn = fast_cut(phi[isn], full[isn]) if full[isn].any() and not full[isn].all() else float("nan")
         accn = float(((phi[~isn] < tn) == full[~isn]).mean()) if tn == tn else float("nan")
         tq = fast_cut(phi[~isn], full[~isn]) if full[~isn].any() and not full[~isn].all() else float("nan")
-        accq = float(((phi[~isn] < tq) == full[~isn]).mean()) if tq == tq else float("nan")
+        qs = split_score(cs, k, reps, rng, mode="quant_half")
+        accq = float(qs.mean()) if len(qs) else float("nan")
         out[gname] = {"noise_cells": int(isn.sum()), "noise_in_band": int(inb.sum()), "quant_cells": int((~isn).sum()),
                       "acc_mean": float(accs.mean()), "acc_p5": float(np.percentile(accs, 5)), "full_noise_cut": tn,
-                      "acc_full_noise_cut": accn, "acc_quant_fit": accq}
+                      "acc_full_noise_cut": accn, "acc_quant_half_split": accq, "full_quant_cut": tq}
         print(f"| {gname} | {int(isn.sum())} ({int(inb.sum())} / {int(full[isn].sum())}) | {phi[isn].min():.2f}-{phi[isn].max():.2f} | "
               f"{int((~isn).sum())} ({int(full[~isn].sum())}) | {accs.mean():.3f} [{np.percentile(accs, 5):.3f}] | "
-              f"{accn:.3f} (t={tn:.3f}) | {accq:.3f} |")
+              f"{accn:.3f} (t={tn:.3f}) | {accq:.3f} (t={tq:.3f}) |")
     return out
+
+
+def split_score(cs, ncal, reps, rng, cut=0.5, mode="half", test_family=None):
+    """Proper split within one model: fit the cut on CALIBRATION cells (labels estimated from n_cal paired
+    examples) and score it on disjoint TEST cells against their full-n labels.
+    mode 'half': random half of the cells per family (stratified); 'quant_half': the same, quantizer cells only.
+    Returns per-repeat accuracies."""
+    phi = np.array([c[0] for c in cs])
+    full = np.array([(c[1].mean() / c[2].mean() if c[2].mean() > 0 else 0.0) < cut for c in cs])
+    fam = np.array([spec_family(c[3]) for c in cs])
+    pool = np.ones(len(cs), bool) if mode == "half" else fam != "noise"
+    k = min(ncal, min(len(c[1]) for c in cs))
+    accs = []
+    for _ in range(reps):
+        cal = np.zeros(len(cs), bool)
+        for F in set(fam[pool]):
+            ids = np.where(pool & (fam == F))[0]
+            rng.shuffle(ids)
+            cal[ids[:len(ids) // 2]] = True
+        test = pool & ~cal
+        if test.sum() == 0:
+            continue
+        perm = rng.permutation(max(len(c[1]) for c in cs))
+        est, keep = np.zeros(len(cs), bool), np.zeros(len(cs), bool)
+        for i in np.where(cal)[0]:
+            ids = perm[perm < len(cs[i][1])][:k]
+            rb = cs[i][2][ids].mean()
+            keep[i] = rb > 0
+            est[i] = True if rb == 0 else cs[i][1][ids].mean() / rb < cut
+        tr = cal & keep
+        t = fast_cut(phi[tr], est[tr]) if tr.sum() >= 2 and est[tr].any() and not est[tr].all() else np.median(phi[cal])
+        accs.append(float(((phi[test] < t) == full[test]).mean()))
+    return np.array(accs)
+
+
+def calib_split_section(ncals=(10, 25, 50, 100, 200), reps=200, seed=0):
+    G = calib_groups()
+    rng = np.random.default_rng(seed)
+    print("\n## Calibration budget with a proper split (fit the cut on a random half of each family's cells, "
+          "score the other half against full-n labels)\n")
+    print("| group | cells (collapsed) | AUROC(1-φ) all cells | " + " | ".join(f"n_cal {k}" for k in ncals) + " |")
+    print("|---|---|---|" + "---|" * len(ncals))
+    out = {}
+    for gname in sorted(G):
+        cs = G[gname]
+        phi = np.array([c[0] for c in cs])
+        full = np.array([(c[1].mean() / c[2].mean() if c[2].mean() > 0 else 0.0) < 0.5 for c in cs])
+        if full.all() or not full.any():
+            continue
+        au = auroc_np(1 - phi, full)
+        nmin = min(len(c[1]) for c in cs)
+        row, res = [], {}
+        for k in ncals:
+            if k > nmin:
+                row.append("–")
+                continue
+            a = split_score(cs, k, reps, rng)
+            res[k] = {"mean": float(a.mean()), "p5": float(np.percentile(a, 5))}
+            row.append(f"{a.mean():.3f} [{np.percentile(a, 5):.3f}]")
+        out[gname] = {"n_cells": len(cs), "n_collapsed": int(full.sum()), "auroc": au, "by_ncal": res}
+        print(f"| {gname} | {len(cs)} ({int(full.sum())}) | {au:.3f} | " + " | ".join(row) + " |")
+    return out
+
+
+def auroc_np(score, pos):
+    s1, s0 = score[pos], score[~pos]
+    if not len(s1) or not len(s0):
+        return float("nan")
+    return float(((s1[:, None] > s0[None, :]).sum() + 0.5 * (s1[:, None] == s0[None, :]).sum()) / (len(s1) * len(s0)))
 
 
 def main():
@@ -584,6 +653,7 @@ def main():
     ap.add_argument("--json", default=None)
     ap.add_argument("--noisecal", action="store_true", help="fit the cut from noise-dial cells only, classify quantizer cells")
     ap.add_argument("--lofo", action="store_true", help="leave-one-quantizer-family-out reuse of the 50-example cut")
+    ap.add_argument("--calib-split", action="store_true", help="calibration budget with disjoint fit/score cells")
     ap.add_argument("--calib", action="store_true", help="labelled-example budget for placing each model's cut")
     ap.add_argument("--variants", action="store_true", help="within-Sudoku test on the 13 trained variants (p4d)")
     ap.add_argument("--s-platform", default="babel", choices=["babel", "p4d"],
@@ -599,6 +669,11 @@ def main():
         return
     if a.lofo:
         out = {"lofo": lofo_section()}
+        if a.json:
+            json.dump(out, open(a.json, "w"), indent=1)
+        return
+    if a.calib_split:
+        out = {"calib_split": calib_split_section()}
         if a.json:
             json.dump(out, open(a.json, "w"), indent=1)
         return
