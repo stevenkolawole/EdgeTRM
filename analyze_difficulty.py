@@ -10,7 +10,7 @@ results/breadth/sudoku_extreme_test_meta.json (built from sapientinc/sudoku-extr
     python analyze_difficulty.py strat    # stratified Babel sweep (difficulty_sweep.py), 6 bins x 1000, k = 1..64
     python analyze_difficulty.py deep     # deep Babel sweep, 300 per bin, k = 1..512
     python analyze_difficulty.py halt     # halting-head AUROC per rating bin and quantizer (angle C)
-    python analyze_difficulty.py gapdepth # deep cells: gap at 16/64/512 with CIs, depth trend test, draws pooled
+    python analyze_difficulty.py gapdepth # Babel robustness exhibit (results/breadth/babel/x1rb); gapdepth_p4d = p4d deep cells: gap at 16/64/512 with CIs, depth trend test, draws pooled
     python analyze_difficulty.py glink    # which puzzles fail: fp32's solve step vs rating
     python analyze_difficulty.py json     # figure-ready JSON -> results/breadth/x1_difficulty_readout.json
     python analyze_difficulty.py fig [first1000|strat|deep]   # draft figure -> plots/x1_difficulty_<src>.{png,pdf}
@@ -146,10 +146,16 @@ def load_strat(task, kind="diff"):
     other fp32 copies are checked for identity)."""
     recs, fp32s = {}, []
     # kind: "deep" (K=512, p4d) | "diff" (K=64, 6000 puzzles, p4d) | "diff_babel" (the Babel K=64 MLP file)
-    plat, pref = {"deep": ("p4d", "deep"), "diff": ("p4d", "diff"), "diff_babel": ("babel", "diff")}[kind]
-    files = sorted(glob.glob(str(B / plat / "x1" / f"{pref}_{task}_*.json")))
-    if kind == "deep":                                   # robustness draws share the deep protocol and fp32
-        files += sorted(glob.glob(str(B / plat / "x1" / f"rb_{task}_*.json")))
+    # kind: "deep" (K=512, p4d, incl. the p4d robustness draws rb_*) | "diff" (K=64, p4d) | "diff_babel" |
+    #       "rb_babel" (the self-contained Babel robustness exhibit: own fp32, results/breadth/babel/x1rb/)
+    if kind == "rb_babel":
+        files = sorted(glob.glob(str(B / "babel" / "x1rb" / f"rb_{task}_*.json")))
+        files = [f for f in files if f.endswith("_fp32.json")] + [f for f in files if not f.endswith("_fp32.json")]
+    else:
+        plat, pref = {"deep": ("p4d", "deep"), "diff": ("p4d", "diff"), "diff_babel": ("babel", "diff")}[kind]
+        files = sorted(glob.glob(str(B / plat / "x1" / f"{pref}_{task}_*.json")))
+        if kind == "deep":                               # p4d robustness draws share the deep protocol and fp32
+            files += sorted(glob.glob(str(B / plat / "x1" / f"rb_{task}_*.json")))
     rows = None
     for f in files:
         d = json.load(open(f))
@@ -376,7 +382,7 @@ def _ncdf(z):
     return 0.5 * (1 + math.erf(z / math.sqrt(2)))
 
 
-def gapdepth():
+def gapdepth(kind="rb_babel"):
     """Per deep cell: paired gap to fp32 at 16 / 64 / 512 steps (95% CI), and the depth trend
     D = gap(512) - gap(16) per puzzle, with CI and one-sided p for D > 0 (the gap shrinks = catch-up)
     and for D < 0 (it grows). Noise specs are also pooled over draws: mean over draws with a t-interval
@@ -384,8 +390,9 @@ def gapdepth():
     ks = (16, 64, 512)
     tcrit = {1: 12.71, 2: 4.30, 3: 3.18, 4: 2.78, 5: 2.57}
     for task, label, H in TASKS:
-        recs, rows = load_strat(task, "deep")
-        if not recs:
+        recs, rows = load_strat(task, kind)
+        if not recs or "fp32" not in recs:
+            print(f"\n### {label}: no {kind} records with an fp32 reference yet")
             continue
         v = np.array([ROW_RES[r] for r in rows])
         masks = [("all", np.ones(len(v), bool)), ("hard", v >= 51)]
@@ -532,5 +539,5 @@ def fig():
 
 
 if __name__ == "__main__":
-    {"first": first, "strat": strat, "strat_babel": lambda: strat("diff_babel"), "deep": lambda: strat("deep"), "glink": glink, "halt": halt, "gapdepth": gapdepth, "json": build_json,
+    {"first": first, "strat": strat, "strat_babel": lambda: strat("diff_babel"), "deep": lambda: strat("deep"), "glink": glink, "halt": halt, "gapdepth": gapdepth, "gapdepth_p4d": lambda: gapdepth("deep"), "json": build_json,
      "fig": fig}[sys.argv[1]]()
