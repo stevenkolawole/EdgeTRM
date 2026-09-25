@@ -82,7 +82,7 @@ def _load_gsm8k_hf_home(n):
     import glob as _glob
     import os as _os
     import pandas as pd
-    root = _os.environ.get("HF_HOME", str(Path.home() / "hf_cache"))
+    root = _os.environ.get("GSM_ROOT") or _os.environ.get("HF_HOME", str(Path.home() / "hf_cache"))
     files = sorted(_glob.glob(root + "/hub/datasets--openai--gsm8k/snapshots/*/main/test-*.parquet"))
     assert files, f"GSM8K parquet not found under {root}/hub"
     df = pd.concat([pd.read_parquet(f) for f in files]).reset_index(drop=True)
