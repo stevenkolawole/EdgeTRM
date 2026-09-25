@@ -322,6 +322,7 @@ def main():
                          "sr0: the same with draw 0 = round-to-nearest")
     ap.add_argument("--tta", action="store_true", help="rollout k runs on a random Sudoku symmetry of each puzzle (k=0 identity)")
     ap.add_argument("--ensemble", default="", help="comma list of checkpoints (released = the default one); rollout k uses model k")
+    ap.add_argument("--ckpt", default="", help="trained-variant checkpoint instead of the released one (use with --tag)")
     ap.add_argument("--offset", type=int, default=0, help="first test row (held-out sets: e.g. 1000)")
     ap.add_argument("--outdir", required=True)
     ap.add_argument("--index", required=True)
@@ -329,6 +330,10 @@ def main():
     ap.add_argument("--allow_cpu", action="store_true")
     a = ap.parse_args()
     assert a.allow_cpu or torch.cuda.is_available(), "NO CUDA on this node"
+    if a.ckpt:
+        import breadth_sweep as bsw
+        assert a.tag, "--ckpt needs a --tag so cell names differ from the released model's"
+        bsw.CKPT_OVERRIDE = a.ckpt
     t = TRM_TASKS.get(a.task) or HRM_TASKS[a.task]
     kind = t["data"]
     inp, lab = load_qa(kind, a.n + a.offset)
@@ -432,7 +437,7 @@ def main():
             os.replace(tmp, outdir / name)
             summ = quick_summary(corr, qh, hs, chk, a.D)
             rec = {"task": a.task, "spec": spec, "wseed": wseed, "noise": a.noise, "sigma": sg, "K": K, "D": a.D,
-                   "polish": a.polish, "polish_from": a.polish_from, "wsample": a.wsample, "master": a.master, "tta": a.tta, "ensemble": a.ensemble, "offset": a.offset, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
+                   "polish": a.polish, "polish_from": a.polish_from, "wsample": a.wsample, "master": a.master, "tta": a.tta, "ensemble": a.ensemble, "ckpt": a.ckpt, "offset": a.offset, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
                    "zl_rms_last": float(rms[-1]), "summary": summ, "secs": time.time() - t1,
                    "host": socket.gethostname(),
                    "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",
