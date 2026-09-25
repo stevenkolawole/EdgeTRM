@@ -968,7 +968,7 @@
   "mj_per_answer": 1.17258465792,
   "acc": 0.0,
   "acc_n": 100,
-  "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
   "mj_per_solved": Infinity
  },
  {
@@ -980,7 +980,7 @@
   "mj_per_answer": 8.74658017792,
   "acc": 0.0,
   "acc_n": 100,
-  "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
   "mj_per_solved": Infinity
  },
  {
@@ -992,7 +992,7 @@
   "mj_per_answer": 2.34516931584,
   "acc": 0.0,
   "acc_n": 100,
-  "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
   "mj_per_solved": Infinity
  },
  {
@@ -1004,7 +1004,7 @@
   "mj_per_answer": 17.49316035584,
   "acc": 0.0,
   "acc_n": 100,
-  "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
   "mj_per_solved": Infinity
  },
  {
@@ -1014,10 +1014,10 @@
   "bound": "weights_on_chip",
   "n": 4,
   "mj_per_answer": 4.69033863168,
-  "acc": 0.24,
+  "acc": 0.19,
   "acc_n": 100,
-  "acc_source": "host sim of compiled QDQ graph, test 0-99",
-  "mj_per_solved": 19.543077632000003
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "mj_per_solved": 24.68599279831579
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1026,10 +1026,10 @@
   "bound": "weights_dram",
   "n": 4,
   "mj_per_answer": 34.98632071168,
-  "acc": 0.24,
+  "acc": 0.19,
   "acc_n": 100,
-  "acc_source": "host sim of compiled QDQ graph, test 0-99",
-  "mj_per_solved": 145.77633629866668
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "mj_per_solved": 184.1385300614737
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1038,10 +1038,10 @@
   "bound": "weights_on_chip",
   "n": 8,
   "mj_per_answer": 9.38067726336,
-  "acc": 0.49,
+  "acc": 0.5,
   "acc_n": 100,
-  "acc_source": "host sim of compiled QDQ graph, test 0-99",
-  "mj_per_solved": 19.144239312979593
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "mj_per_solved": 18.76135452672
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1050,10 +1050,10 @@
   "bound": "weights_dram",
   "n": 8,
   "mj_per_answer": 69.97264142336,
-  "acc": 0.49,
+  "acc": 0.5,
   "acc_n": 100,
-  "acc_source": "host sim of compiled QDQ graph, test 0-99",
-  "mj_per_solved": 142.80130902726532
+  "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "mj_per_solved": 139.94528284672
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",

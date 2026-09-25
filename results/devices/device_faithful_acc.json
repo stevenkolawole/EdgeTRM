@@ -2016,6 +2016,78 @@
   "source": "host sim of compiled QDQ graph, test 0-99"
  },
  {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.5438271604938272,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.03,
+  "cell": 0.7337037037037037,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.19,
+  "cell": 0.7651851851851852,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.3,
+  "cell": 0.7870370370370371,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.4,
+  "cell": 0.8103703703703704,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.44,
+  "cell": 0.8204938271604938,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.5,
+  "cell": 0.8364197530864198,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24"
+ },
+ {
   "task": "maze",
   "prec": "fp32",
   "step": 1,
