@@ -26,8 +26,11 @@ for part in general preempt; do
   run=$(squeue -u $USER -h -p $part -t R -o %i | wc -l)
   echo "$part held_or_pending=$n running=$run cap=${CAP[$part]} backlog=$(ls $B/babel_backlog/$part | wc -l)"
   while [ "$n" -lt "${CAP[$part]}" ]; do
-    f=$(ls $B/babel_backlog/$part/*.sbatch 2>/dev/null | sort | head -1)
-    # general has room but no general work: borrow preempt work (preempt is congested; general is not)
+    # take the highest-priority file (lowest numeric prefix) across BOTH backlogs, so low-priority work in one
+    # partition's backlog never runs ahead of high-priority work waiting in the other
+    f=$(ls $B/babel_backlog/general/*.sbatch $B/babel_backlog/preempt/*.sbatch 2>/dev/null | awk -F/ '{print $NF"\t"$0}' | sort | head -1 | cut -f2)
+    [ -n "$f" ] && [ "$part" = preempt ] && ! grep -q -- "--requeue" "$f" && sed -i "2i #SBATCH --requeue" "$f"
+    # general has room but no queued work: borrow pending preempt jobs (preempt is congested; general is not)
     if [ -z "$f" ] && [ "$part" = general ]; then
       j=$(squeue -u $USER -h -p preempt -t PD -o "%i %r" | grep -v JobHeldUser | awk '$2!="Dependency"{print $1}' | head -1)
       if [ -n "$j" ] && scontrol update jobid=$j partition=general qos=normal >/dev/null 2>&1; then
