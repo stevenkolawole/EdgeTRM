@@ -8,7 +8,7 @@ source "$HOME/q7/env_p4d.sh"
 cd "$HOME/edgetrm_src" || exit 4
 export HF_HUB_OFFLINE=1 PYTHONUNBUFFERED=1
 $Q7_PY -c "import torch,sys; sys.exit(0 if torch.cuda.is_available() else 1)" || { echo "[preflight] no CUDA"; exit 3; }
-args=(); for r in "$@"; do args+=(--rundir "$Q7_ROOT/ckpt/$r"); done
+args=(); for r in "$@"; do case "$r" in --*) args+=("$r");; *) args+=(--rundir "$Q7_ROOT/ckpt/$r");; esac; done
 echo "$(date -u) [q7_evalrun] $JOB: ${args[*]}"
 $Q7_PY q7_eval.py "${args[@]}" 2>&1 | grep -v Warn
 rc=${PIPESTATUS[0]}
