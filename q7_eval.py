@@ -359,6 +359,14 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
             tmp = str(out) + ".tmp"
             json.dump(rec, open(tmp, "w"))
             os.replace(tmp, out)
+        # delta_T at each probe sigma (median over puzzles of the one-step map perturbation, median of draws)
+        for key in [k for k in list(rec) if re.fullmatch(r"Sq?_[0-9.]+", k)]:
+            tag, sg = key.split("_", 1)
+            rec["deltaT" + tag[1:] + "_" + sg] = rec[key] * float(sg)
+        rec["written_at"] = time.time()
+        tmp = str(out) + ".tmp"
+        json.dump(rec, open(tmp, "w"))                # Sep 25 fix (audit 66/80/81): written even if no cell was added
+        os.replace(tmp, out)
         fp = next(r for r in rec["records"] if r["quant"]["spec"] == "fp32")
         w4t = next((r for r in rec["records"] if r["quant"]["spec"] == "w4t"), None)
         lsq = next((r for r in rec["records"] if r["quant"]["spec"] == "w4lsq"), None)
@@ -384,6 +392,7 @@ def main():
     ap.add_argument("--scan", default="", help="root holding <run>/step_N checkpoints; evaluates every one")
     ap.add_argument("--rundir", action="append", default=[], help="one run directory; evaluates its step_N")
     ap.add_argument("--full", action="store_true", help="never use the light cell set")
+    ap.add_argument("--last", action="store_true", help="with --rundir: only the latest step_N of each run")
     ap.add_argument("--n", type=int, default=1000)
     ap.add_argument("--nsup", type=int, default=16)
     ap.add_argument("--draws", type=int, default=DRAWS)
@@ -400,9 +409,10 @@ def main():
             if re.fullmatch(r"step_\d+", Path(p).name):
                 jobs.append((p, str(Path(p).parent / f"eval_{Path(p).name}.json")))
     for rd in a.rundir:
-        for p in sorted(glob.glob(os.path.join(rd, "step_*")), key=lambda q: int(re.sub(r"\D", "", Path(q).name) or 0)):
-            if re.fullmatch(r"step_\d+", Path(p).name):
-                jobs.append((p, str(Path(p).parent / f"eval_{Path(p).name}.json")))
+        steps = [p for p in sorted(glob.glob(os.path.join(rd, "step_*")), key=lambda q: int(re.sub(r"\D", "", Path(q).name) or 0))
+                 if re.fullmatch(r"step_\d+", Path(p).name)]
+        for p in (steps[-1:] if a.last else steps):
+            jobs.append((p, str(Path(p).parent / f"eval_{Path(p).name}.json")))
     for ck, out in jobs:
         evaluate_checkpoint(ck, out, n=a.n, nsup=a.nsup, quants=qs, sigmas=sig, draws=a.draws,
                             label=f"{Path(ck).parent.name}/{Path(ck).name}", light=False if a.full else None)
