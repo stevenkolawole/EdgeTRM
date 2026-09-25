@@ -364,7 +364,8 @@ def cmd_main(a):
     """Headline table: per model and spec base, draws averaged (range in brackets).
     det = deterministic step 16 | det max-Q step | best-Q@K | maxq_any@K | pass@K | vote@K | fp32 polish."""
     recs = load_index(a.root)
-    main = [r for r in recs if r["noise"] == "ptrm" and abs(r["sigma"] - a.sigma_main) < 1e-9 and r["D"] == 16 and r["n"] == a.n]
+    main = [r for r in recs if r["noise"] == "ptrm" and abs(r["sigma"] - a.sigma_main) < 1e-9 and r["D"] == 16 and r["n"] == a.n
+            and r.get("polish", 0) == a.main_polish and r.get("polish_from", "last") == "last"]
     tasks = sorted({r["task"] for r in main}) if not a.task else [a.task]
     Ks = (1, 4, 8, 16, 32)
     for task in tasks:
@@ -406,6 +407,27 @@ def cmd_main(a):
                   " ".join(f(per[('maxq', k)]) for k in Ks) + f" || {f(per[('maxq_any', 16)])} {f(per[('maxq_any', 32)])} | {f(per[('pass', 32)])} | {f(per[('vote', 16)])} | {f(per[('pol', polk)]) if polk else '  -  '}")
 
 
+def cmd_polish(a):
+    """M1 x M2: per polish cell, exact % at step 16 (single / best-Q / max-Q (rollout, step) / pass) and after p fp32
+    polish steps (single+polish / best-Q by the fp32 head / best-Q chosen by the compressed head at 16 / pass)."""
+    recs = [r for r in load_index(a.root) if r.get("polish") and (not a.task or r["task"] == a.task)]
+    print("task spec from K | step16: single bestQ maxq_any pass | per polish step p: single / bestQ(fp32 head) / bestQ(comp head) / pass")
+    for r in sorted(recs, key=lambda r: (r["task"], r.get("polish_from", "last"), r["spec"], r["K"])):
+        c = load_cell(a.root, r)
+        kind = kind_of(r["task"])
+        if kind != "sudoku":
+            continue
+        K = r["K"]
+        m = select(c, kind, K, 16, rules=("random", "maxq", "maxq_any", "pass"))
+        f = lambda d, rr: "%5.1f" % (100 * np.mean(d[rr]["exact"]))
+        line = f"{r['task']:11s} {r['spec']:13s} {r.get('polish_from', 'last'):4s} K{K:2d} | {f(m, 'random')} {f(m, 'maxq')} {f(m, 'maxq_any')} {f(m, 'pass')} |"
+        for pp in range(1, r["polish"] + 1):
+            po = select(c, kind, K, 16, src="pol", polish_step=pp, rules=("random", "maxq", "pass"))
+            pc = select(c, kind, K, 16, src="pol", polish_step=pp, sel_by="comp", rules=("maxq",))
+            line += f" P{pp}: {f(po, 'random')}/{f(po, 'maxq')}/{f(pc, 'maxq')}/{f(po, 'pass')}"
+        print(line)
+
+
 def cmd_json(a):
     recs = load_index(a.root)
     out = []
@@ -436,15 +458,16 @@ def cmd_json(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main"))
+    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main", "polish"))
     ap.add_argument("--sigma_main", type=float, default=0.3)
     ap.add_argument("--n", type=int, default=1000)
+    ap.add_argument("--main_polish", type=int, default=2, help="main grid = the P2 cells (rescue cells with P4 excluded)")
     ap.add_argument("--root", default="results/m2")
     ap.add_argument("--task", default="")
     ap.add_argument("--D", type=int, default=16)
     ap.add_argument("--metric", default="exact", choices=("exact", "valid", "vshort"))
     a = ap.parse_args()
-    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main}[a.cmd](a)
+    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main, "polish": cmd_polish}[a.cmd](a)
 
 
 if __name__ == "__main__":
