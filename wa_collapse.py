@@ -387,6 +387,13 @@ VARIANTS = {
     # the definition used for the cross-mixer comparison
     "A2b2_rms_var_rsqrt": dict(eight={"rms_var", "rms_rsqrt", "rms_const"}),
     "B2b2_rms_var_rsqrt16": dict(eight={"rms_var", "rms_rsqrt", "rms_const"}, sixteen_default=False),
+    # B2 (all RMSNorm at 16) rescues w8a8; is the RMSNorm output needed at 16 too?
+    "B2ab_sq_var16": dict(eight={"rms_sq", "rms_var", "rms_rsqrt", "rms_const"}, sixteen_default=False),
+    # B2b2 (RMSNorm variance path alone at 16) does not rescue w8a8: greedy unions kept at 16 bit
+    "B23_rms_resid16": dict(eight=RMS | {"rms_const", "residual", "inject"}, sixteen_default=False),
+    "B26_rms_swiglu16": dict(eight=RMS | {"rms_const", "swiglu_prod"}, sixteen_default=False),
+    "B236_rms_resid_swiglu16": dict(eight=RMS | {"rms_const", "residual", "inject", "swiglu_prod"},
+                                    sixteen_default=False),
     "A2c_rms_out": dict(eight={"rms_out"}),
     "A3_residual_inject": dict(eight={"residual", "inject"}),
     "A4_linear_in_edge": dict(eight=set(), edge_linear=True),
@@ -428,16 +435,21 @@ def stage_build(task, names, kill=None):
     reg_path.write_text(json.dumps(reg, indent=1))
 
 
-def stage_eval(task, names, start, count, nsteps, threads):
+def stage_eval(task, names, start, count, nsteps, threads, ref=False):
+    """ref=True: reference QDQ semantics (ORT graph optimizations disabled, so every Q/DQ pair is executed
+    as written). The default ORT_ENABLE_ALL fuses QDQ patterns into integer kernels, which changes the
+    arithmetic when uint8 and uint16 encodings mix (M3; REWRITE_NOTES 40)."""
     import onnxruntime as ort
     p16, p8, abl = paths(task)
     so = ort.SessionOptions()
     so.intra_op_num_threads = threads
+    if ref:
+        so.graph_optimization_level = ort.GraphOptimizationLevel.ORT_DISABLE_ALL
     inp, lab = A.load_data(task, list(range(start, start + count)))
     inp = inp.astype(np.int32)
     init = I.initial_state(task)
     for name in names:
-        out = abl / f"eval_{name}_{start}_{count}.json"
+        out = abl / f"eval_{name}_{start}_{count}{'_ref' if ref else ''}.json"
         if out.exists():
             continue
         path = p16 / f"variant_{name}.onnx" if not name.startswith("ref_") else \
@@ -448,11 +460,12 @@ def stage_eval(task, names, start, count, nsteps, threads):
         ex = [(r["preds"][s] == lab).all(-1).mean() for s in range(nsteps)]
         cell = [(r["preds"][s] == lab).mean() for s in range(nsteps)]
         res = {"variant": name, "task": task, "start": start, "count": count, "nsteps": nsteps,
+               "runtime": "ORT reference QDQ (ORT_DISABLE_ALL)" if ref else "ORT fused integer kernels (ORT_ENABLE_ALL)",
                "exact": float(ex[-1]), "cell": float(cell[-1]), "exact_per_step": [float(e) for e in ex],
                "cell_per_step": [float(c) for c in cell], "correct": (r["preds"][-1] == lab).all(-1).astype(int).tolist(),
                "secs": time.time() - t0}
         out.write_text(json.dumps(res))
-        print(f"[{task}] {name} n={count}: exact {ex[-1]:.3f} cell {cell[-1]:.4f} ({time.time()-t0:.0f}s)", flush=True)
+        print(f"[{task}] {name}{' [ref]' if ref else ''} n={count}: exact {ex[-1]:.3f} cell {cell[-1]:.4f} ({time.time()-t0:.0f}s)", flush=True)
 
 
 def stage_report(task):
@@ -488,6 +501,7 @@ def main():
     ap.add_argument("--count", type=int, default=100)
     ap.add_argument("--nsteps", type=int, default=16)
     ap.add_argument("--threads", type=int, default=8)
+    ap.add_argument("--ref", action="store_true", help="reference QDQ semantics (graph optimizations off)")
     a = ap.parse_args()
     names = [v for v in a.variants.split(",") if v]
     if a.stage == "stats":
@@ -497,7 +511,7 @@ def main():
     elif a.stage == "report":
         stage_report(a.task)
     else:
-        stage_eval(a.task, names, a.start, a.count, a.nsteps, a.threads)
+        stage_eval(a.task, names, a.start, a.count, a.nsteps, a.threads, a.ref)
 
 
 if __name__ == "__main__":
