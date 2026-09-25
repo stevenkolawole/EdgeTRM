@@ -1,0 +1,614 @@
+{
+ "sudoku_mlp": {
+  "n_weights": 5023232,
+  "n_linears": 10,
+  "frac_low16_zero": 0.00011625981041687902,
+  "W_bits_per_weight": {
+   "raw": 32.0,
+   "zstd": 29.69485781265926,
+   "zstd_shuf": 26.97896015951483,
+   "fpzip": 29.506187251554376,
+   "zfp_rev": 32.13058047090001
+  },
+  "w4t": {
+   "q_bits_per_weight": 4.000063704005708,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.426584318621956,
+    "zstd_shuf": 26.718385294567323,
+    "fpzip": 29.505938805932118,
+    "zfp_rev": 31.093020589134646
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.106001872897767,
+    "zstd_shuf": 26.27006516919784
+   }
+  },
+  "w4c": {
+   "q_bits_per_weight": 4.030014142289267,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.029735437264296,
+    "zstd_shuf": 25.8504341427989,
+    "fpzip": 29.553970033635714,
+    "zfp_rev": 29.81235348078687
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.721272678626033,
+    "zstd_shuf": 25.865082878911426
+   }
+  },
+  "w4a": {
+   "q_bits_per_weight": 4.037517677861584,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.973371725614108,
+    "zstd_shuf": 25.688664190704312,
+    "fpzip": 29.52432218937927,
+    "zfp_rev": 29.573743757007442
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.751992342778514,
+    "zstd_shuf": 25.947240342472735
+   }
+  },
+  "w4g32": {
+   "q_bits_per_weight": 4.506319437366222,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.415192449801243,
+    "zstd_shuf": 25.31870636275609,
+    "fpzip": 29.895253096014677,
+    "zfp_rev": 29.10583783508307
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 27.61459395066762,
+    "zstd_shuf": 25.02614412394251
+   }
+  },
+  "w4g128": {
+   "q_bits_per_weight": 4.126579859341556,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.906547816226684,
+    "zstd_shuf": 25.71185881918255,
+    "fpzip": 29.641031113036387,
+    "zfp_rev": 29.4885077973703
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.38553504994394,
+    "zstd_shuf": 25.535916318418103
+   }
+  },
+  "mx4": {
+   "q_bits_per_weight": 4.2531597186831105,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.929274220262972,
+    "zstd_shuf": 25.40247713026195,
+    "fpzip": 29.524554709000103,
+    "zfp_rev": 29.27182499235552
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.663993221893794,
+    "zstd_shuf": 25.720586267964528
+   }
+  },
+  "w3g32": {
+   "q_bits_per_weight": 3.5063194373662214,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.760705458159208,
+    "zstd_shuf": 26.139494253898686,
+    "fpzip": 29.879309575986138,
+    "zfp_rev": 30.27118795229844
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.459869661604323,
+    "zstd_shuf": 25.965380058098052
+   }
+  },
+  "w3c": {
+   "q_bits_per_weight": 3.030014142289267,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.453254000611558,
+    "zstd_shuf": 26.646294656508,
+    "fpzip": 29.536546988074612,
+    "zfp_rev": 30.955012231169096
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.13658457343798,
+    "zstd_shuf": 26.28629854245235
+   }
+  },
+  "w3a": {
+   "q_bits_per_weight": 3.0356417939685048,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.29407043114871,
+    "zstd_shuf": 26.352139817551727,
+    "fpzip": 29.518445494852717,
+    "zfp_rev": 30.609290592192437
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.33593670369993,
+    "zstd_shuf": 26.660293611762306
+   }
+  },
+  "w8c": {
+   "q_bits_per_weight": 8.030014142289268,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 25.715512243909895,
+    "zstd_shuf": 22.055823820201816,
+    "fpzip": 29.56469141779635,
+    "zfp_rev": 25.662088472123127
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 25.690522755070837,
+    "zstd_shuf": 22.02261651462644
+   }
+  },
+  "w8t": {
+   "q_bits_per_weight": 8.000063704005708,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 27.073847276016718,
+    "zstd_shuf": 23.55004745948425,
+    "fpzip": 29.52915891601264,
+    "zfp_rev": 27.063168892059934
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 26.539437557333606,
+    "zstd_shuf": 22.897845849046988
+   }
+  },
+  "bf16": {
+   "q_bits_per_weight": 16.0,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 21.11369253898685,
+    "zstd_shuf": 18.18286394098461,
+    "fpzip": 29.87948157680155,
+    "zfp_rev": 22.825400061155847
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 20.72788037661808,
+    "zstd_shuf": 18.269614463357456
+   }
+  }
+ },
+ "sudoku_attn": {
+  "n_weights": 6822400,
+  "n_linears": 10,
+  "frac_low16_zero": 9.087711069418387e-05,
+  "W_bits_per_weight": {
+   "raw": 32.0,
+   "zstd": 29.708867260787994,
+   "zstd_shuf": 27.01110811444653,
+   "fpzip": 29.653789868667918,
+   "zfp_rev": 32.17484052532833
+  },
+  "w4t": {
+   "q_bits_per_weight": 4.000046904315197,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.179990619136962,
+    "zstd_shuf": 26.331673311444654,
+    "fpzip": 29.545742260787993,
+    "zfp_rev": 30.974474671669793
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.96108348968105,
+    "zstd_shuf": 26.120598030018762
+   }
+  },
+  "w4c": {
+   "q_bits_per_weight": 4.026446998123827,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.043538930581615,
+    "zstd_shuf": 25.75954151031895,
+    "fpzip": 29.56314962476548,
+    "zfp_rev": 29.628208255159475
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.516308630393997,
+    "zstd_shuf": 25.606376641651032
+   }
+  },
+  "w4a": {
+   "q_bits_per_weight": 4.033058747654784,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.96517120075047,
+    "zstd_shuf": 25.589208489681052,
+    "fpzip": 29.529086538461538,
+    "zfp_rev": 29.438499061913696
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.502118902439026,
+    "zstd_shuf": 25.635751641651034
+   }
+  },
+  "w4g32": {
+   "q_bits_per_weight": 4.5,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.317254924953097,
+    "zstd_shuf": 25.167406191369604,
+    "fpzip": 29.90418972795497,
+    "zfp_rev": 29.020816135084427
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 27.535615619136962,
+    "zstd_shuf": 24.908942307692307
+   }
+  },
+  "w4g128": {
+   "q_bits_per_weight": 4.125,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.862470684803,
+    "zstd_shuf": 25.54123592870544,
+    "fpzip": 29.654917917448405,
+    "zfp_rev": 29.34455909943715
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.175897045028144,
+    "zstd_shuf": 25.309878048780487
+   }
+  },
+  "mx4": {
+   "q_bits_per_weight": 4.25,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.86561561913696,
+    "zstd_shuf": 25.223643292682926,
+    "fpzip": 29.53375703564728,
+    "zfp_rev": 29.169859287054408
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.55144582551595,
+    "zstd_shuf": 25.559303470919325
+   }
+  },
+  "w3g32": {
+   "q_bits_per_weight": 3.5,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.793650328330205,
+    "zstd_shuf": 26.128067542213884,
+    "fpzip": 29.904743198874296,
+    "zfp_rev": 30.194596622889307
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.45983935272045,
+    "zstd_shuf": 25.939950750469045
+   }
+  },
+  "w3c": {
+   "q_bits_per_weight": 3.0264469981238276,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.318038227016885,
+    "zstd_shuf": 26.450994371482178,
+    "fpzip": 29.571346153846154,
+    "zfp_rev": 30.778517823639774
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.072590290806755,
+    "zstd_shuf": 26.268018292682928
+   }
+  },
+  "w3a": {
+   "q_bits_per_weight": 3.031405810272045,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.22248710131332,
+    "zstd_shuf": 26.233067542213885,
+    "fpzip": 29.533692542213885,
+    "zfp_rev": 30.487457786116323
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.311458724202627,
+    "zstd_shuf": 26.6456074108818
+   }
+  },
+  "w8c": {
+   "q_bits_per_weight": 8.026446998123827,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 25.63217636022514,
+    "zstd_shuf": 22.03004221388368,
+    "fpzip": 29.565235694183865,
+    "zfp_rev": 25.46437148217636
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 25.215063320825514,
+    "zstd_shuf": 21.64418269230769
+   }
+  },
+  "w8t": {
+   "q_bits_per_weight": 8.000046904315196,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 27.028765243902438,
+    "zstd_shuf": 22.817431988742964,
+    "fpzip": 29.531788227016886,
+    "zfp_rev": 26.879484052532835
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 26.48767940900563,
+    "zstd_shuf": 22.798337242026268
+   }
+  },
+  "bf16": {
+   "q_bits_per_weight": 16.0,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 21.750892354596623,
+    "zstd_shuf": 18.182899859287055,
+    "fpzip": 29.881760084427768,
+    "zfp_rev": 22.828527204502816
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 20.427406191369606,
+    "zstd_shuf": 18.258038227016886
+   }
+  }
+ },
+ "maze_attn": {
+  "n_weights": 6819840,
+  "n_linears": 10,
+  "frac_low16_zero": 9.01780686936937e-05,
+  "W_bits_per_weight": {
+   "raw": 32.0,
+   "zstd": 29.704546734234235,
+   "zstd_shuf": 26.97351609421922,
+   "fpzip": 29.62535308746246,
+   "zfp_rev": 32.1246996996997
+  },
+  "w4t": {
+   "q_bits_per_weight": 4.000046921921922,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.230539132882882,
+    "zstd_shuf": 26.19639874249249,
+    "fpzip": 29.533843609234236,
+    "zfp_rev": 30.68277027027027
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.168670232732733,
+    "zstd_shuf": 26.32393135322823
+   }
+  },
+  "w4c": {
+   "q_bits_per_weight": 4.026445195195195,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.88290751689189,
+    "zstd_shuf": 25.522528387762762,
+    "fpzip": 29.56363551051051,
+    "zfp_rev": 29.457028903903904
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.35234961524024,
+    "zstd_shuf": 25.408938626126126
+   }
+  },
+  "w4a": {
+   "q_bits_per_weight": 4.033056493993994,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.73950121996997,
+    "zstd_shuf": 25.286656578453453,
+    "fpzip": 29.530476961336337,
+    "zfp_rev": 29.279016516516517
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.403249343093094,
+    "zstd_shuf": 25.50939846096096
+   }
+  },
+  "w4g32": {
+   "q_bits_per_weight": 4.5,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.171951248123122,
+    "zstd_shuf": 24.979354354354353,
+    "fpzip": 29.902194772897897,
+    "zfp_rev": 28.916253753753754
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 27.511025478603603,
+    "zstd_shuf": 24.889084787912914
+   }
+  },
+  "w4g128": {
+   "q_bits_per_weight": 4.125,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.636620213963965,
+    "zstd_shuf": 25.28575567755255,
+    "fpzip": 29.653567239114114,
+    "zfp_rev": 29.21269707207207
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.104902167792794,
+    "zstd_shuf": 25.240800957207206
+   }
+  },
+  "mx4": {
+   "q_bits_per_weight": 4.25,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.63335914039039,
+    "zstd_shuf": 25.009961524024025,
+    "fpzip": 29.534359750375376,
+    "zfp_rev": 29.081043543543544
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.452080987237238,
+    "zstd_shuf": 25.411615521771772
+   }
+  },
+  "w3g32": {
+   "q_bits_per_weight": 3.5,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.809823104354354,
+    "zstd_shuf": 26.142870213963963,
+    "fpzip": 29.90233084647147,
+    "zfp_rev": 30.088138138138138
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 28.382457066441443,
+    "zstd_shuf": 25.829997184684686
+   }
+  },
+  "w3c": {
+   "q_bits_per_weight": 3.0264451951951954,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.27940362237237,
+    "zstd_shuf": 26.352032892267268,
+    "fpzip": 29.56467483108108,
+    "zfp_rev": 30.63923611111111
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.15599662162162,
+    "zstd_shuf": 26.33091333521021
+   }
+  },
+  "w3a": {
+   "q_bits_per_weight": 3.0314036692942943,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.277227618243245,
+    "zstd_shuf": 26.25962134009009,
+    "fpzip": 29.53006052927928,
+    "zfp_rev": 30.324662162162163
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 29.30804710960961,
+    "zstd_shuf": 26.649332535660662
+   }
+  },
+  "w8c": {
+   "q_bits_per_weight": 8.026445195195196,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 25.344677881006007,
+    "zstd_shuf": 21.56615287162162,
+    "fpzip": 29.56495870870871,
+    "zfp_rev": 25.28099662162162
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 25.433755630630632,
+    "zstd_shuf": 21.21841333521021
+   }
+  },
+  "w8t": {
+   "q_bits_per_weight": 8.000046921921921,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 27.142119463213213,
+    "zstd_shuf": 22.72408736861862,
+    "fpzip": 29.53152683933934,
+    "zfp_rev": 26.48191629129129
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 26.414148132507506,
+    "zstd_shuf": 22.67030076951952
+   }
+  },
+  "bf16": {
+   "q_bits_per_weight": 16.0,
+   "exact_sub_frac": 1.0,
+   "R_sub_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 21.2273730762012,
+    "zstd_shuf": 18.139202092717717,
+    "fpzip": 29.87240404466967,
+    "zfp_rev": 22.78221659159159
+   },
+   "R_xor_bits_per_weight": {
+    "raw": 32.0,
+    "zstd": 20.25116718280781,
+    "zstd_shuf": 18.259394941816815
+   }
+  }
+ }
+}
