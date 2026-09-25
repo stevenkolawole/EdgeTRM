@@ -1,3 +1,6 @@
+--task maze_attn --mode ladder --nsup 32 --group 7 --cells w4t+a4tp99.99~blk@0,w4t+a4tp99.99~blk@1,w4t+a4tp99.99~blk@2,w4t+a4tp99.999~blk@0,w4t+a4tm~blk@0,w4t+a4ts~blk@0,w4t+a4tp99.99@0 --out /home/ubuntu/x7/results/match_maze_attn.json
+--task sudoku_mlp --mode ladder --nsup 32 --group 6 --cells w4t+a4tp99.99~blk@0,w4t+a4tp99.99~blk@1,w4t+a4tp99.99~blk@2,w4t+a4tp99.999~blk@0,w4t+a4tm~blk@0,w4t+a4ts~blk@0 --out /home/ubuntu/x7/results/match_sudoku_mlp.json
+--task maze_attn --mode depth --group 2 --cells w4t+a4tp99.99~blk@0 --out /home/ubuntu/x7/results/match_depth_maze_attn.json
 --task maze_attn --mode biasnoise --draws 0 --arms wb --sigmas 0.3,0.5,0.7,1,1.5,2 --group 6 --out /home/ubuntu/x7/results/bn_maze_attn_d0wb2.json
 --task maze_attn --mode biasnoise --draws 1 --arms wb --sigmas 0.3,0.5,0.7,1,1.5,2 --group 6 --out /home/ubuntu/x7/results/bn_maze_attn_d1wb2.json
 --task maze_attn --mode biasnoise --draws 2 --arms wb --sigmas 0.3,0.5,0.7,1,1.5,2 --group 6 --out /home/ubuntu/x7/results/bn_maze_attn_d2wb2.json
