@@ -181,30 +181,65 @@ def sr_quantize_(m, master, bits, gran, gen):
             mod.weight.data = (torch.floor(Wp / sc + Up).clamp(-qmax, qmax) * sc).view(out_f, -1)[:, :in_f]
 
 
+def sudoku_symmetry(rng):
+    """Random Sudoku symmetry: band/row and stack/column permutations, optional transpose, digit relabelling.
+    Returns (P, dmap, dinv): transformed flat grid t = dmap[g[P]]; inverse g[P] = dinv[t]."""
+    def order():
+        b = rng.permutation(3)
+        w = [rng.permutation(3) for _ in range(3)]            # one within-band permutation per band
+        return np.array([3 * b[i] + w[i][j] for i in range(3) for j in range(3)])
+    R, C = order(), order()
+    P = (R[:, None] * 9 + C[None, :]).reshape(-1)
+    if rng.random() < 0.5:
+        P = P.reshape(9, 9).T.reshape(-1).copy()
+    dmap = np.arange(11)
+    dmap[2:11] = 2 + rng.permutation(9)
+    dinv = np.argsort(dmap)
+    return P, torch.from_numpy(dmap).to(DEV), torch.from_numpy(dinv).to(DEV)
+
+
 @torch.no_grad()
-def run_cell_wsample(m, master, bits, gran, draw0_rtn, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_steps,
-                     hash_w):
-    """K rollouts, rollout k uses its own stochastic-rounding draw of the weights (draw 0 = round-to-nearest if
-    draw0_rtn); optional PTRM kicks on top. Same output arrays as run_cell (no polish)."""
+def gmatch_perturb_(m, master, bits, gran, gen):
+    """Control for SR: Gaussian weight noise with the SAME per-element variance as stochastic rounding on the spec's
+    grid (s^2 f (1 - f), f = frac(W / s)), zero mean, no lattice: the unstructured perturbation of equal size."""
+    import torch.nn.functional as F
+    for mod, W in zip(_linears(m), master):
+        Z = torch.randn(W.shape, generator=gen, device=W.device, dtype=W.dtype)
+        if gran == "a":
+            qmax = 2 ** bits - 1
+            sc = ((W.amax(dim=1, keepdim=True) - W.amin(dim=1, keepdim=True)) / qmax).clamp_min(1e-8)
+        elif gran in ("t", "c"):
+            qmax = 2 ** (bits - 1) - 1
+            sc = ((W.abs().max() if gran == "t" else W.abs().amax(dim=1, keepdim=True)) / qmax).clamp_min(1e-8)
+        else:
+            g = int(gran[1:]); qmax = 2 ** (bits - 1) - 1
+            out_f, in_f = W.shape
+            pad = (-in_f) % g
+            Wp = F.pad(W, (0, pad)).view(out_f, -1, g)
+            sc = (Wp.abs().amax(dim=2, keepdim=True) / qmax).clamp_min(1e-8).expand(-1, -1, g).reshape(out_f, -1)[:, :in_f]
+        f = W / sc - torch.floor(W / sc)
+        mod.weight.data = W + sc * torch.sqrt(f * (1 - f)) * Z
+
+
+@torch.no_grad()
+def run_cell_multi(get_model, get_xform, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_steps, hash_w):
+    """K deterministic (or kicked) rollouts; rollout k runs model get_model(k) on the puzzles transformed by
+    get_xform(k) (None = identity). Correctness and the checker are frame-invariant; answer hashes are taken in the
+    original frame so votes pool across transforms. Same output arrays as run_cell (no polish)."""
     n = inp.shape[0]
     corr = np.zeros((K, n, D), np.uint8); qh = np.zeros((K, n, D), np.float16); rms = np.zeros(D)
     hs = {k: np.zeros((K, n), np.int64) for k in chk_steps}
     chk = {k: np.zeros((K, n), np.int16) for k in chk_steps}
     vsh = {k: np.zeros((K, n), np.uint8) for k in chk_steps} if kind == "maze" else None
     for k in range(K):
-        if gran == "noise":                                   # weight-noise ensemble: draw k = its own Gaussian draw
-            for mod, W in zip(_linears(m), master):
-                mod.weight.data = W.clone()
-            torch.manual_seed(int(seed) * 7907 + 1000 + k)
-            quantize_weights_(m, None, "noise", bits)          # bits carries sigma here
-        elif k == 0 and draw0_rtn:
-            for mod, W in zip(_linears(m), master):
-                mod.weight.data = W.clone()
-            quantize_weights_(m, bits, gran)
-        else:
-            sr_quantize_(m, master, bits, gran, torch.Generator(device=DEV).manual_seed(int(seed) * 7907 + 1000 + k))
+        m = get_model(k)
+        xf = get_xform(k)
         for ci, s in enumerate(range(0, n, chunk)):
             x = torch.from_numpy(inp[s:s + chunk]).to(DEV); y = torch.from_numpy(lab[s:s + chunk]).to(DEV)
+            if xf is not None:
+                P, dmap, dinv = xf
+                Pt = torch.from_numpy(P).to(DEV)
+                x, y = dmap[x[:, Pt]], dmap[y[:, Pt]]
             B = x.shape[0]
             bt = {"inputs": x, "labels": y, "puzzle_identifiers": torch.zeros(B, dtype=torch.int32, device=DEV)}
             carry = init_inner(m, B, x.shape[1] + m.inner.puzzle_emb_len, m.inner.config.hidden_size)
@@ -219,7 +254,11 @@ def run_cell_wsample(m, master, bits, gran, draw0_rtn, inp, lab, kind, bfs, K, D
                 qh[k, s:s + B, t] = q_halt.float().cpu().numpy()
                 rms[t] += float(carry.z_L.float().pow(2).mean().sqrt()) * B / (n * K)
                 if (t + 1) in chk_steps:
-                    hs[t + 1][k, s:s + B] = (pred.long() * hash_w).sum(1).cpu().numpy()
+                    po = pred
+                    if xf is not None:
+                        po = torch.empty_like(pred)
+                        po[:, Pt] = dinv[pred]
+                    hs[t + 1][k, s:s + B] = (po.long() * hash_w).sum(1).cpu().numpy()
                     if kind == "sudoku":
                         chk[t + 1][k, s:s + B] = sudoku_check(pred, x)["chk"].cpu().numpy()
                     else:
@@ -227,6 +266,26 @@ def run_cell_wsample(m, master, bits, gran, draw0_rtn, inp, lab, kind, bfs, K, D
                         chk[t + 1][k, s:s + B] = np.minimum(mc["chk"], 32000)
                         vsh[t + 1][k, s:s + B] = mc["vshort"]
     return corr, qh, rms, hs, chk, vsh, None
+
+
+def weight_setter(m, master, bits, gran, draw0_rtn, seed, gmatch=False):
+    """get_model for the weight samplers: SR draws (draw 0 = RTN if draw0_rtn) or Gaussian weight-noise draws."""
+    def get(k):
+        if gran == "noise":
+            for mod, W in zip(_linears(m), master):
+                mod.weight.data = W.clone()
+            torch.manual_seed(int(seed) * 7907 + 1000 + k)
+            quantize_weights_(m, None, "noise", bits)          # bits carries sigma here
+        elif k == 0 and draw0_rtn:
+            for mod, W in zip(_linears(m), master):
+                mod.weight.data = W.clone()
+            quantize_weights_(m, bits, gran)
+        elif gmatch:
+            gmatch_perturb_(m, master, bits, gran, torch.Generator(device=DEV).manual_seed(int(seed) * 7907 + 1000 + k))
+        else:
+            sr_quantize_(m, master, bits, gran, torch.Generator(device=DEV).manual_seed(int(seed) * 7907 + 1000 + k))
+        return m
+    return get
 
 
 def quick_summary(corr, qh, hs, chk, D):
@@ -258,9 +317,11 @@ def main():
     ap.add_argument("--polish_from", default="last", choices=("last", "best"),
                     help="polish from each rollout's last state, or from its state at its max-q step (kept on the fly)")
     ap.add_argument("--master", default="fp32", help="weights the draws are made from: fp32 or an RTN spec (e.g. w8c)")
-    ap.add_argument("--wsample", default="none", choices=("none", "sr", "sr0", "wnoise"),
+    ap.add_argument("--wsample", default="none", choices=("none", "sr", "sr0", "wnoise", "gmatch"),
                     help="sr: each rollout uses its own stochastic-rounding draw of the weights on the spec's grid; "
                          "sr0: the same with draw 0 = round-to-nearest")
+    ap.add_argument("--tta", action="store_true", help="rollout k runs on a random Sudoku symmetry of each puzzle (k=0 identity)")
+    ap.add_argument("--ensemble", default="", help="comma list of checkpoints (released = the default one); rollout k uses model k")
     ap.add_argument("--offset", type=int, default=0, help="first test row (held-out sets: e.g. 1000)")
     ap.add_argument("--outdir", required=True)
     ap.add_argument("--index", required=True)
@@ -295,14 +356,31 @@ def main():
     for spec in specs:
         todo = []
         for sg in sigmas:
-            K = 1 if ((a.noise == "none" or sg == 0) and a.wsample == "none") else a.K
-            name = f"{a.task}__{spec}__{a.noise}{sg:g}__D{a.D}_K{K}{('_P%d' % a.polish) if a.polish else ''}{'b' if a.polish and a.polish_from == 'best' else ''}{('_' + a.wsample) if a.wsample != 'none' else ''}{('_m' + a.master) if a.master != 'fp32' else ''}{('_o%d' % a.offset) if a.offset else ''}{a.tag}.npz"
+            multi = a.wsample != "none" or a.tta or a.ensemble
+            K = (len(a.ensemble.split(",")) if a.ensemble else a.K) if multi else (1 if (a.noise == "none" or sg == 0) else a.K)
+            name = f"{a.task}__{spec}__{a.noise}{sg:g}__D{a.D}_K{K}{('_P%d' % a.polish) if a.polish else ''}{'b' if a.polish and a.polish_from == 'best' else ''}{('_' + a.wsample) if a.wsample != 'none' else ''}{('_m' + a.master) if a.master != 'fp32' else ''}{'_tta' if a.tta else ''}{('_ens%d' % len(a.ensemble.split(','))) if a.ensemble else ''}{('_o%d' % a.offset) if a.offset else ''}{a.tag}.npz"
             if not (outdir / name).exists():
                 todo.append((sg, K, name))
         if not todo:
             print(f"  {spec}: all cells done", flush=True)
             continue
-        if a.wsample != "none":
+        get_model = None
+        if a.ensemble:
+            import breadth_sweep as bsw
+            base, wseed = split_spec(spec)
+            q = parse_quant(base)
+            models = []
+            for ck in a.ensemble.split(","):
+                bsw.CKPT_OVERRIDE = None if ck == "released" else ck
+                mk, meta = build(a.task, None, a.D, 256)
+                if q["gran"] is not None:
+                    torch.manual_seed(wseed if wseed is not None else 0)
+                    quantize_weights_(mk, q["bits"], q["gran"], q.get("sigma"))
+                models.append(mk.to(DEV).eval())
+            bsw.CKPT_OVERRIDE = None
+            m = models[0]
+            get_model = lambda k: models[k]
+        elif a.wsample != "none":
             base, wseed = split_spec(spec)
             q = parse_quant(base)
             if a.wsample == "wnoise":
@@ -315,17 +393,26 @@ def main():
                 qm = parse_quant(a.master)
                 quantize_weights_(m, qm["bits"], qm["gran"])
             master = [mod.weight.data.clone() for mod in _linears(m)]
+            get_model = weight_setter(m, master, q["sigma"] if a.wsample == "wnoise" else q["bits"], q["gran"],
+                                      a.wsample == "sr0", 7919 * (wseed or 0) + 17, gmatch=a.wsample == "gmatch")
         else:
             m, meta, q, wseed = build_spec(a.task, spec, a.D, 256)
+            if a.tta:
+                get_model = lambda k, _m=m: _m
         for sg, K, name in todo:
             t1 = time.time()
             seed = 7919 * (wseed or 0) + int(round(1000 * sg)) + 17
-            if a.wsample != "none":
+            if get_model is not None:
                 ch = a.chunk or (1000 if kind == "sudoku" else 128)
-                corr, qh, rms, hs, chk, vsh, pol = run_cell_wsample(m, master, q["sigma"] if a.wsample == "wnoise" else q["bits"],
-                                                                    q["gran"], a.wsample == "sr0",
-                                                                    inp, lab, kind, bfs, K, a.D, a.noise, sg, seed, ch,
-                                                                    chk_steps, hash_w)
+                if a.tta:
+                    assert kind == "sudoku", "TTA implemented for Sudoku symmetries"
+                    rng = np.random.default_rng(12345 + 1000 * (wseed or 0))
+                    xfs = [None] + [sudoku_symmetry(rng) for _ in range(K - 1)]
+                    get_xform = lambda k: xfs[k]
+                else:
+                    get_xform = lambda k: None
+                corr, qh, rms, hs, chk, vsh, pol = run_cell_multi(get_model, get_xform, inp, lab, kind, bfs, K, a.D,
+                                                                  a.noise, sg, seed, ch, chk_steps, hash_w)
             else:
                 corr, qh, rms, hs, chk, vsh, pol = run_cell(m, mref, inp, lab, kind, bfs, K, a.D, a.noise, sg, seed,
                                                             chunk, chk_steps, a.polish, hash_w, a.polish_from)
@@ -345,7 +432,7 @@ def main():
             os.replace(tmp, outdir / name)
             summ = quick_summary(corr, qh, hs, chk, a.D)
             rec = {"task": a.task, "spec": spec, "wseed": wseed, "noise": a.noise, "sigma": sg, "K": K, "D": a.D,
-                   "polish": a.polish, "polish_from": a.polish_from, "wsample": a.wsample, "master": a.master, "offset": a.offset, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
+                   "polish": a.polish, "polish_from": a.polish_from, "wsample": a.wsample, "master": a.master, "tta": a.tta, "ensemble": a.ensemble, "offset": a.offset, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
                    "zl_rms_last": float(rms[-1]), "summary": summ, "secs": time.time() - t1,
                    "host": socket.gethostname(),
                    "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",

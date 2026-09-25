@@ -49,6 +49,8 @@ def load_index(root, any_offset=False):
         if r["file"] in seen:
             continue
         seen.add(r["file"])
+        if r.get("tta") and "_v2" not in r["file"]:
+            continue                      # TTA cells before the symmetry fix (Sep 25 10:03 UTC) are invalid
         if any_offset or r.get("offset", 0) == OFFSET:
             out.append(r)
     return out
@@ -529,6 +531,78 @@ def cmd_wsample(a):
             print(f"    K={k:2d} S={16*k:3d}: {100*np.mean(sel['maxq'][mk]):5.1f}{mqa} [{100*np.mean(sel['pass'][mk]):5.1f}]   refs: {f(sq)} / {f(pr)} / {f(pq)}")
 
 
+def abc_scores(cell, k, d=16):
+    """Per puzzle over the first k draws at step d: the max-Q answer (the system's answer) and its exactness,
+    agreement a = share of draws matching the majority answer, a_sel = share matching the max-Q answer, max q."""
+    H = cell[f"hash_{d}"][:k]
+    C = cell["corr"][:k, :, d - 1].astype(bool)
+    Q = cell["q"][:k, :, d - 1].astype(np.float32)
+    n = H.shape[1]; ar = np.arange(n)
+    same = (H[:, None, :] == H[None, :, :]).sum(1)          # [k, n] votes for each draw's answer
+    a_maj = same.max(0) / k
+    pick = Q.argmax(0)
+    a_sel = same[pick, ar] / k
+    return {"exact": C[pick, ar], "exact_vote": C[_mode_pick(H), ar], "a": a_maj, "a_sel": a_sel, "q": Q.max(0)}
+
+
+def risk_at_coverage(score, correct, covs=(1.0, 0.9, 0.8, 0.7, 0.6, 0.5)):
+    """Answer the top-cov fraction by score (higher = more confident); risk = error rate among answered."""
+    order = np.argsort(-score, kind="mergesort")
+    out = []
+    for c in covs:
+        m = max(1, int(round(c * len(score))))
+        out.append(1 - correct[order[:m]].mean())
+    return out
+
+
+def _pct(x):
+    r = np.argsort(np.argsort(x, kind="mergesort"), kind="mergesort")
+    return r / max(1, len(x) - 1)
+
+
+def cmd_abc(a):
+    """ABC agreement over SR draws (Agreement-Based Cascading, 2407.02348) vs the halting head, and the cascade to fp32."""
+    recs = load_index(a.root)
+    want = [("sudoku_mlp", "w4c", "sr0"), ("sudoku_attn", "w3c", "sr0"), ("hrm_sudoku", "w3c", "sr0"), ("sudoku_mlp", "w3g32", "sr0"),
+            ("sudoku_mlp", "fp32", "kick"), ("sudoku_attn", "fp32", "kick"), ("hrm_sudoku", "fp32", "kick")]
+    covs = (1.0, 0.9, 0.8, 0.7, 0.6, 0.5)
+    print("risk (% wrong among answered) at coverage " + " / ".join(f"{int(100*c)}" for c in covs) + "; AUROC of the score for 'answer correct'")
+    for task, spec, kind_ in want:
+        if kind_ == "sr0":
+            rs = [r for r in recs if r["task"] == task and r["spec"] == spec and r.get("wsample") == "sr0" and r["noise"] == "none" and r["n"] == a.n
+                  and r.get("master", "fp32") == "fp32" and not r.get("tta")]
+        else:
+            rs = [r for r in recs if r["task"] == task and r["spec"] == spec and r["noise"] == "ptrm" and abs(r["sigma"] - 0.3) < 1e-9 and r["D"] == 16
+                  and r["n"] == a.n and r.get("wsample", "none") == "none" and r.get("polish", 0) == 2]
+        if not rs:
+            continue
+        cell = load_cell(a.root, rs[0])
+        det = [r for r in recs if r["task"] == task and r["spec"] == "fp32" and r["noise"] == "none" and r["K"] == 1 and r["n"] == a.n and r["D"] >= 16]
+        fp = load_cell(a.root, det[0])["corr"][0, :, 15].astype(bool) if det else None
+        for k in (4, 8, 16):
+            if k > rs[0]["K"]:
+                continue
+            sc = abc_scores(cell, k)
+            corr = sc["exact"]
+            combo = np.minimum(_pct(sc["a_sel"] + 1e-3 * sc["q"]), _pct(sc["q"]))
+            line = f"{task:11s} {spec:5s} {kind_:4s} K={k:2d} acc {100*corr.mean():5.1f} (vote {100*sc['exact_vote'].mean():5.1f}) |"
+            for nm, score in (("a", sc["a"]), ("a_sel", sc["a_sel"] + 1e-3 * sc["q"]), ("maxq", sc["q"]), ("a&q", combo)):
+                rk = risk_at_coverage(score, corr, covs)
+                line += f" {nm}: " + "/".join(f"{100*x:4.1f}" for x in rk) + f" AU {auroc(score, corr):.3f} |"
+            print(line)
+            if fp is not None and k == 16:
+                # cascade: answer on device when score > theta, else defer to fp32 (16 steps); theta from rows 0-99
+                cal, ev = np.arange(100), np.arange(100, len(corr))
+                for nm, score in (("a", sc["a"]), ("maxq", sc["q"]), ("a&q", combo)):
+                    parts = []
+                    for target in (0.1, 0.2, 0.3):
+                        th = np.quantile(score[cal], target)
+                        dfr = score[ev] <= th
+                        acc = np.where(dfr, fp[ev], corr[ev]).mean()
+                        parts.append(f"defer {100*dfr.mean():4.1f}% -> {100*acc:5.1f}")
+                    print(f"      cascade to fp32 (fp32 alone {100*fp[ev].mean():5.1f}, device alone {100*corr[ev].mean():5.1f}) by {nm}: " + "; ".join(parts))
+
+
 def cmd_json(a):
     recs = load_index(a.root)
     out = []
@@ -559,7 +633,7 @@ def cmd_json(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main", "polish", "exit", "wsample"))
+    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main", "polish", "exit", "wsample", "abc"))
     ap.add_argument("--sigma_main", type=float, default=0.3)
     ap.add_argument("--n", type=int, default=1000)
     ap.add_argument("--main_polish", type=int, default=2, help="main grid = the P2 cells (rescue cells with P4 excluded)")
@@ -571,7 +645,7 @@ def main():
     a = ap.parse_args()
     global OFFSET
     OFFSET = a.offset
-    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main, "polish": cmd_polish, "exit": cmd_exit, "wsample": cmd_wsample}[a.cmd](a)
+    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main, "polish": cmd_polish, "exit": cmd_exit, "wsample": cmd_wsample, "abc": cmd_abc}[a.cmd](a)
 
 
 if __name__ == "__main__":
