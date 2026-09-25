@@ -21,6 +21,7 @@ as mean [min, max] over draws.  Basin class of a cell from its accuracy retained
 (same run, same definition): in r >= 0.9, edge 0.3 <= r < 0.9, out r < 0.3.
 """
 import glob
+import gzip
 import json
 import math
 import os
@@ -100,6 +101,16 @@ def spearman_ci(x, y, reps=2000, seed=0):
     return rho, (float(np.percentile(bs, 2.5)), float(np.percentile(bs, 97.5)))
 
 
+def jload(f):
+    f = str(f)
+    return json.load(gzip.open(f, "rt") if f.endswith(".gz") else open(f))
+
+
+def x8files(pattern):
+    """results/breadth/babel/x8/<pattern>.json or .json.gz (the repo keeps gzipped copies)."""
+    return sorted(set(glob.glob(str(X8 / f"{pattern}.json")) + glob.glob(str(X8 / f"{pattern}.json.gz"))))
+
+
 def fmt(v, d=2):
     return "--" if v is None else f"{v:.{d}f}"
 
@@ -109,18 +120,18 @@ def load_det(task):
     """Merge det_<task>.json and det_<task>__*.json (one file per job line). The fp32 record of
     the first file is kept as the reference (every file reran fp32 in its own process; the
     per-file fp32 is what that file's fid_H / agree_fp32 were computed against)."""
-    files = sorted(glob.glob(str(X8 / f"det_{task}.json"))) + sorted(glob.glob(str(X8 / f"det_{task}__*.json")))
+    files = x8files(f"det_{task}") + x8files(f"det_{task}__*")
     if not files:
         return None
     meta, recs, seen = None, [], set()
     for f in files:
-        j = json.load(open(f))
+        j = jload(f)
         meta = meta or j.get("meta", {})
         for r in j["records"]:
             if r["spec"] in seen:
                 continue
             seen.add(r["spec"])
-            r["_file"] = Path(f).name
+            r["_file"] = Path(f).name.replace(".gz", "")
             recs.append(r)
     fp = [r for r in recs if r["spec"] == "fp32"]
     return meta, fp + [r for r in recs if r["spec"] != "fp32"]
@@ -924,10 +935,10 @@ def print_indep(res, specs=None):
 # ----------------------------------------------------------------------------- 8. PTRM
 def compute_ptrm():
     out = {}
-    for f in sorted(glob.glob(str(X8 / "ptrm_*.json"))):
+    for f in x8files("ptrm_*"):
         if "smoke" in f:
             continue
-        j = json.load(open(f))
+        j = jload(f)
         Kmax = max(r["K"] for r in j["records"]) if j["records"] else 0
         key = f"{j['task']}|{j['noise']}|{j.get('wspec', 'fp32')}|K{Kmax}"
         rows = []
@@ -940,7 +951,7 @@ def compute_ptrm():
                          "curve": {k: v for k, v in s.items() if k.isdigit()}, "zL_rms": r.get("zL_rms")})
         if key in out and len(out[key]["rows"]) >= len(rows):
             continue                       # duplicate config (a parallel rerun): keep the more complete file
-        out[key] = {"n": j["n"], "nsup": j["nsup"], "rows": rows, "file": Path(f).name}
+        out[key] = {"n": j["n"], "nsup": j["nsup"], "rows": rows, "file": Path(f).name.replace(".gz", "")}
     return out
 
 
