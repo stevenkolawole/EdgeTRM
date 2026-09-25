@@ -2746,6 +2746,78 @@
  },
  {
   "task": "sudoku_attn",
+  "prec": "w8a16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a16",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.5522222222222222,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a16",
+  "step": 3,
+  "exact": 0.05,
+  "cell": 0.7385185185185185,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a16",
+  "step": 4,
+  "exact": 0.26,
+  "cell": 0.7722222222222223,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a16",
+  "step": 5,
+  "exact": 0.35,
+  "cell": 0.7930864197530865,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a16",
+  "step": 6,
+  "exact": 0.43,
+  "cell": 0.8150617283950617,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a16",
+  "step": 7,
+  "exact": 0.5,
+  "cell": 0.8261728395061728,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a16",
+  "step": 8,
+  "exact": 0.52,
+  "cell": 0.8288888888888889,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_attn",
   "prec": "w8a8",
   "step": 1,
   "exact": 0.0,
