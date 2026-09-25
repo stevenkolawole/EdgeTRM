@@ -271,7 +271,8 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
                 if old.get("n") == rec["n"] and old.get("nsup") == nsup:
                     rec["records"] = old.get("records", [])
                     rec.update({k: v for k, v in old.items() if k.startswith("jac") or k.startswith("ref_fp32")
-                                or k.startswith("S")})
+                                or k.startswith("S") or k.startswith("deltaT") or k.startswith("lsq_steps")
+                                or k.startswith("act_scales")})
             except (json.JSONDecodeError, ValueError):
                 log(f"[q7_eval] {out} unreadable; starting fresh")
         if ref_ckpt:   # records written before the reference was known are redone
@@ -303,6 +304,20 @@ def evaluate_checkpoint(ckpt, out, n=1000, nsup=16, quants=None, sigmas=None, dr
             rec["light"] = True
         todo = [c for c in cells if c not in done]
         if not todo and "jac_spec_mean" in rec and "S_0.02" in rec and (not quant_noise or "Sq_0.02" in rec):
+            # complete record: nothing to recompute, but make sure the file carries every derived field
+            # (audit 94: an early return must not leave S / delta_T only in memory)
+            changed = False
+            for key in [k for k in list(rec) if re.fullmatch(r"Sq?_[0-9.]+", k)]:
+                tag, sg = key.split("_", 1)
+                dk = "deltaT" + tag[1:] + "_" + sg
+                if dk not in rec:
+                    rec[dk] = rec[key] * float(sg)
+                    changed = True
+            if changed or not out.exists():
+                rec["written_at"] = time.time()
+                tmp = str(out) + ".tmp"
+                json.dump(rec, open(tmp, "w"))
+                os.replace(tmp, out)
             return rec
         t0 = time.time()
         ref_zH2 = None
