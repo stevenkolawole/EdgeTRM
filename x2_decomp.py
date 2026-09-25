@@ -7,7 +7,7 @@ same model build, H default, noise draws seeded exactly as difficulty_sweep (@s<
 Per cell (and fp32), from the default carry, T steps of the supervision-step map (contraction.Recursion,
 = the ACT loop), z_H snapshotted on a grid:
   disp_t   ||z_H^q(t) - z_H^fp32(t)|| / ||z_H^fp32(t)||, t in {16, 64, 512, 2048}   (displacement; fidelity's state)
-  settle   first grid step after which ||z_H(t) - z_H(T)|| / ||z_H(T)|| stays below eps (1e-3, 1e-2) (slowdown:
+  settle   first grid step after which ||z_H(t) - z_H(T)|| / ||z_H(T)|| stays below eps (1e-3, 1e-2) (slowdown; = T when it never settles before the end:
            steps to reach the model's OWN end state), T+ if never
   correct  exact-match at 16 / 64 / 512 / 2048
 Path independence of the compressed map (first pi_n puzzles): the default carry plus pi_K random initial carries
