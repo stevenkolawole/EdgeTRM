@@ -73,7 +73,7 @@ def build_spec(task, spec, D, batch):
 
 
 @torch.no_grad()
-def run_cell(m, mref, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_steps, polish, hash_w):
+def run_cell(m, mref, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_steps, polish, hash_w, polish_from="last"):
     n = inp.shape[0]
     corr = np.zeros((K, n, D), np.uint8)
     qh = np.zeros((K, n, D), np.float16)
@@ -103,6 +103,9 @@ def run_cell(m, mref, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_
             Dh = m.inner.config.hidden_size
             carry = init_inner(m, K * B, S, Dh)
             gen = torch.Generator(device=DEV).manual_seed(int(seed) * 1000003 + ci)
+            if polish and polish_from == "best":
+                best_q = torch.full((K * B,), -float("inf"), device=DEV)
+                best_H, best_L = carry.z_H.clone(), carry.z_L.clone()
             for t in range(D):
                 if noise in ("ptrm", "rel") and sigma > 0:
                     zl = carry.z_L
@@ -113,6 +116,11 @@ def run_cell(m, mref, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_
                 pred = logits.argmax(-1)
                 corr[:, s:s + B, t] = (pred == y).all(1).view(K, B).cpu().numpy()
                 qh[:, s:s + B, t] = q_halt.float().view(K, B).cpu().numpy()
+                if polish and polish_from == "best":
+                    upd = q_halt.float() > best_q
+                    best_q = torch.where(upd, q_halt.float(), best_q)
+                    best_H = torch.where(upd.view(-1, 1, 1), carry.z_H, best_H)
+                    best_L = torch.where(upd.view(-1, 1, 1), carry.z_L, best_L)
                 rms[t] += float(carry.z_L.float().pow(2).mean().sqrt()) * B / n
                 if (t + 1) in chk_steps:
                     k = t + 1
@@ -124,6 +132,8 @@ def run_cell(m, mref, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_
                         chk[k][:, s:s + B] = np.minimum(mc["chk"], 32000).reshape(K, B)
                         vsh[k][:, s:s + B] = mc["vshort"].reshape(K, B)
             if polish:
+                if polish_from == "best":
+                    carry = type(carry)(z_H=best_H, z_L=best_L)
                 for p in range(polish):
                     carry, logits, (q_halt, _) = mref.inner(carry, bt)
                     pred = logits.argmax(-1)
@@ -168,6 +178,8 @@ def main():
     ap.add_argument("--chunk", type=int, default=0, help="puzzles per chunk (batch = K*chunk)")
     ap.add_argument("--chk_steps", default="", help="steps with checker + hash (default: D, plus 16/32/64/.. <= D)")
     ap.add_argument("--polish", type=int, default=0, help="fp32 polish steps after the D compressed steps")
+    ap.add_argument("--polish_from", default="last", choices=("last", "best"),
+                    help="polish from each rollout's last state, or from its state at its max-q step (kept on the fly)")
     ap.add_argument("--outdir", required=True)
     ap.add_argument("--index", required=True)
     ap.add_argument("--tag", default="")
@@ -201,7 +213,7 @@ def main():
         todo = []
         for sg in sigmas:
             K = 1 if (a.noise == "none" or sg == 0) else a.K
-            name = f"{a.task}__{spec}__{a.noise}{sg:g}__D{a.D}_K{K}{('_P%d' % a.polish) if a.polish else ''}{a.tag}.npz"
+            name = f"{a.task}__{spec}__{a.noise}{sg:g}__D{a.D}_K{K}{('_P%d' % a.polish) if a.polish else ''}{'b' if a.polish and a.polish_from == 'best' else ''}{a.tag}.npz"
             if not (outdir / name).exists():
                 todo.append((sg, K, name))
         if not todo:
@@ -212,7 +224,7 @@ def main():
             t1 = time.time()
             seed = 7919 * (wseed or 0) + int(round(1000 * sg)) + 17
             corr, qh, rms, hs, chk, vsh, pol = run_cell(m, mref, inp, lab, kind, bfs, K, a.D, a.noise, sg, seed,
-                                                        chunk, chk_steps, a.polish, hash_w)
+                                                        chunk, chk_steps, a.polish, hash_w, a.polish_from)
             arrs = {"corr": corr, "q": qh, "zl_rms": rms}
             for k in chk_steps:
                 arrs[f"hash_{k}"] = hs[k]
@@ -229,7 +241,7 @@ def main():
             os.replace(tmp, outdir / name)
             summ = quick_summary(corr, qh, hs, chk, a.D)
             rec = {"task": a.task, "spec": spec, "wseed": wseed, "noise": a.noise, "sigma": sg, "K": K, "D": a.D,
-                   "polish": a.polish, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
+                   "polish": a.polish, "polish_from": a.polish_from, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
                    "zl_rms_last": float(rms[-1]), "summary": summ, "secs": time.time() - t1,
                    "host": socket.gethostname(),
                    "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",
