@@ -49,6 +49,8 @@ CHAINS = [("sudoku_mlp", "Samsung Galaxy S24", "w8a8"), ("sudoku_mlp", "Samsung 
           ("maze", "Samsung Galaxy S24", "fp32"), ("maze", "Samsung Galaxy S24", "w8a8"),
           ("sudoku_attn", "Samsung Galaxy S24", "w4a16"), ("sudoku_attn", "Samsung Galaxy S24", "w8a8")]
 CHAINS = list(dict.fromkeys(CHAINS))   # a duplicated entry gave two Chain objects one state file (Sep 25 fix)
+# W4A16 retired Sep 25 02:40 UTC: device outputs diverge from the host QDQ graph from step 1 (X3.md)
+CHAINS = [c for c in CHAINS if c[2] != "w4a16"]
 NSTEPS = {"sudoku_mlp": 8, "sudoku_attn": 8, "maze": 8}
 
 

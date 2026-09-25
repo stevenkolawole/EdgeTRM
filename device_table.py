@@ -245,21 +245,29 @@ def deadline(comp, prof, acc, deadlines_ms=(5, 10, 20, 50, 100, 200, 500, 1000, 
     return out
 
 
+def runtime_of(source):
+    if source.startswith("ON DEVICE"):
+        return "QNN HTP on " + source[len("ON DEVICE "):].replace("_", " ")
+    return "ONNX Runtime CPU, fused integer QDQ kernels (host sim)"
+
+
 def device_faithful():
-    """{(task, prec): {step: (exact, count, source)}} from results/devices/device_faithful_acc.json:
-    the accuracy of the very graph that is timed (host simulation of the compiled QDQ graph, or the
-    on-device chain, which takes precedence), keeping the largest sample per (task, prec, step)."""
+    """{(task, prec): {step: (exact, count, source)}} from results/devices/device_faithful_acc.json, the
+    accuracy of the very graph that is timed. If any on-device chain exists for (task, prec), ONLY
+    on-device rows are used for that pair (steps it did not run stay empty: an ORT number describes the
+    host runtime, not the phone); otherwise the host simulation with the largest sample."""
     f = DEV / "device_faithful_acc.json"
+    rows = json.loads(f.read_text()) if f.exists() else []
+    has_dev = {(r["task"], r["prec"]) for r in rows if r["source"].startswith("ON DEVICE")}
     out = collections.defaultdict(dict)
-    if not f.exists():
-        return out
-    for r in json.loads(f.read_text()):
-        key, cur = (r["task"], r["prec"]), out[(r["task"], r["prec"])].get(r["step"])
-        dev = r["source"].startswith("ON DEVICE")
-        if cur is None or (dev and not cur[2].startswith("ON DEVICE")) or \
-                (dev == cur[2].startswith("ON DEVICE") and r["count"] > cur[1]):
+    for r in rows:
+        key = (r["task"], r["prec"])
+        if key in has_dev and not r["source"].startswith("ON DEVICE"):
+            continue
+        cur = out[key].get(r["step"])
+        if cur is None or r["count"] > cur[1]:
             out[key][r["step"]] = (r["exact"], r["count"], r["source"])
-    return out
+    return out, has_dev
 
 
 def energy_table(acc):
@@ -271,7 +279,7 @@ def energy_table(acc):
     the harness fp32 cell. Every row names its accuracy source."""
     rows = []
     est = json.loads((DEV / "energy_estimate.json").read_text()) if (DEV / "energy_estimate.json").exists() else []
-    df = device_faithful()
+    df, has_dev = device_faithful()
     for e in est:
         if e["H"] != 1:
             continue
@@ -284,9 +292,11 @@ def energy_table(acc):
                 row = {"energy_source": "estimate (Horowitz 45 nm)", "task": e["task"], "format": e["format"],
                        "bound": bound, "n": n, "mj_per_answer": ms * n}
                 if a is None:
-                    row.update(acc=None, acc_source="no device-faithful accuracy for this graph yet", mj_per_solved=None)
+                    why = ("on-device chain ran fewer steps; host runtime not substituted"
+                           if (e["task"], prec) in has_dev else "no device-faithful accuracy for this graph yet")
+                    row.update(acc=None, acc_source=why, runtime="-", mj_per_solved=None)
                 else:
-                    row.update(acc=a[0], acc_n=a[1], acc_source=a[2],
+                    row.update(acc=a[0], acc_n=a[1], acc_source=a[2], runtime=runtime_of(a[2]),
                                mj_per_solved=(ms * n / a[0]) if a[0] > 0 else float("inf"))
                 rows.append(row)
     meas = DEV / "energy_l40s.json"
@@ -301,16 +311,17 @@ def energy_table(acc):
                     e = r["median"][f"e_{kind}_mj_per_puzzle_step"]
                     rows.append({"energy_source": f"measured NVML {m['gpu']} batch {r['batch']} {r['dtype']}",
                                  "task": task, "format": r["dtype"], "bound": kind, "n": n, "acc": a,
-                                 "acc_source": "harness fp32 (the timed torch graph), n=1000", "mj_per_answer": e * n,
+                                 "acc_source": "harness fp32 (the timed torch graph), n=1000",
+                                 "runtime": "PyTorch CUDA (L40S)", "mj_per_answer": e * n,
                                  "mj_per_solved": e * n / a if a > 0 else float("inf")})
     (DEV / "energy_solved.json").write_text(json.dumps(rows, indent=1))
-    md = ["| energy source | task | format | bound | n | exact | accuracy source | mJ/answer | mJ/solved |",
-          "|---|---|---|---|---|---|---|---|---|"]
+    md = ["| energy source | task | format | bound | n | exact | accuracy runtime | accuracy source | mJ/answer | mJ/solved |",
+          "|---|---|---|---|---|---|---|---|---|---|"]
     for r in rows:
         a = "-" if r["acc"] is None else f"{r['acc']*100:.1f}"
         sol = "-" if r["mj_per_solved"] is None else ("inf (0 solved)" if r["mj_per_solved"] == float("inf")
                                                        else f"{r['mj_per_solved']:.2f}")
-        md.append(f"| {r['energy_source']} | {r['task']} | {r['format']} | {r['bound']} | {r['n']} | {a} | "
+        md.append(f"| {r['energy_source']} | {r['task']} | {r['format']} | {r['bound']} | {r['n']} | {a} | {r.get('runtime', '-')} | "
                   f"{r['acc_source']}{'' if r.get('acc_n') is None else ' (n=%d)' % r['acc_n']} | "
                   f"{r['mj_per_answer']:.2f} | {sol} |")
     (DEV / "energy_solved.md").write_text(

@@ -9,6 +9,7 @@
   "acc": 0.011,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1808.9414935272728
  },
  {
@@ -21,6 +22,7 @@
   "acc": 0.011,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 3836.094249890909
  },
  {
@@ -33,6 +35,7 @@
   "acc": 0.032,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1243.6472767999999
  },
  {
@@ -45,6 +48,7 @@
   "acc": 0.032,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 2637.3147968
  },
  {
@@ -57,6 +61,7 @@
   "acc": 0.424,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 187.72034366792454
  },
  {
@@ -69,6 +74,7 @@
   "acc": 0.424,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 398.0852523471698
  },
  {
@@ -81,6 +87,7 @@
   "acc": 0.618,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 257.5839019909385
  },
  {
@@ -93,6 +100,7 @@
   "acc": 0.618,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 546.2399579132685
  },
  {
@@ -105,6 +113,7 @@
   "acc": 0.702,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 453.5237932490029
  },
  {
@@ -117,6 +126,7 @@
   "acc": 0.702,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 961.7558233344729
  },
  {
@@ -129,6 +139,7 @@
   "acc": 0.011,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 593.7474792727273
  },
  {
@@ -141,6 +152,7 @@
   "acc": 0.011,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1607.3238574545458
  },
  {
@@ -153,6 +165,7 @@
   "acc": 0.032,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 408.20139200000006
  },
  {
@@ -165,6 +178,7 @@
   "acc": 0.032,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1105.0351520000002
  },
  {
@@ -177,6 +191,7 @@
   "acc": 0.424,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 61.615304452830195
  },
  {
@@ -189,6 +204,7 @@
   "acc": 0.424,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 166.79775879245287
  },
  {
@@ -201,6 +217,7 @@
   "acc": 0.618,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 84.54656662783172
  },
  {
@@ -213,6 +230,7 @@
   "acc": 0.618,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 228.87459458899679
  },
  {
@@ -225,6 +243,7 @@
   "acc": 0.702,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 148.8597668831909
  },
  {
@@ -237,6 +256,7 @@
   "acc": 0.702,
   "acc_n": 1000,
   "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 402.975781925926
  },
  {
@@ -249,6 +269,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": Infinity
  },
  {
@@ -261,6 +282,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": Infinity
  },
  {
@@ -273,6 +295,7 @@
   "acc": 0.02,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 104.39397734400002
  },
  {
@@ -285,6 +308,7 @@
   "acc": 0.02,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 661.860985344
  },
  {
@@ -297,6 +321,7 @@
   "acc": 0.35,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 11.930740267885717
  },
  {
@@ -309,6 +334,7 @@
   "acc": 0.35,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 75.64125546788573
  },
  {
@@ -321,6 +347,7 @@
   "acc": 0.61,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 13.691013422163937
  },
  {
@@ -333,6 +360,7 @@
   "acc": 0.61,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 86.80144070085247
  },
  {
@@ -342,10 +370,10 @@
   "bound": "weights_on_chip",
   "n": 16,
   "mj_per_answer": 16.703036375040003,
-  "acc": 0.0,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "mj_per_solved": Infinity
+  "acc": null,
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
+  "runtime": "-",
+  "mj_per_solved": null
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -354,10 +382,10 @@
   "bound": "weights_dram",
   "n": 16,
   "mj_per_answer": 105.89775765504001,
-  "acc": 0.0,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "mj_per_solved": Infinity
+  "acc": null,
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
+  "runtime": "-",
+  "mj_per_solved": null
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -369,6 +397,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -381,6 +410,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -393,6 +423,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -405,6 +436,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -417,6 +449,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -429,6 +462,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -441,6 +475,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -453,6 +488,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -465,6 +501,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -477,6 +514,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -489,6 +527,7 @@
   "acc": 0.01,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 106.132217344
  },
  {
@@ -501,6 +540,7 @@
   "acc": 0.01,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 663.5992253440002
  },
  {
@@ -513,6 +553,7 @@
   "acc": 0.02,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 106.132217344
  },
  {
@@ -525,6 +566,7 @@
   "acc": 0.02,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 663.5992253440002
  },
  {
@@ -537,6 +579,7 @@
   "acc": 0.36,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 11.792468593777778
  },
  {
@@ -549,6 +592,7 @@
   "acc": 0.36,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 73.73324726044446
  },
  {
@@ -561,6 +605,7 @@
   "acc": 0.56,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 15.161745334857141
  },
  {
@@ -573,6 +618,7 @@
   "acc": 0.56,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 94.79988933485716
  },
  {
@@ -582,10 +628,10 @@
   "bound": "weights_on_chip",
   "n": 16,
   "mj_per_answer": 16.98115477504,
-  "acc": 0.697,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "mj_per_solved": 24.363206276958394
+  "acc": null,
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
+  "runtime": "-",
+  "mj_per_solved": null
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -594,10 +640,10 @@
   "bound": "weights_dram",
   "n": 16,
   "mj_per_answer": 106.17587605504002,
-  "acc": 0.697,
-  "acc_n": 1000,
-  "acc_source": "host sim of compiled QDQ graph, 1000_1000 (start_count)",
-  "mj_per_solved": 152.3326772669154
+  "acc": null,
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
+  "runtime": "-",
+  "mj_per_solved": null
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -609,6 +655,7 @@
   "acc": 0.01,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 103.93746534400002
  },
  {
@@ -621,6 +668,7 @@
   "acc": 0.01,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 382.670969344
  },
  {
@@ -633,6 +681,7 @@
   "acc": 0.02,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 103.93746534400002
  },
  {
@@ -645,6 +694,7 @@
   "acc": 0.02,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 382.670969344
  },
  {
@@ -657,6 +707,7 @@
   "acc": 0.35,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 11.878567467885716
  },
  {
@@ -669,6 +720,7 @@
   "acc": 0.35,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 43.73382506788572
  },
  {
@@ -681,6 +733,7 @@
   "acc": 0.55,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 15.118176777309092
  },
  {
@@ -693,6 +746,7 @@
   "acc": 0.55,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 55.66123190458182
  },
  {
@@ -705,6 +759,7 @@
   "acc": 0.69,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 24.10144123918841
  },
  {
@@ -717,6 +772,7 @@
   "acc": 0.69,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 88.73529723918841
  },
  {
@@ -729,6 +785,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -741,6 +798,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -753,6 +811,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -765,6 +824,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -777,6 +837,7 @@
   "acc": 0.26,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 341.8364707446154
  },
  {
@@ -789,6 +850,7 @@
   "acc": 0.26,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 807.9285027446155
  },
  {
@@ -801,6 +863,7 @@
   "acc": 0.51,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 348.53914664156866
  },
  {
@@ -813,6 +876,7 @@
   "acc": 0.51,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 823.7702380925491
  },
  {
@@ -825,6 +889,7 @@
   "acc": 0.65,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 546.9383531913846
  },
  {
@@ -837,6 +902,7 @@
   "acc": 0.65,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1292.6856043913847
  },
  {
@@ -849,6 +915,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -861,6 +928,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -873,6 +941,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -885,6 +954,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -897,6 +967,7 @@
   "acc": 0.26,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 112.2927104
  },
  {
@@ -909,6 +980,7 @@
   "acc": 0.26,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 345.33872640000004
  },
  {
@@ -921,6 +993,7 @@
   "acc": 0.51,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 114.49452825098041
  },
  {
@@ -933,6 +1006,7 @@
   "acc": 0.51,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 352.11007397647063
  },
  {
@@ -945,6 +1019,7 @@
   "acc": 0.65,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 179.66833664
  },
  {
@@ -957,6 +1032,7 @@
   "acc": 0.65,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 552.5419622400001
  },
  {
@@ -969,6 +1045,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": Infinity
  },
  {
@@ -981,6 +1058,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": Infinity
  },
  {
@@ -993,6 +1071,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": Infinity
  },
  {
@@ -1005,6 +1084,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": Infinity
  },
  {
@@ -1017,6 +1097,7 @@
   "acc": 0.19,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 24.68599279831579
  },
  {
@@ -1029,6 +1110,7 @@
   "acc": 0.19,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 184.1385300614737
  },
  {
@@ -1041,6 +1123,7 @@
   "acc": 0.5,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 18.76135452672
  },
  {
@@ -1053,6 +1136,7 @@
   "acc": 0.5,
   "acc_n": 100,
   "acc_source": "ON DEVICE Samsung_Galaxy_S24",
+  "runtime": "QNN HTP on Samsung Galaxy S24",
   "mj_per_solved": 139.94528284672
  },
  {
@@ -1062,10 +1146,10 @@
   "bound": "weights_on_chip",
   "n": 16,
   "mj_per_answer": 18.76135452672,
-  "acc": 0.69,
-  "acc_n": 100,
-  "acc_source": "host sim of compiled QDQ graph, test 0-99",
-  "mj_per_solved": 27.19036887930435
+  "acc": null,
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
+  "runtime": "-",
+  "mj_per_solved": null
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1074,10 +1158,10 @@
   "bound": "weights_dram",
   "n": 16,
   "mj_per_answer": 139.94528284672,
-  "acc": 0.69,
-  "acc_n": 100,
-  "acc_source": "host sim of compiled QDQ graph, test 0-99",
-  "mj_per_solved": 202.81925050249276
+  "acc": null,
+  "acc_source": "on-device chain ran fewer steps; host runtime not substituted",
+  "runtime": "-",
+  "mj_per_solved": null
  },
  {
   "energy_source": "estimate (Horowitz 45 nm)",
@@ -1089,6 +1173,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1101,6 +1186,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1113,6 +1199,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1125,6 +1212,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1137,6 +1225,7 @@
   "acc": 0.23,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 19.87418744208696
  },
  {
@@ -1149,6 +1238,7 @@
   "acc": 0.23,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 85.73501805078261
  },
  {
@@ -1161,6 +1251,7 @@
   "acc": 0.51,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 17.92573769286275
  },
  {
@@ -1173,6 +1264,7 @@
   "acc": 0.51,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 77.3296241242353
  },
  {
@@ -1185,6 +1277,7 @@
   "acc": 0.62,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 29.4907297527742
  },
  {
@@ -1197,6 +1290,7 @@
   "acc": 0.62,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 127.21970420438711
  },
  {
@@ -1209,6 +1303,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1221,6 +1316,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1233,6 +1329,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1245,6 +1342,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1257,6 +1355,7 @@
   "acc": 0.27,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 17.629141598814815
  },
  {
@@ -1269,6 +1368,7 @@
   "acc": 0.27,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 129.83648263585187
  },
  {
@@ -1281,6 +1381,7 @@
   "acc": 0.53,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 17.961766912
  },
  {
@@ -1293,6 +1394,7 @@
   "acc": 0.53,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 132.28622759124528
  },
  {
@@ -1305,6 +1407,7 @@
   "acc": 0.65,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 29.291496810338465
  },
  {
@@ -1317,6 +1420,7 @@
   "acc": 0.65,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 215.72830961033847
  },
  {
@@ -1329,6 +1433,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1341,6 +1446,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1353,6 +1459,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1365,6 +1472,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1377,6 +1485,7 @@
   "acc": 0.23,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 20.17649005078261
  },
  {
@@ -1389,6 +1498,7 @@
   "acc": 0.23,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 86.03732065947825
  },
  {
@@ -1401,6 +1511,7 @@
   "acc": 0.5,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 18.562370846720004
  },
  {
@@ -1413,6 +1524,7 @@
   "acc": 0.5,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 79.15433500672
  },
  {
@@ -1425,6 +1537,7 @@
   "acc": 0.63,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 29.464080709079372
  },
  {
@@ -1437,6 +1550,7 @@
   "acc": 0.63,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, test 0-99",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 125.64180159796825
  },
  {
@@ -1449,6 +1563,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1461,6 +1576,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1473,6 +1589,7 @@
   "acc": 0.12,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 3062.8219699200004
  },
  {
@@ -1485,6 +1602,7 @@
   "acc": 0.12,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 3423.4884232533336
  },
  {
@@ -1497,6 +1615,7 @@
   "acc": 0.86,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 854.7410148613955
  },
  {
@@ -1509,6 +1628,7 @@
   "acc": 0.86,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 955.3921181172094
  },
  {
@@ -1521,6 +1641,7 @@
   "acc": 0.88,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1670.6301654109093
  },
  {
@@ -1533,6 +1654,7 @@
   "acc": 0.88,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1867.3573217745457
  },
  {
@@ -1544,6 +1666,7 @@
   "mj_per_answer": 2940.3090911232002,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -1555,6 +1678,7 @@
   "mj_per_answer": 3286.5488863232003,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -1567,6 +1691,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1579,6 +1704,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1591,6 +1717,7 @@
   "acc": 0.12,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1000.5995861333333
  },
  {
@@ -1603,6 +1730,7 @@
   "acc": 0.12,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1180.9328128000002
  },
  {
@@ -1615,6 +1743,7 @@
   "acc": 0.86,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 279.2370938046512
  },
  {
@@ -1627,6 +1756,7 @@
   "acc": 0.86,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 329.5626454325582
  },
  {
@@ -1639,6 +1769,7 @@
   "acc": 0.88,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 545.7815924363637
  },
  {
@@ -1651,6 +1782,7 @@
   "acc": 0.88,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 644.145170618182
  },
  {
@@ -1662,6 +1794,7 @@
   "mj_per_answer": 960.575602688,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -1673,6 +1806,7 @@
   "mj_per_answer": 1133.6955002880002,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -1685,6 +1819,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1697,6 +1832,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1709,6 +1845,7 @@
   "acc": 0.02,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 931.6343029760001
  },
  {
@@ -1721,6 +1858,7 @@
   "acc": 0.02,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1472.633982976
  },
  {
@@ -1733,6 +1871,7 @@
   "acc": 0.74,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 50.35861097167568
  },
  {
@@ -1745,6 +1884,7 @@
   "acc": 0.74,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 79.60183691762163
  },
  {
@@ -1757,6 +1897,7 @@
   "acc": 0.84,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 88.72707647390477
  },
  {
@@ -1769,6 +1910,7 @@
   "acc": 0.84,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 140.25085552152382
  },
  {
@@ -1780,6 +1922,7 @@
   "mj_per_answer": 149.06148847616,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -1791,6 +1934,7 @@
   "mj_per_answer": 235.62143727616,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -1803,6 +1947,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1815,6 +1960,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1827,6 +1973,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1839,6 +1986,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1851,6 +1999,7 @@
   "acc": 0.72,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 51.63913238755556
  },
  {
@@ -1863,6 +2012,7 @@
   "acc": 0.72,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 66.66690127644446
  },
  {
@@ -1875,6 +2025,7 @@
   "acc": 0.84,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 88.52422695009525
  },
  {
@@ -1887,6 +2038,7 @@
   "acc": 0.84,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 114.28611647390478
  },
  {
@@ -1898,6 +2050,7 @@
   "mj_per_answer": 148.72070127616,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -1909,6 +2062,7 @@
   "mj_per_answer": 192.00067567616003,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -1921,6 +2075,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1933,6 +2088,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -1945,6 +2101,7 @@
   "acc": 0.12,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 157.22651716266668
  },
  {
@@ -1957,6 +2114,7 @@
   "acc": 0.12,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 247.39313049600003
  },
  {
@@ -1969,6 +2127,7 @@
   "acc": 0.86,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 43.87716758027907
  },
  {
@@ -1981,6 +2140,7 @@
   "acc": 0.86,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 69.03994339423257
  },
  {
@@ -1993,6 +2153,7 @@
   "acc": 0.88,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 85.75991845236364
  },
  {
@@ -2005,6 +2166,7 @@
   "acc": 0.88,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 134.94170754327274
  },
  {
@@ -2016,6 +2178,7 @@
   "mj_per_answer": 150.93745647616,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2027,6 +2190,7 @@
   "mj_per_answer": 237.49740527616,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2039,6 +2203,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -2051,6 +2216,7 @@
   "acc": 0.0,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -2063,6 +2229,7 @@
   "acc": 0.1,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 188.24583659520002
  },
  {
@@ -2075,6 +2242,7 @@
   "acc": 0.1,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 242.34580459520004
  },
  {
@@ -2087,6 +2255,7 @@
   "acc": 0.88,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 42.783144680727275
  },
  {
@@ -2099,6 +2268,7 @@
   "acc": 0.88,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 55.078591953454556
  },
  {
@@ -2111,6 +2281,7 @@
   "acc": 0.88,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 85.56628936145455
  },
  {
@@ -2123,6 +2294,7 @@
   "acc": 0.88,
   "acc_n": 50,
   "acc_source": "host sim of compiled QDQ graph, test 0-49",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 110.15718390690911
  },
  {
@@ -2134,6 +2306,7 @@
   "mj_per_answer": 150.59666927616001,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2145,6 +2318,7 @@
   "mj_per_answer": 193.87664367616003,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2157,6 +2331,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -2169,6 +2344,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -2181,6 +2357,7 @@
   "acc": 0.13,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 2827.419421144615
  },
  {
@@ -2193,6 +2370,7 @@
   "acc": 0.13,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 3160.3423011446152
  },
  {
@@ -2205,6 +2383,7 @@
   "acc": 0.21,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 3500.614521417143
  },
  {
@@ -2217,6 +2396,7 @@
   "acc": 0.21,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 3912.8047537980956
  },
  {
@@ -2229,6 +2409,7 @@
   "acc": 0.23,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 6392.426517370434
  },
  {
@@ -2241,6 +2422,7 @@
   "acc": 0.23,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 7145.121724326957
  },
  {
@@ -2252,6 +2434,7 @@
   "mj_per_answer": 2940.5161979904,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2263,6 +2446,7 @@
   "mj_per_answer": 3286.7559931904,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2275,6 +2459,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -2287,6 +2472,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -2299,6 +2485,7 @@
   "acc": 0.13,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 923.6953245538461
  },
  {
@@ -2311,6 +2498,7 @@
   "acc": 0.13,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1090.1567645538462
  },
  {
@@ -2323,6 +2511,7 @@
   "acc": 0.21,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1143.6227827809525
  },
  {
@@ -2335,6 +2524,7 @@
   "acc": 0.21,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1349.7178989714287
  },
  {
@@ -2347,6 +2537,7 @@
   "acc": 0.23,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 2088.3546468173913
  },
  {
@@ -2359,6 +2550,7 @@
   "acc": 0.23,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 2464.7022502956524
  },
  {
@@ -2370,6 +2562,7 @@
   "mj_per_answer": 960.643137536,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2381,6 +2574,7 @@
   "mj_per_answer": 1133.763035136,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2393,6 +2587,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -2405,6 +2600,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -2417,6 +2613,7 @@
   "acc": 0.02,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 931.6990238720002
  },
  {
@@ -2429,6 +2626,7 @@
   "acc": 0.02,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 1472.6987038720001
  },
  {
@@ -2441,6 +2639,7 @@
   "acc": 0.07,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 532.3994422125716
  },
  {
@@ -2453,6 +2652,7 @@
   "acc": 0.07,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 841.5421164982857
  },
  {
@@ -2465,6 +2665,7 @@
   "acc": 0.14,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 532.3994422125716
  },
  {
@@ -2477,6 +2678,7 @@
   "acc": 0.14,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 841.5421164982857
  },
  {
@@ -2488,6 +2690,7 @@
   "mj_per_answer": 149.07184381952004,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2499,6 +2702,7 @@
   "mj_per_answer": 235.63179261952004,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2510,6 +2714,7 @@
   "mj_per_answer": 9.295691038720001,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2521,6 +2726,7 @@
   "mj_per_answer": 12.000689438720002,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2532,6 +2738,7 @@
   "mj_per_answer": 18.591382077440002,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2543,6 +2750,7 @@
   "mj_per_answer": 24.001378877440004,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2554,6 +2762,7 @@
   "mj_per_answer": 37.182764154880005,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2565,6 +2774,7 @@
   "mj_per_answer": 48.00275775488001,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2576,6 +2786,7 @@
   "mj_per_answer": 74.36552830976001,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2587,6 +2798,7 @@
   "mj_per_answer": 96.00551550976002,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2598,6 +2810,7 @@
   "mj_per_answer": 148.73105661952002,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2609,6 +2822,7 @@
   "mj_per_answer": 192.01103101952003,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2621,6 +2835,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -2633,6 +2848,7 @@
   "acc": 0.0,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": Infinity
  },
  {
@@ -2645,6 +2861,7 @@
   "acc": 0.12,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 157.23730397866672
  },
  {
@@ -2657,6 +2874,7 @@
   "acc": 0.12,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 247.40391731200006
  },
  {
@@ -2669,6 +2887,7 @@
   "acc": 0.22,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 171.53160434036369
  },
  {
@@ -2681,6 +2900,7 @@
   "acc": 0.22,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 269.89518252218187
  },
  {
@@ -2693,6 +2913,7 @@
   "acc": 0.23,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 328.1474169989566
  },
  {
@@ -2705,6 +2926,7 @@
   "acc": 0.23,
   "acc_n": 100,
   "acc_source": "host sim of compiled QDQ graph, 100 canonical rows, token exact",
+  "runtime": "ONNX Runtime CPU, fused integer QDQ kernels (host sim)",
   "mj_per_solved": 516.321218738087
  },
  {
@@ -2716,6 +2938,7 @@
   "mj_per_answer": 150.94781181952004,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2727,6 +2950,7 @@
   "mj_per_answer": 237.50776061952004,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2738,6 +2962,7 @@
   "mj_per_answer": 9.412939038720001,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2749,6 +2974,7 @@
   "mj_per_answer": 12.117937438720002,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2760,6 +2986,7 @@
   "mj_per_answer": 18.825878077440002,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2771,6 +2998,7 @@
   "mj_per_answer": 24.235874877440004,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2782,6 +3010,7 @@
   "mj_per_answer": 37.651756154880005,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2793,6 +3022,7 @@
   "mj_per_answer": 48.47174975488001,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2804,6 +3034,7 @@
   "mj_per_answer": 75.30351230976001,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2815,6 +3046,7 @@
   "mj_per_answer": 96.94349950976002,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2826,6 +3058,7 @@
   "mj_per_answer": 150.60702461952002,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  },
  {
@@ -2837,6 +3070,7 @@
   "mj_per_answer": 193.88699901952003,
   "acc": null,
   "acc_source": "no device-faithful accuracy for this graph yet",
+  "runtime": "-",
   "mj_per_solved": null
  }
 ]

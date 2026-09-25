@@ -33,7 +33,7 @@ for task in ("sudoku_mlp", "sudoku_attn", "maze"):
         add(task, prec, z["preds"], z["lab"], f"host sim of compiled QDQ graph, {f.stem.split('_',2)[2]} (start_count)")
     for f in sorted(d.glob("dev_*.json")):
         meta = json.loads(f.read_text())
-        if not meta.get("done") or not (d / (f.stem + ".npz")).exists():
+        if not meta.get("done") or meta.get("failed") or not (d / (f.stem + ".npz")).exists():
             continue
         z = np.load(d / (f.stem + ".npz")); prec = f.stem.split("_")[1]
         add(task, prec, z["preds"], lab, f"ON DEVICE {f.stem[len('dev_'+prec)+1:]}")
