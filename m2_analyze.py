@@ -11,7 +11,10 @@ step d (<= D) over the first k rollouts:
            step; ties by q; if none crosses, maxq at d
   chk      checker oracle: a rollout whose label-free checker passes (max-q among them), else maxq.
            Sudoku: valid completed grid (= exact on unique solutions).  Maze: valid simple S-G path.
-  pass     any rollout correct (upper bound)
+  pass     any rollout correct at step d (upper bound for rules that read step d)
+  maxq_any the (rollout, step <= d) pair with the highest halting logit, its answer at that step
+           (selection over steps as well as rollouts; K = 1 is sequential selection over steps)
+  pass_any any rollout correct at any step <= d (upper bound for maxq_any / hfirst)
 Maze answers are scored three ways (exact / valid / vshort = valid and as short as BFS).
 
     python m2_analyze.py table   --root results/m2   [--task sudoku_mlp]
@@ -27,7 +30,7 @@ from pathlib import Path
 
 import numpy as np
 
-RULES = ("random", "maxq", "vote", "qvote", "hfirst", "chk", "pass")
+RULES = ("random", "maxq", "vote", "qvote", "hfirst", "maxq_any", "chk", "pass", "pass_any")
 
 
 def load_index(root):
@@ -113,6 +116,17 @@ def select(cell, kind, k, d, rules=RULES, src="main", polish_step=None, sel_by="
             out[r] = {mname: M.mean(0) for mname, M in metrics.items()}          # expected, float per puzzle
         elif r == "pass":
             out[r] = {mname: M.any(0) for mname, M in metrics.items()}
+        elif r in ("maxq_any", "pass_any"):
+            if src != "main":
+                continue
+            ca = cell["corr"][:k, :, :d].astype(bool)
+            if r == "pass_any":
+                out[r] = {"exact": ca.any((0, 2))}
+            else:
+                qa = cell["q"][:k, :, :d].astype(np.float32)
+                flat = qa.transpose(1, 0, 2).reshape(n, -1).argmax(1)
+                kk, tt = np.unravel_index(flat, (k, d))
+                out[r] = {"exact": ca[kk, ar, tt], "mean_step": float(np.mean(tt + 1))}
         elif r == "hfirst":
             if src != "main":
                 continue
@@ -195,7 +209,7 @@ def group_specs(recs):
     g = defaultdict(list)
     for r in recs:
         base = r["spec"].split("@s")[0]
-        g[(r["task"], base, r["noise"], r["sigma"], r["D"], r["K"], r.get("polish", 0))].append(r)
+        g[(r["task"], base, r["noise"], r["sigma"], r["D"], r["K"], r.get("polish", 0), r["n"])].append(r)
     return g
 
 
@@ -209,7 +223,7 @@ def cmd_table(a):
     # deterministic baselines (sigma 0, K 1) per (task, spec base)
     rows = []
     for key in sorted(g, key=lambda k: (k[0], k[1], k[2], k[3], k[4], k[5])):
-        task, base, noise, sg, D, K, P = key
+        task, base, noise, sg, D, K, P, n_ = key
         if K == 1 or D != a.D:
             continue
         kind = kind_of(task)
@@ -231,9 +245,10 @@ def cmd_table(a):
             else:
                 detacc.append(float(c2["corr"][0, :, D - 1].mean()))
         ks = [kk for kk in (1, 2, 4, 8, 16, 32, 64) if kk <= K]
-        line = f"{task:11s} {base:11s} {noise}{sg:<4g} draws={len(g[key])} det={fmt(np.mean(detacc)) if detacc else '  -  '} | "
+        line = f"{task:11s} {base:11s} {noise}{sg:<4g} n={n_} draws={len(g[key])} det={fmt(np.mean(detacc)) if detacc else '  -  '} | "
         line += " ".join(f"K{k}:" + "/".join(fmt(np.mean(per[(k, r)])) for r in ("maxq", "vote", "qvote", "pass")) for k in ks if k in (1, 4, 16, 32))
-        line += f" | rand {fmt(np.mean(per[(K, 'random')]))} hfirst {fmt(np.mean(per[(K, 'hfirst')]))} chk {fmt(np.mean(per[(K, 'chk')]))}"
+        line += f" | rand {fmt(np.mean(per[(K, 'random')]))} hfirst {fmt(np.mean(per[(K, 'hfirst')]))} maxq_any {fmt(np.mean(per[(K, 'maxq_any')]))} pass_any {fmt(np.mean(per[(K, 'pass_any')]))} chk {fmt(np.mean(per[(K, 'chk')]))}"
+        line += f" || K1 hfirst {fmt(np.mean(per[(1, 'hfirst')]))} maxq_any {fmt(np.mean(per[(1, 'maxq_any')]))} pass_any {fmt(np.mean(per[(1, 'pass_any')]))}"
         rows.append(line)
     print(f"metric={a.metric} D={a.D}; per K: maxQ/vote/qvote/pass")
     print("\n".join(rows))
@@ -306,6 +321,66 @@ def cmd_compute(a):
             print(f"  {S:4d} | {fmt(seq_last)}     {fmt(seq_q)}     | {ptxt} | {h32}         | {h64}")
 
 
+def _det_stats(root, recs, task, spec, n):
+    """Deterministic cell (noise none, D >= 16): exact at step 16, at the max-q step <= 16, any step <= 16, at step 64."""
+    for r in recs:
+        if r["task"] == task and r["spec"] == spec and r["noise"] == "none" and r["D"] >= 16 and r["n"] == n:
+            c = load_cell(root, r)
+            C = c["corr"][0].astype(bool); Q = c["q"][0].astype(np.float32)
+            ar = np.arange(C.shape[0])
+            out = {"s16": C[:, 15].mean(), "maxq16": C[ar, Q[:, :16].argmax(1)].mean(), "any16": C[:, :16].any(1).mean()}
+            if r["D"] >= 64:
+                out.update({"s64": C[:, 63].mean(), "maxq64": C[ar, Q[:, :64].argmax(1)].mean()})
+            return out
+    return None
+
+
+def cmd_main(a):
+    """Headline table: per model and spec base, draws averaged (range in brackets).
+    det = deterministic step 16 | det max-Q step | best-Q@K | maxq_any@K | pass@K | vote@K | fp32 polish."""
+    recs = load_index(a.root)
+    main = [r for r in recs if r["noise"] == "ptrm" and abs(r["sigma"] - a.sigma_main) < 1e-9 and r["D"] == 16 and r["n"] == a.n]
+    tasks = sorted({r["task"] for r in main}) if not a.task else [a.task]
+    Ks = (1, 4, 8, 16, 32)
+    for task in tasks:
+        kind = kind_of(task)
+        mk = a.metric if kind == "maze" else "exact"
+        bases = []
+        for r in main:
+            if r["task"] == task and r["spec"].split("@s")[0] not in bases:
+                bases.append(r["spec"].split("@s")[0])
+        print(f"== {task} (sigma {a.sigma_main}, D 16, n {a.n}, metric {mk}); cells: det16 | det maxQ-step16 || best-Q@1/4/8/16/32 || maxq_any@16/32 | pass@32 | vote@16 | P2-polish best-Q (own head)@max K")
+        for base in bases:
+            rs = [r for r in main if r["task"] == task and r["spec"].split("@s")[0] == base]
+            per = defaultdict(list)
+            dets = defaultdict(list)
+            for r in rs:
+                cell = load_cell(a.root, r)
+                for k in Ks:
+                    if k <= r["K"]:
+                        sel = select(cell, kind, k, 16, rules=("maxq", "maxq_any", "pass", "vote"))
+                        for rule in ("maxq", "maxq_any", "pass", "vote"):
+                            if mk in sel.get(rule, {}):
+                                per[(rule, k)].append(float(np.mean(sel[rule][mk])))
+                if r.get("polish") and "pol_corr" in cell:
+                    sp = select(cell, kind, r["K"], 16, src="pol", polish_step=r["polish"], sel_by="own", rules=("maxq",))
+                    per[("pol", r["K"])].append(float(np.mean(sp["maxq"][mk])))
+                d = _det_stats(a.root, recs, task, r["spec"], r["n"]) if kind == "sudoku" else None
+                if d:
+                    for kk, vv in d.items():
+                        dets[kk].append(vv)
+
+            def f(v):
+                if not v:
+                    return "  -  "
+                if len(v) == 1:
+                    return f"{100*v[0]:5.1f}"
+                return f"{100*np.mean(v):5.1f}[{100*min(v):.0f}-{100*max(v):.0f}]"
+            polk = max([k for (rule, k) in per if rule == "pol"], default=None)
+            print(f"  {base:11s} n_draws={len(rs)} | {f(dets['s16'])} | {f(dets['maxq16'])} || " +
+                  " ".join(f(per[('maxq', k)]) for k in Ks) + f" || {f(per[('maxq_any', 16)])} {f(per[('maxq_any', 32)])} | {f(per[('pass', 32)])} | {f(per[('vote', 16)])} | {f(per[('pol', polk)]) if polk else '  -  '}")
+
+
 def cmd_json(a):
     recs = load_index(a.root)
     out = []
@@ -336,14 +411,16 @@ def cmd_json(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=("table", "calib", "compute", "json"))
+    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main"))
+    ap.add_argument("--sigma_main", type=float, default=0.3)
+    ap.add_argument("--n", type=int, default=1000)
     ap.add_argument("--root", default="results/m2")
     ap.add_argument("--task", default="")
     ap.add_argument("--D", type=int, default=16)
     ap.add_argument("--metric", default="exact", choices=("exact", "valid", "vshort"))
     ap.add_argument("--sigma", type=float, default=None)
     a = ap.parse_args()
-    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json}[a.cmd](a)
+    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main}[a.cmd](a)
 
 
 if __name__ == "__main__":
