@@ -1,0 +1,8 @@
+# run	seed	overrides (X5 on p5 card 7; H200 platform: own ft_fp32 controls)
+p5_ft_fp32_s0	0	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/opt/dlami/nvme/edgetrm/results/x5/variants/trm_sudoku_mlp_w256_s0/step_65100
+p5_samft05_s0	0	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/opt/dlami/nvme/edgetrm/results/x5/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=sam +q7_rho=0.05 +q7_start_step=0
+p5_samft1_s0	0	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/opt/dlami/nvme/edgetrm/results/x5/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=sam +q7_rho=0.1 +q7_start_step=0
+p5_ft_fp32_s1	1	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/opt/dlami/nvme/edgetrm/results/x5/variants/trm_sudoku_mlp_w256_s1/step_65100
+p5_samft05_s1	1	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/opt/dlami/nvme/edgetrm/results/x5/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=sam +q7_rho=0.05 +q7_start_step=0
+p5_samft1_s1	1	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/opt/dlami/nvme/edgetrm/results/x5/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=sam +q7_rho=0.1 +q7_start_step=0
+p5_sensfl01_s0	0	epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/opt/dlami/nvme/edgetrm/results/x5/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=sens +q7_sigma=0.1 +q7_lambda=0.1 +q7_sens_target=1.0 +q7_jac_every=1 +q7_ramp_steps=3000 +q7_start_step=0 +q7_sens_min_steps=8
