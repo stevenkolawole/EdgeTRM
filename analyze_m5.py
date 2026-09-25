@@ -116,9 +116,12 @@ def load_resc(model):
     return out
 
 
-def load_m5(model):
+def load_m5(model, sub=None):
     out = {}
-    for f in sorted(glob.glob(str(M5_DIR / model / "*.npz"))):
+    files = sorted(glob.glob(str(M5_DIR / (sub or model) / "*.npz")))
+    if sub is None:
+        files += sorted(glob.glob(str(M5_DIR / f"{model}_deep" / "*.npz")))
+    for f in files:
         if ".tmp" in f:
             continue
         d = np.load(f)
@@ -916,6 +919,70 @@ def cmd_s24(a):
     return out
 
 
+HYB_DIR = Path(os.environ.get("M5_HYB_DIR", RB / "babel" / "m5" / "hybrid"))
+
+
+def cmd_hybrid(a):
+    """exit x M1 depth-for-precision (exit_hybrid.py records): per rule accuracy, mean cheap + polish steps,
+    paired difference vs M1's fixed schedule with the same k; plus the exit-only rows."""
+    out = {}
+    for f in sorted(glob.glob(str(HYB_DIR / "*.json"))):
+        for r in json.load(open(f))["records"]:
+            c = np.array(r["correct"], bool); nc = np.array(r["cheap_steps"]); npl = np.array(r["polish_steps"])
+            name = f"{Path(f).stem} {r['cheap']}->{r['polish']} (T={r['T']}, n={r['n']})"
+            print(f"\n=== {name}")
+            base = {}
+            for i, rule in enumerate(r["rules"]):
+                if rule.startswith("fix"):
+                    base[int(rule[3:])] = c[i]
+            for i, rule in enumerate(r["rules"]):
+                k = parse_k(rule)
+                ref = base.get(k)
+                dd = paired_ci(c[i], ref) if ref is not None and not rule.startswith("fix") else None
+                tot = nc[i].mean() + npl[i].mean()
+                out[(Path(f).stem, r["cheap"], rule)] = {"acc": 100 * c[i].mean(), "cheap": float(nc[i].mean()),
+                                                         "polish": float(npl[i].mean()), "total": float(tot),
+                                                         "d_vs_fixed": dd}
+                print(f"  {rule:16s} acc {100 * c[i].mean():5.1f}  cheap {nc[i].mean():6.1f} + polish {npl[i].mean():5.1f} = {tot:6.1f} "
+                      f"({r['T'] / tot:4.1f}x fewer than T)" + (f"  vs fix{k}: {dd[0]:+.1f} +-{dd[1]:.1f}" if dd else ""))
+    return out
+
+
+def cmd_var(a):
+    """trained variants (X5 checkpoints, 3 seeds per mixer): rule chosen on each variant's own fp32 (and, as a
+    transfer test, the rule chosen on the released checkpoint), applied to its compressed cells; 16 and 64 steps."""
+    out = {}
+    released = {m: select_rule(cells_for(m, 16)["fp32"]) for m in ("sudoku_attn", "sudoku_mlp")}
+    for d in sorted(glob.glob(str(M5_DIR / "var" / "*"))):
+        tag = Path(d).name
+        model = "sudoku_attn" if tag.startswith("attn") else "sudoku_mlp"
+        cells = load_m5(model, sub=f"var/{tag}")
+        if "fp32" not in cells:
+            continue
+        for K in (16, 64):
+            ref = cells["fp32"].trunc(K)
+            sel = select_rule(ref)
+            print(f"\n=== {tag} K={K}: own-fp32 rule {rule_name(*sel)}; released-checkpoint rule {rule_name(*released[model])}; "
+                  f"fixed depth on fp32 {fp32_depth(ref)}")
+            for spec in sorted(cells, key=spec_order):
+                c = cells[spec].trunc(K)
+                parts = []
+                for nm, rule in (("own", sel), ("released", released[model]), ("native", ("native", None)), ("oracle", ("oracle", None))):
+                    ok, st = score(c, exit_steps(c, *rule))
+                    d_, ci = paired_ci(ok, c.c[:, -1])
+                    parts.append(f"{nm} {100*ok.mean():5.1f} ({d_:+5.1f}) {st.mean():5.2f}")
+                    out[(tag, K, spec, nm)] = {"acc": 100 * ok.mean(), "d": d_, "ci": ci, "steps": float(st.mean())}
+                print(f"  {spec:14s} fixed {100*c.c[:, -1].mean():5.1f} | " + " | ".join(parts))
+    return out
+
+
+def parse_k(rule):
+    if rule.startswith("fix"):
+        return int(rule[3:])
+    rest = rule.split("->")[1]
+    return int(rest.split("_")[1]) if rest.startswith("h") else int(rest)
+
+
 def cmd_json(a):
     """figure-ready summary: per model / K / correctness definition, every cell's rule table (draws
     merged), plus Sudoku bins and device rows."""
@@ -947,7 +1014,7 @@ def cmd_json(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["rules", "summary", "bins", "device", "json", "agree", "inner", "deep", "sample", "dt", "polish", "s24"])
+    ap.add_argument("cmd", choices=["rules", "summary", "bins", "device", "json", "agree", "inner", "deep", "sample", "dt", "polish", "s24", "hybrid", "var"])
     ap.add_argument("--K", type=int, default=16)
     ap.add_argument("--models", nargs="+", default=MODELS)
     ap.add_argument("--show", default="")
@@ -975,6 +1042,10 @@ def main():
         cmd_polish(a)
     elif a.cmd == "s24":
         cmd_s24(a)
+    elif a.cmd == "hybrid":
+        cmd_hybrid(a)
+    elif a.cmd == "var":
+        cmd_var(a)
     elif a.cmd == "agree":
         for m in a.models:
             for row in check_agreement(m):
