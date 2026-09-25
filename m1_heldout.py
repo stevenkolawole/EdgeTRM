@@ -106,7 +106,7 @@ def main():
     ap.add_argument("--dev", nargs="+", required=True)
     ap.add_argument("--held", nargs="+", required=True)
     ap.add_argument("--all", nargs="+", default=[], help="every M1 record file, for the conservative m")
-    ap.add_argument("--exclude", default="div_|ens_|heldout", help="dev files written after the pick (controls)")
+    ap.add_argument("--exclude", default="div_|ens_|heldout|T512", help="dev files written after the pick (controls, T=512)")
     ap.add_argument("--polish", default="w8c,w8t")
     a = ap.parse_args()
     dev_files = [(f, b) for f, b in load(a.dev, 0, a.task) if not re.search(a.exclude, f)]

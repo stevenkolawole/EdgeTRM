@@ -77,5 +77,13 @@ def quantize_(fam, model, q, scope):
 L.parse_quant = parse_quant
 D.quantize_ = quantize_
 
+_orig_gsm = L.load_gsm8k
+_OFF = int(__import__("os").environ.get("M1_GSM_OFFSET", "0"))
+if _OFF:                                             # held-out questions: test[OFF:OFF+n] (use a separate --refdir/--outdir)
+    def _load_gsm8k(n):
+        return _orig_gsm(_OFF + n)[_OFF:]
+    L.load_gsm8k = _load_gsm8k
+    D.L.load_gsm8k = _load_gsm8k
+
 if __name__ == "__main__":
     D.main()
