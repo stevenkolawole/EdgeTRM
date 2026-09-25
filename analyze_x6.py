@@ -275,5 +275,46 @@ def deqlmfig(rdir=None):
     print("wrote", out)
 
 
+def difffig(rdir=None):
+    """DDPM CIFAR-10: FID (vs train) and FID vs fp32 samples against sigma, one line per sampler/steps;
+    DDIM (no fresh noise) and DDPM ancestral (fresh noise every step) in separate panels."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    rdir = Path(rdir or HERE / "results" / "transfer" / "babel")
+    recs = []
+    for f in sorted(glob.glob(str(rdir / "diff_*.json"))):
+        recs += json.load(open(f))["records"]
+    samplers = sorted({r["sampler"] for r in recs}, key=lambda s: (s[:4], int(s[4:])))
+    sig = sorted({float(r["spec"][5:]) for r in recs if r["spec"].startswith("noise")})
+    fig, axs = plt.subplots(1, 4, figsize=(17, 3.6))
+    for j, (kind, metric) in enumerate((("ddim", "fid_train"), ("ddpm", "fid_train"), ("ddim", "fid_vs_fp32"),
+                                        ("ddpm", "fid_vs_fp32"))):
+        ax = axs[j]
+        ss = [x for x in samplers if x.startswith(kind)]
+        cols = dict(zip(ss, plt.cm.viridis(np.linspace(0, 0.85, len(ss)))))
+        for sp in ss:
+            m, lo, hi, xs = [], [], [], []
+            for sg in sig:
+                v = np.array([r[metric] for r in recs if r["sampler"] == sp and r["spec"].startswith("noise")
+                              and abs(float(r["spec"][5:]) - sg) < 1e-9])
+                if not len(v):
+                    continue
+                xs.append(sg); m.append(v.mean()); lo.append(v.min()); hi.append(v.max())
+            ax.plot(xs, m, "-o", ms=3, color=cols[sp], label=f"{sp[:4].upper()} {sp[4:]} steps")
+            ax.fill_between(xs, lo, hi, color=cols[sp], alpha=0.15)
+            f0 = [r[metric] for r in recs if r["sampler"] == sp and r["spec"] == "fp32"]
+            if f0 and metric == "fid_train":
+                ax.axhline(f0[0], color=cols[sp], ls=":", lw=0.8)
+        ax.set_xscale("log"); ax.set_yscale("log")
+        ax.set_xlabel("weight noise sigma (x tensor std)", fontsize=8)
+        ax.set_title(f"{kind.upper()} ({'no fresh noise' if kind == 'ddim' else 'fresh noise each step'}): "
+                     f"{'FID vs train' if metric == 'fid_train' else 'FID vs fp32 samples'}", fontsize=8)
+        ax.legend(fontsize=6)
+    out = HERE / "figures" / "x6_ddpm_cifar10.png"
+    fig.tight_layout(); fig.savefig(out, dpi=150)
+    print("wrote", out)
+
+
 if __name__ == "__main__":
     globals()[sys.argv[1]](*(sys.argv[2:]))

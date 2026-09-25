@@ -1,0 +1,31 @@
+NVIDIA L40S
+Thu Sep 24 11:36:45 PM UTC 2026 host babel-q5-24 restart 2: diff_sweep.py --specs noise0.01,noise0.02,noise0.03,noise0.05,noise0.1,noise0.2,noise0.3,noise0.5 --seed 2 --n 5000 --batch 1000 --out /home/skolawol/x6/results/diff_noise_s2.json
+specs ['fp32', 'noise0.01', 'noise0.02', 'noise0.03', 'noise0.05', 'noise0.1', 'noise0.2', 'noise0.3', 'noise0.5'], samplers ['ddim10', 'ddim25', 'ddim50', 'ddim100', 'ddpm50', 'ddpm100', 'ddpm250'], n 5000 (7s setup)
+/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py:202: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+  ddpm50   noise0.05  FID  145.98  vs-fp32   15.55  rmse 0.0979  cos 0.836  (151s)
+  ddpm50   noise0.1   FID  170.43  vs-fp32   50.20  rmse 0.1727  cos 0.717  (129s)
+  ddpm50   noise0.2   FID  296.19  vs-fp32  187.62  rmse 0.3002  cos 0.582  (130s)
+  ddpm50   noise0.3   FID  335.99  vs-fp32  244.92  rmse 0.3875  cos 0.535  (130s)
+  ddpm50   noise0.5   FID  394.79  vs-fp32  355.04  rmse 0.4125  cos 0.452  (131s)
+  ddpm100  fp32       FID   82.44  vs-fp32    0.00  rmse 0.0000  cos 1.000  (15s)
+  ddpm100  noise0.01  FID   83.40  vs-fp32    2.62  rmse 0.0238  cos 0.959  (243s)
+  ddpm100  noise0.02  FID   84.05  vs-fp32    5.49  rmse 0.0455  cos 0.912  (241s)
+  ddpm100  noise0.03  FID   85.74  vs-fp32    8.50  rmse 0.0654  cos 0.870  (243s)
+  ddpm100  noise0.05  FID   90.94  vs-fp32   15.68  rmse 0.1008  cos 0.798  (242s)
+  ddpm100  noise0.1   FID  117.24  vs-fp32   46.60  rmse 0.1767  cos 0.679  (245s)
+  ddpm100  noise0.2   FID  277.89  vs-fp32  206.36  rmse 0.3067  cos 0.535  (245s)
+  ddpm100  noise0.3   FID  334.47  vs-fp32  276.45  rmse 0.3994  cos 0.499  (240s)
+  ddpm100  noise0.5   FID  395.11  vs-fp32  370.59  rmse 0.4246  cos 0.438  (244s)
+  ddpm250  fp32       FID   39.28  vs-fp32    0.00  rmse 0.0000  cos 1.000  (15s)
+  ddpm250  noise0.01  FID   39.54  vs-fp32    3.25  rmse 0.0249  cos 0.948  (575s)
+  ddpm250  noise0.02  FID   40.46  vs-fp32    6.47  rmse 0.0474  cos 0.892  (573s)
+  ddpm250  noise0.03  FID   42.24  vs-fp32    9.45  rmse 0.0677  cos 0.846  (575s)
+  ddpm250  noise0.05  FID   48.09  vs-fp32   16.31  rmse 0.1029  cos 0.776  (581s)
+  ddpm250  noise0.1   FID   82.44  vs-fp32   47.03  rmse 0.1789  cos 0.660  (576s)
+  ddpm250  noise0.2   FID  263.98  vs-fp32  218.92  rmse 0.3110  cos 0.512  (572s)
+  ddpm250  noise0.3   FID  334.42  vs-fp32  300.89  rmse 0.4076  cos 0.483  (574s)
+  ddpm250  noise0.5   FID  393.55  vs-fp32  380.31  rmse 0.4322  cos 0.433  (583s)
+wrote /home/skolawol/x6/results/diff_noise_s2.json 63 (7258s)
+Fri Sep 25 01:37:45 AM UTC 2026 done rc=0
