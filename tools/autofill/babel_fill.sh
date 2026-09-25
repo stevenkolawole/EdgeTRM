@@ -44,8 +44,8 @@ for part in general preempt; do
     # PACKING: small puzzle-model jobs (M1, M2 puzzle runs, M3, X2) use a few GB of a 48 GB L40S, so run up to 3
     # of them concurrently inside one GPU allocation. LM decodes (X4, M2 m2o) and training (X5) stay one per GPU.
     bf=$(basename $f); d=$(dirname $f)
-    if [[ $bf =~ ^[0-9]+_(M1|M2|M3|X2)_ ]] && [[ $bf != *m2o* ]]; then
-      mem=$(ls $d/*.sbatch 2>/dev/null | sort | while read x; do b=$(basename $x); [[ $b =~ ^[0-9]+_(M1|M2|M3|X2)_ ]] && [[ $b != *m2o* ]] && echo $x; done | head -3)
+    if [[ $bf =~ ^[0-9]+_(M1|M2|M3|X1|X2)_ ]] && [[ $bf != *m2o* ]]; then
+      mem=$(ls $d/*.sbatch 2>/dev/null | sort | while read x; do b=$(basename $x); [[ $b =~ ^[0-9]+_(M1|M2|M3|X1|X2)_ ]] && [[ $b != *m2o* ]] && echo $x; done | head -3)
       mkdir -p $B/packs $B/packlogs; pk=$B/packs/pack_$(date +%s)_$RANDOM.sbatch; ok=1; names=""
       for x in $mem; do mv "$x" $B/babel_submitted/ 2>/dev/null || { ok=0; break; }; names="$names $(basename $x)"; done
       [ "$ok" = 1 ] || { echo "$part MOVE_FAILED (pack): not submitting"; break; }
