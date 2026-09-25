@@ -1,0 +1,21 @@
+{
+ "source": "bf16 teacher-forced top1-top2 log-prob gap on gold GSM8K solutions (lm_runs/lm_margin.py); ouro14/ouro26/olmo from p4d refs (n=200), huginn from Babel ref (n=200)",
+ "margin": {
+  "ouro14": {
+   "all": 3.878,
+   "answer": 5.566
+  },
+  "ouro26": {
+   "all": 4.071,
+   "answer": 5.727
+  },
+  "olmo_rec32": {
+   "all": 3.713,
+   "answer": 6.789
+  },
+  "huginn": {
+   "all": 4.551,
+   "answer": 4.497
+  }
+ }
+}
