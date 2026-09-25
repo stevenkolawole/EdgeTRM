@@ -5,7 +5,8 @@ prev=""
 while true; do
   out=""
   p4=$(timeout 40 ssh sk-p4d 'pgrep -f 'autofill.sh$' >/dev/null || echo DAEMON_DEAD; cat ~/autofill/status.txt' 2>/dev/null || echo UNREACHABLE)
-  p5=$(timeout 40 ssh uk-p5 'pgrep -f 'autofill.sh$' >/dev/null || echo DAEMON_DEAD; cat /opt/dlami/nvme/edgetrm/autofill/status.txt' 2>/dev/null || echo UNREACHABLE)
+  if [ -n "${SKIP_P5:-}" ]; then p5="p5 skipped (released to Steven)"; else
+  p5=$(timeout 40 ssh uk-p5 'pgrep -f 'autofill.sh$' >/dev/null || echo DAEMON_DEAD; cat /opt/dlami/nvme/edgetrm/autofill/status.txt' 2>/dev/null || echo UNREACHABLE); fi
   bb=$(cat /home/stevenkolawole/workspace/emnlp-26/reports/edgetrm_exp/autofill_babel_status.txt 2>/dev/null)
   pgrep -f babel_fill.sh >/dev/null || out="$out babel_fill:DAEMON_DEAD;"
   for pair in "p4d:$p4" "p5:$p5"; do
