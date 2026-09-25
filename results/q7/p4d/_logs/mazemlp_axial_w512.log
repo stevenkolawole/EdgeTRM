@@ -1,0 +1,35 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 07:10:26 UTC 2026 [q7_train2] mazemlp_axial_w512 seed=0 host=ip-172-31-15-144 cuda=0 recipe: data_paths=[/home/ubuntu/q7/data_maze/maze-30x30-hard-1k-aug8] epochs=3200 eval_interval=800 lr_warmup_steps=2000 lr=1e-4 puzzle_emb_lr=1e-4 weight_decay=1.0 puzzle_emb_weight_decay=1.0 global_batch_size=128 arch.mlp_t=True arch.pos_encodings=none arch.L_layers=2 arch.H_cycles=3 arch.L_cycles=4 arch.hidden_size=512 arch.num_heads=8 ema=True extra: +q7_eval_n=200 +arch.mlp_t_grid=30
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mix_row_gate_up): CastedLinear()
+          (mix_row_down): CastedLinear()
+          (mix_col_gate_up): CastedLinear()
+          (mix_col_down): CastedLinear()
+          (mix_pz_gate_up): CastedLinear()
+          (mix_pz_down): CastedLinear()
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Setup EMA
+  0%|          | 0/25000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_071031-7uptq1ft
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  0%|          | 80/25000 [01:00<5:13:45,  1.32it/s]  0%|          | 119/25000 [01:20<5:13:16,  1.32it/s]  1%|          | 202/25000 [02:00<3:57:42,  1.74it/s]  1%|          | 241/25000 [02:20<3:57:20,  1.74it/s]  1%|▏         | 324/25000 [03:00<3:39:45,  1.87it/s]  1%|▏         | 363/25000 [03:20<3:39:24,  1.87it/s]  2%|▏         | 446/25000 [04:00<3:31:49,  1.93it/s]  2%|▏         | 484/25000 [04:20<3:31:29,  1.93it/s]  2%|▏         | 568/25000 [05:01<3:27:06,  1.97it/s]  2%|▏         | 606/25000 [05:20<3:26:47,  1.97it/s]  3%|▎         | 690/25000 [06:01<3:23:57,  1.99it/s]  3%|▎         | 727/25000 [06:20<3:23:38,  1.99it/s]  3%|▎         | 812/25000 [07:01<3:21:39,  2.00it/s]  3%|▎         | 849/25000 [07:20<3:21:21,  2.00it/s]  4%|▎         | 934/25000 [08:01<3:19:47,  2.01it/s]  4%|▍         | 970/25000 [08:20<3:19:29,  2.01it/s]  4%|▍         | 1056/25000 [09:02<3:18:25,  2.01it/s]  4%|▍         | 1092/25000 [09:20<3:18:07,  2.01it/s]  5%|▍         | 1178/25000 [10:02<3:16:56,  2.02it/s]  5%|▍         | 1213/25000 [10:20<3:16:38,  2.02it/s]  5%|▌         | 1300/25000 [11:02<3:15:35,  2.02it/s]  5%|▌         | 1335/25000 [11:20<3:15:18,  2.02it/s]  6%|▌         | 1422/25000 [12:02<3:14:23,  2.02it/s]  6%|▌         | 1457/25000 [12:20<3:14:06,  2.02it/s]  6%|▌         | 1544/25000 [13:03<3:13:24,  2.02it/s]  6%|▋         | 1578/25000 [13:20<3:13:07,  2.02it/s]  7%|▋         | 1666/25000 [14:03<3:12:18,  2.02it/s]  7%|▋         | 1699/25000 [14:20<3:12:01,  2.02it/s]  7%|▋         | 1788/25000 [15:03<3:11:13,  2.02it/s]  7%|▋         | 1821/25000 [15:20<3:10:56,  2.02it/s]  8%|▊         | 1910/25000 [16:03<3:10:09,  2.02it/s]  8%|▊         | 1942/25000 [16:20<3:09:53,  2.02it/s]  8%|▊         | 2032/25000 [17:04<3:09:13,  2.02it/s]  8%|▊         | 2064/25000 [17:20<3:08:57,  2.02it/s]  9%|▊         | 2154/25000 [18:04<3:07:59,  2.03it/s]  9%|▊         | 2185/25000 [18:20<3:07:44,  2.03it/s]

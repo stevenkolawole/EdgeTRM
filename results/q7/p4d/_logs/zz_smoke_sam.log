@@ -1,0 +1,77 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 08:58:47 UTC 2026 [q7_train] zz_smoke_sam seed=0 host=ip-172-31-15-144 cuda=4 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100 +q7_reg=sam +q7_rho=0.05 +q7_max_steps=40 +q7_eval_n=50
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+Setup EMA
+  0%|          | 0/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_085852-5gw3iezh
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+[q7_eval] zz_smoke_sam/step_40: fp32 74.0 w4t 0.0 (fidH 0.237/ref 0.242) S0.02 1.24 S0.1 1.27 jac_fro2 0.146; 4 cells in 12s
+[q7] q7_max_steps=40 reached
+wandb: 
+wandb: Run history:
+wandb:            num_params ▁
+wandb:           q7/strength ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:        train/accuracy ███████████████▁▇▅▄▅▅▆▆▅▆▆▆▇▆▇▆▃▆▅▅▅▅▅▅▆
+wandb:           train/count ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:  train/exact_accuracy █████████████▇█▁▆▄▄▅▅▆▆▅▆▅▆▇▆▇▆▃▇▅▅▅▅▅▅▆
+wandb:         train/lm_loss ▆▁▁▃▄▅▅▆▆▆▇▇▇▇██▇▆▆▆▇▆▆▆▆▆▆▆▇▆▆▆▆▆▆▆▆▆▆▆
+wandb:              train/lr ▁▁▁▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb: train/q_halt_accuracy █▇▇▇█▆▇▅▅▃▆██▁██▅▅██▆██▇▇▇█▇█▇█▇█▆████▇▇
+wandb:     train/q_halt_loss ▄▃▄▃█▇▃▃▂▂▃▂▂▄▂▂▅▇▂▂▅▄▁▃▃▁▃▂▃▂▁▃▃▄▃▁▂▁▂▆
+wandb:           train/steps ▁▂▂▂▂▂▃▃▃▃▃▃▃▃▃█▄▅▅▅▅▄▄▄▄▄▄▃▄▄▄▆▄▅▅▅▅▄▅▄
+wandb: 
+wandb: Run summary:
+wandb:            num_params 1483778
+wandb:           q7/strength 1
+wandb:        train/accuracy 0.90275
+wandb:           train/count 1
+wandb:  train/exact_accuracy 0.71698
+wandb:         train/lm_loss 0.65112
+wandb:              train/lr 1e-05
+wandb: train/q_halt_accuracy 0.99057
+wandb:     train/q_halt_loss 0.02283
+wandb:           train/steps 7.37736
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /home/ubuntu/q7/wandb/wandb/offline-run-20260925_085852-5gw3iezh
+wandb: Find logs at: /home/ubuntu/q7/wandb/wandb/offline-run-20260925_085852-5gw3iezh/logs
+  0%|          | 40/12000 [01:22<6:49:45,  2.06s/it]
+Fri Sep 25 09:00:16 UTC 2026 [q7_train] zz_smoke_sam exited rc=0 DONE=yes

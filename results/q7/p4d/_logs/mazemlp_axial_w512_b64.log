@@ -1,0 +1,274 @@
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 07:29:11 UTC 2026 [q7_train2] mazemlp_axial_w512_b64 seed=0 host=ip-172-31-15-144 cuda=0 recipe: data_paths=[/home/ubuntu/q7/data_maze/maze-30x30-hard-1k-aug8] epochs=1600 eval_interval=400 lr_warmup_steps=2000 lr=1e-4 puzzle_emb_lr=1e-4 weight_decay=1.0 puzzle_emb_weight_decay=1.0 global_batch_size=64 arch.mlp_t=True arch.pos_encodings=none arch.L_layers=2 arch.H_cycles=3 arch.L_cycles=4 arch.hidden_size=512 arch.num_heads=8 ema=True extra: +q7_eval_n=200 +arch.mlp_t_grid=30
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mix_row_gate_up): CastedLinear()
+          (mix_row_down): CastedLinear()
+          (mix_col_gate_up): CastedLinear()
+          (mix_col_down): CastedLinear()
+          (mix_pz_gate_up): CastedLinear()
+          (mix_pz_down): CastedLinear()
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Setup EMA
+  0%|          | 0/25000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_072916-zowgspbx
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  0%|          | 1/25000 [01:18<544:03:18, 78.35s/it]  1%|          | 240/25000 [02:18<3:17:44,  2.09it/s]  1%|          | 287/25000 [02:30<3:17:22,  2.09it/s]  2%|▏         | 479/25000 [03:18<2:21:16,  2.89it/s]  2%|▏         | 525/25000 [03:30<2:21:00,  2.89it/s]  3%|▎         | 671/25000 [04:18<2:14:55,  3.01it/s]  3%|▎         | 690/25000 [04:30<2:14:49,  3.01it/s]  3%|▎         | 775/25000 [05:18<2:37:49,  2.56it/s]  3%|▎         | 794/25000 [05:30<2:37:42,  2.56it/s]  4%|▎         | 880/25000 [06:19<2:55:54,  2.29it/s]  4%|▎         | 899/25000 [06:30<2:55:45,  2.29it/s]  4%|▍         | 984/25000 [07:19<3:10:02,  2.11it/s]  4%|▍         | 1002/25000 [07:30<3:09:54,  2.11it/s]  4%|▍         | 1089/25000 [08:19<3:20:19,  1.99it/s]  4%|▍         | 1107/25000 [08:30<3:20:10,  1.99it/s]  5%|▍         | 1193/25000 [09:19<3:27:47,  1.91it/s]  5%|▍         | 1211/25000 [09:30<3:27:38,  1.91it/s]  5%|▌         | 1297/25000 [10:19<3:33:00,  1.85it/s]  5%|▌         | 1315/25000 [10:30<3:32:50,  1.85it/s]  6%|▌         | 1402/25000 [11:20<3:36:04,  1.82it/s]  6%|▌         | 1419/25000 [11:30<3:35:55,  1.82it/s]  6%|▌         | 1513/25000 [12:20<3:34:03,  1.83it/s]  6%|▌         | 1553/25000 [12:30<3:33:41,  1.83it/s]  7%|▋         | 1647/25000 [13:20<3:19:45,  1.95it/s]  7%|▋         | 1681/25000 [13:40<3:19:27,  1.95it/s]  7%|▋         | 1751/25000 [14:20<3:25:47,  1.88it/s]  7%|▋         | 1785/25000 [14:40<3:25:29,  1.88it/s]  7%|▋         | 1856/25000 [15:20<3:29:32,  1.84it/s]  8%|▊         | 1890/25000 [15:40<3:29:13,  1.84it/s]  8%|▊         | 1960/25000 [16:20<3:32:26,  1.81it/s]  8%|▊         | 1993/25000 [16:40<3:32:08,  1.81it/s]  8%|▊         | 2065/25000 [17:21<3:34:00,  1.79it/s]  8%|▊         | 2098/25000 [17:40<3:33:42,  1.79it/s]  9%|▊         | 2169/25000 [18:21<3:35:02,  1.77it/s]  9%|▉         | 2201/25000 [18:40<3:34:44,  1.77it/s]  9%|▉         | 2274/25000 [19:21<3:35:09,  1.76it/s]  9%|▉         | 2306/25000 [19:40<3:34:50,  1.76it/s] 10%|▉         | 2378/25000 [20:21<3:35:15,  1.75it/s] 10%|▉         | 2410/25000 [20:40<3:34:57,  1.75it/s] 10%|█         | 2517/25000 [21:21<3:15:11,  1.92it/s] 10%|█         | 2549/25000 [21:40<3:14:54,  1.92it/s] 10%|█         | 2623/25000 [22:22<3:19:34,  1.87it/s] 11%|█         | 2654/25000 [22:40<3:19:18,  1.87it/s] 11%|█         | 2728/25000 [23:22<3:22:30,  1.83it/s] 11%|█         | 2759/25000 [23:40<3:22:13,  1.83it/s] 11%|█▏        | 2833/25000 [24:22<3:24:20,  1.81it/s] 11%|█▏        | 2864/25000 [24:40<3:24:03,  1.81it/s] 12%|█▏        | 2938/25000 [25:22<3:25:26,  1.79it/s] 12%|█▏        | 2969/25000 [25:40<3:25:09,  1.79it/s] 12%|█▏        | 3043/25000 [26:22<3:26:04,  1.78it/s] 12%|█▏        | 3073/25000 [26:40<3:25:47,  1.78it/s] 13%|█▎        | 3148/25000 [27:22<3:26:00,  1.77it/s] 13%|█▎        | 3178/25000 [27:40<3:25:43,  1.77it/s] 13%|█▎        | 3253/25000 [28:22<3:25:42,  1.76it/s] 13%|█▎        | 3283/25000 [28:40<3:25:25,  1.76it/s] 13%|█▎        | 3358/25000 [29:22<3:25:10,  1.76it/s] 14%|█▎        | 3388/25000 [29:40<3:24:53,  1.76it/s] 14%|█▍        | 3464/25000 [30:23<3:24:24,  1.76it/s] 14%|█▍        | 3493/25000 [30:40<3:24:08,  1.76it/s] 14%|█▍        | 3569/25000 [31:23<3:23:52,  1.75it/s] 14%|█▍        | 3598/25000 [31:40<3:23:35,  1.75it/s] 15%|█▍        | 3675/25000 [32:23<3:22:38,  1.75it/s] 15%|█▍        | 3703/25000 [32:40<3:22:22,  1.75it/s] 15%|█▌        | 3781/25000 [33:24<3:21:44,  1.75it/s] 15%|█▌        | 3808/25000 [33:40<3:21:29,  1.75it/s] 16%|█▌        | 3887/25000 [34:25<3:20:50,  1.75it/s] 16%|█▌        | 3913/25000 [34:40<3:20:35,  1.75it/s] 16%|█▌        | 3993/25000 [35:25<3:19:49,  1.75it/s] 16%|█▌        | 4018/25000 [35:40<3:19:35,  1.75it/s] 16%|█▋        | 4098/25000 [36:25<3:19:05,  1.75it/s] 16%|█▋        | 4123/25000 [36:40<3:18:51,  1.75it/s] 17%|█▋        | 4204/25000 [37:26<3:18:04,  1.75it/s] 17%|█▋        | 4228/25000 [37:40<3:17:50,  1.75it/s] 17%|█▋        | 4310/25000 [38:26<3:16:57,  1.75it/s] 17%|█▋        | 4333/25000 [38:40<3:16:43,  1.75it/s] 18%|█▊        | 4416/25000 [39:27<3:15:55,  1.75it/s] 18%|█▊        | 4438/25000 [39:40<3:15:42,  1.75it/s] 18%|█▊        | 4521/25000 [40:27<3:15:09,  1.75it/s] 18%|█▊        | 4543/25000 [40:40<3:14:56,  1.75it/s] 19%|█▊        | 4627/25000 [41:28<3:14:00,  1.75it/s] 19%|█▊        | 4648/25000 [41:40<3:13:48,  1.75it/s] 19%|█▉        | 4733/25000 [42:28<3:12:59,  1.75it/s] 19%|█▉        | 4753/25000 [42:40<3:12:48,  1.75it/s] 19%|█▉        | 4839/25000 [43:28<3:11:41,  1.75it/s] 19%|█▉        | 4859/25000 [43:40<3:11:29,  1.75it/s] 20%|█▉        | 4944/25000 [44:28<3:10:52,  1.75it/s] 20%|█▉        | 4964/25000 [44:40<3:10:40,  1.75it/s] 20%|██        | 5049/25000 [45:29<3:10:10,  1.75it/s] 20%|██        | 5068/25000 [45:40<3:09:59,  1.75it/s] 21%|██        | 5155/25000 [46:29<3:09:05,  1.75it/s] 21%|██        | 5173/25000 [46:40<3:08:54,  1.75it/s] 21%|██        | 5260/25000 [47:29<3:08:06,  1.75it/s] 21%|██        | 5278/25000 [47:40<3:07:56,  1.75it/s] 21%|██▏       | 5365/25000 [48:29<3:07:08,  1.75it/s] 22%|██▏       | 5383/25000 [48:40<3:06:57,  1.75it/s] 22%|██▏       | 5471/25000 [49:30<3:06:01,  1.75it/s] 22%|██▏       | 5488/25000 [49:40<3:05:51,  1.75it/s] 22%|██▏       | 5576/25000 [50:30<3:05:12,  1.75it/s] 22%|██▏       | 5610/25000 [50:50<3:04:53,  1.75it/s] 23%|██▎       | 5681/25000 [51:30<3:04:12,  1.75it/s] 23%|██▎       | 5715/25000 [51:50<3:03:53,  1.75it/s] 23%|██▎       | 5787/25000 [52:31<3:03:03,  1.75it/s] 23%|██▎       | 5820/25000 [52:50<3:02:44,  1.75it/s] 24%|██▎       | 5892/25000 [53:31<3:02:01,  1.75it/s] 24%|██▎       | 5925/25000 [53:50<3:01:43,  1.75it/s] 24%|██▍       | 5997/25000 [54:31<3:01:02,  1.75it/s] 24%|██▍       | 6030/25000 [54:50<3:00:43,  1.75it/s] 24%|██▍       | 6103/25000 [55:31<2:59:56,  1.75it/s] 25%|██▍       | 6135/25000 [55:50<2:59:38,  1.75it/s] 25%|██▍       | 6208/25000 [56:31<2:58:58,  1.75it/s] 25%|██▍       | 6240/25000 [56:50<2:58:39,  1.75it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+Traceback (most recent call last):
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 471, in q7_inline_eval
+    rec = q7_eval.evaluate_checkpoint(ck, out, n=config.q7_eval_n, label=f"{config.run_name}/step_{step}",
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 319, in evaluate_checkpoint
+    rec.update(_jac_stats(m, inp, lab))
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 91, in _jac_stats
+    _, jv = torch.func.jvp(f, (z0,), (v,))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/eager_transforms.py", line 1042, in jvp
+    return _jvp_with_argnums(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/_functorch/eager_transforms.py", line 1101, in _jvp_with_argnums
+    result_duals = func(*duals)
+                   ^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 74, in f
+    return inner.L_level(zz, inj, cos_sin=cs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/recursive_reasoning/trm.py", line 146, in forward
+    hidden_states = layer(hidden_states=hidden_states, **kwargs)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/recursive_reasoning/trm.py", line 134, in forward
+    out = self.mlp(hidden_states)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/layers.py", line 160, in forward
+    gate, up = self.gate_up_proj(x).chunk(2, dim=-1)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1739, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1750, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/models/layers.py", line 60, in forward
+    return F.linear(input, self.weight.to(input.dtype), bias=self.bias.to(input.dtype) if self.bias is not None else None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 688.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 276.88 MiB is free. Including non-PyTorch memory, this process has 36.07 GiB memory in use. Process 1165726 has 3.13 GiB memory in use. Of the allocated memory 35.22 GiB is allocated by PyTorch, and 351.34 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[Rank 0, World Size 1]: Epoch 400
+TRAIN
+ 25%|██▌       | 6251/25000 [1:00:04<6:21:52,  1.22s/it] 25%|██▌       | 6279/25000 [1:00:20<6:21:18,  1.22s/it] 25%|██▌       | 6356/25000 [1:01:04<5:10:43,  1.00it/s] 26%|██▌       | 6384/25000 [1:01:20<5:10:15,  1.00it/s] 26%|██▌       | 6462/25000 [1:02:04<4:25:11,  1.17it/s] 26%|██▌       | 6489/25000 [1:02:20<4:24:48,  1.17it/s] 26%|██▋       | 6567/25000 [1:03:05<3:55:54,  1.30it/s] 26%|██▋       | 6593/25000 [1:03:20<3:55:34,  1.30it/s] 27%|██▋       | 6673/25000 [1:04:05<3:35:34,  1.42it/s] 27%|██▋       | 6698/25000 [1:04:20<3:35:17,  1.42it/s] 27%|██▋       | 6778/25000 [1:05:05<3:22:08,  1.50it/s] 27%|██▋       | 6803/25000 [1:05:20<3:21:51,  1.50it/s] 28%|██▊       | 6883/25000 [1:06:06<3:12:26,  1.57it/s] 28%|██▊       | 6907/25000 [1:06:20<3:12:10,  1.57it/s] 28%|██▊       | 6988/25000 [1:07:06<3:05:39,  1.62it/s] 28%|██▊       | 7011/25000 [1:07:20<3:05:24,  1.62it/s] 28%|██▊       | 7093/25000 [1:08:06<3:00:23,  1.65it/s] 28%|██▊       | 7117/25000 [1:08:20<3:00:09,  1.65it/s] 29%|██▉       | 7198/25000 [1:09:06<2:56:25,  1.68it/s] 29%|██▉       | 7222/25000 [1:09:20<2:56:11,  1.68it/s] 29%|██▉       | 7303/25000 [1:10:06<2:53:24,  1.70it/s] 29%|██▉       | 7326/25000 [1:10:20<2:53:10,  1.70it/s] 30%|██▉       | 7409/25000 [1:11:07<2:50:50,  1.72it/s] 30%|██▉       | 7432/25000 [1:11:20<2:50:37,  1.72it/s] 30%|███       | 7514/25000 [1:12:07<2:49:02,  1.72it/s] 30%|███       | 7536/25000 [1:12:20<2:48:49,  1.72it/s] 30%|███       | 7619/25000 [1:13:07<2:47:20,  1.73it/s] 31%|███       | 7641/25000 [1:13:20<2:47:07,  1.73it/s] 31%|███       | 7725/25000 [1:14:08<2:45:43,  1.74it/s] 31%|███       | 7746/25000 [1:14:20<2:45:31,  1.74it/s] 31%|███▏      | 7830/25000 [1:15:08<2:44:25,  1.74it/s] 31%|███▏      | 7851/25000 [1:15:20<2:44:13,  1.74it/s] 32%|███▏      | 7936/25000 [1:16:08<2:43:06,  1.74it/s] 32%|███▏      | 7956/25000 [1:16:20<2:42:54,  1.74it/s] 32%|███▏      | 8041/25000 [1:17:09<2:42:10,  1.74it/s] 32%|███▏      | 8061/25000 [1:17:20<2:41:59,  1.74it/s] 33%|███▎      | 8146/25000 [1:18:09<2:40:59,  1.74it/s] 33%|███▎      | 8165/25000 [1:18:20<2:40:48,  1.74it/s] 33%|███▎      | 8304/25000 [1:19:09<2:18:31,  2.01it/s] 33%|███▎      | 8348/25000 [1:19:20<2:18:09,  2.01it/s] 34%|███▍      | 8541/25000 [1:20:09<1:45:59,  2.59it/s] 34%|███▍      | 8585/25000 [1:20:20<1:45:42,  2.59it/s] 35%|███▌      | 8779/25000 [1:21:09<1:30:10,  3.00it/s] 35%|███▌      | 8822/25000 [1:21:20<1:29:55,  3.00it/s] 36%|███▌      | 9016/25000 [1:22:09<1:21:11,  3.28it/s] 36%|███▌      | 9058/25000 [1:22:20<1:20:59,  3.28it/s] 37%|███▋      | 9254/25000 [1:23:09<1:15:21,  3.48it/s] 37%|███▋      | 9296/25000 [1:23:20<1:15:09,  3.48it/s] 38%|███▊      | 9492/25000 [1:24:09<1:11:18,  3.62it/s] 38%|███▊      | 9532/25000 [1:24:20<1:11:07,  3.62it/s] 39%|███▉      | 9729/25000 [1:25:10<1:08:24,  3.72it/s] 39%|███▉      | 9770/25000 [1:25:20<1:08:13,  3.72it/s] 40%|███▉      | 9967/25000 [1:26:10<1:06:04,  3.79it/s] 40%|████      | 10006/25000 [1:26:20<1:05:54,  3.79it/s] 41%|████      | 10204/25000 [1:27:10<1:04:18,  3.83it/s] 41%|████      | 10243/25000 [1:27:20<1:04:08,  3.83it/s] 42%|████▏     | 10442/25000 [1:28:10<1:02:42,  3.87it/s] 42%|████▏     | 10519/25000 [1:28:30<1:02:22,  3.87it/s] 43%|████▎     | 10678/25000 [1:29:10<1:01:24,  3.89it/s] 43%|████▎     | 10755/25000 [1:29:30<1:01:04,  3.89it/s] 44%|████▎     | 10915/25000 [1:30:10<1:00:08,  3.90it/s] 44%|████▍     | 10992/25000 [1:30:30<59:49,  3.90it/s]   45%|████▍     | 11152/25000 [1:31:11<58:57,  3.91it/s] 45%|████▍     | 11228/25000 [1:31:30<58:38,  3.91it/s] 46%|████▌     | 11390/25000 [1:32:11<57:46,  3.93it/s] 46%|████▌     | 11466/25000 [1:32:30<57:27,  3.93it/s] 47%|████▋     | 11627/25000 [1:33:11<56:42,  3.93it/s] 47%|████▋     | 11702/25000 [1:33:30<56:23,  3.93it/s] 47%|████▋     | 11864/25000 [1:34:11<55:37,  3.94it/s] 48%|████▊     | 11939/25000 [1:34:30<55:18,  3.94it/s] 48%|████▊     | 12101/25000 [1:35:11<54:36,  3.94it/s] 49%|████▊     | 12175/25000 [1:35:30<54:18,  3.94it/s] 49%|████▉     | 12339/25000 [1:36:11<53:32,  3.94it/s] 50%|████▉     | 12412/25000 [1:36:30<53:13,  3.94it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+Traceback (most recent call last):
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 471, in q7_inline_eval
+    light = True if (config.q7_light_intermediate and not final) else None
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 319, in evaluate_checkpoint
+    rec.update(_jac_stats(m, inp, lab))
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 92, in _jac_stats
+    (w,) = torch.autograd.grad(out, z, jv, retain_graph=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/autograd/__init__.py", line 496, in grad
+    result = _engine_run_backward(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 344.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 326.44 MiB is free. Including non-PyTorch memory, this process has 39.17 GiB memory in use. Of the allocated memory 38.14 GiB is allocated by PyTorch, and 533.61 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[Rank 0, World Size 1]: Epoch 800
+TRAIN
+ 50%|█████     | 12501/25000 [1:37:56<1:11:26,  2.92it/s] 50%|█████     | 12555/25000 [1:38:10<1:11:07,  2.92it/s] 51%|█████     | 12739/25000 [1:38:56<1:04:06,  3.19it/s] 51%|█████     | 12793/25000 [1:39:10<1:03:49,  3.19it/s] 52%|█████▏    | 12977/25000 [1:39:56<58:59,  3.40it/s]   52%|█████▏    | 13030/25000 [1:40:10<58:44,  3.40it/s] 53%|█████▎    | 13214/25000 [1:40:56<55:21,  3.55it/s] 53%|█████▎    | 13267/25000 [1:41:10<55:06,  3.55it/s] 54%|█████▍    | 13452/25000 [1:41:57<52:31,  3.66it/s] 54%|█████▍    | 13504/25000 [1:42:10<52:16,  3.66it/s] 55%|█████▍    | 13689/25000 [1:42:57<50:20,  3.74it/s] 55%|█████▍    | 13741/25000 [1:43:10<50:06,  3.74it/s] 56%|█████▌    | 13927/25000 [1:43:57<48:29,  3.81it/s] 56%|█████▌    | 13978/25000 [1:44:10<48:15,  3.81it/s] 57%|█████▋    | 14164/25000 [1:44:57<46:58,  3.84it/s] 57%|█████▋    | 14214/25000 [1:45:10<46:45,  3.84it/s] 58%|█████▊    | 14402/25000 [1:45:57<45:34,  3.88it/s] 58%|█████▊    | 14451/25000 [1:46:10<45:21,  3.88it/s] 59%|█████▊    | 14639/25000 [1:46:58<44:20,  3.89it/s] 59%|█████▊    | 14687/25000 [1:47:10<44:08,  3.89it/s] 60%|█████▉    | 14876/25000 [1:47:58<43:09,  3.91it/s] 60%|█████▉    | 14924/25000 [1:48:10<42:56,  3.91it/s] 60%|██████    | 15113/25000 [1:48:58<42:02,  3.92it/s] 61%|██████    | 15161/25000 [1:49:10<41:50,  3.92it/s] 61%|██████▏   | 15351/25000 [1:49:58<40:54,  3.93it/s] 62%|██████▏   | 15398/25000 [1:50:10<40:42,  3.93it/s] 62%|██████▏   | 15588/25000 [1:50:58<39:51,  3.94it/s] 63%|██████▎   | 15635/25000 [1:51:10<39:39,  3.94it/s] 63%|██████▎   | 15826/25000 [1:51:58<38:47,  3.94it/s] 63%|██████▎   | 15873/25000 [1:52:10<38:35,  3.94it/s] 64%|██████▍   | 16063/25000 [1:52:58<37:47,  3.94it/s] 64%|██████▍   | 16109/25000 [1:53:10<37:36,  3.94it/s] 65%|██████▌   | 16301/25000 [1:53:58<36:44,  3.95it/s] 65%|██████▌   | 16346/25000 [1:54:10<36:33,  3.95it/s] 66%|██████▌   | 16538/25000 [1:54:59<35:45,  3.94it/s] 66%|██████▋   | 16583/25000 [1:55:10<35:34,  3.94it/s] 67%|██████▋   | 16776/25000 [1:55:59<34:43,  3.95it/s] 67%|██████▋   | 16820/25000 [1:56:10<34:32,  3.95it/s] 68%|██████▊   | 17013/25000 [1:56:59<33:43,  3.95it/s] 68%|██████▊   | 17057/25000 [1:57:10<33:32,  3.95it/s] 69%|██████▉   | 17251/25000 [1:57:59<32:41,  3.95it/s] 69%|██████▉   | 17294/25000 [1:58:10<32:30,  3.95it/s] 70%|██████▉   | 17489/25000 [1:58:59<31:39,  3.95it/s] 70%|███████   | 17531/25000 [1:59:10<31:29,  3.95it/s] 71%|███████   | 17726/25000 [1:59:59<30:40,  3.95it/s] 71%|███████   | 17769/25000 [2:00:10<30:29,  3.95it/s] 72%|███████▏  | 17964/25000 [2:00:59<29:39,  3.95it/s] 72%|███████▏  | 18005/25000 [2:01:10<29:29,  3.95it/s] 73%|███████▎  | 18201/25000 [2:01:59<28:40,  3.95it/s] 73%|███████▎  | 18243/25000 [2:02:10<28:29,  3.95it/s] 74%|███████▍  | 18439/25000 [2:02:59<27:38,  3.95it/s] 74%|███████▍  | 18481/25000 [2:03:10<27:28,  3.95it/s] 75%|███████▍  | 18677/25000 [2:03:59<26:38,  3.96it/s] 75%|███████▍  | 18718/25000 [2:04:10<26:28,  3.96it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+Traceback (most recent call last):
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 471, in q7_inline_eval
+    light = True if (config.q7_light_intermediate and not final) else None
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 319, in evaluate_checkpoint
+    rec.update(_jac_stats(m, inp, lab))
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 92, in _jac_stats
+    (w,) = torch.autograd.grad(out, z, jv, retain_graph=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/autograd/__init__.py", line 496, in grad
+    result = _engine_run_backward(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 344.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 256.44 MiB is free. Including non-PyTorch memory, this process has 39.23 GiB memory in use. Of the allocated memory 38.14 GiB is allocated by PyTorch, and 604.95 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[Rank 0, World Size 1]: Epoch 1200
+TRAIN
+ 75%|███████▌  | 18751/25000 [2:05:22<36:51,  2.83it/s] 75%|███████▌  | 18823/25000 [2:05:40<36:25,  2.83it/s] 76%|███████▌  | 18989/25000 [2:06:22<31:52,  3.14it/s] 76%|███████▌  | 19060/25000 [2:06:40<31:29,  3.14it/s] 77%|███████▋  | 19226/25000 [2:07:22<28:32,  3.37it/s] 77%|███████▋  | 19298/25000 [2:07:40<28:10,  3.37it/s] 78%|███████▊  | 19464/25000 [2:08:22<26:02,  3.54it/s] 78%|███████▊  | 19535/25000 [2:08:40<25:42,  3.54it/s] 79%|███████▉  | 19701/25000 [2:09:22<24:07,  3.66it/s] 79%|███████▉  | 19773/25000 [2:09:40<23:47,  3.66it/s] 80%|███████▉  | 19939/25000 [2:10:22<22:29,  3.75it/s] 80%|████████  | 20010/25000 [2:10:40<22:10,  3.75it/s] 81%|████████  | 20177/25000 [2:11:22<21:05,  3.81it/s] 81%|████████  | 20248/25000 [2:11:40<20:47,  3.81it/s] 82%|████████▏ | 20415/25000 [2:12:22<19:48,  3.86it/s] 82%|████████▏ | 20486/25000 [2:12:40<19:30,  3.86it/s] 83%|████████▎ | 20653/25000 [2:13:22<18:38,  3.89it/s] 83%|████████▎ | 20723/25000 [2:13:40<18:20,  3.89it/s] 84%|████████▎ | 20892/25000 [2:14:22<17:30,  3.91it/s] 84%|████████▍ | 20961/25000 [2:14:40<17:12,  3.91it/s] 85%|████████▍ | 21129/25000 [2:15:22<16:27,  3.92it/s] 85%|████████▍ | 21198/25000 [2:15:40<16:09,  3.92it/s] 85%|████████▌ | 21367/25000 [2:16:22<15:23,  3.93it/s] 86%|████████▌ | 21436/25000 [2:16:40<15:05,  3.93it/s] 86%|████████▋ | 21604/25000 [2:17:23<14:22,  3.94it/s] 87%|████████▋ | 21673/25000 [2:17:40<14:04,  3.94it/s] 87%|████████▋ | 21843/25000 [2:18:23<13:19,  3.95it/s] 88%|████████▊ | 21911/25000 [2:18:40<13:02,  3.95it/s] 88%|████████▊ | 22081/25000 [2:19:23<12:19,  3.95it/s] 89%|████████▊ | 22148/25000 [2:19:40<12:02,  3.95it/s] 89%|████████▉ | 22320/25000 [2:20:23<11:17,  3.96it/s] 90%|████████▉ | 22386/25000 [2:20:40<11:00,  3.96it/s] 90%|█████████ | 22558/25000 [2:21:23<10:17,  3.96it/s] 90%|█████████ | 22624/25000 [2:21:40<10:00,  3.96it/s] 91%|█████████ | 22796/25000 [2:22:23<09:16,  3.96it/s] 91%|█████████▏| 22862/25000 [2:22:40<09:00,  3.96it/s] 92%|█████████▏| 23034/25000 [2:23:24<08:16,  3.96it/s] 92%|█████████▏| 23099/25000 [2:23:40<08:00,  3.96it/s] 93%|█████████▎| 23273/25000 [2:24:24<07:16,  3.96it/s] 93%|█████████▎| 23337/25000 [2:24:40<06:59,  3.96it/s] 94%|█████████▍| 23511/25000 [2:25:24<06:16,  3.96it/s] 94%|█████████▍| 23574/25000 [2:25:40<06:00,  3.96it/s] 95%|█████████▍| 23749/25000 [2:26:24<05:15,  3.96it/s] 95%|█████████▌| 23812/25000 [2:26:40<04:59,  3.96it/s] 96%|█████████▌| 23987/25000 [2:27:24<04:15,  3.96it/s] 96%|█████████▌| 24049/25000 [2:27:40<04:00,  3.96it/s] 97%|█████████▋| 24225/25000 [2:28:24<03:15,  3.96it/s] 97%|█████████▋| 24287/25000 [2:28:40<03:00,  3.96it/s] 98%|█████████▊| 24463/25000 [2:29:24<02:15,  3.96it/s] 98%|█████████▊| 24525/25000 [2:29:40<01:59,  3.96it/s] 99%|█████████▉| 24701/25000 [2:30:24<01:15,  3.96it/s] 99%|█████████▉| 24763/25000 [2:30:40<00:59,  3.96it/s]100%|█████████▉| 24940/25000 [2:31:25<00:15,  3.96it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+100%|██████████| 25000/25000 [2:31:40<00:00,  3.96it/s]  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+Traceback (most recent call last):
+  File "/home/ubuntu/edgetrm_src/TinyRecursiveModels/pretrain_q7.py", line 471, in q7_inline_eval
+    light = True if (config.q7_light_intermediate and not final) else None
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 319, in evaluate_checkpoint
+    rec.update(_jac_stats(m, inp, lab))
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/edgetrm_src/q7_eval.py", line 92, in _jac_stats
+    (w,) = torch.autograd.grad(out, z, jv, retain_graph=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/autograd/__init__.py", line 496, in grad
+    result = _engine_run_backward(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/venvs/kvcache/lib/python3.11/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 344.00 MiB. GPU 0 has a total capacity of 39.49 GiB of which 328.44 MiB is free. Including non-PyTorch memory, this process has 39.16 GiB memory in use. Of the allocated memory 38.14 GiB is allocated by PyTorch, and 531.73 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+wandb: 
+wandb: Run history:
+wandb:            num_params ▁
+wandb:           q7/strength ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:        train/accuracy ▁▁▁▁▁▁▁▁▁▁▁█▁▁▁▁▁▁█▁▁██▁█▁█▁████▁███████
+wandb:           train/count ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁█▁▁▁▁████████████████
+wandb:  train/exact_accuracy ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁█▁▁▁▁▁▅▁▁▁
+wandb:         train/lm_loss █▇▇▄▃▂▂▂▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:              train/lr ▁▂▂▆████████████████████████████████████
+wandb: train/q_halt_accuracy ▁▁▁▁▁▁█▁▁▁▁▁▁▁██▁██▁██▁█▁▁▁███████▆█████
+wandb:     train/q_halt_loss ▁▁▁▁▁▁▁▁▁▁▁▁▄▁▁▁▁▁▅▅▁▁█▁▁▁▂▇▄▄▁▁▁▂▂▁▁▁▂▃
+wandb:           train/steps ▁▁▁▁▁▁▁█▁▁▁▁▁▁▁▁▁▁▁██▁█▁████████████████
+wandb: 
+wandb: Run summary:
+wandb:            num_params 5700738
+wandb:           q7/strength 0
+wandb:        train/accuracy 0.99167
+wandb:           train/count 1
+wandb:  train/exact_accuracy 0
+wandb:         train/lm_loss 0.04676
+wandb:              train/lr 0.0001
+wandb: train/q_halt_accuracy 1
+wandb:     train/q_halt_loss 0.08878
+wandb:           train/steps 16
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /home/ubuntu/q7/wandb/wandb/offline-run-20260925_072916-zowgspbx
+wandb: Find logs at: /home/ubuntu/q7/wandb/wandb/offline-run-20260925_072916-zowgspbx/logs
+100%|██████████| 25000/25000 [2:32:43<00:00,  2.73it/s]
+Fri Sep 25 10:02:04 UTC 2026 [q7_train] mazemlp_axial_w512_b64 exited rc=0 DONE=yes
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 10:03:34 UTC 2026 [q7_train2] mazemlp_axial_w512_b64 seed=0 host=ip-172-31-15-144 cuda=0 recipe: data_paths=[/home/ubuntu/q7/data_maze/maze-30x30-hard-1k-aug8] epochs=12800 eval_interval=400 lr_warmup_steps=2000 lr=1e-4 puzzle_emb_lr=1e-4 weight_decay=1.0 puzzle_emb_weight_decay=1.0 global_batch_size=64 arch.mlp_t=True arch.pos_encodings=none arch.L_layers=2 arch.H_cycles=3 arch.L_cycles=4 arch.hidden_size=512 arch.num_heads=8 ema=True extra: +q7_inline_eval=False +arch.mlp_t_grid=30
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mix_row_gate_up): CastedLinear()
+          (mix_row_down): CastedLinear()
+          (mix_col_gate_up): CastedLinear()
+          (mix_col_down): CastedLinear()
+          (mix_pz_gate_up): CastedLinear()
+          (mix_pz_down): CastedLinear()
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Setup EMA
+Resuming from checkpoint: /home/ubuntu/q7/ckpt/mazemlp_axial_w512_b64/resume.pt
+  Resumed: step=25000, outer_iter=4, skip_batches=0
+ 12%|█▎        | 25000/200000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_100339-vrdq3n1d
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 1600
+TRAIN
+ 13%|█▎        | 25157/200000 [01:00<18:37:04,  2.61it/s] 13%|█▎        | 25235/200000 [01:20<18:36:34,  2.61it/s] 13%|█▎        | 25395/200000 [02:00<14:14:59,  3.40it/s] 13%|█▎        | 25473/200000 [02:20<14:14:36,  3.40it/s]

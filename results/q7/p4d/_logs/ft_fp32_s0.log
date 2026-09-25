@@ -110,3 +110,111 @@ Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
 [1;34mwandb[0m: Find logs at: [1;35m../../q7/wandb/wandb/offline-run-20260925_001611-gz397qlt/logs[0m
  33%|███▎      | 4000/12000 [00:25<?, ?it/s]
 Fri Sep 25 00:16:38 UTC 2026 [q7_train] ft_fp32_s0 exited rc=1 DONE=n0 (OOM from the 00:16 runner over-launch, not counted)
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 07:49:46 UTC 2026 [q7_train] ft_fp32_s0 seed=0 host=ip-172-31-15-144 cuda=4 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s0/step_65100
+Setup EMA
+Resuming from checkpoint: /home/ubuntu/q7/ckpt/ft_fp32_s0/resume.pt
+  Resumed: step=4000, outer_iter=1, skip_batches=1000
+ 33%|███▎      | 4000/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_074952-ruvlaj4k
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 2304
+TRAIN
+ 34%|███▍      | 4077/12000 [01:00<1:43:29,  1.28it/s] 34%|███▍      | 4129/12000 [01:20<1:42:48,  1.28it/s] 35%|███▌      | 4237/12000 [02:00<1:01:53,  2.09it/s] 36%|███▌      | 4289/12000 [02:20<1:01:28,  2.09it/s] 37%|███▋      | 4397/12000 [03:00<53:51,  2.35it/s]   37%|███▋      | 4448/12000 [03:20<53:29,  2.35it/s] 38%|███▊      | 4557/12000 [04:00<50:07,  2.47it/s] 38%|███▊      | 4609/12000 [04:20<49:46,  2.47it/s] 39%|███▉      | 4718/12000 [05:00<47:41,  2.55it/s] 40%|███▉      | 4768/12000 [05:20<47:21,  2.55it/s] 41%|████      | 4878/12000 [06:00<45:54,  2.59it/s] 41%|████      | 4928/12000 [06:20<45:34,  2.59it/s] 42%|████▏     | 5038/12000 [07:00<44:25,  2.61it/s] 42%|████▏     | 5088/12000 [07:20<44:06,  2.61it/s] 43%|████▎     | 5198/12000 [08:00<43:07,  2.63it/s] 44%|████▎     | 5248/12000 [08:20<42:48,  2.63it/s] 45%|████▍     | 5358/12000 [09:01<41:56,  2.64it/s] 45%|████▌     | 5408/12000 [09:20<41:37,  2.64it/s] 46%|████▌     | 5518/12000 [10:01<40:49,  2.65it/s] 46%|████▋     | 5568/12000 [10:20<40:30,  2.65it/s] 47%|████▋     | 5679/12000 [11:01<39:42,  2.65it/s] 48%|████▊     | 5728/12000 [11:20<39:24,  2.65it/s] 49%|████▊     | 5840/12000 [12:01<38:38,  2.66it/s] 49%|████▉     | 5888/12000 [12:20<38:20,  2.66it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+[q7_eval] ft_fp32_s0/step_6000: fp32 61.0 w4t 0.0 (fidH 0.265/ref 0.267) S0.02 1.33 S0.1 1.40 jac_fro2 0.180; 4 cells in 140s
+[Rank 0, World Size 1]: Epoch 4608
+TRAIN
+ 50%|█████     | 6001/12000 [15:47<1:08:44,  1.45it/s] 50%|█████     | 6035/12000 [16:00<1:08:21,  1.45it/s] 51%|█████▏    | 6161/12000 [16:47<57:44,  1.69it/s]   52%|█████▏    | 6195/12000 [17:00<57:24,  1.69it/s] 53%|█████▎    | 6321/12000 [17:47<49:56,  1.90it/s] 53%|█████▎    | 6355/12000 [18:00<49:38,  1.90it/s] 54%|█████▍    | 6482/12000 [18:47<44:16,  2.08it/s] 54%|█████▍    | 6515/12000 [19:00<44:00,  2.08it/s] 55%|█████▌    | 6643/12000 [19:47<40:06,  2.23it/s] 56%|█████▌    | 6675/12000 [20:00<39:52,  2.23it/s] 57%|█████▋    | 6804/12000 [20:48<36:56,  2.34it/s] 57%|█████▋    | 6835/12000 [21:00<36:43,  2.34it/s] 58%|█████▊    | 6965/12000 [21:48<34:28,  2.43it/s] 58%|█████▊    | 6996/12000 [22:00<34:15,  2.43it/s] 59%|█████▉    | 7126/12000 [22:48<32:28,  2.50it/s] 60%|█████▉    | 7156/12000 [23:00<32:16,  2.50it/s] 61%|██████    | 7287/12000 [23:48<30:48,  2.55it/s] 61%|██████    | 7316/12000 [24:00<30:37,  2.55it/s] 62%|██████▏   | 7448/12000 [24:49<29:20,  2.59it/s] 62%|██████▏   | 7477/12000 [25:00<29:09,  2.59it/s] 63%|██████▎   | 7609/12000 [25:49<28:02,  2.61it/s] 64%|██████▎   | 7637/12000 [26:00<27:52,  2.61it/s] 65%|██████▍   | 7769/12000 [26:49<26:51,  2.63it/s] 65%|██████▍   | 7796/12000 [27:00<26:41,  2.63it/s] 66%|██████▌   | 7930/12000 [27:49<25:42,  2.64it/s] 66%|██████▋   | 7956/12000 [28:00<25:32,  2.64it/s] 67%|██████▋   | 8090/12000 [28:49<24:37,  2.65it/s] 68%|██████▊   | 8116/12000 [29:00<24:27,  2.65it/s] 69%|██████▊   | 8249/12000 [29:49<23:37,  2.65it/s] 69%|██████▉   | 8275/12000 [30:00<23:27,  2.65it/s] 70%|███████   | 8409/12000 [30:50<22:33,  2.65it/s] 70%|███████   | 8435/12000 [31:00<22:24,  2.65it/s] 71%|███████▏  | 8569/12000 [31:50<21:31,  2.66it/s] 72%|███████▏  | 8621/12000 [32:10<21:12,  2.66it/s] 73%|███████▎  | 8729/12000 [32:50<20:31,  2.66it/s] 73%|███████▎  | 8781/12000 [33:10<20:11,  2.66it/s] 74%|███████▍  | 8890/12000 [33:50<19:28,  2.66it/s] 75%|███████▍  | 8942/12000 [34:10<19:09,  2.66it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+[q7_eval] ft_fp32_s0/step_9000: fp32 60.9 w4t 0.0 (fidH 0.261/ref 0.264) S0.02 1.34 S0.1 1.38 jac_fro2 0.186; 4 cells in 141s
+[Rank 0, World Size 1]: Epoch 6912
+TRAIN
+ 75%|███████▌  | 9001/12000 [37:05<34:34,  1.45it/s] 75%|███████▌  | 9039/12000 [37:20<34:08,  1.45it/s] 76%|███████▋  | 9161/12000 [38:05<27:56,  1.69it/s] 77%|███████▋  | 9199/12000 [38:20<27:34,  1.69it/s] 78%|███████▊  | 9348/12000 [39:06<21:58,  2.01it/s] 78%|███████▊  | 9383/12000 [39:20<21:41,  2.01it/s] 79%|███████▉  | 9502/12000 [40:06<19:24,  2.15it/s] 79%|███████▉  | 9539/12000 [40:20<19:06,  2.15it/s] 81%|████████  | 9661/12000 [41:06<17:08,  2.27it/s] 81%|████████  | 9696/12000 [41:20<16:52,  2.27it/s] 82%|████████▏ | 9819/12000 [42:06<15:20,  2.37it/s] 82%|████████▏ | 9856/12000 [42:20<15:04,  2.37it/s] 83%|████████▎ | 9980/12000 [43:06<13:43,  2.45it/s] 83%|████████▎ | 10013/12000 [43:20<13:30,  2.45it/s] 84%|████████▍ | 10137/12000 [44:06<12:26,  2.50it/s] 85%|████████▍ | 10170/12000 [44:20<12:12,  2.50it/s] 86%|████████▌ | 10294/12000 [45:07<11:14,  2.53it/s] 86%|████████▌ | 10329/12000 [45:20<11:00,  2.53it/s] 87%|████████▋ | 10453/12000 [46:07<10:03,  2.56it/s] 87%|████████▋ | 10485/12000 [46:20<09:51,  2.56it/s] 88%|████████▊ | 10610/12000 [47:07<08:59,  2.58it/s] 89%|████████▊ | 10641/12000 [47:20<08:47,  2.58it/s] 90%|████████▉ | 10768/12000 [48:07<07:55,  2.59it/s] 90%|█████████ | 10802/12000 [48:20<07:42,  2.59it/s] 91%|█████████ | 10928/12000 [49:07<06:50,  2.61it/s] 91%|█████████▏| 10959/12000 [49:20<06:38,  2.61it/s] 92%|█████████▏| 11085/12000 [50:08<05:50,  2.61it/s] 93%|█████████▎| 11115/12000 [50:20<05:39,  2.61it/s] 94%|█████████▎| 11242/12000 [51:08<04:50,  2.61it/s] 94%|█████████▍| 11273/12000 [51:20<04:38,  2.61it/s] 95%|█████████▌| 11403/12000 [52:08<03:47,  2.63it/s] 95%|█████████▌| 11433/12000 [52:20<03:35,  2.63it/s] 96%|█████████▋| 11563/12000 [53:08<02:45,  2.64it/s] 97%|█████████▋| 11593/12000 [53:20<02:34,  2.64it/s] 98%|█████████▊| 11723/12000 [54:08<01:44,  2.65it/s] 98%|█████████▊| 11753/12000 [54:20<01:33,  2.65it/s] 99%|█████████▉| 11883/12000 [55:08<00:44,  2.65it/s] 99%|█████████▉| 11913/12000 [55:20<00:32,  2.65it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+[q7_eval] ft_fp32_s0/step_12000: fp32 61.5 w4t 0.0 (fidH 0.256/ref 0.255) S0.02 1.34 S0.1 1.37 jac_fro2 0.186; 27 cells in 711s
+wandb: 
+wandb: Run history:
+wandb:            num_params ▁
+wandb:           q7/strength ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:        train/accuracy ▄▇▆▅▄▆▄▅██▇▃▆▁▆▅▃▆▅▅▆▄▅▄▅▇▂▆▇▇▆▅▅█▂▁▄▅▃▃
+wandb:           train/count ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:  train/exact_accuracy ▄▂▆▆▇▁▅▄▃▅▆▇█▅▅▄▆▃▃▇▄▅█▄█▆▄▆▃▇▇▆▄▄▁▃▇▃▆▅
+wandb:         train/lm_loss ▃▂▁▄▆▄█▂▄▄▂▅▄▂▃▁▄▄▄▁▄▃▄▇▃▅▂▂▃▃▃▃▅▂▄▅▃▂▄▄
+wandb:              train/lr ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: train/q_halt_accuracy ▆▁▅█▅████▅█▂▅▄▆█▄▆███▆█████▆▆██▆▆▇██▆█▆▆
+wandb:     train/q_halt_loss ▅▄▂█▃▁▃▁▂▁▁▂▃▄▂▃▂▁▃▁▃▂▃▂▃▃▄▂▁▁▂▃▅▄▁▃▁▂▃▁
+wandb:           train/steps ▃▃▃▅▃▅▆█▆▂▆▃▄▄▁▅▃▅▅▃▅▂▃▆▃▆█▃▂▂▃▄▂▄▄▅▄▄▃▅
+wandb: 
+wandb: Run summary:
+wandb:            num_params 1483778
+wandb:           q7/strength 0
+wandb:        train/accuracy 0.9082
+wandb:           train/count 1
+wandb:  train/exact_accuracy 0.69149
+wandb:         train/lm_loss 0.66202
+wandb:              train/lr 0.0001
+wandb: train/q_halt_accuracy 1
+wandb:     train/q_halt_loss 0.00677
+wandb:           train/steps 8.38298
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /home/ubuntu/q7/wandb/wandb/offline-run-20260925_074952-ruvlaj4k
+wandb: Find logs at: /home/ubuntu/q7/wandb/wandb/offline-run-20260925_074952-ruvlaj4k/logs
+100%|██████████| 12000/12000 [1:07:56<00:00,  1.96it/s]
+Fri Sep 25 08:57:50 UTC 2026 [q7_train] ft_fp32_s0 exited rc=0 DONE=yes

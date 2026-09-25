@@ -104,3 +104,52 @@ Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
 [1;34mwandb[0m: Find logs at: [1;35m../../q7/wandb/wandb/offline-run-20260925_001615-jpamo41m/logs[0m
   0%|          | 0/12000 [00:26<?, ?it/s]
 Fri Sep 25 00:16:43 UTC 2026 [q7_train] gqatft_s1 exited rc=1 DONE=n0 (OOM from the 00:16 runner over-launch, not counted)
+[preflight] cuda True NVIDIA A100-SXM4-40GB 2.6.0+cu124
+Fri Sep 25 09:38:32 UTC 2026 [q7_train] gqatft_s1 seed=1 host=ip-172-31-15-144 cuda=3 extra: epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100 +q7_reg=qat +q7_bits=4 +q7_start_step=0 +q7_ramp_steps=6000
+WARNING: adam_atan2_backend not available; falling back to torch.optim.AdamW. Install/build adam-atan2 for best performance.
+TinyRecursiveReasoningModel_ACTV1(
+  (inner): TinyRecursiveReasoningModel_ACTV1_Inner(
+    (embed_tokens): CastedEmbedding()
+    (lm_head): CastedLinear()
+    (q_head): CastedLinear()
+    (puzzle_emb): CastedSparseEmbedding()
+    (L_level): TinyRecursiveReasoningModel_ACTV1ReasoningModule(
+      (layers): ModuleList(
+        (0-1): 2 x TinyRecursiveReasoningModel_ACTV1Block(
+          (mlp_t): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+          (mlp): SwiGLU(
+            (gate_up_proj): CastedLinear()
+            (down_proj): CastedLinear()
+          )
+        )
+      )
+    )
+  )
+)
+Loading checkpoint /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100
+Setup EMA
+  0%|          | 0/12000 [00:00<?, ?it/s]wandb: Tracking run with wandb version 0.30.0
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /home/ubuntu/q7/wandb/wandb/offline-run-20260925_093837-4jqiacqv
+wandb: View this run in the terminal with `wandb leet`
+[Rank 0, World Size 1]: Epoch 0
+TRAIN
+  2%|▏         | 257/12000 [01:00<45:47,  4.27it/s]  3%|▎         | 371/12000 [01:20<45:20,  4.27it/s]  5%|▌         | 603/12000 [02:00<36:54,  5.15it/s]  6%|▌         | 713/12000 [02:20<36:33,  5.15it/s]  7%|▋         | 819/12000 [03:00<42:03,  4.43it/s]  7%|▋         | 868/12000 [03:20<41:52,  4.43it/s]  8%|▊         | 973/12000 [04:00<49:47,  3.69it/s]  9%|▊         | 1022/12000 [04:20<49:33,  3.69it/s]  9%|▉         | 1127/12000 [05:00<55:11,  3.28it/s] 10%|▉         | 1175/12000 [05:20<54:56,  3.28it/s] 11%|█         | 1281/12000 [06:01<58:47,  3.04it/s] 11%|█         | 1329/12000 [06:20<58:32,  3.04it/s] 12%|█▏        | 1435/12000 [07:01<1:01:03,  2.88it/s] 12%|█▏        | 1483/12000 [07:20<1:00:46,  2.88it/s] 13%|█▎        | 1589/12000 [08:01<1:02:24,  2.78it/s] 14%|█▎        | 1637/12000 [08:20<1:02:07,  2.78it/s] 15%|█▍        | 1743/12000 [09:01<1:03:02,  2.71it/s] 15%|█▍        | 1790/12000 [09:20<1:02:45,  2.71it/s] 16%|█▌        | 1897/12000 [10:01<1:03:10,  2.67it/s] 16%|█▌        | 1944/12000 [10:20<1:02:53,  2.67it/s] 17%|█▋        | 2051/12000 [11:01<1:02:59,  2.63it/s] 17%|█▋        | 2097/12000 [11:20<1:02:42,  2.63it/s] 18%|█▊        | 2205/12000 [12:01<1:02:34,  2.61it/s] 19%|█▉        | 2251/12000 [12:20<1:02:16,  2.61it/s] 20%|█▉        | 2359/12000 [13:01<1:01:53,  2.60it/s] 20%|██        | 2405/12000 [13:20<1:01:35,  2.60it/s] 21%|██        | 2513/12000 [14:02<1:01:11,  2.58it/s] 21%|██▏       | 2558/12000 [14:20<1:00:53,  2.58it/s] 22%|██▏       | 2667/12000 [15:02<1:00:22,  2.58it/s] 23%|██▎       | 2711/12000 [15:20<1:00:05,  2.58it/s] 24%|██▎       | 2821/12000 [16:02<59:27,  2.57it/s]   24%|██▍       | 2866/12000 [16:20<59:10,  2.57it/s] 25%|██▍       | 2975/12000 [17:02<58:33,  2.57it/s]EVALUATE
+SWITCH TO EMA
+Processing batch 1: all
+ 25%|██▌       | 3000/12000 [17:20<58:24,  2.57it/s]  Completed inference in 16 steps
+Processing batch 2: all
+  Completed inference in 16 steps
+Processing batch 3: all
+  Completed inference in 16 steps
+
+Running 0 evaluator(s)...
+All evaluators completed!
+SAVE CHECKPOINT
+[q7_eval] gqatft_s1/step_3000: fp32 27.0 w4t 0.2 (fidH 0.134/ref 0.199) S0.02 2.20 S0.1 2.16 Sq0.1 1.90 jac_fro2 0.199; 6 cells in 209s
+[Rank 0, World Size 1]: Epoch 2304
+TRAIN
+ 25%|██▌       | 3001/12000 [21:06<2:29:24,  1.00it/s] 25%|██▌       | 3035/12000 [21:20<2:28:51,  1.00it/s] 27%|██▋       | 3183/12000 [22:07<1:47:02,  1.37it/s] 27%|██▋       | 3216/12000 [22:20<1:46:38,  1.37it/s] 28%|██▊       | 3340/12000 [23:07<1:28:39,  1.63it/s] 28%|██▊       | 3374/12000 [23:20<1:28:19,  1.63it/s] 29%|██▉       | 3500/12000 [24:07<1:16:02,  1.86it/s] 29%|██▉       | 3532/12000 [24:20<1:15:45,  1.86it/s] 30%|███       | 3656/12000 [25:07<1:08:03,  2.04it/s] 31%|███       | 3688/12000 [25:20<1:07:47,  2.04it/s] 32%|███▏      | 3811/12000 [26:08<1:02:36,  2.18it/s] 32%|███▏      | 3842/12000 [26:20<1:02:22,  2.18it/s] 33%|███▎      | 3965/12000 [27:08<58:41,  2.28it/s]   33%|███▎      | 3995/12000 [27:20<58:28,  2.28it/s]

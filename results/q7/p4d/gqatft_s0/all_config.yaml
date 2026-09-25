@@ -54,10 +54,13 @@ q7_inline_eval: true
 q7_jac_every: 1
 q7_jac_sub: 128
 q7_lambda: 0.0
+q7_light_intermediate: false
 q7_max_steps: 0
 q7_ramp_steps: 6000
 q7_reg: qat
+q7_sens_min_steps: 0
 q7_sens_sub: 64
+q7_sens_target: 0.0
 q7_sigma: 0.0
 q7_start_frac: 0.0
 q7_start_step: 0

@@ -1,0 +1,69 @@
+arch:
+  H_cycles: 3
+  H_layers: 0
+  L_cycles: 6
+  L_layers: 2
+  expansion: 4
+  forward_dtype: bfloat16
+  halt_exploration_prob: 0.1
+  halt_max_steps: 16
+  hidden_size: 256
+  loss:
+    loss_type: stablemax_cross_entropy
+    name: losses@ACTLossHead
+  mlp_t: true
+  name: recursive_reasoning.trm@TinyRecursiveReasoningModel_ACTV1
+  no_ACT_continue: true
+  num_heads: 4
+  pos_encodings: none
+  puzzle_emb_len: 16
+  puzzle_emb_ndim: 256
+beta1: 0.9
+beta2: 0.95
+checkpoint_every_eval: true
+checkpoint_interval: 500
+checkpoint_path: /home/ubuntu/q7/ckpt/sensfth10_s1
+data_paths:
+- /home/ubuntu/edgetrm_src/TinyRecursiveModels/data/sudoku-extreme-1k-aug-1000
+data_paths_test: []
+ema: true
+ema_rate: 0.999
+epochs: 9216
+eval_interval: 2304
+eval_save_outputs: []
+evaluators: []
+freeze_weights: false
+global_batch_size: 768
+load_checkpoint: /home/ubuntu/edgetrm_ckpt/variants/trm_sudoku_mlp_w256_s1/step_65100
+lr: 0.0001
+lr_min_ratio: 1.0
+lr_warmup_steps: 500
+min_eval_interval: 0
+project_name: Sudoku-extreme-1k-aug-1000-ACT-torch
+puzzle_emb_lr: 0.0001
+puzzle_emb_weight_decay: 1.0
+q7_act_bits: 0
+q7_act_calib_steps: 20
+q7_bits: 4
+q7_clip_k: 0.0
+q7_eval_batches: 3
+q7_eval_n: 1000
+q7_fork_from: null
+q7_fork_iters: []
+q7_inline_eval: true
+q7_jac_every: 4
+q7_jac_sub: 128
+q7_lambda: 1.0
+q7_light_intermediate: false
+q7_max_steps: 0
+q7_ramp_steps: 3000
+q7_reg: sens
+q7_sens_min_steps: 8
+q7_sens_sub: 64
+q7_sens_target: 1.0
+q7_sigma: 0.1
+q7_start_frac: 0.0
+q7_start_step: 0
+run_name: sensfth10_s1
+seed: 1
+weight_decay: 1.0

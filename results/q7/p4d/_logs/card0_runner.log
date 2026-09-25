@@ -1,2 +1,10 @@
 2026-09-25 04:50:56 card0 runner start (pid 654439)
 2026-09-25 04:50:56 launching mazemlp_aug_w512 on card 0 (card had 1 procs)
+2026-09-25 07:10:24 card0 runner start (pid 1029270)
+2026-09-25 07:10:24 launching mazemlp_axial_w512 on card 0 (card had 0 procs)
+2026-09-25 07:29:09 card0 runner start (pid 1091942)
+2026-09-25 07:29:09 launching mazemlp_axial_w512_b64 on card 0 (card had 0 procs)
+2026-09-25 10:02:04 mazemlp_axial_w512_b64 exited rc=0
+2026-09-25 10:02:34 mazemlp_axial_w512_b64 DONE; card0 runner exits
+2026-09-25 10:03:32 card0 runner start (pid 1327267)
+2026-09-25 10:03:32 launching mazemlp_axial_w512_b64 on card 0 (card had 0 procs)
