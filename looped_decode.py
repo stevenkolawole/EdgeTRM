@@ -307,7 +307,30 @@ def family(name):
 
 
 # ----------------------------------------------------------------------------- quantization
+def parse_spec(spec):
+    """Weight quantizer (w<bits><gran>, bf16) or activation noise 'an<sigma>': Gaussian noise added to the
+    input of every core Linear, scaled per token by that input's standard deviation (weights stay bf16)."""
+    if spec.startswith("an"):
+        return {"spec": spec, "bits": None, "gran": None, "act_noise": float(spec[2:])}
+    return L.parse_quant(spec)
+
+
+def _noise_hook(sigma):
+    def hook(mod, args):
+        x = args[0]
+        n = torch.randn_like(x) * x.float().std(-1, keepdim=True).to(x.dtype) * sigma
+        return (x + n,) + tuple(args[1:])
+    return hook
+
+
 def quantize_(fam, model, q, scope):
+    if q.get("act_noise"):
+        n = 0
+        for m in fam.core_modules(model, scope):
+            if isinstance(m, torch.nn.Linear):
+                m.register_forward_pre_hook(_noise_hook(q["act_noise"]))
+                n += 1
+        return n
     if q["bits"] is None:
         return 0
     n = 0
@@ -619,6 +642,8 @@ def gen_pass(fam, model, tok, data, decode, max_new, batch, out_jsonl, log, bf16
         log(f"    {decode} batch {b0 // batch}: {len(idxs)} problems in {time.time() - tb:.0f}s "
             f"(max gen {max(len(x) for x in gen)})")
     f.close()
+    if torch.cuda.is_available():
+        log(f"    {decode} peak_mem_GB {torch.cuda.max_memory_allocated() / 2**30:.1f} (max allocated, this process)")
     recs = read_jsonl(out_jsonl)
     return [recs[i] for i in sorted(recs) if i < len(data)], time.time() - t0
 
@@ -687,7 +712,7 @@ def main():
     for steps in [int(s) for s in a.steps.split(",")]:
         ref_path = refdir / f"{a.model}_s{steps}_n{len(data)}_v2.pt"
         for spec in [q for q in a.quants.split(",") if q]:
-            q = L.parse_quant(spec)
+            q = parse_spec(spec)
             tag = f"{a.model}_s{steps}_{spec}_{a.scope}"
             tdir = outdir / tag
             tdir.mkdir(parents=True, exist_ok=True)
@@ -709,7 +734,7 @@ def main():
                 tf = json.load(open(tf_path))
             else:
                 t0 = time.time()
-                if q["bits"] is None and ref_recs is not None:
+                if q["spec"] in ("bf16", "fp32") and ref_recs is not None:
                     recs = ref_recs                   # bf16 against itself: the reference pass already is this
                 else:
                     recs, _ = tf_pass(fam, model, tok, data, ref=ref)

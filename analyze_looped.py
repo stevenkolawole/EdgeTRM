@@ -22,6 +22,9 @@ Sections
   kl     per-problem teacher-forced KL / NLL increase vs generation failure on the
          problems bf16 greedy solves (AUROC, accuracy by KL quartile)
   sweep  loops x quantizer table for greedy (accuracy, NLL, KL, fidelity)
+  pool   deduplicated pool (one row per model x quantizer x loops, accuracy and teacher-forced record from
+         one directory), per-model and pooled AUROC, best fidelity cut per model with a bootstrap CI.
+         Default roots POOL_ROOTS; `python analyze_looped.py pool` is the documented command.
   boundary  every LM cell with generation (Sep 13-15 Lambda grid + this harness): latent fidelity vs
          teacher-forced NLL increase vs retained accuracy, and AUROC of each for predicting collapse
 """
@@ -422,6 +425,138 @@ def sec_boundary(cells, nmin):
     print()
 
 
+POOL_ROOTS = ["results/looped/p4d/q6", "results/looped/p4d/olmo", "results/looped/p4d/olmo200",
+              "results/looped/p4d/loops", "results/looped/p4d/n500", "results/looped/p4d/olmo500",
+              "results/looped/babel/q6", "results/looped/p5/n500", "results/looped/p5/band"]
+PLATFORM_RANK = {"p5": 0, "p4d": 1, "babel": 2, "lambda": 3}
+
+
+def pool_rows(roots, cut=50.0):
+    """One row per (model, quant, loops): greedy accuracy and teacher-forced record from the SAME result
+    directory (one platform, one n), retained against that directory's own bf16 greedy at the same loops.
+    Duplicates across directories/platforms are resolved by largest n, then platform (p5 > p4d > Babel >
+    Lambda).  Lambda cells (Sep 13-15 grid) are included only where no newer record of that config exists."""
+    cand = []
+    for root in roots:
+        root = HERE / root if not Path(root).is_absolute() else Path(root)
+        if not root.exists():
+            continue
+        plat = root.parent.name
+        cells = load([root])
+        for (model, steps, quant, scope), c in cells.items():
+            if quant == "bf16" or scope != "core" or not c["tf"] or "greedy" not in c["gen"]:
+                continue
+            b = cells.get((model, steps, "bf16", scope))
+            if not b or "greedy" not in b["gen"] or not b["tf"]:
+                continue
+            g, gb = c["gen"]["greedy"], b["gen"]["greedy"]
+            idx = sorted(set(g) & set(gb))
+            if not idx:
+                continue
+            t, tb = c["tf"]["summary"], b["tf"]["summary"]
+            a = 100 * sum(g[i]["correct"] for i in idx) / len(idx)
+            ab = 100 * sum(gb[i]["correct"] for i in idx) / len(idx)
+            cand.append({"platform": plat, "dir": root.name, "model": model, "loops": steps, "quant": quant,
+                         "n_gen": len(idx), "n_tf": len(c["tf"]["records"]), "acc": a, "acc_bf16": ab,
+                         "fid": t["fidelity"], "nll": t["nll"], "nll_bf16": tb["nll"], "kl": t.get("kl")})
+    for model, gen_files, nogen in LAMBDA_FILES:
+        gen, ng = {}, {}
+        for f in gen_files:
+            p = LAMBDA / f
+            if p.exists():
+                for r in json.load(open(p))["records"]:
+                    if r.get("acc") is not None:
+                        gen.setdefault((r["steps"], r["quant"]["spec"]), r)
+        p = LAMBDA / nogen
+        if p.exists():
+            ng = {(r["steps"], r["quant"]["spec"]): r for r in json.load(open(p))["records"]}
+        for (st_, q), g in gen.items():
+            b, t, tb = gen.get((st_, "bf16")), ng.get((st_, q)), ng.get((st_, "bf16"))
+            if q == "bf16" or not b or not t or not tb or g["n"] != b["n"]:
+                continue
+            cand.append({"platform": "lambda", "dir": "lambda", "model": model, "loops": st_, "quant": q,
+                         "n_gen": g["n"], "n_tf": t.get("n", g["n"]), "acc": 100 * g["acc"], "acc_bf16": 100 * b["acc"],
+                         "fid": t["fidelity"], "nll": t["nll"], "nll_bf16": tb["nll"], "kl": None})
+    best = {}
+    for r in cand:
+        k = (r["model"], r["quant"], r["loops"])
+        key = (-min(r["n_gen"], r["n_tf"]), PLATFORM_RANK.get(r["platform"], 9))
+        if k not in best or key < best[k][0]:
+            best[k] = (key, r)
+    rows = [v[1] for v in best.values()]
+    for r in rows:
+        r["ret"] = 100 * r["acc"] / r["acc_bf16"] if r["acc_bf16"] > 0 else float("nan")
+        r["collapse"] = r["ret"] < cut
+    return [r for r in rows if r["acc_bf16"] >= 10 and not math.isnan(r["ret"])], len(cand)
+
+
+def best_threshold(rows):
+    """Fidelity cut t (collapse predicted iff fid < t) minimising misclassified cells; returns (t, errors),
+    t = midpoint of the optimal interval between adjacent sorted fidelities."""
+    xs = sorted(set(r["fid"] for r in rows))
+    cuts = [xs[0] - 1e-3] + [(a + b) / 2 for a, b in zip(xs, xs[1:])] + [xs[-1] + 1e-3]
+    scored = [(sum((r["fid"] < t) != r["collapse"] for r in rows), t) for t in cuts]
+    e = min(x[0] for x in scored)
+    ts = [t for x, t in scored if x == e]
+    return (ts[0] + ts[-1]) / 2, e
+
+
+def sec_pool(cells, nmin, roots=None, cut=50.0, boots=2000, seed=0):
+    import random
+    rows, ncand = pool_rows(roots or POOL_ROOTS, cut)
+    print(f"## Looped-LM pool: one row per model x quantizer x loops (collapse = retained < {cut:.0f}%)\n")
+    print(f"{ncand} candidate records -> {len(rows)} unique cells with bf16 >= 10%. Command: "
+          f"`python EdgeTRM/analyze_looped.py pool` (roots: {', '.join(roots or POOL_ROOTS)} + Lambda grid).\n")
+    print("| model | platform | loops | quant | n | acc (bf16) | retained | fidelity | ΔNLL % | collapse |")
+    print("|---|---|---|---|---|---|---|---|---|---|")
+    for r in sorted(rows, key=lambda r: (r["model"], -r["fid"])):
+        print(f"| {r['model']} | {r['platform']} | {r['loops']} | {r['quant']} | {min(r['n_gen'], r['n_tf'])} | "
+              f"{fmt(r['acc'])} ({fmt(r['acc_bf16'])}) | {fmt(r['ret'], 1)}% | {r['fid']:.3f} | "
+              f"{100 * (r['nll'] - r['nll_bf16']) / r['nll_bf16']:+.0f}% | {'yes' if r['collapse'] else ''} |")
+    print("\n| model | cells (held/collapsed) | collapsed max φ | held min φ | consistent cut interval (width) | "
+          "cells in 0.75-0.90 | AUROC(1-φ) | AUROC(ΔNLL%) | best φ cut (errors) | bootstrap 95% CI of cut |")
+    print("|---|---|---|---|---|---|---|---|---|---|")
+    rng = random.Random(seed)
+    groups_ = defaultdict(list)
+    for r in rows:
+        groups_[r["model"]].append(r)
+    groups_["POOLED"] = rows
+    inter = []
+    for m, rs in groups_.items():
+        col = [r for r in rs if r["collapse"]]
+        held = [r for r in rs if not r["collapse"]]
+        rel = lambda r: (r["nll"] - r["nll_bf16"]) / r["nll_bf16"]  # noqa: E731
+        a_f = auroc([1 - r["fid"] for r in col], [1 - r["fid"] for r in held])
+        a_n = auroc([rel(r) for r in col], [rel(r) for r in held])
+        nband = sum(0.75 <= r["fid"] <= 0.90 for r in rs)
+        lo_, hi_ = max((r["fid"] for r in col), default=float("nan")), min((r["fid"] for r in held), default=float("nan"))
+        if m != "POOLED" and lo_ < hi_:
+            inter.append((lo_, hi_))
+        if col and held:
+            t, e = best_threshold(rs)
+            bs = []
+            for _ in range(boots):
+                smp = [rng.choice(rs) for _ in rs]
+                if any(r["collapse"] for r in smp) and not all(r["collapse"] for r in smp):
+                    bs.append(best_threshold(smp)[0])
+            bs.sort()
+            ci = f"{bs[int(0.025 * len(bs))]:.3f}–{bs[int(0.975 * len(bs)) - 1]:.3f}" if bs else "–"
+            tt = f"{t:.3f} ({e})"
+        else:
+            tt, ci = "–", "–"
+        print(f"| {m} | {len(held)}/{len(col)} | {max((r['fid'] for r in col), default=float('nan')):.3f} | "
+              f"{min((r['fid'] for r in held), default=float('nan')):.3f} | "
+              f"{'[%.3f, %.3f] (%.3f)' % (lo_, hi_, hi_ - lo_) if lo_ < hi_ else 'overlap'} | {nband} | "
+              f"{fmt(a_f, 3)} | {fmt(a_n, 3)} | {tt} | {ci} |")
+    if inter:
+        lo_all, hi_all = max(a for a, _ in inter), min(b for _, b in inter)
+        print(f"\nIntersection of the per-model consistent cut intervals: "
+              + (f"[{lo_all:.3f}, {hi_all:.3f}] -> one cut fits every model" if lo_all < hi_all
+                 else f"empty ({lo_all:.3f} > {hi_all:.3f}) -> no single cut fits every model"))
+    print("\nBootstrap resamples cells within the model (2000 draws); the cut is the midpoint of the error-minimising"
+          " interval, so a model without cells on both sides near the boundary has a wide or undefined CI.\n")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("sections", nargs="*", default=["boundary", "q6", "tf", "div", "len", "kl", "sweep"])
@@ -433,7 +568,7 @@ def main():
         print("no results under", a.roots or DEFAULT_ROOTS)
         return
     fns = {"q6": sec_q6, "tf": sec_tf, "div": sec_div, "len": sec_len, "kl": sec_kl, "sweep": sec_sweep,
-           "boundary": sec_boundary}
+           "boundary": sec_boundary, "pool": sec_pool}
     for s in a.sections:
         fns[s](cells, a.nmin)
 
