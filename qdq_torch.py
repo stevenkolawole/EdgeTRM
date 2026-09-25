@@ -106,13 +106,27 @@ class QDQRunner:
             if x not in keep:
                 self.free_after.setdefault(i, []).append(x)
         self.enc16 = act_encodings(g)
-        self.enc8 = act_encodings(load_graph(path8).graph) if path8 else {}
+        g8 = load_graph(path8).graph if path8 else None
+        self.enc8 = act_encodings(g8) if g8 is not None else {}
+        # w8a8 weight encodings (for the HTP Gather-table rule in device mode)
+        self.wenc8 = {}
+        if g8 is not None:
+            v8 = {i.name: i for i in g8.initializer}
+            v8.update({n.output[0]: n.attribute[0].t for n in g8.node if n.op_type == "Constant"})
+            for n in g8.node:
+                if n.op_type == "QuantizeLinear" and n.input[0] in v8 and n.input[0] in {i.name for i in g8.initializer}:
+                    zt = v8[n.input[2]]
+                    self.wenc8[n.input[0]] = (_np(v8[n.input[1]]).astype(np.float32), _np(zt).astype(np.float64),
+                                              zt.data_type, attrs(n).get("axis", 1))
+        self.device_mode = False
+        self._device_structure()
         self.act_names = sorted(self.enc16)
         # weight Q nodes (input = float initializer): folded once per weight configuration
         self.wq = {n.output[0]: n for n in self.nodes if n.op_type == "QuantizeLinear" and n.input[0] in self.inits}
         self.w_of = {k: n.input[0] for k, n in self.wq.items()}
         self.weight_fmt = {}
         self.act8 = set()
+        self._table8_on = set()
         self.act_noise = {}                                  # {tensor: sigma}: Gaussian noise, std = sigma x std(x)
         self._enc_t = {}
         self._build_enc_tensors()
@@ -138,6 +152,24 @@ class QDQRunner:
         missing = [n for n in names if (n, 8) not in self._enc_t]
         assert not missing, f"no 8-bit encoding for {missing[:5]}"
         self.act8 = names
+        # device mode: a Gather table switches to its 8-bit (w8a8) encoding when its output is 8 bit
+        self._table8_on = set()
+        if self.device_mode:
+            for out_t, (wq_out, wname) in self.table.items():
+                if self.root(out_t) in names and wname in self.wenc8:
+                    self._table8_on.add(wq_out)
+
+    def set_device_mode(self, on=True):
+        self.device_mode = on
+        self._table8_fold = {}
+        self._table8_on = set()
+        for out_t, (wq_out, wname) in self.table.items():
+            if wname in self.wenc8:
+                sc, zp, zt, axis = self.wenc8[wname]
+                lo, hi = QRANGE[zt]
+                self._table8_fold[wq_out] = self._fq(self.const[wname].float(), torch.tensor(sc, device=self.dev),
+                                                     torch.tensor(zp, dtype=torch.float32, device=self.dev), lo, hi, axis)
+        self.set_act8(self.act8)
 
     def set_act_encoding(self, name, scale, zp, zp_type, bits_tag):
         """a custom encoding (e.g. 4-bit, or a re-calibrated 8-bit) for one tensor, selectable by bits_tag."""
@@ -156,6 +188,63 @@ class QDQRunner:
                     out.append(qn.input[0])
                     break
         return sorted(set(out))
+
+    MOVE = ("Gather", "Reshape", "Transpose", "Slice", "Squeeze", "Unsqueeze", "Flatten")
+
+    def _device_structure(self):
+        """HTP legality (X3, Sep 25): (1) a data-movement op's output keeps its input's encoding -> alias
+        {movement output tensor: input tensor}; (2) a Gather's table (a weight) shares its output's encoding ->
+        table {gathered output tensor: (weight Q output, weight name)}."""
+        prod = {o: n for n in self.nodes for o in n.output}
+        cons = {}
+        for n in self.nodes:
+            for x in n.input:
+                cons.setdefault(x, []).append(n)
+        self.alias, self.table = {}, {}
+        for n in self.nodes:
+            if n.op_type not in self.MOVE:
+                continue
+            q_out = next((c for c in cons.get(n.output[0], []) if c.op_type == "QuantizeLinear"), None)
+            if q_out is None:
+                continue
+            dq_in = prod.get(n.input[0])
+            if dq_in is None or dq_in.op_type != "DequantizeLinear":
+                continue
+            q_in = prod.get(dq_in.input[0])
+            if q_in is None or q_in.op_type != "QuantizeLinear":
+                continue
+            if q_in.input[0] in self.inits:
+                if n.op_type == "Gather":
+                    self.table[q_out.input[0]] = (q_in.output[0], q_in.input[0])
+                continue
+            self.alias[q_out.input[0]] = q_in.input[0]
+
+    def root(self, t):
+        seen = 0
+        while t in self.alias and seen < 64:
+            t = self.alias[t]
+            seen += 1
+        return t
+
+    def matmul_input_acts(self):
+        """activation tensors (keys of the activation encodings) whose Q/DQ output is the activation input of a
+        MatMul/Gemm (Ethos-U with INT4 weights accepts only 8-bit activations there)."""
+        prod = {o: n for n in self.nodes for o in n.output}
+        out = set()
+        for n in self.nodes:
+            if n.op_type not in ("MatMul", "Gemm"):
+                continue
+            for x in n.input[:2]:
+                p = prod.get(x)
+                hops = 0
+                while p is not None and hops < 6 and p.op_type in ("DequantizeLinear", "QuantizeLinear", "Transpose",
+                                                                     "Reshape", "Identity", "Cast"):
+                    if p.op_type == "QuantizeLinear" and p.input[0] in self.enc16:
+                        out.add(p.input[0])
+                        break
+                    p = prod.get(p.input[0])
+                    hops += 1
+        return out
 
     def set_weight_fmt(self, fmts):
         """{weight initializer name: fmt or None (graph's own encoding)}."""
@@ -207,8 +296,12 @@ class QDQRunner:
             if op == "QuantizeLinear":
                 if n.output[0] in self.wfold:
                     y = self.wfold[n.output[0]]
+                    if self.device_mode and n.output[0] in self._table8_on:
+                        y = self._table8_fold[n.output[0]]
                 else:
                     name = n.input[0]
+                    if self.device_mode:
+                        name = self.root(name)
                     key = (name, 8) if name in self.act8 else (name, 16)
                     s, z, lo, hi, axis = self._enc_t[key]
                     x = ins[0].float()

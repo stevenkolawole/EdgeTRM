@@ -50,13 +50,20 @@ import breadth_sweep as bs  # noqa: E402
 import contraction as C  # noqa: E402
 
 DEV = bs.DEV
+ARC_DIR = Path.home() / "edgetrm_ckpt" / "arc_slim"
 
 
 # ----------------------------------------------------------------------------- formats
 def parse_fmt(f):
+    if "#" in f:                                      # calibrated tensor (rounding learned): format of the base
+        return parse_fmt(f.split("#")[0])
     """'w4t' | 'w8c' | 'w4g32' | 'mx4' (MXInt4-like: block 32, shared power-of-two scale, INT4 elements) |
     'w4s<k>' (output channels split into k contiguous slices, one per-tensor scale each: k per-tensor INT4
-    ops + concat, expressible on TFLM) ; optional clip suffix '@<r>' (scale = r x absmax / qmax)."""
+    ops + concat, expressible on TFLM) ; optional clip suffix '@<r>' (scale = r x absmax / qmax); optional
+    low-rank correction '+r<k>' (LQER / M1 style: rank-k SVD of W - Q(W) in fp16 added back, in every step)."""
+    if "+r" in f:
+        base, k = f.split("+r")
+        return {**parse_fmt(base), "rank": int(k)}
     if "@" in f:
         base, r = f.split("@")
         return {**parse_fmt(base), "clip": float(r)}
@@ -110,12 +117,23 @@ def qtensor(W, fmt):
         else:
             s = am / qmax
         Q = (torch.round(Wp / s).clamp(-qmax - (1 if g == "mx" else 0), qmax) * s).view(o, -1)[:, :i_]
+    if p.get("rank"):
+        R = Wf - Q
+        U, S_, Vh = torch.linalg.svd(R, full_matrices=False)
+        k = min(p["rank"], S_.numel())
+        Q = Q + ((U[:, :k] * S_[:k]) @ Vh[:k]).half().float()
     return Q.reshape(shp).to(W.dtype)
 
 
 def fmt_bits(fmt, W):
     """Average stored bits per weight including scale overhead (fp16 scales; MX: 8-bit shared exponent)."""
+    if "#" in fmt:
+        return fmt_bits(fmt.split("#")[0], W)
     p = parse_fmt(fmt)
+    if p.get("rank"):
+        rows_, cols_ = W.shape[0], W.numel() // W.shape[0]
+        k = min(p["rank"], rows_, cols_)
+        return fmt_bits(fmt.split("+r")[0], W) + 16.0 * k * (rows_ + cols_) / W.numel()
     b, g = p["bits"], p["gran"]
     rows = W.shape[0]
     cols = W.numel() // rows
@@ -145,6 +163,26 @@ class Ctx:
             self.m = C.build_dt().to(DEV).eval()
             mods = [(n, mod) for n, mod in self.m.named_modules() if isinstance(mod, (torch.nn.Conv1d, torch.nn.Conv2d))]
             self.pl = 0
+        elif task == "arc":
+            import yaml
+            from models.recursive_reasoning.trm import TinyRecursiveReasoningModel_ACTV1
+            self.family = "trm"
+            sd = torch.load(ARC_DIR / "sd.pt", map_location="cpu", weights_only=False)
+            arch = yaml.safe_load((ARC_DIR / "all_config.yaml").read_text())["arch"]
+            cfg = dict(batch_size=batch, seq_len=900, vocab_size=sd["inner.embed_tokens.embedding_weight"].shape[0],
+                       num_puzzle_identifiers=sd["inner.puzzle_emb.weights"].shape[0], H_cycles=arch["H_cycles"],
+                       L_cycles=arch["L_cycles"], H_layers=arch["H_layers"], L_layers=arch["L_layers"],
+                       hidden_size=sd["inner.embed_tokens.embedding_weight"].shape[1], expansion=arch["expansion"],
+                       num_heads=arch["num_heads"], pos_encodings=arch["pos_encodings"], halt_max_steps=T,
+                       halt_exploration_prob=arch["halt_exploration_prob"], forward_dtype="float32",
+                       mlp_t=arch.get("mlp_t", False), puzzle_emb_ndim=arch["puzzle_emb_ndim"],
+                       puzzle_emb_len=arch.get("puzzle_emb_len", 16), no_ACT_continue=arch.get("no_ACT_continue", True))
+            self.m = TinyRecursiveReasoningModel_ACTV1(cfg).eval()
+            miss, unexp = self.m.load_state_dict(sd, strict=False)
+            assert not miss and not unexp, (miss[:3], unexp[:3])
+            self.m = self.m.to(DEV).eval()
+            mods = [(n, mod) for n, mod in self.m.named_modules() if mod.__class__.__name__ == "CastedLinear"]
+            self.pl = self.m.inner.puzzle_emb_len
         else:
             self.family = "trm" if task in bs.TRM_TASKS else "hrm"
             self.m, self.meta = bs.build(task, None, T, batch)
@@ -199,6 +237,27 @@ class Ctx:
         for n in self.tensors:
             self._apply(n)
 
+    # ---- static per-tensor activation fake-quant at every linear input (X7 / Ingolfsson 'Int4' activations)
+    def act_enable(self, bits, scales):
+        """scales: {tensor: float or None}; None = that input stays float."""
+        self.act_disable()
+        qmax = 2 ** (bits - 1) - 1
+        self._ah = []
+        for n in self.tensors:
+            s_ = scales.get(n)
+            if s_ is None:
+                continue
+
+            def hook(mod, args, s_=s_):
+                x = args[0]
+                return (torch.round(x / s_).clamp(-qmax, qmax) * s_,) + tuple(args[1:])
+            self._ah.append(self.tmod[n].register_forward_pre_hook(hook))
+
+    def act_disable(self):
+        for h in getattr(self, "_ah", []):
+            h.remove()
+        self._ah = []
+
     def set_one(self, g, W):
         self.cur[g] = W
         self._apply(self.tensor_of[g])
@@ -208,7 +267,15 @@ class Ctx:
                    else self.numel[g] * 32 for g in self.groups) / self.N
 
     def rec(self, x):
-        return C.DTRecursion(self.m, x) if self.family == "dt" else C.Recursion(self.m, self.family, x)
+        if self.family == "dt":
+            return C.DTRecursion(self.m, x)
+        if self.task == "arc":                                # last column = puzzle id (per-row embedding)
+            tok, pid = x[:, :-1], x[:, -1]
+            R = C.Recursion(self.m, self.family, tok)
+            with torch.no_grad():
+                R.x = self.m.inner._input_embeddings(tok, pid.to(torch.int32)).float()
+            return R
+        return C.Recursion(self.m, self.family, x)
 
     def logits(self, Fn, z):
         """answer logits (B, cells, classes)."""
@@ -269,7 +336,52 @@ class ScoreSet:
                 zT = Fn(z)
                 zT1 = Fn(zT)
                 lg = ctx.logits(Fn, zT)
-                self.chunks.append({"x": x, "y": y, "zTm1": zTm1, "zT": zT, "zT1": zT1, "logits": lg})
+                z0 = Fn.z0()
+                z1 = Fn(z0)
+                g = torch.Generator(device=zT.device).manual_seed(7 + s)
+                sd = zT.flatten(1).std(1).view(-1, *([1] * (zT.dim() - 1)))
+                zr = torch.randn(zT.shape, generator=g, device=zT.device) * sd       # random state, fixed-point scale
+                if ctx.family == "dt":
+                    zr = zr.abs()                                                   # DT states are post-ReLU
+                zr1 = Fn(zr)
+                self.chunks.append({"x": x, "y": y, "zTm1": zTm1, "zT": zT, "zT1": zT1, "logits": lg,
+                                    "z0": z0, "z1": z1, "zr": zr, "zr1": zr1})
+
+    POINTS = {"T": ("zT", "zT1"), "0": ("z0", "z1"), "rand": ("zr", "zr1")}
+
+    @torch.no_grad()
+    def delta_at(self, alloc, point="T"):
+        """||F~(s) - F(s)|| / ||s|| at the calibration point s: the fixed point s_T, the first state s_0, or a
+        random state with the fixed point's scale."""
+        a, b = self.POINTS[point]
+        ctx = self.ctx
+        ctx.set(alloc)
+        vals = []
+        for c in self.chunks:
+            Fn = ctx.rec(c["x"])
+            zq = Fn(c[a])
+            vals.append(C.bnorm(zq - c[b]) / C.bnorm(c[a]))
+        ctx.set({})
+        return float(torch.cat(vals).mean())
+
+    @torch.no_grad()
+    def kl1(self, alloc, point="T"):
+        """one-step read-out KL at the calibration point: KL(p(F(s)) || p(F~(s))) on the answer cells."""
+        a, b = self.POINTS[point]
+        ctx = self.ctx
+        vals = []
+        for c in self.chunks:
+            ctx.set({})
+            Fn = ctx.rec(c["x"])
+            p_ = F.log_softmax(ctx.logits(Fn, c[b]), -1)
+            ctx.set(alloc)
+            Fn = ctx.rec(c["x"])
+            q_ = F.log_softmax(ctx.logits(Fn, Fn(c[a])), -1)
+            k = (p_.exp() * (p_ - q_)).sum(-1)
+            msk = ctx.answer_mask(c["x"], c["y"]).float()
+            vals.append((k * msk).sum(-1) / msk.sum(-1).clamp_min(1))
+        ctx.set({})
+        return float(torch.cat(vals).mean())
 
     @torch.no_grad()
     def delta_T(self, alloc):
@@ -401,7 +513,14 @@ def layer_inputs(ctx, S, max_rows=8192):
     hs = []
     for n in ctx.tensors:
         def hook(mod, args, n=n):
-            x = args[0].detach().reshape(-1, args[0].shape[-1]) if ctx.family != "dt" else None
+            if len(got[n]) >= 64:                         # bounded memory (DT runs 100-300 steps)
+                return
+            if ctx.family == "dt":
+                u = F.unfold(args[0].detach(), mod.kernel_size, dilation=mod.dilation, padding=mod.padding,
+                             stride=mod.stride)
+                x = u.transpose(1, 2).reshape(-1, u.shape[1])
+            else:
+                x = args[0].detach().reshape(-1, args[0].shape[-1])
             if x is not None:
                 idx = torch.randint(0, x.shape[0], (min(512, x.shape[0]),), device=x.device)
                 got[n].append(x[idx].float())
@@ -425,28 +544,113 @@ def layer_inputs(ctx, S, max_rows=8192):
     return out
 
 
-def choose_clips(ctx, S, lo, hi, how):
+@torch.no_grad()
+def layer_inputs_at(ctx, S, point, max_rows=8192):
+    """Inputs each tensor sees during ONE step F(s) at the calibration point (plus the read-out of F(s))."""
+    a, b = S.POINTS[point]
+    got = {n: [] for n in ctx.tensors}
+    hs = []
+    for n in ctx.tensors:
+        def hook(mod, args, n=n):
+            if ctx.family == "dt":
+                u = F.unfold(args[0].detach(), mod.kernel_size, dilation=mod.dilation, padding=mod.padding,
+                             stride=mod.stride)
+                x = u.transpose(1, 2).reshape(-1, u.shape[1])
+            else:
+                x = args[0].detach().reshape(-1, args[0].shape[-1])
+            idx = torch.randint(0, x.shape[0], (min(512, x.shape[0]),), device=x.device)
+            got[n].append(x[idx].float())
+        hs.append(ctx.tmod[n].register_forward_pre_hook(hook))
+    ctx.set({})
+    for c in S.chunks:
+        Fn = ctx.rec(c["x"])
+        z = Fn(c[a])
+        ctx.logits(Fn, z)
+        if ctx.family != "dt":
+            ctx.m.inner.q_head(z[:, 0, 0])
+    for h in hs:
+        h.remove()
+    out = {}
+    for n, L in got.items():
+        X = torch.cat(L) if L else None
+        if X is not None and X.shape[0] > max_rows:
+            X = X[torch.randperm(X.shape[0], device=X.device)[:max_rows]]
+        out[n] = X
+    return out
+
+
+def omse_val(ctx, X, g, f):
+    Xg = X.get(ctx.tensor_of[g]) if X else None
+    D = (ctx.Wq(g, f) - ctx.W0[g]).float()
+    if Xg is None or Xg.shape[1] != D.reshape(D.shape[0], -1).shape[1]:
+        return float(D.pow(2).sum())
+    return float((Xg @ D.reshape(D.shape[0], -1).T).pow(2).sum())
+
+
+def choose_clips(ctx, S, lo, hi, how, point="T"):
     """Per group, the clip ratio of the low format: 'mse' = min ||Q(W) - W||^2 (data-free), 'omse' = min
     ||X (Q(W) - W)^T||^2 on the layer's own inputs along the fp32 trajectory (standard data-aware PTQ), 'dT' =
     min delta_T with only this group at the low format and the rest high (label-free, unlabeled inputs)."""
     out = {}
-    X = layer_inputs(ctx, S) if how == "omse" else None
+    if how in ("pct", "aciq"):
+        for g in ctx.groups:
+            W = ctx.W0[g].float()
+            am = float(W.abs().max())
+            if how == "pct":
+                x = W.abs().flatten()
+                x = x[torch.randperm(x.numel(), device=x.device)[:1_000_000]] if x.numel() > 1_000_000 else x
+                r = float(torch.quantile(x, 0.999)) / am
+            else:
+                bits = parse_fmt(lo)["bits"]
+                bL = float((W - W.mean()).abs().mean())
+                r = {2: 2.83, 3: 3.89, 4: 5.03, 8: 9.89}.get(bits, 5.03) * bL / am
+            out[g] = round(min(1.0, max(0.05, r)), 4)
+        return out
+    if how == "dTj":
+        # joint (coordinate descent): start from the per-tensor dT clips, then re-choose each tensor's clip with every
+        # other tensor at its current clipped low format; two sweeps. Label-free.
+        cur = choose_clips(ctx, S, lo, hi, "dT")
+        for sweep in range(2):
+            for g in ctx.groups:
+                base = {h: f"{lo}@{cur[h]}" for h in ctx.groups}
+                best, bv = cur[g], float("inf")
+                for r in CLIPS:
+                    v = S.delta_T({**base, g: f"{lo}@{r}"})
+                    if v < bv:
+                        best, bv = r, v
+                cur[g] = best
+            print(f"  joint clip sweep {sweep + 1}: delta_T {S.delta_T({h: f'{lo}@{cur[h]}' for h in ctx.groups}):.4f}", flush=True)
+        return cur
+    if how in ("omse", "dT", "dTj", "kl1"):
+        X = layer_inputs(ctx, S) if point == "traj" else layer_inputs_at(ctx, S, point if point != "traj" else "T")
+    else:
+        X = None
+    fallback = {}
     for g in ctx.groups:
         best, bv = 1.0, float("inf")
+        vals = []
         for r in CLIPS:
             f = f"{lo}@{r}"
             if how == "mse":
                 v = float((ctx.Wq(g, f) - ctx.W0[g]).float().pow(2).sum())
             elif how == "omse":
-                Xg = X[ctx.tensor_of[g]]
-                D = (ctx.Wq(g, f) - ctx.W0[g]).float()
-                v = float((Xg @ D.reshape(D.shape[0], -1).T).pow(2).sum()) if Xg is not None else \
-                    float(D.pow(2).sum())
+                v = omse_val(ctx, X, g, f)
+            elif how == "kl1":
+                v = S.kl1({**{h: hi for h in ctx.groups}, g: f}, point)
             else:
-                v = S.delta_T({**{h: hi for h in ctx.groups}, g: f})
+                v = S.delta_at({**{h: hi for h in ctx.groups}, g: f}, point)
+            vals.append(v)
             if v < bv:
                 best, bv = r, v
+        if how in ("dT", "kl1") and (max(vals) - min(vals)) <= 1e-6 * max(abs(max(vals)), 1e-12):
+            # the tensor is outside the step map (read-out head, input projection): delta_T cannot see it;
+            # fall back to its own output error on the trajectory inputs
+            vals = [omse_val(ctx, X, g, f"{lo}@{r}") for r in CLIPS]
+            best = CLIPS[int(np.argmin(vals))]
+            fallback[g] = best
         out[g] = best
+    if fallback:
+        print(f"  clip dT: {len(fallback)} tensors outside the step map use the output-error clip: {fallback}", flush=True)
     return out
 
 
@@ -571,8 +775,17 @@ def main():
     ap.add_argument("--split", type=int, default=1, help="groups = k output-channel slices per tensor")
     ap.add_argument("--singles", type=int, default=1, help="evaluate every tensor alone low / alone high")
     ap.add_argument("--xfer", default="", help="another run's output JSON: evaluate its allocation orders here (seed transfer)")
+    ap.add_argument("--calib", default="", choices=["", "gptq", "ar_layer", "ar_block", "ar_step"],
+                    help="learned/compensated rounding on top of the chosen clip (m3_calib.py)")
+    ap.add_argument("--calib_iters", type=int, default=2000)
+    ap.add_argument("--calib_lr", type=float, default=5e-2)
+    ap.add_argument("--calib_lam", type=float, default=1.0)
+    ap.add_argument("--point", default="", help="calibration point: T (fixed point), 0 (first step), rand (random "
+                                             "state), traj (layer inputs along the whole trajectory; omse default)")
+    ap.add_argument("--act", default="", help="a<bits>: static per-tensor activation fake-quant at every linear input")
+    ap.add_argument("--aclip", default="absmax", choices=["absmax", "pct", "mse", "dT"])
     ap.add_argument("--clips_from", default="", help="use the clip ratios chosen in another run (seed transfer)")
-    ap.add_argument("--clip", default="none", choices=["none", "mse", "omse", "dT"],
+    ap.add_argument("--clip", default="none", choices=["none", "mse", "omse", "dT", "dTj", "pct", "aciq", "kl1"],
                     help="clip ratio of the low format per group: none (absmax), mse (data-free), dT (label-free)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
@@ -581,7 +794,14 @@ def main():
     torch.backends.cudnn.allow_tf32 = False
     torch.manual_seed(0)
 
-    if a.task in C.DT_TASKS:
+    if a.task == "arc":
+        T = a.T or 16
+        batch = a.batch or 16
+        so = a.score_offset if a.score_offset >= 0 else a.n
+        D = np.load(ARC_DIR / "canon.npz")
+        inp = np.concatenate([D["inputs"], D["pids"][:, None]], 1)
+        lab = D["labels"]
+    elif a.task in C.DT_TASKS:
         T = a.T or C.DT_TASKS[a.task]["T"]
         batch = a.batch or C.DT_TASKS[a.task]["batch"]
         so = a.score_offset if a.score_offset >= 0 else a.n
@@ -609,6 +829,10 @@ def main():
         json.dump(blob, open(tmp, "w"))
         tmp.replace(out)
 
+    default_point = "traj" if a.clip == "omse" else "T"
+    if not a.point:
+        a.point = default_point
+    psuf = "" if a.point == default_point else "@" + a.point
     t0 = time.time()
     if a.ckpt:
         bs.CKPT_OVERRIDE = a.ckpt
@@ -670,12 +894,94 @@ def main():
     else:
         if "clips" not in blob:
             S = S or ScoreSet(ctx, sc_inp, sc_lab)
-            blob["clips"] = choose_clips(ctx, S, a.lo, a.hi, a.clip)
+            blob["clips"] = choose_clips(ctx, S, a.lo, a.hi, a.clip, a.point)
             save()
         LO = {g: f"{a.lo}@{blob['clips'][g]}" for g in ctx.groups}
         print(f"  clips ({a.clip}): {blob['clips']}", flush=True)
-        evaluate(f"uniform_lo_clip:{a.clip}", dict(LO), {"method": "uniform", "fmt": f"{a.lo}+clip_{a.clip}"})
+        evaluate(f"uniform_lo_clip:{a.clip}{psuf}", dict(LO),
+                 {"method": "uniform", "fmt": f"{a.lo}+clip_{a.clip}", "point": a.point})
+    if a.calib:
+        import m3_calib
+        cal_path = out.with_suffix(f".{a.calib}.pt")
+        if cal_path.exists():
+            T_ = torch.load(cal_path, map_location=DEV)
+        else:
+            S = S or ScoreSet(ctx, sc_inp, sc_lab)
+            T_ = m3_calib.calibrate(ctx, S, LO, a.calib, parse_fmt, iters=a.calib_iters, lr=a.calib_lr,
+                                    lam=a.calib_lam, log=lambda m_: print(m_, flush=True))
+            torch.save(T_, cal_path)
+        for g in ctx.groups:
+            name = f"{LO[g]}#{a.calib}"
+            ctx._qc[(g, name)] = T_[g].to(ctx.W0[g].dtype)
+            LO[g] = name
+        evaluate(f"uniform_lo_calib:{a.clip}{psuf}+{a.calib}", dict(LO),
+                 {"method": "uniform", "fmt": f"{a.lo}+clip_{a.clip}+{a.calib}"})
+    if a.act:
+        abits = int(a.act[1:])
+        aqmax = 2 ** (abits - 1) - 1
+        S = S or ScoreSet(ctx, sc_inp, sc_lab)
+        # observe each linear input through the weight-quantized model on the unlabeled calibration puzzles
+        amax, samp = {}, {}
+        hs = []
+        for n in ctx.tensors:
+            def ob(mod, args, n=n):
+                x = args[0].detach()
+                amax[n] = max(amax.get(n, 0.0), float(x.abs().max()))
+                if len(samp.setdefault(n, [])) < 32:
+                    f_ = x.reshape(-1).float()
+                    samp[n].append(f_[torch.randint(0, f_.numel(), (4096,), device=f_.device)])
+            hs.append(ctx.tmod[n].register_forward_pre_hook(ob))
+        ctx.set(LO)
+        with torch.no_grad():
+            for c in S.chunks:
+                Fn = ctx.rec(c["x"])
+                z = Fn.z0()
+                for _ in range(ctx.T):
+                    z = Fn(z)
+                ctx.logits(Fn, z)
+                if ctx.family != "dt":
+                    ctx.m.inner.q_head(z[:, 0, 0])
+        for h in hs:
+            h.remove()
+        ctx.set({})
+        samp = {n: torch.cat(v) for n, v in samp.items()}
+        ar = {}
+        for n in ctx.tensors:
+            if n not in amax:
+                continue
+            if a.aclip == "absmax":
+                ar[n] = 1.0
+            elif a.aclip == "pct":
+                ar[n] = min(1.0, float(torch.quantile(samp[n].abs(), 0.9999)) / max(amax[n], 1e-12))
+            elif a.aclip == "mse":
+                errs = []
+                for r in CLIPS:
+                    s_ = r * amax[n] / aqmax
+                    errs.append(float((torch.round(samp[n] / s_).clamp(-aqmax, aqmax) * s_ - samp[n]).pow(2).sum()))
+                ar[n] = CLIPS[int(np.argmin(errs))]
+            else:                                         # dT: one activation quantized, weights at the low format
+                vals = []
+                for r in CLIPS:
+                    ctx.act_enable(abits, {n: r * amax[n] / aqmax})
+                    vals.append(S.delta_at(LO, "T"))
+                    ctx.act_disable()
+                ar[n] = CLIPS[int(np.argmin(vals))] if max(vals) - min(vals) > 1e-9 else 1.0
+        scales = {n: ar[n] * amax[n] / aqmax for n in ar}
+        blob["act_clips"] = ar
+        ctx.act_enable(abits, scales)
+        blob["delta_T_w_and_a"] = S.delta_at(LO, "T")
+        evaluate(f"act:{a.act}+{a.aclip}", dict(LO), {"method": "uniform", "fmt": f"{a.lo}+clip_{a.clip}"
+                                                        f"{'+' + a.calib if a.calib else ''}+{a.act}_{a.aclip}"})
+        ctx.act_disable()
+        save()
+        print(f"done ({time.time()-t0:.0f}s)", flush=True)
+        return
     blob["LO"] = LO
+
+    if a.budgets == "none":                               # uniform formats and clips only
+        save()
+        print(f"done, no allocation ({time.time()-t0:.0f}s)", flush=True)
+        return
 
     # scores (on the unlabeled scoring inputs)
     if "scores" not in blob or set(blob.get("score_list", [])) != want:
@@ -700,7 +1006,7 @@ def main():
     sc = blob["scores"]
 
     # allocations at matched budgets
-    budgets = [float(b) for b in a.budgets.split(",")] if a.budgets else [lo_b + d for d in (0.1, 0.25, 0.5, 1.0, 2.0)]
+    budgets = [float(b) for b in a.budgets.split(",")] if a.budgets and a.budgets != "none" else [lo_b + d for d in (0.1, 0.25, 0.5, 1.0, 2.0)]
     orders = {}
     for name in ("dT_q", "dT_noise", "kl", "lin", "dT_traj", "hawq", "hawq_lbl", "hawq_full"):
         if name in sc:

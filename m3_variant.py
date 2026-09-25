@@ -55,9 +55,52 @@ def main():
             node.input[1], node.input[2] = sn, zn
         n8 += 1
     g.initializer.extend(new)
+    # HTP legality (X3, Sep 25; wa_collapse.build_variant propagate_movement): (1) a data-movement op's output takes
+    # its input's encoding; (2) an embedding Gather's table takes the w8a8 table encoding when its output is 8 bit.
+    import collections as _c
+    prod = {o: n for n in g.node for o in n.output}
+    cons = _c.defaultdict(list)
+    for n in g.node:
+        for x in n.input:
+            cons[x].append(n)
+    wq8 = {n.input[0]: n for n in g8.node if n.op_type == "QuantizeLinear" and n.input[0] in {i.name for i in g8.initializer}}
+    n_prop = n_table = 0
+    tbl = []
+    for n in g.node:
+        if n.op_type not in ("Gather", "Reshape", "Transpose", "Slice", "Squeeze", "Unsqueeze", "Flatten"):
+            continue
+        q_out = next((c for c in cons.get(n.output[0], []) if c.op_type == "QuantizeLinear"), None)
+        dq_in = prod.get(n.input[0])
+        if q_out is None or dq_in is None or dq_in.op_type != "DequantizeLinear":
+            continue
+        q_in = prod.get(dq_in.input[0])
+        if q_in is None or q_in.op_type != "QuantizeLinear":
+            continue
+        if q_in.input[0] in inits:                      # embedding table: follows its output (rule 2)
+            if n.op_type == "Gather" and q_out.input[0] not in keep and q_in.input[0] in wq8:
+                e = wq8[q_in.input[0]]
+                sn, zn = q_in.name + "_m3ts", q_in.name + "_m3tz"
+                zt = vals8[e.input[2]]
+                tbl.append(numpy_helper.from_array(numpy_helper.to_array(vals8[e.input[1]]).astype(np.float32), sn))
+                tbl.append(helper.make_tensor(zn, zt.data_type, list(numpy_helper.to_array(zt).shape),
+                                              numpy_helper.to_array(zt).reshape(-1).tolist()))
+                for node in [q_in, dq_in]:
+                    node.input[1], node.input[2] = sn, zn
+                n_table += 1
+            continue
+        if (q_out.input[1], q_out.input[2]) == (dq_in.input[1], dq_in.input[2]):
+            continue
+        for node in [q_out] + [c for c in cons[q_out.output[0]] if c.op_type == "DequantizeLinear"]:
+            node.input[1], node.input[2] = dq_in.input[1], dq_in.input[2]
+            kept = [x for x in node.attribute if x.name != "axis"]
+            del node.attribute[:]
+            node.attribute.extend(kept + [x for x in dq_in.attribute if x.name == "axis"])
+        n_prop += 1
+    g.initializer.extend(tbl)
     out = d / "qdq_w8a16" / f"variant_{a.name}.onnx"
     onnx.save_model(m, str(out))
     info = {"task": a.task, "key": a.key, "source": a.act, "n16": len(keep), "n8": n8, "keep16": sorted(keep),
+            "device_legal": {"movement_outputs_propagated": n_prop, "gather_tables_8bit": n_table},
             "path": str(out)}
     Path(str(out).replace(".onnx", ".json")).write_text(json.dumps(info, indent=1))
     print(json.dumps({k_: v for k_, v in info.items() if k_ != "keep16"}))

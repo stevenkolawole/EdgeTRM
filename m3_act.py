@@ -72,13 +72,18 @@ class Act:
     def init(self, split):
         return (self.D["zH0"], self.D["zL0"], self.D[f"{split}_emb"])
 
+    base8 = frozenset()                                  # tensors that are always 8 bit (hardware constraint)
+
     def run(self, split, act8, nsteps=None, carry0=None, logits=False, idx=None):
-        self.r.set_act8(act8)
+        self.r.set_act8(set(act8) | self.base8)
         inp = self.D[f"{split}_inp"] if idx is None else self.D[f"{split}_inp"][idx]
         init = self.init(split) if idx is None else (self.D["zH0"], self.D["zL0"], self.D[f"{split}_emb"][idx])
         return self.r.rollout(inp, init, nsteps or self.T, batch=self.batch, keep_logits_last=logits, carry0=carry0)
 
     def frac16(self, keep16):
+        keep16 = set(keep16)
+        if self.r.device_mode:                          # movement outputs inherit their root's precision
+            keep16 |= {t for t in self.names if self.r.root(t) in keep16}
         return sum(self.numel[t] for t in keep16) / self.N_el
 
 
@@ -132,6 +137,10 @@ def main():
     ap.add_argument("--greedy_cand", type=int, default=0, help="greedy over the top-M tensors by a_dTrm (0 = all)")
     ap.add_argument("--wfmt", default="", help="override every MatMul weight: w4c (per-channel INT4, the w4a8 graph's"
                                                 " form, Ethos-U A8W4) or w4t (per-tensor INT4, TFLM FC)")
+    ap.add_argument("--forbid_matmul_inputs", type=int, default=0, help="never promote a MatMul activation input to 16 "
+                                                                         "bit (Ethos-U: INT4 weights only take INT8 inputs)")
+    ap.add_argument("--device_legal", type=int, default=0, help="HTP rules: movement outputs keep their input's encoding, "
+                                                                 "Gather tables follow their output; allocate root tensors only")
     ap.add_argument("--confirm", default="", help="comma list of curve keys (score@k) to re-evaluate on evalbig")
     a = ap.parse_args()
     assert a.device == "cpu" or torch.cuda.is_available(), "NO CUDA"
@@ -149,6 +158,19 @@ def main():
     t0 = time.time()
     A = Act(a.task, a.graphs, device=a.device, batch=a.batch, export=a.export or None, n_score=a.n_score)
     names = A.names
+    if a.device_legal:
+        A.r.set_device_mode(True)
+        names = [t for t in names if t not in A.r.alias]
+        blob["device_legal"] = True
+        blob["n_alias"] = len(A.r.alias)
+        print(f"  device-legal mode: {len(A.r.alias)} movement outputs follow their inputs; {len(A.r.table)} Gather "
+              f"tables; {len(names)} free tensors", flush=True)
+    if a.forbid_matmul_inputs:
+        forb = A.r.matmul_input_acts()
+        names = [t for t in names if t not in forb]      # candidates for 16 bit; the forbidden stay 8 bit always
+        A.base8 = frozenset(forb)
+        blob["forbidden_16"] = sorted(forb)
+        print(f"  {len(forb)} MatMul activation inputs are never promoted", flush=True)
     if a.wfmt:
         ws = A.r.matmul_weights()
         A.r.set_weight_fmt({w: a.wfmt for w in ws})
@@ -183,7 +205,7 @@ def main():
     # references
     evaluate("all16", names, meta={"method": "ref"})
     evaluate("all8", [], meta={"method": "ref"})
-    b2 = [t for t in names if A.grp.get(t) in RMS]
+    b2 = [t for t in names if A.grp.get(t) in RMS]      # (minus forbidden tensors under a hardware constraint)
     evaluate("x3_B2_rms16", b2, meta={"method": "x3", "groups": sorted(RMS)})
 
     S = None
