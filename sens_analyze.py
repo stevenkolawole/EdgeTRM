@@ -93,15 +93,18 @@ def widths():
         a0 = float(np.median(hm["fp32"]))
         sh, note = sigma_half({float(k[5:]): v for k, v in hm.items() if k.startswith("noise")}, a0)
         W["hrm_maze"] = (sh, note, a0, "X2 width sweep, n=500")
-    extra = sorted(glob.glob(str(wid / "wid_trm_sudoku_*_seed*.json")))
+    extra = [f for f in sorted(glob.glob(str(wid / "wid_*_seed*.json"))) if "hrm_maze" not in f]
+    q8 = {Path(f).stem.split("_seed")[0] for f in glob.glob(str(B / "p4d" / "variants_noise" / "trm_sudoku_*.json"))}
     for f in sorted(glob.glob(str(B / "p4d" / "variants_noise" / "trm_sudoku_*.json"))) + extra:
         v = Path(f).stem.split("_seed")[0].replace("wid_", "")
         for r in json.load(open(f))["records"]:
             if r["nsup"] != 16:
                 continue
             s = r["quant"]["spec"]
-            if f in extra and s == "fp32":
+            if f in extra and s == "fp32" and v in q8:
                 continue                           # fp32 comes from the Q8 files (same checkpoint, same n)
+            if f in extra and s == "fp32" and len(W.get("_raw_" + v, {}).get("fp32", [])) >= 1:
+                continue                           # one fp32 per model (identical across seed files)
             W.setdefault("_raw_" + v, defaultdict(list))[s].append(r["pexact"])
     for k in [k for k in W if k.startswith("_raw_")]:
         raw = W.pop(k)
@@ -109,10 +112,17 @@ def widths():
         a0 = float(np.median(raw["fp32"]))
         sa = {float(s[5:]): vals for s, vals in raw.items() if s.startswith("noise")}
         sh, note = sigma_half(sa, a0)
-        W[v] = (sh, note, a0, "variants_noise (Q8), n=1000")
+        W[v] = (sh, note, a0, "variants_noise (Q8), n=1000" if v in q8 else "X2 width sweep (Babel), n=1000")
         for s, vals in raw.items():
             if not s.startswith("noise") and s != "fp32":
                 Q[v][s] = float(np.median(vals)) / max(a0, 1e-9)
+    for f in sorted(glob.glob(str(wid / "wid_*_quant.json"))):      # quantizer cells of X2-swept models
+        v = Path(f).stem.replace("wid_", "").replace("_quant", "")
+        recs = [r for r in json.load(open(f))["records"] if r["nsup"] == 16]
+        a0 = next((r["pexact"] for r in recs if r["quant"]["spec"] == "fp32"), None)
+        for r in recs:
+            if a0 and r["quant"]["spec"] != "fp32":
+                Q[v][r["quant"]["spec"]] = r["pexact"] / max(a0, 1e-9)
     # MDEQ
     for model, pat in (("mdeq_small", "deq_small_*.json"), ("mdeq_xl", "deq_xl_*.json")):
         sa, a0s, qd = defaultdict(list), [], {}
