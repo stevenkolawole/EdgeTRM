@@ -22,7 +22,31 @@ mkdir -p "$ROOT/logs" "$ROOT/state"
 touch "$ROOT/backlog.txt" "$ROOT/launched.txt"
 STATUS="$ROOT/status.txt"
 
+RETRY_WINDOW=${RETRY_WINDOW:-900}
+
+reap() {  # finished jobs: record exit code; requeue once if it failed within RETRY_WINDOW (e.g. an env error)
+  local f tag pid start line rc
+  for f in "$ROOT"/state/pid_*; do
+    [ -e "$f" ] || continue
+    tag=${f##*/pid_}; pid=$(cat "$f")
+    kill -0 "$pid" 2>/dev/null && continue
+    rc=$(grep -oE 'AUTOFILL_EXIT=[0-9]+' "$ROOT/logs/$tag.log" 2>/dev/null | tail -1 | cut -d= -f2)
+    start=$(cat "$ROOT/state/start_$tag" 2>/dev/null || echo 0)
+    echo "$(date -u +%FT%TZ) tag=$tag END rc=${rc:-unknown} runtime=$(( $(date +%s) - start ))s" >> "$ROOT/launched.txt"
+    if [ "${rc:-1}" != "0" ] && [ $(( $(date +%s) - start )) -lt "$RETRY_WINDOW" ] && [ ! -e "$ROOT/state/retried_$tag" ] \
+       && [ -s "$ROOT/state/line_$tag" ]; then
+      line=$(cat "$ROOT/state/line_$tag")
+      mv "$ROOT/logs/$tag.log" "$ROOT/logs/$tag.fail1.log"
+      flock "$ROOT/backlog.lock" bash -c "cat '$ROOT/state/line_$tag' >> '$ROOT/backlog.txt'"
+      touch "$ROOT/state/retried_$tag"
+      echo "$(date -u +%FT%TZ) tag=$tag REQUEUED once (fast failure; see logs/$tag.fail1.log)" >> "$ROOT/launched.txt"
+    fi
+    rm -f "$f"
+  done
+}
+
 while true; do
+  reap
   now=$(date +%s)
   mapfile -t GPUS < <(nvidia-smi --query-gpu=index,uuid,power.draw,memory.used,memory.total --format=csv,noheader,nounits)
   procs=$(nvidia-smi --query-compute-apps=gpu_uuid --format=csv,noheader 2>/dev/null)
@@ -51,7 +75,8 @@ while true; do
           read -r prio mem owner tag cmd <<<"$line"
           flock "$ROOT/backlog.lock" bash -c "grep -vxF -- \"\$1\" '$ROOT/backlog.txt' > '$ROOT/backlog.tmp'; mv '$ROOT/backlog.tmp' '$ROOT/backlog.txt'" _ "$line"
           echo "$now" > "$cool"; rm -f "$low"
-          ( export CUDA_VISIBLE_DEVICES=$idx; nohup bash -c "$cmd" > "$ROOT/logs/$tag.log" 2>&1 & echo $! > "$ROOT/state/pid_$tag" )
+          printf '%s\n' "$line" > "$ROOT/state/line_$tag"; echo "$now" > "$ROOT/state/start_$tag"
+          ( export CUDA_VISIBLE_DEVICES=$idx; nohup bash -c "$cmd; echo AUTOFILL_EXIT=\$?" > "$ROOT/logs/$tag.log" 2>&1 & echo $! > "$ROOT/state/pid_$tag" )
           echo "$(date -u +%FT%TZ) card=$idx owner=$owner tag=$tag prio=$prio mem=$mem pid=$(cat "$ROOT/state/pid_$tag")" >> "$ROOT/launched.txt"
           st="LAUNCHED:$tag"
         else
