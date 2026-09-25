@@ -132,7 +132,7 @@ def deqlm(rdir=None):
 def diff(rdir=None):
     rdir = Path(rdir or HERE / "results" / "transfer" / "babel")
     recs = []
-    for f in sorted(glob.glob(str(rdir / "diff_*.json"))):
+    for f in sorted(glob.glob(str(rdir / "diff*.json"))):
         recs += json.load(open(f))["records"]
     if not recs:
         print("no diff records in", rdir)
@@ -283,7 +283,7 @@ def difffig(rdir=None):
     import matplotlib.pyplot as plt
     rdir = Path(rdir or HERE / "results" / "transfer" / "babel")
     recs = []
-    for f in sorted(glob.glob(str(rdir / "diff_*.json"))):
+    for f in sorted(glob.glob(str(rdir / "diff*.json"))):
         recs += json.load(open(f))["records"]
     samplers = sorted({r["sampler"] for r in recs}, key=lambda s: (s[:4], int(s[4:])))
     sig = sorted({float(r["spec"][5:]) for r in recs if r["spec"].startswith("noise")})
