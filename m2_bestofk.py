@@ -320,7 +320,7 @@ def main():
     ap.add_argument("--polish_from", default="last", choices=("last", "best"),
                     help="polish from each rollout's last state, or from its state at its max-q step (kept on the fly)")
     ap.add_argument("--master", default="fp32", help="weights the draws are made from: fp32 or an RTN spec (e.g. w8c)")
-    ap.add_argument("--wsample", default="none", choices=("none", "sr", "sr0", "wnoise", "gmatch", "dither"),
+    ap.add_argument("--wsample", default="none", choices=("none", "sr", "sr0", "wnoise", "gmatch", "dither", "gdither"),
                     help="sr: each rollout uses its own stochastic-rounding draw of the weights on the spec's grid; "
                          "sr0: the same with draw 0 = round-to-nearest")
     ap.add_argument("--tta", action="store_true", help="rollout k runs on a random Sudoku symmetry of each puzzle (k=0 identity)")
@@ -408,6 +408,11 @@ def main():
                 _dseed = 7919 * (wseed or 0) + 17
                 get_model = lambda k, _m=m: _m
                 step_hook = lambda k, t, _m=m, _ms=master, _q=q, _s=_dseed: sr_quantize_(
+                    _m, _ms, _q["bits"], _q["gran"], torch.Generator(device=DEV).manual_seed(_s * 7907 + 100003 * (k + 1) + t))
+            if a.wsample == "gdither":               # control: master + FRESH zero-mean Gaussian every step, per-weight variance = SR's
+                _dseed = 7919 * (wseed or 0) + 17
+                get_model = lambda k, _m=m: _m
+                step_hook = lambda k, t, _m=m, _ms=master, _q=q, _s=_dseed: gmatch_perturb_(
                     _m, _ms, _q["bits"], _q["gran"], torch.Generator(device=DEV).manual_seed(_s * 7907 + 100003 * (k + 1) + t))
         else:
             m, meta, q, wseed = build_spec(a.task, spec, a.D, 256)

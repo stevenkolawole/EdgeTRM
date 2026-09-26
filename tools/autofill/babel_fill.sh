@@ -22,7 +22,7 @@ if [ "${avail_kb:-0}" -lt 5000000 ]; then echo "HOME_QUOTA_LOW avail_kb=$avail_k
 for part in general preempt; do
   # count GPUs held or requested (running + pending) in this partition
   # (user-held jobs, e.g. the paused EpiKV array, do not count)
-  n=$(squeue -u $USER -h -p $part -t R,PD,CF -o "%b|%r" | grep -v 'JobHeldUser' | cut -d'|' -f1 | grep -o 'gpu[^,]*' | awk -F: '{s+=($NF~/^[0-9]+$/?$NF:1)} END{print s+0}')
+  n=$(squeue -u $USER -h -p $part -t R,PD,CF -o "%b|%r" | grep -vi 'held' | cut -d'|' -f1 | grep -o 'gpu[^,]*' | awk -F: '{s+=($NF~/^[0-9]+$/?$NF:1)} END{print s+0}')
   run=$(squeue -u $USER -h -p $part -t R -o %i | wc -l)
   echo "$part held_or_pending=$n running=$run cap=${CAP[$part]} backlog=$(ls $B/babel_backlog/$part | wc -l)"
   while [ "$n" -lt "${CAP[$part]}" ]; do
@@ -32,7 +32,7 @@ for part in general preempt; do
     [ -n "$f" ] && [ "$part" = preempt ] && ! grep -q -- "--requeue" "$f" && sed -i "2i #SBATCH --requeue" "$f"
     # general has room but no queued work: borrow pending preempt jobs (preempt is congested; general is not)
     if [ -z "$f" ] && [ "$part" = general ]; then
-      j=$(squeue -u $USER -h -p preempt -t PD -o "%i %r" | grep -v JobHeldUser | awk '$2!="Dependency"{print $1}' | head -1)
+      j=$(squeue -u $USER -h -p preempt -t PD -o "%i %r" | grep -vi held | awk '$2!="Dependency"{print $1}' | head -1)
       if [ -n "$j" ] && scontrol update jobid=$j partition=general qos=normal >/dev/null 2>&1; then
         echo "general MOVED pending preempt job $j"; n=$((n+1)); continue
       fi
