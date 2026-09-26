@@ -331,7 +331,7 @@ def p2(rows, md, js):
 
 
 # ----------------------------------------------------------------------------- P3
-def p3(rows, md, js):
+def p3(rows, md, js, m2_gain=True):
     res = {"head_pick": {}, "gain_vs_return": []}
     srs = [r for r in rows if r["ctype"] == "sr"]
     for task in sorted({r["task"] for r in srs}):
@@ -364,7 +364,7 @@ def p3(rows, md, js):
                                              "ok": p is not None and up > dn and p < 0.05}
     # gain vs return rate across M2's SR cells (first n of each)
     by = {(r["model"], r["cell"]): r for r in rows if r["ctype"] in ("weight-quant",)}
-    for f in sorted(glob.glob(str(M2 / "*__none0__D16_K16_sr0.npz"))):
+    for f in (sorted(glob.glob(str(M2 / "*__none0__D16_K16_sr0.npz"))) if m2_gain else []):
         task, spec = Path(f).name.split("__")[:2]
         r = by.get((task, spec))
         if r is None or "@" in spec:
@@ -386,8 +386,11 @@ def p3(rows, md, js):
         peak_ok = (0.2 <= best["return_rate"] <= 0.8) and best is not lo and best is not hi
     hp_ok = all(v["ok"] for v in res["head_pick"].values()) if res["head_pick"] else None
     res["peak_intermediate"] = peak_ok
-    res["verdict"] = None if hp_ok is None or peak_ok is None else (
-        "supported" if (hp_ok and peak_ok) else ("partly" if (hp_ok or peak_ok) else "falsified"))
+    if not m2_gain:
+        res["verdict"] = None if hp_ok is None else ("head-pick part " + ("supported" if hp_ok else "falsified"))
+    else:
+        res["verdict"] = None if hp_ok is None or peak_ok is None else (
+            "supported" if (hp_ok and peak_ok) else ("partly" if (hp_ok or peak_ok) else "falsified"))
     js["P3"] = res
     md.append("## P3: sampling gain peaks at intermediate return rates; the head picks draws with smaller rho\n")
     md.append(f"**Verdict: {str(res['verdict']).upper()}** (head picks larger t_c in every model: {hp_ok}; gain peaks at "
@@ -460,14 +463,28 @@ def p4(rows, md, js):
 
 
 def main():
+    global RES, OUT_MD, OUT_JS
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--platform", default="babel", choices=["babel", "p4d"])
+    a = ap.parse_args()
+    if a.platform == "p4d":
+        # within-platform replicate on the released models; never pooled with Babel. P2 (M1 records) and P4 (width
+        # table) and M2's gain table come from other platforms' records, so only P1 and P3's head-pick test are scored.
+        RES = HERE / "results/breadth/p4d/x2_ret"
+        OUT_MD = HERE / "results/breadth/x2_return_readout_p4d.md"
+        OUT_JS = HERE / "results/breadth/x2_return_p4d.json"
     rows = load_records()
-    md = ["# X2 return test: read-out (`python x2_return_analyze.py`; rules in `x2_return_scoring.md`, fixed before any record was read)\n",
-          f"Records: {len({r['file'] for r in rows})} files, {len(rows)} cells; platform Babel L40S only.\n"]
-    js = {}
+    plat = "Babel L40S" if a.platform == "babel" else "p4d A100-40GB"
+    md = ["# X2 return test: read-out (`python x2_return_analyze.py --platform " + a.platform + "`; rules in `x2_return_scoring.md`, fixed before any record was read)\n",
+          f"Records: {len({r['file'] for r in rows})} files, {len(rows)} cells; platform {plat} only.\n"]
+    js = {"platform": a.platform}
     p1(rows, md, js)
-    p2(rows, md, js)
-    p3(rows, md, js)
-    p4(rows, md, js)
+    if a.platform == "babel":
+        p2(rows, md, js)
+    p3(rows, md, js, m2_gain=(a.platform == "babel"))
+    if a.platform == "babel":
+        p4(rows, md, js)
     OUT_MD.write_text("\n".join(md) + "\n")
 
     def clean(o):
