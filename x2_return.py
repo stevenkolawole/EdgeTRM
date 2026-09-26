@@ -16,6 +16,8 @@ Compression specs (weights exactly as in each family's accuracy sweeps):
              own full compressed run (TRM/HRM; fixed e)
   anoise<s>  Gaussian noise at every Linear input, s x the input's std, redrawn every call (TRM/HRM; FRESH e)
   (combinations like w4c+a8, w4c+anoise0.2)
+  sr<bits><gran>~<k>  M2's stochastic-rounding draw k of the fp32 weights onto the grid (k = 0: round to nearest;
+             k >= 1: m2_bestofk.sr_quantize_ with a CUDA generator seeded 1000 + k, i.e. M2's seed-0 draws)
 
     python x2_return.py --family trm --task sudoku_mlp [--ckpt ...] --n 256 --cells w4t,noise0.2,+a4,anoise0.3 \
         --out ~/breadth_results/x2/ret/ret_sudoku_mlp.json
@@ -39,6 +41,8 @@ LAT_EPS = 1e-2
 def parse_cell(c):
     """-> (weight spec, act bits or None, anoise sigma or None, draw)"""
     draw = 0
+    if c.startswith("sr"):
+        return c, None, None, 0
     if "#" in c:
         c, d = c.split("#")
         draw = int(d)
@@ -115,8 +119,21 @@ def run_recursion(a):
             continue
         t1 = time.time()
         wspec, act, an, draw = parse_cell(cell)
-        mq, _, q = C.make_model(a.task, (wspec, draw), T, batch)
-        per = {k_: [] for k_ in ("corr_f", "corr_q", "ret", "ret_lat", "t_c", "phi", "disp")}
+        if wspec.startswith("sr"):
+            import m2_bestofk as M2
+            body, kd = wspec[2:].split("~")
+            q0 = bs.parse_quant(body)
+            mq, _, q = C.make_model(a.task, ("fp32", 0), T, batch)
+            if int(kd) == 0:
+                bs.quantize_weights_(mq, q0["bits"], q0["gran"])
+            else:
+                master = [mod.weight.data.clone() for mod in bs._linears(mq)]
+                M2.sr_quantize_(mq, master, q0["bits"], q0["gran"],
+                                torch.Generator(device=bs.DEV).manual_seed(1000 + int(kd)))
+            q = {"spec": wspec, "sr_of": body, "sr_draw": int(kd)}
+        else:
+            mq, _, q = C.make_model(a.task, (wspec, draw), T, batch)
+        per = {k_: [] for k_ in ("corr_f", "corr_q", "ret", "ret_lat", "t_c", "phi", "disp", "qhalt")}
         with torch.no_grad(), C.sdpa_math():
             for ci, (s, e) in enumerate(chunks):
                 x = torch.from_numpy(inp[s:e]).to(bs.DEV)
@@ -158,6 +175,7 @@ def run_recursion(a):
                 aq, af = Fq.answer_state(z), Ff.answer_state(R["z"])
                 per["corr_f"].append(R["corr"].int().cpu())
                 per["corr_q"].append(roq["correct"].int().cpu())
+                per["qhalt"].append(roq["qhalt"].float().cpu())
                 per["ret"].append(ret.cpu())
                 per["ret_lat"].append(lat.cpu())
                 per["t_c"].append(t_c_of(ret).cpu())
@@ -180,6 +198,7 @@ def finish(cell, q, per, t1):
     tc = torch.cat(per["t_c"]).numpy()
     phi = torch.cat(per["phi"]).numpy()
     disp = torch.cat(per["disp"]).numpy()
+    qh = torch.cat(per["qhalt"]).numpy() if per.get("qhalt") else None
     i1 = GRID.index(1.0)
     rho = np.where(tc > 0, 1.0 / np.maximum(tc, 1e-9), np.inf)
     rec = {"cell": cell, "quant": q, "n": int(len(cf)), "acc_f": float(cf.mean()), "acc_q": float(cq.mean()),
@@ -189,7 +208,8 @@ def finish(cell, q, per, t1):
            "return_rate_by_t": ret.mean(1).round(4).tolist(), "latent_rate_by_t": lat.mean(1).round(4).tolist(),
            "per": {"corr_f": cf.tolist(), "corr_q": cq.tolist(), "ret1": ret[i1].astype(int).tolist(),
                    "ret1_lat": lat[i1].astype(int).tolist(), "t_c": tc.round(3).tolist(), "phi": phi.round(4).tolist(),
-                   "disp": disp.round(4).tolist()}, "secs": time.time() - t1}
+                   "disp": disp.round(4).tolist(), "qhalt": None if qh is None else qh.round(3).tolist()},
+           "secs": time.time() - t1}
     print(f"  {cell}: acc {rec['acc_q']*100:.1f} (fp32 {rec['acc_f']*100:.1f}) return {rec['return_rate']:.3f} "
           f"latent {rec['return_rate_latent']:.3f} rho med {rec['rho_median']:.3f} phi {rec['phi_mean']:.3f} "
           f"({rec['secs']:.0f}s)", flush=True)
