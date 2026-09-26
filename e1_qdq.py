@@ -61,8 +61,9 @@ def _vals(g):
 
 
 def fold_and_sym(src, fold_dst, sym_dst):
+    import copy
     import onnx
-    from onnx import numpy_helper, TensorProto
+    from onnx import numpy_helper
     m = onnx.load(str(src))
     g = m.graph
     init, cons, get = _vals(g)
@@ -75,12 +76,12 @@ def fold_and_sym(src, fold_dst, sym_dst):
     drop, new_init = set(), []
     # 1. fold
     for n in list(g.node):
-        if n.op_type == "QuantizeLinear" and n.input[0] in init:
+        if n.op_type == "QuantizeLinear" and (n.input[0] in init or n.input[0] in cons):
             zp = get(n.input[2]) if len(n.input) > 2 else None
             if zp is not None and zp.dtype == np.int8:
                 st["int8_weight_pairs_kept"] += 1
                 continue
-            x = numpy_helper.to_array(init[n.input[0]]).astype(np.float32)
+            x = get(n.input[0]).astype(np.float32)
             s = get(n.input[1]).astype(np.float32)
             axis = next((a.i for a in n.attribute if a.name == "axis"), 1)
             if s.ndim == 1 and s.size > 1:
@@ -108,7 +109,20 @@ def fold_and_sym(src, fold_dst, sym_dst):
     del g.node[:]
     g.node.extend(keep)
     g.initializer.extend(new_init)
-    onnx.save(m, str(fold_dst), save_as_external_data=True, location=pathlib.Path(fold_dst).name + ".data")
+    # TensorRT rejects an axis attribute on per-tensor (scalar-scale) Q/DQ (ORT's quantizer writes axis=1 there)
+    n_axis = 0
+    for n in g.node:
+        if n.op_type in ("QuantizeLinear", "DequantizeLinear"):
+            sc = get(n.input[1])
+            if sc is not None and sc.size == 1:
+                for i_, at in enumerate(list(n.attribute)):
+                    if at.name == "axis":
+                        del n.attribute[i_]
+                        n_axis += 1
+                        break
+    st["axis_attr_removed_on_scalar_qdq"] = n_axis
+    onnx.save(copy.deepcopy(m), str(fold_dst), save_as_external_data=True,
+              location=pathlib.Path(fold_dst).name + ".data")
     # 2. symmetrise uint8 activation Q/DQ
     init, cons, get = _vals(g)
     made, factors = {}, []
@@ -133,7 +147,8 @@ def fold_and_sym(src, fold_dst, sym_dst):
     st["coarsening_factor_max"] = round(max(factors), 3) if factors else 1.0
     st["coarsening_factor_median"] = round(float(np.median(factors)), 3) if factors else None
     st["n_sym_encodings"] = len(made)
-    onnx.save(m, str(sym_dst), save_as_external_data=True, location=pathlib.Path(sym_dst).name + ".data")
+    onnx.save(copy.deepcopy(m), str(sym_dst), save_as_external_data=True,
+              location=pathlib.Path(sym_dst).name + ".data")
     return st
 
 
@@ -288,8 +303,14 @@ def main():
             E.dump(outp, rec)
         rec["meta"]["graph"] = f"ORT-quantizer QDQ graph (uint8 asym act, int8 per-channel w), {orig}"
     fold, sym = wd / "fold.onnx", wd / "sym.onnx"
+    if "rewrite" not in rec or rec["rewrite"].get("version") != 2:
+        for f in wd.glob("*"):
+            if f.name.startswith(("fold", "sym", "trt_")):
+                f.unlink()
+        for k in [k for k in rec if k.startswith("trt_") or k in ("fold_check_maxabs", "ort_ref_sym")]:
+            rec.pop(k)
     if not sym.exists():
-        rec["rewrite"] = fold_and_sym(orig, fold, sym)
+        rec["rewrite"] = {**fold_and_sym(orig, fold, sym), "version": 2}
         E.dump(outp, rec)
         log(task, "rewrite", rec["rewrite"])
     # fold check: identical outputs to the original under ORT on one real carry

@@ -1,0 +1,23 @@
+21:24:14 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+/home/skolawol/e1/code/e1_energy.py:561: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+/home/skolawol/e1/code/e1_energy.py:564: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.float16
+/home/skolawol/e1/code/e1_energy.py:565: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.set_output_type(0, trt.float16)
+/home/skolawol/e1/code/e1_energy.py:606: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/home/skolawol/e1/code/e1_energy.py:607: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[09/25/2026-21:25:29] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+21:25:29 maze dyn_H3_b1_int8proj 18.3 s 16.6 MB {'in:FP32|out:FP16': 95, 'in:-|out:FP16': 120, 'in:FP16|out:FP16': 453, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 120, 'in:FP16|out:Int8': 91, 'in:Int8|out:Int8': 346, 'in:Int8|out:FP16': 60, 'in:-|out:FP32': 60, 'in:Int8|out:FP32': 92, 'in:FP32|out:FP32': 214, 'in:FP16|out:FP32': 4, 'in:FP32|out:Int8': 1} missing scales 6
+[09/25/2026-21:25:38] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+21:25:39 maze dyn_H1_b1_int8proj 9.4 s 12.19 MB {'in:FP32|out:FP16': 35, 'in:-|out:FP16': 40, 'in:FP16|out:FP16': 153, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 40, 'in:FP16|out:Int8': 31, 'in:Int8|out:Int8': 106, 'in:Int8|out:FP16': 20, 'in:-|out:FP32': 20, 'in:Int8|out:FP32': 32, 'in:FP32|out:FP32': 74, 'in:FP16|out:FP32': 4, 'in:FP32|out:Int8': 1} missing scales 6
+[09/25/2026-21:29:47] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+21:29:48 maze dyn_H3_b32_int8proj 249.1 s 14.34 MB {'in:FP32|out:FP16': 125, 'in:-|out:FP16': 60, 'in:FP16|out:FP16': 603, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 120, 'in:FP16|out:Int8': 91, 'in:Int8|out:Int8': 496, 'in:-|out:FP32': 120, 'in:Int8|out:FP16': 150, 'in:FP16|out:FP32': 4, 'in:Int8|out:FP32': 2, 'in:FP32|out:FP32': 4, 'in:FP32|out:Int8': 1} missing scales 6
+21:29:51 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+21:35:34 maze ref_eager_fp32_H3_b32 exact@16 0.8678 exit 0.8678 2.028
+21:37:08 maze ref_eager_fp32_H1_b32 exact@16 0.8678 exit 0.8533 3.188
+21:39:17 maze trt_int8proj_H3_b1 exact@8/16 0.8544 0.8556 agree@16 0.9975 cos@16 0.8152 exit 0.8544 2.204
+21:40:03 maze trt_int8proj_H1_b1 exact@8/16 0.8511 0.8578 agree@16 0.9974 cos@16 0.82063 exit 0.7633 3.509
+21:41:40 maze trt_int8proj_H3_b32 exact@8/16 0.8556 0.8578 agree@16 0.9973 cos@16 0.81519 exit 0.8567 2.189

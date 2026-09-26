@@ -1,0 +1,19 @@
+21:24:14 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+/home/skolawol/e1/code/e1_energy.py:561: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+/home/skolawol/e1/code/e1_energy.py:564: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.float16
+/home/skolawol/e1/code/e1_energy.py:565: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.set_output_type(0, trt.float16)
+/home/skolawol/e1/code/e1_energy.py:606: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/home/skolawol/e1/code/e1_energy.py:607: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[09/25/2026-21:39:18] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+21:39:19 hrm_sudoku dyn_H2_b1_int8proj 848.3 s 33.64 MB {'in:FP32|out:FP16': 77, 'in:-|out:FP16': 96, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 144, 'in:FP16|out:Int8': 97, 'in:Int8|out:FP32': 74, 'in:FP32|out:FP32': 27, 'in:FP16|out:FP16': 363, 'in:Int8|out:Int8': 298, 'in:Int8|out:FP16': 24, 'in:FP16|out:FP32': 4, 'in:FP32|out:Int8': 1} missing scales 6
+[09/25/2026-21:42:11] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+21:42:12 hrm_sudoku dyn_H2_b256_int8proj 172.4 s 33.36 MB {'in:FP32|out:FP16': 4, 'in:-|out:FP16': 144, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 96, 'in:FP16|out:Int8': 73, 'in:Int8|out:Int8': 298, 'in:Int8|out:FP16': 121, 'in:FP16|out:FP16': 604, 'in:FP16|out:FP32': 4, 'in:FP32|out:FP32': 3, 'in:FP32|out:Int8': 1, 'in:Int8|out:FP32': 1} missing scales 6
+21:42:14 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+21:42:26 hrm_sudoku ref_eager_fp32_H2_b256 exact@16 0.494 exit 0.494 10.566
+21:43:20 hrm_sudoku trt_int8proj_H2_b1 exact@8/16 0.42 0.492 agree@16 0.891 cos@16 0.93428 exit 0.492 10.898
+21:43:25 hrm_sudoku trt_int8proj_H2_b256 exact@8/16 0.438 0.5 agree@16 0.892 cos@16 0.9338 exit 0.5 10.762

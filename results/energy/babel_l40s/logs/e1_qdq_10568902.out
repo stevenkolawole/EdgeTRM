@@ -1,0 +1,31 @@
+NVIDIA L40S
+Collecting onnx==1.22.0
+  Downloading onnx-1.22.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.5 kB)
+Collecting ml_dtypes
+  Downloading ml_dtypes-0.6.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+Collecting onnxruntime==1.29.0
+  Downloading onnxruntime-1.29.0-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (5.6 kB)
+Collecting flatbuffers
+  Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+Collecting coloredlogs
+  Downloading coloredlogs-15.0.1-py2.py3-none-any.whl.metadata (12 kB)
+Collecting humanfriendly
+  Downloading humanfriendly-10.0-py2.py3-none-any.whl.metadata (9.2 kB)
+Downloading onnx-1.22.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (19.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 19.1/19.1 MB 51.1 MB/s  0:00:00
+Downloading onnxruntime-1.29.0-cp311-cp311-manylinux_2_28_x86_64.whl (23.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 23.1/23.1 MB 49.2 MB/s  0:00:00
+Downloading ml_dtypes-0.6.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (412 kB)
+Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+Downloading coloredlogs-15.0.1-py2.py3-none-any.whl (46 kB)
+Downloading humanfriendly-10.0-py2.py3-none-any.whl (86 kB)
+Installing collected packages: flatbuffers, onnxruntime, onnx, ml_dtypes, humanfriendly, coloredlogs
+
+Successfully installed coloredlogs-15.0.1 flatbuffers-25.12.19 humanfriendly-10.0 ml_dtypes-0.6.0 onnx-1.22.0 onnxruntime-1.29.0
+onnx 1.22.0 ort 1.29.0 trt 10.13.3.9
+Sat Sep 26 01:24:05 AM UTC 2026 start qdq on babel-v9-28
+sudoku_mlp rc=1
+maze rc=1
+sudoku_attn rc=1
+hrm_sudoku rc=0
+Sat Sep 26 02:01:51 AM UTC 2026 done

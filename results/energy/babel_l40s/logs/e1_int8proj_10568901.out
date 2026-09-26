@@ -1,0 +1,7 @@
+NVIDIA L40S
+Sat Sep 26 01:24:13 AM UTC 2026 start int8proj on babel-q9-16
+sudoku_mlp rc=0
+sudoku_attn rc=0
+maze rc=0
+hrm_sudoku rc=0
+Sat Sep 26 01:43:25 AM UTC 2026 done

@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "/home/skolawol/e1/code/e1_qdq.py", line 354, in <module>
+    main()
+  File "/home/skolawol/e1/code/e1_qdq.py", line 292, in main
+    rec["rewrite"] = fold_and_sym(orig, fold, sym)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/e1/code/e1_qdq.py", line 118, in fold_and_sym
+    zp = get(n.input[2])
+         ^^^^^^^^^^^^^^^
+  File "/home/skolawol/e1/code/e1_qdq.py", line 56, in get
+    return numpy_helper.to_array(init[name])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/user_data/skolawol/e1/pylibs/onnx/onnx/numpy_helper.py", line 219, in to_array
+    onnx.external_data_helper.load_external_data_for_tensor(tensor, base_dir)
+  File "/data/user_data/skolawol/e1/pylibs/onnx/onnx/external_data_helper.py", line 153, in load_external_data_for_tensor
+    fd = _open_external_data_fd(base_dir, info.location, tensor.name, True)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/user_data/skolawol/e1/pylibs/onnx/onnx/external_data_helper.py", line 32, in _open_external_data_fd
+    return c_checker._open_external_data(base_dir, location, tensor_name, read_only)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+onnx.onnx_cpp2py_export.checker.ValidationError: Data of TensorProto ( tensor name: onnx::MatMul_1083_copy_1_zero_point) should be stored in fold.onnx.data, but it is not regular file.

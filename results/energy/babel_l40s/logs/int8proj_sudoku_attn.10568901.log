@@ -1,0 +1,23 @@
+21:24:14 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+/home/skolawol/e1/code/e1_energy.py:561: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+/home/skolawol/e1/code/e1_energy.py:564: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.float16
+/home/skolawol/e1/code/e1_energy.py:565: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.set_output_type(0, trt.float16)
+/home/skolawol/e1/code/e1_energy.py:606: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/home/skolawol/e1/code/e1_energy.py:607: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[09/25/2026-21:25:40] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+21:25:40 sudoku_attn dyn_H3_b1_int8proj 29.2 s 16.55 MB {'in:FP32|out:FP16': 216, 'in:-|out:FP16': 252, 'in:FP16|out:FP16': 719, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 168, 'in:FP16|out:Int8': 127, 'in:Int8|out:FP32': 128, 'in:FP32|out:FP32': 85, 'in:Int8|out:Int8': 448, 'in:FP16|out:FP32': 5, 'in:FP32|out:Int8': 1} missing scales 6
+[09/25/2026-21:25:53] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+21:25:54 sudoku_attn dyn_H1_b1_int8proj 13.2 s 11.61 MB {'in:FP32|out:FP16': 76, 'in:-|out:FP16': 84, 'in:FP16|out:FP16': 243, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 56, 'in:FP16|out:Int8': 43, 'in:Int8|out:FP32': 44, 'in:FP32|out:FP32': 29, 'in:Int8|out:Int8': 140, 'in:FP16|out:FP32': 5, 'in:FP32|out:Int8': 1} missing scales 6
+[09/25/2026-21:30:07] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+21:30:08 sudoku_attn dyn_H3_b256_int8proj 253.8 s 16.76 MB {'in:FP32|out:FP16': 214, 'in:-|out:FP16': 84, 'in:FP16|out:FP16': 887, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 168, 'in:FP16|out:Int8': 127, 'in:Int8|out:Int8': 658, 'in:-|out:FP32': 168, 'in:Int8|out:FP16': 169, 'in:Int8|out:FP32': 43, 'in:FP16|out:FP32': 4, 'in:FP32|out:FP32': 3, 'in:FP32|out:Int8': 1} missing scales 6
+21:30:10 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+21:31:04 sudoku_attn ref_eager_fp32_H3_b256 exact@16 0.659 exit 0.654 7.786
+21:31:22 sudoku_attn ref_eager_fp32_H1_b256 exact@16 0.571 exit 0.0 1.0
+21:34:54 sudoku_attn trt_int8proj_H3_b1 exact@8/16 0.624 0.669 agree@16 0.9226 cos@16 0.85874 exit 0.669 7.714
+21:36:08 sudoku_attn trt_int8proj_H1_b1 exact@8/16 0.438 0.567 agree@16 0.901 cos@16 0.80809 exit 0.0 1.0
+21:36:29 sudoku_attn trt_int8proj_H3_b256 exact@8/16 0.604 0.646 agree@16 0.9184 cos@16 0.84665 exit 0.645 7.959
