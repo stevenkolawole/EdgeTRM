@@ -98,8 +98,42 @@ def _fresh(m, bt):
                    current_data={k: v.to(DEV) for k, v in c.current_data.items()})
 
 
+class _ActNoiseFixed:
+    """Activation noise drawn once per layer and reused at every call (X7's 'af' arm, the fixed error placed in the
+    activations): x + sigma * std(x) * G, with G over the last two dims at rms 1, from a generator seeded by
+    (seed, layer index), so every loop and every chunk sees the same direction."""
+
+    def __init__(self, sigma, seed, li):
+        self.sigma, self.seed, self.li, self.G = sigma, seed, li, None
+
+    def __call__(self, mod, args):
+        x = args[0]
+        shape = tuple(x.shape[-2:]) if x.dim() >= 3 else (x.shape[-1],)
+        if self.G is None or tuple(self.G.shape) != shape:
+            gen = torch.Generator(device="cpu").manual_seed(self.seed * 1000 + self.li)
+            G = torch.randn(shape, generator=gen)
+            self.G = (G / G.pow(2).mean().sqrt()).to(x.device, x.dtype)
+        return (x + self.sigma * x.std() * self.G,) + tuple(args[1:])
+
+
+class _WFresh:
+    """Weight noise redrawn at every call (the fresh error placed in the weights): W0 + sigma * std(W0) * randn,
+    a new draw before every forward of the linear; restore() puts W0 back."""
+
+    def __init__(self, mod, sigma):
+        self.W0, self.sigma = mod.weight.data.clone(), sigma
+
+    def __call__(self, mod, args):
+        mod.weight.data = self.W0 + torch.randn_like(self.W0) * (self.sigma * self.W0.std())
+        return None
+
+    def restore(self, mod):
+        mod.weight.data = self.W0
+
+
 @torch.no_grad()
-def run_traj(m, inp, lab, batch, K, act_quant=None, act_noise=None, ref_zH=None, keep_zH=False, partial=None, tag=None):
+def run_traj(m, inp, lab, batch, K, act_quant=None, act_noise=None, ref_zH=None, keep_zH=False, partial=None, tag=None,
+             act_noise_fixed=None, w_fresh=None, seed=0):
     """partial: path of a chunk-level checkpoint (p4d reboots daily); resumes a spec at the next chunk.
     Not used with static activation quantization (its scales are calibrated on chunk 0)."""
     m = m.to(DEV)
@@ -110,6 +144,15 @@ def run_traj(m, inp, lab, batch, K, act_quant=None, act_noise=None, ref_zH=None,
     if act_noise is not None:
         for mod in _linears(m):
             handles.append(mod.register_forward_pre_hook(_ActNoise(act_noise)))
+    if act_noise_fixed is not None:
+        for li, mod in enumerate(_linears(m)):
+            handles.append(mod.register_forward_pre_hook(_ActNoiseFixed(act_noise_fixed, seed, li)))
+    wf = []
+    if w_fresh is not None:
+        for mod in _linears(m):
+            h = _WFresh(mod, w_fresh)
+            wf.append((mod, h))
+            handles.append(mod.register_forward_pre_hook(h))
     if act_quant is not None:
         for mod in _linears(m):
             q = _ActQuant(act_quant)
@@ -168,6 +211,8 @@ def run_traj(m, inp, lab, batch, K, act_quant=None, act_noise=None, ref_zH=None,
             os.replace(tmp, partial)
     for h in handles:
         h.remove()
+    for mod, h in wf:
+        h.restore(mod)
     m.cpu()
     torch.cuda.empty_cache()
     return bits, wrong, qhalt, fid, (torch.cat(zs) if keep_zH else None)
@@ -298,7 +343,12 @@ def main():
         if spec == "fp32" or spec in done:
             continue
         base, seed = split_spec(spec)
-        q = parse_quant(base)
+        if base.startswith("afnoise"):        # fixed activation noise (same direction on every loop)
+            q = {"spec": base, "bits": None, "gran": None, "act": None, "afnoise": float(base[7:])}
+        elif base.startswith("wfresh"):       # fresh weight noise (redrawn at every call)
+            q = {"spec": base, "bits": None, "gran": None, "act": None, "wfresh": float(base[6:])}
+        else:
+            q = parse_quant(base)
         t1 = time.time()
         mq, _ = build(a.task, H, a.K, batch)
         torch.manual_seed(seed)
@@ -307,7 +357,8 @@ def main():
             quantize_weights_(mq, q["bits"], q["gran"], q.get("sigma"))
         torch.manual_seed(seed)
         b2, w2, qh2, fid2, _ = run_traj(mq, inp, lab, batch, a.K, act_quant=q["act"], act_noise=q.get("anoise"),
-                                        ref_zH=ref_zH, partial=partial, tag=f"{spec}|K{a.K}|n{len(rows)}|b{batch}")
+                                        ref_zH=ref_zH, partial=partial, tag=f"{spec}|K{a.K}|n{len(rows)}|b{batch}",
+                                        act_noise_fixed=q.get("afnoise"), w_fresh=q.get("wfresh"), seed=seed)
         del mq
         if partial and Path(partial).exists():
             os.remove(partial)
