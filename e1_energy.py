@@ -430,11 +430,12 @@ def engine_list(task):
         out.append((f"dyn_H{H}_b1_int8", src, H, 1, "int8", cache))
         for prec in ("fp32", "fp16", "int8f32", "int8mm", "int8all"):
             out.append((f"dyn_H{H}_b1_{prec}", src, H, 1, prec, cache))
+        out.append((f"dyn_H{H}_b1_int8proj", src, H, 1, "int8proj", cache))
         if t["kind"] == "trm" and H == 1:
             x3src = X3ART / t["x3"] / f"stepc_H{H}.onnx"
             for prec in ("fp16", "int8mm"):
                 out.append((f"x3_H{H}_b1_{prec}", x3src, H, 1, prec, f"calib_x3_H{H}.cache"))
-    for prec in ("fp32", "fp16", "int8", "int8mm"):
+    for prec in ("fp32", "fp16", "int8", "int8mm", "int8proj"):
         out.append((f"dyn_H{H0}_b{t['B']}_{prec}", dyn_onnx_H(task, H0), H0, t["B"], prec, f"calib_dyn_H{H0}.cache"))
     # build order: the H0 calibration seed, then the engines the energy job times (it waits for them), then the rest
     en = {c.get("engine") for c in energy_configs(task)}
@@ -515,7 +516,7 @@ def stage_build(task, only=None):
         cfg.builder_optimization_level = opt_level
         tcache = cfg.create_timing_cache(tc_path.read_bytes() if tc_path.exists() else b"")
         cfg.set_timing_cache(tcache, ignore_mismatch=False)
-        if prec in ("fp16", "int8", "int8mm", "int8all"):
+        if prec in ("fp16", "int8", "int8mm", "int8all", "int8proj"):
             cfg.set_flag(trt.BuilderFlag.FP16)
         # int8 = TensorRT's own choice per layer (INT8 only where its timing says faster); int8f32 = the same
         # without FP16 kernels; int8mm = INT8 REQUIRED on every MatMul (TRT's INT8 GEMMs, the closest analogue
@@ -529,6 +530,40 @@ def stage_build(task, only=None):
                 if L.type == trt.LayerType.MATRIX_MULTIPLY:
                     L.precision = trt.int8
                     forced.append(L.name)
+        n_score = 0
+        if prec == "int8proj":
+            # INT8 required on every weight MatMul (projections, MLP, heads); the attention score matmuls
+            # (q.k^T and attn.v: both operands are activations, no constant weight upstream) forced to FP16
+            cfg.set_flag(trt.BuilderFlag.OBEY_PRECISION_CONSTRAINTS)
+            prod = {}
+            for i in range(net.num_layers):
+                L = net.get_layer(i)
+                for k in range(L.num_outputs):
+                    prod[L.get_output(k).name] = L
+            passthru = {trt.LayerType.SHUFFLE, trt.LayerType.IDENTITY, trt.LayerType.CAST, trt.LayerType.SLICE,
+                        trt.LayerType.CONCATENATION, trt.LayerType.UNARY}
+
+            def from_const(tensor, depth=0):
+                L = prod.get(tensor.name)
+                if L is None or depth > 8:
+                    return False
+                if L.type == trt.LayerType.CONSTANT:
+                    return True
+                if L.type in passthru:
+                    return all(from_const(L.get_input(j), depth + 1) for j in range(L.num_inputs)
+                               if L.get_input(j) is not None)
+                return False
+            for i in range(net.num_layers):
+                L = net.get_layer(i)
+                if L.type != trt.LayerType.MATRIX_MULTIPLY:
+                    continue
+                if any(from_const(L.get_input(j)) for j in range(2)):
+                    L.precision = trt.int8
+                    forced.append(L.name)
+                else:
+                    L.precision = trt.float16
+                    L.set_output_type(0, trt.float16)
+                    n_score += 1
         if prec == "int8all":
             cfg.set_flag(trt.BuilderFlag.PREFER_PRECISION_CONSTRAINTS)
             skip = {trt.LayerType.SHAPE, trt.LayerType.CONSTANT, trt.LayerType.IDENTITY, trt.LayerType.CAST,
@@ -590,6 +625,7 @@ def stage_build(task, only=None):
         summ[name] = {"onnx": str(src), "H": H, "B": B, "prec": prec, "build_s": round(time.time() - t0, 1),
                       "size_MB": round(len(b) / 1e6, 2), "trt": trt.__version__, **lp,
                       "n_layers_precision_constrained": len(forced), "builder_optimization_level": opt_level,
+                      "n_score_matmuls_fp16": n_score,
                       "warnings": {"n": len(logger.msgs), "missing_int8_scale": len(miss),
                                    "missing_examples": [m[:160] for m in miss[:6]],
                                    "other": sorted({m[:200] for m in logger.msgs if "Missing scale" not in m})[:12]}}
@@ -695,7 +731,7 @@ def record_configs(task):
     for H in Hs:
         cfgs.append(dict(name=f"eager_fp32_H{H}_b1", rt="eager", H=H, prec="fp32", B=1))
         cfgs.append(dict(name=f"eager_fp16_H{H}_b1", rt="eager", H=H, prec="fp16", B=1))
-        for prec in ("fp32", "fp16", "int8", "int8f32", "int8mm", "int8all"):
+        for prec in ("fp32", "fp16", "int8", "int8f32", "int8mm", "int8all", "int8proj"):
             cfgs.append(dict(name=f"trt_{prec}_H{H}_b1", rt="trt", H=H, prec=prec, B=1,
                              engine=b1_engine(task, H, prec)))
         if t["kind"] == "trm" and H == 1:
@@ -704,7 +740,7 @@ def record_configs(task):
                                  engine=f"x3_H{H}_b1_{prec}"))
     cfgs.append(dict(name=f"graph_fp16_H{H0}_b1", rt="graph", H=H0, prec="fp16", B=1, nmax=50))
     cfgs.append(dict(name=f"eager_fp16_H{H0}_b{B}", rt="eager", H=H0, prec="fp16", B=B))
-    for prec in ("fp32", "fp16", "int8", "int8mm"):
+    for prec in ("fp32", "fp16", "int8", "int8mm", "int8proj"):
         cfgs.append(dict(name=f"trt_{prec}_H{H0}_b{B}", rt="trt", H=H0, prec=prec, B=B,
                          engine=f"dyn_H{H0}_b{B}_{prec}"))
     return cfgs
