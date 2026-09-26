@@ -1,0 +1,9 @@
+20 34 X5 p4var_attn512_s6 bash /home/ubuntu/q7/p4d_x5_pipeline.sh p4var_attn512_s6 6 arch.mlp_t=False arch.pos_encodings=rope arch.hidden_size=512 arch.num_heads=8
+20 34 X5 p4var_mlp512_s6 bash /home/ubuntu/q7/p4d_x5_pipeline.sh p4var_mlp512_s6 6 arch.hidden_size=512 arch.num_heads=8
+20 34 X5 p4var_attn512_s7 bash /home/ubuntu/q7/p4d_x5_pipeline.sh p4var_attn512_s7 7 arch.mlp_t=False arch.pos_encodings=rope arch.hidden_size=512 arch.num_heads=8
+20 34 X5 p4var_mlp512_s7 bash /home/ubuntu/q7/p4d_x5_pipeline.sh p4var_mlp512_s7 7 arch.hidden_size=512 arch.num_heads=8
+20 34 X5 p4var_attn512_s8 bash /home/ubuntu/q7/p4d_x5_pipeline.sh p4var_attn512_s8 8 arch.mlp_t=False arch.pos_encodings=rope arch.hidden_size=512 arch.num_heads=8
+20 34 X5 p4var_mlp512_s8 bash /home/ubuntu/q7/p4d_x5_pipeline.sh p4var_mlp512_s8 8 arch.hidden_size=512 arch.num_heads=8
+20 24 X5 q7_base_s2 source /home/ubuntu/q7/env_p4d.sh && Q7_RUN=q7_base_s2 bash /home/ubuntu/q7/q7_train2.sh q7_base_s2 2 '+q7_fork_iters=[7]'
+20 24 X5 qat_lsq_b1 source /home/ubuntu/q7/env_p4d.sh && Q7_RUN=qat_lsq_b1 bash /home/ubuntu/q7/q7_train2.sh qat_lsq_b1 4 epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/q7/ckpt/q7_base_s1/step_65100 +q7_reg=lsq +q7_bits=4
+20 24 X5 ft_fp32_b1 source /home/ubuntu/q7/env_p4d.sh && Q7_RUN=ft_fp32_b1 bash /home/ubuntu/q7/q7_train2.sh ft_fp32_b1 4 epochs=9216 eval_interval=2304 lr_warmup_steps=500 +load_checkpoint=/home/ubuntu/q7/ckpt/q7_base_s1/step_65100
