@@ -57,6 +57,39 @@
    "b": "dev:fp32_Samsung_Galaxy_S24_acct3"
   },
   {
+   "a_correct": 60,
+   "b_correct": 58,
+   "a_only": 5,
+   "b_only": 3,
+   "n": 100,
+   "p_exact": 0.7265625,
+   "task": "sudoku_mlp",
+   "a": "dev:m3g40_Samsung_Galaxy_S24_acct3",
+   "b": "dev:fp32_Samsung_Galaxy_S24_acct3"
+  },
+  {
+   "a_correct": 59,
+   "b_correct": 58,
+   "a_only": 6,
+   "b_only": 5,
+   "n": 100,
+   "p_exact": 1.0,
+   "task": "sudoku_mlp",
+   "a": "dev:m3g60_Samsung_Galaxy_S24_acct3",
+   "b": "dev:fp32_Samsung_Galaxy_S24_acct3"
+  },
+  {
+   "a_correct": 57,
+   "b_correct": 58,
+   "a_only": 6,
+   "b_only": 7,
+   "n": 100,
+   "p_exact": 1.0,
+   "task": "sudoku_mlp",
+   "a": "dev:m3adT40_Samsung_Galaxy_S24_acct3",
+   "b": "dev:fp32_Samsung_Galaxy_S24_acct3"
+  },
+  {
    "a_correct": 58,
    "b_correct": 58,
    "a_only": 0,
@@ -123,6 +156,39 @@
    "b": "dev:fp32_Snapdragon_8_Elite_QRD_acct3"
   },
   {
+   "a_correct": 58,
+   "b_correct": 59,
+   "a_only": 5,
+   "b_only": 6,
+   "n": 100,
+   "p_exact": 1.0,
+   "task": "sudoku_mlp",
+   "a": "dev:m3g40_Snapdragon_8_Elite_QRD_acct3",
+   "b": "dev:fp32_Snapdragon_8_Elite_QRD_acct3"
+  },
+  {
+   "a_correct": 61,
+   "b_correct": 59,
+   "a_only": 6,
+   "b_only": 4,
+   "n": 100,
+   "p_exact": 0.75390625,
+   "task": "sudoku_mlp",
+   "a": "dev:m3g60_Snapdragon_8_Elite_QRD_acct3",
+   "b": "dev:fp32_Snapdragon_8_Elite_QRD_acct3"
+  },
+  {
+   "a_correct": 55,
+   "b_correct": 59,
+   "a_only": 4,
+   "b_only": 8,
+   "n": 100,
+   "p_exact": 0.3876953125,
+   "task": "sudoku_mlp",
+   "a": "dev:m3adT40_Snapdragon_8_Elite_QRD_acct3",
+   "b": "dev:fp32_Snapdragon_8_Elite_QRD_acct3"
+  },
+  {
    "a_correct": 59,
    "b_correct": 58,
    "a_only": 1,
@@ -176,6 +242,39 @@
    "task": "sudoku_mlp",
    "a": "dev:w8a8sqvar16u_Samsung_Galaxy_S24_acct3",
    "b": "dev:w8a8sqvar16u_Snapdragon_8_Elite_QRD_acct3"
+  },
+  {
+   "a_correct": 60,
+   "b_correct": 58,
+   "a_only": 6,
+   "b_only": 4,
+   "n": 100,
+   "p_exact": 0.75390625,
+   "task": "sudoku_mlp",
+   "a": "dev:m3g40_Samsung_Galaxy_S24_acct3",
+   "b": "dev:m3g40_Snapdragon_8_Elite_QRD_acct3"
+  },
+  {
+   "a_correct": 59,
+   "b_correct": 61,
+   "a_only": 3,
+   "b_only": 5,
+   "n": 100,
+   "p_exact": 0.7265625,
+   "task": "sudoku_mlp",
+   "a": "dev:m3g60_Samsung_Galaxy_S24_acct3",
+   "b": "dev:m3g60_Snapdragon_8_Elite_QRD_acct3"
+  },
+  {
+   "a_correct": 57,
+   "b_correct": 55,
+   "a_only": 9,
+   "b_only": 7,
+   "n": 100,
+   "p_exact": 0.803619384765625,
+   "task": "sudoku_mlp",
+   "a": "dev:m3adT40_Samsung_Galaxy_S24_acct3",
+   "b": "dev:m3adT40_Snapdragon_8_Elite_QRD_acct3"
   },
   {
    "a_correct": 50,
@@ -440,6 +539,138 @@
    "task": "maze",
    "a": "dev:w8a8_Samsung_Galaxy_S24",
    "b": "host:w8a8"
+  },
+  {
+   "a_correct": 42,
+   "b_correct": 44,
+   "a_only": 2,
+   "b_only": 4,
+   "n": 50,
+   "p_exact": 0.6875,
+   "task": "maze",
+   "a": "dev:w8a8rope16_Samsung_Galaxy_S24_acct2",
+   "b": "dev:fp32_Samsung_Galaxy_S24_acct3"
+  },
+  {
+   "a_correct": 42,
+   "b_correct": 43,
+   "a_only": 0,
+   "b_only": 1,
+   "n": 50,
+   "p_exact": 1.0,
+   "task": "maze",
+   "a": "dev:w8a8rope16_Samsung_Galaxy_S24_acct2",
+   "b": "hosteval:Ma_rope16_0_50_ref"
+  },
+  {
+   "a_correct": 0,
+   "b_correct": 44,
+   "a_only": 0,
+   "b_only": 44,
+   "n": 50,
+   "p_exact": 1.1368683772161603e-13,
+   "task": "maze",
+   "a": "dev:w8a8rope16_Snapdragon_8_Elite_QRD_acct2",
+   "b": "dev:fp32_Snapdragon_8_Elite_QRD_acct3"
+  },
+  {
+   "a_correct": 0,
+   "b_correct": 43,
+   "a_only": 0,
+   "b_only": 43,
+   "n": 50,
+   "p_exact": 2.2737367544323206e-13,
+   "task": "maze",
+   "a": "dev:w8a8rope16_Snapdragon_8_Elite_QRD_acct2",
+   "b": "hosteval:Ma_rope16_0_50_ref"
+  },
+  {
+   "a_correct": 42,
+   "b_correct": 0,
+   "a_only": 42,
+   "b_only": 0,
+   "n": 50,
+   "p_exact": 4.547473508864641e-13,
+   "task": "maze",
+   "a": "dev:w8a8rope16_Samsung_Galaxy_S24_acct2",
+   "b": "dev:w8a8rope16_Snapdragon_8_Elite_QRD_acct2"
+  },
+  {
+   "a_correct": 43,
+   "b_correct": 44,
+   "a_only": 2,
+   "b_only": 3,
+   "n": 50,
+   "p_exact": 1.0,
+   "task": "maze",
+   "a": "hosteval:Ma_rope16_0_50_ref",
+   "b": "dev:fp32_Samsung_Galaxy_S24_acct3"
+  },
+  {
+   "a_correct": 60,
+   "b_correct": 55,
+   "a_only": 7,
+   "b_only": 2,
+   "n": 100,
+   "p_exact": 0.1796875,
+   "task": "sudoku_mlp",
+   "a": "dev:m3g40_Samsung_Galaxy_S24_acct3",
+   "b": "hosteval:m3_greedy_40_legal_0_100_ref"
+  },
+  {
+   "a_correct": 59,
+   "b_correct": 59,
+   "a_only": 6,
+   "b_only": 6,
+   "n": 100,
+   "p_exact": 1.0,
+   "task": "sudoku_mlp",
+   "a": "dev:m3g60_Samsung_Galaxy_S24_acct3",
+   "b": "hosteval:m3_greedy_60_legal_0_100_ref"
+  },
+  {
+   "a_correct": 57,
+   "b_correct": 54,
+   "a_only": 8,
+   "b_only": 5,
+   "n": 100,
+   "p_exact": 0.5810546875,
+   "task": "sudoku_mlp",
+   "a": "dev:m3adT40_Samsung_Galaxy_S24_acct3",
+   "b": "hosteval:m3_a_dT_40_legal_0_100_ref"
+  },
+  {
+   "a_correct": 58,
+   "b_correct": 55,
+   "a_only": 6,
+   "b_only": 3,
+   "n": 100,
+   "p_exact": 0.5078125,
+   "task": "sudoku_mlp",
+   "a": "dev:m3g40_Snapdragon_8_Elite_QRD_acct3",
+   "b": "hosteval:m3_greedy_40_legal_0_100_ref"
+  },
+  {
+   "a_correct": 61,
+   "b_correct": 59,
+   "a_only": 8,
+   "b_only": 6,
+   "n": 100,
+   "p_exact": 0.79052734375,
+   "task": "sudoku_mlp",
+   "a": "dev:m3g60_Snapdragon_8_Elite_QRD_acct3",
+   "b": "hosteval:m3_greedy_60_legal_0_100_ref"
+  },
+  {
+   "a_correct": 55,
+   "b_correct": 54,
+   "a_only": 5,
+   "b_only": 4,
+   "n": 100,
+   "p_exact": 1.0,
+   "task": "sudoku_mlp",
+   "a": "dev:m3adT40_Snapdragon_8_Elite_QRD_acct3",
+   "b": "hosteval:m3_a_dT_40_legal_0_100_ref"
   }
  ],
  "tensor_counts": {

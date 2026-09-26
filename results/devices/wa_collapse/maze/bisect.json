@@ -1,0 +1,128 @@
+{
+ "M0_all8": {
+  "model_id": "mq808odvn",
+  "compile": "jglywljm5",
+  "inference": "jpxl0xwlp",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.7097130417823792,
+   "device_vs_host_ref_argmax": 0.6075555555555555,
+   "device_vs_host_fused_zH_cos": 0.7103269100189209,
+   "host_ref_vs_host_fused_zH_cos": 0.9968651533126831,
+   "host_ref_vs_host_fused_argmax": 0.9628888888888889,
+   "device_vs_fp32_zH_cos": 0.6116067171096802,
+   "host_ref_vs_fp32_zH_cos": 0.8745952844619751
+  }
+ },
+ "Ma_rope16": {
+  "model_id": "mn1l54kzq",
+  "compile": "j568owkyg",
+  "inference": "jpyo8m9l5",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.9971798658370972,
+   "device_vs_host_ref_argmax": 0.9642222222222222,
+   "device_vs_host_fused_zH_cos": 0.9968312978744507,
+   "host_ref_vs_host_fused_zH_cos": 0.9969258308410645,
+   "host_ref_vs_host_fused_argmax": 0.9640555555555556,
+   "device_vs_fp32_zH_cos": 0.8748624920845032,
+   "host_ref_vs_fp32_zH_cos": 0.8749114274978638
+  }
+ },
+ "Mb_concat16": {
+  "model_id": "mnwv6o33q",
+  "compile": "jp3zo6yn5",
+  "inference": "j5m098j9g",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.7099938988685608,
+   "device_vs_host_ref_argmax": 0.6102222222222222,
+   "device_vs_host_fused_zH_cos": 0.7103682160377502,
+   "host_ref_vs_host_fused_zH_cos": 0.9968701601028442,
+   "host_ref_vs_host_fused_argmax": 0.9637777777777777,
+   "device_vs_fp32_zH_cos": 0.6115891337394714,
+   "host_ref_vs_fp32_zH_cos": 0.8745743036270142
+  }
+ },
+ "Mc_scores16": {
+  "model_id": "mqkpozg1m",
+  "compile": "jpvl27jr5",
+  "inference": "jgnz1kjqg",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.7626463174819946,
+   "device_vs_host_ref_argmax": 0.6218333333333333,
+   "device_vs_host_fused_zH_cos": 0.7624119520187378,
+   "host_ref_vs_host_fused_zH_cos": 0.9982743263244629,
+   "host_ref_vs_host_fused_argmax": 0.9675555555555555,
+   "device_vs_fp32_zH_cos": 0.7640830278396606,
+   "host_ref_vs_fp32_zH_cos": 0.9979511499404907
+  }
+ },
+ "Md_notlinear16": {
+  "model_id": "mqvoe3zlm",
+  "compile": "jpe76yjv5",
+  "inference": "jprlxwz7p",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.6537840962409973,
+   "device_vs_host_ref_argmax": 0.49366666666666664,
+   "device_vs_host_fused_zH_cos": 0.6534905433654785,
+   "host_ref_vs_host_fused_zH_cos": 0.9997190237045288,
+   "host_ref_vs_host_fused_argmax": 0.9885555555555555,
+   "device_vs_fp32_zH_cos": 0.6532241106033325,
+   "host_ref_vs_fp32_zH_cos": 0.9992142915725708
+  }
+ },
+ "Me_ropeconst16": {
+  "model_id": "mn0g4w03m",
+  "compile": "jpyo8x305",
+  "inference": "jg9zomlmp",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.7098461389541626,
+   "device_vs_host_ref_argmax": 0.6113333333333333,
+   "device_vs_host_fused_zH_cos": 0.7102530598640442,
+   "host_ref_vs_host_fused_zH_cos": 0.996867299079895,
+   "host_ref_vs_host_fused_argmax": 0.9618888888888889,
+   "device_vs_fp32_zH_cos": 0.6116302609443665,
+   "host_ref_vs_fp32_zH_cos": 0.8747760057449341
+  }
+ },
+ "Mf_ropemul16": {
+  "model_id": "mn759zpjm",
+  "compile": "jp0mojz0g",
+  "inference": "jp8ejx2qp",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.9971672892570496,
+   "device_vs_host_ref_argmax": 0.964,
+   "device_vs_host_fused_zH_cos": 0.996808648109436,
+   "host_ref_vs_host_fused_zH_cos": 0.9968761205673218,
+   "host_ref_vs_host_fused_argmax": 0.9635555555555556,
+   "device_vs_fp32_zH_cos": 0.8750869035720825,
+   "host_ref_vs_fp32_zH_cos": 0.8752534985542297
+  }
+ },
+ "Mg_rope_scores16": {
+  "model_id": "mmrgox70q",
+  "compile": "jp8ejxqqp",
+  "inference": "jp1noj4ng",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.763177216053009,
+   "device_vs_host_ref_argmax": 0.6185,
+   "device_vs_host_fused_zH_cos": 0.762976348400116,
+   "host_ref_vs_host_fused_zH_cos": 0.9983607530593872,
+   "host_ref_vs_host_fused_argmax": 0.9682222222222222,
+   "device_vs_fp32_zH_cos": 0.7644756436347961,
+   "host_ref_vs_fp32_zH_cos": 0.9980672597885132
+  }
+ },
+ "Mh_notlinear_notscores16": {
+  "model_id": "mq808o1gn",
+  "compile": "jgk264evg",
+  "inference": "jgk264vvg",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.9988111257553101,
+   "device_vs_host_ref_argmax": 0.9725555555555555,
+   "device_vs_host_fused_zH_cos": 0.9987558126449585,
+   "host_ref_vs_host_fused_zH_cos": 0.9986050724983215,
+   "host_ref_vs_host_fused_argmax": 0.9709444444444445,
+   "device_vs_fp32_zH_cos": 0.8757623434066772,
+   "host_ref_vs_fp32_zH_cos": 0.8754258155822754
+  }
+ }
+}

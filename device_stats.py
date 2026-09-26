@@ -38,6 +38,14 @@ def mcnemar(a, b):
 
 def correct(task, kind, name, lab):
     d = I.idir(task)
+    if kind == "hosteval":   # wa_collapse --stage eval record (per-puzzle correctness at its final step)
+        f = d / "ablate" / f"eval_{name}.json"
+        if not f.exists():
+            return None
+        r = json.loads(f.read_text())
+        if r["nsteps"] != STEP or r["start"] != 0:
+            return None
+        return np.array(r["correct"][:len(lab)], dtype=bool)
     f = d / (f"dev_{name}.npz" if kind == "dev" else f"host_{name}.npz")
     if not f.exists():
         return None
@@ -65,6 +73,17 @@ for task in ("sudoku_mlp", "sudoku_attn", "maze"):
 PAIRS.append(("sudoku_mlp", ("dev", "w8a8rms16u_Samsung_Galaxy_S24_acct2"), ("dev", "fp32_Samsung_Galaxy_S24_acct3")))
 PAIRS.append(("sudoku_mlp", ("dev", "w8a8_Samsung_Galaxy_S24"), ("host", "w8a8")))
 PAIRS.append(("maze", ("dev", "w8a8_Samsung_Galaxy_S24"), ("host", "w8a8")))
+# item 111(a): Maze Ma_rope16 chains (acct2) vs device fp32, vs the host reference-QDQ run of the same graph,
+# and across devices
+for dev in ("Samsung_Galaxy_S24", "Snapdragon_8_Elite_QRD"):
+    PAIRS.append(("maze", ("dev", f"w8a8rope16_{dev}_acct2"), ("dev", f"fp32_{dev}_acct3")))
+    PAIRS.append(("maze", ("dev", f"w8a8rope16_{dev}_acct2"), ("hosteval", "Ma_rope16_0_50_ref")))
+PAIRS.append(("maze", ("dev", "w8a8rope16_Samsung_Galaxy_S24_acct2"), ("dev", "w8a8rope16_Snapdragon_8_Elite_QRD_acct2")))
+PAIRS.append(("maze", ("hosteval", "Ma_rope16_0_50_ref"), ("dev", "fp32_Samsung_Galaxy_S24_acct3")))
+# M3 override sets vs the host reference-QDQ run of the same graph (100 test puzzles, 8 steps)
+for dev in ("Samsung_Galaxy_S24", "Snapdragon_8_Elite_QRD"):
+    for prec, var in (("m3g40", "m3_greedy_40_legal"), ("m3g60", "m3_greedy_60_legal"), ("m3adT40", "m3_a_dT_40_legal")):
+        PAIRS.append(("sudoku_mlp", ("dev", f"{prec}_{dev}_acct3"), ("hosteval", f"{var}_0_100_ref")))
 
 
 def main():

@@ -1,0 +1,44 @@
+{
+ "M0_all8": {
+  "model_id": "mnwv6vypq",
+  "compile": "jp1nojwkg",
+  "inference": "jp3zo9mx5",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.997949481010437,
+   "device_vs_host_ref_argmax": 0.9703703703703703,
+   "device_vs_host_fused_zH_cos": 0.9970008730888367,
+   "host_ref_vs_host_fused_zH_cos": 0.9971686601638794,
+   "host_ref_vs_host_fused_argmax": 0.9864197530864197,
+   "device_vs_fp32_zH_cos": 0.9976868629455566,
+   "host_ref_vs_fp32_zH_cos": 0.9977343678474426
+  }
+ },
+ "Ma_rope16": {
+  "model_id": "mnlzozv3q",
+  "compile": "jp4ye1dqp",
+  "inference": "jp0moj12g",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.9980095028877258,
+   "device_vs_host_ref_argmax": 0.9722222222222222,
+   "device_vs_host_fused_zH_cos": 0.9971481561660767,
+   "host_ref_vs_host_fused_zH_cos": 0.997167706489563,
+   "host_ref_vs_host_fused_argmax": 0.9790123456790123,
+   "device_vs_fp32_zH_cos": 0.9977378845214844,
+   "host_ref_vs_fp32_zH_cos": 0.9977754354476929
+  }
+ },
+ "Mc_scores16": {
+  "model_id": "mqvoeo4em",
+  "compile": "j5m09m6yg",
+  "inference": "jgoldrv4g",
+  "result": {
+   "device_vs_host_ref_zH_cos": 0.9982598423957825,
+   "device_vs_host_ref_argmax": 0.9753086419753086,
+   "device_vs_host_fused_zH_cos": 0.9973855018615723,
+   "host_ref_vs_host_fused_zH_cos": 0.9975947141647339,
+   "host_ref_vs_host_fused_argmax": 0.980246913580247,
+   "device_vs_fp32_zH_cos": 0.9979467391967773,
+   "host_ref_vs_fp32_zH_cos": 0.9980152249336243
+  }
+ }
+}
