@@ -1,0 +1,1 @@
+{"model": "huginn", "n": 2, "records": [{"loops": 8, "spec": "w8c", "draw": 0, "bits": 8, "gran": "c", "delta_med": 0.012996611185371876, "delta": [0.013096, 0.012898], "secs": 0.3220961093902588}, {"loops": 8, "spec": "w3a", "draw": 0, "bits": 3, "gran": "a", "delta_med": 0.3214827626943588, "delta": [0.319681, 0.323285], "secs": 0.3160288333892822}]}

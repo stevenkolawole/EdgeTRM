@@ -69,7 +69,7 @@ def main():
     for m, p in first.items():
         if m.endswith("_babel"):
             continue                                          # post-hoc (variants), scored elsewhere
-        w = x5_width(m[3:]) if m.startswith("x5_") else x2_width(m)
+        w = (x5_width(m[3:]) or x2_width(m)) if m.startswith("x5_") else x2_width(m)
         if not w:
             print(f"| {m} | {p['S']:.3f} | {p['sigma_half_pred']:.3f} ({p['time_utc']}) | pending | | |")
             continue
