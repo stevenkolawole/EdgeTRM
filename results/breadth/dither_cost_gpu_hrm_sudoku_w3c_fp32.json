@@ -1,0 +1,29 @@
+{
+ "task": "hrm_sudoku",
+ "spec": "w3c",
+ "master": "fp32",
+ "gpu": "NVIDIA A100-SXM4-40GB",
+ "rows": [
+  {
+   "batch": 1,
+   "step_ms": 24.406219859956764,
+   "redraw_ms": 3.924052019719966,
+   "redraw_over_step": 0.160780819079572,
+   "params_rerounded": 27269632
+  },
+  {
+   "batch": 32,
+   "step_ms": 50.88101270026527,
+   "redraw_ms": 3.9376206399174403,
+   "redraw_over_step": 0.0773888024421517,
+   "params_rerounded": 27269632
+  },
+  {
+   "batch": 300,
+   "step_ms": 420.8306538400939,
+   "redraw_ms": 3.9606218802509834,
+   "redraw_over_step": 0.009411438649038931,
+   "params_rerounded": 27269632
+  }
+ ]
+}

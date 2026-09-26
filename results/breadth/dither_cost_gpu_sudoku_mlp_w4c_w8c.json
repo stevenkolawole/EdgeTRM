@@ -1,0 +1,29 @@
+{
+ "task": "sudoku_mlp",
+ "spec": "w4c",
+ "master": "w8c",
+ "gpu": "NVIDIA A100-SXM4-40GB",
+ "rows": [
+  {
+   "batch": 1,
+   "step_ms": 18.25840670033358,
+   "redraw_ms": 1.2132087198551744,
+   "redraw_over_step": 0.06644658210143874,
+   "params_rerounded": 5023232
+  },
+  {
+   "batch": 32,
+   "step_ms": 64.17396489996463,
+   "redraw_ms": 1.207046420313418,
+   "redraw_over_step": 0.01880897373561039,
+   "params_rerounded": 5023232
+  },
+  {
+   "batch": 300,
+   "step_ms": 551.0841091198381,
+   "redraw_ms": 1.2070580798899755,
+   "redraw_over_step": 0.002190333671239085,
+   "params_rerounded": 5023232
+  }
+ ]
+}
