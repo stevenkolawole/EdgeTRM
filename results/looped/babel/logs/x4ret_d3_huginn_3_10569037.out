@@ -1,0 +1,74 @@
+NVIDIA L40S 4.55.4
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:09<00:28,  9.34s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:19<00:19,  9.97s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:31<00:10, 10.74s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:32<00:00,  6.98s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:32<00:00,  8.16s/it]
+22:13:15   bf16: gen acc 0.420
+22:27:52   w4c: gen acc 0.330
+22:40:31   w4c hybrid k=16: gen acc 0.370
+22:44:57 huginn w4c: {"acc_fp": 0.42, "acc_q": 0.33, "acc_hybrid": 0.37, "retained": 0.786, "fid": 0.929, "rho_median": 0.25, "tc_median": 4.0, "return_tf_rate": 0.91, "return_answer_rate": 0.55, "state_rel_dist": 0.358, "secs": 2686.323}
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:09<00:28,  9.35s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:19<00:19,  9.98s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:31<00:10, 10.76s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:32<00:00,  6.99s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:32<00:00,  8.17s/it]
+Traceback (most recent call last):
+  File "/home/skolawol/edgetrm_src/lm/ret_test.py", line 265, in <module>
+    main()
+  File "/home/skolawol/edgetrm_src/lm/ret_test.py", line 200, in main
+    gen_q = gen_answers(fam, model, tok, data, a.batch, a.max_new, log, spec)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/edgetrm_src/lm/ret_test.py", line 142, in gen_answers
+    o = fam.generate(model, x.to(DEV), a.to(DEV), max_new_tokens=max_new, pad_token_id=pad, eos_token_id=stop,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/edgetrm_src/lm/looped_decode.py", line 313, in generate
+    return model.generate(input_ids, attention_mask=attn, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/data/hf_cache/skolawol/modules/transformers_modules/tomg-group-umd/huginn-0125/bb6621b65e90b6a4b9b29ef88dc83866d450470c/raven_modeling_minimal.py", line 1121, in generate
+    return super().generate(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/pylibs/tf4554/transformers/generation/utils.py", line 2617, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/home/skolawol/pylibs/tf4554/transformers/generation/utils.py", line 3601, in _sample
+    outputs = model_forward(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/hf_cache/skolawol/modules/transformers_modules/tomg-group-umd/huginn-0125/bb6621b65e90b6a4b9b29ef88dc83866d450470c/raven_modeling_minimal.py", line 682, in forward
+    x, num_steps_no_grad, num_steps_with_grad, xk, block_idx = self.iterate_forward(
+                                                               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/_dynamo/external_utils.py", line 203, in nonrecursive_disable_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/data/hf_cache/skolawol/modules/transformers_modules/tomg-group-umd/huginn-0125/bb6621b65e90b6a4b9b29ef88dc83866d450470c/raven_modeling_minimal.py", line 751, in iterate_forward
+    x, block_idx = self.core_block_forward(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/edgetrm_src/lm/ret_test.py", line 94, in cbf
+    x = block(x, freqs_cis, block_idx, mask, past_key_values)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/hf_cache/skolawol/modules/transformers_modules/tomg-group-umd/huginn-0125/bb6621b65e90b6a4b9b29ef88dc83866d450470c/raven_modeling_minimal.py", line 533, in forward
+    attn_out = self.attn(self.norm_1(x), freqs_cis, step_idx, mask, past_key_values)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/hf_cache/skolawol/modules/transformers_modules/tomg-group-umd/huginn-0125/bb6621b65e90b6a4b9b29ef88dc83866d450470c/raven_modeling_minimal.py", line 479, in forward
+    k, v = past_key_values.update(k, v, block_idx)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/edgetrm_src/lm/looped_decode.py", line 243, in _fast_update
+    self._x4k[step_idx] = torch.cat([self._x4k[step_idx], key_states], dim=-2)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 92.00 MiB. GPU 0 has a total capacity of 44.42 GiB of which 98.12 MiB is free. Including non-PyTorch memory, this process has 44.32 GiB memory in use. Of the allocated memory 42.62 GiB is allocated by PyTorch, and 1.19 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

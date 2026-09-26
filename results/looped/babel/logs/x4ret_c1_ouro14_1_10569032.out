@@ -1,0 +1,15 @@
+NVIDIA L40S 4.55.4
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 199728.76it/s]
+21:54:23   bf16: gen acc 0.730
+21:58:09   w4c: gen acc 0.070
+22:01:46   w4c hybrid k=2: gen acc 0.660
+22:02:59 ouro14 w4c: {"acc_fp": 0.73, "acc_q": 0.07, "acc_hybrid": 0.66, "retained": 0.096, "fid": 0.735, "rho_median": 1.52, "tc_median": 0.658, "return_tf_rate": 0.22, "return_answer_rate": 0.57, "state_rel_dist": 0.696, "secs": 729.879}
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 43795.95it/s]
+22:06:58   w3a: gen acc 0.000
+22:10:45   w3a hybrid k=2: gen acc 0.000
+22:11:59 ouro14 w3a: {"acc_fp": 0.73, "acc_q": 0.0, "acc_hybrid": 0.0, "retained": 0.0, "fid": 0.181, "rho_median": 2.292, "tc_median": 0.436, "return_tf_rate": 0, "return_answer_rate": 0, "state_rel_dist": 0.992, "secs": 536.531}
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 323.03it/s]
+22:15:58   w4t: gen acc 0.000
+22:19:45   w4t hybrid k=2: gen acc 0.000
+22:20:59 ouro14 w4t: {"acc_fp": 0.73, "acc_q": 0.0, "acc_hybrid": 0.0, "retained": 0.0, "fid": 0.005, "rho_median": 4.261, "tc_median": 0.235, "return_tf_rate": 0, "return_answer_rate": 0, "state_rel_dist": 1.657, "secs": 536.658}
+22:20:59 done

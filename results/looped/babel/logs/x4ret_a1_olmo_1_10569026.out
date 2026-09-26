@@ -1,0 +1,11 @@
+NVIDIA L40S 4.55.4
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [01:09<01:09, 69.84s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:17<00:00, 33.53s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:17<00:00, 38.98s/it]
+21:39:54   bf16: gen acc 0.410
+21:52:04   w3a: gen acc 0.020
+21:56:43   w3a hybrid k=16: gen acc 0.450
+21:59:43 olmo_rec32 w3a: {"acc_fp": 0.41, "acc_q": 0.02, "acc_hybrid": 0.45, "retained": 0.049, "fid": 0.79, "rho_median": 0.25, "tc_median": 4.0, "return_tf_rate": 1, "return_answer_rate": 0.85, "state_rel_dist": 0.677, "secs": 1471.389}
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.59s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.64s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.93s/it]
+22:12:03   w4t: gen acc 0.000
+22:16:20   w4t hybrid k=16: gen acc 0.430
+22:19:18 olmo_rec32 w4t: {"acc_fp": 0.41, "acc_q": 0.0, "acc_hybrid": 0.43, "retained": 0.0, "fid": 0.114, "rho_median": 0.25, "tc_median": 4.0, "return_tf_rate": 1, "return_answer_rate": 0.85, "state_rel_dist": 1.818, "secs": 1168.892}
+22:19:20 done

@@ -1,0 +1,7 @@
+NVIDIA L40S 4.55.4
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [02:28<07:26, 148.89s/it]Loading checkpoint shards:  50%|█████     | 2/4 [03:09<02:50, 85.46s/it] Loading checkpoint shards:  75%|███████▌  | 3/4 [03:32<00:56, 56.89s/it]Loading checkpoint shards: 100%|██████████| 4/4 [03:45<00:00, 39.38s/it]Loading checkpoint shards: 100%|██████████| 4/4 [03:45<00:00, 56.35s/it]
+23:10:49   bf16: gen acc 0.420
+23:23:37   w4g32: gen acc 0.350
+23:37:13   w4g32 hybrid k=16: gen acc 0.390
+23:41:45 huginn w4g32: {"acc_fp": 0.42, "acc_q": 0.35, "acc_hybrid": 0.39, "retained": 0.833, "fid": 0.978, "rho_median": 0.25, "tc_median": 4.0, "return_tf_rate": 0.97, "return_answer_rate": 0.67, "state_rel_dist": 0.198, "secs": 2629.008}
+23:41:46 done

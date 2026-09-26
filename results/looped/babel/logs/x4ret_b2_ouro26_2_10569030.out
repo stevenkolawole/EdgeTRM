@@ -1,0 +1,11 @@
+NVIDIA L40S 4.55.4
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 79599.93it/s]
+21:52:36   bf16: gen acc 0.810
+21:59:38   w4a: gen acc 0.340
+22:06:40   w4a hybrid k=2: gen acc 0.390
+22:08:55 ouro26 w4a: {"acc_fp": 0.81, "acc_q": 0.34, "acc_hybrid": 0.39, "retained": 0.42, "fid": 0.866, "rho_median": 0.639, "tc_median": 1.566, "return_tf_rate": 0.72, "return_answer_rate": 0.36, "state_rel_dist": 0.49, "secs": 1370.306}
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 35269.05it/s]
+22:15:46   w4c: gen acc 0.780
+22:22:28   w4c hybrid k=2: gen acc 0.740
+22:24:43 ouro26 w4c: {"acc_fp": 0.81, "acc_q": 0.78, "acc_hybrid": 0.74, "retained": 0.963, "fid": 0.852, "rho_median": 0.795, "tc_median": 1.258, "return_tf_rate": 0.67, "return_answer_rate": 0.73, "state_rel_dist": 0.56, "secs": 943.12}
+22:24:46 done

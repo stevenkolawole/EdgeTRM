@@ -1,0 +1,33 @@
+NVIDIA L40S 4.55.4
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files:   8%|▊         | 1/13 [00:00<00:02,  5.93it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 57.36it/s]
+21:24:18   bf16: gen acc 0.333
+21:24:20   w4c: gen acc 0.000
+21:24:23   w4c hybrid k=2: gen acc 0.000
+21:24:26 ouro14 w4c: {"acc_fp": 0.333, "acc_q": 0.0, "acc_hybrid": 0.0, "retained": 0.0, "fid": 0.672, "rho_median": 2.5, "tc_median": 0.4, "return_tf_rate": 0.333, "return_answer_rate": 0, "state_rel_dist": 0.714, "secs": 12.38}
+21:24:26 done
+A new version of the following files was downloaded from https://huggingface.co/smcleish/Recurrent-OLMo-2-0425-train-recurrence-32:
+- raven_config_minimal.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/smcleish/Recurrent-OLMo-2-0425-train-recurrence-32:
+- raven_modeling_minimal.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 26.04it/s]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:50<00:50, 50.49s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:59<00:00, 26.19s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:59<00:00, 29.83s/it]
+21:25:42   bf16: gen acc 0.333
+21:25:50   w4c: gen acc 0.000
+21:25:57   w4c hybrid k=16: gen acc 0.333
+21:26:02 olmo_rec32 w4c: {"acc_fp": 0.333, "acc_q": 0.0, "acc_hybrid": 0.333, "retained": 0.0, "fid": 0.946, "rho_median": 0.25, "tc_median": 4.0, "return_tf_rate": 1, "return_answer_rate": 1, "state_rel_dist": 0.34, "secs": 28.101}
+21:26:02 done
+A new version of the following files was downloaded from https://huggingface.co/tomg-group-umd/huginn-0125:
+- raven_config_minimal.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/tomg-group-umd/huginn-0125:
+- raven_modeling_minimal.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [00:00<00:01,  2.30it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00,  9.18it/s]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:26<01:19, 26.58s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:56<00:56, 28.41s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:27<00:29, 29.84s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:30<00:00, 18.99s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:30<00:00, 22.54s/it]
+21:27:50   bf16: gen acc 0.000
+21:27:59   w3a: gen acc 0.000
+21:28:08   w3a hybrid k=16: gen acc 0.000
+21:28:16 huginn w3a: {"acc_fp": 0.0, "acc_q": 0.0, "acc_hybrid": 0.0, "retained": null, "fid": 0.776, "rho_median": 0.762, "tc_median": 1.313, "return_tf_rate": 0.667, "return_answer_rate": 0.333, "state_rel_dist": 0.673, "secs": 35.232}
+21:28:16 done
