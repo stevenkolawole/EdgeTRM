@@ -1,0 +1,89 @@
+NVIDIA L40S
+name, uuid, driver_version, power.limit [W], clocks.max.sm [MHz]
+NVIDIA L40S, GPU-bb53b63a-3050-ba82-c0c9-da9518308880, 610.43.02, 350.00 W, 2520 MHz
+tensorrt 10.13.3.9
+Fri Sep 25 11:18:09 PM UTC 2026 start en maze on babel-t5-24
+19:18:11 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+19:18:42 idle start 80.06 W 2520.0 MHz 33 C
+19:19:12 idle start 80.43 W 2520.0 MHz 34 C
+19:19:42 idle start 80.57 W 2520.0 MHz 34 C
+19:20:12 idle start 80.56 W 2520.0 MHz 34 C
+19:20:42 idle start 80.73 W 2520.0 MHz 35 C
+19:21:53 maze eager_fp32_b1_fixed w0 293.8 W 4000.04 mJ/step 13.614 ms/step 73.909 J/solved acc 0.866 2316.6 MHz clean
+19:22:53 maze eager_fp32_b1_fixed w1 295.6 W 4060.33 mJ/step 13.735 ms/step 74.479 J/solved acc 0.872 2279.0 MHz clean
+19:23:54 maze eager_fp32_b1_fixed w2 295.4 W 4061.88 mJ/step 13.749 ms/step 74.862 J/solved acc 0.868 2271.0 MHz clean
+19:24:54 maze eager_fp32_b1_fixed w3 295.8 W 4069.39 mJ/step 13.758 ms/step 74.373 J/solved acc 0.875 2269.4 MHz clean
+19:25:54 maze eager_fp32_b1_fixed w4 295.6 W 4063.07 mJ/step 13.744 ms/step 73.337 J/solved acc 0.886 2271.6 MHz clean
+19:27:04 maze eager_fp16_b1_fixed w0 177.5 W 1778.11 mJ/step 10.019 ms/step 31.847 J/solved acc 0.893 2520.0 MHz clean
+19:28:04 maze eager_fp16_b1_fixed w1 175.5 W 1755.80 mJ/step 10.007 ms/step 33.128 J/solved acc 0.848 2520.0 MHz clean
+19:29:04 maze eager_fp16_b1_fixed w2 173.6 W 1741.86 mJ/step 10.031 ms/step 31.586 J/solved acc 0.882 2520.0 MHz clean
+19:30:04 maze eager_fp16_b1_fixed w3 171.9 W 1724.68 mJ/step 10.032 ms/step 32.151 J/solved acc 0.858 2520.0 MHz clean
+19:31:04 maze eager_fp16_b1_fixed w4 171.4 W 1720.92 mJ/step 10.039 ms/step 31.686 J/solved acc 0.869 2520.0 MHz clean
+19:32:15 maze graph_fp16_b1_fixed w0 306.1 W 1276.53 mJ/step 4.171 ms/step 23.537 J/solved acc 0.868 2520.0 MHz clean
+19:33:15 maze graph_fp16_b1_fixed w1 311.6 W 1301.63 mJ/step 4.177 ms/step 24.008 J/solved acc 0.867 2520.0 MHz clean
+19:34:15 maze graph_fp16_b1_fixed w2 315.3 W 1317.91 mJ/step 4.180 ms/step 24.308 J/solved acc 0.867 2520.0 MHz clean
+19:35:15 maze graph_fp16_b1_fixed w3 309.5 W 1292.64 mJ/step 4.176 ms/step 23.838 J/solved acc 0.868 2520.0 MHz clean
+19:36:15 maze graph_fp16_b1_fixed w4 309.4 W 1292.00 mJ/step 4.176 ms/step 23.826 J/solved acc 0.868 2520.0 MHz clean
+19:37:26 maze trt_fp32_b1_fixed w0 323.1 W 3650.95 mJ/step 11.299 ms/step 65.966 J/solved acc 0.886 1990.7 MHz clean
+19:38:27 maze trt_fp32_b1_fixed w1 323.5 W 3670.39 mJ/step 11.346 ms/step 68.652 J/solved acc 0.855 1987.8 MHz clean
+19:39:27 maze trt_fp32_b1_fixed w2 323.5 W 3666.20 mJ/step 11.334 ms/step 66.695 J/solved acc 0.880 1985.5 MHz clean
+19:40:27 maze trt_fp32_b1_fixed w3 323.3 W 3658.71 mJ/step 11.316 ms/step 67.249 J/solved acc 0.870 1985.8 MHz clean
+19:41:27 maze trt_fp32_b1_fixed w4 323.5 W 3659.54 mJ/step 11.312 ms/step 68.691 J/solved acc 0.852 1986.1 MHz clean
+19:42:38 maze trt_fp16_b1_fixed w0 327.5 W 793.58 mJ/step 2.423 ms/step 14.657 J/solved acc 0.866 2431.3 MHz clean
+19:43:38 maze trt_fp16_b1_fixed w1 328.0 W 794.87 mJ/step 2.423 ms/step 14.616 J/solved acc 0.870 2431.4 MHz clean
+19:44:38 maze trt_fp16_b1_fixed w2 327.3 W 792.96 mJ/step 2.423 ms/step 14.559 J/solved acc 0.871 2432.4 MHz clean
+19:45:38 maze trt_fp16_b1_fixed w3 327.3 W 793.02 mJ/step 2.423 ms/step 14.603 J/solved acc 0.869 2432.7 MHz clean
+19:46:38 maze trt_fp16_b1_fixed w4 327.1 W 792.27 mJ/step 2.422 ms/step 14.643 J/solved acc 0.866 2433.7 MHz clean
+19:47:48 maze trt_int8mm_b1_fixed w0 296.2 W 2600.73 mJ/step 8.780 ms/step 17809.770 J/solved acc 0.000 2520.0 MHz clean
+19:48:48 maze trt_int8mm_b1_fixed w1 295.5 W 2593.17 mJ/step 8.776 ms/step 17758.048 J/solved acc 0.000 2520.0 MHz clean
+19:49:49 maze trt_int8mm_b1_fixed w2 295.7 W 2594.26 mJ/step 8.774 ms/step 17765.484 J/solved acc 0.000 2520.0 MHz clean
+19:50:49 maze trt_int8mm_b1_fixed w3 295.1 W 2588.78 mJ/step 8.774 ms/step 17727.938 J/solved acc 0.000 2520.0 MHz clean
+19:51:49 maze trt_int8mm_b1_fixed w4 295.2 W 2590.35 mJ/step 8.774 ms/step 17738.740 J/solved acc 0.000 2520.0 MHz clean
+19:53:00 maze eager_fp32_b1_exit w0 294.1 W 4097.86 mJ/step 13.932 ms/step 9.581 J/solved acc 0.866 2297.9 MHz clean
+19:54:00 maze eager_fp32_b1_exit w1 294.1 W 4103.40 mJ/step 13.951 ms/step 9.581 J/solved acc 0.868 2291.7 MHz clean
+19:55:00 maze eager_fp32_b1_exit w2 294.0 W 4101.71 mJ/step 13.950 ms/step 9.574 J/solved acc 0.870 2290.4 MHz clean
+19:56:00 maze eager_fp32_b1_exit w3 294.3 W 4105.22 mJ/step 13.948 ms/step 9.613 J/solved acc 0.865 2291.1 MHz clean
+19:57:00 maze eager_fp32_b1_exit w4 294.3 W 4106.86 mJ/step 13.954 ms/step 9.600 J/solved acc 0.870 2291.5 MHz clean
+19:58:11 maze eager_fp16_b1_exit w0 178.9 W 1819.00 mJ/step 10.170 ms/step 4.257 J/solved acc 0.865 2520.0 MHz clean
+19:59:12 maze eager_fp16_b1_exit w1 176.7 W 1798.30 mJ/step 10.180 ms/step 4.196 J/solved acc 0.868 2520.0 MHz clean
+20:00:12 maze eager_fp16_b1_exit w2 175.7 W 1786.75 mJ/step 10.171 ms/step 4.177 J/solved acc 0.869 2520.0 MHz clean
+20:01:12 maze eager_fp16_b1_exit w3 175.8 W 1791.30 mJ/step 10.187 ms/step 4.176 J/solved acc 0.869 2520.0 MHz clean
+20:02:12 maze eager_fp16_b1_exit w4 177.8 W 1813.41 mJ/step 10.199 ms/step 4.243 J/solved acc 0.866 2520.0 MHz clean
+20:03:22 maze graph_fp16_b1_exit w0 306.4 W 1293.55 mJ/step 4.222 ms/step 3.021 J/solved acc 0.867 2520.0 MHz clean
+20:04:22 maze graph_fp16_b1_exit w1 308.2 W 1301.96 mJ/step 4.224 ms/step 3.039 J/solved acc 0.868 2520.0 MHz clean
+20:05:22 maze graph_fp16_b1_exit w2 308.0 W 1301.36 mJ/step 4.225 ms/step 3.042 J/solved acc 0.867 2520.0 MHz clean
+20:06:22 maze graph_fp16_b1_exit w3 307.9 W 1300.61 mJ/step 4.224 ms/step 3.035 J/solved acc 0.869 2520.0 MHz clean
+20:07:22 maze graph_fp16_b1_exit w4 308.2 W 1301.64 mJ/step 4.224 ms/step 3.042 J/solved acc 0.867 2520.0 MHz clean
+20:08:32 maze trt_fp16_b1_exit w0 325.3 W 808.98 mJ/step 2.487 ms/step 1.888 J/solved acc 0.868 2453.6 MHz clean
+20:09:32 maze trt_fp16_b1_exit w1 325.9 W 810.16 mJ/step 2.486 ms/step 1.892 J/solved acc 0.867 2452.8 MHz clean
+20:10:32 maze trt_fp16_b1_exit w2 325.4 W 808.95 mJ/step 2.486 ms/step 1.888 J/solved acc 0.868 2453.8 MHz clean
+20:11:32 maze trt_fp16_b1_exit w3 325.9 W 810.17 mJ/step 2.486 ms/step 1.890 J/solved acc 0.868 2453.2 MHz clean
+20:12:32 maze trt_fp16_b1_exit w4 325.3 W 808.79 mJ/step 2.486 ms/step 1.889 J/solved acc 0.868 2452.9 MHz clean
+20:13:43 maze trt_int8mm_b1_exit w0 294.6 W 2598.32 mJ/step 8.819 ms/step 17710.144 J/solved acc 0.000 2520.0 MHz clean
+20:14:43 maze trt_int8mm_b1_exit w1 293.4 W 2592.96 mJ/step 8.838 ms/step 17673.641 J/solved acc 0.000 2520.0 MHz clean
+20:15:44 maze trt_int8mm_b1_exit w2 295.6 W 2608.92 mJ/step 8.826 ms/step 17740.629 J/solved acc 0.000 2520.0 MHz clean
+20:16:44 maze trt_int8mm_b1_exit w3 293.1 W 2582.32 mJ/step 8.810 ms/step 17601.066 J/solved acc 0.000 2520.0 MHz clean
+20:17:44 maze trt_int8mm_b1_exit w4 295.4 W 2606.63 mJ/step 8.823 ms/step 17766.810 J/solved acc 0.000 2520.0 MHz clean
+20:19:00 maze eager_fp32_b32_fixed w0 333.8 W 4082.26 mJ/step 12.231 ms/step 73.596 J/solved acc 0.887 1785.2 MHz clean
+20:20:02 maze eager_fp32_b32_fixed w1 336.7 W 4080.17 mJ/step 12.119 ms/step 76.522 J/solved acc 0.853 1803.2 MHz clean
+20:21:04 maze eager_fp32_b32_fixed w2 336.5 W 4084.53 mJ/step 12.138 ms/step 74.956 J/solved acc 0.872 1792.5 MHz clean
+20:22:06 maze eager_fp32_b32_fixed w3 337.3 W 4099.04 mJ/step 12.153 ms/step 73.898 J/solved acc 0.887 1786.0 MHz clean
+20:23:08 maze eager_fp32_b32_fixed w4 337.2 W 4099.91 mJ/step 12.157 ms/step 77.460 J/solved acc 0.847 1785.2 MHz clean
+20:24:20 maze eager_fp16_b32_fixed w0 323.6 W 1185.81 mJ/step 3.664 ms/step 22.003 J/solved acc 0.862 2130.4 MHz clean
+20:25:22 maze eager_fp16_b32_fixed w1 322.8 W 1181.94 mJ/step 3.661 ms/step 21.636 J/solved acc 0.874 2134.7 MHz clean
+20:26:24 maze eager_fp16_b32_fixed w2 322.7 W 1181.62 mJ/step 3.661 ms/step 21.939 J/solved acc 0.862 2133.9 MHz clean
+20:27:24 maze eager_fp16_b32_fixed w3 323.5 W 1184.95 mJ/step 3.663 ms/step 21.863 J/solved acc 0.867 2132.2 MHz clean
+20:28:26 maze eager_fp16_b32_fixed w4 323.2 W 1183.62 mJ/step 3.662 ms/step 21.809 J/solved acc 0.868 2131.0 MHz clean
+20:29:37 maze trt_fp16_b32_fixed w0 328.7 W 719.88 mJ/step 2.190 ms/step 13.304 J/solved acc 0.866 2031.9 MHz clean
+20:30:38 maze trt_fp16_b32_fixed w1 328.3 W 718.77 mJ/step 2.190 ms/step 13.240 J/solved acc 0.869 2031.0 MHz clean
+20:31:38 maze trt_fp16_b32_fixed w2 328.3 W 718.62 mJ/step 2.189 ms/step 13.299 J/solved acc 0.865 2032.4 MHz clean
+20:32:39 maze trt_fp16_b32_fixed w3 328.4 W 718.93 mJ/step 2.189 ms/step 13.251 J/solved acc 0.868 2031.2 MHz clean
+20:33:39 maze trt_fp16_b32_fixed w4 328.9 W 720.28 mJ/step 2.190 ms/step 13.259 J/solved acc 0.869 2030.5 MHz clean
+20:34:51 maze trt_int8mm_b32_fixed w0 345.3 W 2260.49 mJ/step 6.547 ms/step 20832.693 J/solved acc 0.000 2272.8 MHz clean
+20:35:51 maze trt_int8mm_b32_fixed w1 345.0 W 2259.52 mJ/step 6.549 ms/step 20823.769 J/solved acc 0.000 2270.8 MHz clean
+20:36:52 maze trt_int8mm_b32_fixed w2 345.1 W 2260.30 mJ/step 6.549 ms/step 20830.956 J/solved acc 0.000 2270.4 MHz clean
+20:37:52 maze trt_int8mm_b32_fixed w3 345.1 W 2260.91 mJ/step 6.551 ms/step 20836.501 J/solved acc 0.000 2269.5 MHz clean
+20:38:53 maze trt_int8mm_b32_fixed w4 345.2 W 2260.82 mJ/step 6.550 ms/step 20835.708 J/solved acc 0.000 2269.8 MHz clean
+20:39:23 idle end 90.53 W 2519.8 MHz 51 C
+20:39:53 idle end 87.1 W 2520.0 MHz 47 C
+Sat Sep 26 12:39:53 AM UTC 2026 done rc=0

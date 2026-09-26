@@ -1,0 +1,89 @@
+NVIDIA L40S
+name, uuid, driver_version, power.limit [W], clocks.max.sm [MHz]
+NVIDIA L40S, GPU-6231595c-c229-0edf-9fd8-fc1f04386a37, 610.43.02, 350.00 W, 2520 MHz
+tensorrt 10.13.3.9
+Fri Sep 25 10:47:37 PM UTC 2026 start en hrm_sudoku on babel-q5-20
+18:47:38 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+18:48:09 idle start 86.32 W 2520.0 MHz 43 C
+18:48:39 idle start 86.5 W 2520.0 MHz 43 C
+18:49:09 idle start 86.51 W 2520.0 MHz 43 C
+18:49:39 idle start 86.6 W 2520.0 MHz 43 C
+18:50:09 idle start 86.52 W 2520.0 MHz 43 C
+18:51:19 hrm_sudoku eager_fp32_b1_fixed w0 133.8 W 1395.59 mJ/step 10.434 ms/step 49.016 J/solved acc 0.456 2520.0 MHz clean
+18:52:19 hrm_sudoku eager_fp32_b1_fixed w1 136.4 W 1396.89 mJ/step 10.239 ms/step 66.149 J/solved acc 0.338 2520.0 MHz clean
+18:53:19 hrm_sudoku eager_fp32_b1_fixed w2 137.4 W 1405.74 mJ/step 10.228 ms/step 33.018 J/solved acc 0.681 2520.0 MHz clean
+18:54:20 hrm_sudoku eager_fp32_b1_fixed w3 137.6 W 1427.66 mJ/step 10.378 ms/step 52.336 J/solved acc 0.436 2520.0 MHz clean
+18:55:20 hrm_sudoku eager_fp32_b1_fixed w4 138.0 W 1420.14 mJ/step 10.288 ms/step 54.563 J/solved acc 0.416 2520.0 MHz clean
+18:56:30 hrm_sudoku eager_fp16_b1_fixed w0 111.6 W 1309.91 mJ/step 11.734 ms/step 46.575 J/solved acc 0.450 2520.0 MHz clean
+18:57:30 hrm_sudoku eager_fp16_b1_fixed w1 110.7 W 1296.02 mJ/step 11.711 ms/step 63.394 J/solved acc 0.327 2520.0 MHz clean
+18:58:30 hrm_sudoku eager_fp16_b1_fixed w2 110.4 W 1289.65 mJ/step 11.678 ms/step 29.270 J/solved acc 0.705 2520.0 MHz clean
+18:59:30 hrm_sudoku eager_fp16_b1_fixed w3 110.2 W 1281.34 mJ/step 11.628 ms/step 45.669 J/solved acc 0.449 2520.0 MHz clean
+19:00:31 hrm_sudoku eager_fp16_b1_fixed w4 110.0 W 1283.58 mJ/step 11.673 ms/step 62.188 J/solved acc 0.330 2520.0 MHz clean
+19:01:41 hrm_sudoku graph_fp16_b1_fixed w0 159.5 W 254.48 mJ/step 1.596 ms/step 8.663 J/solved acc 0.470 2520.0 MHz clean
+19:02:41 hrm_sudoku graph_fp16_b1_fixed w1 161.9 W 258.34 mJ/step 1.596 ms/step 7.952 J/solved acc 0.520 2520.0 MHz clean
+19:03:41 hrm_sudoku graph_fp16_b1_fixed w2 163.4 W 260.64 mJ/step 1.596 ms/step 8.526 J/solved acc 0.489 2520.0 MHz clean
+19:04:41 hrm_sudoku graph_fp16_b1_fixed w3 163.8 W 261.37 mJ/step 1.596 ms/step 8.930 J/solved acc 0.468 2520.0 MHz clean
+19:05:41 hrm_sudoku graph_fp16_b1_fixed w4 164.5 W 262.62 mJ/step 1.596 ms/step 8.074 J/solved acc 0.520 2520.0 MHz clean
+19:07:06 hrm_sudoku trt_fp32_b1_fixed w0 279.0 W 517.96 mJ/step 1.856 ms/step 16.732 J/solved acc 0.495 2520.0 MHz clean
+19:08:06 hrm_sudoku trt_fp32_b1_fixed w1 295.2 W 553.68 mJ/step 1.875 ms/step 17.897 J/solved acc 0.495 2520.0 MHz clean
+19:09:06 hrm_sudoku trt_fp32_b1_fixed w2 307.5 W 580.00 mJ/step 1.886 ms/step 18.796 J/solved acc 0.494 2520.0 MHz clean
+19:10:06 hrm_sudoku trt_fp32_b1_fixed w3 314.3 W 594.78 mJ/step 1.893 ms/step 19.129 J/solved acc 0.497 2509.6 MHz clean
+19:11:06 hrm_sudoku trt_fp32_b1_fixed w4 304.0 W 577.71 mJ/step 1.900 ms/step 18.638 J/solved acc 0.496 2467.0 MHz clean
+19:12:20 hrm_sudoku trt_fp16_b1_fixed w0 220.0 W 184.78 mJ/step 0.840 ms/step 5.815 J/solved acc 0.508 2520.0 MHz clean
+19:13:20 hrm_sudoku trt_fp16_b1_fixed w1 212.0 W 177.66 mJ/step 0.838 ms/step 5.900 J/solved acc 0.482 2520.0 MHz clean
+19:14:20 hrm_sudoku trt_fp16_b1_fixed w2 208.0 W 174.09 mJ/step 0.837 ms/step 5.488 J/solved acc 0.508 2520.0 MHz clean
+19:15:20 hrm_sudoku trt_fp16_b1_fixed w3 206.0 W 172.28 mJ/step 0.836 ms/step 5.713 J/solved acc 0.482 2520.0 MHz clean
+19:16:20 hrm_sudoku trt_fp16_b1_fixed w4 204.4 W 170.81 mJ/step 0.836 ms/step 5.380 J/solved acc 0.508 2520.0 MHz clean
+19:17:37 hrm_sudoku trt_int8mm_b1_fixed w0 156.7 W 558.72 mJ/step 3.565 ms/step 26.870 J/solved acc 0.333 2520.0 MHz clean
+19:18:37 hrm_sudoku trt_int8mm_b1_fixed w1 154.7 W 548.40 mJ/step 3.545 ms/step 27.385 J/solved acc 0.320 2520.0 MHz clean
+19:19:37 hrm_sudoku trt_int8mm_b1_fixed w2 152.5 W 546.27 mJ/step 3.582 ms/step 27.100 J/solved acc 0.323 2520.0 MHz clean
+19:20:37 hrm_sudoku trt_int8mm_b1_fixed w3 153.0 W 537.76 mJ/step 3.515 ms/step 26.457 J/solved acc 0.325 2520.0 MHz clean
+19:21:37 hrm_sudoku trt_int8mm_b1_fixed w4 152.6 W 531.88 mJ/step 3.484 ms/step 26.413 J/solved acc 0.322 2520.0 MHz clean
+19:22:48 hrm_sudoku eager_fp32_b1_exit w0 139.0 W 1420.35 mJ/step 10.219 ms/step 41.989 J/solved acc 0.397 2520.0 MHz clean
+19:23:48 hrm_sudoku eager_fp32_b1_exit w1 138.5 W 1438.71 mJ/step 10.389 ms/step 23.952 J/solved acc 0.575 2520.0 MHz clean
+19:24:49 hrm_sudoku eager_fp32_b1_exit w2 138.3 W 1424.59 mJ/step 10.300 ms/step 48.000 J/solved acc 0.361 2520.0 MHz clean
+19:25:49 hrm_sudoku eager_fp32_b1_exit w3 138.7 W 1408.93 mJ/step 10.156 ms/step 22.832 J/solved acc 0.585 2520.0 MHz clean
+19:26:49 hrm_sudoku eager_fp32_b1_exit w4 138.6 W 1413.28 mJ/step 10.194 ms/step 48.117 J/solved acc 0.358 2520.0 MHz clean
+19:27:59 hrm_sudoku eager_fp16_b1_exit w0 111.3 W 1347.62 mJ/step 12.113 ms/step 34.313 J/solved acc 0.443 2520.0 MHz clean
+19:28:59 hrm_sudoku eager_fp16_b1_exit w1 110.5 W 1320.94 mJ/step 11.959 ms/step 24.113 J/solved acc 0.543 2520.0 MHz clean
+19:30:00 hrm_sudoku eager_fp16_b1_exit w2 109.6 W 1313.63 mJ/step 11.986 ms/step 30.666 J/solved acc 0.468 2520.0 MHz clean
+19:31:00 hrm_sudoku eager_fp16_b1_exit w3 109.3 W 1341.74 mJ/step 12.275 ms/step 34.525 J/solved acc 0.436 2520.0 MHz clean
+19:32:00 hrm_sudoku eager_fp16_b1_exit w4 109.0 W 1321.11 mJ/step 12.119 ms/step 24.980 J/solved acc 0.535 2520.0 MHz clean
+19:33:10 hrm_sudoku graph_fp16_b1_exit w0 157.8 W 254.95 mJ/step 1.616 ms/step 5.317 J/solved acc 0.502 2520.0 MHz clean
+19:34:10 hrm_sudoku graph_fp16_b1_exit w1 160.2 W 258.72 mJ/step 1.615 ms/step 5.753 J/solved acc 0.482 2520.0 MHz clean
+19:35:10 hrm_sudoku graph_fp16_b1_exit w2 160.9 W 260.36 mJ/step 1.618 ms/step 5.408 J/solved acc 0.503 2520.0 MHz clean
+19:36:10 hrm_sudoku graph_fp16_b1_exit w3 161.9 W 261.57 mJ/step 1.615 ms/step 5.836 J/solved acc 0.481 2520.0 MHz clean
+19:37:10 hrm_sudoku graph_fp16_b1_exit w4 162.0 W 261.71 mJ/step 1.616 ms/step 5.419 J/solved acc 0.504 2520.0 MHz clean
+19:38:21 hrm_sudoku trt_fp16_b1_exit w0 182.0 W 165.22 mJ/step 0.908 ms/step 3.556 J/solved acc 0.494 2520.0 MHz clean
+19:39:21 hrm_sudoku trt_fp16_b1_exit w1 182.5 W 167.76 mJ/step 0.919 ms/step 3.614 J/solved acc 0.494 2520.0 MHz clean
+19:40:21 hrm_sudoku trt_fp16_b1_exit w2 182.5 W 168.47 mJ/step 0.923 ms/step 3.634 J/solved acc 0.493 2520.0 MHz clean
+19:41:21 hrm_sudoku trt_fp16_b1_exit w3 184.5 W 168.21 mJ/step 0.912 ms/step 3.686 J/solved acc 0.488 2520.0 MHz clean
+19:42:21 hrm_sudoku trt_fp16_b1_exit w4 184.5 W 168.29 mJ/step 0.912 ms/step 3.598 J/solved acc 0.496 2520.0 MHz clean
+19:43:32 hrm_sudoku trt_int8mm_b1_exit w0 153.7 W 547.14 mJ/step 3.560 ms/step 22.389 J/solved acc 0.314 2520.0 MHz clean
+19:44:32 hrm_sudoku trt_int8mm_b1_exit w1 152.0 W 541.69 mJ/step 3.563 ms/step 23.397 J/solved acc 0.300 2520.0 MHz clean
+19:45:32 hrm_sudoku trt_int8mm_b1_exit w2 151.7 W 536.25 mJ/step 3.534 ms/step 18.972 J/solved acc 0.352 2520.0 MHz clean
+19:46:32 hrm_sudoku trt_int8mm_b1_exit w3 150.3 W 540.00 mJ/step 3.592 ms/step 21.635 J/solved acc 0.319 2520.0 MHz clean
+19:47:32 hrm_sudoku trt_int8mm_b1_exit w4 149.7 W 541.56 mJ/step 3.617 ms/step 23.787 J/solved acc 0.296 2520.0 MHz clean
+19:48:45 hrm_sudoku eager_fp32_b256_fixed w0 346.7 W 243.55 mJ/step 0.702 ms/step 7.926 J/solved acc 0.492 1549.2 MHz clean
+19:49:47 hrm_sudoku eager_fp32_b256_fixed w1 344.6 W 263.08 mJ/step 0.763 ms/step 8.566 J/solved acc 0.491 1326.5 MHz clean
+19:50:49 hrm_sudoku eager_fp32_b256_fixed w2 316.4 W 280.28 mJ/step 0.886 ms/step 9.210 J/solved acc 0.487 1076.6 MHz clean
+19:51:53 hrm_sudoku eager_fp32_b256_fixed w3 309.6 W 284.14 mJ/step 0.918 ms/step 8.989 J/solved acc 0.506 1008.6 MHz clean
+19:52:55 hrm_sudoku eager_fp32_b256_fixed w4 303.7 W 285.52 mJ/step 0.940 ms/step 9.282 J/solved acc 0.492 965.8 MHz clean
+19:54:06 hrm_sudoku eager_fp16_b256_fixed w0 275.7 W 85.66 mJ/step 0.311 ms/step 2.799 J/solved acc 0.490 935.8 MHz clean
+19:55:07 hrm_sudoku eager_fp16_b256_fixed w1 288.7 W 82.90 mJ/step 0.287 ms/step 2.687 J/solved acc 0.494 947.2 MHz clean
+19:56:08 hrm_sudoku eager_fp16_b256_fixed w2 288.2 W 82.66 mJ/step 0.287 ms/step 2.667 J/solved acc 0.496 947.7 MHz clean
+19:57:09 hrm_sudoku eager_fp16_b256_fixed w3 287.9 W 82.67 mJ/step 0.287 ms/step 2.693 J/solved acc 0.491 942.5 MHz clean
+19:58:10 hrm_sudoku eager_fp16_b256_fixed w4 289.2 W 82.48 mJ/step 0.285 ms/step 2.695 J/solved acc 0.490 939.9 MHz clean
+19:59:26 hrm_sudoku trt_fp16_b256_fixed w0 298.8 W 48.60 mJ/step 0.163 ms/step 1.586 J/solved acc 0.490 1115.9 MHz clean
+20:00:26 hrm_sudoku trt_fp16_b256_fixed w1 286.4 W 49.32 mJ/step 0.172 ms/step 1.617 J/solved acc 0.488 1010.5 MHz clean
+20:01:27 hrm_sudoku trt_fp16_b256_fixed w2 285.5 W 49.07 mJ/step 0.172 ms/step 1.608 J/solved acc 0.488 1024.8 MHz clean
+20:02:27 hrm_sudoku trt_fp16_b256_fixed w3 285.9 W 49.11 mJ/step 0.172 ms/step 1.610 J/solved acc 0.488 1024.5 MHz clean
+20:03:28 hrm_sudoku trt_fp16_b256_fixed w4 285.3 W 48.96 mJ/step 0.172 ms/step 1.605 J/solved acc 0.488 1039.1 MHz clean
+20:04:41 hrm_sudoku trt_int8mm_b256_fixed w0 309.2 W 105.62 mJ/step 0.342 ms/step 5.153 J/solved acc 0.328 1734.6 MHz clean
+20:05:42 hrm_sudoku trt_int8mm_b256_fixed w1 300.4 W 107.02 mJ/step 0.356 ms/step 5.222 J/solved acc 0.328 1649.9 MHz clean
+20:06:43 hrm_sudoku trt_int8mm_b256_fixed w2 300.8 W 107.13 mJ/step 0.356 ms/step 5.276 J/solved acc 0.325 1635.3 MHz clean
+20:07:45 hrm_sudoku trt_int8mm_b256_fixed w3 300.3 W 107.23 mJ/step 0.357 ms/step 5.208 J/solved acc 0.329 1611.3 MHz clean
+20:08:45 hrm_sudoku trt_int8mm_b256_fixed w4 299.6 W 107.21 mJ/step 0.358 ms/step 5.202 J/solved acc 0.330 1642.5 MHz clean
+20:09:15 idle end 115.38 W 2519.9 MHz 68 C
+20:09:45 idle end 102.7 W 2520.0 MHz 61 C
+Sat Sep 26 12:09:46 AM UTC 2026 done rc=0

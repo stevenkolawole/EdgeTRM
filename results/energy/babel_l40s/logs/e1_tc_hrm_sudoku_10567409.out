@@ -1,0 +1,53 @@
+NVIDIA L40S
+name, uuid, driver_version, power.limit [W], clocks.max.sm [MHz]
+NVIDIA L40S, GPU-cceec4c3-2d62-bba2-cbb2-4e0806a445a9, 610.43.02, 350.00 W, 2520 MHz
+tensorrt 10.13.3.9
+Fri Sep 25 10:18:57 PM UTC 2026 start tc hrm_sudoku on babel-p5-32
+18:18:58 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+/home/skolawol/e1/code/e1_energy.py:571: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/home/skolawol/e1/code/e1_energy.py:572: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[09/25/2026-18:22:33] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:22:33 hrm_sudoku dyn_H2_b1_int8 209.0 s 56.33 MB {'in:FP32|out:FP16': 3, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP16': 270, 'in:FP16|out:FP32': 5} missing scales 6
+[09/25/2026-18:22:40] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:22:40 hrm_sudoku dyn_H2_b1_fp32 6.2 s 110.59 MB {'in:FP32,Int32|out:FP32': 1, 'in:FP32|out:FP32': 318} missing scales 0
+[09/25/2026-18:22:57] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:22:57 hrm_sudoku dyn_H2_b1_fp16 16.8 s 56.34 MB {'in:FP32|out:FP16': 3, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP16': 270, 'in:FP16|out:FP32': 5} missing scales 0
+/home/skolawol/e1/code/e1_energy.py:530: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+[09/25/2026-18:26:57] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:26:57 hrm_sudoku dyn_H2_b1_int8mm 240.0 s 33.84 MB {'in:FP32|out:FP16': 101, 'in:-|out:FP16': 144, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 96, 'in:FP16|out:Int8': 97, 'in:Int8|out:FP32': 122, 'in:FP32|out:FP32': 76, 'in:FP16|out:FP16': 338, 'in:FP32|out:Int8': 73, 'in:Int8|out:Int8': 202, 'in:FP16|out:FP32': 4} missing scales 6
+[09/25/2026-18:27:30] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:27:30 hrm_sudoku dyn_H2_b256_fp16 31.9 s 59.86 MB {'in:FP32|out:FP16': 3, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP16': 202, 'in:FP16|out:FP32': 5} missing scales 0
+[09/25/2026-18:32:11] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:32:11 hrm_sudoku dyn_H2_b256_int8mm 281.4 s 33.28 MB {'in:FP32|out:FP16': 100, 'in:-|out:FP16': 48, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:Int8': 169, 'in:-|out:Int8': 96, 'in:Int8|out:Int8': 418, 'in:-|out:FP32': 96, 'in:Int8|out:FP16': 121, 'in:FP16|out:FP16': 220, 'in:Int8|out:FP32': 25, 'in:FP32|out:FP32': 27, 'in:FP32|out:Int8': 25, 'in:FP16|out:FP32': 4} missing scales 6
+[09/25/2026-18:32:18] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:32:18 hrm_sudoku dyn_H2_b1_int8f32 6.6 s 110.51 MB {'in:FP32,Int32|out:FP32': 1, 'in:FP32|out:FP32': 318} missing scales 6
+/home/skolawol/e1/code/e1_energy.py:541: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:    56: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,82,512][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:    56: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,82,512][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Cast_1]}. In computeCosts at optimizer/common/tactic/optimizer.cpp:4115)
+18:32:28 hrm_sudoku dyn_H2_b1_int8all BUILD FAILED IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Cast_1]}. In computeCost
+[09/25/2026-18:32:37] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:32:37 hrm_sudoku dyn_H2_b256_fp32 7.9 s 111.49 MB {'in:FP32,Int32|out:FP32': 1, 'in:FP32|out:FP32': 274} missing scales 0
+[09/25/2026-18:32:52] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:32:52 hrm_sudoku dyn_H2_b256_int8 14.6 s 56.53 MB {'in:FP32|out:FP16': 3, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP16': 226, 'in:FP16|out:FP32': 5} missing scales 6
+18:32:55 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+18:33:07 hrm_sudoku ref_eager_fp32_H2_b256 exact@16 0.494 exit 0.494 10.566
+18:35:55 hrm_sudoku eager_fp32_H2_b1 exact@8/16 0.441 0.493 agree@16 0.9962 cos@16 0.99998 exit 0.493 10.566
+18:38:58 hrm_sudoku eager_fp16_H2_b1 exact@8/16 0.437 0.493 agree@16 0.9484 cos@16 0.98673 exit 0.493 10.583
+18:39:30 hrm_sudoku trt_fp32_H2_b1 exact@8/16 0.441 0.495 agree@16 0.9952 cos@16 0.99997 exit 0.495 10.566
+18:39:46 hrm_sudoku trt_fp16_H2_b1 exact@8/16 0.436 0.495 agree@16 0.9384 cos@16 0.97526 exit 0.495 10.622
+18:40:06 hrm_sudoku trt_int8_H2_b1 exact@8/16 0.436 0.495 agree@16 0.9384 cos@16 0.97526 exit 0.495 10.622
+18:40:38 hrm_sudoku trt_int8f32_H2_b1 exact@8/16 0.441 0.494 agree@16 0.9954 cos@16 0.99993 exit 0.494 10.565
+18:41:36 hrm_sudoku trt_int8mm_H2_b1 exact@8/16 0.266 0.323 agree@16 0.8073 cos@16 0.87833 exit 0.323 12.743
+18:41:36 missing engine dyn_H2_b1_int8all
+18:41:38 hrm_sudoku graph_fp16_H2_b1 exact@8/16 0.48 0.48 agree@16 0.9605 cos@16 0.99029 exit 0.48 10.02
+18:41:42 hrm_sudoku eager_fp16_H2_b256 exact@8/16 0.437 0.493 agree@16 0.9484 cos@16 0.98673 exit 0.493 10.583
+18:41:52 hrm_sudoku trt_fp32_H2_b256 exact@8/16 0.441 0.495 agree@16 0.9961 cos@16 0.99995 exit 0.495 10.566
+18:41:54 hrm_sudoku trt_fp16_H2_b256 exact@8/16 0.439 0.488 agree@16 0.9409 cos@16 0.98695 exit 0.488 10.637
+18:41:57 hrm_sudoku trt_int8_H2_b256 exact@8/16 0.438 0.492 agree@16 0.9404 cos@16 0.97886 exit 0.492 10.607
+18:42:02 hrm_sudoku trt_int8mm_H2_b256 exact@8/16 0.266 0.328 agree@16 0.8093 cos@16 0.88049 exit 0.328 12.73
+Fri Sep 25 10:42:03 PM UTC 2026 done rc=0

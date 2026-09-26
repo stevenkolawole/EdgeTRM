@@ -1,0 +1,82 @@
+NVIDIA L40S
+name, uuid, driver_version, power.limit [W], clocks.max.sm [MHz]
+NVIDIA L40S, GPU-bb53b63a-3050-ba82-c0c9-da9518308880, 610.43.02, 350.00 W, 2520 MHz
+tensorrt 10.13.3.9
+Fri Sep 25 10:19:10 PM UTC 2026 start tc maze on babel-t5-24
+18:19:11 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+/home/skolawol/e1/code/e1_energy.py:571: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/home/skolawol/e1/code/e1_energy.py:572: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[09/25/2026-18:22:41] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:22:41 maze dyn_H3_b1_int8 197.9 s 16.57 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 337, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 6
+[09/25/2026-18:22:49] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:22:49 maze dyn_H3_b1_fp32 7.1 s 30.39 MB {'in:FP32|out:FP32': 397, 'in:FP32,Int32|out:FP32': 1} missing scales 0
+[09/25/2026-18:23:04] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:23:04 maze dyn_H3_b1_fp16 15.5 s 16.79 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 337, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 0
+/home/skolawol/e1/code/e1_energy.py:530: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+[09/25/2026-18:26:41] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:26:42 maze dyn_H3_b1_int8mm 217.1 s 16.55 MB {'in:FP32|out:FP16': 95, 'in:-|out:FP16': 120, 'in:FP16|out:FP16': 333, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 120, 'in:FP16|out:Int8': 151, 'in:Int8|out:Int8': 466, 'in:Int8|out:FP16': 60, 'in:-|out:FP32': 60, 'in:Int8|out:FP32': 92, 'in:FP32|out:FP32': 214, 'in:FP16|out:FP32': 4, 'in:FP32|out:Int8': 1} missing scales 6
+[09/25/2026-18:27:31] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:27:31 maze dyn_H3_b32_fp16 48.9 s 20.56 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 252, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 0
+[09/25/2026-18:31:21] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:31:21 maze dyn_H3_b32_int8mm 230.2 s 14.36 MB {'in:FP32|out:FP16': 4, 'in:-|out:FP16': 60, 'in:FP16|out:FP16': 95, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 240, 'in:FP16|out:Int8': 151, 'in:Int8|out:Int8': 1126, 'in:Int8|out:FP16': 91, 'in:FP16|out:FP32': 4, 'in:FP32|out:FP32': 3, 'in:FP32|out:Int8': 1, 'in:Int8|out:FP32': 1} missing scales 6
+[09/25/2026-18:31:29] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:31:29 maze dyn_H3_b1_int8f32 7.8 s 29.48 MB {'in:FP32|out:FP32': 397, 'in:FP32,Int32|out:FP32': 1} missing scales 6
+/home/skolawol/e1/code/e1_energy.py:541: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:    56: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,916,512][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:    56: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,916,512][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Cast_1]}. In computeCosts at optimizer/common/tactic/optimizer.cpp:4115)
+18:31:40 maze dyn_H3_b1_int8all BUILD FAILED IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Cast_1]}. In computeCost
+[09/25/2026-18:32:46] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:32:46 maze dyn_H1_b1_int8 63.6 s 15.06 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 117, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 6
+[09/25/2026-18:32:48] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:32:48 maze dyn_H1_b1_fp32 1.7 s 28.53 MB {'in:FP32|out:FP32': 137, 'in:FP32,Int32|out:FP32': 1} missing scales 0
+[09/25/2026-18:32:51] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:32:51 maze dyn_H1_b1_fp16 2.7 s 15.06 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 117, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 0
+[09/25/2026-18:32:53] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:32:53 maze dyn_H1_b1_int8f32 1.8 s 28.53 MB {'in:FP32|out:FP32': 137, 'in:FP32,Int32|out:FP32': 1} missing scales 6
+[09/25/2026-18:34:01] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:34:02 maze dyn_H1_b1_int8mm 68.4 s 12.05 MB {'in:FP32|out:FP16': 35, 'in:-|out:FP16': 40, 'in:FP16|out:FP16': 113, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 40, 'in:FP16|out:Int8': 51, 'in:Int8|out:Int8': 146, 'in:Int8|out:FP16': 20, 'in:-|out:FP32': 20, 'in:Int8|out:FP32': 32, 'in:FP32|out:FP32': 74, 'in:FP16|out:FP32': 4, 'in:FP32|out:Int8': 1} missing scales 6
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:    56: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,916,512][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:    56: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,916,512][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Cast_1]}. In computeCosts at optimizer/common/tactic/optimizer.cpp:4115)
+18:34:03 maze dyn_H1_b1_int8all BUILD FAILED IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Cast_1]}. In computeCost
+[09/25/2026-18:34:06] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:34:06 maze x3_H1_b1_fp16 2.9 s 15.05 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 116, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 4} missing scales 0
+[09/25/2026-18:35:33] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:35:33 maze x3_H1_b1_int8mm 87.3 s 12.04 MB {'in:FP32|out:FP16': 35, 'in:-|out:FP16': 40, 'in:FP16|out:FP16': 113, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 40, 'in:FP16|out:Int8': 51, 'in:Int8|out:Int8': 146, 'in:Int8|out:FP16': 20, 'in:-|out:FP32': 20, 'in:Int8|out:FP32': 32, 'in:FP32|out:FP32': 74, 'in:FP16|out:FP32': 3, 'in:FP32|out:Int8': 1} missing scales 5
+[09/25/2026-18:35:43] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:35:43 maze dyn_H3_b32_fp32 9.3 s 30.73 MB {'in:FP32|out:FP32': 342, 'in:FP32,Int32|out:FP32': 1} missing scales 0
+[09/25/2026-18:36:01] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:36:01 maze dyn_H3_b32_int8 18.2 s 16.48 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 282, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 6
+18:36:04 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+18:39:05 maze ref_eager_fp32_H3_b32 exact@16 0.8678 exit 0.8678 2.028
+18:40:06 maze ref_eager_fp32_H1_b32 exact@16 0.8678 exit 0.8533 3.188
+18:43:27 maze eager_fp32_H3_b1 exact@8/16 0.8678 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8678 2.028
+18:45:58 maze eager_fp16_H3_b1 exact@8/16 0.8678 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8678 2.027
+18:48:53 maze trt_fp32_H3_b1 exact@8/16 0.8678 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8678 2.028
+18:49:32 maze trt_fp16_H3_b1 exact@8/16 0.8678 0.8689 agree@16 1.0 cos@16 1.0 exit 0.8678 2.026
+18:50:11 maze trt_int8_H3_b1 exact@8/16 0.8678 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8678 2.026
+18:53:09 maze trt_int8f32_H3_b1 exact@8/16 0.8678 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8678 2.028
+18:55:20 maze trt_int8mm_H3_b1 exact@8/16 0.0 0.0 agree@16 0.8352 cos@16 0.26885 exit 0.0 16.0
+18:55:20 missing engine dyn_H3_b1_int8all
+18:56:29 maze eager_fp32_H1_b1 exact@8/16 0.8667 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8533 3.188
+18:57:24 maze eager_fp16_H1_b1 exact@8/16 0.8678 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8533 3.186
+18:58:27 maze trt_fp32_H1_b1 exact@8/16 0.8667 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8533 3.188
+18:58:45 maze trt_fp16_H1_b1 exact@8/16 0.8678 0.8678 agree@16 0.9999 cos@16 1.0 exit 0.8544 3.191
+18:59:01 maze trt_int8_H1_b1 exact@8/16 0.8678 0.8678 agree@16 0.9999 cos@16 1.0 exit 0.8544 3.191
+19:00:06 maze trt_int8f32_H1_b1 exact@8/16 0.8667 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8533 3.188
+19:00:52 maze trt_int8mm_H1_b1 exact@8/16 0.0 0.0 agree@16 0.8482 cos@16 0.29012 exit 0.0 16.0
+19:00:52 missing engine dyn_H1_b1_int8all
+19:01:08 maze trt_x3fp16_H1_b1 exact@8/16 0.8678 0.8678 agree@16 0.9999 cos@16 1.0 exit 0.8544 3.191
+19:01:54 maze trt_x3int8mm_H1_b1 exact@8/16 0.0 0.0 agree@16 0.8613 cos@16 0.34145 exit 0.0 16.0
+19:01:58 maze graph_fp16_H3_b1 exact@8/16 0.88 0.88 agree@16 1.0 cos@16 1.0 exit 0.88 2.02
+19:02:54 maze eager_fp16_H3_b32 exact@8/16 0.8678 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8678 2.027
+19:06:10 maze trt_fp32_H3_b32 exact@8/16 0.8678 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8678 2.028
+19:06:48 maze trt_fp16_H3_b32 exact@8/16 0.8678 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8678 2.029
+19:07:26 maze trt_int8_H3_b32 exact@8/16 0.8678 0.8678 agree@16 1.0 cos@16 1.0 exit 0.8678 2.027
+19:09:08 maze trt_int8mm_H3_b32 exact@8/16 0.0 0.0 agree@16 0.8334 cos@16 0.26663 exit 0.0 16.0
+Fri Sep 25 11:09:09 PM UTC 2026 done rc=0

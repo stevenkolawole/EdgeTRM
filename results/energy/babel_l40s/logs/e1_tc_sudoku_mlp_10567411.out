@@ -1,0 +1,122 @@
+NVIDIA L40S
+name, uuid, driver_version, power.limit [W], clocks.max.sm [MHz]
+NVIDIA L40S, GPU-812e4d1b-2e6c-c4a5-96af-10a27b25bb2d, 610.43.02, 350.00 W, 2520 MHz
+Collecting tensorrt-cu12==10.13.3.9
+  Downloading tensorrt_cu12-10.13.3.9.tar.gz (18 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Installing backend dependencies: started
+  Installing backend dependencies: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting tensorrt-cu12-libs==10.13.3.9
+  Downloading tensorrt_cu12_libs-10.13.3.9.tar.gz (703 bytes)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting tensorrt-cu12-bindings==10.13.3.9
+  Downloading tensorrt_cu12_bindings-10.13.3.9-cp311-none-manylinux_2_28_x86_64.whl.metadata (606 bytes)
+Downloading tensorrt_cu12_bindings-10.13.3.9-cp311-none-manylinux_2_28_x86_64.whl (1.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 43.3 MB/s  0:00:00
+Building wheels for collected packages: tensorrt-cu12, tensorrt-cu12-libs
+  Building wheel for tensorrt-cu12 (pyproject.toml): started
+  Building wheel for tensorrt-cu12 (pyproject.toml): finished with status 'done'
+  Created wheel for tensorrt-cu12: filename=tensorrt_cu12-10.13.3.9-py2.py3-none-any.whl size=17538 sha256=02f1473bc3e3e0d0fd902965b2ccca127bd8838031b3f33cd40dd2df6b0fbf55
+  Stored in directory: /data/user_data/skolawol/e1/tmp/pip-ephem-wheel-cache-8bk8bk9h/wheels/42/e3/2d/b6c3c965b91d437eb2135b9d11c01f29fb77d5d3e9639261cb
+  Building wheel for tensorrt-cu12-libs (pyproject.toml): started
+  Building wheel for tensorrt-cu12-libs (pyproject.toml): finished with status 'done'
+  Created wheel for tensorrt-cu12-libs: filename=tensorrt_cu12_libs-10.13.3.9-py2.py3-none-manylinux_2_28_x86_64.whl size=3115257094 sha256=bf2008eca911411aa93b852825ea992de33396451ea11713a6eb97c411d3b2e9
+  Stored in directory: /data/user_data/skolawol/e1/tmp/pip-ephem-wheel-cache-8bk8bk9h/wheels/3f/c3/cb/142337f046b8383c6d609ea19c77b592c8dca6de3e312ff774
+Successfully built tensorrt-cu12 tensorrt-cu12-libs
+Installing collected packages: tensorrt-cu12-libs, tensorrt-cu12-bindings, tensorrt-cu12
+
+Successfully installed tensorrt-cu12-10.13.3.9 tensorrt-cu12-bindings-10.13.3.9 tensorrt-cu12-libs-10.13.3.9
+Collecting nvidia-ml-py
+  Downloading nvidia_ml_py-13.615.71-py3-none-any.whl.metadata (9.7 kB)
+Downloading nvidia_ml_py-13.615.71-py3-none-any.whl (58 kB)
+Installing collected packages: nvidia-ml-py
+Successfully installed nvidia-ml-py-13.615.71
+tensorrt 10.13.3.9
+Fri Sep 25 10:18:56 PM UTC 2026 start tc sudoku_mlp on babel-q9-20
+18:18:57 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+/home/skolawol/e1/code/e1_energy.py:571: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/home/skolawol/e1/code/e1_energy.py:572: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[09/25/2026-18:21:23] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:21:23 sudoku_mlp dyn_H3_b1_int8 138.8 s 11.44 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 426, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 5
+[09/25/2026-18:21:26] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:21:26 sudoku_mlp dyn_H3_b1_fp32 3.3 s 21.24 MB {'in:FP32|out:FP32': 426, 'in:FP32,Int32|out:FP32': 1} missing scales 0
+[09/25/2026-18:21:37] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:21:37 sudoku_mlp dyn_H3_b1_fp16 10.9 s 11.42 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 426, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 0
+/home/skolawol/e1/code/e1_energy.py:530: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+[09/25/2026-18:22:10] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:22:10 sudoku_mlp dyn_H3_b1_int8mm 32.9 s 11.87 MB {'in:FP32|out:FP16': 89, 'in:FP16|out:FP16': 170, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 168, 'in:FP16|out:Int8': 85, 'in:Int8|out:FP32': 128, 'in:FP32|out:FP32': 46, 'in:FP32|out:Int8': 43, 'in:Int8|out:Int8': 406, 'in:FP16|out:FP32': 4} missing scales 5
+[09/25/2026-18:22:28] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:22:28 sudoku_mlp dyn_H3_b256_fp16 17.5 s 13.65 MB {'in:FP32|out:FP16': 3, 'in:Int32|out:FP16': 1, 'in:FP16|out:FP16': 511, 'in:FP16|out:FP32': 5} missing scales 0
+[09/25/2026-18:23:08] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:23:08 sudoku_mlp dyn_H3_b256_int8mm 40.4 s 11.21 MB {'in:FP32|out:FP16': 5, 'in:-|out:-': 4, 'in:Int32|out:FP16': 1, 'in:FP16|out:FP16': 172, 'in:-|out:Int8': 168, 'in:FP16|out:Int8': 85, 'in:Int8|out:Int8': 658, 'in:Int8|out:FP16': 84, 'in:FP16|out:FP32': 4, 'in:Int8|out:FP32': 2, 'in:FP32|out:FP32': 3, 'in:FP32|out:Int8': 1} missing scales 5
+[09/25/2026-18:23:12] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:23:12 sudoku_mlp dyn_H3_b1_int8f32 3.1 s 21.28 MB {'in:FP32|out:FP32': 426, 'in:FP32,Int32|out:FP32': 1} missing scales 5
+/home/skolawol/e1/code/e1_energy.py:541: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:   103: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,512,97][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:   103: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,512,97][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Transpose_1]}. In computeCosts at optimizer/common/tactic/optimizer.cpp:4115)
+18:23:16 sudoku_mlp dyn_H3_b1_int8all BUILD FAILED IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Transpose_1]}. In comput
+[09/25/2026-18:24:02] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:24:02 sudoku_mlp dyn_H1_b1_int8 45.0 s 10.96 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 146, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 5
+[09/25/2026-18:24:03] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:24:03 sudoku_mlp dyn_H1_b1_fp32 0.9 s 20.74 MB {'in:FP32|out:FP32': 146, 'in:FP32,Int32|out:FP32': 1} missing scales 0
+[09/25/2026-18:24:04] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:24:04 sudoku_mlp dyn_H1_b1_fp16 1.5 s 10.95 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 146, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 0
+[09/25/2026-18:24:06] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:24:06 sudoku_mlp dyn_H1_b1_int8f32 1.8 s 20.75 MB {'in:FP32|out:FP32': 146, 'in:FP32,Int32|out:FP32': 1} missing scales 5
+[09/25/2026-18:24:16] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:24:16 sudoku_mlp dyn_H1_b1_int8mm 10.2 s 8.73 MB {'in:FP32|out:FP16': 33, 'in:FP16|out:FP16': 58, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 56, 'in:FP16|out:Int8': 29, 'in:Int8|out:FP32': 44, 'in:FP32|out:FP32': 18, 'in:FP32|out:Int8': 15, 'in:Int8|out:Int8': 126, 'in:FP16|out:FP32': 4} missing scales 5
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:   103: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,512,97][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR Error Code: 9: Skipping tactic 0x0000000000000000 due to exception [type.cpp:infer_type:178] Could not infer output types for operation:   103: round: /inner/L_level/layers_0/Mul_output_0 roundIn-(i8[][]so[], mem_prop=0, align=1) | /inner/L_level/layers_0/Mul_output_0-(i8[1,512,97][]so[], mem_prop=0, align=1), stream = 0 // /inner/L_level/layers_0/Mul_output_0nodeRoundOp1, No matching rules found for input operand types In compileGraph at optimizer/myelin/codeGenerator.cpp:1425
+TRT Severity.ERROR IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Transpose_1]}. In computeCosts at optimizer/common/tactic/optimizer.cpp:4115)
+18:24:17 sudoku_mlp dyn_H1_b1_int8all BUILD FAILED IBuilder::buildSerializedNetwork: Error Code 10: Internal Error (Could not find any implementation for node {ForeignNode[/inner/L_level/layers.0/Cast.../inner/L_level/layers.0/Transpose_1]}. In comput
+[09/25/2026-18:24:19] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:24:19 sudoku_mlp x3_H1_b1_fp16 1.7 s 10.94 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 145, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 4} missing scales 0
+[09/25/2026-18:25:09] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:25:09 sudoku_mlp x3_H1_b1_int8mm 49.7 s 8.72 MB {'in:FP32|out:FP16': 33, 'in:FP16|out:FP16': 58, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 56, 'in:FP16|out:Int8': 29, 'in:Int8|out:FP32': 44, 'in:FP32|out:FP32': 18, 'in:FP32|out:Int8': 15, 'in:Int8|out:Int8': 126, 'in:FP16|out:FP32': 3} missing scales 4
+[09/25/2026-18:25:14] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:25:15 sudoku_mlp dyn_H3_b256_fp32 5.6 s 22.69 MB {'in:Int32|out:FP32': 1, 'in:FP32|out:FP32': 427} missing scales 0
+[09/25/2026-18:25:23] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+18:25:24 sudoku_mlp dyn_H3_b256_int8 8.9 s 13.97 MB {'in:FP32|out:FP16': 3, 'in:Int32|out:FP16': 1, 'in:FP16|out:FP16': 469, 'in:FP16|out:FP32': 5} missing scales 5
+18:25:26 device NVIDIA L40S CUDA_VISIBLE_DEVICES 0
+18:25:51 sudoku_mlp ref_eager_fp32_H3_b256 exact@16 0.705 exit 0.705 7.24
+18:26:00 sudoku_mlp ref_eager_fp32_H1_b256 exact@16 0.642 exit 0.642 9.696
+18:28:16 sudoku_mlp eager_fp32_H3_b1 exact@8/16 0.678 0.712 agree@16 0.9392 cos@16 0.95786 exit 0.712 7.199
+18:30:55 sudoku_mlp eager_fp16_H3_b1 exact@8/16 0.676 0.714 agree@16 0.9363 cos@16 0.96958 exit 0.714 7.176
+18:31:39 sudoku_mlp trt_fp32_H3_b1 exact@8/16 0.673 0.712 agree@16 0.9381 cos@16 0.96269 exit 0.712 7.227
+18:32:06 sudoku_mlp trt_fp16_H3_b1 exact@8/16 0.671 0.71 agree@16 0.9365 cos@16 0.95779 exit 0.71 7.228
+18:32:34 sudoku_mlp trt_int8_H3_b1 exact@8/16 0.677 0.715 agree@16 0.9343 cos@16 0.95399 exit 0.715 7.212
+18:33:19 sudoku_mlp trt_int8f32_H3_b1 exact@8/16 0.677 0.713 agree@16 0.939 cos@16 0.96793 exit 0.713 7.201
+18:34:27 sudoku_mlp trt_int8mm_H3_b1 exact@8/16 0.675 0.719 agree@16 0.8935 cos@16 0.70805 exit 0.719 7.214
+18:34:27 missing engine dyn_H3_b1_int8all
+18:35:15 sudoku_mlp eager_fp32_H1_b1 exact@8/16 0.55 0.641 agree@16 0.9942 cos@16 0.9994 exit 0.641 9.697
+18:36:12 sudoku_mlp eager_fp16_H1_b1 exact@8/16 0.55 0.646 agree@16 0.9301 cos@16 0.97253 exit 0.646 9.687
+18:36:29 sudoku_mlp trt_fp32_H1_b1 exact@8/16 0.55 0.642 agree@16 0.9947 cos@16 0.99942 exit 0.642 9.697
+18:36:39 sudoku_mlp trt_fp16_H1_b1 exact@8/16 0.55 0.641 agree@16 0.9288 cos@16 0.96628 exit 0.641 9.687
+18:36:50 sudoku_mlp trt_int8_H1_b1 exact@8/16 0.55 0.641 agree@16 0.9288 cos@16 0.96628 exit 0.641 9.687
+18:37:07 sudoku_mlp trt_int8f32_H1_b1 exact@8/16 0.55 0.642 agree@16 0.9947 cos@16 0.99942 exit 0.642 9.697
+18:37:32 sudoku_mlp trt_int8mm_H1_b1 exact@8/16 0.523 0.645 agree@16 0.8677 cos@16 0.62557 exit 0.635 9.792
+18:37:32 missing engine dyn_H1_b1_int8all
+18:37:42 sudoku_mlp trt_x3fp16_H1_b1 exact@8/16 0.55 0.641 agree@16 0.9288 cos@16 0.96628 exit 0.641 9.687
+18:38:07 sudoku_mlp trt_x3int8mm_H1_b1 exact@8/16 0.528 0.631 agree@16 0.8649 cos@16 0.6178 exit 0.622 9.81
+18:38:09 sudoku_mlp graph_fp16_H3_b1 exact@8/16 0.66 0.78 agree@16 0.9501 cos@16 0.9692 exit 0.78 7.0
+18:38:20 sudoku_mlp eager_fp16_H3_b256 exact@8/16 0.675 0.716 agree@16 0.9361 cos@16 0.95314 exit 0.716 7.204
+18:38:40 sudoku_mlp trt_fp32_H3_b256 exact@8/16 0.675 0.711 agree@16 0.939 cos@16 0.96489 exit 0.711 7.232
+18:38:48 sudoku_mlp trt_fp16_H3_b256 exact@8/16 0.677 0.708 agree@16 0.9333 cos@16 0.95532 exit 0.708 7.233
+18:38:56 sudoku_mlp trt_int8_H3_b256 exact@8/16 0.679 0.717 agree@16 0.9362 cos@16 0.96139 exit 0.717 7.168
+18:39:04 sudoku_mlp trt_int8mm_H3_b256 exact@8/16 0.679 0.715 agree@16 0.8866 cos@16 0.67466 exit 0.715 7.288
+Fri Sep 25 10:39:04 PM UTC 2026 done rc=0
