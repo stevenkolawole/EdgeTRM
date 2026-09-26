@@ -364,6 +364,52 @@ class ScoreSet:
         ctx.set({})
         return float(torch.cat(vals).mean())
 
+    def build_probes(self, spec="r4,d1,m1", n_power=10, seed=11):
+        """Probe directions at the fp32 fixed point s_T per chunk: r<k> random unit directions, d<k> dominant directions
+        of J(s_T) (power iteration, deflation-free: k starts), m1 the read-out margin direction (w_top1 - w_top2 of every
+        answer cell placed in z_H). Stores the fp32 J v for each probe (exact JVP)."""
+        ctx = self.ctx
+        ctx.set({})
+        want = {t[0]: int(t[1:]) for t in spec.split(",") if t}
+        self.probe_spec = spec
+        for ci, c in enumerate(self.chunks):
+            g = torch.Generator(device=c["zT"].device).manual_seed(seed + ci)
+            Fn = ctx.rec(c["x"])
+            z = c["zT"]
+            V = []
+            for _ in range(want.get("r", 0)):
+                V.append(C.unit(torch.randn(z.shape, generator=g, device=z.device)))
+            for _ in range(want.get("d", 0)):
+                v = C.unit(torch.randn(z.shape, generator=g, device=z.device))
+                for _ in range(n_power):
+                    _, u = C.fjvp(Fn, z, v)
+                    v = C.unit(u)
+                V.append(v)
+            if want.get("m", 0) and ctx.family != "dt":
+                with torch.no_grad():
+                    W = ctx.m.inner.lm_head.weight.float()
+                    lg = ctx.m.inner.lm_head(z[:, 0])[:, ctx.pl:].float()
+                    top = lg.topk(2, dim=-1).indices
+                    wd = W[top[..., 0]] - W[top[..., 1]]                        # (B, cells, D)
+                    v = torch.zeros_like(z)
+                    v[:, 0, ctx.pl:] = wd.to(v.dtype)
+                    V.append(C.unit(v))
+            c["V"] = V
+            c["JV"] = [C.fjvp(Fn, z, v)[1] for v in V]
+
+    def jac_err(self, alloc):
+        """mean over chunks and probes of ||J~(s_T) v - J(s_T) v|| / ||J(s_T) v|| (exact JVPs)."""
+        ctx = self.ctx
+        ctx.set(alloc)
+        vals = []
+        for c in self.chunks:
+            Fn = ctx.rec(c["x"])
+            for v, jv in zip(c["V"], c["JV"]):
+                _, u = C.fjvp(Fn, c["zT"], v)
+                vals.append((C.bnorm(u - jv) / C.bnorm(jv).clamp_min(1e-12)).mean())
+        ctx.set({})
+        return float(torch.stack(vals).mean())
+
     @torch.no_grad()
     def kl1(self, alloc, point="T"):
         """one-step read-out KL at the calibration point: KL(p(F(s)) || p(F~(s))) on the answer cells."""
@@ -504,6 +550,7 @@ class ScoreSet:
 
 
 CLIPS = [round(x, 3) for x in np.linspace(0.25, 1.0, 16)]
+JAC_PROBES = "r4,d1,m1"
 
 
 @torch.no_grad()
@@ -592,6 +639,38 @@ def choose_clips(ctx, S, lo, hi, how, point="T"):
     ||X (Q(W) - W)^T||^2 on the layer's own inputs along the fp32 trajectory (standard data-aware PTQ), 'dT' =
     min delta_T with only this group at the low format and the rest high (label-free, unlabeled inputs)."""
     out = {}
+    if how in ("jac", "jacdT", "jacj"):
+        if not hasattr(S, "probe_spec"):
+            S.build_probes(JAC_PROBES)
+        d_hi = S.delta_T({h: hi for h in ctx.groups})
+        j_hi = S.jac_err({h: hi for h in ctx.groups})
+        X = layer_inputs(ctx, S)
+        fallback = {}
+        cur = {}
+        for g in ctx.groups:
+            vals = []
+            for r in CLIPS:
+                f = f"{lo}@{r}"
+                al = {**{h: hi for h in ctx.groups}, g: f}
+                v = S.jac_err(al) / max(j_hi, 1e-12)
+                if how == "jacdT":
+                    v = v + S.delta_T(al) / max(d_hi, 1e-12)
+                vals.append(v)
+            if (max(vals) - min(vals)) <= 1e-6 * max(abs(max(vals)), 1e-12):
+                vals = [omse_val(ctx, X, g, f"{lo}@{r}") for r in CLIPS]
+                fallback[g] = True
+            cur[g] = CLIPS[int(np.argmin(vals))]
+        if fallback:
+            print(f"  clip {how}: {len(fallback)} tensors outside the step map use the output-error clip", flush=True)
+        if how == "jacj":                                # one coordinate-descent sweep with the others low
+            for g in ctx.groups:
+                if g in fallback:
+                    continue
+                base = {h: f"{lo}@{cur[h]}" for h in ctx.groups}
+                vals = [S.jac_err({**base, g: f"{lo}@{r}"}) for r in CLIPS]
+                cur[g] = CLIPS[int(np.argmin(vals))]
+            print(f"  jacj sweep: jac_err {S.jac_err({h: f'{lo}@{cur[h]}' for h in ctx.groups}):.4f}", flush=True)
+        return cur
     if how in ("pct", "aciq"):
         for g in ctx.groups:
             W = ctx.W0[g].float()
@@ -797,17 +876,19 @@ def main():
     ap.add_argument("--split", type=int, default=1, help="groups = k output-channel slices per tensor")
     ap.add_argument("--singles", type=int, default=1, help="evaluate every tensor alone low / alone high")
     ap.add_argument("--xfer", default="", help="another run's output JSON: evaluate its allocation orders here (seed transfer)")
-    ap.add_argument("--calib", default="", choices=["", "gptq", "ar_layer", "ar_block", "ar_step"],
+    ap.add_argument("--calib", default="", choices=["", "gptq", "ar_layer", "ar_block", "ar_step", "ar_jac"],
                     help="learned/compensated rounding on top of the chosen clip (m3_calib.py)")
     ap.add_argument("--calib_iters", type=int, default=2000)
     ap.add_argument("--calib_lr", type=float, default=5e-2)
     ap.add_argument("--calib_lam", type=float, default=1.0)
+    ap.add_argument("--jac_probes", default="r4,d1,m1", help="probe set for the jac objectives (r random, d dominant, m margin)")
+    ap.add_argument("--eval_offset", type=int, default=0, help="first evaluation puzzle (dev split: e.g. 2048)")
     ap.add_argument("--point", default="", help="calibration point: T (fixed point), 0 (first step), rand (random "
                                              "state), traj (layer inputs along the whole trajectory; omse default)")
     ap.add_argument("--act", default="", help="a<bits>: static per-tensor activation fake-quant at every linear input")
     ap.add_argument("--aclip", default="absmax", choices=["absmax", "pct", "mse", "dT"])
     ap.add_argument("--clips_from", default="", help="use the clip ratios chosen in another run (seed transfer)")
-    ap.add_argument("--clip", default="none", choices=["none", "mse", "omse", "dT", "dTj", "pct", "aciq", "kl1", "klT", "blk"],
+    ap.add_argument("--clip", default="none", choices=["none", "mse", "omse", "dT", "dTj", "pct", "aciq", "kl1", "klT", "blk", "jac", "jacdT", "jacj"],
                     help="clip ratio of the low format per group: none (absmax), mse (data-free), dT (label-free)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
@@ -833,15 +914,18 @@ def main():
         t = bs.TRM_TASKS.get(a.task) or bs.HRM_TASKS[a.task]
         batch = a.batch or (128 if t["seq"] < 200 else 16)
         so = a.score_offset if a.score_offset >= 0 else a.n
-        inp, lab = bs.load_qa(t["data"], so + a.n_score)
-    ev_inp, ev_lab = inp[:a.n], lab[:a.n]
+        inp, lab = bs.load_qa(t["data"], max(so + a.n_score, a.eval_offset + a.n))
+    eo = a.eval_offset
+    ev_inp, ev_lab = inp[eo:eo + a.n], lab[eo:eo + a.n]
     sc_inp, sc_lab = inp[so:so + a.n_score], lab[so:so + a.n_score]
     assert len(sc_inp) == a.n_score, f"only {len(sc_inp)} scoring inputs available"
-    assert so >= a.n, "scoring inputs must be disjoint from the evaluation inputs"
+    assert len(ev_inp) == a.n, f"only {len(ev_inp)} evaluation inputs available"
+    assert so >= eo + a.n or so + a.n_score <= eo, "scoring inputs must be disjoint from the evaluation inputs"
 
     out = Path(a.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     blob = json.load(open(out)) if out.exists() else {}
+    blob.update({"eval_offset": a.eval_offset, "jac_probes": a.jac_probes})
     blob.update({"task": a.task, "lo": a.lo, "hi": a.hi, "clip": a.clip, "T": T, "n": a.n, "n_score": a.n_score, "score_offset": so,
                  "sigma0": a.sigma0, "gpu": torch.cuda.get_device_name(0), "torch": torch.__version__})
     blob.setdefault("evals", {})
@@ -854,6 +938,8 @@ def main():
     default_point = "traj" if a.clip == "omse" else "T"
     if not a.point:
         a.point = default_point
+    global JAC_PROBES
+    JAC_PROBES = a.jac_probes
     psuf = "" if a.point == default_point else "@" + a.point
     t0 = time.time()
     if a.ckpt:
@@ -929,6 +1015,8 @@ def main():
             T_ = torch.load(cal_path, map_location=DEV)
         else:
             S = S or ScoreSet(ctx, sc_inp, sc_lab)
+            if a.calib == "ar_jac" and not hasattr(S, "probe_spec"):
+                S.build_probes(a.jac_probes)
             T_ = m3_calib.calibrate(ctx, S, LO, a.calib, parse_fmt, iters=a.calib_iters, lr=a.calib_lr,
                                     lam=a.calib_lam, log=lambda m_: print(m_, flush=True))
             torch.save(T_, cal_path)

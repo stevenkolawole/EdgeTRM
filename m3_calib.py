@@ -264,6 +264,18 @@ def calibrate(ctx, S, lo, method, parse_fmt, iters=1500, lr=1e-2, lam=1.0, batch
                     a_, kw, out = L[int(torch.randint(0, len(L), (1,), generator=gen))]
                     y = mod(*a_, **kw)
                     loss = loss + (y - out).pow(2).mean() / out.pow(2).mean().clamp_min(1e-12)
+            elif method == "ar_jac":
+                ci = int(torch.randint(0, len(S.chunks), (1,), generator=gen))
+                c = S.chunks[ci]
+                pi = int(torch.randint(0, len(c["V"]), (1,), generator=gen))
+                idx = torch.randperm(c["x"].shape[0], generator=gen)[:batch].to(c["x"].device)
+                v, jv, z = c["V"][pi][idx], c["JV"][pi][idx], c["zT"][idx]
+                Fn = ctx.rec(c["x"][idx])
+                from contraction import bnorm, sdpa_math
+                eps = 1e-2
+                with sdpa_math():
+                    u = (Fn(z + eps * v) - Fn(z - eps * v)) / (2 * eps)      # central-difference J~ v
+                loss = (bnorm(u - jv) / bnorm(jv).clamp_min(1e-12)).pow(2).mean() + layer_loss(head)
             elif method == "ar_step":
                 x, zT, zT1 = states[int(torch.randint(0, len(states), (1,), generator=gen))]
                 idx = torch.randperm(x.shape[0], generator=gen)[:batch].to(x.device)
