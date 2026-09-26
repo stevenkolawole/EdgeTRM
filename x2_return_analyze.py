@@ -192,6 +192,8 @@ def p1(rows, md, js):
     ret = np.array([r["retained"] for r in main])
     res["spearman_retained_return"] = spearman(ret, rr)
     res["pearson_retained_return"] = pearson(ret, rr)
+    rrf = np.array([r["return_rate_fc"] for r in main])
+    res["spearman_retained_return_fc"] = spearman(ret, rrf)   # secondary: return rate over fp32-correct examples
     # per family: rule accuracy and phi collapse point
     fam_tab = {}
     for fam in fams:
@@ -237,7 +239,7 @@ def p1(rows, md, js):
     md.append(f"| (a) balanced accuracy of 'collapse iff median rho > 1' | {fmt(res['bal_acc_rule_rho_gt_1'])} (plain {fmt(res['acc_rule'])}) | >= 0.80 |")
     md.append(f"| (b) AUROC rho vs AUROC -phi | {fmt(res['auroc_rho'])} vs {fmt(res['auroc_negphi'])} | rho > phi |")
     md.append(f"| (c) leave-one-family-out accuracy rho vs phi | {fmt(res['lofo_acc_rho'])} vs {fmt(res['lofo_acc_phi'])} | rho >= phi |")
-    md.append(f"| (d) Spearman(retained, t=1 return rate) | {fmt(res['spearman_retained_return'])} (Pearson {fmt(res['pearson_retained_return'])}) | >= 0.7 |")
+    md.append(f"| (d) Spearman(retained, t=1 return rate) | {fmt(res['spearman_retained_return'])} (Pearson {fmt(res['pearson_retained_return'])}); secondary, fp32-correct examples: {fmt(res['spearman_retained_return_fc'])} | >= 0.7 |")
     md.append(f"| best pooled rho threshold (post hoc, for reference) | {fmt(res['best_thr_rho'])} (bal. acc {fmt(res['bal_acc_best_rho'])}) | - |")
     md.append(f"\n**Verdict: {res['verdict'].upper()}** (criteria a-d: {ok}).\n")
     md.append("Collapsed cells' median rho (fp32-correct examples): " + ", ".join(fmt(v, 2) for v in res["collapsed_rho_med_fc"]) + "\n")
@@ -307,7 +309,7 @@ def p2(rows, md, js):
             if r is None:
                 continue
             n = r["n"]
-            cq = np.array([c == "1" for c in d["curve"][cell]["correct"][:n]])
+            cq = np.array([c == "1" for c in d["curve"][cell]["correct"]["26"][:n]])   # 26 compressed iterations, no polish
             hy = np.array([c == "1" for c in sch[kp]["correct"][:n]])
             match = float(np.mean(cq == r["_cq"]))
             obs = float(hy.mean() - cq.mean())
@@ -375,7 +377,7 @@ def p3(rows, md, js, m2_gain=True):
         q = d["q"][:, :n, 15].astype(np.float32)
         gain = float(c[q.argmax(0), np.arange(n)].mean() - c[0].mean())
         res["gain_vs_return"].append({"task": task, "spec": spec, "rtn_acc_m2": float(c[0].mean()), "rtn_acc_mine": r["acc_q"],
-                                      "gain_bestq16": gain, "return_rate": r["return_rate"], "rho_med_fc": r["rho_med_fc"],
+                                      "gain_bestq16": gain, "return_rate": r["return_rate"], "return_rate_fc": r["return_rate_fc"], "rho_med_fc": r["rho_med_fc"],
                                       "retained": r["retained"]})
     g = res["gain_vs_return"]
     peak_ok = None
@@ -399,9 +401,9 @@ def p3(rows, md, js, m2_gain=True):
     for k, v in res["head_pick"].items():
         md.append(f"| {k} | {v['draws']} | {v['n']} | {v['picked_tc_gt_median']} / {v['picked_tc_lt_median']} | {fmt(v['sign_p'],4)} | "
                   f"{fmt(v['mean_tc_picked'],2)} / {fmt(v['mean_tc_all'],2)} | {fmt(v['acc_rtn'])} / {fmt(v['acc_bestq'])} | {fmt(v['agree_with_m2_corr'])} |")
-    md.append("\n| task | spec | RTN acc (M2 / mine) | best-Q@16 gain (M2) | RTN return rate | median rho | retained |\n|---|---|---|---|---|---|---|")
+    md.append("\n| task | spec | RTN acc (M2 / mine) | best-Q@16 gain (M2) | RTN return rate (all / fp32-correct) | median rho | retained |\n|---|---|---|---|---|---|---|")
     for v in sorted(g, key=lambda x: x["return_rate"]):
-        md.append(f"| {v['task']} | {v['spec']} | {fmt(v['rtn_acc_m2'])} / {fmt(v['rtn_acc_mine'])} | {fmt(v['gain_bestq16'])} | {fmt(v['return_rate'])} | {fmt(v['rho_med_fc'])} | {fmt(v['retained'])} |")
+        md.append(f"| {v['task']} | {v['spec']} | {fmt(v['rtn_acc_m2'])} / {fmt(v['rtn_acc_mine'])} | {fmt(v['gain_bestq16'])} | {fmt(v['return_rate'])} / {fmt(v['return_rate_fc'])} | {fmt(v['rho_med_fc'])} | {fmt(v['retained'])} |")
     md.append("")
 
 
