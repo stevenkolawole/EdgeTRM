@@ -331,7 +331,21 @@ def parse_spec(spec):
     input of every core Linear, scaled per token by that input's standard deviation (weights stay bf16)."""
     if spec.startswith("an"):
         return {"spec": spec, "bits": None, "gran": None, "act_noise": float(spec[2:])}
+    if spec.startswith("wf"):     # fresh weight noise: every core Linear re-noised from its master at every call
+        return {"spec": spec, "bits": None, "gran": None, "w_fresh": float(spec[2:])}
     return L.parse_quant(spec)
+
+
+class _WFresh:
+    """W = W0 + sigma * std(W0) * randn, drawn anew before every forward of the linear (a fresh error in the
+    weights, the LM analogue of the per-step perturbation of the puzzle exhibits)."""
+
+    def __init__(self, mod, sigma):
+        self.W0, self.sigma = mod.weight.data.clone(), sigma
+
+    def __call__(self, mod, args):
+        mod.weight.data = self.W0 + torch.randn_like(self.W0) * (self.sigma * self.W0.float().std().to(self.W0.dtype))
+        return None
 
 
 def _noise_hook(sigma):
@@ -343,6 +357,13 @@ def _noise_hook(sigma):
 
 
 def quantize_(fam, model, q, scope):
+    if q.get("w_fresh"):
+        n = 0
+        for m in fam.core_modules(model, scope):
+            if isinstance(m, torch.nn.Linear):
+                m.register_forward_pre_hook(_WFresh(m, q["w_fresh"]))
+                n += 1
+        return n
     if q.get("act_noise"):
         n = 0
         for m in fam.core_modules(model, scope):
