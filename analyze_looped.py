@@ -443,7 +443,7 @@ def cell_batch(root, model, steps, quant, scope="core"):
     return (d.get("gen", {}).get("greedy", {}) or {}).get("batch") or d.get("meta", {}).get("batch")
 
 
-def pool_rows(roots, cut=50.0, single_platform=True):
+def pool_rows(roots, cut=50.0, single_platform=True, dedupe=True):
     """One row per (model, quant, loops): greedy accuracy and teacher-forced record from the SAME result
     directory (one platform, one n), retained against that directory's own bf16 greedy at the same loops.
     Duplicates across directories/platforms are resolved by largest n, then platform (p5 > p4d > Babel >
@@ -500,6 +500,11 @@ def pool_rows(roots, cut=50.0, single_platform=True):
             per[r["model"]][r["platform"]].add((r["quant"], r["loops"]))
         choice = {m: max(d, key=lambda p: (len(d[p]), -PLATFORM_RANK.get(p, 9))) for m, d in per.items()}
         cand = [r for r in cand if r["platform"] == choice[r["model"]]]
+    if not dedupe:
+        for r in cand:
+            r["ret"] = 100 * r["acc"] / r["acc_bf16"] if r["acc_bf16"] > 0 else float("nan")
+            r["collapse"] = r["ret"] < cut
+        return [r for r in cand if r["acc_bf16"] >= 10 and not math.isnan(r["ret"])], len(cand)
     best = {}
     for r in cand:
         k = (r["model"], r["quant"], r["loops"])
