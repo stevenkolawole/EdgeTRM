@@ -33,12 +33,15 @@ from exit_sweep import DEFAULT_H  # noqa: E402
 
 def make(task, spec, K, batch):
     base, seed = split_spec(spec)
-    q = parse_quant(base)
+    q = parse_quant("fp32" if base.startswith("gq") else base)          # gq<fmt>: GPTQ weights (m5_gptq.py)
     assert q["act"] is None and q.get("anoise") is None, "weight specs only"
     m, _ = build(task, None, 10 ** 6, batch)            # default H; never reaches halt_max_steps
     torch.manual_seed(seed if seed is not None else 0)
     if q["gran"] is not None:
         quantize_weights_(m, q["bits"], q["gran"], q.get("sigma"))
+    if base.startswith("gq"):
+        import m5_gptq
+        m5_gptq.load_if_gptq(m, task, base)
     return m.to(DEV).eval(), q
 
 

@@ -190,7 +190,7 @@ def main():
             continue
         keep_head = spec.endswith("%qh")
         base, seed = split_spec(spec[:-3] if keep_head else spec)
-        q = parse_quant(base)
+        q = parse_quant("fp32" if base.startswith("gq") else base)        # gq<fmt>: GPTQ weights (m5_gptq.py)
         t1 = time.time()
         m, meta = build(a.task, 1, a.K, batch)             # H=1, halt_max_steps = K
         torch.manual_seed(seed if seed is not None else 0)
@@ -198,6 +198,9 @@ def main():
         head32 = (w_head.to(DEV), m.inner.q_head.bias.data.clone().to(DEV))
         if q["gran"] is not None:
             quantize_weights_(m, q["bits"], q["gran"], q.get("sigma"))
+        if base.startswith("gq"):
+            import m5_gptq
+            m5_gptq.load_if_gptq(m, a.task, base)
         if keep_head:
             m.inner.q_head.weight.data = w_head
         r = run_spec(m, inp, lab, batch, a.K, kind, h_def, bfs, a.maze_flags and kind == "maze",

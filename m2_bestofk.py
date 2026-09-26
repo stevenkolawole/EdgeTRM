@@ -63,11 +63,14 @@ def make_hash_w(L):
 def build_spec(task, spec, D, batch):
     """CPU build + weight quantizer / weight-noise draw exactly as detector_sweep (seed after build)."""
     base, seed = split_spec(spec)
-    q = parse_quant(base)
+    q = parse_quant("fp32" if base.startswith("gq") else base)          # gq<fmt>: GPTQ weights (M5, m5_gptq.py)
     m, meta = build(task, None, D, batch)
     torch.manual_seed(seed if seed is not None else 0)
     if q["gran"] is not None:
         quantize_weights_(m, q["bits"], q["gran"], q.get("sigma"))
+    if base.startswith("gq"):
+        import m5_gptq
+        m5_gptq.load_if_gptq(m, task, base)
     assert q.get("act") is None, "activation fake-quant specs are not supported here"
     return m.to(DEV).eval(), meta, q, seed
 
