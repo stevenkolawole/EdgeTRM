@@ -684,6 +684,54 @@ def cmd_robust(a):
                   f"rejected {len(rows)-len(sel)} cells, SR wins {sum(x[5] > 0 for x in rows if x[3] < thr)}")
 
 
+def cmd_dither(a):
+    """Dithered quantization (SR re-drawn every step) vs RTN fixed vs one fixed SR draw; held-out rows 1000-1999, D = 512.
+    gap(S) = fp32(S) - arm(S); D = gap(512) - gap(16) (negative = catch-up). Arms 2-3 averaged over their 3 seeds per puzzle.
+    Arm 4 = arm 3 with the halting head: answer at the max-q step <= S (per rollout, then averaged)."""
+    global OFFSET
+    OFFSET = 1000
+    recs = load_index(a.root)
+    get = lambda task, spec, ws: next((r for r in recs if r["task"] == task and r["spec"] == spec and r["D"] == 512 and r["noise"] == "none"
+                                       and r.get("wsample", "none") == ws and r["n"] == 1000), None)
+    Ss = (16, 64, 256, 512)
+    print("per cell: accuracy at S = 16 / 64 / 256 / 512 (held out, n = 1000); D = gap512 - gap16 [95% CI]; dither - RTN at 512 [CI]; secs")
+    for task in ("sudoku_mlp", "sudoku_attn", "hrm_sudoku"):
+        fr = get(task, "fp32", "none")
+        if fr is None:
+            continue
+        F = load_cell(a.root, fr)["corr"][0].astype(float)
+        print(f"== {task}: fp32 " + " / ".join(f"{100*F[:, S-1].mean():5.1f}" for S in Ss) + f"   ({fr['file']})")
+        for g in ("w4c", "w3c", "w4t", "w3g32"):
+            arms = {"rtn": get(task, g, "none"), "sr": get(task, g, "sr"), "dither": get(task, g, "dither")}
+            if any(v is None for v in arms.values()):
+                continue
+            acc = {}
+            for nm, r in arms.items():
+                c = load_cell(a.root, r)
+                C = c["corr"].astype(float)                       # [K, n, D]
+                acc[nm] = C.mean(0)                               # [n, D] seed-averaged
+                if nm == "dither":
+                    Q = c["q"].astype(np.float32)
+                    mq = np.zeros_like(acc[nm])
+                    for S in Ss:
+                        t = Q[:, :, :S].argmax(2)                  # [K, n]
+                        mq[:, S - 1] = np.take_along_axis(C[:, :, :S], t[..., None], 2)[..., 0].mean(0)
+                    acc["dither+q"] = mq
+            print(f"  {g}:")
+            for nm in ("rtn", "sr", "dither", "dither+q"):
+                A = acc[nm]
+                gap16, gap512 = F[:, 15] - A[:, 15], F[:, 511] - A[:, 511]
+                d, lo, hi = paired_ci(gap512, gap16)
+                line = f"    {nm:9s} " + " / ".join(f"{100*A[:, S-1].mean():5.1f}" for S in Ss) + f" | gap16 {100*gap16.mean():+5.1f} gap512 {100*gap512.mean():+5.1f} D {100*d:+5.1f} [{100*lo:+.1f}, {100*hi:+.1f}]"
+                if nm != "rtn":
+                    x, l2, h2 = paired_ci(A[:, 511], acc["rtn"][:, 511])
+                    line += f" | vs RTN@512 {100*x:+5.1f} [{100*l2:+.1f}, {100*h2:+.1f}]"
+                if nm in arms:
+                    line += f" | {arms[nm]['secs']:.0f}s K={arms[nm]['K']} ({arms[nm]['file']})"
+                print(line)
+    OFFSET = 0
+
+
 def cmd_json(a):
     recs = load_index(a.root)
     out = []
@@ -714,7 +762,7 @@ def cmd_json(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main", "polish", "exit", "wsample", "abc", "robust"))
+    ap.add_argument("cmd", choices=("table", "calib", "compute", "json", "main", "polish", "exit", "wsample", "abc", "robust", "dither"))
     ap.add_argument("--sigma_main", type=float, default=0.3)
     ap.add_argument("--n", type=int, default=1000)
     ap.add_argument("--main_polish", type=int, default=2, help="main grid = the P2 cells (rescue cells with P4 excluded)")
@@ -726,7 +774,7 @@ def main():
     a = ap.parse_args()
     global OFFSET
     OFFSET = a.offset
-    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main, "polish": cmd_polish, "exit": cmd_exit, "wsample": cmd_wsample, "abc": cmd_abc, "robust": cmd_robust}[a.cmd](a)
+    {"table": cmd_table, "calib": cmd_calib, "compute": cmd_compute, "json": cmd_json, "main": cmd_main, "polish": cmd_polish, "exit": cmd_exit, "wsample": cmd_wsample, "abc": cmd_abc, "robust": cmd_robust, "dither": cmd_dither}[a.cmd](a)
 
 
 if __name__ == "__main__":
