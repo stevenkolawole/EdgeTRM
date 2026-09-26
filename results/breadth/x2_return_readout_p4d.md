@@ -1,28 +1,28 @@
 # X2 return test: read-out (`python x2_return_analyze.py --platform p4d`; rules in `x2_return_scoring.md`, fixed before any record was read)
 
-Records: 18 files, 146 cells; platform p4d A100-40GB only.
+Records: 18 files, 148 cells; platform p4d A100-40GB only.
 
 ## P1: collapse at median rho ~ 1, one threshold, rho beats phi
 
-Cells (weight quant, activation quant, weight noise; fp32 acc >= 10%): 90, collapsed (retained < 0.5): 27.
+Cells (weight quant, activation quant, weight noise; fp32 acc >= 10%): 91, collapsed (retained < 0.5): 28.
 
 | test | value | rule |
 |---|---|---|
-| (a) balanced accuracy of 'collapse iff median rho > 1' | 0.611 (plain 0.767) | >= 0.80 |
-| (b) AUROC rho vs AUROC -phi | 0.613 vs 0.965 | rho > phi |
-| (c) leave-one-family-out accuracy rho vs phi | 0.789 vs 0.911 | rho >= phi |
-| (d) Spearman(retained, t=1 return rate) | 0.234 (Pearson 0.348); secondary, fp32-correct examples: 0.553 | >= 0.7 |
-| best pooled rho threshold (post hoc, for reference) | 0.289 (bal. acc 0.685) | - |
+| (a) balanced accuracy of 'collapse iff median rho > 1' | 0.607 (plain 0.758) | >= 0.80 |
+| (b) AUROC rho vs AUROC -phi | 0.604 vs 0.966 | rho > phi |
+| (c) leave-one-family-out accuracy rho vs phi | 0.780 vs 0.912 | rho >= phi |
+| (d) Spearman(retained, t=1 return rate) | 0.220 (Pearson 0.323); secondary, fp32-correct examples: 0.538 | >= 0.7 |
+| best pooled rho threshold (post hoc, for reference) | 0.289 (bal. acc 0.679) | - |
 
 **Verdict: FALSIFIED** (criteria a-d: [False, False, False, False]).
 
-Collapsed cells' median rho (fp32-correct examples): 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.25, 0.33, 0.33, 0.33, 0.67, 1.33, 2.00, 2.00, 2.00, 2.00, 2.00
+Collapsed cells' median rho (fp32-correct examples): 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.25, 0.33, 0.33, 0.33, 0.67, 1.33, 2.00, 2.00, 2.00, 2.00, 2.00
 
 | family | cells | collapsed | rule bal.acc | AUROC rho | AUROC -phi | Spearman | LOFO acc rho / phi (thr rho / phi) |
 |---|---|---|---|---|---|---|---|
-| DT | 16 | 3 | 0.67 | 0.78 | 1.00 | 0.61 | 0.94 / 0.94 (0.29 / 0.82) |
+| DT | 16 | 3 | 0.67 | 0.78 | 1.00 | 0.61 | 0.94 / 0.94 (0.29 / 0.77) |
 | HRM | 22 | 7 | 0.71 | 0.81 | 0.99 | 0.47 | 0.86 / 0.95 (0.29 / 0.77) |
-| MDEQ | 8 | 2 | 0.50 | 0.50 | 1.00 | 0.67 | 0.75 / 0.88 (0.29 / 0.82) |
+| MDEQ | 9 | 3 | 0.50 | 0.50 | 1.00 | 0.64 | 0.67 / 0.89 (0.29 / 0.82) |
 | TRM-MLP | 17 | 6 | 0.50 | 0.58 | 0.98 | 0.69 | 0.71 / 0.88 (0.29 / 0.82) |
 | TRM-attn | 27 | 9 | 0.61 | 0.46 | 0.95 | 0.33 | 0.70 / 0.89 (0.20 / 0.84) |
 
@@ -30,7 +30,7 @@ Collapsed cells' median rho (fp32-correct examples): 0.06, 0.06, 0.06, 0.06, 0.0
 |---|---|---|---|---|
 | weight-quant | 46 | 9 | 0.61 | 0.66 |
 | act-quant | 9 | 4 | 0.75 | 0.82 |
-| weight-noise | 35 | 14 | 0.57 | 0.49 |
+| weight-noise | 36 | 15 | 0.57 | 0.48 |
 
 Per-example agreement (fp32-correct examples, all P1 cells pooled per family): t=1 return vs compressed correct
 
@@ -38,7 +38,7 @@ Per-example agreement (fp32-correct examples, all P1 cells pooled per family): t
 |---|---|---|---|---|---|---|
 | DT | 2048 | 0.940 | 0.846 | 0.379 | 0.836 | 0.000 |
 | HRM | 2028 | 0.781 | 0.806 | 0.569 | 0.751 | 0.000 |
-| MDEQ | 5808 | 0.999 | 0.636 | 0.001 | 0.636 | 0.429 |
+| MDEQ | 6534 | 0.999 | 0.566 | 0.001 | 0.566 | 0.375 |
 | TRM-MLP | 3111 | 0.966 | 0.665 | 0.113 | 0.654 | 0.009 |
 | TRM-attn | 3354 | 0.869 | 0.810 | 0.483 | 0.781 | 0.000 |
 
@@ -51,6 +51,7 @@ Fresh-e cells (activation noise redrawn every call):
 | sudoku_attn | anoise0.7 | 0.742 | 0.016 | 0.555 | 0.667 | 0.443 |
 | hrm_sudoku | anoise0.3 | 0.477 | 0.893 | 0.441 | 0.125 | 0.929 |
 | hrm_sudoku | anoise0.5 | 0.477 | 0.287 | 0.375 | 0.500 | 0.728 |
+| maze_attn | anoise1.0 | 0.875 | 0.310 | 0.896 | 0.062 | 0.919 |
 | sudoku_mlp | anoise0.1 | 0.715 | 0.989 | 0.719 | 0.062 | 0.926 |
 | sudoku_mlp | anoise0.2 | 0.715 | 0.918 | 0.719 | 0.062 | 0.874 |
 | sudoku_mlp | anoise0.3 | 0.715 | 0.546 | 0.699 | 0.062 | 0.554 |
@@ -102,6 +103,7 @@ All cells:
 | MDEQ | mdeq_small | noise0.1 | weight-noise | 1000 | 0.726 | 0.886 | 0.997 / 0.999 | 0.062 / 0.062 | 1.00 | 0.919 |
 | MDEQ | mdeq_small | noise0.2 | weight-noise | 1000 | 0.726 | 0.649 | 0.997 / 0.999 | 0.062 / 0.062 | 0.99 | 0.778 |
 | MDEQ | mdeq_small | noise0.3 | weight-noise | 1000 | 0.726 | 0.218 | 0.996 / 0.997 | 0.062 / 0.062 | 1.00 | 0.620 |
+| MDEQ | mdeq_small | noise0.5 | weight-noise | 1000 | 0.726 | 0.006 | 0.996 / 0.999 | 0.062 / 0.062 | 1.00 | 0.342 |
 | MDEQ | mdeq_small | w4a | weight-quant | 1000 | 0.726 | 0.910 | 0.998 / 0.999 | 0.062 / 0.062 | 1.00 | 0.902 |
 | MDEQ | mdeq_small | w4c | weight-quant | 1000 | 0.726 | 0.771 | 0.994 / 0.999 | 0.062 / 0.062 | 1.00 | 0.852 |
 | MDEQ | mdeq_small | w4g32 | weight-quant | 1000 | 0.726 | 0.906 | 0.997 / 1.000 | 0.062 / 0.062 | 1.00 | 0.884 |
@@ -127,6 +129,7 @@ All cells:
 | TRM-MLP | sudoku_mlp | w4t | weight-quant | 256 | 0.715 | 0.142 | 0.707 / 0.967 | 0.062 / 0.062 | 0.78 | 0.286 |
 | TRM-MLP | sudoku_mlp | w5t | weight-quant | 256 | 0.715 | 0.874 | 0.715 / 0.978 | 0.062 / 0.062 | 0.92 | 0.848 |
 | TRM-MLP | sudoku_mlp | w8c | weight-quant | 256 | 0.715 | 1.022 | 0.727 / 1.000 | 0.062 / 0.062 | 0.98 | 0.972 |
+| TRM-attn | maze_attn | anoise1.0 | act-noise(fresh) | 48 | 0.875 | 0.310 | 0.896 / 0.929 | 0.062 / 0.062 | 0.88 | 0.919 |
 | TRM-attn | maze_attn | +a4 | act-quant | 48 | 0.875 | 0.000 | 0.875 / 0.881 | 0.062 / 0.062 | 0.81 | 0.284 |
 | TRM-attn | maze_attn | noise0.1 | weight-noise | 48 | 0.875 | 1.000 | 0.979 / 1.000 | 0.062 / 0.062 | 1.00 | 1.000 |
 | TRM-attn | maze_attn | noise1.0 | weight-noise | 48 | 0.875 | 1.024 | 0.979 / 1.000 | 0.062 / 0.062 | 0.98 | 0.949 |

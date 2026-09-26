@@ -9,7 +9,9 @@ from pathlib import Path
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
-RES = HERE / "results/breadth/babel/x2_ret"
+import sys
+PLAT = sys.argv[1] if len(sys.argv) > 1 else "babel"
+RES = HERE / f"results/breadth/{PLAT}/x2_ret"
 SAT = 7.6          # logit above which sigmoid rounds to 1.0 in fp16
 
 
@@ -23,7 +25,8 @@ def binom_p(k, n):
 out = {}
 for task in ("sudoku_mlp", "sudoku_attn", "hrm_sudoku"):
     recs = []
-    for f in sorted(glob.glob(str(RES / f"ret_sr_{task}_*.json"))):
+    short = {"sudoku_mlp": "mlp", "sudoku_attn": "attn", "hrm_sudoku": "hrm"}[task]
+    for f in sorted(glob.glob(str(RES / f"ret_sr_{task}_*.json")) + glob.glob(str(RES / f"ret_sr_{short}_[ab].json"))):
         recs += json.load(open(f))["records"]
     recs.sort(key=lambda r: int(r["cell"].split("~")[1]))
     q = np.array([r["per"]["qhalt"] for r in recs], float)          # (K, n)
@@ -61,4 +64,4 @@ for task in ("sudoku_mlp", "sudoku_attn", "hrm_sudoku"):
     res["frac_tc_censored_all_draws"] = float((tc >= 16).all(0).mean())
     out[task] = res
     print(task, json.dumps(res))
-(HERE / "results/breadth/x2_p3_check.json").write_text(json.dumps(out, indent=1))
+(HERE / ("results/breadth/x2_p3_check.json" if PLAT == "babel" else f"results/breadth/x2_p3_check_{PLAT}.json")).write_text(json.dumps(out, indent=1))
