@@ -257,6 +257,9 @@ def main():
             json.dump({"meta": {**meta, "model": a.model}, "gen_fp": gen_fp}, open(bf_path, "w"))
         log(f"{a.model} {spec}: {json.dumps({k: (round(v, 3) if isinstance(v, float) else v) for k, v in summ.items()})}")
         del model
+        ctl.override = ctl.captured = None
+        import gc
+        gc.collect()                          # the Raven core_block_forward closure keeps a reference cycle to the model
         torch.cuda.empty_cache()
     log("done")
 
