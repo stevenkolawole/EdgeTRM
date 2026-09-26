@@ -1,0 +1,172 @@
+{
+ "platform": "babel",
+ "K1": {
+  "n_collapsed": 65,
+  "median_rec_k4": 0.7104072398190046,
+  "frac_cells_ge_0.8_k4": 0.3384615384615385,
+  "verdict": "falsified",
+  "median_rec_by_k": {
+   "1": 0.27631578947368424,
+   "2": 0.5,
+   "4": 0.7104072398190046,
+   "8": 0.8296943231441049,
+   "16": 0.8934010152284264
+  }
+ },
+ "K2": {
+  "n": 201,
+  "frac_within_2pts": 0.835820895522388,
+  "verdict": "partly",
+  "median_abs_d4": 0.0027548209366391463,
+  "worst": [
+   {
+    "family": "QAT",
+    "model": "qat_lsq_s0",
+    "cell": "noise0.3",
+    "d4": -0.04054054054054057,
+    "d16": 0.006756756756756799,
+    "d16_w4c": -0.006756756756756688,
+    "ok": false,
+    "collapse": true
+   },
+   {
+    "family": "seeds",
+    "model": "x5_mlp512_s4",
+    "cell": "noise0.2",
+    "d4": 0.03619909502262442,
+    "d16": -0.013574660633484115,
+    "d16_w4c": 0.0,
+    "ok": false,
+    "collapse": true
+   },
+   {
+    "family": "seeds",
+    "model": "x5_mlp512_s4",
+    "cell": "noise0.3",
+    "d4": 0.03619909502262442,
+    "d16": -0.004524886877828038,
+    "d16_w4c": -0.045248868778280604,
+    "ok": false,
+    "collapse": true
+   },
+   {
+    "family": "seeds",
+    "model": "x5_mlp512_s4",
+    "cell": "w4t",
+    "d4": -0.03167420814479638,
+    "d16": 0.009049773755656076,
+    "d16_w4c": 0.009049773755656076,
+    "ok": false,
+    "collapse": true
+   },
+   {
+    "family": "TRM-MLP",
+    "model": "trm_sudoku_mlp_w256_s0",
+    "cell": "noise0.1",
+    "d4": -0.029940119760479056,
+    "d16": -0.0239520958083832,
+    "d16_w4c": -0.0119760479041916,
+    "ok": false,
+    "collapse": false
+   },
+   {
+    "family": "seeds",
+    "model": "x5_mlp512_s3",
+    "cell": "noise0.2",
+    "d4": -0.02654867256637161,
+    "d16": -0.013274336283185861,
+    "d16_w4c": -0.017699115044247815,
+    "ok": false,
+    "collapse": true
+   },
+   {
+    "family": "TRM-attn",
+    "model": "trm_sudoku_attn_w512_s1",
+    "cell": "w4t",
+    "d4": 0.02285714285714291,
+    "d16": 0.0,
+    "d16_w4c": -0.040000000000000036,
+    "ok": false,
+    "collapse": false
+   },
+   {
+    "family": "TRM-MLP",
+    "model": "trm_sudoku_mlp_w512_s2",
+    "cell": "w4t",
+    "d4": -0.02192982456140352,
+    "d16": 0.00438596491228066,
+    "d16_w4c": 0.030701754385964897,
+    "ok": false,
+    "collapse": true
+   }
+  ]
+ },
+ "post_hoc": {
+  "auroc_r_q": 0.970321017565112,
+  "auroc_res_q": 0.9701998788612962,
+  "auroc_shift": 0.8898849182313749,
+  "auroc_gain": 0.509267110841914,
+  "by_family": {
+   "DT": {
+    "n": 16,
+    "n_collapse": 3,
+    "auroc_r_q": 1.0,
+    "auroc_shift": 1.0,
+    "r_q_collapsed_min": 0.2924549877643585,
+    "r_q_held_max": 0.28899501264095306
+   },
+   "HRM": {
+    "n": 22,
+    "n_collapse": 7,
+    "auroc_r_q": 1.0,
+    "auroc_shift": 1.0,
+    "r_q_collapsed_min": 0.41708000004291534,
+    "r_q_held_max": 0.36662501096725464
+   },
+   "MDEQ": {
+    "n": 17,
+    "n_collapse": 5,
+    "auroc_r_q": 1.0,
+    "auroc_shift": 0.48333333333333334,
+    "r_q_collapsed_min": 0.8032900094985962,
+    "r_q_held_max": 0.6449449956417084
+   },
+   "QAT": {
+    "n": 28,
+    "n_collapse": 10,
+    "auroc_r_q": 1.0,
+    "auroc_shift": 0.9777777777777777,
+    "r_q_collapsed_min": 0.32186999917030334,
+    "r_q_held_max": 0.3062350004911423
+   },
+   "TRM-MLP": {
+    "n": 31,
+    "n_collapse": 13,
+    "auroc_r_q": 0.9957264957264957,
+    "auroc_shift": 0.9957264957264957,
+    "r_q_collapsed_min": 0.5170199871063232,
+    "r_q_held_max": 0.5680699944496155
+   },
+   "TRM-attn": {
+    "n": 33,
+    "n_collapse": 10,
+    "auroc_r_q": 0.991304347826087,
+    "auroc_shift": 0.9478260869565217,
+    "r_q_collapsed_min": 0.48431000113487244,
+    "r_q_held_max": 0.5233400166034698
+   },
+   "seeds": {
+    "n": 45,
+    "n_collapse": 17,
+    "auroc_r_q": 0.9663865546218487,
+    "auroc_shift": 0.9789915966386554,
+    "r_q_collapsed_min": 0.317330002784729,
+    "r_q_held_max": 0.4698899984359741
+   }
+  },
+  "S_sigma_vs_r_q_spearman": 0.9099326340398044,
+  "S_sigma_over_r_q_median": 0.970824500042843,
+  "auroc_S_sigma": 0.915527950310559,
+  "auroc_r_q_same_cells": 0.977639751552795
+ }
+}
