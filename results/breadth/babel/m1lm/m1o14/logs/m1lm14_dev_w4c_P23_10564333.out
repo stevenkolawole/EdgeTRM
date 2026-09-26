@@ -1,0 +1,78 @@
+NVIDIA L40S 4.55.4
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 214669.10it/s]
+/data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1/modeling_ouro.py
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-2.6B/snapshots/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py
+Fri Sep 25 05:53:56 PM UTC 2026 babel-m5-32 restart 0: dev w4c_P23 steps 4 quants w4c~P23@w8c
+13:54:17 ouro14_s4_w4c~P23@w8c_core: computing bf16 reference (500 problems)
+13:55:27   reference done in 70s
+13:56:43 ouro14_s4_w4c~P23@w8c_core: tf nll 0.908  tf_acc 0.802  agree 0.924  kl 0.080  fid 0.8690  ans_acc 0.904  (168 linears quantized)
+13:58:09     greedy batch 0: 16 problems in 85s (max gen 512)
+[2026-09-25T13:58:12.128] error: *** JOB 10564333 ON babel-m5-32 CANCELLED AT 2026-09-25T13:58:12 DUE TO PREEMPTION ***
+NVIDIA L40S 4.55.4
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 833.87it/s]
+/data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1/modeling_ouro.py
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-2.6B/snapshots/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py
+Fri Sep 25 06:09:10 PM UTC 2026 babel-o9-16 restart 1: dev w4c_P23 steps 4 quants w4c~P23@w8c
+14:09:18 ouro14_s4_w4c~P23@w8c_core: tf nll 0.908  tf_acc 0.802  agree 0.924  kl 0.080  fid 0.8690  ans_acc 0.904  (168 linears quantized)
+14:09:52     greedy batch 1: 16 problems in 33s (max gen 512)
+14:10:25     greedy batch 2: 16 problems in 33s (max gen 512)
+14:10:58     greedy batch 3: 16 problems in 33s (max gen 512)
+14:11:31     greedy batch 4: 16 problems in 33s (max gen 512)
+14:12:04     greedy batch 5: 16 problems in 33s (max gen 512)
+14:12:37     greedy batch 6: 16 problems in 33s (max gen 512)
+14:13:10     greedy batch 7: 16 problems in 33s (max gen 512)
+14:13:43     greedy batch 8: 16 problems in 33s (max gen 512)
+14:14:17     greedy batch 9: 16 problems in 33s (max gen 512)
+14:14:50     greedy batch 10: 16 problems in 33s (max gen 512)
+14:15:23     greedy batch 11: 16 problems in 33s (max gen 512)
+14:15:56     greedy batch 12: 16 problems in 33s (max gen 512)
+14:16:29     greedy batch 13: 16 problems in 33s (max gen 512)
+14:17:02     greedy batch 14: 16 problems in 33s (max gen 512)
+14:17:35     greedy batch 15: 16 problems in 33s (max gen 512)
+14:18:08     greedy batch 16: 16 problems in 33s (max gen 512)
+14:18:41     greedy batch 17: 16 problems in 33s (max gen 512)
+14:19:15     greedy batch 18: 16 problems in 33s (max gen 512)
+14:19:48     greedy batch 19: 16 problems in 33s (max gen 512)
+14:20:21     greedy batch 20: 16 problems in 33s (max gen 512)
+14:20:54     greedy batch 21: 16 problems in 33s (max gen 512)
+14:21:27     greedy batch 22: 16 problems in 33s (max gen 512)
+14:22:00     greedy batch 23: 16 problems in 33s (max gen 512)
+14:22:33     greedy batch 24: 16 problems in 33s (max gen 512)
+14:23:06     greedy batch 25: 16 problems in 33s (max gen 512)
+14:23:39     greedy batch 26: 16 problems in 33s (max gen 512)
+14:24:12     greedy batch 27: 16 problems in 33s (max gen 512)
+14:24:45     greedy batch 28: 16 problems in 33s (max gen 512)
+14:25:18     greedy batch 29: 16 problems in 33s (max gen 512)
+14:25:52     greedy batch 30: 16 problems in 33s (max gen 512)
+14:26:21     greedy batch 31: 4 problems in 29s (max gen 452)
+14:26:21     greedy peak_mem_GB 13.2 (max allocated, this process)
+14:26:21 ouro14_s4_w4c~P23@w8c_core greedy         acc 66.6  degen 21.8  loop 0.4  capped 22.2  len 278  (n=500, 1023s)
+14:26:21 done
+M1_PEAK_GB reserved 14.8 allocated 13.2
+Fri Sep 25 06:26:22 PM UTC 2026 done rc=0
+NVIDIA L40S 4.55.4
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 136999.88it/s]
+/data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1/modeling_ouro.py
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-2.6B/snapshots/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py
+Fri Sep 25 06:35:03 PM UTC 2026 babel-p9-32 restart 2: dev w4c_P23 steps 4 quants w4c~P23@w8c
+14:35:14 ouro14_s4_w4c~P23@w8c_core: tf nll 0.908  tf_acc 0.802  agree 0.924  kl 0.080  fid 0.8690  ans_acc 0.904  (168 linears quantized)
+14:35:14     greedy peak_mem_GB 5.1 (max allocated, this process)
+14:35:14 ouro14_s4_w4c~P23@w8c_core greedy         acc 66.6  degen 21.8  loop 0.4  capped 22.2  len 278  (n=500, 0s)
+14:35:15 done
+M1_PEAK_GB reserved 5.2 allocated 5.1
+Fri Sep 25 06:35:16 PM UTC 2026 done rc=0
+NVIDIA L40S 4.55.4
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 163741.60it/s]
+/data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1/modeling_ouro.py
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-2.6B/snapshots/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py
+Fri Sep 25 06:37:54 PM UTC 2026 babel-m5-32 restart 3: dev w4c_P23 steps 4 quants w4c~P23@w8c
+14:38:24 ouro14_s4_w4c~P23@w8c_core: tf nll 0.908  tf_acc 0.802  agree 0.924  kl 0.080  fid 0.8690  ans_acc 0.904  (168 linears quantized)
+14:38:24     greedy peak_mem_GB 5.1 (max allocated, this process)
+14:38:24 ouro14_s4_w4c~P23@w8c_core greedy         acc 66.6  degen 21.8  loop 0.4  capped 22.2  len 278  (n=500, 0s)
+14:38:30 done
+M1_PEAK_GB reserved 5.2 allocated 5.1
+Fri Sep 25 06:38:33 PM UTC 2026 done rc=0

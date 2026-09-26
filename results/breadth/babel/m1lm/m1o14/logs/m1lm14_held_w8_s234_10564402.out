@@ -1,0 +1,157 @@
+NVIDIA L40S 4.55.4
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 246723.76it/s]
+/data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1/modeling_ouro.py
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-2.6B/snapshots/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py
+Fri Sep 25 06:10:52 PM UTC 2026 babel-u5-28 restart 0: held w8_s234 steps 2,3,4 quants w8c
+14:11:33 ouro14_s2_w8c_core: computing bf16 reference (500 problems)
+14:12:10   reference done in 37s
+14:12:45 ouro14_s2_w8c_core: tf nll 1.020  tf_acc 0.793  agree 0.990  kl 0.002  fid 0.9980  ans_acc 0.984  (168 linears quantized)
+14:13:07     greedy batch 0: 16 problems in 22s (max gen 512)
+[2026-09-25T14:13:14.004] error: *** JOB 10564402 ON babel-u5-28 CANCELLED AT 2026-09-25T14:13:14 DUE TO PREEMPTION ***
+NVIDIA L40S 4.55.4
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 175890.17it/s]
+/data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1/modeling_ouro.py
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-2.6B/snapshots/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py
+Fri Sep 25 06:17:02 PM UTC 2026 babel-p5-20 restart 1: held w8_s234 steps 2,3,4 quants w8c
+14:17:10 ouro14_s2_w8c_core: tf nll 1.020  tf_acc 0.793  agree 0.990  kl 0.002  fid 0.9980  ans_acc 0.984  (168 linears quantized)
+14:17:32     greedy batch 1: 16 problems in 22s (max gen 512)
+14:17:54     greedy batch 2: 16 problems in 22s (max gen 512)
+14:18:15     greedy batch 3: 16 problems in 22s (max gen 512)
+14:18:37     greedy batch 4: 16 problems in 22s (max gen 512)
+14:18:59     greedy batch 5: 16 problems in 22s (max gen 512)
+14:19:21     greedy batch 6: 16 problems in 22s (max gen 512)
+14:19:43     greedy batch 7: 16 problems in 22s (max gen 512)
+14:20:05     greedy batch 8: 16 problems in 22s (max gen 512)
+14:20:27     greedy batch 9: 16 problems in 22s (max gen 512)
+14:20:48     greedy batch 10: 16 problems in 22s (max gen 512)
+14:21:10     greedy batch 11: 16 problems in 22s (max gen 512)
+14:21:32     greedy batch 12: 16 problems in 22s (max gen 512)
+14:21:51     greedy batch 13: 16 problems in 19s (max gen 459)
+14:22:13     greedy batch 14: 16 problems in 22s (max gen 512)
+14:22:35     greedy batch 15: 16 problems in 22s (max gen 512)
+14:22:57     greedy batch 16: 16 problems in 22s (max gen 512)
+14:23:18     greedy batch 17: 16 problems in 22s (max gen 512)
+14:23:40     greedy batch 18: 16 problems in 22s (max gen 512)
+14:24:02     greedy batch 19: 16 problems in 22s (max gen 512)
+14:24:24     greedy batch 20: 16 problems in 22s (max gen 512)
+14:24:45     greedy batch 21: 16 problems in 22s (max gen 512)
+14:25:07     greedy batch 22: 16 problems in 22s (max gen 512)
+14:25:29     greedy batch 23: 16 problems in 22s (max gen 512)
+14:25:50     greedy batch 24: 16 problems in 21s (max gen 512)
+14:26:12     greedy batch 25: 16 problems in 21s (max gen 512)
+14:26:33     greedy batch 26: 16 problems in 22s (max gen 512)
+14:26:55     greedy batch 27: 16 problems in 22s (max gen 512)
+14:27:16     greedy batch 28: 16 problems in 21s (max gen 512)
+14:27:37     greedy batch 29: 16 problems in 22s (max gen 512)
+14:27:59     greedy batch 30: 16 problems in 21s (max gen 512)
+14:28:20     greedy batch 31: 4 problems in 21s (max gen 512)
+14:28:20     greedy peak_mem_GB 6.8 (max allocated, this process)
+14:28:20 ouro14_s2_w8c_core greedy         acc 76.2  degen 14.8  loop 0.0  capped 15.2  len 348  (n=500, 671s)
+14:28:24 ouro14_s3_w8c_core: computing bf16 reference (500 problems)
+[2026-09-25T14:28:48.005] error: *** JOB 10564402 ON babel-p5-20 CANCELLED AT 2026-09-25T14:28:48 DUE TO PREEMPTION ***
+NVIDIA L40S 4.55.4
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 186732.71it/s]
+/data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1/modeling_ouro.py
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-2.6B/snapshots/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py
+Fri Sep 25 06:37:14 PM UTC 2026 babel-q5-32 restart 2: held w8_s234 steps 2,3,4 quants w8c
+14:37:28 ouro14_s2_w8c_core: tf nll 1.020  tf_acc 0.793  agree 0.990  kl 0.002  fid 0.9980  ans_acc 0.984  (168 linears quantized)
+14:37:28     greedy peak_mem_GB 2.8 (max allocated, this process)
+14:37:28 ouro14_s2_w8c_core greedy         acc 76.2  degen 14.8  loop 0.0  capped 15.2  len 348  (n=500, 0s)
+14:37:30 ouro14_s3_w8c_core: computing bf16 reference (500 problems)
+14:38:39   reference done in 70s
+14:39:47 ouro14_s3_w8c_core: tf nll 0.854  tf_acc 0.809  agree 0.991  kl 0.001  fid 0.9977  ans_acc 0.984  (168 linears quantized)
+14:40:20     greedy batch 0: 16 problems in 34s (max gen 435)
+14:40:54     greedy batch 1: 16 problems in 34s (max gen 512)
+14:41:26     greedy batch 2: 16 problems in 32s (max gen 512)
+14:41:47     greedy batch 3: 16 problems in 20s (max gen 318)
+14:42:17     greedy batch 4: 16 problems in 30s (max gen 478)
+14:42:45     greedy batch 5: 16 problems in 29s (max gen 454)
+14:43:17     greedy batch 6: 16 problems in 32s (max gen 512)
+14:43:39     greedy batch 7: 16 problems in 21s (max gen 337)
+14:44:11     greedy batch 8: 16 problems in 32s (max gen 512)
+14:44:40     greedy batch 9: 16 problems in 29s (max gen 456)
+14:45:02     greedy batch 10: 16 problems in 22s (max gen 347)
+14:45:34     greedy batch 11: 16 problems in 32s (max gen 512)
+14:46:06     greedy batch 12: 16 problems in 32s (max gen 512)
+14:46:35     greedy batch 13: 16 problems in 29s (max gen 460)
+14:47:03     greedy batch 14: 16 problems in 29s (max gen 458)
+14:47:30     greedy batch 15: 16 problems in 27s (max gen 419)
+14:48:02     greedy batch 16: 16 problems in 32s (max gen 512)
+14:48:35     greedy batch 17: 16 problems in 33s (max gen 512)
+14:49:00     greedy batch 18: 16 problems in 26s (max gen 407)
+14:49:33     greedy batch 19: 16 problems in 32s (max gen 512)
+14:50:05     greedy batch 20: 16 problems in 32s (max gen 512)
+14:50:32     greedy batch 21: 16 problems in 27s (max gen 424)
+14:51:04     greedy batch 22: 16 problems in 32s (max gen 512)
+14:51:28     greedy batch 23: 16 problems in 24s (max gen 381)
+14:52:00     greedy batch 24: 16 problems in 32s (max gen 512)
+14:52:29     greedy batch 25: 16 problems in 28s (max gen 446)
+14:53:01     greedy batch 26: 16 problems in 32s (max gen 512)
+14:53:33     greedy batch 27: 16 problems in 32s (max gen 512)
+14:54:06     greedy batch 28: 16 problems in 32s (max gen 512)
+14:54:32     greedy batch 29: 16 problems in 27s (max gen 424)
+14:55:04     greedy batch 30: 16 problems in 32s (max gen 512)
+14:55:27     greedy batch 31: 4 problems in 22s (max gen 353)
+14:55:27     greedy peak_mem_GB 8.8 (max allocated, this process)
+14:55:27 ouro14_s3_w8c_core greedy         acc 78.8  degen 4.2  loop 0.0  capped 4.2  len 257  (n=500, 940s)
+14:55:35 ouro14_s4_w8c_core: computing bf16 reference (500 problems)
+14:57:03   reference done in 88s
+14:58:30 ouro14_s4_w8c_core: tf nll 0.851  tf_acc 0.812  agree 0.993  kl 0.001  fid 0.9975  ans_acc 0.984  (168 linears quantized)
+14:59:20     greedy batch 0: 16 problems in 50s (max gen 512)
+15:00:03     greedy batch 1: 16 problems in 43s (max gen 512)
+15:00:45     greedy batch 2: 16 problems in 42s (max gen 490)
+15:01:13     greedy batch 3: 16 problems in 28s (max gen 336)
+15:01:53     greedy batch 4: 16 problems in 40s (max gen 478)
+15:02:31     greedy batch 5: 16 problems in 38s (max gen 453)
+15:03:14     greedy batch 6: 16 problems in 42s (max gen 502)
+15:03:38     greedy batch 7: 16 problems in 24s (max gen 287)
+15:04:21     greedy batch 8: 16 problems in 43s (max gen 512)
+15:04:50     greedy batch 9: 16 problems in 29s (max gen 347)
+15:05:21     greedy batch 10: 16 problems in 31s (max gen 373)
+15:05:52     greedy batch 11: 16 problems in 31s (max gen 372)
+15:06:26     greedy batch 12: 16 problems in 34s (max gen 400)
+15:07:04     greedy batch 13: 16 problems in 38s (max gen 453)
+15:07:44     greedy batch 14: 16 problems in 40s (max gen 463)
+15:08:16     greedy batch 15: 16 problems in 32s (max gen 373)
+15:09:01     greedy batch 16: 16 problems in 44s (max gen 512)
+15:09:44     greedy batch 17: 16 problems in 43s (max gen 512)
+15:10:17     greedy batch 18: 16 problems in 33s (max gen 400)
+15:11:00     greedy batch 19: 16 problems in 43s (max gen 512)
+15:11:42     greedy batch 20: 16 problems in 42s (max gen 499)
+15:12:10     greedy batch 21: 16 problems in 28s (max gen 338)
+15:12:46     greedy batch 22: 16 problems in 35s (max gen 420)
+15:13:20     greedy batch 23: 16 problems in 34s (max gen 416)
+15:13:50     greedy batch 24: 16 problems in 30s (max gen 355)
+15:14:32     greedy batch 25: 16 problems in 43s (max gen 512)
+15:15:16     greedy batch 26: 16 problems in 43s (max gen 512)
+15:15:58     greedy batch 27: 16 problems in 43s (max gen 512)
+15:16:42     greedy batch 28: 16 problems in 43s (max gen 512)
+15:17:15     greedy batch 29: 16 problems in 33s (max gen 397)
+15:17:55     greedy batch 30: 16 problems in 39s (max gen 469)
+15:18:24     greedy batch 31: 4 problems in 29s (max gen 350)
+15:18:24     greedy peak_mem_GB 10.8 (max allocated, this process)
+15:18:24 ouro14_s4_w8c_core greedy         acc 78.8  degen 2.6  loop 0.6  capped 2.6  len 242  (n=500, 1193s)
+15:18:25 done
+M1_PEAK_GB reserved 13.4 allocated 10.8
+Fri Sep 25 07:18:26 PM UTC 2026 done rc=0
+NVIDIA L40S 4.55.4
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 179953.64it/s]
+/data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-1.4B/snapshots/574fa66cb8bf5abdc979642d01cf2b79b16bfab1/modeling_ouro.py
+already ok /data/hf_cache/skolawol/hub/models--ByteDance--Ouro-2.6B/snapshots/1ed04250da1a9936042725d302e81c8fa2ab5abd/modeling_ouro.py
+Fri Sep 25 08:24:01 PM UTC 2026 babel-q5-28 restart 3: held w8_s234 steps 2,3,4 quants w8c
+16:24:14 ouro14_s2_w8c_core: tf nll 1.020  tf_acc 0.793  agree 0.990  kl 0.002  fid 0.9980  ans_acc 0.984  (168 linears quantized)
+16:24:14     greedy peak_mem_GB 2.8 (max allocated, this process)
+16:24:14 ouro14_s2_w8c_core greedy         acc 76.2  degen 14.8  loop 0.0  capped 15.2  len 348  (n=500, 0s)
+16:24:16 ouro14_s3_w8c_core: tf nll 0.854  tf_acc 0.809  agree 0.991  kl 0.001  fid 0.9977  ans_acc 0.984  (168 linears quantized)
+16:24:16     greedy peak_mem_GB 2.8 (max allocated, this process)
+16:24:16 ouro14_s3_w8c_core greedy         acc 78.8  degen 4.2  loop 0.0  capped 4.2  len 257  (n=500, 0s)
+16:24:18 ouro14_s4_w8c_core: tf nll 0.851  tf_acc 0.812  agree 0.993  kl 0.001  fid 0.9975  ans_acc 0.984  (168 linears quantized)
+16:24:18     greedy peak_mem_GB 2.8 (max allocated, this process)
+16:24:18 ouro14_s4_w8c_core greedy         acc 78.8  degen 2.6  loop 0.6  capped 2.6  len 242  (n=500, 0s)
+16:24:18 done
+M1_PEAK_GB reserved 2.9 allocated 2.8
+Fri Sep 25 08:24:18 PM UTC 2026 done rc=0
