@@ -3,7 +3,8 @@
 does not?  Uses only saved records: tf2.json (looped_decode v2) holds per-cell KL on the bf16 top-64 support + a
 tail bin, fidelity and NLL.  One platform per model (the platform with the most KL cells), batch-matched to the bf16
 reference, one row per model x quantizer x loops (largest n).  Collapse = greedy retained < 50%.
-    python kl_pool.py
+    python kl_pool.py          # the platform with the most KL cells per model
+    python kl_pool.py p4d      # p4d only (audit batch 8)
 """
 import sys
 from collections import defaultdict
@@ -17,6 +18,7 @@ import analyze_looped as A  # noqa: E402
 from ret_analyze import auroc, best_cut  # noqa: E402
 
 ROOTS = A.POOL_ROOTS + ["results/looped/p5/cross"]
+PLATFORM = sys.argv[1] if len(sys.argv) > 1 else None   # e.g. "p4d": restrict every model to one platform
 
 
 def main():
@@ -25,7 +27,8 @@ def main():
     per = defaultdict(lambda: defaultdict(set))
     for r in rows:
         per[r["model"]][r["platform"]].add((r["quant"], r["loops"]))
-    choice = {m: max(d, key=lambda p: len(d[p])) for m, d in per.items()}
+    choice = {m: (PLATFORM if PLATFORM in d else None) if PLATFORM else max(d, key=lambda p: len(d[p]))
+              for m, d in per.items()}
     rows = [r for r in rows if r["platform"] == choice[r["model"]]]
     best = {}
     for r in rows:

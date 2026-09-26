@@ -427,7 +427,7 @@ def sec_boundary(cells, nmin):
 
 POOL_ROOTS = ["results/looped/p4d/q6", "results/looped/p4d/olmo", "results/looped/p4d/olmo200", "results/looped/p4d/olmo_b8",
               "results/looped/p4d/loops", "results/looped/p4d/n500", "results/looped/p4d/olmo500",
-              "results/looped/babel/q6", "results/looped/p5/n500", "results/looped/p5/band"]
+              "results/looped/babel/q6", "results/looped/p4d/huginn_p4d", "results/looped/p5/n500", "results/looped/p5/band"]
 PLATFORM_RANK = {"p5": 0, "p4d": 1, "babel": 2, "lambda": 3}
 
 
