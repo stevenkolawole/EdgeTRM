@@ -41,6 +41,10 @@ from m5_controller import fire_mask, first
 ROOT = Path(os.environ.get("M5_CTL_DIR", A.HERE / "results" / "m5" / "ctl" / "p4d"))
 DT_ROOT = Path(os.environ.get("M5_DT_DIR", A.HERE / "results" / "m5" / "ctl" / "p4d_dt"))   # DT controller records (none on p4d yet)
 BUDGETS = [4, 8, 16, 32, 64, 128, 256, 512]
+# M5_POLISH=w8c: the polish model is the w8c model instead of fp32 (device-realistic control: no fp32 weights held).
+# Rollout polish records exist for fp32 only, so under w8c the rollout end states are not polished (polishing one returns
+# the same answer at j extra steps, which selection then avoids); fp32 cells are skipped.
+POL = os.environ.get("M5_POLISH", "fp32")
 NB = 2000
 RELEASED = {"sudoku_mlp": "fp32,noise0.15@s0,noise0.15@s2,w3g32,w4c,w4t",
             "sudoku_attn": "fp32,noise0.7@s0,noise0.7@s1,noise0.7@s2,w3c,w4c",
@@ -214,16 +218,20 @@ def cell_splits(task, spec, fam):
     if fam["kind"] == "maze":
         det = [load_det(ROOT / "det_o0" / task / f"{spec}.npz", slice(0, 500)), load_det(ROOT / "det_o0" / task / f"{spec}.npz", slice(500, 1000))]
         m2 = [load_m2(task, spec, 1, 16, ""), load_m2(task, spec, 1, 16, "_o500")]
-        pol = [load_pol(ROOT / f"polish_o{o}" / task / f"{spec}__fp32.npz") for o in (0, 500)]
+        pol = [load_pol(ROOT / f"polish_o{o}" / task / f"{spec}__{POL}.npz") for o in (0, 500)]
     else:
         sub = fam.get("sub", task)
         det = [load_det(ROOT / f"det_o{o}" / sub / f"{spec}.npz") for o in (0, 1000)]
         tag = fam.get("tag", "")
         m2 = [load_m2(task, spec, 0.3, fam["K"], f"{('_o1000' if o else '')}{tag}") for o in (0, 1000)]
-        pol = [load_pol(ROOT / f"polish_o{o}" / sub / f"{spec}__fp32.npz") for o in (0, 1000)]
+        pol = [load_pol(ROOT / f"polish_o{o}" / sub / f"{spec}__{POL}.npz") for o in (0, 1000)]
     if any(x is None for x in det + m2):
         return None
-    if spec == "fp32":                         # fp32 polish of an fp32 trajectory = more fp32 steps
+    if POL != "fp32":
+        if spec == "fp32":
+            return None
+        m2 = [(rc, rq, np.repeat(rc[:, :, -1:], rp.shape[2], 2)) for rc, rq, rp in m2]
+    elif spec == "fp32":                         # fp32 polish of an fp32 trajectory = more fp32 steps
         # (index clipped at the last recorded step: the answer then uses fewer steps than charged, a conservative cost)
         pol = [np.stack([d[0][:, np.minimum(np.arange(t + 1, t + 5), d[0].shape[1] - 1)] for t in range(16)], 1) for d in det]
     if any(x is None for x in pol):
@@ -256,7 +264,11 @@ def families():
 def run_family(fam, rng):
     task = fam["task"]
     res = {}
-    fp = cell_splits(task, "fp32", fam)
+    fp = cell_splits(task, "fp32", fam) if POL == "fp32" else None
+    if POL != "fp32":                                  # the exit rule is still chosen on the dev fp32 trajectory
+        sub = fam.get("sub", task)
+        d0 = load_det(ROOT / "det_o0" / sub / "fp32.npz", slice(0, 500) if fam["kind"] == "maze" else None)
+        fp = ([d0],) if d0 is not None else None
     if fp is None:
         print(f"  {fam['name']}: fp32 records missing, skipped")
         return res
@@ -379,7 +391,7 @@ def dt_ho(rng):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--json", default=str(A.RB / "m5_ctl_ho.json"))
+    ap.add_argument("--json", default=str(A.RB / ("m5_ctl_ho.json" if POL == "fp32" else f"m5_ctl_ho_{POL}.json")))
     ap.add_argument("--fams", default="")
     a = ap.parse_args()
     rng = np.random.default_rng(0)
