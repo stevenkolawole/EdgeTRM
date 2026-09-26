@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""M1 on MDEQ-Small: matched-traffic frontier on dev, frozen picks evaluated on held-out images.
+"""M1 on MDEQ (Small or XL, from the record meta): matched-traffic frontier on dev, frozen picks evaluated on held-out images.
 
 Cost: weight-bit traffic of the fixed-point block, (t_c x bits(cheap) + k x bits(precise)) / 32 in fp32-iteration
 units (injection and head, computed once per model, are ignored); memory = stored bits per weight (nested n8c4 with
@@ -46,7 +46,9 @@ def main():
     def mem_of(c, p):
         return MEM["w8c"] if (c == "n8c4" and p == "w8c") else MEM[c] + MEM[p]
 
-    print("## MDEQ-Small dev (images 0-2499): single formats from z0 = 0 (top-1 %)\n")
+    m = dev["meta"]
+    name = {"mdeq_small": "MDEQ-Small", "mdeq_xl": "MDEQ-XL"}.get(m.get("model"), m.get("model", "MDEQ"))
+    print(f"## {name} dev (images {m.get('lo', 0)}-{m.get('hi', 2500) - 1}): single formats from z0 = 0 (top-1 %)\n")
     print("| format | " + " | ".join(str(k) for k in curve) + " |")
     print("|---|" + "---|" * len(curve))
     for s, v in singles.items():
