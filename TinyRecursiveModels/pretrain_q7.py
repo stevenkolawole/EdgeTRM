@@ -94,7 +94,7 @@ class PretrainConfig(pydantic.BaseModel):
     freeze_weights: bool = False # If True, freeze weights and only learn the embeddings
 
     # ---- Q7 (trainable basin width). Pass on the command line with a "+" prefix (+q7_reg=jac ...).
-    # q7_reg: none | jac | sens | noise | qat | clip | lsq | sam | asam. Active from step q7_start_frac*total_steps; its strength
+    # q7_reg: none | jac | sens | contract | noise | qat | clip | lsq | sam | asam. Active from step q7_start_frac*total_steps; its strength
     # ramps linearly from 0 to full over q7_ramp_steps (jac lambda, noise sigma, clip threshold).
     q7_reg: str = "none"
     q7_start_frac: float = 0.0
@@ -109,6 +109,9 @@ class PretrainConfig(pydantic.BaseModel):
     q7_sens_target: float = 0.0     # sens: hinge, penalise only S above this (0 = plain penalty on S)
     q7_sens_min_steps: int = 0      # sens: probe only puzzles whose carry has run >= this many ACT steps
     q7_rho: float = 0.05            # sam / asam: neighbourhood radius (Foret et al. 2021; ASAM: Kwon et al. 2021)
+    q7_keep_last_ckpt: bool = False # quota: after saving step_N, delete older step_* files (eval JSONs stay)
+    q7_margin: float = 0.1          # contract: hinge on rho(J) > 1 - margin at the late carry
+    q7_pi_iters: int = 8            # contract: power iterations (finite-difference JVPs) for the dominant direction
     q7_act_noise: float = 0.0       # extra, combinable with any q7_reg: Gaussian noise at every CastedLinear input
                                     # during training, std = this x the input's std (fresh every call)
     q7_extra_wnoise: float = 0.0    # extra, combinable with any q7_reg: weight noise sigma x per-tensor std per step
@@ -300,6 +303,12 @@ def save_train_state(config: PretrainConfig, train_state: TrainState):
                 print(f"[q7] removed stale {stale}")
     torch.save(train_state.model.state_dict(), path + ".tmp")
     os.replace(path + ".tmp", path)
+    if config.q7_keep_last_ckpt:
+        import re as _re
+        for fn in os.listdir(config.checkpoint_path):
+            mm = _re.fullmatch(r"step_(\d+)(\.nolsq)?", fn)
+            if mm and int(mm.group(1)) < train_state.step:
+                os.remove(os.path.join(config.checkpoint_path, fn))
 
 
 def load_checkpoint(model: nn.Module, config: PretrainConfig):
@@ -755,6 +764,54 @@ def q7_sensitivity_penalty(config: PretrainConfig, train_state: TrainState):
     return (num / den).mean() / config.q7_sigma
 
 
+def q7_contraction_penalty(config: PretrainConfig, train_state: TrainState):
+    """Dominant-eigenvalue magnitude rho(J) of one full ACT step F at the late training carry (puzzles with >=
+    q7_sens_min_steps ACT steps; the fixed-point region), in the style of DEQ Jacobian regularisation (Bai, Koltun &
+    Kolter 2021) but on the spectral radius: q7_pi_iters power iterations v <- J v / |J v| with finite-difference
+    JVPs (no grad), then rho = |J v| / |v| per puzzle with gradient in W (finite difference, eps 1e-2 relative), mean
+    over puzzles. Penalty (in train_batch): lambda x relu(rho - (1 - margin))."""
+    inner = _q7_inner(train_state.model)
+    c = train_state.carry
+    if config.q7_sens_min_steps > 0:
+        idx = torch.nonzero(c.steps >= config.q7_sens_min_steps).flatten()[: config.q7_sens_sub]
+        if idx.numel() == 0:
+            return torch.zeros((), device=c.steps.device)
+    else:
+        idx = torch.arange(min(config.q7_sens_sub, c.inner_carry.z_L.shape[0]), device=c.steps.device)
+    with torch.no_grad():
+        cd = c.current_data
+        x = q7_input_embeddings(inner, cd["inputs"][idx], cd["puzzle_identifiers"][idx]).float()
+        zH = c.inner_carry.z_H[idx].float()
+        zL = c.inner_carry.z_L[idx].float()
+    cs = inner.rotary_emb() if hasattr(inner, "rotary_emb") else None
+    B = zH.shape[0]
+
+    def bnorm(a, b):
+        return torch.sqrt(a.pow(2).flatten(1).sum(1) + b.pow(2).flatten(1).sum(1)).clamp_min(1e-12)
+
+    def F(h, l):
+        return q7_act_step(inner.L_level, inner.config, h, l, x, cs)
+
+    scale = bnorm(zH, zL)
+    eps = 1e-2
+    with torch.no_grad():
+        h0, l0 = F(zH, zL)
+        vh, vl = torch.randn_like(zH), torch.randn_like(zL)
+        n = bnorm(vh, vl).view(B, 1, 1)
+        vh, vl = vh / n, vl / n
+        for _ in range(config.q7_pi_iters):
+            e = (eps * scale).view(B, 1, 1)
+            h1, l1 = F(zH + e * vh, zL + e * vl)
+            jh, jl = (h1 - h0) / e, (l1 - l0) / e
+            n = bnorm(jh, jl).view(B, 1, 1)
+            vh, vl = jh / n, jl / n
+    e = (eps * scale).view(B, 1, 1)
+    h0g, l0g = F(zH, zL)
+    h1g, l1g = F(zH + e * vh, zL + e * vl)
+    rho = bnorm((h1g - h0g) / e, (l1g - l0g) / e)          # |J v| with |v| = 1
+    return rho.mean()
+
+
 def create_evaluators(config: PretrainConfig, eval_metadata: PuzzleDatasetMetadata) -> List[Any]:
     data_paths =config.data_paths_test if len(config.data_paths_test)>0 else config.data_paths
     # Initialize evaluators
@@ -813,6 +870,11 @@ def train_batch(config: PretrainConfig, train_state: TrainState, batch: Any, glo
     if config.q7_reg == "jac" and q7_s > 0 and train_state.step % config.q7_jac_every == 0:
         q7_jac = q7_jacobian_penalty(config, train_state)
         (q7_s * config.q7_lambda * config.q7_jac_every * q7_jac).backward()
+    if config.q7_reg == "contract" and q7_s > 0 and train_state.step % config.q7_jac_every == 0:
+        q7_jac = q7_contraction_penalty(config, train_state)       # logged under q7/jac_fro2 = rho estimate
+        pen = torch.relu(q7_jac - (1.0 - config.q7_margin))
+        if pen.requires_grad:
+            (q7_s * config.q7_lambda * config.q7_jac_every * pen).backward()
     if config.q7_reg == "sens" and q7_s > 0 and train_state.step % config.q7_jac_every == 0:
         q7_jac = q7_sensitivity_penalty(config, train_state)       # logged under q7/jac_fro2 = S estimate
         pen = torch.relu(q7_jac - config.q7_sens_target) if config.q7_sens_target > 0 else q7_jac
