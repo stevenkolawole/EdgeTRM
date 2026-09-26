@@ -1,28 +1,28 @@
 # X2 return test: read-out (`python x2_return_analyze.py --platform babel`; rules in `x2_return_scoring.md`, fixed before any record was read)
 
-Records: 43 files, 255 cells; platform Babel L40S only.
+Records: 42 files, 255 cells; platform Babel L40S only.
 
 ## P1: collapse at median rho ~ 1, one threshold, rho beats phi
 
-Cells (weight quant, activation quant, weight noise; fp32 acc >= 10%): 191, collapsed (retained < 0.5): 63.
+Cells (weight quant, activation quant, weight noise; fp32 acc >= 10%): 191, collapsed (retained < 0.5): 64.
 
 | test | value | rule |
 |---|---|---|
-| (a) balanced accuracy of 'collapse iff median rho > 1' | 0.627 (plain 0.754) | >= 0.80 |
-| (b) AUROC rho vs AUROC -phi | 0.710 vs 0.981 | rho > phi |
+| (a) balanced accuracy of 'collapse iff median rho > 1' | 0.625 (plain 0.749) | >= 0.80 |
+| (b) AUROC rho vs AUROC -phi | 0.704 vs 0.981 | rho > phi |
 | (c) leave-one-family-out accuracy rho vs phi | 0.717 vs 0.942 | rho >= phi |
-| (d) Spearman(retained, t=1 return rate) | 0.318 (Pearson 0.410); secondary, fp32-correct examples: 0.599 | >= 0.7 |
-| best pooled rho threshold (post hoc, for reference) | 0.102 (bal. acc 0.696) | - |
+| (d) Spearman(retained, t=1 return rate) | 0.306 (Pearson 0.396); secondary, fp32-correct examples: 0.588 | >= 0.7 |
+| best pooled rho threshold (post hoc, for reference) | 0.289 (bal. acc 0.691) | - |
 
 **Verdict: FALSIFIED** (criteria a-d: [False, False, False, False]).
 
-Collapsed cells' median rho (fp32-correct examples): 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.12, 0.12, 0.12, 0.12, 0.12, 0.17, 0.17, 0.17, 0.25, 0.25, 0.33, 0.33, 0.33, 0.33, 0.33, 0.67, 0.67, 1.00, 1.00, 1.17, 1.17, 1.17, 1.33, 1.33, 1.33, 1.33, 2.00, 2.00, 2.00, 2.00, 2.00, 2.00, 2.00, 2.00, 4.00
+Collapsed cells' median rho (fp32-correct examples): 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.12, 0.12, 0.12, 0.12, 0.12, 0.17, 0.17, 0.17, 0.25, 0.25, 0.33, 0.33, 0.33, 0.33, 0.33, 0.67, 0.67, 1.00, 1.00, 1.17, 1.17, 1.17, 1.33, 1.33, 1.33, 1.33, 2.00, 2.00, 2.00, 2.00, 2.00, 2.00, 2.00, 2.00, 4.00
 
 | family | cells | collapsed | rule bal.acc | AUROC rho | AUROC -phi | Spearman | LOFO acc rho / phi (thr rho / phi) |
 |---|---|---|---|---|---|---|---|
 | DT | 16 | 3 | 0.67 | 0.78 | 1.00 | 0.61 | 0.75 / 0.94 (0.10 / 0.69) |
-| HRM | 22 | 7 | 0.71 | 0.81 | 0.99 | 0.46 | 0.82 / 0.95 (0.10 / 0.69) |
-| MDEQ | 16 | 3 | 0.50 | 0.50 | 1.00 | 0.30 | 0.81 / 1.00 (0.29 / 0.69) |
+| HRM | 22 | 7 | 0.71 | 0.81 | 0.99 | 0.46 | 0.86 / 0.95 (0.29 / 0.69) |
+| MDEQ | 16 | 4 | 0.50 | 0.50 | 1.00 | 0.39 | 0.75 / 1.00 (0.29 / 0.69) |
 | QAT | 28 | 10 | 0.60 | 1.00 | 1.00 | 0.68 | 0.86 / 0.93 (0.29 / 0.77) |
 | TRM-MLP | 31 | 13 | 0.65 | 0.73 | 1.00 | 0.60 | 0.74 / 0.94 (0.29 / 0.69) |
 | TRM-attn | 33 | 10 | 0.65 | 0.54 | 0.96 | 0.06 | 0.45 / 0.91 (0.10 / 0.69) |
@@ -30,9 +30,9 @@ Collapsed cells' median rho (fp32-correct examples): 0.06, 0.06, 0.06, 0.06, 0.0
 
 | compression type | cells | collapsed | rule bal.acc | AUROC rho |
 |---|---|---|---|---|
-| weight-quant | 94 | 23 | 0.70 | 0.76 |
+| weight-quant | 93 | 23 | 0.70 | 0.76 |
 | act-quant | 9 | 4 | 0.75 | 0.82 |
-| weight-noise | 88 | 36 | 0.57 | 0.65 |
+| weight-noise | 89 | 37 | 0.57 | 0.65 |
 
 Per-example agreement (fp32-correct examples, all P1 cells pooled per family): t=1 return vs compressed correct
 
@@ -40,7 +40,7 @@ Per-example agreement (fp32-correct examples, all P1 cells pooled per family): t
 |---|---|---|---|---|---|---|
 | DT | 2048 | 0.940 | 0.846 | 0.379 | 0.836 | 0.000 |
 | HRM | 2028 | 0.782 | 0.806 | 0.569 | 0.751 | 0.000 |
-| MDEQ | 11728 | 0.997 | 0.720 | 0.012 | 0.719 | 0.143 |
+| MDEQ | 11728 | 0.997 | 0.663 | 0.010 | 0.663 | 0.132 |
 | QAT | 4711 | 0.814 | 0.719 | 0.413 | 0.654 | 0.000 |
 | TRM-MLP | 5933 | 0.874 | 0.666 | 0.289 | 0.618 | 0.001 |
 | TRM-attn | 4286 | 0.878 | 0.824 | 0.470 | 0.810 | 0.082 |
@@ -115,10 +115,10 @@ All cells:
 | MDEQ | mdeq_xl | noise0.1 | weight-noise | 1000 | 0.740 | 0.986 | 0.997 / 0.999 | 0.062 / 0.062 | 0.98 | 0.966 |
 | MDEQ | mdeq_xl | noise0.2 | weight-noise | 1000 | 0.740 | 0.923 | 0.988 / 0.995 | 0.062 / 0.062 | 0.98 | 0.881 |
 | MDEQ | mdeq_xl | noise0.3 | weight-noise | 1000 | 0.740 | 0.768 | 0.986 / 0.992 | 0.062 / 0.062 | 0.98 | 0.769 |
+| MDEQ | mdeq_xl | noise0.5 | weight-noise | 1000 | 0.740 | 0.109 | 0.984 / 0.995 | 0.062 / 0.062 | 0.98 | 0.531 |
 | MDEQ | mdeq_xl | w4c | weight-quant | 1000 | 0.740 | 0.931 | 0.987 / 0.995 | 0.062 / 0.062 | 0.98 | 0.870 |
 | MDEQ | mdeq_xl | w4g32 | weight-quant | 1000 | 0.740 | 0.986 | 0.991 / 0.995 | 0.062 / 0.062 | 0.98 | 0.939 |
 | MDEQ | mdeq_xl | w4t | weight-quant | 1000 | 0.740 | 0.001 | 0.973 / 0.991 | 0.062 / 0.062 | 0.98 | 0.349 |
-| MDEQ | mdeq_xl | w8c | weight-quant | 1000 | 0.740 | 0.999 | 0.996 / 0.999 | 0.062 / 0.062 | 0.99 | 0.999 |
 | MDEQ | mdeq_xl | w8c | weight-quant | 1000 | 0.740 | 0.999 | 0.996 / 0.999 | 0.062 / 0.062 | 0.99 | 0.999 |
 | QAT | ft_fp32_s0 | noise0.1 | weight-noise | 256 | 0.664 | 0.847 | 0.633 / 0.912 | 0.062 / 0.062 | 0.85 | 0.892 |
 | QAT | ft_fp32_s0 | noise0.2 | weight-noise | 256 | 0.664 | 0.112 | 0.602 / 0.865 | 0.167 / 0.333 | 0.34 | 0.577 |

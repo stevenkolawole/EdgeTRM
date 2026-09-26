@@ -117,11 +117,14 @@ def kappa(a, b):
 
 
 def load_records():
-    rows = []
+    rows, seen = [], set()
     for f in sorted(glob.glob(str(RES / "ret_*.json"))):
         b = json.load(open(f))
         m = b
         for r in b["records"]:
+            if (m["model"], r["cell"]) in seen:       # a requeued job re-ran cells another file already holds
+                continue
+            seen.add((m["model"], r["cell"]))
             p = r["per"]
             cf = np.array(p["corr_f"], bool)
             cq = np.array(p["corr_q"], bool)
