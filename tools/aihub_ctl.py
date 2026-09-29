@@ -48,6 +48,10 @@ Predictions, written before launch (Sep 28):
     reading it every 3 cycles avoids that, and the S24 / 8 Elite cells should land within 2 points of fixed 8 at
     ~10 cheap cycles.
 
+Sep 29 (DIAG_ACCT_SPLIT.md): compiles are pinned to QAIRT aihub_acct.QAIRT (2.45) and every graph passes
+aihub_acct.guard_outputs before its first job (verdict per graph in the json under "guard"; a FAULT fails the chain).
+Profile jobs are reused only when they ran on the pinned compile (from_compile).
+
     python aihub_ctl.py                     (loops until every chain is done or failed; resumable, gate-first)
     python aihub_ctl.py --smoke             (one chain, S24 Sudoku-MLP, 2 device steps + 3 finishing, acct2)
 """
@@ -156,7 +160,7 @@ class CtlChain:
     # ------------------------------------------------------------------ graphs
     def compiled(self, prec, bs):
         """compile record of (task, prec) on this account, or None while it is still compiling / after failure."""
-        comp = self.a.compile(self.task, prec, self.device, "qnn_dlc")
+        comp = self.a.compile(self.task, prec, self.device, "qnn_dlc", prefer=self.pinned(prec))
         code = bs.get(comp["job_id"]) or self.a.C.get_job(comp["job_id"]).get_status().code
         if code == "FAILED":
             msg = (self.a.C.get_job(comp["job_id"]).get_status().message or "")[:600]
@@ -164,11 +168,32 @@ class CtlChain:
             self.save()
             print(f"[ctl {self.task} {self.tag}] compile {prec} FAILED: {msg[:160]}", flush=True)
             return None
-        return comp if code == "SUCCESS" else None
+        if code != "SUCCESS":
+            return None
+        guard = self.meta.setdefault("guard", {})
+        if (guard.get(prec) or {}).get("compile_job") != comp["job_id"]:
+            try:
+                ver, g = self.a.check(comp, self.task, prec)
+            except RuntimeError as exc:
+                guard[prec] = {"compile_job": comp["job_id"], "verdict": "fault", "error": str(exc)[:600]}
+                self.meta["failed"] = f"guard {prec}: " + str(exc)[:600]
+                self.save()
+                print(f"FAULT [ctl {self.task} {self.tag}] {prec}: {str(exc)[:400]}", flush=True)
+                return None
+            guard[prec] = {**g, "qairt": comp.get("qairt"), "qairt_sdk_version": ver}
+            self.save()
+            if g["verdict"] != "match":
+                print(f"WARN [ctl {self.task} {self.tag}] guard {prec} {g['verdict']} on {comp['job_id']} (QAIRT {ver})",
+                      flush=True)
+        return comp
+
+    def pinned(self, prec):
+        """compile job this chain passed the guard on (sticky for the chain's lifetime)."""
+        return ((self.meta.get("guard") or {}).get(prec) or {}).get("compile_job")
 
     def graph(self, prec):
         if prec not in self._comp:
-            cj = self.a.C.get_job(self.a.compile(self.task, prec, self.device, "qnn_dlc")["job_id"])
+            cj = self.a.C.get_job(self.a.compile(self.task, prec, self.device, "qnn_dlc", prefer=self.pinned(prec))["job_id"])
             self._comp[prec] = cj
             self._tshapes[prec] = cj.get_target_shapes()
             self._enc[prec] = json.loads((I.idir(self.task) / f"io_enc_{prec}.json").read_text())["inputs"] \
@@ -221,7 +246,8 @@ class CtlChain:
         """one profile job per graph on this device; reuse the account's record if it has one. Returns slots used."""
         p = self.meta["profile"].get(prec)
         if p is None:
-            have = self.a.find(kind="profile", task=self.task, prec=prec, device=self.device)
+            cj0 = self.a.compile(self.task, prec, self.device, "qnn_dlc", prefer=self.pinned(prec))
+            have = self.a.find(kind="profile", task=self.task, prec=prec, device=self.device, from_compile=cj0["job_id"])
             if have:
                 self.meta["profile"][prec] = {"job_id": have[-1]["job_id"], "reused": True}
                 self.save()
@@ -361,6 +387,9 @@ class CtlChain:
             cur = {"step": len(self.meta["steps"]), "jobs": {}, "todo": todo}
             self.meta["current"] = cur
             self.save()
+        for prec in (self.cheap, self.precise):      # both graphs compiled on the pin and past the guard before any job
+            if self.compiled(prec, bs) is None:
+                return used
         for prec in (self.cheap, self.precise):
             n = self.profile(prec, bs, free - used)
             used += n
