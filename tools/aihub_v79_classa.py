@@ -47,7 +47,10 @@ MAZE = {  # prec suffix -> how the graph is made from variant_Ma_rope16.onnx (or
     "all16s8": dict(build=dict(eight=set(W.GROUPS) - {"attn_scores"}, sixteen_default=False, propagate_movement=True)),
 }
 PRECS = {**{f"maze_v79_{v}": ("maze", "qdq_w8a16", f"variant_V79_{v}.onnx", S25) for v in MAZE},
-         "w8a8_nofuse": ("sudoku_mlp", "qdq_w8a8", "variant_CA_nofuse.onnx", S21)}
+         # nofuse: first build, N taken as 512 (no value_info in the graph) where the reduction runs over 97: a wrong
+         # graph (host 0.128 -> 0.220 vs w8a8 0.340 -> 0.488); kept for the record. nofuse2: N from shape inference.
+         "w8a8_nofuse": ("sudoku_mlp", "qdq_w8a8", "variant_CA_nofuse.onnx", S21),
+         "w8a8_nofuse2": ("sudoku_mlp", "qdq_w8a8", "variant_CA_nofuse2.onnx", S21)}
 DTYPE = {0x0216: "FLOAT_16", 0x0232: "FLOAT_32", 0x0408: "UFIXED_8", 0x0416: "UFIXED_16", 0x0308: "SFIXED_8",
          0x0316: "SFIXED_16", 0x0332: "SFIXED_32"}
 LOGS = pathlib.Path.home() / "x3" / "joblogs" / "v79_classa"
@@ -131,9 +134,16 @@ def strip_qdq(g, groups):
     return interior
 
 
-def break_rmsnorm(g):
+def break_rmsnorm(m):
     """ReduceMean(x) -> Mul(ReduceSum(x), 1/N): same arithmetic, both new tensors quantized (sum at N x the mean's
-    scale, the constant exactly representable), so qairt-converter's RMSNorm matcher has nothing to fuse."""
+    scale, the constant exactly representable), so qairt-converter's RMSNorm matcher has nothing to fuse.
+    N = the size of the reduced (last) axis from shape inference (97 for the Sudoku-MLP token-mixing norms)."""
+    g = m.graph
+    inf = onnx.shape_inference.infer_shapes(m)
+    dims = {}
+    for vi in list(inf.graph.value_info) + list(inf.graph.input):
+        if vi.type.tensor_type.shape.dim:
+            dims[vi.name] = [d.dim_value for d in vi.type.tensor_type.shape.dim]
     vals = W.const_map(g)
     prod = {o: n for n in g.node for o in n.output}
     new_nodes, new_inits, n_done = [], [], 0
@@ -149,12 +159,9 @@ def break_rmsnorm(g):
         zp = vals[q.input[2]]
         shape_src = n.input[0]
         # the hidden size: the last dim of the Mul(x, x) input; read from the graph's value_info if present else 512
-        N = None
-        for vi in list(g.value_info) + list(g.input):
-            if vi.name == shape_src and vi.type.tensor_type.shape.dim:
-                N = vi.type.tensor_type.shape.dim[-1].dim_value
-        if not N:
-            N = {"sudoku_mlp": 512, "maze": 512}["sudoku_mlp"]
+        assert axes == [-1] or axes == [len(dims[shape_src]) - 1], (n.name, axes)
+        N = dims[shape_src][-1]
+        assert N > 0, (n.name, dims.get(shape_src))
         base = n.name
         sum_out, sum_q, sum_dq = base + "_sum", base + "_sum_q", base + "_sum_dq"
         c_name, c_q, c_dq = base + "_invN", base + "_invN_q", base + "_invN_dq"
@@ -194,12 +201,12 @@ def build(names):
                                                                      ({kk: sorted(vv) if isinstance(vv, set) else vv
                                                                        for kk, vv in x.items()} if isinstance(x, dict) else x)
                                                                      for k, x in spec.items()}}, indent=1))
-    if not names or "w8a8_nofuse" in names:
+    if not names or "w8a8_nofuse2" in names:
         d = I.idir("sudoku_mlp")
         m = onnx.load(str(d / "qdq_w8a8" / "model.onnx"), load_external_data=False)
-        n = break_rmsnorm(m.graph)
-        onnx.save(m, str(d / "qdq_w8a8" / "variant_CA_nofuse.onnx"))
-        print("w8a8_nofuse: rewrote", n, "ReduceMean nodes", flush=True)
+        n = break_rmsnorm(m)
+        onnx.save(m, str(d / "qdq_w8a8" / "variant_CA_nofuse2.onnx"))
+        print("w8a8_nofuse2: rewrote", n, "ReduceMean nodes", flush=True)
 
 
 # ------------------------------------------------------------------ hub side
