@@ -120,6 +120,7 @@ ARM_SRC = {"fixed": "rtn", "ctl": "rtn", "dit": "dit", "dit+E": "dit", "dit+P": 
 
 
 def select(dev, ho, cfgs, budgets):
+    cfgs = [c for c in cfgs if c[1] <= min(dev.T, ho.T)]        # Maze records hold K = 32 cheap steps
     res = {c: dev.eval(c) for c in cfgs}
     out = {}
     for b in budgets:
@@ -175,7 +176,7 @@ def main():
     ap.add_argument("--json", default=str(A.RB / "m5_comb.json"))
     a = ap.parse_args()
     root = Path(a.root)
-    budgets = [int(b) for b in a.budgets.split(",")]
+    all_budgets = [int(b) for b in a.budgets.split(",")]
     rng = np.random.default_rng(0)
     out = {"cells": {}, "pooled": {}}
     rows = []
@@ -204,15 +205,23 @@ def main():
                 continue
             n_dev, n_ho = arms[("dev", "rtn")].n, arms[("ho", "rtn")].n
             S = arms[("ho", "dit")].S
+            T = min(arms[("dev", "rtn")].T, arms[("ho", "rtn")].T)
+            budgets = [b for b in all_budgets if b <= T]          # Maze: budgets 8-32 (K = 32)
             print(f"\n=== {task} {spec}  rule {A.rule_name(*rule)}  r = {r:.2f}  dev n={n_dev} held-out n={n_ho}  dither seeds {S}")
             print(f"  checks dev: {arms[('dev', 'check')]} | held out: {arms[('ho', 'check')]}")
             sel = {arm: select(arms[("dev", ARM_SRC[arm])], arms[("ho", ARM_SRC[arm])], configs(ARM_CFG[arm]), budgets) for arm in ARMS}
             hd = {k: {"dev": arms[("dev", k)].head(), "ho": arms[("ho", k)].head()} for k in ("rtn", "dit")}
+            fp = C.load_det(C.ROOT / f"det_o{0 if splits[1][2] else splits[1][0]}" / task / "fp32.npz", splits[1][2])
+            if fp is not None:                                   # fp32 head on the held-out rows, for reference
+                tf = first(fire_mask(fp[1][None], fp[2][None] if hrm else None, rule, hrm))
+                ff = (tf >= 0) & (tf < 16)
+                hd["fp32"] = {"ho": (float(ff.mean()), float((tf[ff] + 1).mean()) if ff.any() else float("nan"))}
             print(f"  head at cap 16 (fired fraction, mean first step): RTN dev {hd['rtn']['dev'][0]:.3f} {hd['rtn']['dev'][1]:.2f} | "
                   f"held out {hd['rtn']['ho'][0]:.3f} {hd['rtn']['ho'][1]:.2f}; dither dev {hd['dit']['dev'][0]:.3f} {hd['dit']['dev'][1]:.2f} | "
-                  f"held out {hd['dit']['ho'][0]:.3f} {hd['dit']['ho'][1]:.2f}")
-            print(f"  {'budget':>6s} | " + " | ".join(f"{m:>18s}" for m in ARMS) + " | comb-ctl [CI] | comb-dit [CI] | ctl-fixed [CI] | dit-fixed [CI]")
-            cell = {"rule": A.rule_name(*rule), "r": r, "n_dev": n_dev, "n_ho": n_ho, "seeds": S, "head": hd,
+                  f"held out {hd['dit']['ho'][0]:.3f} {hd['dit']['ho'][1]:.2f}"
+                  + (f"; fp32 held out {hd['fp32']['ho'][0]:.3f} {hd['fp32']['ho'][1]:.2f}" if "fp32" in hd else ""))
+            print(f"  {'budget':>6s} | " + " | ".join(f"{m:>18s}" for m in ARMS) + " | comb-ctl [CI] | comb-dit [CI] | comb-ditE [CI] | ctl-fixed [CI] | dit-fixed [CI]")
+            cell = {"rule": A.rule_name(*rule), "r": r, "n_dev": n_dev, "n_ho": n_ho, "seeds": S, "T": T, "head": hd,
                     "checks": {"dev": arms[("dev", "check")], "ho": arms[("ho", "check")]}, "budgets": {}}
             for b in budgets:
                 if not all(b in sel[m] for m in ARMS):
@@ -220,26 +229,29 @@ def main():
                 parts = [f"{100 * sel[m][b]['acc_i'].mean():5.1f} @{sel[m][b]['cost']:5.1f} ({sel[m][b]['fin']:.2f})" for m in ARMS]
                 g = lambda m: sel[m][b]["acc_i"]  # noqa: E731
                 diffs = {"comb-ctl": boot(g("comb"), rng, g("ctl")), "comb-dit": boot(g("comb"), rng, g("dit")),
-                         "ctl-fixed": boot(g("ctl"), rng, g("fixed")), "dit-fixed": boot(g("dit"), rng, g("fixed")),
-                         "ditE-ctlE": None}
-                print(f"  {b:6d} | " + " | ".join(f"{p:>18s}" for p in parts) + " | " + " | ".join(fmt(diffs[k]) for k in ("comb-ctl", "comb-dit", "ctl-fixed", "dit-fixed")))
+                         "comb-ditE": boot(g("comb"), rng, g("dit+E")), "comb-ditP": boot(g("comb"), rng, g("dit+P")),
+                         "ditE-ctl": boot(g("dit+E"), rng, g("ctl")), "ditP-ctl": boot(g("dit+P"), rng, g("ctl")),
+                         "ctl-fixed": boot(g("ctl"), rng, g("fixed")), "dit-fixed": boot(g("dit"), rng, g("fixed"))}
+                print(f"  {b:6d} | " + " | ".join(f"{p:>18s}" for p in parts) + " | " + " | ".join(fmt(diffs[k]) for k in ("comb-ctl", "comb-dit", "comb-ditE", "ctl-fixed", "dit-fixed")))
                 cell["budgets"][b] = {m: {"cfg": list(sel[m][b]["cfg"]), "dev_acc": sel[m][b]["dev_acc"], "acc": boot(g(m), rng),
                                           "cost": sel[m][b]["cost"], "cheap": sel[m][b]["cheap"], "fin": sel[m][b]["fin"]} for m in ARMS}
-                cell["budgets"][b]["diffs"] = {k: v for k, v in diffs.items() if v is not None}
+                cell["budgets"][b]["diffs"] = diffs
                 rows.append((task, spec, b, sel))
             out["cells"][f"{task}|{spec}"] = cell
-    # pooled over the cells at each budget
-    print("\n=== pooled over cells, held out: mean acc @ mean honest cost; paired pooled CIs")
-    for b in budgets:
-        sub = [x for x in rows if x[2] == b]
+    # pooled over the cells of each family (Sudoku: 5 cells; Maze: 4 cells) at each budget
+    for fam in ("sudoku", "maze"):
+      print(f"\n=== {fam}: pooled over cells, held out: mean acc @ mean honest cost; paired pooled CIs")
+      out["pooled"][fam] = {}
+      for b in all_budgets:
+        sub = [x for x in rows if x[2] == b and (fam in x[0])]
         if not sub:
             continue
         line = " | ".join(f"{m} {100 * np.mean([x[3][m][b]['acc_i'].mean() for x in sub]):5.1f} @{np.mean([x[3][m][b]['cost'] for x in sub]):5.1f}" for m in ARMS)
         d = lambda m1, m2: pooled([x[3][m1][b]["acc_i"].astype(float) - x[3][m2][b]["acc_i"] for x in sub], rng)  # noqa: E731
         dd = {"comb-ctl": d("comb", "ctl"), "comb-dit": d("comb", "dit"), "ctl-fixed": d("ctl", "fixed"), "dit-fixed": d("dit", "fixed"),
-              "ditE-ctl": d("dit+E", "ctl"), "ditP-ctl": d("dit+P", "ctl")}
+              "ditE-ctl": d("dit+E", "ctl"), "ditP-ctl": d("dit+P", "ctl"), "comb-ditE": d("comb", "dit+E"), "comb-ditP": d("comb", "dit+P")}
         print(f"  {b:4d} ({len(sub)} cells): {line}\n       " + "  ".join(f"{k} {fmt(v)}" for k, v in dd.items()))
-        out["pooled"][b] = {"cells": len(sub), "diffs": dd,
+        out["pooled"][fam][b] = {"cells": len(sub), "diffs": dd,
                             "mean": {m: (100 * np.mean([x[3][m][b]["acc_i"].mean() for x in sub]), float(np.mean([x[3][m][b]["cost"] for x in sub]))) for m in ARMS}}
     Path(a.json).parent.mkdir(parents=True, exist_ok=True)
     json.dump(out, open(a.json, "w"), indent=1, default=lambda o: o.item() if isinstance(o, np.generic) else (list(o) if isinstance(o, tuple) else str(o)))

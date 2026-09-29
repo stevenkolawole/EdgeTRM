@@ -42,3 +42,6 @@ edge/results/
 
 # E10 fault-injection cells (rsynced from babel:~/m2_results/cells and sk-p4d:~/fi_results/cells; 206 MB); indices committed
 results/fault/*/cells/
+
+# E_COMBINED cells (rsynced from sk-p4d:~/m5/comb; 72 npz, 20 MB); index_comb.jsonl committed
+results/m5/comb/p4d/**/*.npz
