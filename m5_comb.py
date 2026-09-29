@@ -48,6 +48,10 @@ NB = 2000
 D0S = (1, 2, 4, 8, 12, 16, 24, 32, 48, 64)
 JS = (0, 1, 2, 4)
 ARMS = ["fixed", "ctl", "dit", "dit+E", "dit+P", "comb"]
+# re-draw charge c_d per dithered cheap step, as a share of a cheap step: the measured L40S batch-1 shares of
+# reports/edgetrm_exp/E1_DITHER.md sec. 3 (Sudoku-MLP 0.067, Sudoku-attn 0.045, HRM Sudoku 0.218, Maze-Hard attention
+# 0.040); the attention Maze cells take the Sudoku-attn value, HRM Maze the HRM Sudoku value (coordinator, Sep 29).
+CD = {"sudoku_mlp": 0.067, "sudoku_attn": 0.045, "hrm_sudoku": 0.218, "maze_attn": 0.045, "hrm_maze": 0.218}
 
 
 def load(path):
@@ -60,7 +64,8 @@ def load(path):
 class Arm:
     """one trajectory family (RTN: one record; dither: one record per seed) on one row set."""
 
-    def __init__(self, recs, hrm, rule, r):
+    def __init__(self, recs, hrm, rule, r, cd=0.0):
+        self.cd = cd                                          # re-draw charge per cheap step (0 for RTN)
         self.S = len(recs)
         self.c = np.stack([x["c"] for x in recs])            # [S, n, T]
         self.pc = np.stack([x["pc"] for x in recs])          # [S, n, T, J]
@@ -96,7 +101,7 @@ class Arm:
                 acc[s, ~f] = self.pc[s, i[~f], D0 - 1, jF - 1] if jF else self.c[s, i[~f], D0 - 1]
                 cheap[s, ~f] = D0
                 fin[s, ~f] = jF
-        cost = cheap + self.r * fin
+        cost = cheap * (1 + self.cd) + self.r * fin
         return acc.mean(0), cost.mean(0), cheap.mean(0), fin.mean(0)
 
     def head(self, cap=16):
@@ -177,10 +182,24 @@ def main():
     a = ap.parse_args()
     root = Path(a.root)
     all_budgets = [int(b) for b in a.budgets.split(",")]
+    out = {}
+    for charged in (False, True):
+        cells, pooled = run(root, all_budgets, charged)
+        out["cells" if not charged else "cells_cd"] = cells
+        out["pooled" if not charged else "pooled_cd"] = pooled
+    Path(a.json).parent.mkdir(parents=True, exist_ok=True)
+    json.dump(out, open(a.json, "w"), indent=1, default=lambda o: o.item() if isinstance(o, np.generic) else (list(o) if isinstance(o, tuple) else str(o)))
+    print("\nwrote", a.json)
+
+
+def run(root, all_budgets, charged):
+    """one full read-out; charged: dithered cheap steps cost 1 + CD[task] instead of 1."""
     rng = np.random.default_rng(0)
     out = {"cells": {}, "pooled": {}}
     rows = []
+    print(f"\n##### re-draw {'charged (c_d = ' + ', '.join(f'{k} {v}' for k, v in CD.items()) + ')' if charged else 'charged 0'}")
     for task, specs in CELLS.items():
+        cd = CD[task] if charged else 0.0
         hrm = task.startswith("hrm")
         splits = SPLITS["maze" if "maze" in task else "sudoku"]
         d0 = C.load_det(C.ROOT / "det_o0" / task / "fp32.npz", splits[0][2])
@@ -199,7 +218,7 @@ def main():
                     break
                 rtn = load(rtn_p)
                 arms[(name, "rtn")] = Arm([rtn], hrm, rule, r)
-                arms[(name, "dit")] = Arm([load(p) for p in dit_p], hrm, rule, r)
+                arms[(name, "dit")] = Arm([load(p) for p in dit_p], hrm, rule, r, cd)
                 arms[(name, "check")] = checks(task, spec, off, rtn, rsl)
             if not ok:
                 continue
@@ -207,7 +226,7 @@ def main():
             S = arms[("ho", "dit")].S
             T = min(arms[("dev", "rtn")].T, arms[("ho", "rtn")].T)
             budgets = [b for b in all_budgets if b <= T]          # Maze: budgets 8-32 (K = 32)
-            print(f"\n=== {task} {spec}  rule {A.rule_name(*rule)}  r = {r:.2f}  dev n={n_dev} held-out n={n_ho}  dither seeds {S}")
+            print(f"\n=== {task} {spec}  rule {A.rule_name(*rule)}  r = {r:.2f}  c_d = {cd}  dev n={n_dev} held-out n={n_ho}  dither seeds {S}")
             print(f"  checks dev: {arms[('dev', 'check')]} | held out: {arms[('ho', 'check')]}")
             sel = {arm: select(arms[("dev", ARM_SRC[arm])], arms[("ho", ARM_SRC[arm])], configs(ARM_CFG[arm]), budgets) for arm in ARMS}
             hd = {k: {"dev": arms[("dev", k)].head(), "ho": arms[("ho", k)].head()} for k in ("rtn", "dit")}
@@ -221,7 +240,7 @@ def main():
                   f"held out {hd['dit']['ho'][0]:.3f} {hd['dit']['ho'][1]:.2f}"
                   + (f"; fp32 held out {hd['fp32']['ho'][0]:.3f} {hd['fp32']['ho'][1]:.2f}" if "fp32" in hd else ""))
             print(f"  {'budget':>6s} | " + " | ".join(f"{m:>18s}" for m in ARMS) + " | comb-ctl [CI] | comb-dit [CI] | comb-ditE [CI] | ctl-fixed [CI] | dit-fixed [CI]")
-            cell = {"rule": A.rule_name(*rule), "r": r, "n_dev": n_dev, "n_ho": n_ho, "seeds": S, "T": T, "head": hd,
+            cell = {"rule": A.rule_name(*rule), "r": r, "c_d": cd, "n_dev": n_dev, "n_ho": n_ho, "seeds": S, "T": T, "head": hd,
                     "checks": {"dev": arms[("dev", "check")], "ho": arms[("ho", "check")]}, "budgets": {}}
             for b in budgets:
                 if not all(b in sel[m] for m in ARMS):
@@ -253,9 +272,7 @@ def main():
         print(f"  {b:4d} ({len(sub)} cells): {line}\n       " + "  ".join(f"{k} {fmt(v)}" for k, v in dd.items()))
         out["pooled"][fam][b] = {"cells": len(sub), "diffs": dd,
                             "mean": {m: (100 * np.mean([x[3][m][b]["acc_i"].mean() for x in sub]), float(np.mean([x[3][m][b]["cost"] for x in sub]))) for m in ARMS}}
-    Path(a.json).parent.mkdir(parents=True, exist_ok=True)
-    json.dump(out, open(a.json, "w"), indent=1, default=lambda o: o.item() if isinstance(o, np.generic) else (list(o) if isinstance(o, tuple) else str(o)))
-    print("\nwrote", a.json)
+    return out["cells"], out["pooled"]
 
 
 if __name__ == "__main__":
