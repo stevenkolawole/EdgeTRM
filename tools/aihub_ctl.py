@@ -21,8 +21,8 @@ puzzles still running and the precise graph for the puzzles that owe finishing s
 flight per account (chains are served in plan order, so the first cells complete first). Each chain also holds one
 profile job per graph on its device (reused from the account's records when one exists) for the per-step latency.
 
-Devices / cells (acct2: Galaxy S24, Galaxy S25; acct3: Snapdragon 8 Elite QRD; every graph already compiled on the
-account except Sudoku-attn w8a16 on acct2, which compiles first):
+Devices / cells (acct2: Galaxy S24; acct3: Galaxy S25, the 8 Elite silicon, since the 8 Elite QRDs left the hosted
+fleet; every graph already compiled on the account except Sudoku-attn w8a16 on acct2, which compiles first):
   sudoku_mlp   cheap w8a8          precise w8a16   100 puzzles
   maze         cheap w8a8rope16    precise fp32     50 puzzles
   sudoku_attn  cheap w8a8          precise w8a16   100 puzzles (its device w8a8 graph works: S24 0.50, 8 Elite 0.47,
@@ -70,7 +70,10 @@ HCYC = {"sudoku_mlp": 3, "sudoku_attn": 3, "maze": 3}                 # device c
 RULES = {"sudoku_mlp": ("pat", 2), "sudoku_attn": ("native", 0), "maze": ("min", 2)}
 S24, S25, E8 = "Samsung Galaxy S24", "Samsung Galaxy S25", "Snapdragon 8 Elite QRD"
 CELLS = [("sudoku_mlp", "w8a8", "w8a16"), ("maze", "w8a8rope16", "fp32"), ("sudoku_attn", "w8a8", "w8a16")]
-PLAN = {"acct2": [(d, *c) for d in (S24, S25) for c in CELLS], "acct3": [(E8, *c) for c in CELLS]}
+# Sep 29 00:40: neither "Snapdragon 8 Elite QRD" nor "Snapdragon 8 Elite Gen 5 QRD" is hosted any more (both accounts
+# list only the X Elite / X2 Elite CRDs), so the 8 Elite silicon is covered by the Galaxy S25, run on acct3 (its qnn_dlc
+# compiles are device-agnostic) so the two phones advance in parallel. Devices an account does not list are dropped.
+PLAN = {"acct2": [(S24, *c) for c in CELLS], "acct3": [(S25, *c) for c in CELLS]}
 
 
 def profile_row(p):
@@ -388,8 +391,10 @@ def main():
         chains = [CtlChain(accts["acct2"], S24, "sudoku_mlp", "w8a8", "w8a16", cap=2, fin=3)]
     else:
         chains = [CtlChain(accts[n], *spec) for n, plan in PLAN.items() if n in accts for spec in plan]
-    missing = [c.device for c in chains if c.device not in X.OS]
-    assert not missing, f"devices without an OS entry: {sorted(set(missing))}"
+    hosted = {n: set(device_os(acct.C)) for n, acct in accts.items()}
+    for c in [c for c in chains if c.device not in hosted[c.a.name]]:
+        print(f"[ctl] DROPPED {c.task}/{c.tag}: {c.device} is not hosted on {c.a.name}", flush=True)
+        chains.remove(c)
     print(f"[ctl] {len(chains)} chains on {list(accts)}: " + ", ".join(f"{c.task}/{c.tag}" for c in chains), flush=True)
     while True:
         for acct in accts.values():
