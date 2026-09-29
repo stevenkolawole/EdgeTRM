@@ -1156,6 +1156,438 @@
   "prec": "fp32",
   "step": 1,
   "exact": 0.01,
+  "cell": 0.5582716049382717,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6811111111111111,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.7545679012345679,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7738271604938272,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.43,
+  "cell": 0.8017283950617284,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.53,
+  "cell": 0.8245679012345679,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.835679012345679,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.58,
+  "cell": 0.8449382716049383,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5582716049382717,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6807407407407408,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.7544444444444445,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7738271604938272,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.43,
+  "cell": 0.8025925925925926,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.53,
+  "cell": 0.8254320987654321,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.8348148148148148,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.59,
+  "cell": 0.8450617283950618,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5580246913580247,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6814814814814815,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.754320987654321,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7738271604938272,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.43,
+  "cell": 0.8019753086419753,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.53,
+  "cell": 0.8251851851851851,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.8358024691358025,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.59,
+  "cell": 0.8433333333333334,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5582716049382717,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6807407407407408,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.7544444444444445,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7738271604938272,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.43,
+  "cell": 0.8025925925925926,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.53,
+  "cell": 0.8254320987654321,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.8348148148148148,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.59,
+  "cell": 0.8450617283950618,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5579012345679012,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6804938271604938,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.7541975308641975,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7733333333333333,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.43,
+  "cell": 0.8012345679012346,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.53,
+  "cell": 0.8244444444444444,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.54,
+  "cell": 0.832716049382716,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.58,
+  "cell": 0.8412345679012345,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5580246913580247,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6814814814814815,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.754320987654321,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7738271604938272,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.43,
+  "cell": 0.8019753086419753,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.53,
+  "cell": 0.8251851851851851,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.8358024691358025,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.59,
+  "cell": 0.8433333333333334,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.01,
   "cell": 0.558395061728395,
   "count": 100,
   "source": "ON DEVICE Samsung_Galaxy_S24"
@@ -1294,6 +1726,159 @@
   "cell": 0.8428395061728395,
   "count": 100,
   "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5582716049382717,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5579012345679012,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6804938271604938,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.7541975308641975,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7733333333333333,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.43,
+  "cell": 0.8012345679012346,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.53,
+  "cell": 0.8244444444444444,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.54,
+  "cell": 0.832716049382716,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.58,
+  "cell": 0.8412345679012345,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5582716049382717,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6811111111111111,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.7541975308641975,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7738271604938272,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.43,
+  "cell": 0.8028395061728395,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.53,
+  "cell": 0.8254320987654321,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.8362962962962963,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.59,
+  "cell": 0.8462962962962963,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
  },
  {
   "task": "sudoku_mlp",
@@ -1366,6 +1951,78 @@
   "cell": 0.8462962962962963,
   "count": 100,
   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5580246913580247,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6814814814814815,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.754320987654321,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7738271604938272,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.43,
+  "cell": 0.8019753086419753,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.53,
+  "cell": 0.8251851851851851,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.8358024691358025,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.59,
+  "cell": 0.8433333333333334,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
  },
  {
   "task": "sudoku_mlp",
@@ -1815,6 +2472,438 @@
   "exact": 0.01,
   "cell": 0.5561728395061728,
   "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6811111111111111,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.7537037037037037,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7766666666666666,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 5,
+  "exact": 0.44,
+  "cell": 0.7951851851851852,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 6,
+  "exact": 0.51,
+  "cell": 0.8203703703703704,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.8277777777777777,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 8,
+  "exact": 0.56,
+  "cell": 0.8380246913580247,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5561728395061728,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6811111111111111,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.7537037037037037,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7766666666666666,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 5,
+  "exact": 0.44,
+  "cell": 0.7951851851851852,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 6,
+  "exact": 0.51,
+  "cell": 0.8203703703703704,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.8277777777777777,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 8,
+  "exact": 0.56,
+  "cell": 0.8380246913580247,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5561728395061728,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6811111111111111,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.7537037037037037,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7766666666666666,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 5,
+  "exact": 0.44,
+  "cell": 0.7951851851851852,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 6,
+  "exact": 0.51,
+  "cell": 0.8203703703703704,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.8277777777777777,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 8,
+  "exact": 0.56,
+  "cell": 0.8380246913580247,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5561728395061728,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6811111111111111,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.7537037037037037,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7766666666666666,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 5,
+  "exact": 0.44,
+  "cell": 0.7951851851851852,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 6,
+  "exact": 0.51,
+  "cell": 0.8203703703703704,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.8277777777777777,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 8,
+  "exact": 0.56,
+  "cell": 0.8380246913580247,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.49691358024691357,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.5981481481481481,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 3,
+  "exact": 0.02,
+  "cell": 0.6562962962962963,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 4,
+  "exact": 0.15,
+  "cell": 0.7267901234567902,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 5,
+  "exact": 0.28,
+  "cell": 0.7423456790123457,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 6,
+  "exact": 0.32,
+  "cell": 0.7587654320987655,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 7,
+  "exact": 0.37,
+  "cell": 0.7675308641975309,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 8,
+  "exact": 0.41,
+  "cell": 0.7808641975308642,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.49679012345679013,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.5965432098765432,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 3,
+  "exact": 0.02,
+  "cell": 0.6546913580246914,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 4,
+  "exact": 0.15,
+  "cell": 0.7149382716049383,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 5,
+  "exact": 0.26,
+  "cell": 0.734320987654321,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 6,
+  "exact": 0.3,
+  "cell": 0.7528395061728395,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 7,
+  "exact": 0.37,
+  "cell": 0.7660493827160494,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 8,
+  "exact": 0.42,
+  "cell": 0.7820987654320988,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5561728395061728,
+  "count": 100,
   "source": "ON DEVICE Samsung_Galaxy_S24"
  },
  {
@@ -1956,6 +3045,222 @@
   "task": "sudoku_mlp",
   "prec": "w8a16",
   "step": 1,
+  "exact": 0.0,
+  "cell": 0.49691358024691357,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.5965432098765432,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 3,
+  "exact": 0.02,
+  "cell": 0.6551851851851852,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 4,
+  "exact": 0.15,
+  "cell": 0.7151851851851851,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 5,
+  "exact": 0.26,
+  "cell": 0.7349382716049383,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 6,
+  "exact": 0.3,
+  "cell": 0.752962962962963,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 7,
+  "exact": 0.37,
+  "cell": 0.7666666666666667,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 8,
+  "exact": 0.42,
+  "cell": 0.7808641975308642,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.49691358024691357,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.5981481481481481,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 3,
+  "exact": 0.02,
+  "cell": 0.6562962962962963,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 4,
+  "exact": 0.15,
+  "cell": 0.7267901234567902,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 5,
+  "exact": 0.28,
+  "cell": 0.7423456790123457,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 6,
+  "exact": 0.32,
+  "cell": 0.7587654320987655,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 7,
+  "exact": 0.37,
+  "cell": 0.7675308641975309,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 8,
+  "exact": 0.41,
+  "cell": 0.7808641975308642,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.49691358024691357,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.5965432098765432,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 3,
+  "exact": 0.02,
+  "cell": 0.6551851851851852,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 4,
+  "exact": 0.15,
+  "cell": 0.7151851851851851,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 5,
+  "exact": 0.26,
+  "cell": 0.7349382716049383,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 6,
+  "exact": 0.3,
+  "cell": 0.752962962962963,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 7,
+  "exact": 0.37,
+  "cell": 0.7666666666666667,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 8,
+  "exact": 0.42,
+  "cell": 0.7808641975308642,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 1,
   "exact": 0.01,
   "cell": 0.5565432098765432,
   "count": 100,
@@ -2026,6 +3331,510 @@
  },
  {
   "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 1,
+  "exact": 0.01,
+  "cell": 0.5561728395061728,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6811111111111111,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 3,
+  "exact": 0.26,
+  "cell": 0.7537037037037037,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7766666666666666,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 5,
+  "exact": 0.44,
+  "cell": 0.7951851851851852,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 6,
+  "exact": 0.51,
+  "cell": 0.8203703703703704,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 7,
+  "exact": 0.55,
+  "cell": 0.8277777777777777,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a16",
+  "step": 8,
+  "exact": 0.56,
+  "cell": 0.8380246913580247,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.5608641975308643,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.674320987654321,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.22,
+  "cell": 0.7569135802469136,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7848148148148149,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.44,
+  "cell": 0.8117283950617284,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.5,
+  "cell": 0.8253086419753086,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.53,
+  "cell": 0.8351851851851851,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.58,
+  "cell": 0.8453086419753086,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.5608641975308643,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.674320987654321,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.22,
+  "cell": 0.7569135802469136,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7848148148148149,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.44,
+  "cell": 0.8117283950617284,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.5,
+  "cell": 0.8253086419753086,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.53,
+  "cell": 0.8351851851851851,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.58,
+  "cell": 0.8453086419753086,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.5608641975308643,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.674320987654321,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.22,
+  "cell": 0.7569135802469136,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7848148148148149,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.44,
+  "cell": 0.8117283950617284,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.5,
+  "cell": 0.8253086419753086,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.53,
+  "cell": 0.8351851851851851,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.58,
+  "cell": 0.8453086419753086,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.5608641975308643,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.674320987654321,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.22,
+  "cell": 0.7569135802469136,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7848148148148149,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.44,
+  "cell": 0.8117283950617284,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.5,
+  "cell": 0.8253086419753086,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.53,
+  "cell": 0.8351851851851851,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.58,
+  "cell": 0.8453086419753086,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.49296296296296294,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6045679012345679,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.02,
+  "cell": 0.6476543209876543,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.09,
+  "cell": 0.6971604938271605,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.15,
+  "cell": 0.7223456790123457,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.22,
+  "cell": 0.7320987654320987,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.27,
+  "cell": 0.7466666666666667,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.32,
+  "cell": 0.7519753086419753,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.494320987654321,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6098765432098765,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.02,
+  "cell": 0.6514814814814814,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.04,
+  "cell": 0.698395061728395,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.19,
+  "cell": 0.7248148148148148,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.22,
+  "cell": 0.7379012345679012,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.29,
+  "cell": 0.7523456790123457,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.34,
+  "cell": 0.7648148148148148,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
   "prec": "w8a8",
   "step": 1,
   "exact": 0.0,
@@ -2167,6 +3976,222 @@
   "cell": 0.8464197530864197,
   "count": 100,
   "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4955555555555556,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6017283950617284,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.02,
+  "cell": 0.6418518518518519,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.07,
+  "cell": 0.6950617283950618,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.19,
+  "cell": 0.7314814814814815,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.28,
+  "cell": 0.737037037037037,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.29,
+  "cell": 0.7425925925925926,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.31,
+  "cell": 0.7528395061728395,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.49296296296296294,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6045679012345679,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.02,
+  "cell": 0.6476543209876543,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.09,
+  "cell": 0.6971604938271605,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.15,
+  "cell": 0.7223456790123457,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.22,
+  "cell": 0.7320987654320987,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.27,
+  "cell": 0.7466666666666667,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.32,
+  "cell": 0.7519753086419753,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4955555555555556,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.6017283950617284,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.02,
+  "cell": 0.6418518518518519,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.07,
+  "cell": 0.6950617283950618,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.19,
+  "cell": 0.7314814814814815,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.28,
+  "cell": 0.737037037037037,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.29,
+  "cell": 0.7425925925925926,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.31,
+  "cell": 0.7528395061728395,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
  },
  {
   "task": "sudoku_mlp",
@@ -2239,6 +4264,78 @@
   "cell": 0.8396296296296296,
   "count": 100,
   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.5608641975308643,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.674320987654321,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.22,
+  "cell": 0.7569135802469136,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.36,
+  "cell": 0.7848148148148149,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.44,
+  "cell": 0.8117283950617284,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.5,
+  "cell": 0.8253086419753086,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.53,
+  "cell": 0.8351851851851851,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_mlp",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.58,
+  "cell": 0.8453086419753086,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
  },
  {
   "task": "sudoku_mlp",
@@ -3471,6 +5568,438 @@
   "exact": 0.0,
   "cell": 0.0,
   "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.5438271604938272,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.03,
+  "cell": 0.7337037037037037,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.19,
+  "cell": 0.7651851851851852,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.3,
+  "cell": 0.7870370370370371,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.4,
+  "cell": 0.8103703703703704,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.44,
+  "cell": 0.8204938271604938,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.5,
+  "cell": 0.8364197530864198,
+  "count": 100,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.5438271604938272,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.03,
+  "cell": 0.7337037037037037,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.19,
+  "cell": 0.7651851851851852,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.3,
+  "cell": 0.7870370370370371,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.4,
+  "cell": 0.8103703703703704,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.44,
+  "cell": 0.8204938271604938,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.5,
+  "cell": 0.8364197530864198,
+  "count": 100,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.5438271604938272,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.03,
+  "cell": 0.7337037037037037,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.19,
+  "cell": 0.7651851851851852,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.3,
+  "cell": 0.7870370370370371,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.4,
+  "cell": 0.8103703703703704,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.44,
+  "cell": 0.8204938271604938,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.5,
+  "cell": 0.8364197530864198,
+  "count": 100,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.5438271604938272,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.03,
+  "cell": 0.7337037037037037,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.19,
+  "cell": 0.7651851851851852,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.3,
+  "cell": 0.7870370370370371,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.4,
+  "cell": 0.8103703703703704,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.44,
+  "cell": 0.8204938271604938,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.5,
+  "cell": 0.8364197530864198,
+  "count": 100,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.12308641975308642,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.5725925925925925,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.02,
+  "cell": 0.684320987654321,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.07,
+  "cell": 0.7406172839506173,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.13,
+  "cell": 0.7574074074074074,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.2,
+  "cell": 0.7650617283950617,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.25,
+  "cell": 0.7679012345679013,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.12839506172839507,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.5708641975308641,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.02,
+  "cell": 0.6875308641975308,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.05,
+  "cell": 0.7344444444444445,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.12,
+  "cell": 0.754320987654321,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.19,
+  "cell": 0.7587654320987655,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.22,
+  "cell": 0.762962962962963,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
   "source": "ON DEVICE Samsung_Galaxy_S24"
  },
  {
@@ -3607,6 +6136,222 @@
   "cell": 0.8364197530864198,
   "count": 100,
   "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.1262962962962963,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.5702469135802469,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.02,
+  "cell": 0.6864197530864198,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.07,
+  "cell": 0.7335802469135803,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.14,
+  "cell": 0.7508641975308642,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.21,
+  "cell": 0.7590123456790123,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.23,
+  "cell": 0.7604938271604939,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.12308641975308642,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.5725925925925925,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.02,
+  "cell": 0.684320987654321,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.07,
+  "cell": 0.7406172839506173,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.13,
+  "cell": 0.7574074074074074,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.2,
+  "cell": 0.7650617283950617,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.25,
+  "cell": 0.7679012345679013,
+  "count": 100,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.1262962962962963,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.5702469135802469,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.02,
+  "cell": 0.6864197530864198,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.07,
+  "cell": 0.7335802469135803,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.14,
+  "cell": 0.7508641975308642,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.21,
+  "cell": 0.7590123456790123,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.23,
+  "cell": 0.7604938271604939,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
  },
  {
   "task": "sudoku_attn",
@@ -3679,6 +6424,78 @@
   "cell": 0.8269135802469135,
   "count": 100,
   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.0,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.5438271604938272,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.03,
+  "cell": 0.7337037037037037,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.19,
+  "cell": 0.7651851851851852,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.3,
+  "cell": 0.7870370370370371,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.4,
+  "cell": 0.8103703703703704,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.44,
+  "cell": 0.8204938271604938,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "sudoku_attn",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.5,
+  "cell": 0.8364197530864198,
+  "count": 100,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
  },
  {
   "task": "maze",
@@ -4045,6 +6862,438 @@
   "prec": "fp32",
   "step": 1,
   "exact": 0.0,
+  "cell": 0.43395555555555554,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.12,
+  "cell": 0.9786444444444444,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.8,
+  "cell": 0.9954222222222222,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.86,
+  "cell": 0.9954,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.88,
+  "cell": 0.9956222222222222,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.88,
+  "cell": 0.9958666666666667,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.88,
+  "cell": 0.9959555555555556,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4339777777777778,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.12,
+  "cell": 0.9786666666666667,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.78,
+  "cell": 0.9954222222222222,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.86,
+  "cell": 0.9954,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.88,
+  "cell": 0.9956222222222222,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.88,
+  "cell": 0.9958666666666667,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.88,
+  "cell": 0.9959555555555556,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4340222222222222,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.12,
+  "cell": 0.9786888888888889,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.8,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.86,
+  "cell": 0.9954,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.88,
+  "cell": 0.9956222222222222,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.88,
+  "cell": 0.9958666666666667,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.88,
+  "cell": 0.9959555555555556,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4339777777777778,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.12,
+  "cell": 0.9786666666666667,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.78,
+  "cell": 0.9954222222222222,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.86,
+  "cell": 0.9954,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.88,
+  "cell": 0.9956222222222222,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.88,
+  "cell": 0.9958666666666667,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.88,
+  "cell": 0.9959555555555556,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4341555555555556,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.12,
+  "cell": 0.9786888888888889,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.8,
+  "cell": 0.9954222222222222,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.86,
+  "cell": 0.9954,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.88,
+  "cell": 0.9956666666666667,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.88,
+  "cell": 0.9958444444444444,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.88,
+  "cell": 0.9959555555555556,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4340222222222222,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.12,
+  "cell": 0.9786888888888889,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.8,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.86,
+  "cell": 0.9954,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.88,
+  "cell": 0.9956222222222222,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.88,
+  "cell": 0.9958666666666667,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.88,
+  "cell": 0.9959555555555556,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.0,
   "cell": 0.4339777777777778,
   "count": 50,
   "source": "ON DEVICE Samsung_Galaxy_S24"
@@ -4183,6 +7432,222 @@
   "cell": 0.9959555555555556,
   "count": 50,
   "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.43391111111111114,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.12,
+  "cell": 0.9786444444444444,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.8,
+  "cell": 0.9954222222222222,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.86,
+  "cell": 0.9954,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.88,
+  "cell": 0.9956444444444444,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.88,
+  "cell": 0.9958666666666667,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.88,
+  "cell": 0.9959555555555556,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4341555555555556,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.12,
+  "cell": 0.9786888888888889,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.8,
+  "cell": 0.9954222222222222,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.86,
+  "cell": 0.9954,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.88,
+  "cell": 0.9956666666666667,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.88,
+  "cell": 0.9958444444444444,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.88,
+  "cell": 0.9959555555555556,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.43391111111111114,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.12,
+  "cell": 0.9786444444444444,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.8,
+  "cell": 0.9954222222222222,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.86,
+  "cell": 0.9954,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.88,
+  "cell": 0.9956444444444444,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.88,
+  "cell": 0.9958666666666667,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.88,
+  "cell": 0.9959555555555556,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
  },
  {
   "task": "maze",
@@ -4258,6 +7723,510 @@
  },
  {
   "task": "maze",
+  "prec": "fp32",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4340222222222222,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 2,
+  "exact": 0.12,
+  "cell": 0.9786888888888889,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 3,
+  "exact": 0.8,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 4,
+  "exact": 0.86,
+  "cell": 0.9954,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9954444444444445,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 6,
+  "exact": 0.88,
+  "cell": 0.9956222222222222,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 7,
+  "exact": 0.88,
+  "cell": 0.9958666666666667,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "fp32",
+  "step": 8,
+  "exact": 0.88,
+  "cell": 0.9959555555555556,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.30266666666666664,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.6056,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.6150222222222222,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.6119111111111111,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.6131333333333333,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.6129111111111111,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.6119555555555556,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.6114888888888889,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.30266666666666664,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.6056,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.6150222222222222,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.6119111111111111,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.6131333333333333,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.6129111111111111,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.6119555555555556,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.6114888888888889,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.30266666666666664,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.6056,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.6150222222222222,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.6119111111111111,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.6131333333333333,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.6129111111111111,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.6119555555555556,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.6114888888888889,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.30266666666666664,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.6056,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.6150222222222222,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.6119111111111111,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.6131333333333333,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.6129111111111111,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.6119555555555556,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.6114888888888889,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4503111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.2829111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.8558666666666667,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.9129777777777778,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.9342444444444444,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.9621111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.9732666666666666,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.9763111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4517333333333333,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.28244444444444444,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.8558888888888889,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.9133777777777777,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.9334666666666667,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.9617777777777777,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.9730888888888889,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.9769777777777777,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
   "prec": "w8a8",
   "step": 1,
   "exact": 0.0,
@@ -4399,6 +8368,222 @@
   "cell": 0.6114888888888889,
   "count": 50,
   "source": "ON DEVICE Samsung_Galaxy_S24_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.43244444444444446,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.2740222222222222,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.7891111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.8366,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.8543777777777778,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.8751111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.8850222222222223,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.8891111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4503111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.2829111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.8558666666666667,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.9129777777777778,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.9342444444444444,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.9621111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.9732666666666666,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.9763111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.4504888888888889,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.28215555555555555,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.8557111111111111,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.9141555555555556,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.9331333333333334,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.9621333333333333,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.9728666666666667,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.9772666666666666,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
  },
  {
   "task": "maze",
@@ -4471,6 +8656,510 @@
   "cell": 0.5720888888888889,
   "count": 50,
   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.30266666666666664,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.6056,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.6150222222222222,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.6119111111111111,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.6131333333333333,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.6129111111111111,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.6119555555555556,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.6114888888888889,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.45313333333333333,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.2802,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.8512222222222222,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.9107777777777778,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.9309777777777778,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.9606222222222223,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.9723111111111111,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.9769555555555556,
+  "count": 50,
+  "source": "ON DEVICE Arduino_VENTUNO_Q_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.45313333333333333,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.2802,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.8512222222222222,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.9107777777777778,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.9309777777777778,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.9606222222222223,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.9723111111111111,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.9769555555555556,
+  "count": 50,
+  "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.45313333333333333,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.2802,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.8512222222222222,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.9107777777777778,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.9309777777777778,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.9606222222222223,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.9723111111111111,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.9769555555555556,
+  "count": 50,
+  "source": "ON DEVICE QCS8550_(Proxy)_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.45313333333333333,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.2802,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.8512222222222222,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.9107777777777778,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.9309777777777778,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.9606222222222223,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.9723111111111111,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.9769555555555556,
+  "count": 50,
+  "source": "ON DEVICE SA8775P_ADP_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.3793111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.9634444444444444,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 3,
+  "exact": 0.44,
+  "cell": 0.9889111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 4,
+  "exact": 0.76,
+  "cell": 0.9949333333333333,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9961777777777778,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 6,
+  "exact": 0.86,
+  "cell": 0.9952,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 7,
+  "exact": 0.86,
+  "cell": 0.9949333333333333,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 8,
+  "exact": 0.84,
+  "cell": 0.9944,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.3806888888888889,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.9630888888888889,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 3,
+  "exact": 0.42,
+  "cell": 0.9885333333333334,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 4,
+  "exact": 0.76,
+  "cell": 0.9938222222222223,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 5,
+  "exact": 0.82,
+  "cell": 0.9951555555555556,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 6,
+  "exact": 0.86,
+  "cell": 0.9953777777777778,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 7,
+  "exact": 0.86,
+  "cell": 0.9945777777777778,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 8,
+  "exact": 0.84,
+  "cell": 0.9943777777777778,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S23_acct2"
  },
  {
   "task": "maze",
@@ -4551,6 +9240,222 @@
   "exact": 0.0,
   "cell": 0.36562222222222224,
   "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.8819555555555556,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.8950666666666667,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.8991333333333333,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.9017111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.9026444444444445,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.9019777777777778,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.9031333333333333,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_S25_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.3793111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.9634444444444444,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 3,
+  "exact": 0.44,
+  "cell": 0.9889111111111111,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 4,
+  "exact": 0.76,
+  "cell": 0.9949333333333333,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 5,
+  "exact": 0.88,
+  "cell": 0.9961777777777778,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 6,
+  "exact": 0.86,
+  "cell": 0.9952,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 7,
+  "exact": 0.86,
+  "cell": 0.9949333333333333,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 8,
+  "exact": 0.84,
+  "cell": 0.9944,
+  "count": 50,
+  "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.38035555555555556,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 2,
+  "exact": 0.02,
+  "cell": 0.9630444444444445,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 3,
+  "exact": 0.42,
+  "cell": 0.9880888888888889,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 4,
+  "exact": 0.72,
+  "cell": 0.9948444444444444,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 5,
+  "exact": 0.9,
+  "cell": 0.9973111111111111,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 6,
+  "exact": 0.9,
+  "cell": 0.9971555555555556,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 7,
+  "exact": 0.9,
+  "cell": 0.9962888888888889,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 8,
+  "exact": 0.88,
+  "cell": 0.9956888888888888,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.36562222222222224,
+  "count": 50,
   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct2"
  },
  {
@@ -4615,6 +9520,78 @@
   "cell": 0.9031333333333333,
   "count": 50,
   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct2"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 1,
+  "exact": 0.0,
+  "cell": 0.45313333333333333,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 2,
+  "exact": 0.0,
+  "cell": 0.2802,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 3,
+  "exact": 0.0,
+  "cell": 0.8512222222222222,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 4,
+  "exact": 0.0,
+  "cell": 0.9107777777777778,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 5,
+  "exact": 0.0,
+  "cell": 0.9309777777777778,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 6,
+  "exact": 0.0,
+  "cell": 0.9606222222222223,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 7,
+  "exact": 0.0,
+  "cell": 0.9723111111111111,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
+ },
+ {
+  "task": "maze",
+  "prec": "w8a8rope16",
+  "step": 8,
+  "exact": 0.0,
+  "cell": 0.9769555555555556,
+  "count": 50,
+  "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3"
  },
  {
   "task": "arc",
