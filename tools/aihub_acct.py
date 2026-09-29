@@ -301,6 +301,20 @@ class Acct:
         return v, g
 
 
+def atomic_json(path, obj):
+    tmp = path.with_name(path.name + ".tmp")
+    tmp.write_text(json.dumps(obj, indent=1))
+    os.replace(tmp, path)
+
+
+def atomic_npz(path, **arrays):
+    """a killed driver must not leave a truncated .npz (a zip) behind: write beside, then rename."""
+    tmp = path.with_name(path.name + ".tmp")
+    with open(tmp, "wb") as f:
+        np.savez_compressed(f, **arrays)
+    os.replace(tmp, path)
+
+
 class Chain:
     def __init__(self, acct, task, prec, device, runtime, nsteps):
         self.a, self.task, self.prec, self.device, self.runtime, self.nsteps = acct, task, prec, device, runtime, nsteps
@@ -312,7 +326,7 @@ class Chain:
         self._data = None
 
     def save(self):
-        self.meta_path.write_text(json.dumps(self.meta, indent=1))
+        atomic_json(self.meta_path, self.meta)
 
     @property
     def done(self):
@@ -340,8 +354,8 @@ class Chain:
             if code not in ("SUCCESS", "FAILED"):
                 return 0
             job = self.a.C.get_job(cur["job_id"])
-            self.meta.pop("current")
             if code == "FAILED":
+                self.meta.pop("current")
                 msg = (job.get_status().message or "")[:600]
                 self.meta.setdefault("errors", []).append({"step": cur["step"], "job_id": cur["job_id"], "error": msg})
                 if len(self.meta["errors"]) >= 3:
@@ -362,7 +376,8 @@ class Chain:
             assert len(preds) == cur["step"], (self.tag, len(preds), cur)     # one state row per device step
             preds.append(lg.argmax(-1))
             qs.append(q)
-            np.savez_compressed(self.state_path, zH=zH, zL=zL, preds=np.stack(preds), q=np.stack(qs))
+            atomic_npz(self.state_path, zH=zH, zL=zL, preds=np.stack(preds), q=np.stack(qs))
+            self.meta.pop("current")                 # only once the step is ingested: an exception above leaves it for a retry
             ex = float((preds[-1] == lab).all(-1).mean())
             self.meta["steps"].append({"step": cur["step"], "job_id": cur["job_id"], "exact": ex,
                                        "cell": float((preds[-1] == lab).mean())})

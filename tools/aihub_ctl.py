@@ -124,7 +124,7 @@ class CtlChain:
 
     # ------------------------------------------------------------------ state
     def save(self):
-        self.meta_path.write_text(json.dumps(self.meta, indent=1))
+        X.atomic_json(self.meta_path, self.meta)
 
     @property
     def done(self):
@@ -155,7 +155,7 @@ class CtlChain:
         return self._st
 
     def save_state(self):
-        np.savez_compressed(self.state_path, **self._st)
+        X.atomic_npz(self.state_path, **self._st)
 
     # ------------------------------------------------------------------ graphs
     def compiled(self, prec, bs):
