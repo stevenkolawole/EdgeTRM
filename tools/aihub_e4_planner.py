@@ -138,7 +138,9 @@ def table():
                 if m.get("failed") and not st:
                     print(f"| {task} {label} | {prec} | 0 | refused: {m['failed'][:70]} | - | - |")
                     continue
-                pv, vv = verdicts(st, h)
+                # the fused w8a8 DLC (fp16 islands + fp16 carry) is not an execution of the all-integer graph the host
+                # reference column runs: its ratios against that column mean nothing, so none is printed
+                pv, vv = verdicts(st, h) if prec != "w8a8" else ("n/a (fused DLC)", "n/a (fused DLC)")
                 conv = (m.get("converter") or {}).get("converter") or "unpinned qairt path (Sep 25)"
                 print(f"| {task} {label} | {prec} ({m['_file'].split('_')[-1][:-5]}, {conv}, guard {(m.get('guard') or {}).get('verdict', '-')}) | {len(st)} | {fmt(st)} | {pv} | {vv} |")
             for prec in ("w8a8_nofuse2", "m3g40_nofuse2", "m3g60_nofuse2"):
