@@ -32,3 +32,10 @@ Thumbs.db
 EdgeTRM.pem
 EdgeTRM_Seq.pem
 results/m2/cells/
+
+# edge boards: large exports and host references live in edge/assets (copied from p4d ~/aihub_artifacts/h1); results rsynced from boards
+edge/assets/**/*.onnx
+edge/assets/**/host_fp32.npz
+edge/assets/**/puzzles_*.npz
+edge/assets/**/*.plan
+edge/results/
