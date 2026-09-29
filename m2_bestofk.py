@@ -27,6 +27,41 @@ Rollouts are vectorized: each chunk of B puzzles is replicated K times (batch K*
 puzzle i sits at row k*B + i.  Noise comes from a CUDA generator seeded per (spec seed, sigma,
 chunk), so a cell is reproducible given the chunk size.
 
+Reduced-precision arithmetic (--compute fp16 | bf16; default fp32 = every earlier record):
+  Every supervision step (and every polish step) runs under torch.autocast(cuda, dtype), so the linears, the attention
+  and the halting head compute in the reduced dtype while the WEIGHTS stay whatever the spec says (fp32, or RTN /
+  SR values dequantized to fp32) and the carry z_H / z_L stays fp32 (the residual add promotes back).  Nothing else
+  changes: same rows, seeds, records.  Cell files carry the suffix _c16 / _cbf16 and the index record the field
+  "compute", so fp32-compute cells are never overwritten.
+  Question ("free dither"): the dither result (M2.md "Dither" / "Dither controls") is that a FRESH per-step weight
+  perturbation at the stochastic-rounding variance lifts the compressed loop above its own fp32 accuracy at depth 512,
+  and the lattice is incidental (fp32 weights + per-step Gaussian at the SR variance matches).  Reduced-precision
+  arithmetic injects a fresh per-step rounding error of the activations at zero cost.  Is it big enough to act?
+  Order of magnitude (weight scales measured on the released checkpoints, p4d Sep 28, tools: see HANDOVER_SEP26):
+  the per-step rounding of an fp16 activation is a relative error of at most 2^-11 = 4.9e-4 per element (uniform,
+  std 2.8e-4); bf16 is 2^-8 = 3.9e-3 (std 2.3e-3).  A relative per-element error on a linear's INPUT has the same
+  effect on the output as a relative per-element error on that row of the WEIGHT, so the comparable weight-side
+  number is the SR per-weight std relative to the weight RMS, sqrt(mean s^2 f (1 - f)) / rms(W), over the
+  CastedLinears: Sudoku-MLP w4c 0.20 (s = row absmax / 7; rms(W) 0.022, SR std 0.0043), w3g32 0.29; Sudoku-attn w3c
+  0.42, w3g32 0.28, w4t 0.43; HRM w3c 0.44.  So the fresh fp16 rounding is 700-1500x smaller in std (5e5-2e6x in
+  variance) than the perturbation the dither / gdither arms apply, and bf16 90-200x (8e3-4e4x).  (RTN's FIXED error
+  is 0.14-0.31 relative on the same cells.)  The p4d smoke (n = 16, D = 64) confirms the perturbation is live: the
+  halting logit differs from fp32 compute at step 0 by 0.045 (fp16) / 0.25 (bf16) and the trajectories diverge with
+  depth (per-step correctness differs at 34 / 58 of 64 steps) while the final accuracy is unchanged.
+  Predictions, written before any cell ran:
+  (a) "free dither works": at D = 512 the compressed model under fp16 / bf16 compute rises above its own fp32-compute
+      RTN number, in the direction of the gdither arm (MLP w4c 82.1 -> towards 95; attn w3c 89.4 -> 94; HRM w3c 66.4
+      -> 75), bf16 more than fp16, and the fp32-weight model gains as well.  Then a device gets the per-step
+      regulariser from its fp16 / bf16 tensor cores alone and the re-draw is unnecessary.
+  (b) "too weak" (EXPECTED, by the ~2-3 orders of magnitude above): fp16 and bf16 compute reproduce the fp32-compute
+      trajectories to within a few tenths of a point at every checkpoint (16 / 64 / 512) for both fp32 and RTN weights,
+      and adding fp16 compute on top of dither (K = 3) changes the dither number by no more than its seed spread.
+      Then the free perturbation is far below the useful range and the device needs the explicit re-draw (or an
+      explicit per-step noise source); the reduced-precision run also doubles as the "reduced precision does no harm"
+      check for the fp16 device paths.
+  A third outcome to watch for: bf16 HURTS (a fixed 2^-8 error on the halting logit or on the settled state moves the
+      readout without any regularising benefit); then compute precision is a fault, not a free lunch.
+
 Output: one .npz per cell (task, spec, noise, sigma, D, K) under --outdir, plus a JSON index line
 (--index) with the cell's summary.  Resumable per cell (skip if the .npz exists).
 
@@ -58,6 +93,20 @@ def init_inner(m, B, S, D):
 def make_hash_w(L):
     g = torch.Generator().manual_seed(99)
     return torch.randint(1, 2 ** 31 - 1, (L,), generator=g, dtype=torch.int64).to(DEV)
+
+
+COMPUTE = "fp32"                       # set from --compute; fp16 / bf16 = autocast every forward (arithmetic only)
+_AC_DTYPE = {"fp32": None, "fp16": torch.float16, "bf16": torch.bfloat16}
+
+
+def fwd(model, carry, bt):
+    """One supervision step under the chosen compute precision. Weights and carry stay as they are; only the arithmetic
+    inside the step (linears, attention, halting head) runs in the reduced dtype."""
+    dt = _AC_DTYPE[COMPUTE]
+    if dt is None:
+        return model.inner(carry, bt)
+    with torch.autocast(device_type="cuda", dtype=dt):
+        return model.inner(carry, bt)
 
 
 def build_spec(task, spec, D, batch):
@@ -115,7 +164,7 @@ def run_cell(m, mref, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_
                     eps = torch.randn(zl.shape, generator=gen, device=DEV, dtype=zl.dtype)
                     scale = sigma if noise == "ptrm" else sigma * zl.float().pow(2).mean((1, 2), keepdim=True).sqrt()
                     carry = type(carry)(z_H=carry.z_H, z_L=zl + scale * eps)
-                carry, logits, (q_halt, _) = m.inner(carry, bt)
+                carry, logits, (q_halt, _) = fwd(m, carry, bt)
                 pred = logits.argmax(-1)
                 corr[:, s:s + B, t] = (pred == y).all(1).view(K, B).cpu().numpy()
                 qh[:, s:s + B, t] = q_halt.float().view(K, B).cpu().numpy()
@@ -138,7 +187,7 @@ def run_cell(m, mref, inp, lab, kind, bfs, K, D, noise, sigma, seed, chunk, chk_
                 if polish_from == "best":
                     carry = type(carry)(z_H=best_H, z_L=best_L)
                 for p in range(polish):
-                    carry, logits, (q_halt, _) = mref.inner(carry, bt)
+                    carry, logits, (q_halt, _) = fwd(mref, carry, bt)
                     pred = logits.argmax(-1)
                     pol["corr"][:, s:s + B, p] = (pred == y).all(1).view(K, B).cpu().numpy()
                     pol["q"][:, s:s + B, p] = q_halt.float().view(K, B).cpu().numpy()
@@ -254,7 +303,7 @@ def run_cell_multi(get_model, get_xform, inp, lab, kind, bfs, K, D, noise, sigma
                 if noise in ("ptrm", "rel") and sigma > 0:
                     eps = torch.randn(carry.z_L.shape, generator=gen, device=DEV, dtype=carry.z_L.dtype)
                     carry = type(carry)(z_H=carry.z_H, z_L=carry.z_L + sigma * eps)
-                carry, logits, (q_halt, _) = m.inner(carry, bt)
+                carry, logits, (q_halt, _) = fwd(m, carry, bt)
                 pred = logits.argmax(-1)
                 corr[k, s:s + B, t] = (pred == y).all(1).cpu().numpy()
                 qh[k, s:s + B, t] = q_halt.float().cpu().numpy()
@@ -333,9 +382,14 @@ def main():
     ap.add_argument("--outdir", required=True)
     ap.add_argument("--index", required=True)
     ap.add_argument("--tag", default="")
+    ap.add_argument("--compute", default="fp32", choices=("fp32", "fp16", "bf16"),
+                    help="arithmetic precision of every step (autocast); weights stay as the spec says. fp16 -> _c16, bf16 -> _cbf16")
     ap.add_argument("--allow_cpu", action="store_true")
     a = ap.parse_args()
     assert a.allow_cpu or torch.cuda.is_available(), "NO CUDA on this node"
+    global COMPUTE
+    COMPUTE = a.compute
+    csuf = {"fp32": "", "fp16": "_c16", "bf16": "_cbf16"}[a.compute]
     if a.ckpt:
         import breadth_sweep as bsw
         assert a.tag, "--ckpt needs a --tag so cell names differ from the released model's"
@@ -363,13 +417,13 @@ def main():
     sigmas = [0.0] if a.noise == "none" else [float(s) for s in a.sigmas.split(",") if s.strip()]
     specs = [s.strip() for s in a.specs.split(",") if s.strip()]
     print(f"{a.task} n={n} D={a.D} K={a.K} noise={a.noise} sigmas={sigmas} specs={specs} chunk={chunk} "
-          f"chk_steps={chk_steps} polish={a.polish} dev={DEV}", flush=True)
+          f"chk_steps={chk_steps} polish={a.polish} compute={a.compute} dev={DEV}", flush=True)
     for spec in specs:
         todo = []
         for sg in sigmas:
             multi = a.wsample != "none" or a.tta or a.ensemble
             K = (len(a.ensemble.split(",")) if a.ensemble else a.K) if multi else (1 if (a.noise == "none" or sg == 0) else a.K)
-            name = f"{a.task}__{spec}__{a.noise}{sg:g}__D{a.D}_K{K}{('_P%d' % a.polish) if a.polish else ''}{'b' if a.polish and a.polish_from == 'best' else ''}{('_' + a.wsample) if a.wsample != 'none' else ''}{('_m' + a.master) if a.master != 'fp32' else ''}{'_tta' if a.tta else ''}{('_ens%d' % len(a.ensemble.split(','))) if a.ensemble else ''}{('_o%d' % a.offset) if a.offset else ''}{a.tag}.npz"
+            name = f"{a.task}__{spec}__{a.noise}{sg:g}__D{a.D}_K{K}{('_P%d' % a.polish) if a.polish else ''}{'b' if a.polish and a.polish_from == 'best' else ''}{('_' + a.wsample) if a.wsample != 'none' else ''}{('_m' + a.master) if a.master != 'fp32' else ''}{'_tta' if a.tta else ''}{('_ens%d' % len(a.ensemble.split(','))) if a.ensemble else ''}{('_o%d' % a.offset) if a.offset else ''}{csuf}{a.tag}.npz"
             if not (outdir / name).exists():
                 todo.append((sg, K, name))
         if not todo:
@@ -454,7 +508,7 @@ def main():
             os.replace(tmp, outdir / name)
             summ = quick_summary(corr, qh, hs, chk, a.D)
             rec = {"task": a.task, "spec": spec, "wseed": wseed, "noise": a.noise, "sigma": sg, "K": K, "D": a.D,
-                   "polish": a.polish, "polish_from": a.polish_from, "wsample": a.wsample, "master": a.master, "tta": a.tta, "ensemble": a.ensemble, "ckpt": a.ckpt, "offset": a.offset, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
+                   "polish": a.polish, "polish_from": a.polish_from, "wsample": a.wsample, "master": a.master, "tta": a.tta, "ensemble": a.ensemble, "ckpt": a.ckpt, "offset": a.offset, "compute": a.compute, "n": n, "chunk": chunk, "file": name, "H_cycles": meta["H_cycles"],
                    "zl_rms_last": float(rms[-1]), "summary": summ, "secs": time.time() - t1,
                    "host": socket.gethostname(),
                    "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",
