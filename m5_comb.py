@@ -2,7 +2,7 @@
 """E_COMBINED read-out: the controller (exit + 8-bit finishing) with and without per-step dither on the cheap loops,
 at the same honest cost. Predictions and protocol: reports/edgetrm_exp/E_COMBINED.md (written before any record).
 
-Records (exit_polish.py --K 64 --J 4, p4d A100; results/m5/comb/p4d/polish_o{0,1000}/<task>/):
+Records (exit_polish.py --K 64 --J 4 Sudoku, --K 32 Maze; p4d A100; results/m5/comb/p4d/polish_o{0,1000|500}/<task>/):
   <cheap>__w8c.npz                        RTN cheap trajectory, w8c finishing after every cheap step (deterministic)
   <cheap>__w8c__dither_mw8c_s{k}.npz      cheap weights re-drawn (SR onto the cheap grid from the INT8 copy) before every
                                           cheap step, seed k = M2 arm 6's rollout k; the same w8c finishing
@@ -38,7 +38,11 @@ from m5_controller import fire_mask, first
 
 HERE = Path(__file__).resolve().parent
 ROOT = Path(os.environ.get("M5_COMB_DIR", HERE / "results" / "m5" / "comb" / "p4d"))
-CELLS = {"sudoku_mlp": ["w4c", "w3g32"], "sudoku_attn": ["w3c", "w4t"], "hrm_sudoku": ["w3c"]}
+CELLS = {"sudoku_mlp": ["w4c", "w3g32"], "sudoku_attn": ["w3c", "w4t"], "hrm_sudoku": ["w3c"],
+         "maze_attn": ["w2a", "w4t"], "hrm_maze": ["w2a", "w2g32"]}
+# row sets: Sudoku dev 0-999 / held out 1000-1999 (polish_o0 / polish_o1000); Maze dev 0-499 / held out 500-999
+# (polish_o0 / polish_o500; the det reference is the one det_o0 record, sliced). Maze records: K = 32 cheap steps.
+SPLITS = {"sudoku": ((0, "dev", None), (1000, "ho", None)), "maze": ((0, "dev", slice(0, 500)), (500, "ho", slice(500, 1000)))}
 BUD = [8, 12, 16, 24, 32, 48, 64]
 NB = 2000
 D0S = (1, 2, 4, 8, 12, 16, 24, 32, 48, 64)
@@ -145,12 +149,12 @@ def fmt(t):
     return f"{t[0]:+5.1f} [{t[1]:+.1f},{t[2]:+.1f}]"
 
 
-def checks(task, spec, off, rtn):
+def checks(task, spec, off, rtn, rows=None):
     """RTN record vs the existing exit_sweep and polish records of the controller platform."""
     msg = []
-    p = C.ROOT / f"det_o{off}" / task / f"{spec}.npz"
+    p = C.ROOT / f"det_o{0 if rows else off}" / task / f"{spec}.npz"
     if p.exists():
-        dc, _, _ = C.load_det(p)
+        dc, _, _ = C.load_det(p, rows)
         T = min(dc.shape[1], rtn["c"].shape[1])
         n = min(dc.shape[0], rtn["c"].shape[0])
         mm = int((dc[:n, :T] != rtn["c"][:n, :T]).sum())
@@ -177,13 +181,14 @@ def main():
     rows = []
     for task, specs in CELLS.items():
         hrm = task.startswith("hrm")
-        d0 = C.load_det(C.ROOT / "det_o0" / task / "fp32.npz")
+        splits = SPLITS["maze" if "maze" in task else "sudoku"]
+        d0 = C.load_det(C.ROOT / "det_o0" / task / "fp32.npz", splits[0][2])
         rule, _ = C.rules_for(d0, task)
         for spec in specs:
             r = 8.0 / b_eff(spec)
             arms = {}
             ok = True
-            for off, name in ((0, "dev"), (1000, "ho")):
+            for off, name, rsl in splits:
                 d = root / f"polish_o{off}" / task
                 rtn_p = d / f"{spec}__w8c.npz"
                 dit_p = sorted(glob.glob(str(d / f"{spec}__w8c__dither_mw8c_s*.npz")))
@@ -194,7 +199,7 @@ def main():
                 rtn = load(rtn_p)
                 arms[(name, "rtn")] = Arm([rtn], hrm, rule, r)
                 arms[(name, "dit")] = Arm([load(p) for p in dit_p], hrm, rule, r)
-                arms[(name, "check")] = checks(task, spec, off, rtn)
+                arms[(name, "check")] = checks(task, spec, off, rtn, rsl)
             if not ok:
                 continue
             n_dev, n_ho = arms[("dev", "rtn")].n, arms[("ho", "rtn")].n
