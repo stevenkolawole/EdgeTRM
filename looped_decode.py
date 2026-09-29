@@ -337,18 +337,42 @@ def parse_spec(spec):
 
 
 class _WFresh:
-    """W = W0 + sigma * std(W0) * randn, drawn anew before every forward of the linear (a fresh error in the
-    weights, the LM analogue of the per-step perturbation of the puzzle exhibits)."""
+    """Fresh weight noise: W = W0 + sigma * std(W0) * Z, Z ~ N(0, 1) i.i.d., drawn anew at every call of the linear
+    (every loop of every decode step; one Z shared by all rows of the batch within a call).  The LM analogue of the
+    per-step perturbation of the puzzle exhibits.
+
+    Realised on the output side.  Z is used once and discarded, so its only effect is y = x W0^T + s * x Z^T, and
+    x Z^T over the R input rows is exactly Gaussian with covariance (X X^T) (x) I_out.  We sample that law directly:
+    N = L G with L L^T = X X^T (Cholesky of the R x R Gram, fp32) and G ~ N(0, 1)^{R x out}, i.e. R * out Gaussians
+    per call instead of in * out.  Same process law as materialising Z into the weight (per-row noise std and
+    cross-row correlation agree with the materialised draw), a different random stream, and no in*out RNG pass per
+    call: materialising Z costs ~51G Gaussians per decode step for Huginn's core (16 linears x 32 loops), which the
+    GPU generates at ~0.25 G/us, i.e. the arm was RNG-bound at ~1.2 s per decode step.  Calls with more rows than
+    WF_GRAM_MAX (long prefills) use the materialised draw, which is cheaper there; WF_DIRECT=1 forces it everywhere
+    (for A/B checks).  The Gram gets a 1e-4 relative diagonal jitter (identical pad rows make it singular); that adds
+    1e-4 relative noise variance, far below the bf16 rounding of W0 + noise in the materialised path."""
+
+    GRAM_MAX = int(os.environ.get("WF_GRAM_MAX", "512"))
+    DIRECT = os.environ.get("WF_DIRECT") == "1"
 
     def __init__(self, mod, sigma):
-        self.W0, self.sigma = mod.weight.data.clone(), sigma
-        # std(W0) is a constant of the master weight: computed once (the per-call fp32 copy + reduction cost
-        # more than the matmul at batch 4; the value is bit-identical to computing it at every call).
-        self.scale = self.sigma * self.W0.float().std().to(self.W0.dtype)
+        self.sigma = sigma
+        self.scale = float(sigma * mod.weight.float().std())    # a constant of the master weight
 
-    def __call__(self, mod, args):
-        mod.weight.data = self.W0 + torch.randn_like(self.W0) * self.scale
-        return None
+    def __call__(self, mod, args, out):
+        x = args[0]
+        X = x.reshape(-1, x.shape[-1])
+        R = X.shape[0]
+        if self.DIRECT or R > self.GRAM_MAX:
+            Z = torch.empty_like(mod.weight).normal_(0.0, self.scale)          # in the weight dtype, one kernel
+            n = F.linear(X, Z)
+        else:
+            Xf = X.float()
+            G = Xf @ Xf.T
+            G.diagonal().mul_(1.0 + 1e-4).add_(1e-10)          # relative jitter, no reduction kernel
+            L, _ = torch.linalg.cholesky_ex(G)
+            n = L @ torch.empty(R, out.shape[-1], device=X.device, dtype=torch.float32).normal_(0.0, self.scale)
+        return out.add_(n.reshape(out.shape))                   # in place, fp32 noise rounded into the bf16 output
 
 
 def _noise_hook(sigma):
@@ -364,7 +388,7 @@ def quantize_(fam, model, q, scope):
         n = 0
         for m in fam.core_modules(model, scope):
             if isinstance(m, torch.nn.Linear):
-                m.register_forward_pre_hook(_WFresh(m, q["w_fresh"]))
+                m.register_forward_hook(_WFresh(m, q["w_fresh"]))
                 n += 1
         return n
     if q.get("act_noise"):
