@@ -39,3 +39,6 @@ edge/assets/**/host_fp32.npz
 edge/assets/**/puzzles_*.npz
 edge/assets/**/*.plan
 edge/results/
+
+# E10 fault-injection cells (rsynced from babel:~/m2_results/cells and sk-p4d:~/fi_results/cells; 206 MB); indices committed
+results/fault/*/cells/
