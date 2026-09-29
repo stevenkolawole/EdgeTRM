@@ -1,0 +1,726 @@
+{
+ "listed": "2026-09-29 via qai_hub.Client.get_devices() on acct2 and acct3 (identical lists)",
+ "devices": {
+  "Google Pixel 3 (Family)": {
+   "os": "10",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-845",
+    "sdm845"
+   ],
+   "hexagon": "v65",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 3": {
+   "os": "10",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-845",
+    "sdm845"
+   ],
+   "hexagon": "v65",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 3a": {
+   "os": "10",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-670",
+    "sdm670"
+   ],
+   "hexagon": "v65",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 3 XL": {
+   "os": "10",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-845",
+    "sdm845"
+   ],
+   "hexagon": "v65",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 4": {
+   "os": "10",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-855",
+    "sm8150"
+   ],
+   "hexagon": "v66",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 5": {
+   "os": "11",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-765g",
+    "sm7250"
+   ],
+   "hexagon": "v66",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Samsung Galaxy Tab S7": {
+   "os": "11",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-865+",
+    "sm8250-ab"
+   ],
+   "hexagon": "v66",
+   "htp_fp16": null,
+   "format": "tablet"
+  },
+  "Samsung Galaxy Note 20 (Intl)": {
+   "os": "11",
+   "os_kind": "android",
+   "chipset": [
+    "samsung-exynos-990"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Samsung Galaxy S21 (Family)": {
+   "os": "11",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-888",
+    "sm8350"
+   ],
+   "hexagon": "v68",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Samsung Galaxy S21": {
+   "os": "11",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-888",
+    "sm8350"
+   ],
+   "hexagon": "v68",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Samsung Galaxy S21 Ultra": {
+   "os": "11",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-888",
+    "sm8350"
+   ],
+   "hexagon": "v68",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Xiaomi Redmi Note 10 5G": {
+   "os": "11",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-678",
+    "sm6150-ac"
+   ],
+   "hexagon": "v66",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 3a XL": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-670",
+    "sdm670"
+   ],
+   "hexagon": "v65",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 5 (Family)": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-765g",
+    "sm7250"
+   ],
+   "hexagon": "v66",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 5a 5G": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-765g",
+    "sm7250"
+   ],
+   "hexagon": "v66",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 6": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Samsung Galaxy A53 5G": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "samsung-exynos-1280"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Samsung Galaxy A73 5G": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-778g",
+    "sm7325"
+   ],
+   "hexagon": "v68",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "QCS8550 (Proxy)": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-qcs8550-proxy",
+    "qualcomm-dragonwing-qcs8550-proxy"
+   ],
+   "hexagon": "v73",
+   "htp_fp16": "true",
+   "format": "iot"
+  },
+  "Samsung Galaxy S22 (Family)": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen1",
+    "sm8450"
+   ],
+   "hexagon": "v69",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S22 Ultra 5G": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen1",
+    "sm8450"
+   ],
+   "hexagon": "v69",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S22 5G": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen1",
+    "sm8450"
+   ],
+   "hexagon": "v69",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S22+ 5G": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen1",
+    "sm8450"
+   ],
+   "hexagon": "v69",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy Tab S8": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen1",
+    "sm8450"
+   ],
+   "hexagon": "v69",
+   "htp_fp16": "true",
+   "format": "tablet"
+  },
+  "Xiaomi 12 (Family)": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen1",
+    "sm8450"
+   ],
+   "hexagon": "v69",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Xiaomi 12": {
+   "os": "12",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen1",
+    "sm8450"
+   ],
+   "hexagon": "v69",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Google Pixel 6 (Family)": {
+   "os": "13",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 7 (Family)": {
+   "os": "13",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g2"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 7": {
+   "os": "13",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g2"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 7 Pro": {
+   "os": "13",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g2"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Samsung Galaxy A14 5G": {
+   "os": "13",
+   "os_kind": "android",
+   "chipset": [
+    "samsung-exynos-1330"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Samsung Galaxy S23 (Family)": {
+   "os": "13",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen2",
+    "sm8550"
+   ],
+   "hexagon": "v73",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S23": {
+   "os": "13",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen2",
+    "sm8550"
+   ],
+   "hexagon": "v73",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S23+": {
+   "os": "13",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen2",
+    "sm8550"
+   ],
+   "hexagon": "v73",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S23 Ultra": {
+   "os": "13",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen2",
+    "sm8550"
+   ],
+   "hexagon": "v73",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Google Pixel 8 (Family)": {
+   "os": "14",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g3"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 8": {
+   "os": "14",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g3"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 8 Pro": {
+   "os": "14",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g3"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Samsung Galaxy S24 (Family)": {
+   "os": "14",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen3",
+    "sm8650"
+   ],
+   "hexagon": "v75",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S24": {
+   "os": "14",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen3",
+    "sm8650"
+   ],
+   "hexagon": "v75",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S24 Ultra": {
+   "os": "14",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen3",
+    "sm8650"
+   ],
+   "hexagon": "v75",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S24+": {
+   "os": "14",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8gen3",
+    "sm8650"
+   ],
+   "hexagon": "v75",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Google Pixel 9 (Family)": {
+   "os": "15",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g4"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 9": {
+   "os": "15",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g4"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 9 Pro": {
+   "os": "15",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g4"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 9 Pro XL": {
+   "os": "15",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g4"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Samsung Galaxy S25": {
+   "os": "15",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8-elite-for-galaxy",
+    "sm8750-ac"
+   ],
+   "hexagon": "v79",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S25 Ultra": {
+   "os": "15",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8-elite-for-galaxy",
+    "sm8750-ac"
+   ],
+   "hexagon": "v79",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S25+": {
+   "os": "15",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8-elite-for-galaxy",
+    "sm8750-ac"
+   ],
+   "hexagon": "v79",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S25 (Family)": {
+   "os": "15",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8-elite-for-galaxy",
+    "sm8750-ac"
+   ],
+   "hexagon": "v79",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Google Pixel 10": {
+   "os": "16",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g5"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Google Pixel 10 Pro XL": {
+   "os": "16",
+   "os_kind": "android",
+   "chipset": [
+    "google-tensor-g5"
+   ],
+   "hexagon": null,
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "Samsung Galaxy S26": {
+   "os": "16",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8-elite-gen5-for-galaxy",
+    "sm8850-ad"
+   ],
+   "hexagon": "v81",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S26 Ultra": {
+   "os": "16",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8-elite-gen5-for-galaxy",
+    "sm8850-ad"
+   ],
+   "hexagon": "v81",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S26+": {
+   "os": "16",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8-elite-gen5-for-galaxy",
+    "sm8850-ad"
+   ],
+   "hexagon": "v81",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Samsung Galaxy S26 (Family)": {
+   "os": "16",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-8-elite-gen5-for-galaxy",
+    "sm8850-ad"
+   ],
+   "hexagon": "v81",
+   "htp_fp16": "true",
+   "format": "phone"
+  },
+  "Snapdragon X Elite CRD": {
+   "os": "11",
+   "os_kind": "windows",
+   "chipset": [
+    "qualcomm-snapdragon-x-elite",
+    "sc8380xp"
+   ],
+   "hexagon": "v73",
+   "htp_fp16": "true",
+   "format": "compute"
+  },
+  "Snapdragon X Plus 8-Core CRD": {
+   "os": "11",
+   "os_kind": "windows",
+   "chipset": [
+    "qualcomm-snapdragon-x-plus-8-core",
+    "sc8340xp"
+   ],
+   "hexagon": "v73",
+   "htp_fp16": "true",
+   "format": "compute"
+  },
+  "Snapdragon X2 Elite CRD": {
+   "os": "11",
+   "os_kind": "windows",
+   "chipset": [
+    "qualcomm-snapdragon-x2-elite",
+    "sc8480xp"
+   ],
+   "hexagon": "v81",
+   "htp_fp16": "true",
+   "format": "compute"
+  },
+  "Snapdragon 7 Gen 4 QRD": {
+   "os": "15",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-snapdragon-7gen4",
+    "sm7750"
+   ],
+   "hexagon": "v73",
+   "htp_fp16": null,
+   "format": "phone"
+  },
+  "SA8295P ADP": {
+   "os": "14",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-sa8295p"
+   ],
+   "hexagon": "v68",
+   "htp_fp16": "true",
+   "format": "auto"
+  },
+  "SA8775P ADP": {
+   "os": "14",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-sa8775p"
+   ],
+   "hexagon": "v73",
+   "htp_fp16": "true",
+   "format": "auto"
+  },
+  "SA7255P ADP": {
+   "os": "14",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-sa7255p"
+   ],
+   "hexagon": "v75",
+   "htp_fp16": "true",
+   "format": "auto"
+  },
+  "Dragonwing Q-6690 MTP": {
+   "os": "15",
+   "os_kind": "android",
+   "chipset": [
+    "qualcomm-qcm6690",
+    "qcm6690",
+    "qualcomm-dragonwing-q-6690"
+   ],
+   "hexagon": "v73",
+   "htp_fp16": null,
+   "format": "iot"
+  },
+  "Dragonwing RB3 Gen 2 Vision Kit": {
+   "os": "1.6",
+   "os_kind": "qc_linux",
+   "chipset": [
+    "qualcomm-qcs6490",
+    "qcs6490",
+    "qualcomm-dragonwing-qcs6490"
+   ],
+   "hexagon": "v68",
+   "htp_fp16": null,
+   "format": "iot"
+  },
+  "Dragonwing IQ-9075 EVK": {
+   "os": "1.9",
+   "os_kind": "qc_linux",
+   "chipset": [
+    "qualcomm-qcs9075",
+    "qcs9075",
+    "qualcomm-dragonwing-iq-9075"
+   ],
+   "hexagon": "v73",
+   "htp_fp16": "true",
+   "format": "iot"
+  },
+  "Arduino VENTUNO Q": {
+   "os": "24.04",
+   "os_kind": "ubuntu",
+   "chipset": [
+    "qualcomm-qcs8275",
+    "qcs8275",
+    "qualcomm-dragonwing-iq-8275"
+   ],
+   "hexagon": "v75",
+   "htp_fp16": "true",
+   "format": "iot"
+  }
+ }
+}

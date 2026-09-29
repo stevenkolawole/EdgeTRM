@@ -1,0 +1,5093 @@
+{
+ "built": "2026-09-29, from sk-p4d:~/aihub_artifacts/h1/<task>/infer/dev_*.json (+ *.json.qairt250, the set-aside QAIRT 2.50 records) and ~/aihub_artifacts/h1/acct_acct{2,3}/jobs.json",
+ "note": "One entry per chain record. 'set_aside' records are the QAIRT 2.50 chains renamed on Sep 29 (QAIRT250_MOVED_INDEX.json); they are not device rows. 'guard' is aihub_acct.guard_outputs on the chain's compile (Sep 29 pin onwards; None for pre-pin records).",
+ "chains": [
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Arduino VENTUNO Q",
+   "acct": "acct3",
+   "source": "ON DEVICE Arduino_VENTUNO_Q_acct3",
+   "file": "dev_fp32_Arduino_VENTUNO_Q_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mm7rng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Dragonwing IQ-9075 EVK",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3",
+   "file": "dev_fp32_Dragonwing_IQ-9075_EVK_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mm7rng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Dragonwing Q-6690 MTP",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_Q-6690_MTP_acct3",
+   "file": "dev_fp32_Dragonwing_Q-6690_MTP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jp0mm7rng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_RB3_Gen_2_Vision_Kit_acct3",
+   "file": "dev_fp32_Dragonwing_RB3_Gen_2_Vision_Kit_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jp0mm7rng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Google Pixel 10",
+   "acct": "acct2",
+   "source": "ON DEVICE Google_Pixel_10_acct2",
+   "file": "dev_fp32_Google_Pixel_10_acct2.json",
+   "set_aside": false,
+   "runtime": "tflite",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: [tflite] Node number 410 (TfLiteGpuDelegateV2) failed to invoke.",
+   "compile_jobs": [
+    "jgol9xv1g"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "n/a (TFLite)"
+   ],
+   "qairt_evidence": [
+    "no QAIRT"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Google Pixel 9",
+   "acct": "acct2",
+   "source": "ON DEVICE Google_Pixel_9_acct2",
+   "file": "dev_fp32_Google_Pixel_9_acct2.json",
+   "set_aside": false,
+   "runtime": "tflite",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: [tflite] Node number 410 (TfLiteGpuDelegateV2) failed to invoke.",
+   "compile_jobs": [
+    "j5680x1ng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "n/a (TFLite)"
+   ],
+   "qairt_evidence": [
+    "no QAIRT"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "QCS8550 (Proxy)",
+   "acct": "acct3",
+   "source": "ON DEVICE QCS8550_(Proxy)_acct3",
+   "file": "dev_fp32_QCS8550_(Proxy)_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mm7rng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "SA8775P ADP",
+   "acct": "acct3",
+   "source": "ON DEVICE SA8775P_ADP_acct3",
+   "file": "dev_fp32_SA8775P_ADP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mm7rng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Samsung Galaxy A53 5G",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_A53_5G_acct3",
+   "file": "dev_fp32_Samsung_Galaxy_A53_5G_acct3.json",
+   "set_aside": false,
+   "runtime": "tflite",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: [tflite] Node number 410 (TfLiteGpuDelegateV2) failed to invoke.",
+   "compile_jobs": [
+    "jgk2k1ryg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "n/a (TFLite)"
+   ],
+   "qairt_evidence": [
+    "no QAIRT"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S21",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S21_acct2",
+   "file": "dev_fp32_Samsung_Galaxy_S21_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jp0mxwl0g"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S22 5G",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2",
+   "file": "dev_fp32_Samsung_Galaxy_S22_5G_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mxwl0g"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S23",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S23_acct2",
+   "file": "dev_fp32_Samsung_Galaxy_S23_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mxwl0g"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S24",
+   "acct": "main",
+   "source": "ON DEVICE Samsung_Galaxy_S24",
+   "file": "dev_fp32_Samsung_Galaxy_S24.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_fp32_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mm7rng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S25",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S25_acct2",
+   "file": "dev_fp32_Samsung_Galaxy_S25_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 1,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mxwl0g"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Samsung Galaxy Tab S8",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2",
+   "file": "dev_fp32_Samsung_Galaxy_Tab_S8_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mxwl0g"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_7_Gen_4_QRD_acct2",
+   "file": "dev_fp32_Snapdragon_7_Gen_4_QRD_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jp0mxwl0g"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Snapdragon 8 Elite Gen 5 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2",
+   "file": "dev_fp32_Snapdragon_8_Elite_Gen_5_QRD_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mxwl0g"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_fp32_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mm7rng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "fp32",
+   "device": "Snapdragon X Elite CRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3",
+   "file": "dev_fp32_Snapdragon_X_Elite_CRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mm7rng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "m3adT40",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_m3adT40_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mo6yng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T11:18Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "m3adT40",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_m3adT40_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp0mo6yng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T11:18Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "m3g40",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_m3g40_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp2roe8qg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T11:18Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "m3g40",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_m3g40_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp2roe8qg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T11:18Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "m3g60",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_m3g60_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jpyo8mel5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T11:18Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "m3g60",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_m3g60_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jpyo8mel5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T11:18Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w4a16",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "acct": "main",
+   "source": "ON DEVICE Dragonwing_RB3_Gen_2_Vision_Kit",
+   "file": "dev_w4a16_Dragonwing_RB3_Gen_2_Vision_Kit.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 7,
+   "failed": "retired Sep 25 02:40 UTC: device W4A16 outputs diverge from the host QDQ graph from step 1 (z_H_out cos 0.14, logits argmax agreement 0.43 on S24 Sudoku-MLP); runtime log selects a disabled q::QNN_CastInt4ToInt8 op; not an I/O encoding issue (w8a16 uses identical input encodings and matches host). Numbers not usable.",
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w4a16",
+   "device": "Samsung Galaxy S24",
+   "acct": "main",
+   "source": "ON DEVICE Samsung_Galaxy_S24",
+   "file": "dev_w4a16_Samsung_Galaxy_S24.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": "retired Sep 25 02:40 UTC: device W4A16 outputs diverge from the host QDQ graph from step 1 (z_H_out cos 0.14, logits argmax agreement 0.43 on S24 Sudoku-MLP); runtime log selects a disabled q::QNN_CastInt4ToInt8 op; not an I/O encoding issue (w8a16 uses identical input encodings and matches host). Numbers not usable.",
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w4a16",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct2",
+   "file": "dev_w4a16_Samsung_Galaxy_S24_acct2.json",
+   "set_aside": false,
+   "runtime": "precompiled_qnn_onnx",
+   "done": true,
+   "n_steps": 1,
+   "failed": null,
+   "compile_jobs": [
+    "jp2rrnmqg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:23Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Arduino VENTUNO Q",
+   "acct": "acct3",
+   "source": "ON DEVICE Arduino_VENTUNO_Q_acct3",
+   "file": "dev_w8a16_Arduino_VENTUNO_Q_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk22myng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Dragonwing IQ-9075 EVK",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3",
+   "file": "dev_w8a16_Dragonwing_IQ-9075_EVK_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk22myng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Dragonwing Q-6690 MTP",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_Q-6690_MTP_acct3",
+   "file": "dev_w8a16_Dragonwing_Q-6690_MTP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgk22myng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_RB3_Gen_2_Vision_Kit_acct3",
+   "file": "dev_w8a16_Dragonwing_RB3_Gen_2_Vision_Kit_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgk22myng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "QCS8550 (Proxy)",
+   "acct": "acct3",
+   "source": "ON DEVICE QCS8550_(Proxy)_acct3",
+   "file": "dev_w8a16_QCS8550_(Proxy)_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk22myng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "SA8775P ADP",
+   "acct": "acct3",
+   "source": "ON DEVICE SA8775P_ADP_acct3",
+   "file": "dev_w8a16_SA8775P_ADP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk22myng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S21",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S21_acct2",
+   "file": "dev_w8a16_Samsung_Galaxy_S21_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgk2w1oyg",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S21",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S21_acct2",
+   "file": "dev_w8a16_Samsung_Galaxy_S21_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgjr89e1p",
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S22 5G",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2",
+   "file": "dev_w8a16_Samsung_Galaxy_S22_5G_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgk2w1oyg",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S22 5G",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2",
+   "file": "dev_w8a16_Samsung_Galaxy_S22_5G_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr89e1p",
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S23",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S23_acct2",
+   "file": "dev_w8a16_Samsung_Galaxy_S23_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgk2w1oyg",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S23",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S23_acct2",
+   "file": "dev_w8a16_Samsung_Galaxy_S23_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr89e1p",
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S24",
+   "acct": "main",
+   "source": "ON DEVICE Samsung_Galaxy_S24",
+   "file": "dev_w8a16_Samsung_Galaxy_S24.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_w8a16_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk22myng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S25",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S25_acct2",
+   "file": "dev_w8a16_Samsung_Galaxy_S25_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgk2w1oyg",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S25",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S25_acct2",
+   "file": "dev_w8a16_Samsung_Galaxy_S25_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr89e1p",
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy Tab S8",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2",
+   "file": "dev_w8a16_Samsung_Galaxy_Tab_S8_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgk2w1oyg",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy Tab S8",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2",
+   "file": "dev_w8a16_Samsung_Galaxy_Tab_S8_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr89e1p",
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_7_Gen_4_QRD_acct2",
+   "file": "dev_w8a16_Snapdragon_7_Gen_4_QRD_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgk2w1oyg",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_7_Gen_4_QRD_acct2",
+   "file": "dev_w8a16_Snapdragon_7_Gen_4_QRD_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgjr89e1p",
+    "jgk2w1oyg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Snapdragon 8 Elite Gen 5 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2",
+   "file": "dev_w8a16_Snapdragon_8_Elite_Gen_5_QRD_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr89e1p"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_w8a16_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk22myng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a16",
+   "device": "Snapdragon X Elite CRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3",
+   "file": "dev_w8a16_Snapdragon_X_Elite_CRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk22myng"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Arduino VENTUNO Q",
+   "acct": "acct3",
+   "source": "ON DEVICE Arduino_VENTUNO_Q_acct3",
+   "file": "dev_w8a8_Arduino_VENTUNO_Q_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp8eev7op"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Dragonwing IQ-9075 EVK",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3",
+   "file": "dev_w8a8_Dragonwing_IQ-9075_EVK_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp8eev7op"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Dragonwing Q-6690 MTP",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_Q-6690_MTP_acct3",
+   "file": "dev_w8a8_Dragonwing_Q-6690_MTP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jp8eev7op"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_RB3_Gen_2_Vision_Kit_acct3",
+   "file": "dev_w8a8_Dragonwing_RB3_Gen_2_Vision_Kit_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jp8eev7op"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Google Pixel 10",
+   "acct": "acct2",
+   "source": "ON DEVICE Google_Pixel_10_acct2",
+   "file": "dev_w8a8_Google_Pixel_10_acct2.json",
+   "set_aside": false,
+   "runtime": "tflite",
+   "done": false,
+   "n_steps": 0,
+   "failed": "The process ended because of a segmentation fault. Consult the runtime log for more details.",
+   "compile_jobs": [
+    "jpvln8wz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "n/a (TFLite)"
+   ],
+   "qairt_evidence": [
+    "no QAIRT"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Google Pixel 9",
+   "acct": "acct2",
+   "source": "ON DEVICE Google_Pixel_9_acct2",
+   "file": "dev_w8a8_Google_Pixel_9_acct2.json",
+   "set_aside": false,
+   "runtime": "tflite",
+   "done": false,
+   "n_steps": 0,
+   "failed": "The process ended because of a segmentation fault. Consult the runtime log for more details.",
+   "compile_jobs": [
+    "jp3zrdmm5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "n/a (TFLite)"
+   ],
+   "qairt_evidence": [
+    "no QAIRT"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "QCS8550 (Proxy)",
+   "acct": "acct3",
+   "source": "ON DEVICE QCS8550_(Proxy)_acct3",
+   "file": "dev_w8a8_QCS8550_(Proxy)_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp8eev7op"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "SA8775P ADP",
+   "acct": "acct3",
+   "source": "ON DEVICE SA8775P_ADP_acct3",
+   "file": "dev_w8a8_SA8775P_ADP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp8eev7op"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy A53 5G",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_A53_5G_acct3",
+   "file": "dev_w8a8_Samsung_Galaxy_A53_5G_acct3.json",
+   "set_aside": false,
+   "runtime": "tflite",
+   "done": false,
+   "n_steps": 0,
+   "failed": "The process ended because of a segmentation fault. Consult the runtime log for more details.",
+   "compile_jobs": [
+    "j5qldn97p"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "n/a (TFLite)"
+   ],
+   "qairt_evidence": [
+    "no QAIRT"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S21",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S21_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S21_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgjr6917p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgjr6917p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S21",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S21_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S21_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgjr6917p",
+    "jpvln8vz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S22 5G",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S22_5G_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr6917p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgjr6917p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S22 5G",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S22_5G_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr6917p",
+    "jpvln8vz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S23",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S23_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S23_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr6917p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgjr6917p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S23",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S23_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S23_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr6917p",
+    "jpvln8vz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S24",
+   "acct": "main",
+   "source": "ON DEVICE Samsung_Galaxy_S24",
+   "file": "dev_w8a8_Samsung_Galaxy_S24.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_w8a8_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp8eev7op"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S25",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S25_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S25_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr6917p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgjr6917p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S25",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S25_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S25_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr6917p",
+    "jpvln8vz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy Tab S8",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_Tab_S8_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr6917p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgjr6917p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy Tab S8",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_Tab_S8_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjr6917p",
+    "jpvln8vz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_7_Gen_4_QRD_acct2",
+   "file": "dev_w8a8_Snapdragon_7_Gen_4_QRD_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgjr6917p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgjr6917p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_7_Gen_4_QRD_acct2",
+   "file": "dev_w8a8_Snapdragon_7_Gen_4_QRD_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgjr6917p",
+    "jpvln8vz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Snapdragon 8 Elite Gen 5 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2",
+   "file": "dev_w8a8_Snapdragon_8_Elite_Gen_5_QRD_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jpvln8vz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_w8a8_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp8eev7op"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8",
+   "device": "Snapdragon X Elite CRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3",
+   "file": "dev_w8a8_Snapdragon_X_Elite_CRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp8eev7op"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8rms16",
+   "device": "Samsung Galaxy S24",
+   "acct": "main",
+   "source": "ON DEVICE Samsung_Galaxy_S24",
+   "file": "dev_w8a8rms16_Samsung_Galaxy_S24.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8rms16",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct2",
+   "file": "dev_w8a8rms16_Samsung_Galaxy_S24_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jpyoo0dl5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:24Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8rms16t",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct2",
+   "file": "dev_w8a8rms16t_Samsung_Galaxy_S24_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "superseded Sep 25: HTP requires data-movement ops (Gather/Reshape/Transpose/Slice) to keep their input encoding (/inner/Gather incorrect Value -26880, expected -30915); replaced by the *u variants",
+   "compile_jobs": [
+    "jgjrr41ep"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:37Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8rms16u",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct2",
+   "file": "dev_w8a8rms16u_Samsung_Galaxy_S24_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp8eev4qp"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:46Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8sqvar16",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_w8a8sqvar16_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "superseded Sep 25 06:0x: this B2ab graph kept the embedding table at 16 bit while its Gather output is 8 bit, which the HTP rejects (w8a8rms16 step 0 MODEL_GRAPH_ERROR: embed_tokens/Gather offset -34869 vs -34816); replaced by w8a8sqvar16t",
+   "compile_jobs": [
+    "j5qllo2op"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:24Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8sqvar16",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_w8a8sqvar16_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "superseded Sep 25 06:0x: this B2ab graph kept the embedding table at 16 bit while its Gather output is 8 bit, which the HTP rejects (w8a8rms16 step 0 MODEL_GRAPH_ERROR: embed_tokens/Gather offset -34869 vs -34816); replaced by w8a8sqvar16t",
+   "compile_jobs": [
+    "j5qllo2op"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:24Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8sqvar16t",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_w8a8sqvar16t_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "superseded Sep 25: HTP requires data-movement ops (Gather/Reshape/Transpose/Slice) to keep their input encoding (/inner/Gather incorrect Value -26880, expected -30915); replaced by the *u variants",
+   "compile_jobs": [
+    "jpe7732v5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:37Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8sqvar16t",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_w8a8sqvar16t_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "superseded Sep 25: HTP requires data-movement ops (Gather/Reshape/Transpose/Slice) to keep their input encoding (/inner/Gather incorrect Value -26880, expected -30915); replaced by the *u variants",
+   "compile_jobs": [
+    "jpe7732v5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:37Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8sqvar16u",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_w8a8sqvar16u_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk22m9vg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:46Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_mlp",
+   "prec": "w8a8sqvar16u",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_w8a8sqvar16u_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgk22m9vg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:46Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_fp32_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jglyyr0m5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:24Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "fp32",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_fp32_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jglyyr0m5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:24Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w4a16",
+   "device": "Samsung Galaxy S24",
+   "acct": "main",
+   "source": "ON DEVICE Samsung_Galaxy_S24",
+   "file": "dev_w4a16_Samsung_Galaxy_S24.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 7,
+   "failed": "retired Sep 25 02:40 UTC: device W4A16 outputs diverge from the host QDQ graph from step 1 (z_H_out cos 0.14, logits argmax agreement 0.43 on S24 Sudoku-MLP); runtime log selects a disabled q::QNN_CastInt4ToInt8 op; not an I/O encoding issue (w8a16 uses identical input encodings and matches host). Numbers not usable.",
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_w8a16_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jpe773rv5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:24Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a16",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_w8a16_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jpe773rv5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327 (by date)"
+   ],
+   "qairt_evidence": [
+    "submitted 2026-09-25T05:24Z, same batch as the DIAG-verified 2.45 compiles; not read back"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Arduino VENTUNO Q",
+   "acct": "acct3",
+   "source": "ON DEVICE Arduino_VENTUNO_Q_acct3",
+   "file": "dev_w8a8_Arduino_VENTUNO_Q_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjrr40ep"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Dragonwing IQ-9075 EVK",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3",
+   "file": "dev_w8a8_Dragonwing_IQ-9075_EVK_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjrr40ep"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Dragonwing Q-6690 MTP",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_Q-6690_MTP_acct3",
+   "file": "dev_w8a8_Dragonwing_Q-6690_MTP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgjrr40ep"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_RB3_Gen_2_Vision_Kit_acct3",
+   "file": "dev_w8a8_Dragonwing_RB3_Gen_2_Vision_Kit_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgjrr40ep"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "QCS8550 (Proxy)",
+   "acct": "acct3",
+   "source": "ON DEVICE QCS8550_(Proxy)_acct3",
+   "file": "dev_w8a8_QCS8550_(Proxy)_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjrr40ep"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "SA8775P ADP",
+   "acct": "acct3",
+   "source": "ON DEVICE SA8775P_ADP_acct3",
+   "file": "dev_w8a8_SA8775P_ADP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjrr40ep"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S21",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S21_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S21_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "j5qlxnz7p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "j5qlxnz7p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S21",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S21_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S21_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "j5qlxnz7p",
+    "jpe7nqk85"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S22 5G",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S22_5G_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5qlxnz7p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "j5qlxnz7p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S22 5G",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S22_5G_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5qlxnz7p",
+    "jpe7nqk85"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S23",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S23_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S23_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5qlxnz7p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "j5qlxnz7p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S23",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S23_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S23_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5qlxnz7p",
+    "jpe7nqk85"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S24",
+   "acct": "main",
+   "source": "ON DEVICE Samsung_Galaxy_S24",
+   "file": "dev_w8a8_Samsung_Galaxy_S24.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_w8a8_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjrr40ep"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S25",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S25_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S25_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5qlxnz7p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "j5qlxnz7p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S25",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S25_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S25_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5qlxnz7p",
+    "jpe7nqk85"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy Tab S8",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_Tab_S8_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5qlxnz7p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "j5qlxnz7p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy Tab S8",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_Tab_S8_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5qlxnz7p",
+    "jpe7nqk85"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_7_Gen_4_QRD_acct2",
+   "file": "dev_w8a8_Snapdragon_7_Gen_4_QRD_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "j5qlxnz7p"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "j5qlxnz7p",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_7_Gen_4_QRD_acct2",
+   "file": "dev_w8a8_Snapdragon_7_Gen_4_QRD_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "j5qlxnz7p",
+    "jpe7nqk85"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327",
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata",
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Snapdragon 8 Elite Gen 5 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2",
+   "file": "dev_w8a8_Snapdragon_8_Elite_Gen_5_QRD_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jpe7nqk85"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_w8a8_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjrr40ep"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "sudoku_attn",
+   "prec": "w8a8",
+   "device": "Snapdragon X Elite CRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3",
+   "file": "dev_w8a8_Snapdragon_X_Elite_CRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgjrr40ep"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Arduino VENTUNO Q",
+   "acct": "acct3",
+   "source": "ON DEVICE Arduino_VENTUNO_Q_acct3",
+   "file": "dev_fp32_Arduino_VENTUNO_Q_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzllkxx5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Dragonwing IQ-9075 EVK",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3",
+   "file": "dev_fp32_Dragonwing_IQ-9075_EVK_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzllkxx5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Dragonwing Q-6690 MTP",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_Q-6690_MTP_acct3",
+   "file": "dev_fp32_Dragonwing_Q-6690_MTP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgzllkxx5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_RB3_Gen_2_Vision_Kit_acct3",
+   "file": "dev_fp32_Dragonwing_RB3_Gen_2_Vision_Kit_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgzllkxx5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "QCS8550 (Proxy)",
+   "acct": "acct3",
+   "source": "ON DEVICE QCS8550_(Proxy)_acct3",
+   "file": "dev_fp32_QCS8550_(Proxy)_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzllkxx5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "SA8775P ADP",
+   "acct": "acct3",
+   "source": "ON DEVICE SA8775P_ADP_acct3",
+   "file": "dev_fp32_SA8775P_ADP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzllkxx5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S21",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S21_acct2",
+   "file": "dev_fp32_Samsung_Galaxy_S21_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgzl06r45"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S22 5G",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2",
+   "file": "dev_fp32_Samsung_Galaxy_S22_5G_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzl06r45"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S23",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S23_acct2",
+   "file": "dev_fp32_Samsung_Galaxy_S23_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzl06r45"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S24",
+   "acct": "main",
+   "source": "ON DEVICE Samsung_Galaxy_S24",
+   "file": "dev_fp32_Samsung_Galaxy_S24.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_fp32_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzllkxx5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S25",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S25_acct2",
+   "file": "dev_fp32_Samsung_Galaxy_S25_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzl06r45"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Samsung Galaxy Tab S8",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2",
+   "file": "dev_fp32_Samsung_Galaxy_Tab_S8_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzl06r45"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_7_Gen_4_QRD_acct2",
+   "file": "dev_fp32_Snapdragon_7_Gen_4_QRD_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgzl06r45"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Snapdragon 8 Elite Gen 5 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2",
+   "file": "dev_fp32_Snapdragon_8_Elite_Gen_5_QRD_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzl06r45"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_fp32_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzllkxx5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "fp32",
+   "device": "Snapdragon X Elite CRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3",
+   "file": "dev_fp32_Snapdragon_X_Elite_CRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzllkxx5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w4a16",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "acct": "main",
+   "source": "ON DEVICE Dragonwing_RB3_Gen_2_Vision_Kit",
+   "file": "dev_w4a16_Dragonwing_RB3_Gen_2_Vision_Kit.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "retired Sep 25 02:40 UTC: device W4A16 outputs diverge from the host QDQ graph from step 1 (z_H_out cos 0.14, logits argmax agreement 0.43 on S24 Sudoku-MLP); runtime log selects a disabled q::QNN_CastInt4ToInt8 op; not an I/O encoding issue (w8a16 uses identical input encodings and matches host). Numbers not usable.",
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w4a16",
+   "device": "Samsung Galaxy S24",
+   "acct": "main",
+   "source": "ON DEVICE Samsung_Galaxy_S24",
+   "file": "dev_w4a16_Samsung_Galaxy_S24.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 7,
+   "failed": "retired Sep 25 02:40 UTC: device W4A16 outputs diverge from the host QDQ graph from step 1 (z_H_out cos 0.14, logits argmax agreement 0.43 on S24 Sudoku-MLP); runtime log selects a disabled q::QNN_CastInt4ToInt8 op; not an I/O encoding issue (w8a16 uses identical input encodings and matches host). Numbers not usable.",
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Arduino VENTUNO Q",
+   "acct": "acct3",
+   "source": "ON DEVICE Arduino_VENTUNO_Q_acct3",
+   "file": "dev_w8a8_Arduino_VENTUNO_Q_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wllndmp"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Dragonwing IQ-9075 EVK",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3",
+   "file": "dev_w8a8_Dragonwing_IQ-9075_EVK_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wllndmp"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Dragonwing Q-6690 MTP",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_Q-6690_MTP_acct3",
+   "file": "dev_w8a8_Dragonwing_Q-6690_MTP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "j5wllndmp"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_RB3_Gen_2_Vision_Kit_acct3",
+   "file": "dev_w8a8_Dragonwing_RB3_Gen_2_Vision_Kit_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "j5wllndmp"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "QCS8550 (Proxy)",
+   "acct": "acct3",
+   "source": "ON DEVICE QCS8550_(Proxy)_acct3",
+   "file": "dev_w8a8_QCS8550_(Proxy)_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wllndmp"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "SA8775P ADP",
+   "acct": "acct3",
+   "source": "ON DEVICE SA8775P_ADP_acct3",
+   "file": "dev_w8a8_SA8775P_ADP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wllndmp"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S21",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S21_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S21_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgly9doe5"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgly9doe5",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S21",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S21_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S21_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "j5wlrkq4p",
+    "jgly9doe5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S22 5G",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S22_5G_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgly9doe5"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgly9doe5",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S22 5G",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S22_5G_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wlrkq4p",
+    "jgly9doe5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S23",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S23_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S23_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgly9doe5"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgly9doe5",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S23",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S23_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S23_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wlrkq4p",
+    "jgly9doe5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S24",
+   "acct": "main",
+   "source": "ON DEVICE Samsung_Galaxy_S24",
+   "file": "dev_w8a8_Samsung_Galaxy_S24.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [],
+   "compile_evidence": "main account (Sep 24 compiles, ~/aihub_artifacts/h1/<task>/jobs.json; 2.45 per DIAG_ACCT_SPLIT.md)",
+   "qairt": [
+    "2.45.0.260326154327 (main account, Sep 24; DIAG_ACCT_SPLIT.md)"
+   ],
+   "qairt_evidence": [],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct3",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct3",
+   "file": "dev_w8a8_Samsung_Galaxy_S24_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wllndmp"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S25",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S25_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S25_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgly9doe5"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgly9doe5",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S25",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S25_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_S25_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wlrkq4p",
+    "jgly9doe5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy Tab S8",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_Tab_S8_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgly9doe5"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgly9doe5",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy Tab S8",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2",
+   "file": "dev_w8a8_Samsung_Galaxy_Tab_S8_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wlrkq4p",
+    "jgly9doe5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_7_Gen_4_QRD_acct2",
+   "file": "dev_w8a8_Snapdragon_7_Gen_4_QRD_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgly9doe5"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "float_carry",
+   "guard_compile": "jgly9doe5",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "float_carry",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "float16"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_7_Gen_4_QRD_acct2",
+   "file": "dev_w8a8_Snapdragon_7_Gen_4_QRD_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "j5wlrkq4p",
+    "jgly9doe5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Snapdragon 8 Elite Gen 5 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2",
+   "file": "dev_w8a8_Snapdragon_8_Elite_Gen_5_QRD_acct2.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wlrkq4p"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct3",
+   "file": "dev_w8a8_Snapdragon_8_Elite_QRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wllndmp"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Snapdragon X Elite CRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3",
+   "file": "dev_w8a8_Snapdragon_X_Elite_CRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "j5wllndmp"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Arduino VENTUNO Q",
+   "acct": "acct3",
+   "source": "ON DEVICE Arduino_VENTUNO_Q_acct3",
+   "file": "dev_w8a8rope16_Arduino_VENTUNO_Q_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp3zldxx5"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "dev json qairt_sdk_version (read back by Acct.verify)"
+   ],
+   "guard": "match",
+   "guard_compile": "jp3zldxx5",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "match",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "uint8"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Arduino VENTUNO Q",
+   "acct": "acct3",
+   "source": "ON DEVICE Arduino_VENTUNO_Q_acct3",
+   "file": "dev_w8a8rope16_Arduino_VENTUNO_Q_acct3.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgddmkv6g",
+    "jp3zldxx5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45 (pinned)"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "pinned --qairt_version; sdk string not stored (orphan record)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Dragonwing IQ-9075 EVK",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3",
+   "file": "dev_w8a8rope16_Dragonwing_IQ-9075_EVK_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp3zldxx5"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "dev json qairt_sdk_version (read back by Acct.verify)"
+   ],
+   "guard": "match",
+   "guard_compile": "jp3zldxx5",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "match",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "uint8"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Dragonwing IQ-9075 EVK",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_IQ-9075_EVK_acct3",
+   "file": "dev_w8a8rope16_Dragonwing_IQ-9075_EVK_acct3.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgddmkv6g",
+    "jp3zldxx5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45 (pinned)"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "pinned --qairt_version; sdk string not stored (orphan record)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Dragonwing Q-6690 MTP",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_Q-6690_MTP_acct3",
+   "file": "dev_w8a8rope16_Dragonwing_Q-6690_MTP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jp1nk97kg"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "match",
+   "guard_compile": "jp1nk97kg",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "match",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "uint8"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Dragonwing Q-6690 MTP",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_Q-6690_MTP_acct3",
+   "file": "dev_w8a8rope16_Dragonwing_Q-6690_MTP_acct3.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgddmkv6g",
+    "jp1nk97kg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_RB3_Gen_2_Vision_Kit_acct3",
+   "file": "dev_w8a8rope16_Dragonwing_RB3_Gen_2_Vision_Kit_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jp1nk97kg"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "match",
+   "guard_compile": "jp1nk97kg",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "match",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "uint8"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "acct": "acct3",
+   "source": "ON DEVICE Dragonwing_RB3_Gen_2_Vision_Kit_acct3",
+   "file": "dev_w8a8rope16_Dragonwing_RB3_Gen_2_Vision_Kit_acct3.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgddmkv6g",
+    "jp1nk97kg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "QCS8550 (Proxy)",
+   "acct": "acct3",
+   "source": "ON DEVICE QCS8550_(Proxy)_acct3",
+   "file": "dev_w8a8rope16_QCS8550_(Proxy)_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp1nk97kg"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "match",
+   "guard_compile": "jp1nk97kg",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "match",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "uint8"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "QCS8550 (Proxy)",
+   "acct": "acct3",
+   "source": "ON DEVICE QCS8550_(Proxy)_acct3",
+   "file": "dev_w8a8rope16_QCS8550_(Proxy)_acct3.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgddmkv6g",
+    "jp1nk97kg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "SA8775P ADP",
+   "acct": "acct3",
+   "source": "ON DEVICE SA8775P_ADP_acct3",
+   "file": "dev_w8a8rope16_SA8775P_ADP_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp1nk97kg"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "match",
+   "guard_compile": "jp1nk97kg",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "match",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "uint8"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "SA8775P ADP",
+   "acct": "acct3",
+   "source": "ON DEVICE SA8775P_ADP_acct3",
+   "file": "dev_w8a8rope16_SA8775P_ADP_acct3.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgddmkv6g",
+    "jp1nk97kg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Samsung Galaxy S21",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S21_acct2",
+   "file": "dev_w8a8rope16_Samsung_Galaxy_S21_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgzlzmjz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Samsung Galaxy S22 5G",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S22_5G_acct2",
+   "file": "dev_w8a8rope16_Samsung_Galaxy_S22_5G_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzlzmjz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Samsung Galaxy S23",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S23_acct2",
+   "file": "dev_w8a8rope16_Samsung_Galaxy_S23_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzlzmjz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Samsung Galaxy S24",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S24_acct2",
+   "file": "dev_w8a8rope16_Samsung_Galaxy_S24_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzlzmjz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Samsung Galaxy S25",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_S25_acct2",
+   "file": "dev_w8a8rope16_Samsung_Galaxy_S25_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzlzmjz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Samsung Galaxy Tab S8",
+   "acct": "acct2",
+   "source": "ON DEVICE Samsung_Galaxy_Tab_S8_acct2",
+   "file": "dev_w8a8rope16_Samsung_Galaxy_Tab_S8_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzlzmjz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_7_Gen_4_QRD_acct2",
+   "file": "dev_w8a8rope16_Snapdragon_7_Gen_4_QRD_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": false,
+   "n_steps": 0,
+   "failed": "Failed to profile the model: Failed to call QnnModel_composeGraphsFromDlc: MODEL_GRAPH_ERROR.",
+   "compile_jobs": [
+    "jgzlzmjz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Snapdragon 8 Elite Gen 5 QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_8_Elite_Gen_5_QRD_acct2",
+   "file": "dev_w8a8rope16_Snapdragon_8_Elite_Gen_5_QRD_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzlzmjz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Snapdragon 8 Elite QRD",
+   "acct": "acct2",
+   "source": "ON DEVICE Snapdragon_8_Elite_QRD_acct2",
+   "file": "dev_w8a8rope16_Snapdragon_8_Elite_QRD_acct2.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgzlzmjz5"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Snapdragon X Elite CRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3",
+   "file": "dev_w8a8rope16_Snapdragon_X_Elite_CRD_acct3.json",
+   "set_aside": false,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jp1nk97kg"
+   ],
+   "compile_evidence": "dev json compile_job (guarded chain)",
+   "qairt": [
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "read back from the target model metadata"
+   ],
+   "guard": "match",
+   "guard_compile": "jp1nk97kg",
+   "guard_outputs": {
+    "z_H_out": "match",
+    "z_L_out": "match",
+    "logits": "match",
+    "q_halt": "match"
+   },
+   "guard_zL_dlc_dtype": "uint8"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8rope16",
+   "device": "Snapdragon X Elite CRD",
+   "acct": "acct3",
+   "source": "ON DEVICE Snapdragon_X_Elite_CRD_acct3",
+   "file": "dev_w8a8rope16_Snapdragon_X_Elite_CRD_acct3.json.qairt250",
+   "set_aside": true,
+   "runtime": "qnn_dlc",
+   "done": true,
+   "n_steps": 8,
+   "failed": null,
+   "compile_jobs": [
+    "jgddmkv6g",
+    "jp1nk97kg"
+   ],
+   "compile_evidence": "from_compile of the chain's device jobs in acct jobs.json",
+   "qairt": [
+    "2.50.0.260828221209",
+    "2.45.0.260326154327"
+   ],
+   "qairt_evidence": [
+    "DIAG_ACCT_SPLIT.md section 1 (hub metadata read on Sep 28)",
+    "read back from the target model metadata"
+   ],
+   "guard": null,
+   "guard_compile": null,
+   "guard_outputs": null,
+   "guard_zL_dlc_dtype": null
+  }
+ ]
+}
