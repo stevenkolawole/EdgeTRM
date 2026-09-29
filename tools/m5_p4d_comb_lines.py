@@ -41,6 +41,9 @@ for off in OFFS:
                 continue
             L.append(f"{P} 8 M5 comb_rtn_{t} {base}")
             for k in range(3):
-                # one seed per line so the cards pack; --seeds k+1 skips the seeds whose files exist (the earlier lines)
-                L.append(f"{P} 8 M5 comb_dit{k}_{t} {base} --dither w8c --seeds {k + 1}")
+                # one seed per line so the cards pack. (The first Sudoku launch used --seeds k+1, relying on the
+                # exists-skip; lines launched together then computed the same seed twice and one os.replace failed.)
+                L.append(f"{P} 8 M5 comb_dit{k}_{t} {base} --dither w8c --seeds {k}:{k + 1}")
+if "--rerun" in sys.argv:            # low-priority repeats of the exposed lines (tag _r1): a finished record is skipped in seconds
+    L = [l.replace(" 5 8 M5 comb_", " 9 8 M5 comb_", 1).replace(f" {l.split()[3]} ", f" {l.split()[3]}_r1 ", 1) for l in L]
 print("\n".join(L))

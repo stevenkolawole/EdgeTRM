@@ -120,7 +120,8 @@ def main():
     ap.add_argument("--ckpt", default="", help="TRM: a trained variant's step_N file; cheap and polish models both use it")
     ap.add_argument("--dither", default="", help="re-draw the cheap weights (SR onto the cheap grid) before every cheap step from "
                                                  "this master: w8c = the resident INT8 copy, fp32 = full precision (M2 arm 6 / dither)")
-    ap.add_argument("--seeds", type=int, default=1, help="dither: number of re-draw sequences (one file per seed, suffix _s<k>)")
+    ap.add_argument("--seeds", default="1", help="dither: re-draw sequences, 'K' = seeds 0..K-1 or 'a:b' = seeds a..b-1 "
+                                                 "(one file per seed, suffix _s<k>; one seed per backlog line avoids duplicate work)")
     ap.add_argument("--allow_cpu", action="store_true")
     a = ap.parse_args()
     assert a.allow_cpu or torch.cuda.is_available(), "NO CUDA"
@@ -133,7 +134,7 @@ def main():
     inp, lab = inp[a.offset:], lab[a.offset:]
     od = Path(a.outdir)
     od.mkdir(parents=True, exist_ok=True)
-    seeds = list(range(a.seeds)) if a.dither else [None]
+    seeds = (list(range(*map(int, a.seeds.split(":")))) if ":" in a.seeds else list(range(int(a.seeds)))) if a.dither else [None]
     for pspec in [p for p in a.polish.split(",") if p]:
         mp, _, _ = make(a.task, pspec, a.K, batch)
         for cspec in [c for c in a.cheap.split(",") if c]:
@@ -153,9 +154,13 @@ def main():
                         "n": int(len(inp)), "offset": a.offset, "ckpt": a.ckpt, "dither": a.dither, "seed_k": k,
                         "secs": time.time() - t0, "host": socket.gethostname(),
                         "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu"}
-                tmp = str(path) + ".tmp.npz"
+                tmp = f"{path}.tmp{os.getpid()}.npz"           # per-process name: two lines on one record cannot collide
                 np.savez_compressed(tmp, info=json.dumps(info), **r)
-                os.replace(tmp, path)
+                if path.exists():                                # another process finished the same record meanwhile
+                    os.remove(tmp)
+                    print(f"  {path.name}: written by another process meanwhile, this copy dropped", flush=True)
+                else:
+                    os.replace(tmp, path)
                 print(f"  {cspec:14s} -> {pspec:6s}{suf} cheap@K {100 * r['c_cheap'][:, -1].mean():5.1f}  "
                       f"cK.P1 {100 * r['c_pol'][:, -1, 0].mean():5.1f}  cK.P{a.J} {100 * r['c_pol'][:, -1, -1].mean():5.1f} "
                       f"({time.time() - t0:.0f}s)", flush=True)
