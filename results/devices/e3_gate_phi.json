@@ -1,6 +1,6 @@
 {
  "n_gate": 80,
- "n_scored": 76,
+ "n_scored": 80,
  "missing": [
   "dev_fp32_Dragonwing_Q-6690_MTP_acct3.json",
   "dev_fp32_Dragonwing_RB3_Gen_2_Vision_Kit_acct3.json",
@@ -47,15 +47,18 @@
  ],
  "phiH": {
   "auroc_pass_vs_fail": 1.0,
-  "auroc_pass_vs_warn": 0.515625,
-  "auroc_pass_vs_notpass": 0.9596354166666666,
+  "auroc_pass_vs_warn": 0.6358974358974359,
+  "auroc_pass_vs_notpass": 0.9271794871794872,
   "pass_min": 0.881485128171088,
   "pass_med": 0.944838254231236,
   "warn": [
+   0.8859613675773338,
+   0.9305242260632461,
    0.9305242260632461
   ],
   "fail_max": 0.6858847184255339,
   "fail": [
+   0.34500883901646484,
    0.34500883901646484,
    0.401573647207674,
    0.401573647207674,
@@ -71,15 +74,18 @@
  },
  "phiL": {
   "auroc_pass_vs_fail": 1.0,
-  "auroc_pass_vs_warn": 0.875,
-  "auroc_pass_vs_notpass": 0.9895833333333334,
+  "auroc_pass_vs_warn": 0.8358974358974359,
+  "auroc_pass_vs_notpass": 0.9671794871794872,
   "pass_min": 0.813209740848772,
-  "pass_med": 0.931800705254745,
+  "pass_med": 0.9320389296100069,
   "warn": [
-   0.8281386805023422
+   0.8281386805023422,
+   0.8281386805023422,
+   0.8450124866592581
   ],
   "fail_max": 0.7775584470065527,
   "fail": [
+   0.39926529991088444,
    0.39926529991088444,
    0.44458843864116054,
    0.44458843864116054,
@@ -94,16 +100,19 @@
   ]
  },
  "phiH_min": {
-  "auroc_pass_vs_fail": 0.9630681818181818,
-  "auroc_pass_vs_warn": 0.671875,
-  "auroc_pass_vs_notpass": 0.9388020833333334,
+  "auroc_pass_vs_fail": 0.9666666666666667,
+  "auroc_pass_vs_warn": 0.717948717948718,
+  "auroc_pass_vs_notpass": 0.916923076923077,
   "pass_min": 0.44020433344501725,
-  "pass_med": 0.6102247119446632,
+  "pass_med": 0.6076017931452793,
   "warn": [
+   0.462900610707421,
+   0.5025197106281014,
    0.5025197106281014
   ],
   "fail_max": 0.46027209755976733,
   "fail": [
+   0.19924923299082933,
    0.19924923299082933,
    0.2412988981737896,
    0.2412988981737896,
@@ -119,15 +128,18 @@
  },
  "phiH_p10": {
   "auroc_pass_vs_fail": 1.0,
-  "auroc_pass_vs_warn": 0.875,
-  "auroc_pass_vs_notpass": 0.9895833333333334,
+  "auroc_pass_vs_warn": 0.841025641025641,
+  "auroc_pass_vs_notpass": 0.9682051282051282,
   "pass_min": 0.5784593971783164,
   "pass_med": 0.8933811623727944,
   "warn": [
-   0.6268560952763602
+   0.6268560952763602,
+   0.6268560952763602,
+   0.7911619048561555
   ],
   "fail_max": 0.5101763388907352,
   "fail": [
+   0.24543601560560993,
    0.24543601560560993,
    0.31687692493461994,
    0.31687692493461994,
@@ -142,16 +154,19 @@
   ]
  },
  "phiL_min": {
-  "auroc_pass_vs_fail": 0.7670454545454546,
-  "auroc_pass_vs_warn": 0.84375,
-  "auroc_pass_vs_notpass": 0.7734375,
+  "auroc_pass_vs_fail": 0.7743589743589744,
+  "auroc_pass_vs_warn": 0.8307692307692308,
+  "auroc_pass_vs_notpass": 0.7856410256410257,
   "pass_min": 0.1677768240088958,
-  "pass_med": 0.5996045819316298,
+  "pass_med": 0.5989649470915607,
   "warn": [
-   0.24565466427836544
+   0.24565466427836544,
+   0.24565466427836544,
+   0.4133759673044107
   ],
   "fail_max": 0.6528419059919576,
   "fail": [
+   0.26685218752053524,
    0.26685218752053524,
    0.3407074592787944,
    0.3407074592787944,
@@ -167,14 +182,14 @@
  },
  "probe_cell_s2": {
   "auroc_pass_vs_fail": 1.0,
-  "auroc_pass_vs_warn": 0.796875,
-  "auroc_pass_vs_notpass": 0.9830729166666666
+  "auroc_pass_vs_warn": 0.841025641025641,
+  "auroc_pass_vs_notpass": 0.9682051282051282
  },
  "cross_account": {
   "train=acct2 test=rest | phiH | midpoint": {
    "cut": 0.783684923298311,
    "separable_on_train": true,
-   "n_train": 19,
+   "n_train": 23,
    "n_test": 57,
    "test_fail": 8,
    "test_pass": 48,
@@ -188,7 +203,7 @@
   "train=acct2 test=rest | phiL | midpoint": {
    "cut": 0.7953840939276624,
    "separable_on_train": true,
-   "n_train": 19,
+   "n_train": 23,
    "n_test": 57,
    "test_fail": 8,
    "test_pass": 48,
@@ -202,7 +217,7 @@
   "train=acct2 test=rest | phiH | min_pass": {
    "cut": 0.8814851271710881,
    "separable_on_train": true,
-   "n_train": 19,
+   "n_train": 23,
    "n_test": 57,
    "test_fail": 8,
    "test_pass": 48,
@@ -216,7 +231,7 @@
   "train=acct2 test=rest | phiL | min_pass": {
    "cut": 0.813209739848772,
    "separable_on_train": true,
-   "n_train": 19,
+   "n_train": 23,
    "n_test": 57,
    "test_fail": 8,
    "test_pass": 48,
@@ -231,58 +246,70 @@
    "cut": 0.6424269415698346,
    "separable_on_train": true,
    "n_train": 57,
-   "n_test": 19,
-   "test_fail": 3,
-   "test_pass": 16,
+   "n_test": 23,
+   "test_fail": 4,
+   "test_pass": 17,
    "missed_fail": [
     "maze w8a8rope16 Samsung Galaxy S25",
     "maze w8a8rope16 Snapdragon 8 Elite QRD"
    ],
    "false_alarm": [],
    "warn_flagged": [],
-   "warn_passed": []
+   "warn_passed": [
+    "sudoku_mlp w8a8 Samsung Galaxy S25 (0.886)",
+    "sudoku_attn w8a8 Samsung Galaxy S25 (0.931)"
+   ]
   },
   "train=rest test=acct2 | phiL | midpoint": {
    "cut": 0.6288990897449662,
    "separable_on_train": true,
    "n_train": 57,
-   "n_test": 19,
-   "test_fail": 3,
-   "test_pass": 16,
+   "n_test": 23,
+   "test_fail": 4,
+   "test_pass": 17,
    "missed_fail": [
     "maze w8a8rope16 Samsung Galaxy S25",
     "maze w8a8rope16 Snapdragon 8 Elite QRD"
    ],
    "false_alarm": [],
    "warn_flagged": [],
-   "warn_passed": []
+   "warn_passed": [
+    "sudoku_mlp w8a8 Samsung Galaxy S25 (0.845)",
+    "sudoku_attn w8a8 Samsung Galaxy S25 (0.828)"
+   ]
   },
   "train=rest test=acct2 | phiH | min_pass": {
    "cut": 0.8832802349319953,
    "separable_on_train": true,
    "n_train": 57,
-   "n_test": 19,
-   "test_fail": 3,
-   "test_pass": 16,
+   "n_test": 23,
+   "test_fail": 4,
+   "test_pass": 17,
    "missed_fail": [],
    "false_alarm": [
     "sudoku_mlp w8a8 Samsung Galaxy S22 5G (0.881)",
     "sudoku_mlp w8a8 Samsung Galaxy Tab S8 (0.881)"
    ],
    "warn_flagged": [],
-   "warn_passed": []
+   "warn_passed": [
+    "sudoku_mlp w8a8 Samsung Galaxy S25 (0.886)",
+    "sudoku_attn w8a8 Samsung Galaxy S25 (0.931)"
+   ]
   },
   "train=rest test=acct2 | phiL | min_pass": {
    "cut": 0.813209739848772,
    "separable_on_train": true,
    "n_train": 57,
-   "n_test": 19,
-   "test_fail": 3,
-   "test_pass": 16,
+   "n_test": 23,
+   "test_fail": 4,
+   "test_pass": 17,
    "missed_fail": [],
    "false_alarm": [],
    "warn_flagged": [],
-   "warn_passed": []
+   "warn_passed": [
+    "sudoku_mlp w8a8 Samsung Galaxy S25 (0.845)",
+    "sudoku_attn w8a8 Samsung Galaxy S25 (0.828)"
+   ]
   }
  },
  "same_prec": [
@@ -356,6 +383,15 @@
    "vv": "FAIL",
    "sameH": 0.4665618020906198,
    "sameL": 0.44052795411617063,
+   "file": "host_w8a8_ref.npz"
+  },
+  {
+   "task": "maze",
+   "prec": "w8a8",
+   "device": "Samsung Galaxy S25",
+   "vv": "FAIL",
+   "sameH": 0.41478971101128265,
+   "sameL": 0.39330424217848625,
    "file": "host_w8a8_ref.npz"
   },
   {
@@ -1131,17 +1167,17 @@
    "device": "Samsung Galaxy S25",
    "acct": "acct2",
    "hexagon": "v79",
-   "steps": 7,
+   "steps": 8,
    "in_gate": true,
    "probe": 1.0001813565469715,
    "pv": "PASS",
    "s8": 0.9827586206896551,
    "vv": "PASS",
-   "phiH": null,
-   "phiL": null,
-   "phiH_min": null,
-   "phiH_p10": null,
-   "phiL_min": null,
+   "phiH": 0.9675718441882024,
+   "phiL": 0.9335377739484401,
+   "phiH_min": 0.5240664850172427,
+   "phiH_p10": 0.9133544094261785,
+   "phiL_min": 0.5294388679167015,
    "sameH": null,
    "sameL": null,
    "same_file": null
@@ -1383,17 +1419,17 @@
    "device": "Samsung Galaxy S25",
    "acct": "acct2",
    "hexagon": "v79",
-   "steps": 7,
+   "steps": 8,
    "in_gate": true,
    "probe": 0.9809575625680087,
    "pv": "PASS",
    "s8": 0.9482758620689656,
    "vv": "WARN",
-   "phiH": null,
-   "phiL": null,
-   "phiH_min": null,
-   "phiH_p10": null,
-   "phiL_min": null,
+   "phiH": 0.8859613675773338,
+   "phiL": 0.8450124866592581,
+   "phiH_min": 0.462900610707421,
+   "phiH_p10": 0.7911619048561555,
+   "phiL_min": 0.4133759673044107,
    "sameH": null,
    "sameL": null,
    "same_file": null
@@ -1803,17 +1839,17 @@
    "device": "Samsung Galaxy S25",
    "acct": "acct2",
    "hexagon": "v79",
-   "steps": 7,
+   "steps": 8,
    "in_gate": true,
    "probe": 0.983957219251337,
    "pv": "PASS",
    "s8": 0.9215686274509803,
    "vv": "WARN",
-   "phiH": null,
-   "phiL": null,
-   "phiH_min": null,
-   "phiH_p10": null,
-   "phiL_min": null,
+   "phiH": 0.9305242260632461,
+   "phiL": 0.8281386805023422,
+   "phiH_min": 0.5025197106281014,
+   "phiH_p10": 0.6268560952763602,
+   "phiL_min": 0.24565466427836544,
    "sameH": null,
    "sameL": null,
    "same_file": null
@@ -2349,20 +2385,20 @@
    "device": "Samsung Galaxy S25",
    "acct": "acct2",
    "hexagon": "v79",
-   "steps": 7,
+   "steps": 8,
    "in_gate": true,
    "probe": 0.5821885147255842,
    "pv": "WARN",
    "s8": 0.0,
    "vv": "FAIL",
-   "phiH": null,
-   "phiL": null,
-   "phiH_min": null,
-   "phiH_p10": null,
-   "phiL_min": null,
-   "sameH": null,
-   "sameL": null,
-   "same_file": null
+   "phiH": 0.34500883901646484,
+   "phiL": 0.39926529991088444,
+   "phiH_min": 0.19924923299082933,
+   "phiH_p10": 0.24543601560560993,
+   "phiL_min": 0.26685218752053524,
+   "sameH": 0.41478971101128265,
+   "sameL": 0.39330424217848625,
+   "same_file": "host_w8a8_ref.npz"
   },
   {
    "task": "maze",
