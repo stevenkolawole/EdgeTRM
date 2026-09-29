@@ -369,14 +369,20 @@ class Chain:
             zL = np.stack([x.astype(np.float32) for x in o["z_L_out"]])
             lg = np.concatenate([x.astype(np.float32) for x in o["logits"]])
             q = np.array([float(x.reshape(-1)[0]) for x in o["q_halt"]])
-            preds, qs = ([], [])
+            preds, qs, zHs, zLs, kept = [], [], [], [], []
             if self.state_path.exists():
                 st = np.load(self.state_path)
                 preds, qs = list(st["preds"]), list(st["q"])
+                if "zH_steps" in st.files:
+                    zHs, zLs, kept = list(st["zH_steps"]), list(st["zL_steps"]), list(st["carry_steps"])
             assert len(preds) == cur["step"], (self.tag, len(preds), cur)     # one state row per device step
             preds.append(lg.argmax(-1))
             qs.append(q)
-            atomic_npz(self.state_path, zH=zH, zL=zL, preds=np.stack(preds), q=np.stack(qs))
+            # Sep 29 (E3_GATE_PHI_STEP2): keep the carry of EVERY step (zH_steps / zL_steps (k, N, 1, seq, 512), carry_steps =
+            # the record steps kept; a chain resumed from an older record keeps them from this step on), not only the last.
+            zHs.append(zH); zLs.append(zL); kept.append(cur["step"])
+            atomic_npz(self.state_path, zH=zH, zL=zL, preds=np.stack(preds), q=np.stack(qs),
+                       zH_steps=np.stack(zHs), zL_steps=np.stack(zLs), carry_steps=np.array(kept))
             self.meta.pop("current")                 # only once the step is ingested: an exception above leaves it for a retry
             ex = float((preds[-1] == lab).all(-1).mean())
             self.meta["steps"].append({"step": cur["step"], "job_id": cur["job_id"], "exact": ex,

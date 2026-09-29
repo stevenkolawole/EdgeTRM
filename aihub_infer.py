@@ -286,10 +286,11 @@ def chain(task, device, prec, log_lock):
         zH, zL = st_["zH"], st_["zL"]
         preds = list(st_["preds"]) if "preds" in st_.files else []
         qs = list(st_["q"]) if "q" in st_.files else []
+        zHs, zLs, kept = (list(st_["zH_steps"]), list(st_["zL_steps"]), list(st_["carry_steps"])) if "zH_steps" in st_.files else ([], [], [])
     else:
         zH = np.repeat(zH0, N, 0)[:, None]
         zL = np.repeat(zL0, N, 0)[:, None]
-        preds, qs = [], []
+        preds, qs, zHs, zLs, kept = [], [], [], [], []
     device_obj = hub.Device(device, A.DEV_BY_NAME[device][1])
     for s in range(len(preds), NSTEPS[task]):
         feeds = {"z_H": [zH[i] for i in range(N)], "z_L": [zL[i] for i in range(N)],
@@ -325,7 +326,9 @@ def chain(task, device, prec, log_lock):
         lg = np.concatenate([x.astype(np.float32) for x in o["logits"]])
         preds.append(lg.argmax(-1))
         qs.append(np.array([float(x.reshape(-1)[0]) for x in o["q_halt"]]))
-        np.savez_compressed(state_path, zH=zH, zL=zL, preds=np.stack(preds), q=np.stack(qs))
+        zHs.append(zH); zLs.append(zL); kept.append(s)   # Sep 29 (E3_GATE_PHI_STEP2): keep every step's carry, not only the last
+        np.savez_compressed(state_path, zH=zH, zL=zL, preds=np.stack(preds), q=np.stack(qs),
+                            zH_steps=np.stack(zHs), zL_steps=np.stack(zLs), carry_steps=np.array(kept))
         ex = (preds[-1] == lab).all(-1).mean()
         meta["steps"].append({"step": s, "job_id": ij.job_id, "exact": float(ex),
                               "cell": float((preds[-1] == lab).mean())})

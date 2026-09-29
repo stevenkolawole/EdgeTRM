@@ -70,6 +70,7 @@ from aihub_breadth import device_os  # noqa: E402
 from aihub_sched import named_outputs  # noqa: E402
 
 CAP, FIN, SLOTS = 16, 6, 2
+CARRY_KEEP = 2      # cheap steps whose carry is kept per puzzle in the state npz (the gate's probe steps 1 and 2)
 HCYC = {"sudoku_mlp": 3, "sudoku_attn": 3, "maze": 3}                 # device cycles per supervision step
 RULES = {"sudoku_mlp": ("pat", 2), "sudoku_attn": ("native", 0), "maze": ("min", 2)}
 S24, S25, E8 = "Samsung Galaxy S24", "Samsung Galaxy S25", "Snapdragon 8 Elite QRD"
@@ -152,6 +153,11 @@ class CtlChain:
                             "fin_q": np.full((N, self.fin), np.nan, np.float32),
                             "exit_pred": np.full((N, L), -1, np.int32), "final_pred": np.full((N, L), -1, np.int32),
                             "lab": lab.astype(np.int32)}
+            # Sep 29 (E3_GATE_PHI_STEP2): keep the carry after each of the first CARRY_KEEP cheap steps per puzzle
+            # (zH_steps / zL_steps (CARRY_KEEP, N, 1, seq, 512); all CAP + FIN steps would be 1.5 GB per Maze save)
+            if "zH_steps" not in self._st:
+                self._st["zH_steps"] = np.zeros((CARRY_KEEP,) + self._st["zH"].shape, np.float32)
+                self._st["zL_steps"] = np.zeros((CARRY_KEEP,) + self._st["zL"].shape, np.float32)
         return self._st
 
     def save_state(self):
@@ -293,6 +299,8 @@ class CtlChain:
         st["zH"][idx], st["zL"][idx] = zH, zL
         if kind == "cheap":
             k = int(st["cheap_steps"][idx[0]])
+            if k < CARRY_KEEP:
+                st["zH_steps"][k, idx], st["zL_steps"][k, idx] = zH, zL
             assert (st["cheap_steps"][idx] == k).all() and (st["status"][idx] == 0).all(), (self.tag, k)
             st["cheap_preds"][idx, k], st["cheap_q"][idx, k] = pred, q
             st["cheap_steps"][idx] = k + 1

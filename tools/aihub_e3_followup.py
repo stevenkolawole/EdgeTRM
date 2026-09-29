@@ -169,7 +169,7 @@ def host_run(task, prec, steps, threads, reference):
     zH0, zL0, emb = init
     N = inp.shape[0]
     zH, zL = np.repeat(zH0, N, 0)[:, None], np.repeat(zL0, N, 0)[:, None]
-    preds, qs, rows = [], [], []
+    preds, qs, rows, zHs, zLs = [], [], [], [], []
     t0 = time.time()
     for s in range(steps):
         nzH, nzL, lg, qh = [], [], [], []
@@ -177,11 +177,13 @@ def host_run(task, prec, steps, threads, reference):
             o = sess.run(I.OUTS, {"z_H": zH[i], "z_L": zL[i], "inputs": inp[i:i + 1], "puzzle_embedding": emb})
             nzH.append(o[0].astype(np.float32)); nzL.append(o[1].astype(np.float32)); lg.append(o[2]); qh.append(float(o[3].reshape(-1)[0]))
         zH, zL = np.stack(nzH), np.stack(nzL)
+        zHs.append(zH[:, 0]); zLs.append(zL[:, 0])   # Sep 29 (E3_GATE_PHI_STEP2): every step's host carry; device chains keep theirs via aihub_acct.Chain
         preds.append(np.concatenate(lg).argmax(-1))
         qs.append(qh)
         rows.append({"step": s, "exact": float((preds[-1] == lab).all(-1).mean()), "cell": float((preds[-1] == lab).mean())})
         print(task, prec, "ref" if reference else "fused", "step", s, rows[-1], f"{time.time() - t0:.0f}s", flush=True)
-    return {"preds": np.stack(preds), "q": np.array(qs), "zH": zH[:, 0], "zL": zL[:, 0]}, rows, path
+    return {"preds": np.stack(preds), "q": np.array(qs), "zH": zH[:, 0], "zL": zL[:, 0],
+            "zH_steps": np.stack(zHs), "zL_steps": np.stack(zLs), "carry_steps": np.arange(steps)}, rows, path
 
 
 def hostref(names, threads, reference=True):
