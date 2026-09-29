@@ -137,7 +137,8 @@ def main():
             if not x[3]:
                 print(f"    violated: {x[0]} d{x[1]} load {x[2]:g}: {x[4]}")
     for x in score["P4"]:
-        print(f"- P4 {x[0]} d{x[1]} load {x[2]:g}: ctl_dither - ctl = {100 * x[3]:+.1f} points (ctl CI {x[4]}, ctl_dither CI {x[5]})")
+        fmt = lambda c: "-" if not c else f"[{100 * c[0]:.1f}, {100 * c[1]:.1f}]"  # noqa: E731
+        print(f"- P4 {x[0]} d{x[1]} load {x[2]:g}: ctl_dither - ctl = {100 * x[3]:+.1f} points (ctl {fmt(x[4])}, ctl_dither {fmt(x[5])})")
 
 
 if __name__ == "__main__":
