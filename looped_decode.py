@@ -342,9 +342,12 @@ class _WFresh:
 
     def __init__(self, mod, sigma):
         self.W0, self.sigma = mod.weight.data.clone(), sigma
+        # std(W0) is a constant of the master weight: computed once (the per-call fp32 copy + reduction cost
+        # more than the matmul at batch 4; the value is bit-identical to computing it at every call).
+        self.scale = self.sigma * self.W0.float().std().to(self.W0.dtype)
 
     def __call__(self, mod, args):
-        mod.weight.data = self.W0 + torch.randn_like(self.W0) * (self.sigma * self.W0.float().std().to(self.W0.dtype))
+        mod.weight.data = self.W0 + torch.randn_like(self.W0) * self.scale
         return None
 
 
