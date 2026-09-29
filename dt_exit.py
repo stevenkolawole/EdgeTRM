@@ -14,6 +14,16 @@ Data: first 1000 test mazes per size (copied from p4d ~/breadth/dt_data, uint8; 
 the X2 subsets in ~/edgetrm_ckpt/dt_mazes). Quantizers as contraction.dt_quantize_ (every Conv).
 
     python dt_exit.py --size 33 --T 500 --specs fp32,w4c,w4t,noise0.2@s0 --outdir ~/breadth_results/m5/dt_maze33
+
+E6 (MLSys, perturb every step): a spec `<grid>@dither<k>` re-draws every Conv weight by stochastic rounding from
+the master (fp32, or an RTN --master spec such as w8c) onto <grid> BEFORE EVERY ITERATION (draw 0 before the
+projection, draw t before recur_block t); `<grid>@gdither<k>` is the control (master + fresh zero-mean Gaussian at
+the SR variance, no lattice). k = the re-draw sequence, seeded as m2_bestofk (wdither.draw_seed(17, k, t)), the same
+weight trajectory for every maze. Record layout unchanged (per-iteration correct / res / chg / conf); file
+`<spec>[_m<master>].npz`, info carries wsample / dseed / master.
+
+    python dt_exit.py --size 33 --T 1000 --specs w4t,w4t@dither0,w4t@dither1,w4t@dither2,w4t@gdither0 \
+        --outdir ~/breadth_results/e6/dt_maze33
 """
 import argparse
 import json
@@ -29,6 +39,7 @@ import torch
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from contraction import build_dt, dt_quantize_  # noqa: E402
 from breadth_sweep import parse_quant  # noqa: E402
+from wdither import make_hook, parse_arm  # noqa: E402
 
 DEV = "cuda" if torch.cuda.is_available() else "cpu"
 DATA = Path(os.environ.get("M5_DT_DATA", Path.home() / "edgetrm_ckpt" / "dt_mazes" / "full1000"))
@@ -52,9 +63,11 @@ class _ActQuant:
 
 
 @torch.no_grad()
-def run(net, x, y, T, batch, tsteps=(), href=None):
+def run(net, x, y, T, batch, tsteps=(), href=None, step_hook=None):
     """tsteps: iterations (0-based) at which the recurrent state h is captured (href None: returned as "hcap", fp16 CPU)
-    or compared with the fp32 reference (cosine per maze, returned as "phi" [n, len(tsteps)])."""
+    or compared with the fp32 reference (cosine per maze, returned as "phi" [n, len(tsteps)]).
+    step_hook(t): called before the projection (t = 0) and before recur_block t for t >= 1 (E6 per-iteration re-draw);
+    the same t gives the same weights in every batch."""
     n = x.shape[0]
     out = {k: [] for k in ("correct", "res", "chg", "conf")}
     hcap, phis = {t: [] for t in tsteps}, []
@@ -63,12 +76,16 @@ def run(net, x, y, T, batch, tsteps=(), href=None):
         yb = torch.from_numpy(y[s:s + batch]).long().to(DEV).view(xb.shape[0], -1)
         B = xb.shape[0]
         mask = xb.max(1)[0].view(B, -1)                      # open cells (walls = 0)
+        if step_hook is not None:
+            step_hook(0)
         h = net.projection(xb)
         prevP, prevH = None, h
         phi = []
         rec = {"correct": torch.zeros(B, T, dtype=torch.bool, device=DEV), "res": torch.zeros(B, T, dtype=torch.float16, device=DEV),
                "chg": torch.zeros(B, T, dtype=torch.int16, device=DEV), "conf": torch.zeros(B, T, dtype=torch.float16, device=DEV)}
         for t in range(T):
+            if step_hook is not None and t > 0:
+                step_hook(t)
             h = net.recur_block(torch.cat([h, xb], 1))
             o = net.head(h)
             pred = o.argmax(1).view(B, -1) * mask.long()
@@ -104,6 +121,7 @@ def main():
     ap.add_argument("--batch", type=int, default=50)
     ap.add_argument("--outdir", required=True)
     ap.add_argument("--allow_cpu", action="store_true")
+    ap.add_argument("--master", default="fp32", help="E6: weights the dither / gdither draws are made from (fp32 or an RTN spec, e.g. w8c)")
     ap.add_argument("--phi", default="", help="iterations (1-based, e.g. 30,100,500) at which to store phi = cos(h, h of fp32 at the same "
                     "iteration, same maze), from an fp32 reference run in the same process")
     a = ap.parse_args()
@@ -119,17 +137,29 @@ def main():
         t0 = time.time()
         href = run(build_dt().to(DEV), x, y, a.T, a.batch, tsteps).pop("hcap")
         print(f"  fp32 reference for phi at iterations {phi_steps} ({time.time() - t0:.0f}s)", flush=True)
+    msuf = "" if a.master == "fp32" else f"_m{a.master}"
     for spec in [s for s in a.specs.split(",") if s]:
-        path = od / f"{spec}.npz"
+        base, arm, seed = parse_arm(spec)
+        path = od / (f"{spec}{msuf}.npz" if arm in ("dither", "gdither") else f"{spec}.npz")
         if path.exists():
             print(f"  {spec}: exists, skipped", flush=True)
             continue
-        base, seed = (spec.split("@s")[0], int(spec.split("@s")[1])) if "@s" in spec else (spec, 0)
         q = parse_quant(base)
         t0 = time.time()
         net = build_dt().to(DEV)
         torch.manual_seed(seed)
-        if q["gran"] is not None:
+        step_hook = None
+        if arm in ("dither", "gdither"):                  # E6: re-draw from the master before every iteration
+            assert q["bits"] is not None and q["gran"] not in (None, "noise"), f"{spec}: dither needs a quantizer grid"
+            if a.master != "fp32":
+                qm = parse_quant(a.master)
+                dt_quantize_(net, qm["bits"], qm["gran"])
+            slots = []
+            for mod in net.modules():
+                if isinstance(mod, (torch.nn.Conv1d, torch.nn.Conv2d)):
+                    slots.append(((lambda W, _m=mod: setattr(_m.weight, "data", W)), mod.weight.data.clone()))
+            step_hook = make_hook(slots, arm, q["bits"], q["gran"], seed, DEV)
+        elif q["gran"] is not None:
             dt_quantize_(net, q["bits"], q["gran"], q.get("sigma"))
         handles, obs = [], []
         if q["act"] is not None:
@@ -141,13 +171,14 @@ def main():
             run(net, x[:a.batch], y[:a.batch], a.T, a.batch)
             for qa in obs:
                 qa.freeze()
-        r = run(net, x, y, a.T, a.batch, tsteps, href)
+        r = run(net, x, y, a.T, a.batch, tsteps, href, step_hook)
         for hh in handles:
             hh.remove()
         info = {"task": f"dt_maze{a.size}", "spec": spec, "quant": q, "seed": seed, "T": a.T, "n": int(len(x)), "phi_steps": phi_steps,
+                "base": base, "wsample": arm if arm in ("dither", "gdither") else "none", "dseed": seed, "master": a.master,
                 "secs": time.time() - t0, "host": socket.gethostname(),
                 "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu", "torch": torch.__version__}
-        tmp = str(path) + ".tmp.npz"
+        tmp = f"{path}.tmp{os.getpid()}.npz"                # pid-unique: several jobs may share an outdir (fp32 reference)
         np.savez_compressed(tmp, info=json.dumps(info), **r)
         os.replace(tmp, path)
         c = r["correct"]

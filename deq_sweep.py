@@ -27,6 +27,16 @@ residual over T steps), and cosine to the fp32 state at the same solver and budg
 "fidelity"). Per (cell, solver): the per-image residual trace over all T steps.
 Output: JSON with aggregates (+ AUROC of the residual as a wrong-answer detector) and an .npz with the
 per-image arrays. Resumable: accumulators are checkpointed to --state every --ckpt_every batches.
+
+E6 (MLSys, perturb every step): --wsample dither[,gdither] --dseeds K adds, for every quantizer spec, the arms
+<spec>@dither<k> (every Conv2d/Linear effective weight re-drawn by stochastic rounding from the master onto the
+spec's grid BEFORE EVERY FUNCTION EVALUATION f(z) of the solver: draw 0 before the injection / evaluation 0, draw e
+before evaluation e; wdither.sr_round, the m2_bestofk formula) and <spec>@gdither<k> (the control: master + fresh
+zero-mean Gaussian at the SR variance, no lattice). Master = fp32 or an RTN spec (--master w8c). Seeds as
+m2_bestofk (wdither.draw_seed(17, k, e)); sequence k is one weight trajectory shared by every image. The classifier
+head is read at every budget with the draw current at the end of the solve (draw T). Record layout unchanged; the
+record and array keys carry the arm name, the record adds base / wsample / dseed / master. --limit N keeps the
+first N cached images (smoke).
 """
 import argparse
 import glob
@@ -41,6 +51,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from wdither import make_hook, parse_arm  # noqa: E402
 
 DEQ_ROOT = Path(os.environ.get("DEQ_ROOT", Path.home() / "x6" / "deq"))
 MV = DEQ_ROOT / "MDEQ-Vision"
@@ -187,6 +200,18 @@ def prepare(m, x):
     m.fullstage._reset(z_list)
     f = lambda z: list2vec(m.fullstage(vec2list(z, cutoffs), x_list))  # noqa: E731
     return f, list2vec(z_list), cutoffs
+
+
+def _dithered(f, hook):
+    """Wrap the DEQ map so that evaluation e (1-based within one solve) runs after re-draw hook(e)."""
+    cnt = [0]
+
+    def g(z):
+        if cnt[0] > 0:
+            hook(cnt[0])
+        cnt[0] += 1
+        return f(z)
+    return g
 
 
 def head(m, z, cutoffs):
@@ -365,6 +390,10 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--state", default="")
     ap.add_argument("--ckpt_every", type=int, default=10)
+    ap.add_argument("--wsample", default="none", help="E6: comma list of dither,gdither (per-evaluation re-draw arms) or none")
+    ap.add_argument("--dseeds", type=int, default=3, help="E6: number of re-draw sequences per arm")
+    ap.add_argument("--master", default="fp32", help="E6: fp32 or an RTN spec (e.g. w8c) the draws are made from")
+    ap.add_argument("--limit", type=int, default=0, help="keep only the first N cached images (smoke); 0 = all")
     a = ap.parse_args()
     assert torch.cuda.is_available(), "NO CUDA"
     torch.backends.cudnn.allow_tf32 = False
@@ -374,7 +403,15 @@ def main():
     budgets = sorted(int(b) for b in a.budgets.split(","))
     assert budgets[-1] == a.T
     solvers = a.solvers.split(",")
-    specs = ["fp32"] + [s for s in a.specs.split(",") if s and s != "fp32"]
+    qspecs = ["fp32"] + [s for s in a.specs.split(",") if s and s != "fp32"]
+    wsamples = [w for w in a.wsample.split(",") if w and w != "none"]
+    assert all(w in ("dither", "gdither") for w in wsamples), a.wsample
+    msuf = "" if a.master == "fp32" else f"_m{a.master}"
+    specs = list(qspecs)                                 # arm names: fp32, RTN specs, then <spec>@<arm><k>[_m<master>]
+    for s_ in qspecs[1:]:
+        for w in wsamples:
+            for k in range(a.dseeds):
+                specs.append(f"{s_}@{w}{k}{msuf}")
     out = Path(a.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     state_path = Path(a.state or (CACHE / "state" / (out.stem + ".state.pt")))
@@ -390,16 +427,33 @@ def main():
             pass
     t0 = time.time()
     X, Y = load_imagenet_val(a.n, a.data)
+    if a.limit:
+        X, Y = X[:a.limit], Y[:a.limit]
     N = len(Y)
     print(f"{a.model}: {N} images, specs {specs}, solvers {solvers}, T {a.T}, budgets {budgets} "
           f"({time.time()-t0:.0f}s data)", flush=True)
-    models, qinfo = {}, {}
-    for s in specs:
+    models, qinfo, hooks = {}, {}, {}
+    for s in qspecs:
         m = load_mdeq(a.model)
         qinfo[s] = perturb_(m, s, a.seed)
         models[s] = m
-    print(f"  {len(models)} models built; weight rel err "
-          + ", ".join(f"{s}:{qinfo[s].get('weight_rel_err_mean', 0):.3f}" for s in specs), flush=True)
+    for s in specs[len(qspecs):]:                        # E6 arms: one master model per (spec, arm), re-drawn per evaluation
+        base, arm, k = parse_arm(s.split("_m")[0] if msuf else s)
+        q = parse_spec(base)
+        assert q["gran"] not in (None, "noise"), s
+        mk = (base, arm)
+        if mk not in hooks:
+            m = load_mdeq(a.model)
+            if a.master != "fp32":
+                perturb_(m, a.master, a.seed)
+            slots = [(put, get()) for _, get, put in weight_slots(m)]
+            hooks[mk] = (m, slots)
+        m, slots = hooks[mk]
+        models[s] = m
+        hooks[s] = make_hook(slots, arm, q["bits"], q["gran"], k, DEV, wseed=a.seed)
+        qinfo[s] = {**q, "spec": s, "base": base, "wsample": arm, "dseed": k, "master": a.master}
+    print(f"  {len(models)} arms built; weight rel err "
+          + ", ".join(f"{s}:{qinfo[s].get('weight_rel_err_mean', 0):.3f}" for s in qspecs), flush=True)
 
     keys = [(s, sv) for s in specs for sv in solvers]
     nb = len(budgets)
@@ -430,7 +484,12 @@ def main():
         for s in specs:
             m = models[s]
             for sv in solvers:
+                hook = hooks.get(s)
+                if hook is not None:
+                    hook(0)                              # draw 0: injection and evaluation 0
                 f, z0, cut = prepare(m, x)
+                if hook is not None:
+                    f = _dithered(f, hook)               # draw e before evaluation e >= 1
                 snaps, trace = solve(f, z0, a.T, set(budgets), sv)
                 if s == "fp32" and sv == "broyden":
                     z_ref = snaps[a.T][0]
@@ -476,6 +535,8 @@ def main():
         with np.errstate(divide="ignore", invalid="ignore"):
             logtr = np.log10(np.clip(tr, 1e-12, 1e12))
         rec = {"model": f"mdeq_{a.model}", "spec": s, "quant": qinfo[s], "seed": a.seed, "solver": sv, "n": N,
+               "base": qinfo[s].get("base", s), "wsample": qinfo[s].get("wsample", "none"),
+               "dseed": qinfo[s].get("dseed"), "master": qinfo[s].get("master", "fp32"),
                "T": a.T, "budgets": budgets, "hits": hits,
                "trace_log10_median": np.nanmedian(logtr, 0).round(4).tolist(),
                "trace_log10_p90": np.nanpercentile(logtr, 90, 0).round(4).tolist(),
@@ -496,6 +557,7 @@ def main():
             arrays[f"{tag}|{name}"] = A[name] if name in ("c1", "c5") else A[name].astype(np.float32)
         arrays[f"{tag}|trace"] = A["trace"].astype(np.float16)
     meta = {"model": f"mdeq_{a.model}", "seed": a.seed, "n": N, "T": a.T, "budgets": budgets, "specs": specs,
+            "qspecs": qspecs, "wsample": wsamples, "dseeds": a.dseeds, "master": a.master, "limit": a.limit,
             "solvers": solvers, "data": ("ImageNet val (evanarlian/imagenet_1k_resized_256), first n/1000 per class" if a.data == "resized"
                      else "ImageNet val original JPEGs (mlx-vision/imagenet-1k val.zip), first n/1000 per class by name"),
             "ref_res_median": float(np.median(ref_res)), "secs": time.time() - t0,
