@@ -1,0 +1,611 @@
+{
+ "task": "maze",
+ "device": "Samsung Galaxy S25",
+ "account": "acct3",
+ "cheap": "w8a8rope16",
+ "precise": "fp32",
+ "cap": 16,
+ "fin": 6,
+ "H": 3,
+ "rule": [
+  "min",
+  2
+ ],
+ "steps": [
+  {
+   "step": 0,
+   "cheap": {
+    "job_id": "jp4y672vp",
+    "n": 50
+   }
+  },
+  {
+   "step": 1,
+   "cheap": {
+    "job_id": "jgddykkrg",
+    "n": 50
+   }
+  },
+  {
+   "step": 2,
+   "cheap": {
+    "job_id": "jp1nk9r8g",
+    "n": 50
+   }
+  },
+  {
+   "step": 3,
+   "cheap": {
+    "job_id": "jgjr69xvp",
+    "n": 50
+   }
+  },
+  {
+   "step": 4,
+   "cheap": {
+    "job_id": "jgddyklrg",
+    "n": 50
+   }
+  },
+  {
+   "step": 5,
+   "cheap": {
+    "job_id": "jgzlq1dx5",
+    "n": 50
+   }
+  },
+  {
+   "step": 6,
+   "cheap": {
+    "job_id": "jgjr6jdep",
+    "n": 42
+   },
+   "precise": {
+    "job_id": "jgk2wjvng",
+    "n": 8
+   }
+  },
+  {
+   "step": 7,
+   "cheap": {
+    "job_id": "jp8edlmqp",
+    "n": 42
+   },
+   "precise": {
+    "job_id": "jpe70jk85",
+    "n": 8
+   }
+  },
+  {
+   "step": 8,
+   "cheap": {
+    "job_id": "jp3zlymm5",
+    "n": 42
+   },
+   "precise": {
+    "job_id": "jprlmz1vp",
+    "n": 8
+   }
+  },
+  {
+   "step": 9,
+   "cheap": {
+    "job_id": "jpyok9nr5",
+    "n": 42
+   },
+   "precise": {
+    "job_id": "jpvlyj7m5",
+    "n": 8
+   }
+  },
+  {
+   "step": 10,
+   "cheap": {
+    "job_id": "jgjr6j38p",
+    "n": 42
+   },
+   "precise": {
+    "job_id": "jgjr6j6xp",
+    "n": 8
+   }
+  },
+  {
+   "step": 11,
+   "cheap": {
+    "job_id": "j5m01rn9g",
+    "n": 42
+   },
+   "precise": {
+    "job_id": "jp2rq8xqg",
+    "n": 8
+   }
+  },
+  {
+   "step": 12,
+   "cheap": {
+    "job_id": "jp1nk0w7g",
+    "n": 42
+   }
+  },
+  {
+   "step": 13,
+   "cheap": {
+    "job_id": "jp2rq8wmg",
+    "n": 42
+   }
+  },
+  {
+   "step": 14,
+   "cheap": {
+    "job_id": "j5689690g",
+    "n": 42
+   }
+  },
+  {
+   "step": 15,
+   "cheap": {
+    "job_id": "jgol7yxxg",
+    "n": 42
+   }
+  },
+  {
+   "step": 16,
+   "precise": {
+    "job_id": "jpyokwzl5",
+    "n": 42
+   }
+  },
+  {
+   "step": 17,
+   "precise": {
+    "job_id": "jp2rq69qg",
+    "n": 42
+   }
+  },
+  {
+   "step": 18,
+   "precise": {
+    "job_id": "jgly9z025",
+    "n": 42
+   }
+  },
+  {
+   "step": 19,
+   "precise": {
+    "job_id": "jgk2wnoyg",
+    "n": 42
+   }
+  },
+  {
+   "step": 20,
+   "precise": {
+    "job_id": "jgzlq9mz5",
+    "n": 42
+   }
+  },
+  {
+   "step": 21,
+   "precise": {
+    "job_id": "jp3zl3oz5",
+    "n": 42
+   }
+  }
+ ],
+ "errors": [],
+ "profile": {
+  "w8a8rope16": {
+   "job_id": "j5qlxnvmp",
+   "ms": 17.753,
+   "summary": {
+    "ms": 17.753,
+    "units": {
+     "NPU": 837
+    },
+    "peak_mb": 187.62890625,
+    "all_times_ms": [
+     18.687,
+     17.963,
+     18.058,
+     18.433,
+     18.241,
+     18.076,
+     18.02,
+     17.954,
+     17.916,
+     18.068,
+     17.881,
+     18.103,
+     18.047,
+     18.054,
+     18.281,
+     17.89,
+     18.065,
+     18.188,
+     19.063,
+     19.225,
+     18.011,
+     17.97,
+     18.025,
+     18.08,
+     18.042,
+     18.834,
+     17.8,
+     17.852,
+     17.784,
+     17.806,
+     17.755,
+     17.848,
+     17.821,
+     17.803,
+     17.807,
+     17.777,
+     17.869,
+     17.955,
+     17.891,
+     17.806,
+     18.457,
+     17.846,
+     17.821,
+     17.883,
+     17.87,
+     17.833,
+     17.908,
+     17.85,
+     18.0,
+     17.757,
+     17.831,
+     17.878,
+     17.753,
+     17.859,
+     18.267,
+     17.937,
+     17.881,
+     17.982,
+     18.055,
+     17.864,
+     17.882,
+     18.212,
+     18.401,
+     18.316,
+     18.278,
+     18.226,
+     18.067,
+     18.136,
+     18.493,
+     18.596,
+     17.963,
+     18.081,
+     18.356,
+     18.101,
+     17.983,
+     18.145,
+     18.237,
+     18.172,
+     18.025,
+     18.384,
+     18.425,
+     18.342,
+     18.543,
+     18.461,
+     18.315,
+     18.507,
+     19.058,
+     18.283,
+     18.1,
+     18.392,
+     18.351,
+     18.33,
+     18.269,
+     18.466,
+     18.498,
+     18.38,
+     18.481,
+     18.444,
+     18.154,
+     18.529
+    ]
+   }
+  },
+  "fp32": {
+   "job_id": "jgly9dll5",
+   "ms": 44.75,
+   "summary": {
+    "ms": 44.75,
+    "units": {
+     "NPU": 547
+    },
+    "peak_mb": 186.05859375,
+    "all_times_ms": [
+     46.318,
+     44.862,
+     44.75,
+     45.037,
+     44.941,
+     44.837,
+     44.868,
+     45.222,
+     45.629,
+     45.247,
+     45.026,
+     45.86,
+     44.887,
+     46.057,
+     44.92,
+     44.975,
+     45.381,
+     45.05,
+     45.582,
+     44.821,
+     45.129,
+     44.984,
+     45.127,
+     44.767,
+     45.057,
+     45.651,
+     44.856,
+     44.875,
+     44.846,
+     45.2,
+     46.145,
+     45.42,
+     45.213,
+     45.811,
+     45.81,
+     45.827,
+     46.044,
+     45.948,
+     45.765,
+     45.812,
+     46.432,
+     46.048,
+     45.891,
+     45.874,
+     46.111,
+     46.955,
+     45.741,
+     45.719,
+     45.725,
+     45.856,
+     45.617,
+     45.699,
+     46.377,
+     46.331,
+     45.917,
+     45.927,
+     45.805,
+     45.954,
+     46.05,
+     46.726,
+     46.05,
+     46.145,
+     46.186,
+     45.932,
+     46.255,
+     46.561,
+     46.305,
+     45.979,
+     45.815,
+     46.028,
+     46.06,
+     45.917,
+     45.856,
+     46.047,
+     46.26,
+     45.624,
+     45.473,
+     46.237,
+     51.301,
+     47.346,
+     46.366,
+     46.178,
+     45.924,
+     46.111,
+     46.458,
+     45.859,
+     45.708,
+     45.692,
+     46.183,
+     46.255,
+     45.925,
+     46.817,
+     46.106,
+     45.986,
+     46.356,
+     45.962,
+     45.669,
+     46.337,
+     46.335,
+     45.805
+    ]
+   }
+  }
+ },
+ "guard": {
+  "w8a8rope16": {
+   "compile_job": "jp1nk97kg",
+   "verdict": "match",
+   "outputs": {
+    "z_H_out": {
+     "graph": {
+      "scale": 0.031946055591106415,
+      "zero_point": 114.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_0",
+      "dtype": "uint8",
+      "shape": [
+       1,
+       916,
+       512
+      ],
+      "scale": 0.031946055591106415,
+      "zero_point": 114.0
+     },
+     "status": "match"
+    },
+    "z_L_out": {
+     "graph": {
+      "scale": 0.03129538521170616,
+      "zero_point": 114.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_1",
+      "dtype": "uint8",
+      "shape": [
+       1,
+       916,
+       512
+      ],
+      "scale": 0.03129538521170616,
+      "zero_point": 114.0
+     },
+     "status": "match"
+    },
+    "logits": {
+     "graph": {
+      "scale": 1.1497315168380737,
+      "zero_point": 123.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_2",
+      "dtype": "uint8",
+      "shape": [
+       1,
+       900,
+       6
+      ],
+      "scale": 1.1497315168380737,
+      "zero_point": 123.0
+     },
+     "status": "match"
+    },
+    "q_halt": {
+     "graph": {
+      "scale": 0.011749301105737686,
+      "zero_point": 0.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_3",
+      "dtype": "uint8",
+      "shape": [
+       1
+      ],
+      "scale": 0.011749301105737686,
+      "zero_point": 0.0
+     },
+     "status": "match"
+    }
+   },
+   "n_dlc_outputs": 4,
+   "n_graph_outputs": 4,
+   "qairt": "2.45",
+   "qairt_sdk_version": "2.45.0.260326154327"
+  },
+  "fp32": {
+   "compile_job": "jgnzd4kmg",
+   "verdict": "match",
+   "outputs": {
+    "z_H_out": {
+     "graph": null,
+     "dlc": {
+      "name": "output_0",
+      "dtype": "float32",
+      "shape": [
+       1,
+       916,
+       512
+      ],
+      "scale": null,
+      "zero_point": null
+     },
+     "status": "match"
+    },
+    "z_L_out": {
+     "graph": null,
+     "dlc": {
+      "name": "output_1",
+      "dtype": "float32",
+      "shape": [
+       1,
+       916,
+       512
+      ],
+      "scale": null,
+      "zero_point": null
+     },
+     "status": "match"
+    },
+    "logits": {
+     "graph": null,
+     "dlc": {
+      "name": "output_2",
+      "dtype": "float32",
+      "shape": [
+       1,
+       900,
+       6
+      ],
+      "scale": null,
+      "zero_point": null
+     },
+     "status": "match"
+    },
+    "q_halt": {
+     "graph": null,
+     "dlc": {
+      "name": "output_3",
+      "dtype": "float32",
+      "shape": [
+       1
+      ],
+      "scale": null,
+      "zero_point": null
+     },
+     "status": "match"
+    }
+   },
+   "n_dlc_outputs": 4,
+   "n_graph_outputs": 4,
+   "qairt": "2.45",
+   "qairt_sdk_version": "2.45.0.260326154327"
+  }
+ },
+ "done": true,
+ "summary": {
+  "n": 50,
+  "fired_frac": 0.16,
+  "cheap_steps_mean": 14.4,
+  "fin_steps_mean": 6.0,
+  "exact_exit_only": 0.0,
+  "exact_finish_all_j2": 0.88,
+  "exact_finish_all_j1": 0.78,
+  "exact_finish_fired_only_j2": 0.16,
+  "exact_cheap_per_step": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "device_steps": 22,
+  "profile_ms": {
+   "w8a8rope16": 17.753,
+   "fp32": 44.75
+  }
+ }
+}

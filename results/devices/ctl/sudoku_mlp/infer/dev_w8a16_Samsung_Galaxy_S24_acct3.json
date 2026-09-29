@@ -1,0 +1,90 @@
+{
+ "steps": [
+  {
+   "step": 0,
+   "job_id": "jgnzz89qg",
+   "exact": 0.01,
+   "cell": 0.5561728395061728
+  },
+  {
+   "step": 1,
+   "job_id": "jgdddl0zg",
+   "exact": 0.02,
+   "cell": 0.6811111111111111
+  },
+  {
+   "step": 2,
+   "job_id": "jgnz1vvrg",
+   "exact": 0.26,
+   "cell": 0.7537037037037037
+  },
+  {
+   "step": 3,
+   "job_id": "jp3zoj2z5",
+   "exact": 0.36,
+   "cell": 0.7766666666666666
+  },
+  {
+   "step": 4,
+   "job_id": "j5wlywojp",
+   "exact": 0.44,
+   "cell": 0.7951851851851852
+  },
+  {
+   "step": 5,
+   "job_id": "j5wly31mp",
+   "exact": 0.51,
+   "cell": 0.8203703703703704
+  },
+  {
+   "step": 6,
+   "job_id": "jglywk8m5",
+   "exact": 0.55,
+   "cell": 0.8277777777777777
+  },
+  {
+   "step": 7,
+   "job_id": "jgzlzwwk5",
+   "exact": 0.56,
+   "cell": 0.8380246913580247
+  }
+ ],
+ "jobs": [
+  {
+   "step": 0,
+   "job_id": "jgnzz89qg"
+  },
+  {
+   "step": 1,
+   "job_id": "jgdddl0zg"
+  },
+  {
+   "step": 2,
+   "job_id": "jgnz1vvrg"
+  },
+  {
+   "step": 3,
+   "job_id": "jp3zoj2z5"
+  },
+  {
+   "step": 4,
+   "job_id": "j5wlywojp"
+  },
+  {
+   "step": 5,
+   "job_id": "j5wly31mp"
+  },
+  {
+   "step": 6,
+   "job_id": "jglywk8m5"
+  },
+  {
+   "step": 7,
+   "job_id": "jgzlzwwk5"
+  }
+ ],
+ "n_steps": 8,
+ "account": "acct3",
+ "runtime": "qnn_dlc",
+ "done": true
+}

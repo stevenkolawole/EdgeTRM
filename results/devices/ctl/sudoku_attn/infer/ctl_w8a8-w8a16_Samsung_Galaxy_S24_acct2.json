@@ -1,0 +1,655 @@
+{
+ "task": "sudoku_attn",
+ "device": "Samsung Galaxy S24",
+ "account": "acct2",
+ "cheap": "w8a8",
+ "precise": "w8a16",
+ "cap": 16,
+ "fin": 6,
+ "H": 3,
+ "rule": [
+  "native",
+  0
+ ],
+ "steps": [
+  {
+   "step": 0,
+   "cheap": {
+    "job_id": "jg9z7v9qp",
+    "n": 100
+   }
+  },
+  {
+   "step": 1,
+   "cheap": {
+    "job_id": "jgk2wzw2g",
+    "n": 100
+   }
+  },
+  {
+   "step": 2,
+   "cheap": {
+    "job_id": "jp4y6q7vp",
+    "n": 100
+   }
+  },
+  {
+   "step": 3,
+   "cheap": {
+    "job_id": "jgnzdyvkg",
+    "n": 97
+   },
+   "precise": {
+    "job_id": "jgddy9ezg",
+    "n": 3
+   }
+  },
+  {
+   "step": 4,
+   "cheap": {
+    "job_id": "jgjr6meep",
+    "n": 97
+   },
+   "precise": {
+    "job_id": "j5wl0vm4p",
+    "n": 3
+   }
+  },
+  {
+   "step": 5,
+   "cheap": {
+    "job_id": "j5689jdvg",
+    "n": 97
+   },
+   "precise": {
+    "job_id": "jp0m8qmeg",
+    "n": 40
+   }
+  },
+  {
+   "step": 6,
+   "cheap": {
+    "job_id": "jpvlyonm5",
+    "n": 60
+   },
+   "precise": {
+    "job_id": "jgjr6m88p",
+    "n": 40
+   }
+  },
+  {
+   "step": 7,
+   "cheap": {
+    "job_id": "jpvlyojj5",
+    "n": 60
+   },
+   "precise": {
+    "job_id": "jgzlq91k5",
+    "n": 40
+   }
+  },
+  {
+   "step": 8,
+   "cheap": {
+    "job_id": "jgol70yxg",
+    "n": 60
+   },
+   "precise": {
+    "job_id": "jpvlyo3j5",
+    "n": 40
+   }
+  },
+  {
+   "step": 9,
+   "cheap": {
+    "job_id": "jp0m8qq9g",
+    "n": 45
+   },
+   "precise": {
+    "job_id": "jp8ed99kp",
+    "n": 52
+   }
+  },
+  {
+   "step": 10,
+   "cheap": {
+    "job_id": "j5689ly6g",
+    "n": 45
+   },
+   "precise": {
+    "job_id": "jp3zl2j35",
+    "n": 52
+   }
+  },
+  {
+   "step": 11,
+   "cheap": {
+    "job_id": "jgzlqkox5",
+    "n": 45
+   },
+   "precise": {
+    "job_id": "jp1nkxy7g",
+    "n": 15
+   }
+  },
+  {
+   "step": 12,
+   "cheap": {
+    "job_id": "jgk2wmqng",
+    "n": 34
+   },
+   "precise": {
+    "job_id": "j5qlxorop",
+    "n": 26
+   }
+  },
+  {
+   "step": 13,
+   "cheap": {
+    "job_id": "jpxl8218p",
+    "n": 34
+   },
+   "precise": {
+    "job_id": "j5m01yz7g",
+    "n": 26
+   }
+  },
+  {
+   "step": 14,
+   "cheap": {
+    "job_id": "jp1nkxdng",
+    "n": 34
+   },
+   "precise": {
+    "job_id": "jgddylr6g",
+    "n": 26
+   }
+  },
+  {
+   "step": 15,
+   "cheap": {
+    "job_id": "j5m01yv7g",
+    "n": 31
+   },
+   "precise": {
+    "job_id": "jgnzd8rjg",
+    "n": 14
+   }
+  },
+  {
+   "step": 16,
+   "precise": {
+    "job_id": "jgddyl06g",
+    "n": 45
+   }
+  },
+  {
+   "step": 17,
+   "precise": {
+    "job_id": "j5wl0n84p",
+    "n": 45
+   }
+  },
+  {
+   "step": 18,
+   "precise": {
+    "job_id": "jp4y60mqp",
+    "n": 34
+   }
+  },
+  {
+   "step": 19,
+   "precise": {
+    "job_id": "jpyok0mr5",
+    "n": 34
+   }
+  },
+  {
+   "step": 20,
+   "precise": {
+    "job_id": "jgly9rle5",
+    "n": 34
+   }
+  },
+  {
+   "step": 21,
+   "precise": {
+    "job_id": "j5wl0n7zp",
+    "n": 31
+   }
+  }
+ ],
+ "errors": [],
+ "profile": {
+  "w8a8": {
+   "job_id": "jgk2wzvng",
+   "ms": 3.861,
+   "summary": {
+    "ms": 3.861,
+    "units": {
+     "NPU": 785
+    },
+    "peak_mb": 183.6328125,
+    "all_times_ms": [
+     4.443,
+     3.954,
+     3.934,
+     3.915,
+     3.925,
+     3.935,
+     3.911,
+     3.91,
+     3.92,
+     3.914,
+     3.926,
+     4.112,
+     3.901,
+     3.972,
+     3.876,
+     3.892,
+     3.894,
+     3.92,
+     3.867,
+     3.894,
+     3.908,
+     3.894,
+     3.89,
+     3.899,
+     3.901,
+     3.894,
+     3.899,
+     3.904,
+     3.896,
+     3.903,
+     3.889,
+     3.893,
+     3.897,
+     3.894,
+     3.899,
+     3.886,
+     3.883,
+     3.875,
+     3.883,
+     3.899,
+     3.891,
+     3.882,
+     3.903,
+     3.885,
+     3.885,
+     3.876,
+     3.869,
+     3.88,
+     3.897,
+     3.895,
+     3.891,
+     3.887,
+     3.896,
+     3.873,
+     3.911,
+     3.864,
+     3.885,
+     3.887,
+     3.874,
+     3.889,
+     3.884,
+     3.88,
+     3.872,
+     3.887,
+     3.861,
+     3.872,
+     3.882,
+     3.873,
+     3.878,
+     3.881,
+     3.861,
+     3.863,
+     3.881,
+     3.888,
+     3.875,
+     3.902,
+     3.895,
+     3.891,
+     3.898,
+     3.891,
+     3.88,
+     3.883,
+     3.888,
+     3.877,
+     3.881,
+     3.893,
+     3.89,
+     3.876,
+     3.896,
+     3.882,
+     3.886,
+     3.881,
+     3.885,
+     3.875,
+     3.89,
+     3.888,
+     3.882,
+     3.866,
+     3.865,
+     3.87
+    ]
+   }
+  },
+  "w8a16": {
+   "job_id": "j5wl0oq4p",
+   "ms": 4.088,
+   "summary": {
+    "ms": 4.088,
+    "units": {
+     "NPU": 785
+    },
+    "peak_mb": 184.03515625,
+    "all_times_ms": [
+     4.649,
+     4.179,
+     4.163,
+     4.15,
+     4.147,
+     4.135,
+     4.142,
+     4.145,
+     4.154,
+     4.143,
+     4.143,
+     4.119,
+     4.132,
+     4.135,
+     4.15,
+     4.131,
+     4.125,
+     4.148,
+     4.147,
+     4.154,
+     4.13,
+     4.138,
+     4.116,
+     4.111,
+     4.118,
+     4.119,
+     4.125,
+     4.127,
+     4.115,
+     4.124,
+     4.138,
+     4.149,
+     4.13,
+     4.112,
+     4.128,
+     4.135,
+     4.195,
+     4.098,
+     4.139,
+     4.141,
+     4.128,
+     4.127,
+     4.132,
+     4.133,
+     4.116,
+     4.09,
+     4.11,
+     4.117,
+     4.104,
+     4.092,
+     4.12,
+     4.119,
+     4.135,
+     4.112,
+     4.133,
+     4.118,
+     4.118,
+     4.125,
+     4.135,
+     4.122,
+     4.125,
+     4.126,
+     4.128,
+     4.118,
+     4.121,
+     4.121,
+     4.102,
+     4.093,
+     4.125,
+     4.124,
+     4.133,
+     4.109,
+     4.135,
+     4.131,
+     4.128,
+     4.119,
+     4.122,
+     4.119,
+     4.145,
+     4.134,
+     4.145,
+     4.126,
+     4.128,
+     4.126,
+     4.128,
+     4.126,
+     4.122,
+     4.126,
+     4.107,
+     4.135,
+     4.105,
+     4.105,
+     4.096,
+     4.112,
+     4.117,
+     4.136,
+     4.124,
+     4.108,
+     4.088,
+     4.112
+    ]
+   }
+  }
+ },
+ "guard": {
+  "w8a8": {
+   "compile_job": "j5qlxnz7p",
+   "verdict": "float_carry",
+   "outputs": {
+    "z_H_out": {
+     "graph": {
+      "scale": 0.034735288470983505,
+      "zero_point": 127.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_0",
+      "dtype": "uint8",
+      "shape": [
+       1,
+       97,
+       512
+      ],
+      "scale": 0.034735288470983505,
+      "zero_point": 127.0
+     },
+     "status": "match"
+    },
+    "z_L_out": {
+     "graph": {
+      "scale": 0.03996603190898895,
+      "zero_point": 127.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_1",
+      "dtype": "float16",
+      "shape": [
+       1,
+       97,
+       512
+      ],
+      "scale": null,
+      "zero_point": null
+     },
+     "status": "float_carry"
+    },
+    "logits": {
+     "graph": {
+      "scale": 0.852663516998291,
+      "zero_point": 154.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_2",
+      "dtype": "uint8",
+      "shape": [
+       1,
+       81,
+       11
+      ],
+      "scale": 0.852663516998291,
+      "zero_point": 154.0
+     },
+     "status": "match"
+    },
+    "q_halt": {
+     "graph": {
+      "scale": 0.05326464772224426,
+      "zero_point": 111.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_3",
+      "dtype": "uint8",
+      "shape": [
+       1
+      ],
+      "scale": 0.05326464772224426,
+      "zero_point": 111.0
+     },
+     "status": "match"
+    }
+   },
+   "n_dlc_outputs": 4,
+   "n_graph_outputs": 4,
+   "qairt": "2.45",
+   "qairt_sdk_version": "2.45.0.260326154327"
+  },
+  "w8a16": {
+   "compile_job": "j5wl0k1jp",
+   "verdict": "float_carry",
+   "outputs": {
+    "z_H_out": {
+     "graph": {
+      "scale": 0.0001544648694107309,
+      "zero_point": 32332.0,
+      "dtype": "uint16"
+     },
+     "dlc": {
+      "name": "output_0",
+      "dtype": "uint16",
+      "shape": [
+       1,
+       97,
+       512
+      ],
+      "scale": 0.0001544648694107309,
+      "zero_point": 32332.0
+     },
+     "status": "match"
+    },
+    "z_L_out": {
+     "graph": {
+      "scale": 0.00016587717982474715,
+      "zero_point": 33057.0,
+      "dtype": "uint16"
+     },
+     "dlc": {
+      "name": "output_1",
+      "dtype": "float16",
+      "shape": [
+       1,
+       97,
+       512
+      ],
+      "scale": null,
+      "zero_point": null
+     },
+     "status": "float_carry"
+    },
+    "logits": {
+     "graph": {
+      "scale": 0.003317756811156869,
+      "zero_point": 39661.0,
+      "dtype": "uint16"
+     },
+     "dlc": {
+      "name": "output_2",
+      "dtype": "uint16",
+      "shape": [
+       1,
+       81,
+       11
+      ],
+      "scale": 0.003317756811156869,
+      "zero_point": 39661.0
+     },
+     "status": "match"
+    },
+    "q_halt": {
+     "graph": {
+      "scale": 0.00020725543436128646,
+      "zero_point": 28581.0,
+      "dtype": "uint16"
+     },
+     "dlc": {
+      "name": "output_3",
+      "dtype": "uint16",
+      "shape": [
+       1
+      ],
+      "scale": 0.00020725543436128646,
+      "zero_point": 28581.0
+     },
+     "status": "match"
+    }
+   },
+   "n_dlc_outputs": 4,
+   "n_graph_outputs": 4,
+   "qairt": "2.45",
+   "qairt_sdk_version": "2.45.0.260326154327"
+  }
+ },
+ "done": true,
+ "summary": {
+  "n": 100,
+  "fired_frac": 0.69,
+  "cheap_steps_mean": 10.39,
+  "fin_steps_mean": 6.0,
+  "exact_exit_only": 0.68,
+  "exact_finish_all_j2": 0.7,
+  "exact_finish_all_j1": 0.7,
+  "exact_finish_fired_only_j2": 0.69,
+  "exact_cheap_per_step": [
+   0.0,
+   0.0,
+   0.03,
+   0.16,
+   0.27,
+   0.37,
+   0.04,
+   0.1,
+   0.16,
+   0.05,
+   0.08,
+   0.12,
+   0.02,
+   0.03,
+   0.03,
+   0.0
+  ],
+  "device_steps": 22,
+  "profile_ms": {
+   "w8a8": 3.861,
+   "w8a16": 4.088
+  }
+ }
+}

@@ -1,0 +1,655 @@
+{
+ "task": "sudoku_attn",
+ "device": "Samsung Galaxy S25",
+ "account": "acct3",
+ "cheap": "w8a8",
+ "precise": "w8a16",
+ "cap": 16,
+ "fin": 6,
+ "H": 3,
+ "rule": [
+  "native",
+  0
+ ],
+ "steps": [
+  {
+   "step": 0,
+   "cheap": {
+    "job_id": "j5m01r0qg",
+    "n": 100
+   }
+  },
+  {
+   "step": 1,
+   "cheap": {
+    "job_id": "jgol7y7xg",
+    "n": 100
+   }
+  },
+  {
+   "step": 2,
+   "cheap": {
+    "job_id": "jgjr6x9xp",
+    "n": 100
+   }
+  },
+  {
+   "step": 3,
+   "cheap": {
+    "job_id": "jpxl8jnlp",
+    "n": 97
+   },
+   "precise": {
+    "job_id": "jgly9z3m5",
+    "n": 3
+   }
+  },
+  {
+   "step": 4,
+   "cheap": {
+    "job_id": "jprlmqekp",
+    "n": 97
+   },
+   "precise": {
+    "job_id": "jpe701485",
+    "n": 3
+   }
+  },
+  {
+   "step": 5,
+   "cheap": {
+    "job_id": "jgjr6mo7p",
+    "n": 97
+   },
+   "precise": {
+    "job_id": "j5689jwvg",
+    "n": 40
+   }
+  },
+  {
+   "step": 6,
+   "cheap": {
+    "job_id": "jgk2wn2og",
+    "n": 60
+   },
+   "precise": {
+    "job_id": "jp4y6oelp",
+    "n": 40
+   }
+  },
+  {
+   "step": 7,
+   "cheap": {
+    "job_id": "jg9z71qvp",
+    "n": 60
+   },
+   "precise": {
+    "job_id": "jprlmqz9p",
+    "n": 40
+   }
+  },
+  {
+   "step": 8,
+   "cheap": {
+    "job_id": "jgddy9weg",
+    "n": 60
+   },
+   "precise": {
+    "job_id": "j57e1wzlp",
+    "n": 40
+   }
+  },
+  {
+   "step": 9,
+   "cheap": {
+    "job_id": "jpyokwe75",
+    "n": 49
+   },
+   "precise": {
+    "job_id": "jp0m8qy6g",
+    "n": 48
+   }
+  },
+  {
+   "step": 10,
+   "cheap": {
+    "job_id": "jgddy99eg",
+    "n": 49
+   },
+   "precise": {
+    "job_id": "j5wl0vv3p",
+    "n": 48
+   }
+  },
+  {
+   "step": 11,
+   "cheap": {
+    "job_id": "jgnzdyykg",
+    "n": 49
+   },
+   "precise": {
+    "job_id": "jprlmqq0p",
+    "n": 11
+   }
+  },
+  {
+   "step": 12,
+   "cheap": {
+    "job_id": "jpe7013o5",
+    "n": 38
+   },
+   "precise": {
+    "job_id": "jgzlq9ko5",
+    "n": 22
+   }
+  },
+  {
+   "step": 13,
+   "cheap": {
+    "job_id": "jgol7q2qg",
+    "n": 38
+   },
+   "precise": {
+    "job_id": "jpvlyxqk5",
+    "n": 22
+   }
+  },
+  {
+   "step": 14,
+   "cheap": {
+    "job_id": "jg9z7e08p",
+    "n": 38
+   },
+   "precise": {
+    "job_id": "jp1nkx27g",
+    "n": 22
+   }
+  },
+  {
+   "step": 15,
+   "cheap": {
+    "job_id": "jgddylezg",
+    "n": 32
+   },
+   "precise": {
+    "job_id": "j57e1309p",
+    "n": 17
+   }
+  },
+  {
+   "step": 16,
+   "precise": {
+    "job_id": "jpyok0jl5",
+    "n": 49
+   }
+  },
+  {
+   "step": 17,
+   "precise": {
+    "job_id": "jgly9r3m5",
+    "n": 49
+   }
+  },
+  {
+   "step": 18,
+   "precise": {
+    "job_id": "jp1nkxe7g",
+    "n": 38
+   }
+  },
+  {
+   "step": 19,
+   "precise": {
+    "job_id": "jprlmjykp",
+    "n": 38
+   }
+  },
+  {
+   "step": 20,
+   "precise": {
+    "job_id": "jp3zl24m5",
+    "n": 38
+   }
+  },
+  {
+   "step": 21,
+   "precise": {
+    "job_id": "jpxl8278p",
+    "n": 32
+   }
+  }
+ ],
+ "errors": [],
+ "profile": {
+  "w8a8": {
+   "job_id": "j5qlx80op",
+   "ms": 2.966,
+   "summary": {
+    "ms": 2.966,
+    "units": {
+     "NPU": 785
+    },
+    "peak_mb": 139.71484375,
+    "all_times_ms": [
+     3.635,
+     3.062,
+     3.048,
+     3.048,
+     3.03,
+     3.004,
+     2.997,
+     2.993,
+     2.997,
+     2.995,
+     2.998,
+     3.305,
+     3.068,
+     3.059,
+     3.041,
+     3.028,
+     3.018,
+     3.015,
+     3.009,
+     3.009,
+     3.004,
+     3.004,
+     3.001,
+     3.004,
+     3.002,
+     3.004,
+     2.997,
+     3.715,
+     2.999,
+     2.995,
+     2.99,
+     3.079,
+     3.0,
+     3.012,
+     3.026,
+     2.995,
+     2.988,
+     3.01,
+     2.995,
+     2.99,
+     2.993,
+     3.016,
+     3.037,
+     3.042,
+     3.057,
+     3.049,
+     3.061,
+     3.059,
+     3.045,
+     3.042,
+     3.04,
+     3.052,
+     3.042,
+     3.043,
+     3.045,
+     3.051,
+     3.032,
+     3.032,
+     3.037,
+     3.031,
+     2.994,
+     3.008,
+     2.986,
+     2.998,
+     2.981,
+     2.999,
+     2.998,
+     3.027,
+     2.995,
+     3.002,
+     3.037,
+     3.048,
+     3.048,
+     3.064,
+     3.03,
+     3.024,
+     2.991,
+     3.012,
+     2.983,
+     2.984,
+     2.991,
+     2.979,
+     2.976,
+     2.978,
+     2.972,
+     2.976,
+     2.982,
+     2.979,
+     2.977,
+     2.98,
+     2.976,
+     2.98,
+     2.966,
+     2.976,
+     2.979,
+     2.973,
+     2.992,
+     2.981,
+     2.98,
+     3.002
+    ]
+   }
+  },
+  "w8a16": {
+   "job_id": "jg9z7vwmp",
+   "ms": 3.245,
+   "summary": {
+    "ms": 3.245,
+    "units": {
+     "NPU": 785
+    },
+    "peak_mb": 173.41796875,
+    "all_times_ms": [
+     3.901,
+     3.329,
+     3.294,
+     3.303,
+     3.295,
+     3.285,
+     3.32,
+     3.309,
+     3.288,
+     3.284,
+     3.279,
+     3.485,
+     3.283,
+     3.259,
+     3.288,
+     3.283,
+     3.262,
+     3.247,
+     3.252,
+     3.245,
+     3.27,
+     3.257,
+     3.253,
+     3.252,
+     3.25,
+     3.245,
+     3.249,
+     3.258,
+     3.258,
+     3.26,
+     3.266,
+     3.254,
+     3.269,
+     3.259,
+     3.254,
+     3.26,
+     3.25,
+     3.276,
+     3.262,
+     3.255,
+     3.248,
+     3.247,
+     3.255,
+     3.277,
+     3.282,
+     3.297,
+     3.284,
+     3.276,
+     3.273,
+     3.279,
+     3.257,
+     3.258,
+     3.246,
+     3.248,
+     3.256,
+     3.257,
+     3.263,
+     3.256,
+     3.264,
+     3.271,
+     3.265,
+     3.254,
+     3.278,
+     3.267,
+     3.277,
+     3.26,
+     3.255,
+     3.26,
+     3.258,
+     3.252,
+     3.256,
+     3.273,
+     3.27,
+     3.271,
+     3.258,
+     3.269,
+     3.26,
+     3.257,
+     3.25,
+     3.265,
+     3.252,
+     3.249,
+     3.252,
+     3.25,
+     3.254,
+     3.265,
+     3.257,
+     3.261,
+     3.265,
+     3.269,
+     3.256,
+     3.258,
+     3.25,
+     3.265,
+     3.269,
+     3.264,
+     3.267,
+     3.29,
+     3.273,
+     3.274
+    ]
+   }
+  }
+ },
+ "guard": {
+  "w8a8": {
+   "compile_job": "jgddyk8kg",
+   "verdict": "float_carry",
+   "outputs": {
+    "z_H_out": {
+     "graph": {
+      "scale": 0.034735288470983505,
+      "zero_point": 127.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_0",
+      "dtype": "uint8",
+      "shape": [
+       1,
+       97,
+       512
+      ],
+      "scale": 0.034735288470983505,
+      "zero_point": 127.0
+     },
+     "status": "match"
+    },
+    "z_L_out": {
+     "graph": {
+      "scale": 0.03996603190898895,
+      "zero_point": 127.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_1",
+      "dtype": "float16",
+      "shape": [
+       1,
+       97,
+       512
+      ],
+      "scale": null,
+      "zero_point": null
+     },
+     "status": "float_carry"
+    },
+    "logits": {
+     "graph": {
+      "scale": 0.852663516998291,
+      "zero_point": 154.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_2",
+      "dtype": "uint8",
+      "shape": [
+       1,
+       81,
+       11
+      ],
+      "scale": 0.852663516998291,
+      "zero_point": 154.0
+     },
+     "status": "match"
+    },
+    "q_halt": {
+     "graph": {
+      "scale": 0.05326464772224426,
+      "zero_point": 111.0,
+      "dtype": "uint8"
+     },
+     "dlc": {
+      "name": "output_3",
+      "dtype": "uint8",
+      "shape": [
+       1
+      ],
+      "scale": 0.05326464772224426,
+      "zero_point": 111.0
+     },
+     "status": "match"
+    }
+   },
+   "n_dlc_outputs": 4,
+   "n_graph_outputs": 4,
+   "qairt": "2.45",
+   "qairt_sdk_version": "2.45.0.260326154327"
+  },
+  "w8a16": {
+   "compile_job": "jprlmrwep",
+   "verdict": "float_carry",
+   "outputs": {
+    "z_H_out": {
+     "graph": {
+      "scale": 0.0001544648694107309,
+      "zero_point": 32332.0,
+      "dtype": "uint16"
+     },
+     "dlc": {
+      "name": "output_0",
+      "dtype": "uint16",
+      "shape": [
+       1,
+       97,
+       512
+      ],
+      "scale": 0.0001544648694107309,
+      "zero_point": 32332.0
+     },
+     "status": "match"
+    },
+    "z_L_out": {
+     "graph": {
+      "scale": 0.00016587717982474715,
+      "zero_point": 33057.0,
+      "dtype": "uint16"
+     },
+     "dlc": {
+      "name": "output_1",
+      "dtype": "float16",
+      "shape": [
+       1,
+       97,
+       512
+      ],
+      "scale": null,
+      "zero_point": null
+     },
+     "status": "float_carry"
+    },
+    "logits": {
+     "graph": {
+      "scale": 0.003317756811156869,
+      "zero_point": 39661.0,
+      "dtype": "uint16"
+     },
+     "dlc": {
+      "name": "output_2",
+      "dtype": "uint16",
+      "shape": [
+       1,
+       81,
+       11
+      ],
+      "scale": 0.003317756811156869,
+      "zero_point": 39661.0
+     },
+     "status": "match"
+    },
+    "q_halt": {
+     "graph": {
+      "scale": 0.00020725543436128646,
+      "zero_point": 28581.0,
+      "dtype": "uint16"
+     },
+     "dlc": {
+      "name": "output_3",
+      "dtype": "uint16",
+      "shape": [
+       1
+      ],
+      "scale": 0.00020725543436128646,
+      "zero_point": 28581.0
+     },
+     "status": "match"
+    }
+   },
+   "n_dlc_outputs": 4,
+   "n_graph_outputs": 4,
+   "qairt": "2.45",
+   "qairt_sdk_version": "2.45.0.260326154327"
+  }
+ },
+ "done": true,
+ "summary": {
+  "n": 100,
+  "fired_frac": 0.68,
+  "cheap_steps_mean": 10.64,
+  "fin_steps_mean": 6.0,
+  "exact_exit_only": 0.68,
+  "exact_finish_all_j2": 0.73,
+  "exact_finish_all_j1": 0.71,
+  "exact_finish_fired_only_j2": 0.69,
+  "exact_cheap_per_step": [
+   0.0,
+   0.0,
+   0.05,
+   0.2,
+   0.3,
+   0.37,
+   0.05,
+   0.07,
+   0.11,
+   0.05,
+   0.07,
+   0.11,
+   0.01,
+   0.05,
+   0.06,
+   0.01
+  ],
+  "device_steps": 22,
+  "profile_ms": {
+   "w8a8": 2.966,
+   "w8a16": 3.245
+  }
+ }
+}

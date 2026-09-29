@@ -1,0 +1,912 @@
+{
+ "S24/sudoku_mlp": {
+  "device": "Samsung Galaxy S24",
+  "account": "acct2",
+  "task": "sudoku_mlp",
+  "cheap": "w8a8",
+  "precise": "w8a16",
+  "n": 100,
+  "chain_json": "results/devices/ctl/sudoku_mlp/infer/ctl_w8a8-w8a16_Samsung_Galaxy_S24_acct2.json",
+  "guard": {
+   "w8a8": "float_carry",
+   "w8a16": "float_carry"
+  },
+  "compiles": {
+   "w8a8": "jgjr6917p",
+   "w8a16": "jgk2w1oyg"
+  },
+  "fired_frac": 0.61,
+  "cheap_steps_mean": 11.49,
+  "fin_steps_mean": 6.0,
+  "fired_at_hist": {
+   "-1": 39,
+   "6": 21,
+   "9": 30,
+   "12": 7,
+   "15": 3
+  },
+  "exact_exit_only": 0.66,
+  "exact_finish_all_j1": 0.67,
+  "exact_finish_all_j2": 0.71,
+  "exact_finish_fired_only_j2": 0.66,
+  "exact_exit_fired": 1.0,
+  "exact_exit_capped": 0.1282051282051282,
+  "exact_finish_j2_capped": 0.2564102564102564,
+  "cell_acc_exit": 0.864320987654321,
+  "chain_fixed_cycle": 6,
+  "exact_chain_fixed": 0.5,
+  "cheap_curve_all_puzzles": [
+   0.0,
+   0.02,
+   0.22,
+   0.36,
+   0.44,
+   0.5
+  ],
+  "fin_curve": [
+   0.67,
+   0.67,
+   0.67,
+   0.7,
+   0.7,
+   0.71
+  ],
+  "fin_q_pos": [
+   0.67,
+   0.67,
+   0.67,
+   0.7,
+   0.7,
+   0.72
+  ],
+  "profile_ms": {
+   "w8a8": 3.135,
+   "w8a16": 2.92
+  },
+  "profile_jobs": {
+   "w8a8": "jgol7x4dg",
+   "w8a16": "jgjr69w8p"
+  },
+  "fixed8": {
+   "exact": 0.61,
+   "cycles": 8,
+   "file": "results/devices/ctl/sudoku_mlp/infer/dev_w8a8_Samsung_Galaxy_S24.json",
+   "account": "main",
+   "qairt": null,
+   "compile": null,
+   "steps": 8,
+   "done": true
+  },
+  "fixed16_host_fp32": {
+   "exact": 0.68,
+   "file": "results/devices/ctl/sudoku_mlp/infer/host_fp32.npz"
+  },
+  "ci": {
+   "j2_minus_exit": [
+    0.05,
+    0.01,
+    0.1
+   ],
+   "j1_minus_exit": [
+    0.01,
+    0.0,
+    0.03
+   ],
+   "exit_minus_chain_fixed": [
+    0.16,
+    0.09,
+    0.24
+   ],
+   "exit_minus_fixed8": [
+    0.05,
+    -0.02,
+    0.12
+   ],
+   "j2_minus_fixed8": [
+    0.1,
+    0.03,
+    0.17
+   ],
+   "exit_minus_fixed16_host_fp32": [
+    -0.02,
+    -0.08,
+    0.04
+   ]
+  },
+  "cost": {
+   "cheap_ms": 3.135,
+   "precise_ms": 2.92,
+   "exit_only_ms": 36.02115,
+   "exit_finish_ms": 53.54115,
+   "fixed8_ms": 25.08,
+   "fixed16_ms": 50.16,
+   "precise_fixed8_ms": 23.36,
+   "ratio_exit_vs_fixed8": 1.43625,
+   "ratio_exit_vs_fixed16": 0.718125,
+   "ratio_finish_vs_fixed8": 2.1348145933014355,
+   "ratio_finish_vs_fixed16": 1.0674072966507178
+  },
+  "host": {
+   "fp32": {
+    "file": "results/devices/ctl/sudoku_mlp/infer/host_fp32.npz",
+    "cap": 16,
+    "fired_frac": 0.65,
+    "cheap_steps_mean": 11.21,
+    "exact_exit_only": 0.68,
+    "exact_fixed_last": 0.68,
+    "ci_device_exit_minus_host_exit": [
+     -0.02,
+     -0.08,
+     0.04
+    ]
+   },
+   "w8a8": {
+    "file": "results/devices/ctl/sudoku_mlp/infer/host_w8a8.npz",
+    "cap": 16,
+    "fired_frac": 0.0,
+    "cheap_steps_mean": 16.0,
+    "exact_exit_only": 0.0,
+    "exact_fixed_last": 0.0,
+    "ci_device_exit_minus_host_exit": [
+     0.66,
+     0.56,
+     0.75
+    ]
+   }
+  }
+ },
+ "S25/sudoku_mlp": {
+  "device": "Samsung Galaxy S25",
+  "account": "acct3",
+  "task": "sudoku_mlp",
+  "cheap": "w8a8",
+  "precise": "w8a16",
+  "n": 100,
+  "chain_json": "results/devices/ctl/sudoku_mlp/infer/ctl_w8a8-w8a16_Samsung_Galaxy_S25_acct3.json",
+  "guard": {
+   "w8a8": "float_carry",
+   "w8a16": "float_carry"
+  },
+  "compiles": {
+   "w8a8": "jg9z7rkqp",
+   "w8a16": "jgddykzlg"
+  },
+  "fired_frac": 0.62,
+  "cheap_steps_mean": 11.6,
+  "fin_steps_mean": 6.0,
+  "fired_at_hist": {
+   "-1": 38,
+   "6": 19,
+   "9": 32,
+   "12": 5,
+   "15": 6
+  },
+  "exact_exit_only": 0.63,
+  "exact_finish_all_j1": 0.64,
+  "exact_finish_all_j2": 0.66,
+  "exact_finish_fired_only_j2": 0.63,
+  "exact_exit_fired": 1.0,
+  "exact_exit_capped": 0.02631578947368421,
+  "exact_finish_j2_capped": 0.10526315789473684,
+  "cell_acc_exit": 0.8581481481481481,
+  "chain_fixed_cycle": 6,
+  "exact_chain_fixed": 0.51,
+  "cheap_curve_all_puzzles": [
+   0.0,
+   0.02,
+   0.21,
+   0.35,
+   0.45,
+   0.51
+  ],
+  "fin_curve": [
+   0.63,
+   0.63,
+   0.64,
+   0.64,
+   0.65,
+   0.66
+  ],
+  "fin_q_pos": [
+   0.63,
+   0.64,
+   0.65,
+   0.64,
+   0.65,
+   0.66
+  ],
+  "profile_ms": {
+   "w8a8": 2.781,
+   "w8a16": 2.762
+  },
+  "profile_jobs": {
+   "w8a8": "jp0m8w30g",
+   "w8a16": "jp8edn0qp"
+  },
+  "fixed8": {
+   "exact": 0.53,
+   "cycles": 7,
+   "file": "results/devices/ctl/sudoku_mlp/infer/dev_w8a8_Samsung_Galaxy_S25_acct2.json",
+   "account": "acct2",
+   "qairt": "2.45",
+   "compile": "jgjr6917p",
+   "steps": 7,
+   "done": false
+  },
+  "fixed16_host_fp32": {
+   "exact": 0.68,
+   "file": "results/devices/ctl/sudoku_mlp/infer/host_fp32.npz"
+  },
+  "ci": {
+   "j2_minus_exit": [
+    0.03,
+    0.0,
+    0.07
+   ],
+   "j1_minus_exit": [
+    0.01,
+    0.0,
+    0.03
+   ],
+   "exit_minus_chain_fixed": [
+    0.12,
+    0.06,
+    0.19
+   ],
+   "exit_minus_fixed8": [
+    0.1,
+    0.05,
+    0.16
+   ],
+   "j2_minus_fixed8": [
+    0.13,
+    0.07,
+    0.2
+   ],
+   "exit_minus_fixed16_host_fp32": [
+    -0.05,
+    -0.12,
+    0.02
+   ]
+  },
+  "cost": {
+   "cheap_ms": 2.781,
+   "precise_ms": 2.762,
+   "exit_only_ms": 32.2596,
+   "exit_finish_ms": 48.831599999999995,
+   "fixed8_ms": 22.248,
+   "fixed16_ms": 44.496,
+   "precise_fixed8_ms": 22.096,
+   "ratio_exit_vs_fixed8": 1.45,
+   "ratio_exit_vs_fixed16": 0.725,
+   "ratio_finish_vs_fixed8": 2.19487594390507,
+   "ratio_finish_vs_fixed16": 1.097437971952535
+  },
+  "host": {
+   "fp32": {
+    "file": "results/devices/ctl/sudoku_mlp/infer/host_fp32.npz",
+    "cap": 16,
+    "fired_frac": 0.65,
+    "cheap_steps_mean": 11.21,
+    "exact_exit_only": 0.68,
+    "exact_fixed_last": 0.68,
+    "ci_device_exit_minus_host_exit": [
+     -0.05,
+     -0.12,
+     0.02
+    ]
+   },
+   "w8a8": {
+    "file": "results/devices/ctl/sudoku_mlp/infer/host_w8a8.npz",
+    "cap": 16,
+    "fired_frac": 0.0,
+    "cheap_steps_mean": 16.0,
+    "exact_exit_only": 0.0,
+    "exact_fixed_last": 0.0,
+    "ci_device_exit_minus_host_exit": [
+     0.63,
+     0.53,
+     0.72
+    ]
+   }
+  }
+ },
+ "S24/sudoku_attn": {
+  "device": "Samsung Galaxy S24",
+  "account": "acct2",
+  "task": "sudoku_attn",
+  "cheap": "w8a8",
+  "precise": "w8a16",
+  "n": 100,
+  "chain_json": "results/devices/ctl/sudoku_attn/infer/ctl_w8a8-w8a16_Samsung_Galaxy_S24_acct2.json",
+  "guard": {
+   "w8a8": "float_carry",
+   "w8a16": "float_carry"
+  },
+  "compiles": {
+   "w8a8": "j5qlxnz7p",
+   "w8a16": "j5wl0k1jp"
+  },
+  "fired_frac": 0.69,
+  "cheap_steps_mean": 10.39,
+  "fin_steps_mean": 6.0,
+  "fired_at_hist": {
+   "-1": 31,
+   "3": 3,
+   "6": 37,
+   "9": 15,
+   "12": 11,
+   "15": 3
+  },
+  "exact_exit_only": 0.68,
+  "exact_finish_all_j1": 0.7,
+  "exact_finish_all_j2": 0.7,
+  "exact_finish_fired_only_j2": 0.69,
+  "exact_exit_fired": 0.9855072463768116,
+  "exact_exit_capped": 0.0,
+  "exact_finish_j2_capped": 0.03225806451612903,
+  "cell_acc_exit": 0.8835802469135803,
+  "chain_fixed_cycle": 3,
+  "exact_chain_fixed": 0.03,
+  "cheap_curve_all_puzzles": [
+   0.0,
+   0.0,
+   0.03
+  ],
+  "fin_curve": [
+   0.69,
+   0.7,
+   0.7,
+   0.7,
+   0.7,
+   0.7
+  ],
+  "fin_q_pos": [
+   0.69,
+   0.7,
+   0.7,
+   0.7,
+   0.7,
+   0.7
+  ],
+  "profile_ms": {
+   "w8a8": 3.861,
+   "w8a16": 4.088
+  },
+  "profile_jobs": {
+   "w8a8": "jgk2wzvng",
+   "w8a16": "j5wl0oq4p"
+  },
+  "fixed8": {
+   "exact": 0.5,
+   "cycles": 8,
+   "file": "results/devices/ctl/sudoku_attn/infer/dev_w8a8_Samsung_Galaxy_S24.json",
+   "account": "main",
+   "qairt": null,
+   "compile": null,
+   "steps": 8,
+   "done": true
+  },
+  "fixed16_host_fp32": {
+   "exact": 0.65,
+   "file": "results/devices/ctl/sudoku_attn/infer/host_fp32.npz"
+  },
+  "ci": {
+   "j2_minus_exit": [
+    0.02,
+    0.0,
+    0.05
+   ],
+   "j1_minus_exit": [
+    0.02,
+    0.0,
+    0.05
+   ],
+   "exit_minus_chain_fixed": [
+    0.65,
+    0.55,
+    0.74
+   ],
+   "exit_minus_fixed8": [
+    0.18,
+    0.1,
+    0.26
+   ],
+   "j2_minus_fixed8": [
+    0.2,
+    0.12,
+    0.28
+   ],
+   "exit_minus_fixed16_host_fp32": [
+    0.03,
+    -0.05,
+    0.11
+   ]
+  },
+  "cost": {
+   "cheap_ms": 3.861,
+   "precise_ms": 4.088,
+   "exit_only_ms": 40.115790000000004,
+   "exit_finish_ms": 64.64379,
+   "fixed8_ms": 30.888,
+   "fixed16_ms": 61.776,
+   "precise_fixed8_ms": 32.704,
+   "ratio_exit_vs_fixed8": 1.29875,
+   "ratio_exit_vs_fixed16": 0.649375,
+   "ratio_finish_vs_fixed8": 2.092844794094794,
+   "ratio_finish_vs_fixed16": 1.046422397047397
+  },
+  "host": {
+   "fp32": {
+    "file": "results/devices/ctl/sudoku_attn/infer/host_fp32.npz",
+    "cap": 16,
+    "fired_frac": 0.64,
+    "cheap_steps_mean": 10.56,
+    "exact_exit_only": 0.64,
+    "exact_fixed_last": 0.65,
+    "ci_device_exit_minus_host_exit": [
+     0.04,
+     -0.04,
+     0.12
+    ]
+   },
+   "w8a8": {
+    "file": "results/devices/ctl/sudoku_attn/infer/host_w8a8.npz",
+    "cap": 16,
+    "fired_frac": 0.66,
+    "cheap_steps_mean": 10.6,
+    "exact_exit_only": 0.68,
+    "exact_fixed_last": 0.69,
+    "ci_device_exit_minus_host_exit": [
+     0.0,
+     -0.07,
+     0.07
+    ]
+   }
+  }
+ },
+ "S25/sudoku_attn": {
+  "device": "Samsung Galaxy S25",
+  "account": "acct3",
+  "task": "sudoku_attn",
+  "cheap": "w8a8",
+  "precise": "w8a16",
+  "n": 100,
+  "chain_json": "results/devices/ctl/sudoku_attn/infer/ctl_w8a8-w8a16_Samsung_Galaxy_S25_acct3.json",
+  "guard": {
+   "w8a8": "float_carry",
+   "w8a16": "float_carry"
+  },
+  "compiles": {
+   "w8a8": "jgddyk8kg",
+   "w8a16": "jprlmrwep"
+  },
+  "fired_frac": 0.68,
+  "cheap_steps_mean": 10.64,
+  "fin_steps_mean": 6.0,
+  "fired_at_hist": {
+   "-1": 32,
+   "3": 3,
+   "6": 37,
+   "9": 11,
+   "12": 11,
+   "15": 6
+  },
+  "exact_exit_only": 0.68,
+  "exact_finish_all_j1": 0.71,
+  "exact_finish_all_j2": 0.73,
+  "exact_finish_fired_only_j2": 0.69,
+  "exact_exit_fired": 0.9852941176470589,
+  "exact_exit_capped": 0.03125,
+  "exact_finish_j2_capped": 0.15625,
+  "cell_acc_exit": 0.8928395061728395,
+  "chain_fixed_cycle": 3,
+  "exact_chain_fixed": 0.05,
+  "cheap_curve_all_puzzles": [
+   0.0,
+   0.0,
+   0.05
+  ],
+  "fin_curve": [
+   0.71,
+   0.71,
+   0.71,
+   0.72,
+   0.73,
+   0.73
+  ],
+  "fin_q_pos": [
+   0.71,
+   0.71,
+   0.71,
+   0.72,
+   0.73,
+   0.73
+  ],
+  "profile_ms": {
+   "w8a8": 2.966,
+   "w8a16": 3.245
+  },
+  "profile_jobs": {
+   "w8a8": "j5qlx80op",
+   "w8a16": "jg9z7vwmp"
+  },
+  "fixed8": {
+   "exact": 0.45,
+   "cycles": 7,
+   "file": "results/devices/ctl/sudoku_attn/infer/dev_w8a8_Samsung_Galaxy_S25_acct2.json",
+   "account": "acct2",
+   "qairt": "2.45",
+   "compile": "j5qlxnz7p",
+   "steps": 7,
+   "done": false
+  },
+  "fixed16_host_fp32": {
+   "exact": 0.65,
+   "file": "results/devices/ctl/sudoku_attn/infer/host_fp32.npz"
+  },
+  "ci": {
+   "j2_minus_exit": [
+    0.05,
+    0.01,
+    0.1
+   ],
+   "j1_minus_exit": [
+    0.03,
+    0.0,
+    0.07
+   ],
+   "exit_minus_chain_fixed": [
+    0.63,
+    0.54,
+    0.72
+   ],
+   "exit_minus_fixed8": [
+    0.23,
+    0.15,
+    0.32
+   ],
+   "j2_minus_fixed8": [
+    0.28,
+    0.2,
+    0.37
+   ],
+   "exit_minus_fixed16_host_fp32": [
+    0.03,
+    -0.04,
+    0.1
+   ]
+  },
+  "cost": {
+   "cheap_ms": 2.966,
+   "precise_ms": 3.245,
+   "exit_only_ms": 31.558240000000005,
+   "exit_finish_ms": 51.028240000000004,
+   "fixed8_ms": 23.728,
+   "fixed16_ms": 47.456,
+   "precise_fixed8_ms": 25.96,
+   "ratio_exit_vs_fixed8": 1.33,
+   "ratio_exit_vs_fixed16": 0.665,
+   "ratio_finish_vs_fixed8": 2.1505495616992585,
+   "ratio_finish_vs_fixed16": 1.0752747808496292
+  },
+  "host": {
+   "fp32": {
+    "file": "results/devices/ctl/sudoku_attn/infer/host_fp32.npz",
+    "cap": 16,
+    "fired_frac": 0.64,
+    "cheap_steps_mean": 10.56,
+    "exact_exit_only": 0.64,
+    "exact_fixed_last": 0.65,
+    "ci_device_exit_minus_host_exit": [
+     0.04,
+     -0.03,
+     0.11
+    ]
+   },
+   "w8a8": {
+    "file": "results/devices/ctl/sudoku_attn/infer/host_w8a8.npz",
+    "cap": 16,
+    "fired_frac": 0.66,
+    "cheap_steps_mean": 10.6,
+    "exact_exit_only": 0.68,
+    "exact_fixed_last": 0.69,
+    "ci_device_exit_minus_host_exit": [
+     0.0,
+     -0.09,
+     0.09
+    ]
+   }
+  }
+ },
+ "S24/maze": {
+  "device": "Samsung Galaxy S24",
+  "account": "acct2",
+  "task": "maze",
+  "cheap": "w8a8rope16",
+  "precise": "fp32",
+  "n": 50,
+  "chain_json": "results/devices/ctl/maze/infer/ctl_w8a8rope16-fp32_Samsung_Galaxy_S24_acct2.json",
+  "guard": {
+   "w8a8rope16": "match",
+   "fp32": "match"
+  },
+  "compiles": {
+   "w8a8rope16": "jgzlq6465",
+   "fp32": "jgnzd4nmg"
+  },
+  "fired_frac": 0.86,
+  "cheap_steps_mean": 7.64,
+  "fin_steps_mean": 6.0,
+  "fired_at_hist": {
+   "-1": 7,
+   "6": 41,
+   "9": 1,
+   "15": 1
+  },
+  "exact_exit_only": 0.86,
+  "exact_finish_all_j1": 0.88,
+  "exact_finish_all_j2": 0.9,
+  "exact_finish_fired_only_j2": 0.88,
+  "exact_exit_fired": 0.9069767441860465,
+  "exact_exit_capped": 0.5714285714285714,
+  "exact_finish_j2_capped": 0.7142857142857143,
+  "cell_acc_exit": 0.9953555555555555,
+  "chain_fixed_cycle": 6,
+  "exact_chain_fixed": 0.86,
+  "cheap_curve_all_puzzles": [
+   0.0,
+   0.02,
+   0.42,
+   0.76,
+   0.82,
+   0.86
+  ],
+  "fin_curve": [
+   0.86,
+   0.88,
+   0.88,
+   0.9,
+   0.9,
+   0.9
+  ],
+  "fin_q_pos": [
+   0.94,
+   0.98,
+   0.96,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "profile_ms": {
+   "w8a8rope16": 22.354,
+   "fp32": 43.774
+  },
+  "profile_jobs": {
+   "w8a8rope16": "jp2rq1x6g",
+   "fp32": "jp4y67ylp"
+  },
+  "fixed8": {
+   "exact": 0.84,
+   "cycles": 8,
+   "file": "results/devices/ctl/maze/infer/dev_w8a8rope16_Samsung_Galaxy_S24_acct2.json",
+   "account": "acct2",
+   "qairt": null,
+   "compile": null,
+   "steps": 8,
+   "done": true
+  },
+  "ci": {
+   "j2_minus_exit": [
+    0.04,
+    0.0,
+    0.1
+   ],
+   "j1_minus_exit": [
+    0.02,
+    0.0,
+    0.06
+   ],
+   "exit_minus_chain_fixed": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "exit_minus_fixed8": [
+    0.02,
+    0.0,
+    0.06
+   ],
+   "j2_minus_fixed8": [
+    0.06,
+    0.0,
+    0.14
+   ]
+  },
+  "cost": {
+   "cheap_ms": 22.354,
+   "precise_ms": 43.774,
+   "exit_only_ms": 170.78456,
+   "exit_finish_ms": 433.42856,
+   "fixed8_ms": 178.832,
+   "fixed16_ms": 357.664,
+   "precise_fixed8_ms": 350.192,
+   "ratio_exit_vs_fixed8": 0.9550000000000001,
+   "ratio_exit_vs_fixed16": 0.47750000000000004,
+   "ratio_finish_vs_fixed8": 2.423663326474009,
+   "ratio_finish_vs_fixed16": 1.2118316632370045
+  },
+  "host": {
+   "fp32": {
+    "file": "results/devices/ctl/maze/infer/host_fp32.npz",
+    "cap": 8,
+    "fired_frac": 0.98,
+    "cheap_steps_mean": 6.04,
+    "exact_exit_only": 0.88,
+    "exact_fixed_last": 0.88,
+    "ci_device_exit_minus_host_exit": [
+     -0.02,
+     -0.1,
+     0.06
+    ]
+   },
+   "w8a8": {
+    "file": "results/devices/ctl/maze/infer/host_w8a8.npz",
+    "cap": 8,
+    "fired_frac": 0.9,
+    "cheap_steps_mean": 6.2,
+    "exact_exit_only": 0.84,
+    "exact_fixed_last": 0.84,
+    "ci_device_exit_minus_host_exit": [
+     0.02,
+     -0.04,
+     0.1
+    ]
+   }
+  }
+ },
+ "S25/maze": {
+  "device": "Samsung Galaxy S25",
+  "account": "acct3",
+  "task": "maze",
+  "cheap": "w8a8rope16",
+  "precise": "fp32",
+  "n": 50,
+  "chain_json": "results/devices/ctl/maze/infer/ctl_w8a8rope16-fp32_Samsung_Galaxy_S25_acct3.json",
+  "guard": {
+   "w8a8rope16": "match",
+   "fp32": "match"
+  },
+  "compiles": {
+   "w8a8rope16": "jp1nk97kg",
+   "fp32": "jgnzd4kmg"
+  },
+  "fired_frac": 0.16,
+  "cheap_steps_mean": 14.4,
+  "fin_steps_mean": 6.0,
+  "fired_at_hist": {
+   "-1": 42,
+   "6": 8
+  },
+  "exact_exit_only": 0.0,
+  "exact_finish_all_j1": 0.78,
+  "exact_finish_all_j2": 0.88,
+  "exact_finish_fired_only_j2": 0.16,
+  "exact_exit_fired": 0.0,
+  "exact_exit_capped": 0.0,
+  "exact_finish_j2_capped": 0.8571428571428571,
+  "cell_acc_exit": 0.9008444444444444,
+  "chain_fixed_cycle": 6,
+  "exact_chain_fixed": 0.0,
+  "cheap_curve_all_puzzles": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "fin_curve": [
+   0.04,
+   0.6,
+   0.78,
+   0.86,
+   0.88,
+   0.88
+  ],
+  "fin_q_pos": [
+   0.22,
+   0.66,
+   0.9,
+   0.94,
+   0.94,
+   0.96
+  ],
+  "profile_ms": {
+   "w8a8rope16": 17.753,
+   "fp32": 44.75
+  },
+  "profile_jobs": {
+   "w8a8rope16": "j5qlxnvmp",
+   "fp32": "jgly9dll5"
+  },
+  "fixed8": {
+   "exact": 0.0,
+   "cycles": 8,
+   "file": "results/devices/ctl/maze/infer/dev_w8a8rope16_Samsung_Galaxy_S25_acct2.json",
+   "account": "acct2",
+   "qairt": null,
+   "compile": null,
+   "steps": 8,
+   "done": true
+  },
+  "ci": {
+   "j2_minus_exit": [
+    0.88,
+    0.78,
+    0.96
+   ],
+   "j1_minus_exit": [
+    0.78,
+    0.66,
+    0.88
+   ],
+   "exit_minus_chain_fixed": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "exit_minus_fixed8": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "j2_minus_fixed8": [
+    0.88,
+    0.78,
+    0.96
+   ]
+  },
+  "cost": {
+   "cheap_ms": 17.753,
+   "precise_ms": 44.75,
+   "exit_only_ms": 255.6432,
+   "exit_finish_ms": 524.1432,
+   "fixed8_ms": 142.024,
+   "fixed16_ms": 284.048,
+   "precise_fixed8_ms": 358.0,
+   "ratio_exit_vs_fixed8": 1.8,
+   "ratio_exit_vs_fixed16": 0.9,
+   "ratio_finish_vs_fixed8": 3.690525544978313,
+   "ratio_finish_vs_fixed16": 1.8452627724891566
+  },
+  "host": {
+   "fp32": {
+    "file": "results/devices/ctl/maze/infer/host_fp32.npz",
+    "cap": 8,
+    "fired_frac": 0.98,
+    "cheap_steps_mean": 6.04,
+    "exact_exit_only": 0.88,
+    "exact_fixed_last": 0.88,
+    "ci_device_exit_minus_host_exit": [
+     -0.88,
+     -0.96,
+     -0.78
+    ]
+   },
+   "w8a8": {
+    "file": "results/devices/ctl/maze/infer/host_w8a8.npz",
+    "cap": 8,
+    "fired_frac": 0.9,
+    "cheap_steps_mean": 6.2,
+    "exact_exit_only": 0.84,
+    "exact_fixed_last": 0.84,
+    "ci_device_exit_minus_host_exit": [
+     -0.84,
+     -0.94,
+     -0.74
+    ]
+   }
+  }
+ }
+}

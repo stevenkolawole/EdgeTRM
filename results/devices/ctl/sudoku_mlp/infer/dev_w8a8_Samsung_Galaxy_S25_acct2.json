@@ -1,0 +1,164 @@
+{
+ "steps": [
+  {
+   "step": 0,
+   "job_id": "jp8edn6zp",
+   "exact": 0.0,
+   "cell": 0.5580246913580247
+  },
+  {
+   "step": 1,
+   "job_id": "jpe70jv85",
+   "exact": 0.02,
+   "cell": 0.6677777777777778
+  },
+  {
+   "step": 2,
+   "job_id": "jg9z7vj8p",
+   "exact": 0.21,
+   "cell": 0.7522222222222222
+  },
+  {
+   "step": 3,
+   "job_id": "jpe701kv5",
+   "exact": 0.35,
+   "cell": 0.7867901234567901
+  },
+  {
+   "step": 4,
+   "job_id": "jg9z71ewp",
+   "exact": 0.45,
+   "cell": 0.8097530864197531
+  },
+  {
+   "step": 5,
+   "job_id": "jg9z7ekqp",
+   "exact": 0.51,
+   "cell": 0.8145679012345679
+  },
+  {
+   "step": 6,
+   "job_id": "j5qlxodmp",
+   "exact": 0.53,
+   "cell": 0.8204938271604938
+  }
+ ],
+ "jobs": [
+  {
+   "step": 0,
+   "job_id": "jp8edn6zp"
+  },
+  {
+   "step": 1,
+   "job_id": "jpe70jv85"
+  },
+  {
+   "step": 2,
+   "job_id": "jg9z7vj8p"
+  },
+  {
+   "step": 3,
+   "job_id": "jpe701kv5"
+  },
+  {
+   "step": 4,
+   "job_id": "jg9z71ewp"
+  },
+  {
+   "step": 5,
+   "job_id": "jg9z7ekqp"
+  },
+  {
+   "step": 6,
+   "job_id": "j5qlxodmp"
+  }
+ ],
+ "n_steps": 8,
+ "account": "acct2",
+ "runtime": "qnn_dlc",
+ "compile_job": "jgjr6917p",
+ "qairt": "2.45",
+ "qairt_sdk_version": "2.45.0.260326154327",
+ "guard": {
+  "compile_job": "jgjr6917p",
+  "verdict": "float_carry",
+  "outputs": {
+   "z_H_out": {
+    "graph": {
+     "scale": 0.04412992298603058,
+     "zero_point": 105.0,
+     "dtype": "uint8"
+    },
+    "dlc": {
+     "name": "output_0",
+     "dtype": "uint8",
+     "shape": [
+      1,
+      97,
+      512
+     ],
+     "scale": 0.04412992298603058,
+     "zero_point": 105.0
+    },
+    "status": "match"
+   },
+   "z_L_out": {
+    "graph": {
+     "scale": 0.036464378237724304,
+     "zero_point": 127.0,
+     "dtype": "uint8"
+    },
+    "dlc": {
+     "name": "output_1",
+     "dtype": "float16",
+     "shape": [
+      1,
+      97,
+      512
+     ],
+     "scale": null,
+     "zero_point": null
+    },
+    "status": "float_carry"
+   },
+   "logits": {
+    "graph": {
+     "scale": 0.8561109900474548,
+     "zero_point": 164.0,
+     "dtype": "uint8"
+    },
+    "dlc": {
+     "name": "output_2",
+     "dtype": "uint8",
+     "shape": [
+      1,
+      81,
+      11
+     ],
+     "scale": 0.8561109900474548,
+     "zero_point": 164.0
+    },
+    "status": "match"
+   },
+   "q_halt": {
+    "graph": {
+     "scale": 0.057707205414772034,
+     "zero_point": 76.0,
+     "dtype": "uint8"
+    },
+    "dlc": {
+     "name": "output_3",
+     "dtype": "uint8",
+     "shape": [
+      1
+     ],
+     "scale": 0.057707205414772034,
+     "zero_point": 76.0
+    },
+    "status": "match"
+   }
+  },
+  "n_dlc_outputs": 4,
+  "n_graph_outputs": 4
+ }
+}

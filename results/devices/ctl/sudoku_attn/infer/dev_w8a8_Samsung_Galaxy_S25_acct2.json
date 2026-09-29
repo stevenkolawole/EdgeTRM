@@ -1,0 +1,164 @@
+{
+ "steps": [
+  {
+   "step": 0,
+   "job_id": "jp3zldwz5",
+   "exact": 0.0,
+   "cell": 0.0
+  },
+  {
+   "step": 1,
+   "job_id": "jgk2wjryg",
+   "exact": 0.0,
+   "cell": 0.5451851851851852
+  },
+  {
+   "step": 2,
+   "job_id": "j5wl0o34p",
+   "exact": 0.05,
+   "cell": 0.7340740740740741
+  },
+  {
+   "step": 3,
+   "job_id": "jp1nklqng",
+   "exact": 0.23,
+   "cell": 0.7760493827160494
+  },
+  {
+   "step": 4,
+   "job_id": "j57e1329p",
+   "exact": 0.33,
+   "cell": 0.7904938271604939
+  },
+  {
+   "step": 5,
+   "job_id": "jp2rqnvxg",
+   "exact": 0.4,
+   "cell": 0.8044444444444444
+  },
+  {
+   "step": 6,
+   "job_id": "jp2rqnqmg",
+   "exact": 0.45,
+   "cell": 0.8202469135802469
+  }
+ ],
+ "jobs": [
+  {
+   "step": 0,
+   "job_id": "jp3zldwz5"
+  },
+  {
+   "step": 1,
+   "job_id": "jgk2wjryg"
+  },
+  {
+   "step": 2,
+   "job_id": "j5wl0o34p"
+  },
+  {
+   "step": 3,
+   "job_id": "jp1nklqng"
+  },
+  {
+   "step": 4,
+   "job_id": "j57e1329p"
+  },
+  {
+   "step": 5,
+   "job_id": "jp2rqnvxg"
+  },
+  {
+   "step": 6,
+   "job_id": "jp2rqnqmg"
+  }
+ ],
+ "n_steps": 8,
+ "account": "acct2",
+ "runtime": "qnn_dlc",
+ "compile_job": "j5qlxnz7p",
+ "qairt": "2.45",
+ "qairt_sdk_version": "2.45.0.260326154327",
+ "guard": {
+  "compile_job": "j5qlxnz7p",
+  "verdict": "float_carry",
+  "outputs": {
+   "z_H_out": {
+    "graph": {
+     "scale": 0.034735288470983505,
+     "zero_point": 127.0,
+     "dtype": "uint8"
+    },
+    "dlc": {
+     "name": "output_0",
+     "dtype": "uint8",
+     "shape": [
+      1,
+      97,
+      512
+     ],
+     "scale": 0.034735288470983505,
+     "zero_point": 127.0
+    },
+    "status": "match"
+   },
+   "z_L_out": {
+    "graph": {
+     "scale": 0.03996603190898895,
+     "zero_point": 127.0,
+     "dtype": "uint8"
+    },
+    "dlc": {
+     "name": "output_1",
+     "dtype": "float16",
+     "shape": [
+      1,
+      97,
+      512
+     ],
+     "scale": null,
+     "zero_point": null
+    },
+    "status": "float_carry"
+   },
+   "logits": {
+    "graph": {
+     "scale": 0.852663516998291,
+     "zero_point": 154.0,
+     "dtype": "uint8"
+    },
+    "dlc": {
+     "name": "output_2",
+     "dtype": "uint8",
+     "shape": [
+      1,
+      81,
+      11
+     ],
+     "scale": 0.852663516998291,
+     "zero_point": 154.0
+    },
+    "status": "match"
+   },
+   "q_halt": {
+    "graph": {
+     "scale": 0.05326464772224426,
+     "zero_point": 111.0,
+     "dtype": "uint8"
+    },
+    "dlc": {
+     "name": "output_3",
+     "dtype": "uint8",
+     "shape": [
+      1
+     ],
+     "scale": 0.05326464772224426,
+     "zero_point": 111.0
+    },
+    "status": "match"
+   }
+  },
+  "n_dlc_outputs": 4,
+  "n_graph_outputs": 4
+ }
+}
