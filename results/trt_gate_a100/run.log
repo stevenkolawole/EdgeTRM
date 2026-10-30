@@ -1,0 +1,150 @@
+NVIDIA A100-SXM4-40GB
+NVIDIA A100-SXM4-40GB, GPU-98a21b03-4b64-b007-4c0b-efd71c0974c1, 595.91.07, 1410 MHz, 400.00 W
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+03:50:44 device NVIDIA A100-SXM4-40GB CUDA_VISIBLE_DEVICES 0
+[10/30/2026-03:50:54] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+03:50:54 sudoku_mlp dyn_H1_b1_fp16 7.5 s 11.06 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 146, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 0
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:531: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:606: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:607: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[10/30/2026-03:51:12] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+03:51:12 sudoku_mlp dyn_H1_b1_int8mm 17.7 s 8.73 MB {'in:FP32|out:FP16': 33, 'in:FP16|out:FP16': 58, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 56, 'in:FP16|out:Int8': 29, 'in:Int8|out:FP32': 44, 'in:FP32|out:FP32': 18, 'in:FP32|out:Int8': 15, 'in:Int8|out:Int8': 126, 'in:FP16|out:FP32': 4} missing scales 5
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:561: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+[10/30/2026-03:51:15] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+03:51:15 sudoku_mlp dyn_H1_b1_int8proj 3.3 s 8.73 MB {'in:FP32|out:FP16': 33, 'in:FP16|out:FP16': 58, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 56, 'in:FP16|out:Int8': 29, 'in:Int8|out:FP32': 44, 'in:FP32|out:FP32': 18, 'in:FP32|out:Int8': 15, 'in:Int8|out:Int8': 126, 'in:FP16|out:FP32': 4} missing scales 5
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+03:51:19 device NVIDIA A100-SXM4-40GB CUDA_VISIBLE_DEVICES 0
+[10/30/2026-03:51:33] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+03:51:33 sudoku_attn dyn_H1_b1_fp16 11.9 s 14.79 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 161, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 0
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:531: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:606: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:607: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[10/30/2026-03:53:25] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+03:53:25 sudoku_attn dyn_H1_b1_int8mm 112.0 s 11.54 MB {'in:FP32|out:FP16': 61, 'in:-|out:FP16': 84, 'in:FP16|out:FP16': 199, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 56, 'in:FP16|out:Int8': 57, 'in:Int8|out:FP32': 72, 'in:FP32|out:FP32': 60, 'in:FP32|out:Int8': 43, 'in:Int8|out:Int8': 126, 'in:FP16|out:FP32': 4} missing scales 6
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:561: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:564: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.float16
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:565: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.set_output_type(0, trt.float16)
+[10/30/2026-03:53:33] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+03:53:33 sudoku_attn dyn_H1_b1_int8proj 7.1 s 11.79 MB {'in:FP32|out:FP16': 75, 'in:-|out:FP16': 84, 'in:FP16|out:FP16': 255, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 56, 'in:FP16|out:Int8': 43, 'in:Int8|out:FP32': 44, 'in:FP32|out:FP32': 32, 'in:Int8|out:Int8': 126, 'in:FP16|out:FP32': 4, 'in:FP32|out:Int8': 1} missing scales 6
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+03:53:36 device NVIDIA A100-SXM4-40GB CUDA_VISIBLE_DEVICES 0
+[10/30/2026-03:53:50] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+03:53:50 maze dyn_H1_b1_fp16 11.2 s 15.34 MB {'in:FP32|out:FP16': 3, 'in:FP16|out:FP16': 117, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP32': 5} missing scales 0
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:531: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:606: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:607: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[10/30/2026-03:55:36] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+03:55:36 maze dyn_H1_b1_int8mm 105.8 s 11.34 MB {'in:FP32|out:FP16': 25, 'in:-|out:FP16': 60, 'in:FP16|out:FP16': 153, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 40, 'in:FP16|out:Int8': 51, 'in:Int8|out:Int8': 146, 'in:Int8|out:FP16': 30, 'in:Int8|out:FP32': 22, 'in:FP16|out:FP32': 4, 'in:FP32|out:FP32': 4, 'in:FP32|out:Int8': 1} missing scales 6
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:561: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:564: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.float16
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:565: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.set_output_type(0, trt.float16)
+[10/30/2026-03:55:41] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+03:55:41 maze dyn_H1_b1_int8proj 5.3 s 11.75 MB {'in:FP32|out:FP16': 55, 'in:-|out:FP16': 60, 'in:FP16|out:FP16': 183, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 40, 'in:FP16|out:Int8': 31, 'in:Int8|out:FP32': 32, 'in:FP32|out:FP32': 24, 'in:Int8|out:Int8': 86, 'in:FP16|out:FP32': 4, 'in:FP32|out:Int8': 1} missing scales 6
+cp: warning: behavior of -n is non-portable and may change in future; use --update=none instead
+03:55:45 device NVIDIA A100-SXM4-40GB CUDA_VISIBLE_DEVICES 0
+[10/30/2026-03:56:11] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+03:56:11 hrm_sudoku dyn_H2_b1_fp16 24.0 s 56.23 MB {'in:FP32|out:FP16': 3, 'in:FP16,Int32|out:FP16': 1, 'in:FP16|out:FP16': 270, 'in:FP16|out:FP32': 5} missing scales 0
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:531: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:606: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.set_calibration_profile(cprof)
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:607: DeprecationWarning: Use Deprecated in TensorRT 10.1. Superseded by explicit quantization. instead.
+  cfg.int8_calibrator = make_calibrator(data, cb, cache)
+[10/30/2026-03:59:45] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+03:59:46 hrm_sudoku dyn_H2_b1_int8mm 213.6 s 33.85 MB {'in:FP32|out:FP16': 101, 'in:-|out:FP16': 144, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 96, 'in:FP16|out:Int8': 97, 'in:Int8|out:FP32': 122, 'in:FP32|out:FP32': 100, 'in:FP16|out:FP16': 338, 'in:FP32|out:Int8': 73, 'in:Int8|out:Int8': 178, 'in:FP16|out:FP32': 4} missing scales 6
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:561: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.int8
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:564: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.precision = trt.float16
+/opt/dlami/nvme/trt_gate/home/e1/code/e1_energy.py:565: DeprecationWarning: Use Deprecated in TensorRT 10.12. Superseded by strong typing. instead.
+  L.set_output_type(0, trt.float16)
+[10/30/2026-04:00:47] [TRT] [W] WARNING The logger passed into createInferRuntime differs from one already registered for an existing builder, runtime, or refitter. So the current new logger is ignored, and TensorRT will use the existing one which is returned by nvinfer1::getLogger() instead.
+04:00:47 hrm_sudoku dyn_H2_b1_int8proj 61.0 s 33.92 MB {'in:FP32|out:FP16': 125, 'in:-|out:FP16': 144, 'in:FP16,Int32|out:FP16': 1, 'in:-|out:Int8': 96, 'in:FP16|out:Int8': 73, 'in:Int8|out:FP32': 74, 'in:FP32|out:FP32': 52, 'in:FP16|out:FP16': 434, 'in:Int8|out:Int8': 178, 'in:FP16|out:FP32': 4, 'in:FP32|out:Int8': 1} missing scales 6
+04:00:53 sudoku_mlp host fp32 step 1 2s
+04:00:55 sudoku_mlp host fp32 step 2 4s
+04:00:57 sudoku_mlp host fp32 step 3 6s
+04:00:59 sudoku_mlp host fp32 step 4 8s
+04:01:01 sudoku_mlp host fp32 step 5 10s
+04:01:03 sudoku_mlp host fp32 step 6 12s
+04:01:05 sudoku_mlp host fp32 step 7 14s
+04:01:07 sudoku_mlp host fp32 step 8 17s
+04:01:09 sudoku_mlp fp16 100 puzzles x 8 steps 1s
+04:01:10 sudoku_mlp fp16 exact [0.01, 0.02, 0.26, 0.36, 0.44, 0.53, 0.54, 0.56] phi_H [1.0, 1.0, 1.0, 1.0, 1.0, 0.999, 0.993, 0.988]
+04:01:13 sudoku_mlp int8mm 100 puzzles x 8 steps 2s
+04:01:14 sudoku_mlp int8mm exact [0.01, 0.03, 0.08, 0.32, 0.4, 0.46, 0.46, 0.49] phi_H [0.849, 0.79, 0.547, 0.599, 0.639, 0.628, 0.63, 0.638]
+04:01:16 sudoku_mlp int8proj 100 puzzles x 8 steps 2s
+04:01:17 sudoku_mlp int8proj exact [0.01, 0.03, 0.08, 0.32, 0.4, 0.46, 0.46, 0.49] phi_H [0.849, 0.79, 0.547, 0.599, 0.639, 0.628, 0.63, 0.638]
+04:01:17 wrote /opt/dlami/nvme/trt_gate/home/trt_gate/results/trt_gate_a100/sudoku_mlp.json
+04:01:22 sudoku_attn host fp32 step 1 2s
+04:01:25 sudoku_attn host fp32 step 2 5s
+04:01:27 sudoku_attn host fp32 step 3 7s
+04:01:30 sudoku_attn host fp32 step 4 10s
+04:01:32 sudoku_attn host fp32 step 5 12s
+04:01:34 sudoku_attn host fp32 step 6 14s
+04:01:37 sudoku_attn host fp32 step 7 17s
+04:01:39 sudoku_attn host fp32 step 8 19s
+04:01:41 sudoku_attn fp16 100 puzzles x 8 steps 1s
+04:01:42 sudoku_attn fp16 exact [0.0, 0.0, 0.06, 0.26, 0.34, 0.44, 0.5, 0.51] phi_H [1.0, 1.0, 1.0, 1.0, 0.999, 0.993, 0.997, 0.996]
+04:01:46 sudoku_attn int8mm 100 puzzles x 8 steps 3s
+04:01:46 sudoku_attn int8mm exact [0.0, 0.0, 0.0, 0.0, 0.0, 0.01, 0.01, 0.01] phi_H [0.956, 0.815, 0.701, 0.66, 0.653, 0.636, 0.621, 0.623]
+04:01:50 sudoku_attn int8proj 100 puzzles x 8 steps 3s
+04:01:50 sudoku_attn int8proj exact [0.0, 0.0, 0.02, 0.26, 0.36, 0.42, 0.46, 0.51] phi_H [0.954, 0.892, 0.919, 0.901, 0.874, 0.864, 0.835, 0.818]
+04:01:50 wrote /opt/dlami/nvme/trt_gate/home/trt_gate/results/trt_gate_a100/sudoku_attn.json
+04:01:59 maze host fp32 step 1 6s
+04:02:05 maze host fp32 step 2 12s
+04:02:12 maze host fp32 step 3 19s
+04:02:18 maze host fp32 step 4 25s
+04:02:24 maze host fp32 step 5 31s
+04:02:30 maze host fp32 step 6 37s
+04:02:37 maze host fp32 step 7 44s
+04:02:43 maze host fp32 step 8 50s
+04:02:47 maze fp16 50 puzzles x 8 steps 2s
+04:02:53 maze fp16 exact [0.0, 0.12, 0.78, 0.86, 0.88, 0.88, 0.88, 0.88] phi_H [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+04:02:56 maze int8mm 50 puzzles x 8 steps 3s
+04:03:02 maze int8mm exact [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] phi_H [0.798, 0.42, 0.38, 0.287, 0.357, 0.332, 0.344, 0.313]
+04:03:05 maze int8proj 50 puzzles x 8 steps 3s
+04:03:11 maze int8proj exact [0.0, 0.06, 0.72, 0.84, 0.9, 0.9, 0.9, 0.9] phi_H [0.999, 0.861, 0.808, 0.819, 0.825, 0.824, 0.825, 0.825]
+04:03:11 wrote /opt/dlami/nvme/trt_gate/home/trt_gate/results/trt_gate_a100/maze.json
+04:03:18 hrm_sudoku host fp32 step 1 4s
+04:03:23 hrm_sudoku host fp32 step 2 9s
+04:03:27 hrm_sudoku host fp32 step 3 13s
+04:03:31 hrm_sudoku host fp32 step 4 17s
+04:03:36 hrm_sudoku host fp32 step 5 22s
+04:03:40 hrm_sudoku host fp32 step 6 26s
+04:03:44 hrm_sudoku host fp32 step 7 30s
+04:03:49 hrm_sudoku host fp32 step 8 35s
+04:03:51 hrm_sudoku fp16 100 puzzles x 8 steps 2s
+04:03:52 hrm_sudoku fp16 exact [0.01, 0.08, 0.23, 0.31, 0.35, 0.38, 0.42, 0.43] phi_H [1.0, 1.0, 1.0, 0.999, 0.999, 0.998, 0.994, 0.992]
+04:03:58 hrm_sudoku int8mm 100 puzzles x 8 steps 5s
+04:03:59 hrm_sudoku int8mm exact [0.0, 0.02, 0.1, 0.14, 0.16, 0.21, 0.22, 0.24] phi_H [0.853, 0.914, 0.899, 0.89, 0.892, 0.89, 0.886, 0.886]
+04:04:04 hrm_sudoku int8proj 100 puzzles x 8 steps 5s
+04:04:05 hrm_sudoku int8proj exact [0.0, 0.06, 0.19, 0.26, 0.31, 0.39, 0.42, 0.45] phi_H [0.932, 0.956, 0.939, 0.934, 0.934, 0.939, 0.939, 0.937]
+04:04:05 wrote /opt/dlami/nvme/trt_gate/home/trt_gate/results/trt_gate_a100/hrm_sudoku.json
+sudoku_mlp   fp16      ex2 0.02 ex8 0.56/0.58 PASS | phi_H2 0.9999 phi_L2 1.0000 gateH PASS/PASS | cell2 PASS written2 0.997 PASS
+sudoku_mlp   int8mm    ex2 0.03 ex8 0.49/0.58 WARN | phi_H2 0.7901 phi_L2 0.8534 gateH FLAG/FLAG | cell2 PASS written2 0.741 PASS
+sudoku_mlp   int8proj  ex2 0.03 ex8 0.49/0.58 WARN | phi_H2 0.7901 phi_L2 0.8534 gateH FLAG/FLAG | cell2 PASS written2 0.741 PASS
+sudoku_attn  fp16      ex2 0.00 ex8 0.51/0.51 PASS | phi_H2 1.0000 phi_L2 1.0000 gateH PASS/PASS | cell2 PASS written2 0.999 PASS
+sudoku_attn  int8mm    ex2 0.00 ex8 0.01/0.51 FAIL | phi_H2 0.8147 phi_L2 0.7946 gateH PASS/FLAG | cell2 WARN written2 0.600 PASS
+sudoku_attn  int8proj  ex2 0.00 ex8 0.51/0.51 PASS | phi_H2 0.8916 phi_L2 0.8737 gateH PASS/PASS | cell2 PASS written2 0.766 PASS
+maze         fp16      ex2 0.12 ex8 0.88/0.88 PASS | phi_H2 1.0000 phi_L2 1.0000 gateH PASS/PASS | cell2 PASS written2 0.999 PASS
+maze         int8mm    ex2 0.00 ex8 0.00/0.88 FAIL | phi_H2 0.4201 phi_L2 0.5445 gateH FLAG/FLAG | cell2 WARN written2 0.398 FLAG
+maze         int8proj  ex2 0.06 ex8 0.90/0.88 PASS | phi_H2 0.8608 phi_L2 0.9889 gateH PASS/PASS | cell2 PASS written2 0.981 PASS
+hrm_sudoku   fp16      ex2 0.08 ex8 0.43/0.41 PASS | phi_H2 1.0000 phi_L2 1.0000 gateH PASS/PASS | cell2 PASS written2 0.999 PASS
+hrm_sudoku   int8mm    ex2 0.02 ex8 0.24/0.41 WARN | phi_H2 0.9135 phi_L2 0.8776 gateH PASS/PASS | cell2 WARN written2 0.680 PASS
+hrm_sudoku   int8proj  ex2 0.06 ex8 0.45/0.41 PASS | phi_H2 0.9555 phi_L2 0.9407 gateH PASS/PASS | cell2 PASS written2 0.790 PASS
