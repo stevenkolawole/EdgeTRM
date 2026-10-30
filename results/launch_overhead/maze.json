@@ -1,0 +1,1800 @@
+{
+ "setup": {
+  "task": "maze",
+  "H": 1,
+  "device": "NVIDIA L40S",
+  "torch_uuid": "6d34511a-3fd5-b777-0fbf-b8595a485388",
+  "nvidia_smi": "610.43.02, NVIDIA L40S, GPU-6d34511a-3fd5-b777-0fbf-b8595a485388",
+  "trt": "10.13.3.9",
+  "torch": "2.10.0+cu128",
+  "cuda": "12.8",
+  "host": "babel-o9-28",
+  "job": "10899973",
+  "iters": 200,
+  "reps": 5,
+  "warm": 30,
+  "precision": "TensorRT FP16 (TF32 off), builder optimisation level 3, I/O dtypes as exported"
+ },
+ "rows": {
+  "b1_k1": {
+   "B": 1,
+   "k": 1,
+   "unrolled_engine": {
+    "build_s": 13.1,
+    "size_MB": 15.45,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "one_step_engine": {
+    "build_s": 13.1,
+    "size_MB": 15.45,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "unrolled_vs_device_cosH_min": 1.0,
+   "unrolled": {
+    "ms_per_loop": 0.8206494647311047,
+    "reps_ms": [
+     0.81211,
+     0.83364,
+     0.819,
+     0.82065,
+     0.82123
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "118.26",
+      "temp_C": "59",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "144.33",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "172.85",
+      "temp_C": "61",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "210.10",
+      "temp_C": "61",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "249.93",
+      "temp_C": "62",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "device": {
+    "ms_per_loop": 0.8243713696720079,
+    "reps_ms": [
+     0.82326,
+     0.83496,
+     0.82416,
+     0.82437,
+     0.82456
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "281.37",
+      "temp_C": "62",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "296.92",
+      "temp_C": "62",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "310.21",
+      "temp_C": "62",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "316.10",
+      "temp_C": "59",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "317.46",
+      "temp_C": "62",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "host": {
+    "ms_per_loop": 1.1388857854763046,
+    "reps_ms": [
+     1.13889,
+     1.13898,
+     1.13889,
+     1.13876,
+     1.13874
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "298.18",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "288.88",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "269.05",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "257.32",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "249.50",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "launch_share_of_device_loop": 0.0045148401288899916,
+   "roundtrip_share_of_host_loop": 0.2761597517636596,
+   "overhead_share_of_host_loop": 0.2794277747633027
+  },
+  "b1_k2": {
+   "B": 1,
+   "k": 2,
+   "unrolled_engine": {
+    "build_s": 8.2,
+    "size_MB": 16.23,
+    "n_layers": 8300,
+    "trt": "10.13.3.9",
+    "onnx_MB": 46.7
+   },
+   "one_step_engine": {
+    "build_s": 13.1,
+    "size_MB": 15.45,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "unrolled_vs_device_cosH_min": 1.0000001192092896,
+   "unrolled": {
+    "ms_per_loop": 1.594882205245085,
+    "reps_ms": [
+     1.58681,
+     1.59252,
+     1.59488,
+     1.59543,
+     1.59543
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "170.39",
+      "temp_C": "55",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "221.48",
+      "temp_C": "59",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "311.49",
+      "temp_C": "59",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "314.03",
+      "temp_C": "59",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "304.26",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "device": {
+    "ms_per_loop": 1.6317961452296004,
+    "reps_ms": [
+     1.63141,
+     1.6318,
+     1.63207,
+     1.63874,
+     1.63171
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "301.48",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "301.01",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "300.68",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "299.69",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "301.75",
+      "temp_C": "60",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "host": {
+    "ms_per_loop": 2.2507463302463293,
+    "reps_ms": [
+     2.24984,
+     2.25895,
+     2.25037,
+     2.25075,
+     2.25193
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "285.07",
+      "temp_C": "58",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "257.57",
+      "temp_C": "56",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "248.42",
+      "temp_C": "58",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "249.11",
+      "temp_C": "58",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "245.10",
+      "temp_C": "58",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "launch_share_of_device_loop": 0.022621661469436408,
+   "roundtrip_share_of_host_loop": 0.2749977537224237,
+   "overhead_share_of_host_loop": 0.291398509102296
+  },
+  "b1_k4": {
+   "B": 1,
+   "k": 4,
+   "unrolled_engine": {
+    "build_s": 15.7,
+    "size_MB": 17.81,
+    "n_layers": 16486,
+    "trt": "10.13.3.9",
+    "onnx_MB": 66.1
+   },
+   "one_step_engine": {
+    "build_s": 13.1,
+    "size_MB": 15.45,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "unrolled_vs_device_cosH_min": 1.0,
+   "unrolled": {
+    "ms_per_loop": 3.1381047453032807,
+    "reps_ms": [
+     3.12654,
+     3.1306,
+     3.15475,
+     3.1381,
+     3.14125
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "229.41",
+      "temp_C": "49",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "306.84",
+      "temp_C": "46",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "314.94",
+      "temp_C": "50",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "305.49",
+      "temp_C": "49",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "317.16",
+      "temp_C": "51",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "device": {
+    "ms_per_loop": 3.2467260299017653,
+    "reps_ms": [
+     3.26292,
+     3.24496,
+     3.25567,
+     3.24617,
+     3.24673
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "297.50",
+      "temp_C": "52",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "308.65",
+      "temp_C": "50",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "307.86",
+      "temp_C": "52",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "309.92",
+      "temp_C": "53",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "299.52",
+      "temp_C": "53",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "host": {
+    "ms_per_loop": 4.487820185022429,
+    "reps_ms": [
+     4.49452,
+     4.47265,
+     4.48782,
+     4.47402,
+     4.4922
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "250.80",
+      "temp_C": "51",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "254.83",
+      "temp_C": "49",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "253.24",
+      "temp_C": "51",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "254.80",
+      "temp_C": "51",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "236.12",
+      "temp_C": "52",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "launch_share_of_device_loop": 0.033455636107913654,
+   "roundtrip_share_of_host_loop": 0.27654721088484535,
+   "overhead_share_of_host_loop": 0.3007507841387372
+  },
+  "b1_k8": {
+   "B": 1,
+   "k": 8,
+   "unrolled_engine": {
+    "build_s": 41.0,
+    "size_MB": 20.97,
+    "n_layers": 32858,
+    "trt": "10.13.3.9",
+    "onnx_MB": 104.8
+   },
+   "one_step_engine": {
+    "build_s": 13.1,
+    "size_MB": 15.45,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "unrolled_vs_device_cosH_min": 1.0000001192092896,
+   "unrolled": {
+    "ms_per_loop": 6.231523844762705,
+    "reps_ms": [
+     6.22507,
+     6.23009,
+     6.23152,
+     6.23733,
+     6.2385
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "315.72",
+      "temp_C": "48",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "316.74",
+      "temp_C": "49",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "317.56",
+      "temp_C": "50",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "318.43",
+      "temp_C": "48",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "307.80",
+      "temp_C": "52",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "device": {
+    "ms_per_loop": 6.489777885144576,
+    "reps_ms": [
+     6.49479,
+     6.49521,
+     6.4812,
+     6.48978,
+     6.48945
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "311.93",
+      "temp_C": "52",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "310.91",
+      "temp_C": "52",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "317.89",
+      "temp_C": "53",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "316.44",
+      "temp_C": "54",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "309.37",
+      "temp_C": "54",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "host": {
+    "ms_per_loop": 8.944888649857603,
+    "reps_ms": [
+     8.94377,
+     8.94541,
+     8.94528,
+     8.94489,
+     8.94057
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "254.24",
+      "temp_C": "52",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "246.02",
+      "temp_C": "52",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "253.63",
+      "temp_C": "52",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "255.70",
+      "temp_C": "50",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "255.67",
+      "temp_C": "53",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "launch_share_of_device_loop": 0.03979397214395079,
+   "roundtrip_share_of_host_loop": 0.27447080235617133,
+   "overhead_share_of_host_loop": 0.30334249103683286
+  },
+  "b1_k16": {
+   "B": 1,
+   "k": 16,
+   "unrolled_engine": {
+    "build_s": 120.7,
+    "size_MB": 27.29,
+    "n_layers": 65602,
+    "trt": "10.13.3.9",
+    "onnx_MB": 182.4
+   },
+   "one_step_engine": {
+    "build_s": 13.1,
+    "size_MB": 15.45,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "unrolled_vs_device_cosH_min": 1.0,
+   "unrolled": {
+    "ms_per_loop": 12.455843929783441,
+    "reps_ms": [
+     12.45287,
+     12.44985,
+     12.45584,
+     12.46497,
+     12.47344
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "318.15",
+      "temp_C": "47",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "318.82",
+      "temp_C": "49",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "307.88",
+      "temp_C": "50",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "321.80",
+      "temp_C": "51",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "323.01",
+      "temp_C": "50",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "device": {
+    "ms_per_loop": 12.996897720149718,
+    "reps_ms": [
+     12.97915,
+     12.9876,
+     12.9969,
+     13.06627,
+     13.01324
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "316.98",
+      "temp_C": "53",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "316.76",
+      "temp_C": "54",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "303.34",
+      "temp_C": "55",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "319.01",
+      "temp_C": "53",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "319.54",
+      "temp_C": "57",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "host": {
+    "ms_per_loop": 17.83912381506525,
+    "reps_ms": [
+     17.82793,
+     17.8384,
+     17.83912,
+     17.86055,
+     17.86213
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "255.44",
+      "temp_C": "54",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "255.36",
+      "temp_C": "55",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "256.32",
+      "temp_C": "55",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "256.02",
+      "temp_C": "55",
+      "reasons": "0x0000000000000000"
+     },
+     {
+      "sm_MHz": "2520",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "256.74",
+      "temp_C": "56",
+      "reasons": "0x0000000000000000"
+     }
+    ]
+   },
+   "launch_share_of_device_loop": 0.04162945666083494,
+   "roundtrip_share_of_host_loop": 0.27143856083482315,
+   "overhead_share_of_host_loop": 0.30176817769130543
+  },
+  "b32_k1": {
+   "B": 32,
+   "k": 1,
+   "unrolled_engine": {
+    "build_s": 17.3,
+    "size_MB": 16.73,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "one_step_engine": {
+    "build_s": 17.3,
+    "size_MB": 16.73,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "unrolled_vs_device_cosH_min": 0.9999998807907104,
+   "unrolled": {
+    "ms_per_loop": 23.443615740397945,
+    "reps_ms": [
+     23.32078,
+     23.40688,
+     23.44362,
+     23.54473,
+     23.60611
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2145",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "328.57",
+      "temp_C": "55",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2160",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "311.52",
+      "temp_C": "56",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2130",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "323.26",
+      "temp_C": "57",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2130",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "328.59",
+      "temp_C": "59",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2130",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "312.67",
+      "temp_C": "59",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "device": {
+    "ms_per_loop": 23.80063242977485,
+    "reps_ms": [
+     23.71095,
+     23.75362,
+     23.80063,
+     23.85982,
+     23.89131
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2115",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "329.11",
+      "temp_C": "60",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2085",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "330.19",
+      "temp_C": "61",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2070",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "329.08",
+      "temp_C": "59",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2085",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "331.24",
+      "temp_C": "60",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2070",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "329.88",
+      "temp_C": "61",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "host": {
+    "ms_per_loop": 32.44045343482867,
+    "reps_ms": [
+     32.42862,
+     32.44045,
+     32.43517,
+     32.44956,
+     32.45618
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2340",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "280.98",
+      "temp_C": "59",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2415",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "288.49",
+      "temp_C": "60",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2445",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "284.18",
+      "temp_C": "63",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2385",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "287.07",
+      "temp_C": "61",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2340",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "280.27",
+      "temp_C": "63",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "launch_share_of_device_loop": 0.015000302636087677,
+   "roundtrip_share_of_host_loop": 0.26632861413021885,
+   "overhead_share_of_host_loop": 0.27733390695370347
+  },
+  "b32_k2": {
+   "B": 32,
+   "k": 2,
+   "unrolled_engine": {
+    "build_s": 12.3,
+    "size_MB": 18.65,
+    "n_layers": 8300,
+    "trt": "10.13.3.9",
+    "onnx_MB": 46.7
+   },
+   "one_step_engine": {
+    "build_s": 17.3,
+    "size_MB": 16.73,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "unrolled_vs_device_cosH_min": 0.9999970197677612,
+   "unrolled": {
+    "ms_per_loop": 46.908919240231626,
+    "reps_ms": [
+     46.70625,
+     46.92965,
+     46.90892,
+     46.88892,
+     46.99421
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2055",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "335.17",
+      "temp_C": "62",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2010",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "336.65",
+      "temp_C": "64",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2025",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "333.44",
+      "temp_C": "65",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2025",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "336.47",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1980",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "335.56",
+      "temp_C": "67",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "device": {
+    "ms_per_loop": 47.9361016000621,
+    "reps_ms": [
+     47.73096,
+     47.8293,
+     47.9361,
+     48.02364,
+     47.9636
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2055",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "335.49",
+      "temp_C": "68",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2010",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "332.23",
+      "temp_C": "68",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1995",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "336.63",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1980",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "336.45",
+      "temp_C": "69",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1950",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "333.72",
+      "temp_C": "69",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "host": {
+    "ms_per_loop": 64.97397813014686,
+    "reps_ms": [
+     64.97398,
+     64.92483,
+     64.88772,
+     65.04795,
+     65.04969
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2370",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "287.49",
+      "temp_C": "68",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2295",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "290.80",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2385",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "279.60",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2370",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "283.44",
+      "temp_C": "67",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2295",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "275.69",
+      "temp_C": "65",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "launch_share_of_device_loop": 0.021428158017529435,
+   "roundtrip_share_of_host_loop": 0.2622261560767735,
+   "overhead_share_of_host_loop": 0.2780352905855605
+  },
+  "b32_k4": {
+   "B": 32,
+   "k": 4,
+   "unrolled_engine": {
+    "build_s": 25.9,
+    "size_MB": 22.48,
+    "n_layers": 16486,
+    "trt": "10.13.3.9",
+    "onnx_MB": 66.1
+   },
+   "one_step_engine": {
+    "build_s": 17.3,
+    "size_MB": 16.73,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "unrolled_vs_device_cosH_min": 0.9995880126953125,
+   "unrolled": {
+    "ms_per_loop": 94.99902143492363,
+    "reps_ms": [
+     93.82976,
+     94.56019,
+     94.99902,
+     95.01799,
+     95.02864
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2010",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "333.72",
+      "temp_C": "67",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1920",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "332.28",
+      "temp_C": "69",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1965",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "334.32",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1950",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "336.47",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1950",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "335.73",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "device": {
+    "ms_per_loop": 97.368701309897,
+    "reps_ms": [
+     97.34139,
+     97.358,
+     97.37364,
+     97.37184,
+     97.3687
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "1950",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "323.03",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1905",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "327.93",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1980",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "333.65",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1980",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "332.22",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1950",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "334.34",
+      "temp_C": "67",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "host": {
+    "ms_per_loop": 130.0465251703281,
+    "reps_ms": [
+     130.50658,
+     130.22441,
+     130.04653,
+     129.94786,
+     129.91565
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2295",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "304.00",
+      "temp_C": "67",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2400",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "277.37",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2265",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "278.49",
+      "temp_C": "64",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2295",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "283.28",
+      "temp_C": "62",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2400",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "291.38",
+      "temp_C": "63",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "launch_share_of_device_loop": 0.02433718271984908,
+   "roundtrip_share_of_host_loop": 0.2512779470088216,
+   "overhead_share_of_host_loop": 0.26949973241884845
+  },
+  "b32_k8": {
+   "B": 32,
+   "k": 8,
+   "unrolled_engine": {
+    "build_s": 63.1,
+    "size_MB": 30.07,
+    "n_layers": 32858,
+    "trt": "10.13.3.9",
+    "onnx_MB": 104.8
+   },
+   "one_step_engine": {
+    "build_s": 17.3,
+    "size_MB": 16.73,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "unrolled_vs_device_cosH_min": 0.9999982118606567,
+   "unrolled": {
+    "ms_per_loop": 186.94258011993952,
+    "reps_ms": [
+     184.40915,
+     186.34452,
+     186.94258,
+     188.08618,
+     188.6404
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "1980",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "337.48",
+      "temp_C": "61",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1995",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "338.16",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1935",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "340.82",
+      "temp_C": "68",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1935",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "342.80",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1935",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "342.58",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "device": {
+    "ms_per_loop": 191.90364455978852,
+    "reps_ms": [
+     191.50918,
+     191.6843,
+     191.90615,
+     191.90364,
+     191.97605
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "1980",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "340.60",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1950",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "338.01",
+      "temp_C": "71",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1980",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "340.22",
+      "temp_C": "71",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1995",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "340.51",
+      "temp_C": "71",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1980",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "341.71",
+      "temp_C": "71",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "host": {
+    "ms_per_loop": 259.9475866399007,
+    "reps_ms": [
+     259.71598,
+     259.94759,
+     259.91931,
+     259.94785,
+     259.99205
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2370",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "300.69",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2400",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "295.81",
+      "temp_C": "65",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2265",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "288.56",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2400",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "272.43",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2385",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "295.93",
+      "temp_C": "65",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "launch_share_of_device_loop": 0.025851851074685312,
+   "roundtrip_share_of_host_loop": 0.2617602377450492,
+   "overhead_share_of_host_loop": 0.2808451021362753
+  },
+  "b32_k16": {
+   "B": 32,
+   "k": 16,
+   "unrolled_engine": {
+    "build_s": 169.7,
+    "size_MB": 45.26,
+    "n_layers": 65602,
+    "trt": "10.13.3.9",
+    "onnx_MB": 182.4
+   },
+   "one_step_engine": {
+    "build_s": 17.3,
+    "size_MB": 16.73,
+    "n_layers": 4207,
+    "trt": "10.13.3.9",
+    "onnx_MB": 37.0
+   },
+   "unrolled_vs_device_cosH_min": 0.9999972581863403,
+   "unrolled": {
+    "ms_per_loop": 377.73653027485125,
+    "reps_ms": [
+     374.24744,
+     377.7313,
+     377.77399,
+     377.74008,
+     377.73653
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "1935",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "333.73",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1890",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "333.63",
+      "temp_C": "71",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1890",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "331.95",
+      "temp_C": "67",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1890",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "332.68",
+      "temp_C": "67",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1890",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "334.57",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "device": {
+    "ms_per_loop": 386.14968907961156,
+    "reps_ms": [
+     386.1447,
+     385.82971,
+     386.14969,
+     386.98475,
+     388.05027
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "1980",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "318.17",
+      "temp_C": "69",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1995",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "333.77",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1995",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "317.59",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1935",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "335.24",
+      "temp_C": "70",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "1920",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "319.52",
+      "temp_C": "71",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "host": {
+    "ms_per_loop": 521.0797022754559,
+    "reps_ms": [
+     520.54666,
+     521.0797,
+     520.87168,
+     521.40975,
+     522.07476
+    ],
+    "clocks": [
+     {
+      "sm_MHz": "2310",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "286.31",
+      "temp_C": "63",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2370",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "263.19",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2295",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "276.76",
+      "temp_C": "63",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2295",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "284.51",
+      "temp_C": "66",
+      "reasons": "0x0000000000000004"
+     },
+     {
+      "sm_MHz": "2325",
+      "mem_MHz": "9001",
+      "max_sm_MHz": "2520",
+      "power_W": "297.50",
+      "temp_C": "67",
+      "reasons": "0x0000000000000004"
+     }
+    ]
+   },
+   "launch_share_of_device_loop": 0.02178729918134362,
+   "roundtrip_share_of_host_loop": 0.25894313788587553,
+   "overhead_share_of_host_loop": 0.2750887654511437
+  }
+ }
+}

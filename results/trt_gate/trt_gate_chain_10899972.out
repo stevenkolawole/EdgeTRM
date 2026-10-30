@@ -1,0 +1,99 @@
+NVIDIA L40S
+trt 10.13.3.9 ort 1.22.0 numpy 2.4.2
+NVIDIA L40S, 610.43.02, 210 MHz, 2520 MHz, 350.00 W
+Fri Oct 23 03:10:28 AM UTC 2026 start on babel-o9-28
+sudoku_mlp dyn_H1_b1_fp16 reused from E1 cd20b339f874
+sudoku_mlp dyn_H1_b1_int8mm reused from E1 8b8030d671ae
+sudoku_mlp dyn_H1_b1_int8proj reused from E1 1605121dcf67
+sudoku_attn dyn_H1_b1_fp16 reused from E1 3c1b59630b01
+sudoku_attn dyn_H1_b1_int8mm reused from E1 d7b5a5b78ad9
+sudoku_attn dyn_H1_b1_int8proj reused from E1 54277fab9fa7
+maze dyn_H1_b1_fp16 reused from E1 65c2657eb559
+maze dyn_H1_b1_int8mm reused from E1 46b00804ea7a
+maze dyn_H1_b1_int8proj reused from E1 09c49e7851cd
+hrm_sudoku dyn_H2_b1_fp16 reused from E1 6faeb4bfe32f
+hrm_sudoku dyn_H2_b1_int8mm reused from E1 c509063da925
+hrm_sudoku dyn_H2_b1_int8proj reused from E1 20bdc8de50b8
+23:10:48 sudoku_mlp host fp32 step 1 2s
+23:10:50 sudoku_mlp host fp32 step 2 5s
+23:10:53 sudoku_mlp host fp32 step 3 7s
+23:10:55 sudoku_mlp host fp32 step 4 10s
+23:10:57 sudoku_mlp host fp32 step 5 12s
+23:11:00 sudoku_mlp host fp32 step 6 14s
+23:11:02 sudoku_mlp host fp32 step 7 17s
+23:11:05 sudoku_mlp host fp32 step 8 19s
+23:11:06 sudoku_mlp fp16 100 puzzles x 8 steps 1s
+23:11:07 sudoku_mlp fp16 exact [0.01, 0.02, 0.26, 0.36, 0.43, 0.53, 0.55, 0.58] phi_H [1.0, 1.0, 1.0, 1.0, 1.0, 0.999, 0.997, 0.995]
+23:11:08 sudoku_mlp int8mm 100 puzzles x 8 steps 1s
+23:11:09 sudoku_mlp int8mm exact [0.01, 0.03, 0.08, 0.32, 0.4, 0.46, 0.46, 0.49] phi_H [0.849, 0.79, 0.547, 0.599, 0.639, 0.628, 0.63, 0.638]
+23:11:11 sudoku_mlp int8proj 100 puzzles x 8 steps 1s
+23:11:11 sudoku_mlp int8proj exact [0.01, 0.03, 0.08, 0.32, 0.4, 0.46, 0.46, 0.49] phi_H [0.849, 0.79, 0.547, 0.599, 0.639, 0.628, 0.63, 0.638]
+23:11:11 wrote /home/skolawol/trt_gate/results/trt_gate/sudoku_mlp.json
+Traceback (most recent call last):
+  File "/home/skolawol/trt_gate/code/trt_gate_chain.py", line 235, in <module>
+    main()
+  File "/home/skolawol/trt_gate/code/trt_gate_chain.py", line 229, in main
+    run(a.task)
+  File "/home/skolawol/trt_gate/code/trt_gate_chain.py", line 157, in run
+    inner, pe = E.build_inner(task, t["H"])
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/e1/code/e1_energy.py", line 99, in build_inner
+    m, cfg, sd = A.build(t["x3"], H)
+                 ^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/e1/code/aihub_h1.py", line 137, in build
+    sd = load_sd(t["ckpt"])
+         ^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/e1/code/aihub_h1.py", line 126, in load_sd
+    sd = torch.load(path, map_location="cpu", weights_only=False)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/serialization.py", line 1500, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/serialization.py", line 768, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skolawol/miniconda3/envs/kvcache/lib/python3.11/site-packages/torch/serialization.py", line 749, in __init__
+    super().__init__(open(name, mode))  # noqa: SIM115
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/skolawol/edgetrm_ckpt/sudoku_extreme/step_39060_sudoku_60k_epoch_attn_type'
+RUN FAILED sudoku_attn
+23:11:22 maze host fp32 step 1 7s
+23:11:28 maze host fp32 step 2 13s
+23:11:35 maze host fp32 step 3 19s
+23:11:41 maze host fp32 step 4 26s
+23:11:47 maze host fp32 step 5 32s
+23:11:54 maze host fp32 step 6 39s
+23:12:00 maze host fp32 step 7 45s
+23:12:07 maze host fp32 step 8 52s
+23:12:12 maze fp16 50 puzzles x 8 steps 1s
+23:12:16 maze fp16 exact [0.0, 0.12, 0.78, 0.86, 0.88, 0.88, 0.88, 0.88] phi_H [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+23:12:18 maze int8mm 50 puzzles x 8 steps 2s
+23:12:25 maze int8mm exact [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] phi_H [0.798, 0.42, 0.381, 0.287, 0.357, 0.332, 0.344, 0.313]
+23:12:26 maze int8proj 50 puzzles x 8 steps 1s
+23:12:39 maze int8proj exact [0.0, 0.04, 0.66, 0.82, 0.88, 0.88, 0.88, 0.88] phi_H [0.999, 0.856, 0.802, 0.817, 0.823, 0.823, 0.824, 0.823]
+23:12:40 wrote /home/skolawol/trt_gate/results/trt_gate/maze.json
+23:12:47 hrm_sudoku host fp32 step 1 5s
+23:12:52 hrm_sudoku host fp32 step 2 10s
+23:12:57 hrm_sudoku host fp32 step 3 15s
+23:13:02 hrm_sudoku host fp32 step 4 20s
+23:13:07 hrm_sudoku host fp32 step 5 24s
+23:13:12 hrm_sudoku host fp32 step 6 29s
+23:13:17 hrm_sudoku host fp32 step 7 34s
+23:13:22 hrm_sudoku host fp32 step 8 39s
+23:13:25 hrm_sudoku fp16 100 puzzles x 8 steps 1s
+23:13:25 hrm_sudoku fp16 exact [0.01, 0.08, 0.23, 0.32, 0.35, 0.39, 0.41, 0.41] phi_H [1.0, 1.0, 1.0, 1.0, 0.998, 0.995, 0.991, 0.99]
+23:13:29 hrm_sudoku int8mm 100 puzzles x 8 steps 3s
+23:13:29 hrm_sudoku int8mm exact [0.0, 0.02, 0.1, 0.14, 0.15, 0.18, 0.2, 0.23] phi_H [0.851, 0.914, 0.899, 0.887, 0.887, 0.886, 0.88, 0.879]
+23:13:32 hrm_sudoku int8proj 100 puzzles x 8 steps 3s
+23:13:41 hrm_sudoku int8proj exact [0.0, 0.06, 0.21, 0.29, 0.32, 0.39, 0.4, 0.45] phi_H [0.932, 0.956, 0.937, 0.935, 0.934, 0.936, 0.939, 0.941]
+23:13:41 wrote /home/skolawol/trt_gate/results/trt_gate/hrm_sudoku.json
+sudoku_mlp   fp16      ex2 0.02 ex8 0.58/0.58 PASS | phi_H2 1.0000 phi_L2 1.0000 gateH PASS/PASS | cell2 PASS written2 0.998 PASS
+sudoku_mlp   int8mm    ex2 0.03 ex8 0.49/0.58 WARN | phi_H2 0.7901 phi_L2 0.8534 gateH FLAG/FLAG | cell2 PASS written2 0.741 PASS
+sudoku_mlp   int8proj  ex2 0.03 ex8 0.49/0.58 WARN | phi_H2 0.7901 phi_L2 0.8534 gateH FLAG/FLAG | cell2 PASS written2 0.741 PASS
+maze         fp16      ex2 0.12 ex8 0.88/0.88 PASS | phi_H2 1.0000 phi_L2 1.0000 gateH PASS/PASS | cell2 PASS written2 1.000 PASS
+maze         int8mm    ex2 0.00 ex8 0.00/0.88 FAIL | phi_H2 0.4201 phi_L2 0.5445 gateH FLAG/FLAG | cell2 WARN written2 0.397 FLAG
+maze         int8proj  ex2 0.04 ex8 0.88/0.88 PASS | phi_H2 0.8557 phi_L2 0.9818 gateH PASS/PASS | cell2 PASS written2 0.961 PASS
+hrm_sudoku   fp16      ex2 0.08 ex8 0.41/0.41 PASS | phi_H2 1.0000 phi_L2 1.0000 gateH PASS/PASS | cell2 PASS written2 0.999 PASS
+hrm_sudoku   int8mm    ex2 0.02 ex8 0.23/0.41 WARN | phi_H2 0.9136 phi_L2 0.8775 gateH PASS/PASS | cell2 WARN written2 0.682 PASS
+hrm_sudoku   int8proj  ex2 0.06 ex8 0.45/0.41 PASS | phi_H2 0.9559 phi_L2 0.9409 gateH PASS/PASS | cell2 PASS written2 0.787 PASS
+Fri Oct 23 03:13:41 AM UTC 2026 done
