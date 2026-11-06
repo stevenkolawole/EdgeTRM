@@ -64,6 +64,11 @@ TASKS = {
     "arc": dict(ckpt=CKPT / "arc_v1_public" / "step_518071", seq_len=900, vocab=12, L_cycles=4, mlp_t=False,
                 pos="rope", data="arc", n_cal=16, n_test=0),
 }
+# width variants (Q8 runs, seed 0, 65,100 steps, same recipe at every width; repo checkpoints_trained/), for the
+# edge energy-vs-model-size rows; the default width is 512 (the official checkpoint above is sudoku_mlp)
+for _w in (256, 512, 768):
+    TASKS[f"sudoku_mlp_w{_w}"] = dict(TASKS["sudoku_mlp"], width=_w,
+                                      ckpt=HERE / "checkpoints_trained" / f"trm_sudoku_mlp_w{_w}_s0" / "step_65100")
 COMMON = dict(H_layers=0, L_layers=2, hidden_size=512, expansion=4, num_heads=8, halt_max_steps=16,
               halt_exploration_prob=0.1, forward_dtype="float32", puzzle_emb_ndim=512, puzzle_emb_len=16,
               no_ACT_continue=True)
@@ -129,6 +134,10 @@ def load_sd(path):
     return {k.replace("_orig_mod.model.", "").replace("model.", ""): v for k, v in sd.items()}
 
 
+def width(task):
+    return TASKS[task].get("width", 512)
+
+
 def build(task, H):
     if str(TRM_SRC) not in sys.path:
         sys.path.insert(0, str(TRM_SRC))
@@ -138,7 +147,8 @@ def build(task, H):
     vocab = sd["inner.embed_tokens.embedding_weight"].shape[0]
     cfg = dict(batch_size=1, seq_len=t["seq_len"], vocab_size=vocab,
                num_puzzle_identifiers=sd["inner.puzzle_emb.weights"].shape[0], H_cycles=H,
-               L_cycles=t["L_cycles"], mlp_t=t["mlp_t"], pos_encodings=t["pos"], **COMMON)
+               L_cycles=t["L_cycles"], mlp_t=t["mlp_t"], pos_encodings=t["pos"],
+               **dict(COMMON, hidden_size=width(task), num_heads=width(task) // 64, puzzle_emb_ndim=width(task)))
     m = TinyRecursiveReasoningModel_ACTV1(cfg).eval()
     miss, unexp = m.load_state_dict(sd, strict=False)
     assert not miss and not unexp, (miss[:5], unexp[:5])
@@ -188,9 +198,9 @@ def graph_io(graph, task):
     t = TASKS[task]
     seq = t["seq_len"] + PLEN
     if graph in ("step", "stepc"):
-        return {"z_H": (1, seq, 512), "z_L": (1, seq, 512), "inputs": (1, t["seq_len"]),
-                "puzzle_embedding": (1, 512)}
-    return {"hidden": (1, seq, 512), "injection": (1, seq, 512)}
+        return {"z_H": (1, seq, width(task)), "z_L": (1, seq, width(task)), "inputs": (1, t["seq_len"]),
+                "puzzle_embedding": (1, width(task))}
+    return {"hidden": (1, seq, width(task)), "injection": (1, seq, width(task))}
 
 
 def onnx_name(graph, H):
@@ -260,8 +270,8 @@ def host_rollout(task, H, inp, nsteps, collect_f=False):
     n = inp.shape[0]
     emb = sd["inner.puzzle_emb.weights"][:1].float()
     x = torch.as_tensor(inp, dtype=torch.int32)
-    zH = inner.H_init.expand(n, PLEN + cfg["seq_len"], 512).clone()
-    zL = inner.L_init.expand(n, PLEN + cfg["seq_len"], 512).clone()
+    zH = inner.H_init.expand(n, PLEN + cfg["seq_len"], width(task)).clone()
+    zL = inner.L_init.expand(n, PLEN + cfg["seq_len"], width(task)).clone()
     Carry = type(inner.empty_carry(1))
     fpairs = []
     if collect_f:
