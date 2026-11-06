@@ -859,17 +859,18 @@ def main():
         ref = dict(np.load(a.ref))
 
     # power sampler
-    files = [os.path.join(a.power_dir, f) for f in a.power_files.split(",") if f]
+    files = [f if f == "sum" else "*".join(os.path.join(a.power_dir, g) for g in f.split("*"))
+             for f in a.power_files.split(",") if f]
     names = a.rail_names.split(",")[:len(files)] or ["rail%d" % i for i in range(len(files))]
     sampler = None
     if not a.no_power:
-        missing = [f for f in files if not os.path.exists(f)]
-        if missing:
-            log("power files missing, running without energy:", missing)
-        else:
-            sampler = PowerSampler(files, names, a.power_hz)
-            sampler.start()
-            log("power sampler on %s at %.0f Hz, first read %s mW" % (a.power_dir, a.power_hz, sampler.read_once()))
+        missing = [g for f in files if f != "sum" for g in f.split("*") if not os.access(g, os.R_OK)]
+        if missing:   # an energy run without readable rails is a wasted run: stop instead of measuring nothing
+            log("power files missing or unreadable (use --no_power for a latency-only run):", missing)
+            sys.exit(2)
+        sampler = PowerSampler(files, names, a.power_hz)
+        sampler.start()
+        log("power sampler on %s at %.0f Hz, first read %s mW" % (a.power_dir, a.power_hz, sampler.read_once()))
 
     t_load = time.perf_counter()
     cuda = CudaMem() if a.backend == "trt" else None
