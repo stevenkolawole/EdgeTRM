@@ -1,0 +1,19 @@
+{
+ "check_n": 10,
+ "T": 300,
+ "max_abs_diff": {
+  "h0": 0.0,
+  "h": 2.2649765014648438e-06,
+  "h_rel": 4.702010755863739e-06,
+  "logits": 4.3392181396484375e-05
+ },
+ "pred_cells_differing": 0,
+ "exact_flags_differing": 0,
+ "ort_cpu_ms_per_iter_median": 23.859999499109108,
+ "torch": "2.14.1+cu130",
+ "onnxruntime": "1.20.1",
+ "image": [
+  72,
+  72
+ ]
+}

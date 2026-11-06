@@ -35,6 +35,7 @@ build() {  # build <onnx> <plan> [extra flags]
 # prefer the opset-13 restamps (convert_opset.py) when present: TRT 8.2 parses opset <= 13
 if ls "$SRC"/stepc_H*_op13_fold.onnx >/dev/null 2>&1; then LIST="$SRC/stepc_H*_op13_fold.onnx"  # TRT 8.2 needs the folded graphs (fold_constants.py)
 elif ls "$SRC"/stepc_H*_op13.onnx >/dev/null 2>&1; then LIST="$SRC/stepc_H*_op13.onnx $SRC/stepc_k*_H*_op13.onnx"; else LIST="$SRC/stepc_H*.onnx $SRC/stepc_k*_H*.onnx"; fi
+LIST="$LIST $SRC/dt_proj_fold.onnx $SRC/dt_step_fold.onnx"   # DeepThinking mazes (export_dt.py, run by dt_loop.py)
 for onnx in $LIST; do
     [ -f "$onnx" ] || continue
     base=$(basename "$onnx" .onnx)
