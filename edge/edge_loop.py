@@ -381,8 +381,10 @@ class PowerSampler(threading.Thread):
         self.files, self.names, self.hz = list(files), list(names), float(hz)
         # a file spec "a*b" is a voltage file (mV) times a current file (mA), for boards whose INA3221 driver exposes
         # no power file (Jetson AGX Xavier hwmon: in<k>_input*curr<k>_input); the product / 1000 is mW
-        self.groups = [[os.open(f, os.O_RDONLY) for f in spec.split("*")] for spec in self.files]
-        self.fds = [fd for g in self.groups for fd in g]
+        # the spec "sum" is a synthetic rail: the sum of the rails before it (the AGX has no total rail)
+        self.groups = [[os.open(f, os.O_RDONLY) for f in spec.split("*")] if spec != "sum" else "sum"
+                       for spec in self.files]
+        self.fds = [fd for g in self.groups if g != "sum" for fd in g]
         self.on = threading.Event()
         self.stop_ = threading.Event()
         self.lock = threading.Lock()
@@ -392,6 +394,9 @@ class PowerSampler(threading.Thread):
     def read_once(self):
         vals = []
         for g in self.groups:
+            if g == "sum":
+                vals.append(sum(vals))
+                continue
             v = 1.0
             for fd in g:
                 raw = os.pread(fd, 64, 0).strip()
