@@ -146,12 +146,12 @@ def main():
     summ = dict(onnx=a.onnx, calib=a.calib, n_calib=calib.n, variant=a.variant, cache=a.cache,
                 cache_reused=cache_existed, tensorrt=trt.__version__, build_s=round(build_s, 1),
                 calib_s_per_batch=round((ct[-1] - ct[0]) / max(1, len(ct) - 1), 2) if len(ct) > 1 else None,
-                plan_bytes=len(ser), n_layers=sum(by_io.values()), by_io_dtype=by_io, by_type_out=by_type_out)
+                plan_bytes=ser.nbytes, n_layers=sum(by_io.values()), by_io_dtype=by_io, by_type_out=by_type_out)
     with open(a.out + ".build.json", "w") as f:
         json.dump(summ, f, indent=1)
     print("%s: %s build %.0f s, %d layers, int8-out layers %d, plan %.1f MB" % (
         a.out, a.variant, build_s, summ["n_layers"], sum(v for k, v in by_io.items() if "out:" in k and "Int8" in
-                                                         k.split("out:")[1]), len(ser) / 1e6), flush=True)
+                                                         k.split("out:")[1]), ser.nbytes / 1e6), flush=True)
 
 
 if __name__ == "__main__":
