@@ -86,6 +86,36 @@ def rule_fires(rule, s, qh, qc, prev_halt):
     raise ValueError(rule)
 
 
+def headfree_fires(rule, s, changed, resid, streak):
+    """Exit rules that need no halting head. stable<p>: the predicted answer has not changed for p consecutive
+    steps. resid<tau>: the relative change of the high-level state, ||z_H(s) - z_H(s-1)|| / ||z_H(s)||, is below
+    tau. s = 1-based step just completed; changed = did the answer change at step s; streak = unchanged steps so far.
+    Neither fires at step 1 (no previous step)."""
+    streak = 0 if (changed or s == 1) else streak + 1
+    if rule.startswith("stable"):
+        return s >= 2 and streak >= int(rule[6:]), streak
+    if rule.startswith("resid"):
+        return s >= 2 and resid < float(rule[5:]), streak
+    raise ValueError(rule)
+
+
+HEADFREE = ["stable1", "stable2", "stable3", "resid0.1", "resid0.03", "resid0.01", "resid0.003", "resid0.001"]
+
+
+def offline_headfree(rule, changed, resid, nsup=NSUP):
+    """changed (n, nsup) bool, resid (n, nsup) float -> exit step (1-based) per puzzle, capped at nsup."""
+    n = changed.shape[0]
+    out = np.full(n, nsup)
+    for i in range(n):
+        streak = 0
+        for s in range(1, nsup + 1):
+            fire, streak = headfree_fires(rule, s, bool(changed[i, s - 1]), float(resid[i, s - 1]), streak)
+            if fire:
+                out[i] = s
+                break
+    return out
+
+
 def offline_exit(rule, qh, qc, nsup=NSUP):
     """qh, qc: (n, nsup) arrays -> exit step (1-based) per puzzle, capped at nsup."""
     n = qh.shape[0]
@@ -558,13 +588,29 @@ class Loop(object):
         r.load(self.x[i:i + 1], self.zh0, self.zl0, self.emb)
         ms, qhs, prev = [], [], False
         steps, cap = 0, depth
-        need_q = mode == "exit"
+        headfree = mode == "exit" and self.rule[:5] in ("stabl", "resid")
+        need_q = mode == "exit" and not headfree
+        pred_prev, z_prev, streak = None, None, 0
         while steps < cap:
             t0 = time.perf_counter()
             r.step(need_q=need_q)
+            if headfree:                                  # the signal is read inside the timed step: it is its cost
+                pred = r.logits()[0].argmax(-1)
+                changed = pred_prev is None or bool((pred != pred_prev).any())
+                pred_prev = pred
+                resid = 1.0
+                if self.rule.startswith("resid"):
+                    z = r.get_carry()[0][0].astype(np.float32).copy()
+                    if z_prev is not None:
+                        resid = float(np.linalg.norm(z - z_prev) / max(np.linalg.norm(z), 1e-12))
+                    z_prev = z
             ms.append((time.perf_counter() - t0) * 1e3)
             steps += self.k
-            if need_q:
+            if headfree:
+                fire, streak = headfree_fires(self.rule, steps, changed, resid, streak)
+                if fire:
+                    break
+            elif need_q:
                 qh, qc = float(r.qh[0]), float(r.qc[0])
                 qhs.append(qh)
                 fire, prev = rule_fires(self.rule, steps, qh, qc, prev)
@@ -614,6 +660,7 @@ def check_pass(loop, ref, nsup):
     qc = np.zeros((n, calls), np.float64)
     ms = np.zeros((n, calls), np.float64)
     zH_final = np.zeros((n, loop.zh0.shape[0], loop.zh0.shape[-1]), np.float32)
+    resid = np.ones((n, calls), np.float64)               # relative change of z_H per step (1.0 at step 1)
     t_all = time.perf_counter()
     for i in range(n):
         r.load(loop.x[i:i + 1], loop.zh0, loop.zl0, loop.emb)
@@ -623,6 +670,10 @@ def check_pass(loop, ref, nsup):
             ms[i, c] = (time.perf_counter() - t0) * 1e3
             preds[i, c] = r.logits()[0].argmax(-1)
             qh[i, c], qc[i, c] = float(r.qh[0]), float(r.qc[0])
+            z = r.get_carry()[0][0].astype(np.float32)
+            if c > 0:
+                resid[i, c] = np.linalg.norm(z - z_prev) / max(np.linalg.norm(z), 1e-12)
+            z_prev = z.copy()
         zH_final[i] = r.get_carry()[0][0]
         if (i + 1) % 10 == 0 or i == n - 1:
             log("check %d/%d exact@last %.3f mean step %.2f ms" % (
@@ -630,6 +681,8 @@ def check_pass(loop, ref, nsup):
     lab = loop.lab[:, None, :]
     ex = (preds == lab).all(-1)
     cell = (preds == lab).mean(-1)
+    changed = np.ones((n, calls), bool)
+    changed[:, 1:] = (preds[:, 1:] != preds[:, :-1]).any(-1)
     ex_step = offline_exit(loop.rule, qh, qc, calls) * loop.k
     at_exit = ex[np.arange(n), np.minimum(ex_step // loop.k, calls) - 1]
     out = {"n": int(n), "nsup": int(calls * loop.k), "steps_per_call": loop.k,
@@ -641,7 +694,14 @@ def check_pass(loop, ref, nsup):
            "step_ms": lat_summary(ms), "wall_s": round(time.perf_counter() - t_all, 1),
            "per_puzzle": [{"i": int(i), "exact_per_step": [bool(v) for v in ex[i]],
                            "ms": [round(float(v), 3) for v in ms[i]],
-                           "q_halt": [round(float(v), 5) for v in qh[i]]} for i in range(n)]}
+                           "q_halt": [round(float(v), 5) for v in qh[i]],
+                           "resid": [round(float(v), 6) for v in resid[i]],
+                           "changed": [bool(v) for v in changed[i]]} for i in range(n)]}
+    out["exit_headfree"] = {}
+    for rule in HEADFREE:
+        st = offline_headfree(rule, changed, resid, calls) * loop.k
+        hit = ex[np.arange(n), np.minimum(st // loop.k, calls) - 1]
+        out["exit_headfree"][rule] = {"exact": round(float(hit.mean()), 4), "mean_steps": round(float(st.mean()), 3)}
     if ref is not None:
         rp = ref["preds"]                                     # (steps, N, seq)
         m = min(n, rp.shape[1])
