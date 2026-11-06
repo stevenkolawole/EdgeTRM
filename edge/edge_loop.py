@@ -379,7 +379,10 @@ class PowerSampler(threading.Thread):
         threading.Thread.__init__(self)
         self.daemon = True
         self.files, self.names, self.hz = list(files), list(names), float(hz)
-        self.fds = [os.open(f, os.O_RDONLY) for f in self.files]
+        # a file spec "a*b" is a voltage file (mV) times a current file (mA), for boards whose INA3221 driver exposes
+        # no power file (Jetson AGX Xavier hwmon: in<k>_input*curr<k>_input); the product / 1000 is mW
+        self.groups = [[os.open(f, os.O_RDONLY) for f in spec.split("*")] for spec in self.files]
+        self.fds = [fd for g in self.groups for fd in g]
         self.on = threading.Event()
         self.stop_ = threading.Event()
         self.lock = threading.Lock()
@@ -388,11 +391,14 @@ class PowerSampler(threading.Thread):
 
     def read_once(self):
         vals = []
-        for fd in self.fds:
-            raw = os.pread(fd, 64, 0).strip()
-            if not raw:
-                raise ValueError("empty read")          # the whole sample is dropped (errors += 1)
-            vals.append(float(raw))
+        for g in self.groups:
+            v = 1.0
+            for fd in g:
+                raw = os.pread(fd, 64, 0).strip()
+                if not raw:
+                    raise ValueError("empty read")      # the whole sample is dropped (errors += 1)
+                v *= float(raw)
+            vals.append(v / 1000.0 if len(g) > 1 else v)
         return vals
 
     def run(self):
