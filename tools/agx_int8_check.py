@@ -14,7 +14,7 @@ PASS = ["fp32", "fp16", "int8", "dla0fp16"]
 
 
 def q_steps(check):
-    return np.array([p["q_halt"] for p in check["per_puzzle"]])          # (puzzles, steps)
+    return np.array([p["q_halt"] for p in check["per_puzzle"]])
 
 
 for task, host in HOST.items():
