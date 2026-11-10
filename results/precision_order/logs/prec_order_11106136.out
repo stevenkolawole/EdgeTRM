@@ -1,0 +1,6 @@
+NVIDIA L40S 2.10.0+cu128
+sudoku_mlp (trm) n=1000 batch=256 T=16 ks=[4, 8, 16] inner=[1, 7, 14] cells=[('w4t', 0)] polish=['w8c']; 0 records present
+  fp32 acc 70.8  curve@[4, 8, 16]: [np.float64(61.0), np.float64(67.6), np.float64(70.8)] (48s)
+  w4t#0 polish=w8c: c16 5.9 | c16=5.9 c20=5.8 c24=5.9 c32=5.7 P4.c16=7.6 P8.c16=8.7 P16.c16=8.1 f16=70.8 | append c16.P16@[20, 24, 32]: [np.float64(63.8), np.float64(69.3), np.float64(72.8)] (229s)
+  cell ('w4t', 0) done (230s)
+wrote /home/skolawol/precision_order/out/smoke_mlp_w4t.json 1 records

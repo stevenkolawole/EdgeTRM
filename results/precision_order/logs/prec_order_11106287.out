@@ -1,0 +1,8 @@
+NVIDIA L40S 2.10.0+cu128
+sudoku_mlp (trm) n=1000 batch=256 T=16 ks=[4, 8, 16] inner=[1, 7, 14] cells=[('w3c', 0), ('w4c', 0)] polish=['w8c']; 0 records present
+  fp32 acc 70.8  curve@[4, 8, 16]: [np.float64(61.0), np.float64(67.6), np.float64(70.8)] (48s)
+  w3c#0 polish=w8c: c16 17.3 | c16=17.3 c20=17.7 c24=18.0 c32=18.0 P4.c16=55.7 P8.c16=60.9 P16.c16=64.2 f16=70.8 | append c16.P16@[20, 24, 32]: [np.float64(62.2), np.float64(67.8), np.float64(71.8)] (230s)
+  cell ('w3c', 0) done (230s)
+  w4c#0 polish=w8c: c16 68.1 | c16=68.1 c20=69.0 c24=69.3 c32=70.1 P4.c16=71.5 P8.c16=72.5 P16.c16=74.2 f16=70.8 | append c16.P16@[20, 24, 32]: [np.float64(71.0), np.float64(73.1), np.float64(73.9)] (232s)
+  cell ('w4c', 0) done (232s)
+wrote /home/skolawol/precision_order/out/mlp_rest.json 2 records

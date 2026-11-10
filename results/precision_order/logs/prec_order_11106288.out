@@ -1,0 +1,12 @@
+NVIDIA L40S 2.10.0+cu128
+sudoku_attn (trm) n=1000 batch=256 T=16 ks=[4, 8, 16] inner=[1, 7, 14] cells=[('w4t', 0), ('w3t', 0), ('w2g32', 0), ('w4c', 0)] polish=['w8c']; 0 records present
+  fp32 acc 66.0  curve@[4, 8, 16]: [np.float64(52.5), np.float64(61.5), np.float64(66.0)] (45s)
+  w4t#0 polish=w8c: c16 62.9 | c16=62.9 c20=64.4 c24=65.2 c32=66.4 P4.c16=67.0 P8.c16=69.1 P16.c16=71.4 f16=66.0 | append c16.P16@[20, 24, 32]: [np.float64(66.2), np.float64(68.7), np.float64(69.9)] (216s)
+  cell ('w4t', 0) done (217s)
+  w3t#0 polish=w8c: c16 0.0 | c16=0.0 c20=0.0 c24=0.0 c32=0.0 P4.c16=0.0 P8.c16=0.0 P16.c16=0.0 f16=66.0 | append c16.P16@[20, 24, 32]: [np.float64(9.4), np.float64(17.1), np.float64(19.9)] (212s)
+  cell ('w3t', 0) done (212s)
+  w2g32#0 polish=w8c: c16 0.0 | c16=0.0 c20=0.0 c24=0.0 c32=0.0 P4.c16=0.0 P8.c16=0.0 P16.c16=0.0 f16=66.0 | append c16.P16@[20, 24, 32]: [np.float64(20.1), np.float64(26.4), np.float64(28.7)] (216s)
+  cell ('w2g32', 0) done (216s)
+  w4c#0 polish=w8c: c16 65.6 | c16=65.6 c20=66.6 c24=68.0 c32=69.4 P4.c16=67.5 P8.c16=70.0 P16.c16=70.8 f16=66.0 | append c16.P16@[20, 24, 32]: [np.float64(67.3), np.float64(69.0), np.float64(70.0)] (218s)
+  cell ('w4c', 0) done (218s)
+wrote /home/skolawol/precision_order/out/attn_all.json 4 records
