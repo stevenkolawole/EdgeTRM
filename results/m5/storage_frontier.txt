@@ -1,0 +1,233 @@
+models 9; singles available per model: {'sudoku_mlp': ['w2g32', 'w3c', 'w3g32', 'w4c', 'w4g32', 'w4t', 'w6c', 'w8c'], 'sudoku_attn': ['w2g32', 'w3c', 'w3g32', 'w4c', 'w4g32', 'w6c', 'w8c'], 'hrm_sudoku': ['w2g32', 'w3c', 'w3g32', 'w4c', 'w4g32', 'w4t', 'w6c', 'w8c'], 'attn512_s0': ['w3c', 'w3g32', 'w4c', 'w4g32', 'w6c', 'w8c'], 'attn512_s1': ['w3c', 'w3g32', 'w4c', 'w4g32', 'w6c', 'w8c'], 'attn512_s2': ['w3c', 'w3g32', 'w4c', 'w4g32', 'w6c', 'w8c'], 'mlp512_s0': ['w3c', 'w3g32', 'w4c', 'w4g32', 'w6c', 'w8c'], 'mlp512_s1': ['w3c', 'w3g32', 'w4c', 'w4g32', 'w6c', 'w8c'], 'mlp512_s2': ['w3c', 'w3g32', 'w4c', 'w4g32', 'w6c', 'w8c']}
+controller (cheap,finish) pairs per model: {'sudoku_mlp': ['w3g32+w4c', 'w3g32+w4g32', 'w3g32+w8c', 'w4c+w8c', 'w4t+w4c', 'w4t+w8c'], 'sudoku_attn': ['w3c+w4c', 'w3c+w4g32', 'w3c+w8c', 'w4c+w8c'], 'hrm_sudoku': ['w2g32+w4c', 'w2g32+w4g32', 'w2g32+w8c', 'w4c+w8c', 'w4t+w4c', 'w4t+w8c'], 'attn512_s0': ['w3c+w4c', 'w3c+w4g32', 'w3c+w8c', 'w4c+w8c'], 'attn512_s1': ['w3c+w4c', 'w3c+w4g32', 'w3c+w8c', 'w4c+w8c'], 'attn512_s2': ['w3c+w4c', 'w3c+w4g32', 'w3c+w8c', 'w4c+w8c'], 'mlp512_s0': ['w3c+w4c', 'w3c+w4g32', 'w3c+w8c', 'w4c+w8c'], 'mlp512_s1': ['w3c+w4c', 'w3c+w4g32', 'w3c+w8c', 'w4c+w8c'], 'mlp512_s2': ['w3c+w4c', 'w3c+w4g32', 'w3c+w8c', 'w4c+w8c']}
+
+=== PART 1, budget 16 cheap-loop units (traffic cap = 16 x b_eff(cheap) bits), held-out rows 1000-1999; mean over cells of acc | traffic (bits/weight/puzzle) | stored bits/weight
+  fixed         n=20  acc  56.8  traffic   56.2  stored  3.55
+  stop          n=20  acc  61.1  traffic   41.1  stored  3.55
+  ctl_w8c       n=20  acc  74.5  traffic   39.8  stored 11.55
+  ctl_w4c       n=20  acc  73.9  traffic   36.2  stored  5.75
+  ctl_w4g32     n= 9  acc  68.4  traffic   29.3  stored  7.50
+  alone_w8c     n=20  acc  75.2  traffic   43.0  stored  8.00
+  alone_w6c     n=20  acc  79.3  traffic   41.9  stored  6.00
+  alone_w4g32   n=20  acc  80.5  traffic   38.1  stored  4.50
+  alone_w4c     n=20  acc  80.2  traffic   37.4  stored  4.00
+  alonefix_w8c  n=20  acc  66.8  traffic   49.6  stored  8.00
+  alonefix_w4c  n=20  acc  74.7  traffic   56.0  stored  4.00
+  ctl_w4c-alone_w4c: -6.34 [-6.76,-5.91] (n=20 cells)
+  ctl_w4c-alone_w4g32: -6.65 [-7.14,-6.14] (n=20 cells)
+  ctl_w4c-ctl_w8c: -0.60 [-0.90,-0.30] (n=20 cells)
+  ctl_w4c-stop: +12.75 [+12.36,+13.12] (n=20 cells)
+  ctl_w4g32-alone_w4g32: -12.67 [-13.59,-11.79] (n=9 cells)
+  ctl_w4g32-ctl_w8c: -0.59 [-1.14,-0.02] (n=9 cells)
+  ctl_w4c-alone_w8c: -1.36 [-1.86,-0.87] (n=20 cells)
+  alone_w4c-alone_w8c: +4.98 [+4.56,+5.42] (n=20 cells)
+
+=== PART 1, budget 24 cheap-loop units (traffic cap = 24 x b_eff(cheap) bits), held-out rows 1000-1999; mean over cells of acc | traffic (bits/weight/puzzle) | stored bits/weight
+  fixed         n=20  acc  58.4  traffic   80.6  stored  3.55
+  stop          n=20  acc  62.4  traffic   55.7  stored  3.55
+  ctl_w8c       n=20  acc  75.3  traffic   51.1  stored 11.55
+  ctl_w4c       n=20  acc  74.7  traffic   46.8  stored  5.75
+  ctl_w4g32     n= 9  acc  69.1  traffic   38.1  stored  7.50
+  alone_w8c     n=20  acc  80.2  traffic   60.4  stored  8.00
+  alone_w6c     n=20  acc  81.8  traffic   54.7  stored  6.00
+  alone_w4g32   n=20  acc  81.9  traffic   51.0  stored  4.50
+  alone_w4c     n=20  acc  81.8  traffic   50.8  stored  4.00
+  alonefix_w8c  n=20  acc  72.9  traffic   80.0  stored  8.00
+  alonefix_w4c  n=20  acc  76.9  traffic   80.8  stored  4.00
+  ctl_w4c-alone_w4c: -7.08 [-7.52,-6.67] (n=20 cells)
+  ctl_w4c-alone_w4g32: -7.18 [-7.67,-6.71] (n=20 cells)
+  ctl_w4c-ctl_w8c: -0.61 [-0.89,-0.34] (n=20 cells)
+  ctl_w4c-stop: +12.37 [+11.99,+12.75] (n=20 cells)
+  ctl_w4g32-alone_w4g32: -13.41 [-14.27,-12.56] (n=9 cells)
+  ctl_w4g32-ctl_w8c: -0.51 [-1.04,+0.03] (n=9 cells)
+  ctl_w4c-alone_w8c: -5.42 [-5.92,-4.95] (n=20 cells)
+  alone_w4c-alone_w8c: +1.65 [+1.25,+2.04] (n=20 cells)
+
+=== PART 1, budget 32 cheap-loop units (traffic cap = 32 x b_eff(cheap) bits), held-out rows 1000-1999; mean over cells of acc | traffic (bits/weight/puzzle) | stored bits/weight
+  fixed         n=20  acc  59.3  traffic  103.8  stored  3.55
+  stop          n=20  acc  62.8  traffic   61.4  stored  3.55
+  ctl_w8c       n=20  acc  75.7  traffic   55.2  stored 11.55
+  ctl_w4c       n=20  acc  75.2  traffic   51.7  stored  5.75
+  ctl_w4g32     n= 9  acc  69.5  traffic   41.8  stored  7.50
+  alone_w8c     n=20  acc  81.9  traffic   73.7  stored  8.00
+  alone_w6c     n=20  acc  82.8  traffic   66.9  stored  6.00
+  alone_w4g32   n=20  acc  82.7  traffic   60.6  stored  4.50
+  alone_w4c     n=20  acc  82.4  traffic   58.3  stored  4.00
+  alonefix_w8c  n=20  acc  76.4  traffic  112.0  stored  8.00
+  alonefix_w4c  n=20  acc  78.6  traffic  112.0  stored  4.00
+  ctl_w4c-alone_w4c: -7.22 [-7.66,-6.79] (n=20 cells)
+  ctl_w4c-alone_w4g32: -7.53 [-8.02,-7.01] (n=20 cells)
+  ctl_w4c-ctl_w8c: -0.57 [-0.84,-0.30] (n=20 cells)
+  ctl_w4c-stop: +12.34 [+11.97,+12.71] (n=20 cells)
+  ctl_w4g32-alone_w4g32: -13.90 [-14.78,-13.06] (n=9 cells)
+  ctl_w4g32-ctl_w8c: -0.50 [-1.03,+0.02] (n=9 cells)
+  ctl_w4c-alone_w8c: -6.78 [-7.28,-6.28] (n=20 cells)
+  alone_w4c-alone_w8c: +0.44 [+0.08,+0.82] (n=20 cells)
+
+=== PART 1, budget 64 cheap-loop units (traffic cap = 64 x b_eff(cheap) bits), held-out rows 1000-1999; mean over cells of acc | traffic (bits/weight/puzzle) | stored bits/weight
+  fixed         n=20  acc  61.1  traffic  197.8  stored  3.55
+  stop          n=20  acc  63.0  traffic   80.7  stored  3.55
+  ctl_w8c       n=20  acc  75.8  traffic   57.5  stored 11.55
+  ctl_w4c       n=20  acc  75.2  traffic   54.0  stored  5.75
+  ctl_w4g32     n= 9  acc  69.5  traffic   41.8  stored  7.50
+  alone_w8c     n=20  acc  83.9  traffic  109.0  stored  8.00
+  alone_w6c     n=20  acc  83.8  traffic   87.6  stored  6.00
+  alone_w4g32   n=20  acc  83.1  traffic   69.1  stored  4.50
+  alone_w4c     n=20  acc  82.6  traffic   63.6  stored  4.00
+  alonefix_w8c  n=20  acc  80.3  traffic  214.4  stored  8.00
+  alonefix_w4c  n=20  acc  80.8  traffic  214.4  stored  4.00
+  ctl_w4c-alone_w4c: -7.35 [-7.80,-6.94] (n=20 cells)
+  ctl_w4c-alone_w4g32: -7.88 [-8.39,-7.41] (n=20 cells)
+  ctl_w4c-ctl_w8c: -0.57 [-0.82,-0.32] (n=20 cells)
+  ctl_w4c-stop: +12.19 [+11.83,+12.55] (n=20 cells)
+  ctl_w4g32-alone_w4g32: -14.74 [-15.61,-13.83] (n=9 cells)
+  ctl_w4g32-ctl_w8c: -0.50 [-1.01,+0.01] (n=9 cells)
+  ctl_w4c-alone_w8c: -8.65 [-9.14,-8.17] (n=20 cells)
+  alone_w4c-alone_w8c: -1.30 [-1.67,-0.94] (n=20 cells)
+
+=== PART 2: frontier. per model: best single-format config (format with b_eff <= S, stop or fixed, D0 on dev under traffic <= Tb) vs best controller
+    (cheap format + finishing copy with b_eff(cheap)+b(fin) <= S; configs with at least one finishing step; chosen on dev under traffic <= Tb)
+
+  S <= 6.5, Tb <= 64 bits: singles exist on 9/9 models, controllers on 1/9
+    over 1 models with both: best single  61.4 @  50.7 bits; best controller  36.0 @  18.5 bits; controller - single -25.40 [-28.40,-22.50]; controller ahead on 0/1 models
+      sudoku_mlp single w6c   /stop   78.3@ 50.2 | ctl -             0.0@  0.0
+      sudoku_attn single w3g32 /stop   83.3@ 42.2 | ctl -             0.0@  0.0
+      hrm_sudoku single w4c   /stop   61.4@ 50.7 | ctl w2g32+w4c    36.0@ 18.5
+      attn512_s0 single w3c   /stop   80.5@ 44.0 | ctl -             0.0@  0.0
+      attn512_s1 single w3g32 /stop   76.3@ 38.5 | ctl -             0.0@  0.0
+      attn512_s2 single w4c   /stop   76.0@ 46.2 | ctl -             0.0@  0.0
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl -             0.0@  0.0
+      mlp512_s1  single w4g32 /stop   95.3@ 34.9 | ctl -             0.0@  0.0
+      mlp512_s2  single w6c   /stop   96.2@ 35.8 | ctl -             0.0@  0.0
+
+  S <= 6.5, Tb <= 96 bits: singles exist on 9/9 models, controllers on 1/9
+    over 1 models with both: best single  63.4 @  76.9 bits; best controller  36.0 @  18.5 bits; controller - single -27.40 [-30.40,-24.40]; controller ahead on 0/1 models
+      sudoku_mlp single w6c   /stop   81.0@ 79.7 | ctl -             0.0@  0.0
+      sudoku_attn single w4c   /stop   83.7@ 58.3 | ctl -             0.0@  0.0
+      hrm_sudoku single w3g32 /stop   63.4@ 76.9 | ctl w2g32+w4c    36.0@ 18.5
+      attn512_s0 single w3c   /stop   81.9@ 52.9 | ctl -             0.0@  0.0
+      attn512_s1 single w3g32 /stop   78.6@ 63.1 | ctl -             0.0@  0.0
+      attn512_s2 single w3c   /stop   75.7@ 64.6 | ctl -             0.0@  0.0
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl -             0.0@  0.0
+      mlp512_s1  single w4g32 /stop   95.3@ 34.9 | ctl -             0.0@  0.0
+      mlp512_s2  single w6c   /stop   96.7@ 38.2 | ctl -             0.0@  0.0
+
+  S <= 6.5, Tb <= 128 bits: singles exist on 9/9 models, controllers on 1/9
+    over 1 models with both: best single  64.0 @  86.2 bits; best controller  36.0 @  18.5 bits; controller - single -28.00 [-30.90,-25.00]; controller ahead on 0/1 models
+      sudoku_mlp single w6c   /stop   81.7@ 97.7 | ctl -             0.0@  0.0
+      sudoku_attn single w6c   /stop   83.0@ 86.7 | ctl -             0.0@  0.0
+      hrm_sudoku single w4c   /stop   64.0@ 86.2 | ctl w2g32+w4c    36.0@ 18.5
+      attn512_s0 single w3c   /stop   81.9@ 52.9 | ctl -             0.0@  0.0
+      attn512_s1 single w3g32 /stop   78.6@ 63.1 | ctl -             0.0@  0.0
+      attn512_s2 single w3c   /stop   75.7@ 64.6 | ctl -             0.0@  0.0
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl -             0.0@  0.0
+      mlp512_s1  single w4g32 /stop   95.3@ 34.9 | ctl -             0.0@  0.0
+      mlp512_s2  single w6c   /stop   96.7@ 38.2 | ctl -             0.0@  0.0
+
+  S <= 6.5, Tb <= 256 bits: singles exist on 9/9 models, controllers on 1/9
+    over 1 models with both: best single  64.9 @ 121.4 bits; best controller  36.0 @  18.5 bits; controller - single -28.90 [-31.80,-26.00]; controller ahead on 0/1 models
+      sudoku_mlp single w6c   /stop   81.7@ 97.7 | ctl -             0.0@  0.0
+      sudoku_attn single w6c   /stop   83.0@ 86.7 | ctl -             0.0@  0.0
+      hrm_sudoku single w4g32 /stop   64.9@121.4 | ctl w2g32+w4c    36.0@ 18.5
+      attn512_s0 single w3c   /fixed  82.0@192.0 | ctl -             0.0@  0.0
+      attn512_s1 single w6c   /stop   80.7@101.0 | ctl -             0.0@  0.0
+      attn512_s2 single w6c   /stop   78.9@108.5 | ctl -             0.0@  0.0
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl -             0.0@  0.0
+      mlp512_s1  single w4g32 /fixed  94.7@216.0 | ctl -             0.0@  0.0
+      mlp512_s2  single w6c   /stop   96.7@ 38.2 | ctl -             0.0@  0.0
+
+  S <= 8.0, Tb <= 64 bits: singles exist on 9/9 models, controllers on 9/9
+    over 9 models with both: best single  82.7 @  41.3 bits; best controller  71.1 @  37.5 bits; controller - single -11.61 [-12.40,-10.84]; controller ahead on 0/9 models
+      sudoku_mlp single w6c   /stop   78.3@ 50.2 | ctl w3g32+w4g32  73.7@ 63.5
+      sudoku_attn single w3g32 /stop   83.3@ 42.2 | ctl w3c+w4g32    79.7@ 41.4
+      hrm_sudoku single w4c   /stop   61.4@ 50.7 | ctl w4t+w4c      60.5@ 46.6
+      attn512_s0 single w3c   /stop   80.5@ 44.0 | ctl w3c+w4c      77.3@ 61.0
+      attn512_s1 single w3g32 /stop   76.3@ 38.5 | ctl w3c+w4g32    74.4@ 28.5
+      attn512_s2 single w4c   /stop   76.0@ 46.2 | ctl w3c+w4c      71.8@ 33.7
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl w3c+w4g32    65.9@ 21.0
+      mlp512_s1  single w4g32 /stop   95.3@ 34.9 | ctl w3c+w4g32    69.2@ 21.0
+      mlp512_s2  single w6c   /stop   96.2@ 35.8 | ctl w3c+w4g32    67.0@ 21.0
+
+  S <= 8.0, Tb <= 96 bits: singles exist on 9/9 models, controllers on 9/9
+    over 9 models with both: best single  83.8 @  56.9 bits; best controller  71.1 @  37.5 bits; controller - single -12.72 [-13.50,-11.94]; controller ahead on 0/9 models
+      sudoku_mlp single w6c   /stop   81.0@ 79.7 | ctl w3g32+w4g32  73.7@ 63.5
+      sudoku_attn single w4c   /stop   83.7@ 58.3 | ctl w3c+w4g32    79.7@ 41.4
+      hrm_sudoku single w3g32 /stop   63.4@ 76.9 | ctl w4t+w4c      60.5@ 46.6
+      attn512_s0 single w3c   /stop   81.9@ 52.9 | ctl w3c+w4c      77.3@ 61.0
+      attn512_s1 single w3g32 /stop   78.6@ 63.1 | ctl w3c+w4g32    74.4@ 28.5
+      attn512_s2 single w3c   /stop   75.7@ 64.6 | ctl w3c+w4c      71.8@ 33.7
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl w3c+w4g32    65.9@ 21.0
+      mlp512_s1  single w4g32 /stop   95.3@ 34.9 | ctl w3c+w4g32    69.2@ 21.0
+      mlp512_s2  single w8c   /stop   97.7@ 52.5 | ctl w3c+w4g32    67.0@ 21.0
+
+  S <= 8.0, Tb <= 128 bits: singles exist on 9/9 models, controllers on 9/9
+    over 9 models with both: best single  84.0 @  65.6 bits; best controller  71.1 @  37.5 bits; controller - single -12.90 [-13.68,-12.08]; controller ahead on 0/9 models
+      sudoku_mlp single w6c   /stop   81.7@ 97.7 | ctl w3g32+w4g32  73.7@ 63.5
+      sudoku_attn single w6c   /stop   83.0@ 86.7 | ctl w3c+w4g32    79.7@ 41.4
+      hrm_sudoku single w4c   /stop   64.0@ 86.2 | ctl w4t+w4c      60.5@ 46.6
+      attn512_s0 single w3c   /stop   81.9@ 52.9 | ctl w3c+w4c      77.3@ 61.0
+      attn512_s1 single w3g32 /stop   78.6@ 63.1 | ctl w3c+w4g32    74.4@ 28.5
+      attn512_s2 single w3c   /stop   75.7@ 64.6 | ctl w3c+w4c      71.8@ 33.7
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl w3c+w4g32    65.9@ 21.0
+      mlp512_s1  single w8c   /stop   96.3@ 57.3 | ctl w3c+w4g32    69.2@ 21.0
+      mlp512_s2  single w8c   /stop   97.7@ 52.5 | ctl w3c+w4g32    67.0@ 21.0
+
+  S <= 8.0, Tb <= 256 bits: singles exist on 9/9 models, controllers on 9/9
+    over 9 models with both: best single  84.7 @ 105.0 bits; best controller  71.1 @  37.5 bits; controller - single -13.69 [-14.49,-12.88]; controller ahead on 0/9 models
+      sudoku_mlp single w8c   /stop   81.6@129.0 | ctl w3g32+w4g32  73.7@ 63.5
+      sudoku_attn single w8c   /stop   83.3@118.9 | ctl w3c+w4g32    79.7@ 41.4
+      hrm_sudoku single w4g32 /stop   64.9@121.4 | ctl w4t+w4c      60.5@ 46.6
+      attn512_s0 single w3c   /fixed  82.0@192.0 | ctl w3c+w4c      77.3@ 61.0
+      attn512_s1 single w8c   /stop   81.3@136.2 | ctl w3c+w4g32    74.4@ 28.5
+      attn512_s2 single w6c   /stop   78.9@108.5 | ctl w3c+w4c      71.8@ 33.7
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl w3c+w4g32    65.9@ 21.0
+      mlp512_s1  single w8c   /stop   96.3@ 57.3 | ctl w3c+w4g32    69.2@ 21.0
+      mlp512_s2  single w8c   /stop   97.7@ 52.5 | ctl w3c+w4g32    67.0@ 21.0
+
+  S <= 12.0, Tb <= 64 bits: singles exist on 9/9 models, controllers on 9/9
+    over 9 models with both: best single  82.7 @  41.3 bits; best controller  79.5 @  40.6 bits; controller - single -3.16 [-3.74,-2.58]; controller ahead on 1/9 models
+      sudoku_mlp single w6c   /stop   78.3@ 50.2 | ctl w4c+w8c      76.8@ 36.5
+      sudoku_attn single w3g32 /stop   83.3@ 42.2 | ctl w3c+w4g32    79.7@ 41.4
+      hrm_sudoku single w4c   /stop   61.4@ 50.7 | ctl w4c+w8c      60.5@ 51.0
+      attn512_s0 single w3c   /stop   80.5@ 44.0 | ctl w3c+w4c      77.3@ 61.0
+      attn512_s1 single w3g32 /stop   76.3@ 38.5 | ctl w4c+w8c      76.5@ 36.6
+      attn512_s2 single w4c   /stop   76.0@ 46.2 | ctl w3c+w8c      72.7@ 41.7
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl w4c+w8c      91.7@ 22.3
+      mlp512_s1  single w4g32 /stop   95.3@ 34.9 | ctl w4c+w8c      89.4@ 52.2
+      mlp512_s2  single w6c   /stop   96.2@ 35.8 | ctl w4c+w8c      91.0@ 22.7
+
+  S <= 12.0, Tb <= 96 bits: singles exist on 9/9 models, controllers on 9/9
+    over 9 models with both: best single  83.8 @  56.9 bits; best controller  79.5 @  52.7 bits; controller - single -4.27 [-4.89,-3.70]; controller ahead on 0/9 models
+      sudoku_mlp single w6c   /stop   81.0@ 79.7 | ctl w4c+w8c      76.8@ 36.5
+      sudoku_attn single w4c   /stop   83.7@ 58.3 | ctl w3c+w4g32    79.7@ 41.4
+      hrm_sudoku single w3g32 /stop   63.4@ 76.9 | ctl w4c+w8c      60.5@ 51.0
+      attn512_s0 single w3c   /stop   81.9@ 52.9 | ctl w3c+w4c      77.3@ 61.0
+      attn512_s1 single w3g32 /stop   78.6@ 63.1 | ctl w4c+w8c      76.5@ 36.6
+      attn512_s2 single w3c   /stop   75.7@ 64.6 | ctl w3c+w8c      72.7@ 41.7
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl w4c+w8c      91.7@ 22.3
+      mlp512_s1  single w4g32 /stop   95.3@ 34.9 | ctl w4c+w8c      89.0@ 88.0
+      mlp512_s2  single w8c   /stop   97.7@ 52.5 | ctl w4c+w8c      91.4@ 96.0
+
+  S <= 12.0, Tb <= 128 bits: singles exist on 9/9 models, controllers on 9/9
+    over 9 models with both: best single  84.0 @  65.6 bits; best controller  79.5 @  52.7 bits; controller - single -4.44 [-5.06,-3.89]; controller ahead on 0/9 models
+      sudoku_mlp single w6c   /stop   81.7@ 97.7 | ctl w4c+w8c      76.8@ 36.5
+      sudoku_attn single w6c   /stop   83.0@ 86.7 | ctl w3c+w4g32    79.7@ 41.4
+      hrm_sudoku single w4c   /stop   64.0@ 86.2 | ctl w4c+w8c      60.5@ 51.0
+      attn512_s0 single w3c   /stop   81.9@ 52.9 | ctl w3c+w4c      77.3@ 61.0
+      attn512_s1 single w3g32 /stop   78.6@ 63.1 | ctl w4c+w8c      76.5@ 36.6
+      attn512_s2 single w3c   /stop   75.7@ 64.6 | ctl w3c+w8c      72.7@ 41.7
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl w4c+w8c      91.7@ 22.3
+      mlp512_s1  single w8c   /stop   96.3@ 57.3 | ctl w4c+w8c      89.0@ 88.0
+      mlp512_s2  single w8c   /stop   97.7@ 52.5 | ctl w4c+w8c      91.4@ 96.0
+
+  S <= 12.0, Tb <= 256 bits: singles exist on 9/9 models, controllers on 9/9
+    over 9 models with both: best single  84.7 @ 105.0 bits; best controller  79.5 @  52.7 bits; controller - single -5.23 [-5.87,-4.61]; controller ahead on 0/9 models
+      sudoku_mlp single w8c   /stop   81.6@129.0 | ctl w4c+w8c      76.8@ 36.5
+      sudoku_attn single w8c   /stop   83.3@118.9 | ctl w3c+w4g32    79.7@ 41.4
+      hrm_sudoku single w4g32 /stop   64.9@121.4 | ctl w4c+w8c      60.5@ 51.0
+      attn512_s0 single w3c   /fixed  82.0@192.0 | ctl w3c+w4c      77.3@ 61.0
+      attn512_s1 single w8c   /stop   81.3@136.2 | ctl w4c+w8c      76.5@ 36.6
+      attn512_s2 single w6c   /stop   78.9@108.5 | ctl w3c+w8c      72.7@ 41.7
+      mlp512_s0  single w4c   /stop   96.7@ 29.5 | ctl w4c+w8c      91.7@ 22.3
+      mlp512_s1  single w8c   /stop   96.3@ 57.3 | ctl w4c+w8c      89.0@ 88.0
+      mlp512_s2  single w8c   /stop   97.7@ 52.5 | ctl w4c+w8c      91.4@ 96.0

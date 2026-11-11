@@ -1,0 +1,70 @@
+per-mixer room (median implied room, n models): {'sudoku_mlp': (0.245, 8), 'sudoku_attn': (0.52, 3)}
+no det record, skipped: sudoku_attn w4t
+
+task        spec      type  push16 wdist   acc  fp32 ret2000  ret256
+sudoku_mlp  w4t       RTN    1.042 0.321   6.3  74.2   0.085   0.138
+sudoku_mlp  gqw4t     GPTQ   0.182 0.223  71.5  74.2   0.964   0.958
+sudoku_mlp  w3c       RTN    0.957 0.313  18.0  74.2   0.243   0.344
+sudoku_mlp  gqw3c     GPTQ   0.154 0.285  70.2  74.2   0.946   0.958
+sudoku_mlp  w3g32     RTN    0.422 0.205  54.9  74.2   0.740   0.741
+sudoku_mlp  gqw3g32   GPTQ   0.109 0.239  75.1  74.2   1.013   1.021
+sudoku_mlp  w2g32     RTN    1.164 0.543   0.0  74.2   0.000   0.000
+sudoku_mlp  gqw2g32   GPTQ   0.698 0.507   2.5  74.2   0.034   0.037
+sudoku_mlp  w4c       RTN    0.207 0.138  70.5  74.2   0.951   0.968
+sudoku_attn w3c       RTN    0.353 0.292  65.9  72.7   0.906   0.856
+sudoku_attn gqw3c     GPTQ   0.136 0.312  70.3  72.7   0.967   1.011
+sudoku_attn w3g32     RTN    0.211 0.199  71.5  72.7   0.984   1.005
+sudoku_attn gqw3g32   GPTQ   0.067 0.258  71.1  72.7   0.978   0.979
+sudoku_attn w2g32     RTN    0.910 0.555   0.0  72.7   0.000   0.000
+sudoku_attn gqw2g32   GPTQ   0.720 0.544   0.0  72.7   0.000   0.000
+sudoku_attn w4c       RTN    0.135 0.127  72.3  72.7   0.994   0.995
+
+=== label: collapsed iff retained (rows 0-1999) < 0.5
+  pooled 0.344  GPTQ: 7/7 | RTN: 7/9 | all: 14/16
+      miss [RTN] mlp w3g32 push 0.42 room 0.34 ret 0.74
+      miss [RTN] attn w3c push 0.35 room 0.34 ret 0.91
+      miss [all] mlp w3g32 push 0.42 room 0.34 ret 0.74
+      miss [all] attn w3c push 0.35 room 0.34 ret 0.91
+  refit 0.327   GPTQ: 7/7 | RTN: 7/9 | all: 14/16
+      miss [RTN] mlp w3g32 push 0.42 room 0.33 ret 0.74
+      miss [RTN] attn w3c push 0.35 room 0.33 ret 0.91
+      miss [all] mlp w3g32 push 0.42 room 0.33 ret 0.74
+      miss [all] attn w3c push 0.35 room 0.33 ret 0.91
+  per-mixer     GPTQ: 7/7 | RTN: 8/9 | all: 15/16
+      miss [RTN] mlp w3g32 push 0.42 room 0.24 ret 0.74
+      miss [all] mlp w3g32 push 0.42 room 0.24 ret 0.74
+
+=== label: collapsed iff retained (rows 0-1999) < 0.4
+  pooled 0.344  GPTQ: 7/7 | RTN: 7/9 | all: 14/16
+      miss [RTN] mlp w3g32 push 0.42 room 0.34 ret 0.74
+      miss [RTN] attn w3c push 0.35 room 0.34 ret 0.91
+      miss [all] mlp w3g32 push 0.42 room 0.34 ret 0.74
+      miss [all] attn w3c push 0.35 room 0.34 ret 0.91
+  refit 0.327   GPTQ: 7/7 | RTN: 7/9 | all: 14/16
+      miss [RTN] mlp w3g32 push 0.42 room 0.33 ret 0.74
+      miss [RTN] attn w3c push 0.35 room 0.33 ret 0.91
+      miss [all] mlp w3g32 push 0.42 room 0.33 ret 0.74
+      miss [all] attn w3c push 0.35 room 0.33 ret 0.91
+  per-mixer     GPTQ: 7/7 | RTN: 8/9 | all: 15/16
+      miss [RTN] mlp w3g32 push 0.42 room 0.24 ret 0.74
+      miss [all] mlp w3g32 push 0.42 room 0.24 ret 0.74
+
+=== label: collapsed iff retained (rows 0-1999) < 0.6
+  pooled 0.344  GPTQ: 7/7 | RTN: 7/9 | all: 14/16
+      miss [RTN] mlp w3g32 push 0.42 room 0.34 ret 0.74
+      miss [RTN] attn w3c push 0.35 room 0.34 ret 0.91
+      miss [all] mlp w3g32 push 0.42 room 0.34 ret 0.74
+      miss [all] attn w3c push 0.35 room 0.34 ret 0.91
+  refit 0.327   GPTQ: 7/7 | RTN: 7/9 | all: 14/16
+      miss [RTN] mlp w3g32 push 0.42 room 0.33 ret 0.74
+      miss [RTN] attn w3c push 0.35 room 0.33 ret 0.91
+      miss [all] mlp w3g32 push 0.42 room 0.33 ret 0.74
+      miss [all] attn w3c push 0.35 room 0.33 ret 0.91
+  per-mixer     GPTQ: 7/7 | RTN: 8/9 | all: 15/16
+      miss [RTN] mlp w3g32 push 0.42 room 0.24 ret 0.74
+      miss [all] mlp w3g32 push 0.42 room 0.24 ret 0.74
+
+=== push-vs-retained curve: isotonic fit on RTN points (leave-one-out for RTN), GPTQ predicted from the RTN curve
+  x = push: RTN leave-one-out residuals (measured - predicted retained) mean abs 0.093, max 0.286; GPTQ residuals [-0.013, -0.042, 0.019, -0.356, -0.027, -0.017, -0.362] mean abs 0.119, mean signed -0.114
+  x = wdist: RTN leave-one-out residuals (measured - predicted retained) mean abs 0.135, max 0.567; GPTQ residuals [0.141, 0.123, 0.19, 0.021, 0.719, 0.155, 0.0] mean abs 0.193, mean signed +0.193
+wrote results/m5/gptq_push_rule.json

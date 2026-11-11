@@ -1,0 +1,6 @@
+NVIDIA L40S 2.10.0+cu128
+sudoku_mlp (trm) n=1000 batch=256 T=16 ks=[8] inner=[1, 7, 14] cells=[('w3c', 0)] polish=['w8c']; 0 records present
+  fp32 acc 70.8  curve@[8]: [np.float64(67.6)] (393s)
+  w3c#0 polish=w8c: c16 17.3 | c16=17.3 c24=18.0 P8.c16=60.9 c16.P8=67.8 c32=18.0 c40=17.9 P8.c32=59.9 c32.P8=68.6 c64=18.1 c72=17.9 P8.c64=60.5 c64.P8=67.7 c128=18.1 c136=18.2 P8.c128=60.4 c128.P8=67.9 c256=18.2 c264=18.1 P8.c256=60.1 c256.P8=67.2 | append c16.P8@[24]: [np.float64(67.8)] (2761s)
+  cell ('w3c', 0) done (2762s)
+wrote /home/skolawol/settling/out/mlp_w3c.json 1 records
