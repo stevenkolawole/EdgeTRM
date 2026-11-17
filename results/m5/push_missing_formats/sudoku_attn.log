@@ -1,0 +1,2 @@
+sudoku_attn  w4g32      w-dist pooled 0.0866 mean-tensor 0.0955 | push median T16=0.0720
+sudoku_attn  w6c        w-dist pooled 0.0288 mean-tensor 0.0323 | push median T16=0.0262

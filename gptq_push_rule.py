@@ -89,4 +89,5 @@ def main():
     json.dump(res, open(H / "results/m5/gptq_push_rule.json", "w"), indent=1, default=float)
     print("wrote results/m5/gptq_push_rule.json")
 
-main()
+if __name__ == "__main__":
+    main()

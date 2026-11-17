@@ -1,0 +1,2394 @@
+{
+ "coverage": {
+  "sudoku_mlp": {
+   "measured": {
+    "w2g32": {
+     "push": 1.164149284362793,
+     "source": "push_gptq_vs_rtn"
+    },
+    "w3c": {
+     "push": 0.9570366144180298,
+     "source": "push_gptq_vs_rtn"
+    },
+    "w3g32": {
+     "push": 0.42213791608810425,
+     "source": "push_gptq_vs_rtn"
+    },
+    "w4t": {
+     "push": 1.0419244766235352,
+     "source": "push_gptq_vs_rtn"
+    },
+    "w4c": {
+     "push": 0.20657318830490112,
+     "source": "push_gptq_vs_rtn"
+    },
+    "w4g32": {
+     "push": 0.10921318829059601,
+     "source": "push_missing_formats/sudoku_mlp.json"
+    },
+    "w6c": {
+     "push": 0.04093574732542038,
+     "source": "push_missing_formats/sudoku_mlp.json"
+    },
+    "w8c": {
+     "push": 0.009704000316560268,
+     "source": "contraction/contraction_sudoku_mlp_q1.json"
+    }
+   },
+   "missing": []
+  },
+  "sudoku_attn": {
+   "measured": {
+    "w2g32": {
+     "push": 0.9103634357452393,
+     "source": "push_gptq_vs_rtn"
+    },
+    "w3c": {
+     "push": 0.35280925035476685,
+     "source": "push_gptq_vs_rtn"
+    },
+    "w3g32": {
+     "push": 0.2113359570503235,
+     "source": "push_gptq_vs_rtn"
+    },
+    "w4c": {
+     "push": 0.13537731766700745,
+     "source": "push_gptq_vs_rtn"
+    },
+    "w4g32": {
+     "push": 0.0719703882932663,
+     "source": "push_missing_formats/sudoku_attn.json"
+    },
+    "w6c": {
+     "push": 0.026176534593105316,
+     "source": "push_missing_formats/sudoku_attn.json"
+    },
+    "w8c": {
+     "push": 0.00658600009046495,
+     "source": "contraction/contraction_sudoku_attn_q1.json"
+    }
+   },
+   "missing": []
+  },
+  "hrm_sudoku": {
+   "measured": {
+    "w2g32": {
+     "push": 0.4303932189941406,
+     "source": "push_missing_formats/hrm_sudoku.json"
+    },
+    "w3c": {
+     "push": 0.16470742225646973,
+     "source": "push_missing_formats/hrm_sudoku.json"
+    },
+    "w3g32": {
+     "push": 0.09329497814178467,
+     "source": "push_missing_formats/hrm_sudoku.json"
+    },
+    "w4t": {
+     "push": 0.14794399589300156,
+     "source": "contraction/contraction_hrm_sudoku_q1.json"
+    },
+    "w4c": {
+     "push": 0.05987099930644035,
+     "source": "contraction/contraction_hrm_sudoku_q1.json"
+    },
+    "w4g32": {
+     "push": 0.03804124891757965,
+     "source": "push_missing_formats/hrm_sudoku.json"
+    },
+    "w6c": {
+     "push": 0.013208162039518356,
+     "source": "push_missing_formats/hrm_sudoku.json"
+    },
+    "w8c": {
+     "push": 0.00330550002399832,
+     "source": "contraction/contraction_hrm_sudoku_q1.json"
+    }
+   },
+   "missing": []
+  },
+  "attn512_s0": {
+   "measured": {
+    "w3c": {
+     "push": 0.34243354201316833,
+     "source": "push_missing_formats/attn512_s0.json"
+    },
+    "w3g32": {
+     "push": 0.17398613691329956,
+     "source": "push_missing_formats/attn512_s0.json"
+    },
+    "w4c": {
+     "push": 0.1233283206820488,
+     "source": "push_missing_formats/attn512_s0.json"
+    },
+    "w4g32": {
+     "push": 0.07616056501865387,
+     "source": "push_missing_formats/attn512_s0.json"
+    },
+    "w6c": {
+     "push": 0.030088674277067184,
+     "source": "push_missing_formats/attn512_s0.json"
+    },
+    "w8c": {
+     "push": 0.006842887494713068,
+     "source": "push_missing_formats/attn512_s0.json"
+    }
+   },
+   "missing": []
+  },
+  "attn512_s1": {
+   "measured": {
+    "w3c": {
+     "push": 0.365276575088501,
+     "source": "push_missing_formats/attn512_s1.json"
+    },
+    "w3g32": {
+     "push": 0.19588646292686462,
+     "source": "push_missing_formats/attn512_s1.json"
+    },
+    "w4c": {
+     "push": 0.1334458291530609,
+     "source": "push_missing_formats/attn512_s1.json"
+    },
+    "w4g32": {
+     "push": 0.08656840026378632,
+     "source": "push_missing_formats/attn512_s1.json"
+    },
+    "w6c": {
+     "push": 0.03170103207230568,
+     "source": "push_missing_formats/attn512_s1.json"
+    },
+    "w8c": {
+     "push": 0.007596669718623161,
+     "source": "push_missing_formats/attn512_s1.json"
+    }
+   },
+   "missing": []
+  },
+  "attn512_s2": {
+   "measured": {
+    "w3c": {
+     "push": 0.4123152792453766,
+     "source": "push_missing_formats/attn512_s2.json"
+    },
+    "w3g32": {
+     "push": 0.20377352833747864,
+     "source": "push_missing_formats/attn512_s2.json"
+    },
+    "w4c": {
+     "push": 0.1481032520532608,
+     "source": "push_missing_formats/attn512_s2.json"
+    },
+    "w4g32": {
+     "push": 0.08719507604837418,
+     "source": "push_missing_formats/attn512_s2.json"
+    },
+    "w6c": {
+     "push": 0.03326127678155899,
+     "source": "push_missing_formats/attn512_s2.json"
+    },
+    "w8c": {
+     "push": 0.007721623405814171,
+     "source": "push_missing_formats/attn512_s2.json"
+    }
+   },
+   "missing": []
+  },
+  "mlp512_s0": {
+   "measured": {
+    "w3c": {
+     "push": 0.7919915914535522,
+     "source": "push_missing_formats/mlp512_s0.json"
+    },
+    "w3g32": {
+     "push": 0.2674354612827301,
+     "source": "push_missing_formats/mlp512_s0.json"
+    },
+    "w4c": {
+     "push": 0.18123304843902588,
+     "source": "push_missing_formats/mlp512_s0.json"
+    },
+    "w4g32": {
+     "push": 0.07833510637283325,
+     "source": "push_missing_formats/mlp512_s0.json"
+    },
+    "w6c": {
+     "push": 0.030331384390592575,
+     "source": "push_missing_formats/mlp512_s0.json"
+    },
+    "w8c": {
+     "push": 0.007744838483631611,
+     "source": "push_missing_formats/mlp512_s0.json"
+    }
+   },
+   "missing": []
+  },
+  "mlp512_s1": {
+   "measured": {
+    "w3c": {
+     "push": 0.5599724054336548,
+     "source": "push_missing_formats/mlp512_s1.json"
+    },
+    "w3g32": {
+     "push": 0.22274214029312134,
+     "source": "push_missing_formats/mlp512_s1.json"
+    },
+    "w4c": {
+     "push": 0.1516338288784027,
+     "source": "push_missing_formats/mlp512_s1.json"
+    },
+    "w4g32": {
+     "push": 0.08064413070678711,
+     "source": "push_missing_formats/mlp512_s1.json"
+    },
+    "w6c": {
+     "push": 0.02877676673233509,
+     "source": "push_missing_formats/mlp512_s1.json"
+    },
+    "w8c": {
+     "push": 0.007523584179580212,
+     "source": "push_missing_formats/mlp512_s1.json"
+    }
+   },
+   "missing": []
+  },
+  "mlp512_s2": {
+   "measured": {
+    "w3c": {
+     "push": 0.734979510307312,
+     "source": "push_missing_formats/mlp512_s2.json"
+    },
+    "w3g32": {
+     "push": 0.269564688205719,
+     "source": "push_missing_formats/mlp512_s2.json"
+    },
+    "w4c": {
+     "push": 0.167181134223938,
+     "source": "push_missing_formats/mlp512_s2.json"
+    },
+    "w4g32": {
+     "push": 0.08478154242038727,
+     "source": "push_missing_formats/mlp512_s2.json"
+    },
+    "w6c": {
+     "push": 0.029137659817934036,
+     "source": "push_missing_formats/mlp512_s2.json"
+    },
+    "w8c": {
+     "push": 0.007004340644925833,
+     "source": "push_missing_formats/mlp512_s2.json"
+    }
+   },
+   "missing": []
+  }
+ },
+ "models": {
+  "pooled 0.344": {
+   "sudoku_mlp": {
+    "pick": "w4c",
+    "push": 0.20657318830490112,
+    "room": 0.344,
+    "retained": 0.9514497639919083,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 76.0,
+       "traffic": 44.372,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 75.2,
+       "traffic": 44.152,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.8,
+       "traffic": 51.3325,
+       "stored": 11.5
+      },
+      "dev-best (w6c)": {
+       "acc": 78.3,
+       "traffic": 50.232,
+       "stored": 6.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 76.6,
+       "traffic": 59.604,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 78.9,
+       "traffic": 66.384,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.8,
+       "traffic": 51.3325,
+       "stored": 11.5
+      },
+      "dev-best (w6c)": {
+       "acc": 79.3,
+       "traffic": 60.408,
+       "stored": 6.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 77.5,
+       "traffic": 74.412,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 81.6,
+       "traffic": 129.024,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.8,
+       "traffic": 51.3325,
+       "stored": 11.5
+      },
+      "dev-best (w8c)": {
+       "acc": 81.6,
+       "traffic": 129.024,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "sudoku_attn": {
+    "pick": "w3g32",
+    "push": 0.2113359570503235,
+    "room": 0.344,
+    "retained": 0.984181568088033,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 81.5,
+       "traffic": 32.872,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 73.4,
+       "traffic": 34.36,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 78.8,
+       "traffic": 37.79899999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4g32)": {
+       "acc": 80.0,
+       "traffic": 35.3385,
+       "stored": 4.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 83.3,
+       "traffic": 42.175,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 78.3,
+       "traffic": 49.184,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 79.80000000000001,
+       "traffic": 55.43899999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 83.1,
+       "traffic": 47.996,
+       "stored": 4.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 84.0,
+       "traffic": 50.778,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 83.3,
+       "traffic": 118.896,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 80.5,
+       "traffic": 50.853,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 83.3,
+       "traffic": 118.896,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "hrm_sudoku": {
+    "pick": "w3c",
+    "push": 0.16470742225646973,
+    "room": 0.344,
+    "retained": 0.9202175883952856,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 55.300000000000004,
+       "traffic": 30.267,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 38.1,
+       "traffic": 29.656,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 36.8,
+       "traffic": 34.500000000000014,
+       "stored": 10.5
+      },
+      "dev-best (w3g32)": {
+       "acc": 58.099999999999994,
+       "traffic": 33.488,
+       "stored": 3.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 58.9,
+       "traffic": 50.58,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 53.900000000000006,
+       "traffic": 47.272,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 36.8,
+       "traffic": 34.500000000000014,
+       "stored": 10.5
+      },
+      "dev-best (w4c)": {
+       "acc": 61.4,
+       "traffic": 50.676,
+       "stored": 4.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 61.8,
+       "traffic": 88.467,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 63.6,
+       "traffic": 122.424,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 36.8,
+       "traffic": 34.500000000000014,
+       "stored": 10.5
+      },
+      "dev-best (w4g32)": {
+       "acc": 64.9,
+       "traffic": 121.365,
+       "stored": 4.5
+      }
+     }
+    }
+   },
+   "attn512_s0": {
+    "pick": "w3c",
+    "push": 0.34243354201316833,
+    "room": 0.344,
+    "retained": 0.9698668535388927,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 78.3,
+       "traffic": 34.257,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 72.2,
+       "traffic": 35.936,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 78.3,
+       "traffic": 34.257000000000005,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 78.3,
+       "traffic": 34.257,
+       "stored": 3.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 77.60000000000001,
+       "traffic": 51.512,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 3.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 85.0,
+       "traffic": 118.04,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 3.0
+      }
+     }
+    }
+   },
+   "attn512_s1": {
+    "pick": "w3g32",
+    "push": 0.19588646292686462,
+    "room": 0.344,
+    "retained": 0.9832483612527313,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 76.0,
+       "traffic": 31.955,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 67.9,
+       "traffic": 38.496,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 73.4,
+       "traffic": 36.644999999999996,
+       "stored": 11.0
+      },
+      "dev-best (w3g32)": {
+       "acc": 76.0,
+       "traffic": 31.955,
+       "stored": 3.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 77.4,
+       "traffic": 51.093,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 74.4,
+       "traffic": 56.448,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.2,
+       "traffic": 49.107,
+       "stored": 11.0
+      },
+      "dev-best (w3g32)": {
+       "acc": 77.4,
+       "traffic": 51.093,
+       "stored": 3.5
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 78.60000000000001,
+       "traffic": 63.077,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 81.3,
+       "traffic": 136.192,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.9,
+       "traffic": 61.254,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 81.3,
+       "traffic": 136.192,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "attn512_s2": {
+    "pick": "w3g32",
+    "push": 0.20377352833747864,
+    "room": 0.344,
+    "retained": 1.006677796327212,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 76.1,
+       "traffic": 33.348,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 65.3,
+       "traffic": 39.6,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 72.7,
+       "traffic": 41.65699999999999,
+       "stored": 11.0
+      },
+      "dev-best (w3g32)": {
+       "acc": 76.1,
+       "traffic": 33.348,
+       "stored": 3.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 77.60000000000001,
+       "traffic": 39.7705,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 72.7,
+       "traffic": 58.848,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 73.6,
+       "traffic": 52.86,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 73.6,
+       "traffic": 52.86,
+       "stored": 3.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 79.60000000000001,
+       "traffic": 63.182,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 78.4,
+       "traffic": 117.32,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 75.7,
+       "traffic": 64.638,
+       "stored": 11.0
+      },
+      "dev-best (w6c)": {
+       "acc": 78.9,
+       "traffic": 108.528,
+       "stored": 6.0
+      }
+     }
+    }
+   },
+   "mlp512_s0": {
+    "pick": "w3g32",
+    "push": 0.2674354612827301,
+    "room": 0.344,
+    "retained": 0.8892094633583381,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 85.0,
+       "traffic": 29.7815,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 90.8,
+       "traffic": 37.032,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.7,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 95.7,
+       "traffic": 26.976,
+       "stored": 4.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 88.5,
+       "traffic": 43.988,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 95.0,
+       "traffic": 45.68,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.7,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 96.7,
+       "traffic": 29.476,
+       "stored": 4.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 88.5,
+       "traffic": 43.988,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 97.0,
+       "traffic": 54.664,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.7,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 96.7,
+       "traffic": 29.476,
+       "stored": 4.0
+      }
+     }
+    }
+   },
+   "mlp512_s1": {
+    "pick": "w3g32",
+    "push": 0.22274214029312134,
+    "room": 0.344,
+    "retained": 0.9180232558139535,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 88.4,
+       "traffic": 34.412,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 90.10000000000001,
+       "traffic": 36.904,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.4,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4g32)": {
+       "acc": 94.19999999999999,
+       "traffic": 31.473,
+       "stored": 4.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 89.1,
+       "traffic": 40.5685,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 93.8,
+       "traffic": 46.192,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.4,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4g32)": {
+       "acc": 95.3,
+       "traffic": 34.92,
+       "stored": 4.5
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 89.1,
+       "traffic": 40.5685,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 96.3,
+       "traffic": 57.272,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.4,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 96.3,
+       "traffic": 57.272,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "mlp512_s2": {
+    "pick": "w3g32",
+    "push": 0.269564688205719,
+    "room": 0.344,
+    "retained": 0.8818443804034581,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 82.89999999999999,
+       "traffic": 32.284,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 90.3,
+       "traffic": 37.0,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.60000000000001,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 96.2,
+       "traffic": 30.704,
+       "stored": 4.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 85.6,
+       "traffic": 49.014,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 95.1,
+       "traffic": 45.16,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.60000000000001,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w6c)": {
+       "acc": 96.7,
+       "traffic": 38.238,
+       "stored": 6.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 85.6,
+       "traffic": 49.014,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 97.7,
+       "traffic": 52.52,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.60000000000001,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 97.7,
+       "traffic": 52.52,
+       "stored": 8.0
+      }
+     }
+    }
+   }
+  },
+  "refit 0.327": {
+   "sudoku_mlp": {
+    "pick": "w4c",
+    "push": 0.20657318830490112,
+    "room": 0.327,
+    "retained": 0.9514497639919083,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 76.0,
+       "traffic": 44.372,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 75.2,
+       "traffic": 44.152,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.8,
+       "traffic": 51.3325,
+       "stored": 11.5
+      },
+      "dev-best (w6c)": {
+       "acc": 78.3,
+       "traffic": 50.232,
+       "stored": 6.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 76.6,
+       "traffic": 59.604,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 78.9,
+       "traffic": 66.384,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.8,
+       "traffic": 51.3325,
+       "stored": 11.5
+      },
+      "dev-best (w6c)": {
+       "acc": 79.3,
+       "traffic": 60.408,
+       "stored": 6.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 77.5,
+       "traffic": 74.412,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 81.6,
+       "traffic": 129.024,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.8,
+       "traffic": 51.3325,
+       "stored": 11.5
+      },
+      "dev-best (w8c)": {
+       "acc": 81.6,
+       "traffic": 129.024,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "sudoku_attn": {
+    "pick": "w3g32",
+    "push": 0.2113359570503235,
+    "room": 0.327,
+    "retained": 0.984181568088033,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 81.5,
+       "traffic": 32.872,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 73.4,
+       "traffic": 34.36,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 78.8,
+       "traffic": 37.79899999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4g32)": {
+       "acc": 80.0,
+       "traffic": 35.3385,
+       "stored": 4.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 83.3,
+       "traffic": 42.175,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 78.3,
+       "traffic": 49.184,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 79.80000000000001,
+       "traffic": 55.43899999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 83.1,
+       "traffic": 47.996,
+       "stored": 4.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 84.0,
+       "traffic": 50.778,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 83.3,
+       "traffic": 118.896,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 80.5,
+       "traffic": 50.853,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 83.3,
+       "traffic": 118.896,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "hrm_sudoku": {
+    "pick": "w3c",
+    "push": 0.16470742225646973,
+    "room": 0.327,
+    "retained": 0.9202175883952856,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 55.300000000000004,
+       "traffic": 30.267,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 38.1,
+       "traffic": 29.656,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 36.8,
+       "traffic": 34.500000000000014,
+       "stored": 10.5
+      },
+      "dev-best (w3g32)": {
+       "acc": 58.099999999999994,
+       "traffic": 33.488,
+       "stored": 3.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 58.9,
+       "traffic": 50.58,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 53.900000000000006,
+       "traffic": 47.272,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 36.8,
+       "traffic": 34.500000000000014,
+       "stored": 10.5
+      },
+      "dev-best (w4c)": {
+       "acc": 61.4,
+       "traffic": 50.676,
+       "stored": 4.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 61.8,
+       "traffic": 88.467,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 63.6,
+       "traffic": 122.424,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 36.8,
+       "traffic": 34.500000000000014,
+       "stored": 10.5
+      },
+      "dev-best (w4g32)": {
+       "acc": 64.9,
+       "traffic": 121.365,
+       "stored": 4.5
+      }
+     }
+    }
+   },
+   "attn512_s0": {
+    "pick": "w3g32",
+    "push": 0.17398613691329956,
+    "room": 0.327,
+    "retained": 1.0063069376313944,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 81.0,
+       "traffic": 35.0105,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 72.2,
+       "traffic": 35.936,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 78.3,
+       "traffic": 34.257000000000005,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 78.3,
+       "traffic": 34.257,
+       "stored": 3.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 83.3,
+       "traffic": 44.9295,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 77.60000000000001,
+       "traffic": 51.512,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 3.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 84.1,
+       "traffic": 53.8685,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 85.0,
+       "traffic": 118.04,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 3.0
+      }
+     }
+    }
+   },
+   "attn512_s1": {
+    "pick": "w3g32",
+    "push": 0.19588646292686462,
+    "room": 0.327,
+    "retained": 0.9832483612527313,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 76.0,
+       "traffic": 31.955,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 67.9,
+       "traffic": 38.496,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 73.4,
+       "traffic": 36.644999999999996,
+       "stored": 11.0
+      },
+      "dev-best (w3g32)": {
+       "acc": 76.0,
+       "traffic": 31.955,
+       "stored": 3.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 77.4,
+       "traffic": 51.093,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 74.4,
+       "traffic": 56.448,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.2,
+       "traffic": 49.107,
+       "stored": 11.0
+      },
+      "dev-best (w3g32)": {
+       "acc": 77.4,
+       "traffic": 51.093,
+       "stored": 3.5
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 78.60000000000001,
+       "traffic": 63.077,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 81.3,
+       "traffic": 136.192,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.9,
+       "traffic": 61.254,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 81.3,
+       "traffic": 136.192,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "attn512_s2": {
+    "pick": "w3g32",
+    "push": 0.20377352833747864,
+    "room": 0.327,
+    "retained": 1.006677796327212,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 76.1,
+       "traffic": 33.348,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 65.3,
+       "traffic": 39.6,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 72.7,
+       "traffic": 41.65699999999999,
+       "stored": 11.0
+      },
+      "dev-best (w3g32)": {
+       "acc": 76.1,
+       "traffic": 33.348,
+       "stored": 3.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 77.60000000000001,
+       "traffic": 39.7705,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 72.7,
+       "traffic": 58.848,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 73.6,
+       "traffic": 52.86,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 73.6,
+       "traffic": 52.86,
+       "stored": 3.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 79.60000000000001,
+       "traffic": 63.182,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 78.4,
+       "traffic": 117.32,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 75.7,
+       "traffic": 64.638,
+       "stored": 11.0
+      },
+      "dev-best (w6c)": {
+       "acc": 78.9,
+       "traffic": 108.528,
+       "stored": 6.0
+      }
+     }
+    }
+   },
+   "mlp512_s0": {
+    "pick": "w3g32",
+    "push": 0.2674354612827301,
+    "room": 0.327,
+    "retained": 0.8892094633583381,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 85.0,
+       "traffic": 29.7815,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 90.8,
+       "traffic": 37.032,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.7,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 95.7,
+       "traffic": 26.976,
+       "stored": 4.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 88.5,
+       "traffic": 43.988,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 95.0,
+       "traffic": 45.68,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.7,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 96.7,
+       "traffic": 29.476,
+       "stored": 4.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 88.5,
+       "traffic": 43.988,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 97.0,
+       "traffic": 54.664,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.7,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 96.7,
+       "traffic": 29.476,
+       "stored": 4.0
+      }
+     }
+    }
+   },
+   "mlp512_s1": {
+    "pick": "w3g32",
+    "push": 0.22274214029312134,
+    "room": 0.327,
+    "retained": 0.9180232558139535,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 88.4,
+       "traffic": 34.412,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 90.10000000000001,
+       "traffic": 36.904,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.4,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4g32)": {
+       "acc": 94.19999999999999,
+       "traffic": 31.473,
+       "stored": 4.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 89.1,
+       "traffic": 40.5685,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 93.8,
+       "traffic": 46.192,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.4,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4g32)": {
+       "acc": 95.3,
+       "traffic": 34.92,
+       "stored": 4.5
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 89.1,
+       "traffic": 40.5685,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 96.3,
+       "traffic": 57.272,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.4,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 96.3,
+       "traffic": 57.272,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "mlp512_s2": {
+    "pick": "w3g32",
+    "push": 0.269564688205719,
+    "room": 0.327,
+    "retained": 0.8818443804034581,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 82.89999999999999,
+       "traffic": 32.284,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 90.3,
+       "traffic": 37.0,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.60000000000001,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 96.2,
+       "traffic": 30.704,
+       "stored": 4.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 85.6,
+       "traffic": 49.014,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 95.1,
+       "traffic": 45.16,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.60000000000001,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w6c)": {
+       "acc": 96.7,
+       "traffic": 38.238,
+       "stored": 6.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 85.6,
+       "traffic": 49.014,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 97.7,
+       "traffic": 52.52,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.60000000000001,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 97.7,
+       "traffic": 52.52,
+       "stored": 8.0
+      }
+     }
+    }
+   }
+  },
+  "per-mixer": {
+   "sudoku_mlp": {
+    "pick": "w4c",
+    "push": 0.20657318830490112,
+    "room": 0.245,
+    "retained": 0.9514497639919083,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 76.0,
+       "traffic": 44.372,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 75.2,
+       "traffic": 44.152,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.8,
+       "traffic": 51.3325,
+       "stored": 11.5
+      },
+      "dev-best (w6c)": {
+       "acc": 78.3,
+       "traffic": 50.232,
+       "stored": 6.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 76.6,
+       "traffic": 59.604,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 78.9,
+       "traffic": 66.384,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.8,
+       "traffic": 51.3325,
+       "stored": 11.5
+      },
+      "dev-best (w6c)": {
+       "acc": 79.3,
+       "traffic": 60.408,
+       "stored": 6.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 77.5,
+       "traffic": 74.412,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 81.6,
+       "traffic": 129.024,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.8,
+       "traffic": 51.3325,
+       "stored": 11.5
+      },
+      "dev-best (w8c)": {
+       "acc": 81.6,
+       "traffic": 129.024,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "sudoku_attn": {
+    "pick": "w3c",
+    "push": 0.35280925035476685,
+    "room": 0.52,
+    "retained": 0.9064649243466301,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 76.6,
+       "traffic": 34.164,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 73.4,
+       "traffic": 34.36,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 78.8,
+       "traffic": 37.79899999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4g32)": {
+       "acc": 80.0,
+       "traffic": 35.3385,
+       "stored": 4.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 79.2,
+       "traffic": 43.119,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 78.3,
+       "traffic": 49.184,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 79.80000000000001,
+       "traffic": 55.43899999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 83.1,
+       "traffic": 47.996,
+       "stored": 4.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 80.5,
+       "traffic": 50.853,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 83.3,
+       "traffic": 118.896,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 80.5,
+       "traffic": 50.853,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 83.3,
+       "traffic": 118.896,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "hrm_sudoku": {
+    "pick": null
+   },
+   "attn512_s0": {
+    "pick": "w3c",
+    "push": 0.34243354201316833,
+    "room": 0.52,
+    "retained": 0.9698668535388927,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 78.3,
+       "traffic": 34.257,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 72.2,
+       "traffic": 35.936,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 78.3,
+       "traffic": 34.257000000000005,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 78.3,
+       "traffic": 34.257,
+       "stored": 3.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 77.60000000000001,
+       "traffic": 51.512,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 3.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 85.0,
+       "traffic": 118.04,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 81.89999999999999,
+       "traffic": 52.905,
+       "stored": 3.0
+      }
+     }
+    }
+   },
+   "attn512_s1": {
+    "pick": "w3c",
+    "push": 0.365276575088501,
+    "room": 0.52,
+    "retained": 0.9213401310997814,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 73.4,
+       "traffic": 36.645,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 67.9,
+       "traffic": 38.496,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 73.4,
+       "traffic": 36.644999999999996,
+       "stored": 11.0
+      },
+      "dev-best (w3g32)": {
+       "acc": 76.0,
+       "traffic": 31.955,
+       "stored": 3.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 74.2,
+       "traffic": 49.107,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 74.4,
+       "traffic": 56.448,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.2,
+       "traffic": 49.107,
+       "stored": 11.0
+      },
+      "dev-best (w3g32)": {
+       "acc": 77.4,
+       "traffic": 51.093,
+       "stored": 3.5
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 74.9,
+       "traffic": 61.254,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 81.3,
+       "traffic": 136.192,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 74.9,
+       "traffic": 61.254,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 81.3,
+       "traffic": 136.192,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "attn512_s2": {
+    "pick": "w3c",
+    "push": 0.4123152792453766,
+    "room": 0.52,
+    "retained": 0.7621035058430718,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 70.5,
+       "traffic": 33.216,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 65.3,
+       "traffic": 39.6,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 72.7,
+       "traffic": 41.65699999999999,
+       "stored": 11.0
+      },
+      "dev-best (w3g32)": {
+       "acc": 76.1,
+       "traffic": 33.348,
+       "stored": 3.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 73.6,
+       "traffic": 52.86,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 72.7,
+       "traffic": 58.848,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 73.6,
+       "traffic": 52.86,
+       "stored": 11.0
+      },
+      "dev-best (w3c)": {
+       "acc": 73.6,
+       "traffic": 52.86,
+       "stored": 3.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 75.7,
+       "traffic": 64.638,
+       "stored": 3.0
+      },
+      "w8c alone": {
+       "acc": 78.4,
+       "traffic": 117.32,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 75.7,
+       "traffic": 64.638,
+       "stored": 11.0
+      },
+      "dev-best (w6c)": {
+       "acc": 78.9,
+       "traffic": 108.528,
+       "stored": 6.0
+      }
+     }
+    }
+   },
+   "mlp512_s0": {
+    "pick": "w4c",
+    "push": 0.18123304843902588,
+    "room": 0.245,
+    "retained": 0.9913444893248701,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 95.7,
+       "traffic": 26.976,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 90.8,
+       "traffic": 37.032,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.7,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 95.7,
+       "traffic": 26.976,
+       "stored": 4.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 96.7,
+       "traffic": 29.476,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 95.0,
+       "traffic": 45.68,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.7,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 96.7,
+       "traffic": 29.476,
+       "stored": 4.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 96.7,
+       "traffic": 29.476,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 97.0,
+       "traffic": 54.664,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.7,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 96.7,
+       "traffic": 29.476,
+       "stored": 4.0
+      }
+     }
+    }
+   },
+   "mlp512_s1": {
+    "pick": "w3g32",
+    "push": 0.22274214029312134,
+    "room": 0.245,
+    "retained": 0.9180232558139535,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 88.4,
+       "traffic": 34.412,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 90.10000000000001,
+       "traffic": 36.904,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.4,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4g32)": {
+       "acc": 94.19999999999999,
+       "traffic": 31.473,
+       "stored": 4.5
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 89.1,
+       "traffic": 40.5685,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 93.8,
+       "traffic": 46.192,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.4,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4g32)": {
+       "acc": 95.3,
+       "traffic": 34.92,
+       "stored": 4.5
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 89.1,
+       "traffic": 40.5685,
+       "stored": 3.5
+      },
+      "w8c alone": {
+       "acc": 96.3,
+       "traffic": 57.272,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.4,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 96.3,
+       "traffic": 57.272,
+       "stored": 8.0
+      }
+     }
+    }
+   },
+   "mlp512_s2": {
+    "pick": "w4c",
+    "push": 0.167181134223938,
+    "room": 0.245,
+    "retained": 0.9936599423631123,
+    "collapses": false,
+    "determined": true,
+    "budgets": {
+     "16": {
+      "law pick": {
+       "acc": 96.2,
+       "traffic": 30.704,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 90.3,
+       "traffic": 37.0,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.60000000000001,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w4c)": {
+       "acc": 96.2,
+       "traffic": 30.704,
+       "stored": 4.0
+      }
+     },
+     "24": {
+      "law pick": {
+       "acc": 96.2,
+       "traffic": 30.704,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 95.1,
+       "traffic": 45.16,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.60000000000001,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w6c)": {
+       "acc": 96.7,
+       "traffic": 38.238,
+       "stored": 6.0
+      }
+     },
+     "64": {
+      "law pick": {
+       "acc": 96.2,
+       "traffic": 30.704,
+       "stored": 4.0
+      },
+      "w8c alone": {
+       "acc": 97.7,
+       "traffic": 52.52,
+       "stored": 8.0
+      },
+      "controller+w8c": {
+       "acc": 68.60000000000001,
+       "traffic": 34.99999999999999,
+       "stored": 11.0
+      },
+      "dev-best (w8c)": {
+       "acc": 97.7,
+       "traffic": 52.52,
+       "stored": 8.0
+      }
+     }
+    }
+   }
+  }
+ },
+ "pooled": {
+  "pooled 0.344": {
+   "n_determined": 9,
+   "n_collapse": 0,
+   "w8c_alone_b16": {
+    "n": 9,
+    "mean": 4.022222222222221,
+    "lo": 3.266666666666666,
+    "hi": 4.777777777777778
+   },
+   "w8c_alone_b24": {
+    "n": 9,
+    "mean": -0.08888888888888898,
+    "lo": -0.7888888888888888,
+    "hi": 0.6333333333333333
+   },
+   "w8c_alone_b64": {
+    "n": 9,
+    "mean": -4.177777777777777,
+    "lo": -4.877777777777778,
+    "hi": -3.5555555555555554
+   },
+   "controller_b16": {
+    "n": 9,
+    "mean": 8.777777777777779,
+    "lo": 7.977777777777778,
+    "hi": 9.555833333333332
+   },
+   "controller_b24": {
+    "n": 9,
+    "mean": 10.233333333333334,
+    "lo": 9.433333333333332,
+    "hi": 11.044444444444444
+   },
+   "controller_b64": {
+    "n": 9,
+    "mean": 10.700000000000001,
+    "lo": 9.88888888888889,
+    "hi": 11.500277777777775
+   }
+  },
+  "refit 0.327": {
+   "n_determined": 9,
+   "n_collapse": 0,
+   "w8c_alone_b16": {
+    "n": 9,
+    "mean": 4.322222222222222,
+    "lo": 3.588611111111111,
+    "hi": 5.11111111111111
+   },
+   "w8c_alone_b24": {
+    "n": 9,
+    "mean": 0.06666666666666674,
+    "lo": -0.6000000000000001,
+    "hi": 0.755833333333332
+   },
+   "w8c_alone_b64": {
+    "n": 9,
+    "mean": -3.933333333333333,
+    "lo": -4.5888888888888895,
+    "hi": -3.322222222222223
+   },
+   "controller_b16": {
+    "n": 9,
+    "mean": 9.077777777777778,
+    "lo": 8.233333333333333,
+    "hi": 9.933333333333334
+   },
+   "controller_b24": {
+    "n": 9,
+    "mean": 10.388888888888891,
+    "lo": 9.544444444444444,
+    "hi": 11.21111111111111
+   },
+   "controller_b64": {
+    "n": 9,
+    "mean": 10.944444444444446,
+    "lo": 10.066666666666668,
+    "hi": 11.755833333333333
+   }
+  },
+  "per-mixer": {
+   "n_determined": 8,
+   "n_collapse": 0,
+   "w8c_alone_b16": {
+    "n": 8,
+    "mean": 3.7375000000000007,
+    "lo": 2.95,
+    "hi": 4.549999999999999
+   },
+   "w8c_alone_b24": {
+    "n": 8,
+    "mean": 0.21249999999999994,
+    "lo": -0.5499999999999999,
+    "hi": 0.9625
+   },
+   "w8c_alone_b64": {
+    "n": 8,
+    "mean": -3.5125,
+    "lo": -4.2250000000000005,
+    "hi": -2.7875000000000005
+   },
+   "controller_b16": {
+    "n": 8,
+    "mean": 8.925,
+    "lo": 8.1875,
+    "hi": 9.65
+   },
+   "controller_b24": {
+    "n": 8,
+    "mean": 9.6875,
+    "lo": 8.912500000000001,
+    "hi": 10.4125
+   },
+   "controller_b64": {
+    "n": 8,
+    "mean": 9.875,
+    "lo": 9.212187499999999,
+    "hi": 10.574999999999998
+   }
+  }
+ }
+}

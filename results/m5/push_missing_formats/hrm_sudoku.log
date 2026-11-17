@@ -1,0 +1,5 @@
+hrm_sudoku   w2g32      w-dist pooled 0.6044 mean-tensor 0.6378 | push median T16=0.4304
+hrm_sudoku   w3c        w-dist pooled 0.3096 mean-tensor 0.3328 | push median T16=0.1647
+hrm_sudoku   w3g32      w-dist pooled 0.2114 mean-tensor 0.2234 | push median T16=0.0933
+hrm_sudoku   w4g32      w-dist pooled 0.0911 mean-tensor 0.0961 | push median T16=0.0380
+hrm_sudoku   w6c        w-dist pooled 0.0303 mean-tensor 0.0325 | push median T16=0.0132

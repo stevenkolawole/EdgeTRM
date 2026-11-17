@@ -1,0 +1,9 @@
+rc=0 hrm_sudoku
+rc=0 sudoku_mlp
+rc=0 sudoku_attn
+rc=0 mlp512_s0
+rc=0 mlp512_s1
+rc=0 mlp512_s2
+rc=0 attn512_s0
+rc=0 attn512_s2
+rc=0 attn512_s1

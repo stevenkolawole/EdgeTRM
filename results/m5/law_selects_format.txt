@@ -1,0 +1,144 @@
+room per mixer (median implied room, n): {'sudoku_mlp': (0.245, 8), 'sudoku_attn': (0.52, 3)}
+
+=== COVERAGE: formats with a measured push (push) / without (-)
+  sudoku_mlp   measured 8/8: w2g32=1.164 w3c=0.957 w3g32=0.422 w4t=1.042 w4c=0.207 w4g32=0.109 w6c=0.041 w8c=0.010 | missing: 
+  sudoku_attn  measured 7/7: w2g32=0.910 w3c=0.353 w3g32=0.211 w4c=0.135 w4g32=0.072 w6c=0.026 w8c=0.007 | missing: 
+  hrm_sudoku   measured 8/8: w2g32=0.430 w3c=0.165 w3g32=0.093 w4t=0.148 w4c=0.060 w4g32=0.038 w6c=0.013 w8c=0.003 | missing: 
+  attn512_s0   measured 6/6: w3c=0.342 w3g32=0.174 w4c=0.123 w4g32=0.076 w6c=0.030 w8c=0.007 | missing: 
+  attn512_s1   measured 6/6: w3c=0.365 w3g32=0.196 w4c=0.133 w4g32=0.087 w6c=0.032 w8c=0.008 | missing: 
+  attn512_s2   measured 6/6: w3c=0.412 w3g32=0.204 w4c=0.148 w4g32=0.087 w6c=0.033 w8c=0.008 | missing: 
+  mlp512_s0    measured 6/6: w3c=0.792 w3g32=0.267 w4c=0.181 w4g32=0.078 w6c=0.030 w8c=0.008 | missing: 
+  mlp512_s1    measured 6/6: w3c=0.560 w3g32=0.223 w4c=0.152 w4g32=0.081 w6c=0.029 w8c=0.008 | missing: 
+  mlp512_s2    measured 6/6: w3c=0.735 w3g32=0.270 w4c=0.167 w4g32=0.085 w6c=0.029 w8c=0.007 | missing: 
+
+=== ROOM pooled 0.344: label-free pick, held-out rows 1000-1999 (acc | traffic bits/weight/puzzle | stored bits); cap = budget x b_eff(cheap of the controller cell)
+  sudoku_mlp  cheap w3g32 (cap 16/24/64 x 3.5): pick w4c (push 0.207 <= room 0.344, retained 0.95); determined
+      b=16: law pick  76.0  44.4  4.0 | w8c alone  75.2  44.2  8.0 | controller+w8c  74.8  51.3 11.5 | dev-best (w6c)  78.3  50.2  6.0
+      b=24: law pick  76.6  59.6  4.0 | w8c alone  78.9  66.4  8.0 | controller+w8c  74.8  51.3 11.5 | dev-best (w6c)  79.3  60.4  6.0
+      b=64: law pick  77.5  74.4  4.0 | w8c alone  81.6 129.0  8.0 | controller+w8c  74.8  51.3 11.5 | dev-best (w8c)  81.6 129.0  8.0
+  sudoku_attn cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.211 <= room 0.344, retained 0.98); determined
+      b=16: law pick  81.5  32.9  3.5 | w8c alone  73.4  34.4  8.0 | controller+w8c  78.8  37.8 11.0 | dev-best (w4g32)  80.0  35.3  4.5
+      b=24: law pick  83.3  42.2  3.5 | w8c alone  78.3  49.2  8.0 | controller+w8c  79.8  55.4 11.0 | dev-best (w4c)  83.1  48.0  4.0
+      b=64: law pick  84.0  50.8  3.5 | w8c alone  83.3 118.9  8.0 | controller+w8c  80.5  50.9 11.0 | dev-best (w8c)  83.3 118.9  8.0
+  hrm_sudoku  cheap w2g32 (cap 16/24/64 x 2.5): pick w3c (push 0.165 <= room 0.344, retained 0.92); determined
+      b=16: law pick  55.3  30.3  3.0 | w8c alone  38.1  29.7  8.0 | controller+w8c  36.8  34.5 10.5 | dev-best (w3g32)  58.1  33.5  3.5
+      b=24: law pick  58.9  50.6  3.0 | w8c alone  53.9  47.3  8.0 | controller+w8c  36.8  34.5 10.5 | dev-best (w4c)  61.4  50.7  4.0
+      b=64: law pick  61.8  88.5  3.0 | w8c alone  63.6 122.4  8.0 | controller+w8c  36.8  34.5 10.5 | dev-best (w4g32)  64.9 121.4  4.5
+  attn512_s0  cheap w3c (cap 16/24/64 x 3.0): pick w3c (push 0.342 <= room 0.344, retained 0.97); determined
+      b=16: law pick  78.3  34.3  3.0 | w8c alone  72.2  35.9  8.0 | controller+w8c  78.3  34.3 11.0 | dev-best (w3c)  78.3  34.3  3.0
+      b=24: law pick  81.9  52.9  3.0 | w8c alone  77.6  51.5  8.0 | controller+w8c  81.9  52.9 11.0 | dev-best (w3c)  81.9  52.9  3.0
+      b=64: law pick  81.9  52.9  3.0 | w8c alone  85.0 118.0  8.0 | controller+w8c  81.9  52.9 11.0 | dev-best (w3c)  81.9  52.9  3.0
+  attn512_s1  cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.196 <= room 0.344, retained 0.98); determined
+      b=16: law pick  76.0  32.0  3.5 | w8c alone  67.9  38.5  8.0 | controller+w8c  73.4  36.6 11.0 | dev-best (w3g32)  76.0  32.0  3.5
+      b=24: law pick  77.4  51.1  3.5 | w8c alone  74.4  56.4  8.0 | controller+w8c  74.2  49.1 11.0 | dev-best (w3g32)  77.4  51.1  3.5
+      b=64: law pick  78.6  63.1  3.5 | w8c alone  81.3 136.2  8.0 | controller+w8c  74.9  61.3 11.0 | dev-best (w8c)  81.3 136.2  8.0
+  attn512_s2  cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.204 <= room 0.344, retained 1.01); determined
+      b=16: law pick  76.1  33.3  3.5 | w8c alone  65.3  39.6  8.0 | controller+w8c  72.7  41.7 11.0 | dev-best (w3g32)  76.1  33.3  3.5
+      b=24: law pick  77.6  39.8  3.5 | w8c alone  72.7  58.8  8.0 | controller+w8c  73.6  52.9 11.0 | dev-best (w3c)  73.6  52.9  3.0
+      b=64: law pick  79.6  63.2  3.5 | w8c alone  78.4 117.3  8.0 | controller+w8c  75.7  64.6 11.0 | dev-best (w6c)  78.9 108.5  6.0
+  mlp512_s0   cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.267 <= room 0.344, retained 0.89); determined
+      b=16: law pick  85.0  29.8  3.5 | w8c alone  90.8  37.0  8.0 | controller+w8c  68.7  35.0 11.0 | dev-best (w4c)  95.7  27.0  4.0
+      b=24: law pick  88.5  44.0  3.5 | w8c alone  95.0  45.7  8.0 | controller+w8c  68.7  35.0 11.0 | dev-best (w4c)  96.7  29.5  4.0
+      b=64: law pick  88.5  44.0  3.5 | w8c alone  97.0  54.7  8.0 | controller+w8c  68.7  35.0 11.0 | dev-best (w4c)  96.7  29.5  4.0
+  mlp512_s1   cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.223 <= room 0.344, retained 0.92); determined
+      b=16: law pick  88.4  34.4  3.5 | w8c alone  90.1  36.9  8.0 | controller+w8c  68.4  35.0 11.0 | dev-best (w4g32)  94.2  31.5  4.5
+      b=24: law pick  89.1  40.6  3.5 | w8c alone  93.8  46.2  8.0 | controller+w8c  68.4  35.0 11.0 | dev-best (w4g32)  95.3  34.9  4.5
+      b=64: law pick  89.1  40.6  3.5 | w8c alone  96.3  57.3  8.0 | controller+w8c  68.4  35.0 11.0 | dev-best (w8c)  96.3  57.3  8.0
+  mlp512_s2   cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.270 <= room 0.344, retained 0.88); determined
+      b=16: law pick  82.9  32.3  3.5 | w8c alone  90.3  37.0  8.0 | controller+w8c  68.6  35.0 11.0 | dev-best (w4c)  96.2  30.7  4.0
+      b=24: law pick  85.6  49.0  3.5 | w8c alone  95.1  45.2  8.0 | controller+w8c  68.6  35.0 11.0 | dev-best (w6c)  96.7  38.2  6.0
+      b=64: law pick  85.6  49.0  3.5 | w8c alone  97.7  52.5  8.0 | controller+w8c  68.6  35.0 11.0 | dev-best (w8c)  97.7  52.5  8.0
+  determined picks 9; of these the law picked a collapsing format on 0
+  pooled b=16 law pick - w8c alone: +4.02 [+3.27,+4.78] (n=9 models)
+  pooled b=24 law pick - w8c alone: -0.09 [-0.79,+0.63] (n=9 models)
+  pooled b=64 law pick - w8c alone: -4.18 [-4.88,-3.56] (n=9 models)
+  pooled b=16 law pick - controller+w8c: +8.78 [+7.98,+9.56] (n=9 models)
+  pooled b=24 law pick - controller+w8c: +10.23 [+9.43,+11.04] (n=9 models)
+  pooled b=64 law pick - controller+w8c: +10.70 [+9.89,+11.50] (n=9 models)
+
+=== ROOM refit 0.327: label-free pick, held-out rows 1000-1999 (acc | traffic bits/weight/puzzle | stored bits); cap = budget x b_eff(cheap of the controller cell)
+  sudoku_mlp  cheap w3g32 (cap 16/24/64 x 3.5): pick w4c (push 0.207 <= room 0.327, retained 0.95); determined
+      b=16: law pick  76.0  44.4  4.0 | w8c alone  75.2  44.2  8.0 | controller+w8c  74.8  51.3 11.5 | dev-best (w6c)  78.3  50.2  6.0
+      b=24: law pick  76.6  59.6  4.0 | w8c alone  78.9  66.4  8.0 | controller+w8c  74.8  51.3 11.5 | dev-best (w6c)  79.3  60.4  6.0
+      b=64: law pick  77.5  74.4  4.0 | w8c alone  81.6 129.0  8.0 | controller+w8c  74.8  51.3 11.5 | dev-best (w8c)  81.6 129.0  8.0
+  sudoku_attn cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.211 <= room 0.327, retained 0.98); determined
+      b=16: law pick  81.5  32.9  3.5 | w8c alone  73.4  34.4  8.0 | controller+w8c  78.8  37.8 11.0 | dev-best (w4g32)  80.0  35.3  4.5
+      b=24: law pick  83.3  42.2  3.5 | w8c alone  78.3  49.2  8.0 | controller+w8c  79.8  55.4 11.0 | dev-best (w4c)  83.1  48.0  4.0
+      b=64: law pick  84.0  50.8  3.5 | w8c alone  83.3 118.9  8.0 | controller+w8c  80.5  50.9 11.0 | dev-best (w8c)  83.3 118.9  8.0
+  hrm_sudoku  cheap w2g32 (cap 16/24/64 x 2.5): pick w3c (push 0.165 <= room 0.327, retained 0.92); determined
+      b=16: law pick  55.3  30.3  3.0 | w8c alone  38.1  29.7  8.0 | controller+w8c  36.8  34.5 10.5 | dev-best (w3g32)  58.1  33.5  3.5
+      b=24: law pick  58.9  50.6  3.0 | w8c alone  53.9  47.3  8.0 | controller+w8c  36.8  34.5 10.5 | dev-best (w4c)  61.4  50.7  4.0
+      b=64: law pick  61.8  88.5  3.0 | w8c alone  63.6 122.4  8.0 | controller+w8c  36.8  34.5 10.5 | dev-best (w4g32)  64.9 121.4  4.5
+  attn512_s0  cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.174 <= room 0.327, retained 1.01); determined
+      b=16: law pick  81.0  35.0  3.5 | w8c alone  72.2  35.9  8.0 | controller+w8c  78.3  34.3 11.0 | dev-best (w3c)  78.3  34.3  3.0
+      b=24: law pick  83.3  44.9  3.5 | w8c alone  77.6  51.5  8.0 | controller+w8c  81.9  52.9 11.0 | dev-best (w3c)  81.9  52.9  3.0
+      b=64: law pick  84.1  53.9  3.5 | w8c alone  85.0 118.0  8.0 | controller+w8c  81.9  52.9 11.0 | dev-best (w3c)  81.9  52.9  3.0
+  attn512_s1  cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.196 <= room 0.327, retained 0.98); determined
+      b=16: law pick  76.0  32.0  3.5 | w8c alone  67.9  38.5  8.0 | controller+w8c  73.4  36.6 11.0 | dev-best (w3g32)  76.0  32.0  3.5
+      b=24: law pick  77.4  51.1  3.5 | w8c alone  74.4  56.4  8.0 | controller+w8c  74.2  49.1 11.0 | dev-best (w3g32)  77.4  51.1  3.5
+      b=64: law pick  78.6  63.1  3.5 | w8c alone  81.3 136.2  8.0 | controller+w8c  74.9  61.3 11.0 | dev-best (w8c)  81.3 136.2  8.0
+  attn512_s2  cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.204 <= room 0.327, retained 1.01); determined
+      b=16: law pick  76.1  33.3  3.5 | w8c alone  65.3  39.6  8.0 | controller+w8c  72.7  41.7 11.0 | dev-best (w3g32)  76.1  33.3  3.5
+      b=24: law pick  77.6  39.8  3.5 | w8c alone  72.7  58.8  8.0 | controller+w8c  73.6  52.9 11.0 | dev-best (w3c)  73.6  52.9  3.0
+      b=64: law pick  79.6  63.2  3.5 | w8c alone  78.4 117.3  8.0 | controller+w8c  75.7  64.6 11.0 | dev-best (w6c)  78.9 108.5  6.0
+  mlp512_s0   cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.267 <= room 0.327, retained 0.89); determined
+      b=16: law pick  85.0  29.8  3.5 | w8c alone  90.8  37.0  8.0 | controller+w8c  68.7  35.0 11.0 | dev-best (w4c)  95.7  27.0  4.0
+      b=24: law pick  88.5  44.0  3.5 | w8c alone  95.0  45.7  8.0 | controller+w8c  68.7  35.0 11.0 | dev-best (w4c)  96.7  29.5  4.0
+      b=64: law pick  88.5  44.0  3.5 | w8c alone  97.0  54.7  8.0 | controller+w8c  68.7  35.0 11.0 | dev-best (w4c)  96.7  29.5  4.0
+  mlp512_s1   cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.223 <= room 0.327, retained 0.92); determined
+      b=16: law pick  88.4  34.4  3.5 | w8c alone  90.1  36.9  8.0 | controller+w8c  68.4  35.0 11.0 | dev-best (w4g32)  94.2  31.5  4.5
+      b=24: law pick  89.1  40.6  3.5 | w8c alone  93.8  46.2  8.0 | controller+w8c  68.4  35.0 11.0 | dev-best (w4g32)  95.3  34.9  4.5
+      b=64: law pick  89.1  40.6  3.5 | w8c alone  96.3  57.3  8.0 | controller+w8c  68.4  35.0 11.0 | dev-best (w8c)  96.3  57.3  8.0
+  mlp512_s2   cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.270 <= room 0.327, retained 0.88); determined
+      b=16: law pick  82.9  32.3  3.5 | w8c alone  90.3  37.0  8.0 | controller+w8c  68.6  35.0 11.0 | dev-best (w4c)  96.2  30.7  4.0
+      b=24: law pick  85.6  49.0  3.5 | w8c alone  95.1  45.2  8.0 | controller+w8c  68.6  35.0 11.0 | dev-best (w6c)  96.7  38.2  6.0
+      b=64: law pick  85.6  49.0  3.5 | w8c alone  97.7  52.5  8.0 | controller+w8c  68.6  35.0 11.0 | dev-best (w8c)  97.7  52.5  8.0
+  determined picks 9; of these the law picked a collapsing format on 0
+  pooled b=16 law pick - w8c alone: +4.32 [+3.59,+5.11] (n=9 models)
+  pooled b=24 law pick - w8c alone: +0.07 [-0.60,+0.76] (n=9 models)
+  pooled b=64 law pick - w8c alone: -3.93 [-4.59,-3.32] (n=9 models)
+  pooled b=16 law pick - controller+w8c: +9.08 [+8.23,+9.93] (n=9 models)
+  pooled b=24 law pick - controller+w8c: +10.39 [+9.54,+11.21] (n=9 models)
+  pooled b=64 law pick - controller+w8c: +10.94 [+10.07,+11.76] (n=9 models)
+
+=== ROOM per-mixer: label-free pick, held-out rows 1000-1999 (acc | traffic bits/weight/puzzle | stored bits); cap = budget x b_eff(cheap of the controller cell)
+  sudoku_mlp  cheap w3g32 (cap 16/24/64 x 3.5): pick w4c (push 0.207 <= room 0.245, retained 0.95); determined
+      b=16: law pick  76.0  44.4  4.0 | w8c alone  75.2  44.2  8.0 | controller+w8c  74.8  51.3 11.5 | dev-best (w6c)  78.3  50.2  6.0
+      b=24: law pick  76.6  59.6  4.0 | w8c alone  78.9  66.4  8.0 | controller+w8c  74.8  51.3 11.5 | dev-best (w6c)  79.3  60.4  6.0
+      b=64: law pick  77.5  74.4  4.0 | w8c alone  81.6 129.0  8.0 | controller+w8c  74.8  51.3 11.5 | dev-best (w8c)  81.6 129.0  8.0
+  sudoku_attn cheap w3c (cap 16/24/64 x 3.0): pick w3c (push 0.353 <= room 0.520, retained 0.91); determined
+      b=16: law pick  76.6  34.2  3.0 | w8c alone  73.4  34.4  8.0 | controller+w8c  78.8  37.8 11.0 | dev-best (w4g32)  80.0  35.3  4.5
+      b=24: law pick  79.2  43.1  3.0 | w8c alone  78.3  49.2  8.0 | controller+w8c  79.8  55.4 11.0 | dev-best (w4c)  83.1  48.0  4.0
+      b=64: law pick  80.5  50.9  3.0 | w8c alone  83.3 118.9  8.0 | controller+w8c  80.5  50.9 11.0 | dev-best (w8c)  83.3 118.9  8.0
+  hrm_sudoku  no pick: no room defined for this mixer
+  attn512_s0  cheap w3c (cap 16/24/64 x 3.0): pick w3c (push 0.342 <= room 0.520, retained 0.97); determined
+      b=16: law pick  78.3  34.3  3.0 | w8c alone  72.2  35.9  8.0 | controller+w8c  78.3  34.3 11.0 | dev-best (w3c)  78.3  34.3  3.0
+      b=24: law pick  81.9  52.9  3.0 | w8c alone  77.6  51.5  8.0 | controller+w8c  81.9  52.9 11.0 | dev-best (w3c)  81.9  52.9  3.0
+      b=64: law pick  81.9  52.9  3.0 | w8c alone  85.0 118.0  8.0 | controller+w8c  81.9  52.9 11.0 | dev-best (w3c)  81.9  52.9  3.0
+  attn512_s1  cheap w3c (cap 16/24/64 x 3.0): pick w3c (push 0.365 <= room 0.520, retained 0.92); determined
+      b=16: law pick  73.4  36.6  3.0 | w8c alone  67.9  38.5  8.0 | controller+w8c  73.4  36.6 11.0 | dev-best (w3g32)  76.0  32.0  3.5
+      b=24: law pick  74.2  49.1  3.0 | w8c alone  74.4  56.4  8.0 | controller+w8c  74.2  49.1 11.0 | dev-best (w3g32)  77.4  51.1  3.5
+      b=64: law pick  74.9  61.3  3.0 | w8c alone  81.3 136.2  8.0 | controller+w8c  74.9  61.3 11.0 | dev-best (w8c)  81.3 136.2  8.0
+  attn512_s2  cheap w3c (cap 16/24/64 x 3.0): pick w3c (push 0.412 <= room 0.520, retained 0.76); determined
+      b=16: law pick  70.5  33.2  3.0 | w8c alone  65.3  39.6  8.0 | controller+w8c  72.7  41.7 11.0 | dev-best (w3g32)  76.1  33.3  3.5
+      b=24: law pick  73.6  52.9  3.0 | w8c alone  72.7  58.8  8.0 | controller+w8c  73.6  52.9 11.0 | dev-best (w3c)  73.6  52.9  3.0
+      b=64: law pick  75.7  64.6  3.0 | w8c alone  78.4 117.3  8.0 | controller+w8c  75.7  64.6 11.0 | dev-best (w6c)  78.9 108.5  6.0
+  mlp512_s0   cheap w3c (cap 16/24/64 x 3.0): pick w4c (push 0.181 <= room 0.245, retained 0.99); determined
+      b=16: law pick  95.7  27.0  4.0 | w8c alone  90.8  37.0  8.0 | controller+w8c  68.7  35.0 11.0 | dev-best (w4c)  95.7  27.0  4.0
+      b=24: law pick  96.7  29.5  4.0 | w8c alone  95.0  45.7  8.0 | controller+w8c  68.7  35.0 11.0 | dev-best (w4c)  96.7  29.5  4.0
+      b=64: law pick  96.7  29.5  4.0 | w8c alone  97.0  54.7  8.0 | controller+w8c  68.7  35.0 11.0 | dev-best (w4c)  96.7  29.5  4.0
+  mlp512_s1   cheap w3c (cap 16/24/64 x 3.0): pick w3g32 (push 0.223 <= room 0.245, retained 0.92); determined
+      b=16: law pick  88.4  34.4  3.5 | w8c alone  90.1  36.9  8.0 | controller+w8c  68.4  35.0 11.0 | dev-best (w4g32)  94.2  31.5  4.5
+      b=24: law pick  89.1  40.6  3.5 | w8c alone  93.8  46.2  8.0 | controller+w8c  68.4  35.0 11.0 | dev-best (w4g32)  95.3  34.9  4.5
+      b=64: law pick  89.1  40.6  3.5 | w8c alone  96.3  57.3  8.0 | controller+w8c  68.4  35.0 11.0 | dev-best (w8c)  96.3  57.3  8.0
+  mlp512_s2   cheap w3c (cap 16/24/64 x 3.0): pick w4c (push 0.167 <= room 0.245, retained 0.99); determined
+      b=16: law pick  96.2  30.7  4.0 | w8c alone  90.3  37.0  8.0 | controller+w8c  68.6  35.0 11.0 | dev-best (w4c)  96.2  30.7  4.0
+      b=24: law pick  96.2  30.7  4.0 | w8c alone  95.1  45.2  8.0 | controller+w8c  68.6  35.0 11.0 | dev-best (w6c)  96.7  38.2  6.0
+      b=64: law pick  96.2  30.7  4.0 | w8c alone  97.7  52.5  8.0 | controller+w8c  68.6  35.0 11.0 | dev-best (w8c)  97.7  52.5  8.0
+  determined picks 8; of these the law picked a collapsing format on 0
+  pooled b=16 law pick - w8c alone: +3.74 [+2.95,+4.55] (n=8 models)
+  pooled b=24 law pick - w8c alone: +0.21 [-0.55,+0.96] (n=8 models)
+  pooled b=64 law pick - w8c alone: -3.51 [-4.23,-2.79] (n=8 models)
+  pooled b=16 law pick - controller+w8c: +8.93 [+8.19,+9.65] (n=8 models)
+  pooled b=24 law pick - controller+w8c: +9.69 [+8.91,+10.41] (n=8 models)
+  pooled b=64 law pick - controller+w8c: +9.88 [+9.21,+10.57] (n=8 models)
