@@ -12,7 +12,7 @@ families we use:
 
 We deployed them on edge hardware:
 - 35 phones through Qualcomm AI Hub (Snapdragon NPUs);
-- Jetson Nano and AGX Orin;
+- Jetson Nano and AGX Xavier;
 - Raspberry Pi 4;
 - an Arm Ethos-U55/U65 microcontroller NPU, simulated with the Corstone-300 FVP and Vela;
 - L40S, A100 and H200 GPUs.

@@ -49,6 +49,43 @@ def iteration_curves():
     return {"dt_maze33_step": dict(sorted(dt.items())), "mdeq_small_step": dict(zip(iters, top1))}
 
 
+def board_rows():
+    """Per-step time of the same weights on the boards and the simulated microcontroller NPU, per series.
+
+    Sudoku-MLP boards ran the H=3 full step; ms per H=1 step = full step / 3 (the H=3/H=1 ratio is 3.00 on the Ethos-U55
+    FVP and 2.8-3.0 on 40 phone pairs). Ethos-U rows are INT8 H=1 graphs: FVP NPU cycles for U55-256, Vela estimates
+    for U65 and U85, at 500 MHz; TFLite Micro numerics for this graph are broken, so these rows give time only.
+    """
+    edge = DEV.parent.parent / "edge" / "results"
+
+    def rec(path, window=None):
+        d = json.loads((edge / path).read_text())
+        return d["windows"][window]["median_clean"]["ms_per_step"] if window else d["record"]["step_ms"]["median"]
+
+    mcu = {}
+    for line in (DEV / "mcu_h1.md").read_text().splitlines():
+        c = [x.strip() for x in line.strip("|").split("|")]
+        if len(c) == 11 and c[0] == "sudoku_mlp" and c[1] == "1":
+            mcu[c[2]] = float(c[10]) if c[10] != "-" else float(c[6])
+    sudoku = [("Jetson AGX Xavier (TensorRT fp16)", "board", rec("agx/agx_sudoku_mlp_fp16_fixed16_maxn.json") / 3),
+              ("Jetson Nano (TensorRT fp32)", "board", rec("nano-a/nano-a_sudoku_mlp_fp32_fixed16_maxn_fullset.json") / 3),
+              ("Raspberry Pi 4 (ONNX Runtime fp32)", "board", rec("pi-a/pi-a_sudoku_mlp_H3_fp32_fixed16_nopower.json") / 3)]
+    sudoku += [(f"Arm Ethos-{k} (simulated, INT8, time only)", "mcu", v) for k, v in mcu.items()]
+    dt = [("Jetson Nano (TensorRT fp32)", "board", rec("nano-a/nano-a_dt_fixed300_maxn.json")),
+          ("Jetson AGX Xavier (PyTorch fp32)", "board",
+           json.loads((edge / "agx_family" / "dt" / "energy.json").read_text())["windows"]["fixed_T100"]["median"]["ms_per_step"])]
+    return {"sudoku_mlp/fp32": sudoku, "dt_maze33_step/fp32": dt}
+
+
+def reach_at(curve, ms):
+    reach = {}
+    for d in DEADLINES_MS:
+        k = int(d // ms)
+        done = [n for n in curve if n <= k]
+        reach[d] = {"steps": k, "exact": curve[max(done)] if done else 0.0}
+    return reach
+
+
 def main():
     acc = json.loads((DEV / "device_faithful_acc.json").read_text())
     host, dev = defaultdict(dict), defaultdict(dict)
@@ -87,6 +124,12 @@ def main():
                 reach[d] = {"steps": k, "exact": curve[max(done)] if done else 0.0}
             rows.append({"device": r["device"], "runtime": r["runtime"], "ms_per_step": r["ms_min"], "reach": reach})
         out["series"][f"{graph}/fp32"] = {"host_curve": curve, "devices": rows}
+
+    for key, rows in board_rows().items():
+        curve = out["series"][key]["host_curve"]
+        for name, tier, ms in rows:
+            out["series"][key]["devices"].append({"device": name, "tier": tier, "ms_per_step": round(ms, 2),
+                                                  "reach": reach_at(curve, ms)})
 
     for (name, task, prec), c in sorted(dev.items()):
         h = host.get((task, prec))

@@ -866,6 +866,141 @@
        "exact": 0.36
       }
      }
+    },
+    {
+     "device": "Jetson AGX Xavier (TensorRT fp16)",
+     "tier": "board",
+     "ms_per_step": 4.13,
+     "reach": {
+      "50": {
+       "steps": 12,
+       "exact": 0.65
+      },
+      "100": {
+       "steps": 24,
+       "exact": 0.68
+      },
+      "250": {
+       "steps": 60,
+       "exact": 0.68
+      },
+      "500": {
+       "steps": 121,
+       "exact": 0.68
+      },
+      "1000": {
+       "steps": 242,
+       "exact": 0.68
+      }
+     }
+    },
+    {
+     "device": "Jetson Nano (TensorRT fp32)",
+     "tier": "board",
+     "ms_per_step": 63.74,
+     "reach": {
+      "50": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 1,
+       "exact": 0.01
+      },
+      "250": {
+       "steps": 3,
+       "exact": 0.26
+      },
+      "500": {
+       "steps": 7,
+       "exact": 0.55
+      },
+      "1000": {
+       "steps": 15,
+       "exact": 0.68
+      }
+     }
+    },
+    {
+     "device": "Raspberry Pi 4 (ONNX Runtime fp32)",
+     "tier": "board",
+     "ms_per_step": 378.01,
+     "reach": {
+      "50": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "500": {
+       "steps": 1,
+       "exact": 0.01
+      },
+      "1000": {
+       "steps": 2,
+       "exact": 0.02
+      }
+     }
+    },
+    {
+     "device": "Arm Ethos-U55-256 (simulated, INT8, time only)",
+     "tier": "mcu",
+     "ms_per_step": 110.77,
+     "reach": {
+      "50": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 2,
+       "exact": 0.02
+      },
+      "500": {
+       "steps": 4,
+       "exact": 0.36
+      },
+      "1000": {
+       "steps": 9,
+       "exact": 0.6
+      }
+     }
+    },
+    {
+     "device": "Arm Ethos-U85-256 (simulated, INT8, time only)",
+     "tier": "mcu",
+     "ms_per_step": 81.4,
+     "reach": {
+      "50": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 1,
+       "exact": 0.01
+      },
+      "250": {
+       "steps": 3,
+       "exact": 0.26
+      },
+      "500": {
+       "steps": 6,
+       "exact": 0.53
+      },
+      "1000": {
+       "steps": 12,
+       "exact": 0.65
+      }
+     }
     }
    ]
   },
@@ -3638,6 +3773,60 @@
       "1000": {
        "steps": 23,
        "exact": 0.003
+      }
+     }
+    },
+    {
+     "device": "Jetson Nano (TensorRT fp32)",
+     "tier": "board",
+     "ms_per_step": 29.12,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 3,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 8,
+       "exact": 0.0
+      },
+      "500": {
+       "steps": 17,
+       "exact": 0.0
+      },
+      "1000": {
+       "steps": 34,
+       "exact": 0.039
+      }
+     }
+    },
+    {
+     "device": "Jetson AGX Xavier (PyTorch fp32)",
+     "tier": "board",
+     "ms_per_step": 4.0,
+     "reach": {
+      "50": {
+       "steps": 12,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 25,
+       "exact": 0.003
+      },
+      "250": {
+       "steps": 62,
+       "exact": 0.258
+      },
+      "500": {
+       "steps": 125,
+       "exact": 0.551
+      },
+      "1000": {
+       "steps": 250,
+       "exact": 0.551
       }
      }
     }
