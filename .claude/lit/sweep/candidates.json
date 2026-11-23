@@ -1,0 +1,587 @@
+[
+ {
+  "title": "What Survives When You Compress a Recursive Reasoner for the Edge?",
+  "first": "Pearse Jim",
+  "venue": "arXiv (in review)",
+  "url": "https://arxiv.org/abs/2606.26488",
+  "cluster": "A,F,G,B",
+  "score": 5,
+  "diff": "Same model class (TRM-style) and the same story: quantization noise compounds across cycles; adds label-free 'carry-trajectory fidelity' predicting damage and recovery, per-channel calibration repair, 4 MB INT4 budget. Abstract shows no multi-device energy law, no vendor-toolchain faults, no per-input stopping, no host-reference build check."
+ },
+ {
+  "title": "Quantizing Recursive Reasoning Models",
+  "first": "Thorir Mar Ingolfsson",
+  "venue": "arXiv preprint",
+  "url": "https://arxiv.org/abs/2607.16237",
+  "cluster": "F",
+  "score": 4,
+  "diff": "TRM/EqR quantization; per-tensor INT4 takes Sudoku 84.1% to 0.0% from drift, per-block scaling (MXInt4) restores it. Static format, no device, energy or toolchain faults (abstract)."
+ },
+ {
+  "title": "Nanbeige4.2-3B on Apple Silicon: Fixing Deployment Bugs and Decreasing Looped Transformer Memory",
+  "first": "John T. Halloran",
+  "venue": "arXiv (single author)",
+  "url": "https://arxiv.org/abs/2608.13987",
+  "cluster": "C,A",
+  "score": 4,
+  "diff": "Five silent bugs (zeroed RoPE buffer) running a looped LM on MPS, plus doubled attention memory from layer reuse; case study of one model, no systematic fault census or detector (abstract)."
+ },
+ {
+  "title": "Is INT8 Portable? A Cross-Platform Measurement Study of Quantized Inference on Embedded and Automotive Hardware",
+  "first": "Yuyeong Shin",
+  "venue": "arXiv (artifact on GitHub)",
+  "url": "https://arxiv.org/abs/2609.16085",
+  "cluster": "C",
+  "score": 4,
+  "diff": "INT8 outputs disagree across targets (958-965/1000 vs 1000/1000), invisible to top-1; includes Hexagon HTP, Jetson AGX Orin; one-pass models, no loops, no detector (abstract)."
+ },
+ {
+  "title": "Quantizing Looped Transformers: Feedback Exposure and Calibration Blindness",
+  "first": "Nux Li",
+  "venue": "arXiv (single author)",
+  "url": "https://arxiv.org/abs/2609.30820",
+  "cluster": "F",
+  "score": 4,
+  "diff": "Huginn-3.5B: INT4 fails at the loop-entry adapter because error is fed back; server-side, no device or energy (abstract)."
+ },
+ {
+  "title": "Loopy: Low-Bit Quantization Framework for Looped Language Models",
+  "first": "Zeyu Li",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2610.05265",
+  "cluster": "F",
+  "score": 4,
+  "diff": "Finds PTQ configuration rankings change with recurrent depth and selects config at target depth: precision tied to loop count; no device or energy (abstract)."
+ },
+ {
+  "title": "Do Halting Heads Really Save Compute in Looped Language Models?",
+  "first": "Tsung-Han Wu",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2610.32246",
+  "cluster": "A,D",
+  "score": 4,
+  "diff": "Halting heads (like Ouro's) predict under half the iterations yet run almost all under the standard rule; pretrained to 1.3B; compute counted in iterations, not energy per correct answer or device (abstract)."
+ },
+ {
+  "title": "Amortized-Precision Quantization for Early-Exit Vision Transformers",
+  "first": "Rui Fang",
+  "venue": "NeurIPS 2026 poster (listed) / arXiv",
+  "url": "https://neurips.cc/virtual/2026/poster/154315 ; https://arxiv.org/abs/2605.07317",
+  "cluster": "D,F",
+  "score": 4,
+  "diff": "Quantization noise perturbs exit decisions and amplifies along dynamic paths; one-pass ViT with exits, not loops; no device measurement stated (abstract)."
+ },
+ {
+  "title": "Does per-frame early exit pay? A compute-matched study of dynamic depth for on-device speech enhancement",
+  "first": "Clement Laroche",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2609.29867",
+  "cluster": "D",
+  "score": 4,
+  "diff": "On-device, static int8 graphs force depth-varying nets into several graphs; compute-matched comparison; one-pass, no loops (abstract)."
+ },
+ {
+  "title": "Ekka: Automated Diagnosis of Silent Errors in LLM Inference",
+  "first": "Yile Gu",
+  "venue": "ICML 2026 poster (listed) / arXiv",
+  "url": "https://icml.cc/virtual/2026/poster/66507 ; https://arxiv.org/abs/2606.04594",
+  "cluster": "C,G",
+  "score": 4,
+  "diff": "Diagnoses silent quality loss by aligning intermediate states of a target framework against a reference: same reference-comparison idea as our build check, for serving stacks, with a reference rather than a 2-loop state (abstract)."
+ },
+ {
+  "title": "InstMeter: An Instruction-Level Method to Predict Energy and Latency of DL Model Inference on MCUs",
+  "first": "Hao Liu",
+  "venue": "MobiCom 2026 (listed) / arXiv",
+  "url": "https://www.sigmobile.org/mobicom/2026/program.html ; https://arxiv.org/abs/2603.04134",
+  "cluster": "E",
+  "score": 4,
+  "diff": "Says MAC-style proxies are inaccurate and predicts MCU energy and latency from instructions; one-pass models, no loop-count term (abstract)."
+ },
+ {
+  "title": "Causes and Effects of Unanticipated Numerical Deviations in Neural Network Inference Frameworks",
+  "first": "(not fetched)",
+  "venue": "NeurIPS 2023 poster (listed)",
+  "url": "https://neurips.cc/virtual/2023/poster/72729",
+  "cluster": "C",
+  "score": 4,
+  "diff": "Title only fetched (abstract not fetched): server and framework numerical deviations, one pass. Deep-read to delineate."
+ },
+ {
+  "title": "The Silent Hyperparameter: Quantifying the Impact of Inference Backends on LLM Reproducibility",
+  "first": "David Pape",
+  "venue": "NeurIPS 2026 poster (listed) / arXiv",
+  "url": "https://neurips.cc/virtual/2026/poster/155935 ; https://arxiv.org/abs/2605.19537",
+  "cluster": "C",
+  "score": 3,
+  "diff": "Backend kernels and reduced precision change token probabilities and cascade into divergent generation; GPU server backends, autoregressive LLMs (abstract)."
+ },
+ {
+  "title": "What Sets the Serving Speed of Looped Language Models?",
+  "first": "Dezhen Lu",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2611.05150",
+  "cluster": "A,C",
+  "score": 3,
+  "diff": "GPU serving of Ouro/Huginn; grades optimizations from bitwise-identical to accuracy-checked; loop fusion issues; server, throughput not energy (abstract)."
+ },
+ {
+  "title": "Where KV-Cache Error Lives in Looped Language Models",
+  "first": "Dezhen Lu",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2610.41825",
+  "cluster": "F,A",
+  "score": 3,
+  "diff": "Storage error and shared-weight error accumulation across loops in Ouro/Huginn KV planes; server (abstract)."
+ },
+ {
+  "title": "LoopQuant: Accurate and Efficient PTQ for Looped Transformers",
+  "first": "Zhixiong Zhao",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2610.16368",
+  "cluster": "F",
+  "score": 3,
+  "diff": "Loop-aware PTQ for cross-loop dynamics and recursive error; no device (abstract)."
+ },
+ {
+  "title": "LoopQ: Quantization for Looped Language Models",
+  "first": "Rui Fang",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2605.16343",
+  "cluster": "F",
+  "score": 3,
+  "diff": "Names recursive error accumulation and state reuse as degradation sources; loop-aware PTQ (abstract)."
+ },
+ {
+  "title": "When Does Adaptive Halting Win? Selection Rules Matter in Looped Language Models",
+  "first": "Mahesh Reddy Pagadala",
+  "venue": "arXiv (single author, code)",
+  "url": "https://arxiv.org/abs/2611.02333",
+  "cluster": "A,D",
+  "score": 3,
+  "diff": "Frozen Ouro-1.4B, 4 loops: learned gate vs post-hoc trajectory readouts depend on selection rule; no energy (abstract)."
+ },
+ {
+  "title": "Adaptive Depth in Looped Transformers: Diagnosing Learned Halting Gates and Trajectory Readouts",
+  "first": "Andrei Cristian Popescu",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2607.20519",
+  "cluster": "A,D",
+  "score": 3,
+  "diff": "Learned halting entangles exit selection with trajectory formation; accuracy-depth only (abstract)."
+ },
+ {
+  "title": "Think Shallow, Solve Deep: Controlling Recurrent Dynamics for Reliable Test-Time Depth",
+  "first": "Ivan Viakhirev",
+  "venue": "arXiv (submitted AAAI)",
+  "url": "https://arxiv.org/abs/2608.18222",
+  "cluster": "A,D",
+  "score": 3,
+  "diff": "Operator's settling/marginal/drifting regime says whether more iterations help; relevant to stable-state stopping rules, no hardware (abstract)."
+ },
+ {
+  "title": "There Is No Free Loop: When Does Looping a Trained Model Pay for Its Inference Compute?",
+  "first": "Rhea Sanjay Sukthanker",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2610.42030",
+  "cluster": "A,E",
+  "score": 3,
+  "diff": "Per-token cost of added loops is (N+m)/N in compute; FLOP-style cost, no measured energy in abstract."
+ },
+ {
+  "title": "Depth-adaptive Inference of Looped Language Models via Continuous Depth Batching",
+  "first": "Kristian Schwethelm",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2608.09444",
+  "cluster": "A,D",
+  "score": 3,
+  "diff": "Batching tokens with different loop counts so depth-adaptive inference realizes savings in vLLM; server (abstract)."
+ },
+ {
+  "title": "Depth through Recurrence: Towards Ultra-Efficient On-Device ASR",
+  "first": "Chen Feng",
+  "venue": "NeurIPS 2026 poster (listed) / arXiv",
+  "url": "https://neurips.cc/virtual/2026/poster/149074 ; https://arxiv.org/abs/2610.37833",
+  "cluster": "A,B",
+  "score": 3,
+  "diff": "Block-recurrent ASR, 97.4% of large-model accuracy with an order of magnitude fewer parameters for watches and glasses; no per-input depth, no energy law (abstract)."
+ },
+ {
+  "title": "Monitoring latent reasoning in looped language models",
+  "first": "Pawel Olszowiec",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2610.18127",
+  "cluster": "G,A",
+  "score": 3,
+  "diff": "Analyses whether iterations improve capability and stability under prompt perturbation; monitoring, not build checking (abstract)."
+ },
+ {
+  "title": "Q-DEQ: Discrete Solving and Quantization for Deep Equilibrium Models in Time Series Forecasting",
+  "first": "Ruotong Yang",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2609.24042",
+  "cluster": "F",
+  "score": 3,
+  "diff": "Quantizes DEQs for edge forecasting; solver/quantization design, not toolchain faults (abstract)."
+ },
+ {
+  "title": "Predict Before You Deploy: Offline Prediction of Quantization-Induced Task Degradation (PreDE)",
+  "first": "Jiuyi Xu",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2609.19441",
+  "cluster": "G,F",
+  "score": 3,
+  "diff": "Predicts which quantization configs keep task performance without exhaustive closed-loop evaluation, for diffusion-backbone world action models (abstract)."
+ },
+ {
+  "title": "Quantization-Aware Kalman Estimation for Diffusion Sampling",
+  "first": "Qitan Shi",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2609.21407",
+  "cluster": "F",
+  "score": 3,
+  "diff": "Corrects quantized-vs-full-precision deviations during sampling steps: closest diffusion analogue to repair across iterations (abstract)."
+ },
+ {
+  "title": "UniExit: A Unified Latency-Aware Early-Exit Runtime for Heterogeneous Edge AI",
+  "first": "Yuhang Guan",
+  "venue": "arXiv (author-stated SenSys 2027)",
+  "url": "https://arxiv.org/abs/2611.09159",
+  "cluster": "D",
+  "score": 3,
+  "diff": "Early-exit runtime aware of input difficulty and hardware state for CNN and Transformer LMs on edge; one-pass (abstract)."
+ },
+ {
+  "title": "QUTE: Quantifying Uncertainty in TinyML models with Early-exit-assisted ensembles for model-monitoring",
+  "first": "Nikhil Pratap Ghanathe",
+  "venue": "ICML 2025 poster (listed)",
+  "url": "https://icml.cc/virtual/2025/poster/45956",
+  "cluster": "G,D",
+  "score": 3,
+  "diff": "Title only: TinyML uncertainty/monitoring via early exits; label-free-style monitoring but of data drift, not builds."
+ },
+ {
+  "title": "From PyTorch to the NPU: LLM-Agent-Driven Model Conversion Across Heterogeneous Inference Runtimes",
+  "first": "Jianhao Su",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2609.27249",
+  "cluster": "C",
+  "score": 3,
+  "diff": "Agent-driven conversion with a precision-verification step across Qualcomm, OpenVINO and others (abstract partly read)."
+ },
+ {
+  "title": "Mitigating Compiler Fusion-Induced Power Bursts in Mobile NPU Inference as the Battery Depletes",
+  "first": "Ryoga Yuzawa",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2607.16555",
+  "cluster": "C,E",
+  "score": 3,
+  "diff": "Compiler fusion causes voltage droop and DVFS on mobile NPU; shows toolchain effects on power, one-pass (abstract)."
+ },
+ {
+  "title": "Dr. DNA: Combating Silent Data Corruptions in Deep Learning using Distribution of Neuron Activations",
+  "first": "(authors not fetched)",
+  "venue": "ASPLOS 2024 (listed)",
+  "url": "https://www.asplos-conference.org/asplos2024/main-program/index.html",
+  "cluster": "C,G",
+  "score": 3,
+  "diff": "Title only: detects hardware silent corruption from activation distributions without labels; hardware faults, one pass."
+ },
+ {
+  "title": "FastTTS: Accelerating Test-Time Scaling for Edge LLM Reasoning",
+  "first": "Hao Mark Chen",
+  "venue": "ASPLOS 2026 (listed) / arXiv",
+  "url": "https://www.asplos-conference.org/asplos2026/program/index.html ; https://arxiv.org/abs/2509.00195",
+  "cluster": "B",
+  "score": 3,
+  "diff": "Test-time scaling on edge GPUs for small reasoning LLMs; autoregressive, system speedups, no loops (abstract)."
+ },
+ {
+  "title": "Efficient Reasoning on the Edge",
+  "first": "Yelysei Bondarenko",
+  "venue": "arXiv (Qualcomm AI Research)",
+  "url": "https://arxiv.org/abs/2603.16867",
+  "cluster": "B",
+  "score": 3,
+  "diff": "CoT reasoning made practical on edge: token cost, KV cache; autoregressive (abstract)."
+ },
+ {
+  "title": "MORES: Mobile Reasoning-as-a-Service via Distributed LLM Inference-Time Scaling",
+  "first": "Guanchen Liu",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2607.08116",
+  "cluster": "B",
+  "score": 2,
+  "diff": "Distributed inference-time scaling for mobile reasoning service (abstract)."
+ },
+ {
+  "title": "Wireless Edge-Assisted Adaptive Latent Reasoning for Vision-Language-Action Models",
+  "first": "Fatih Temiz",
+  "venue": "arXiv (submitted)",
+  "url": "https://arxiv.org/abs/2611.19131",
+  "cluster": "A,B",
+  "score": 2,
+  "diff": "Adaptive latent reasoning split across device and edge server (abstract)."
+ },
+ {
+  "title": "Test-Time Accuracy-Cost Control in Neural Simulators via Recurrent-Depth",
+  "first": "Harris Abdul Majid",
+  "venue": "ICLR 2026 poster (listed)",
+  "url": "https://iclr.cc/virtual/2026/poster/10009265",
+  "cluster": "A,D",
+  "score": 2,
+  "diff": "Title only: recurrent depth as accuracy-cost knob at test time; no device."
+ },
+ {
+  "title": "Stabilizing Extrapolation in Looped Transformers via Learned Stochastic Stopping",
+  "first": "Hsun-Yu Kuo",
+  "venue": "NeurIPS 2026 poster (listed) / arXiv",
+  "url": "https://neurips.cc/virtual/2026/poster/152714 ; https://arxiv.org/abs/2606.29983",
+  "cluster": "A,D",
+  "score": 2,
+  "diff": "Stochastic loop counts for length extrapolation; algorithmic tasks (abstract)."
+ },
+ {
+  "title": "Fixed-Point Reasoners: Stable and Adaptive Deep Looped Transformers",
+  "first": "Sajad Movahedi",
+  "venue": "NeurIPS 2026 poster (listed) / arXiv",
+  "url": "https://neurips.cc/virtual/2026/poster/148540 ; https://arxiv.org/abs/2606.18206",
+  "cluster": "A,D",
+  "score": 2,
+  "diff": "Pre-norm and residual scaling for deep looped models with halting (abstract)."
+ },
+ {
+  "title": "Spherical Fixed-Point Reasoners: Adaptive Loop Halting on the Hypersphere",
+  "first": "Arber Zela",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2610.25646",
+  "cluster": "A,D",
+  "score": 2,
+  "diff": "Norm-based halting with damped fixed-point solver (abstract)."
+ },
+ {
+  "title": "Energy-Based Reasoners: Your Recurrent Reasoner Should Be an Energy-Based Model",
+  "first": "William Xingxu Chen",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2611.08977",
+  "cluster": "A",
+  "score": 2,
+  "diff": "Energy as explicit progress measure for when to stop looping (abstract)."
+ },
+ {
+  "title": "Classical Energies Learn to Reason 1,000x Faster than Looped Models",
+  "first": "Benjamin Hoover",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2611.17309",
+  "cluster": "A",
+  "score": 2,
+  "diff": "Energy descent replaces looped models on Sudoku/Maze with fewer FLOPs; training-side (abstract)."
+ },
+ {
+  "title": "Equilibrium Reasoners: Learning Attractors Enables Scalable Reasoning",
+  "first": "Benhao Huang",
+  "venue": "ICML 2026 poster (listed)",
+  "url": "https://icml.cc/virtual/2026/poster/61915",
+  "cluster": "A",
+  "score": 2,
+  "diff": "Title only: DEQ-style reasoner (studied in 2607.16237)."
+ },
+ {
+  "title": "Latent Reasoning in TRMs is Secretly a Policy Improvement Operator",
+  "first": "Arip Asadulaev",
+  "venue": "ICML 2026 poster (listed)",
+  "url": "https://icml.cc/virtual/2026/poster/63962",
+  "cluster": "A",
+  "score": 2,
+  "diff": "Title only: theory of TRM refinement."
+ },
+ {
+  "title": "Efficient Parallel Samplers for Recurrent-Depth Models",
+  "first": "(not fetched)",
+  "venue": "ICML 2026 poster (listed)",
+  "url": "https://icml.cc/virtual/2026/poster/62383",
+  "cluster": "A",
+  "score": 2,
+  "diff": "Title only: faster sampling from Huginn-style models."
+ },
+ {
+  "title": "Scaling up Test-Time Compute with Latent Reasoning (Huginn)",
+  "first": "(not fetched)",
+  "venue": "NeurIPS 2025 poster (listed)",
+  "url": "https://neurips.cc/virtual/2025/poster/117966",
+  "cluster": "A",
+  "score": 2,
+  "diff": "Already ours to read as a base; listed for completeness."
+ },
+ {
+  "title": "HELIOS: Adaptive Model And Early-Exit Selection for Efficient LLM Inference Serving",
+  "first": "(not fetched)",
+  "venue": "MLSys 2026 (listed) / arXiv",
+  "url": "https://arxiv.org/abs/2504.10724",
+  "cluster": "D",
+  "score": 2,
+  "diff": "Early-exit LLM serving on servers (title)."
+ },
+ {
+  "title": "SpecEE: Accelerating LLM Inference with Speculative Early Exiting",
+  "first": "(not fetched)",
+  "venue": "ISCA 2025 (listed)",
+  "url": "https://iscaconf.org/isca2025/program/",
+  "cluster": "D",
+  "score": 2,
+  "diff": "Early exit for autoregressive LLMs on accelerators (title)."
+ },
+ {
+  "title": "TinyTTA: Efficient Test-time Adaptation via Early-exit Ensembles on Edge Devices",
+  "first": "(not fetched)",
+  "venue": "NeurIPS 2024 poster (listed)",
+  "url": "https://neurips.cc/virtual/2024/papers.html",
+  "cluster": "D",
+  "score": 2,
+  "diff": "Edge early-exit ensembles for adaptation (title)."
+ },
+ {
+  "title": "The Battery Price of Edge AI: Environmental Impact of LLM Inference on Mobile Devices",
+  "first": "Edouard Guegain",
+  "venue": "arXiv (under submission)",
+  "url": "https://arxiv.org/abs/2609.11940",
+  "cluster": "E",
+  "score": 3,
+  "diff": "Measured battery cost of local LLM inference on phones (abstract)."
+ },
+ {
+  "title": "Measuring the Energy Cost of Completing Tasks with Quantized Language-Model Agents",
+  "first": "Stephen Abkin",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2610.32417",
+  "cluster": "E",
+  "score": 3,
+  "diff": "Energy per completed task rather than per token, for quantized agents (abstract)."
+ },
+ {
+  "title": "AgentStop: Terminating Local AI Agents Early to Save Energy in Consumer Devices",
+  "first": "Dzung Pham",
+  "venue": "arXiv (ACM CAIS 2026)",
+  "url": "https://arxiv.org/abs/2605.15206",
+  "cluster": "D,E",
+  "score": 3,
+  "diff": "Per-input early termination of on-device agents to save energy; autoregressive agents (abstract)."
+ },
+ {
+  "title": "Beyond Test-Time Compute Strategies: Advocating Energy-per-Token in LLM Inference",
+  "first": "Patrick Wilhelm",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2603.20224",
+  "cluster": "E",
+  "score": 2,
+  "diff": "Argues for energy-per-token over accuracy-only test-time-compute metrics (abstract)."
+ },
+ {
+  "title": "How Do Prompt Variations Affect Energy Consumption in On-Device LLMs?",
+  "first": "Wei Hu",
+  "venue": "EMNLP 2026 Main (author-stated) / arXiv",
+  "url": "https://arxiv.org/abs/2609.01798",
+  "cluster": "E",
+  "score": 2,
+  "diff": "Prompt properties vs on-device energy; energy as a function of input (abstract)."
+ },
+ {
+  "title": "PELM: Power Efficient On-Device LLM Inference with Speculative Decoding and DVFS",
+  "first": "Weisi Yang",
+  "venue": "SenSys 2026 (listed) / arXiv",
+  "url": "https://arxiv.org/abs/2609.09662",
+  "cluster": "E",
+  "score": 2,
+  "diff": "Power-mode (DVFS) co-design for on-device LLMs; autoregressive (title)."
+ },
+ {
+  "title": "Is Your NPU Ready for LLMs? Dissecting Efficiency Bottlenecks in Mobile LLM Inference",
+  "first": "Guanyu Cai",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2607.05475",
+  "cluster": "E,B",
+  "score": 2,
+  "diff": "Mobile NPU bottleneck analysis for LLMs (title)."
+ },
+ {
+  "title": "When NPUs Are Not Always Faster: A Stage-Level Analysis of Mobile LLM Inference",
+  "first": "Pu Li",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2605.27435",
+  "cluster": "E",
+  "score": 2,
+  "diff": "Operator and pipeline level NPU effectiveness (abstract)."
+ },
+ {
+  "title": "Stateful Testing for Deep Learning Compilers",
+  "first": "Jiatao Ge",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2610.22003",
+  "cluster": "C",
+  "score": 2,
+  "diff": "Compiler cache state makes later calls wrong; testing, not on-device loops (abstract)."
+ },
+ {
+  "title": "Optimization-Aware Test Generation for Deep Learning Compilers",
+  "first": "Qingchao Shen",
+  "venue": "ICSE 2026 (author-stated) / arXiv",
+  "url": "https://arxiv.org/abs/2511.18918",
+  "cluster": "C",
+  "score": 2,
+  "diff": "Tests compiler optimization stages (abstract)."
+ },
+ {
+  "title": "Cross-Model Disagreement as a Label-Free Correctness Signal",
+  "first": "Matt Gorbett",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2603.25450",
+  "cluster": "G",
+  "score": 2,
+  "diff": "Label-free wrongness detection via disagreement of two LLMs; language outputs (abstract)."
+ },
+ {
+  "title": "SPINN: Synergistic Progressive Inference of Neural Networks over Device and Cloud",
+  "first": "(not fetched)",
+  "venue": "MobiCom 2020",
+  "url": "https://arxiv.org/abs/2008.06402",
+  "cluster": "D",
+  "score": 3,
+  "diff": "Early-exit plus device-cloud split on phones; one-pass CNNs (arXiv id confirmed in API; venue from the task text)."
+ },
+ {
+  "title": "Post-training Quantization for Hybrid Iterative Generative Models",
+  "first": "Jing Gao",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2608.13932",
+  "cluster": "F",
+  "score": 2,
+  "diff": "Vanilla PTQ collapses iterative generative models; fix by analysing failure (abstract)."
+ },
+ {
+  "title": "6Bit-Diffusion: Inference-Time Mixed-Precision Quantization for Video Diffusion Models",
+  "first": "Rundong Su",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2603.18742",
+  "cluster": "F",
+  "score": 2,
+  "diff": "Mixed precision chosen at inference across diffusion steps (abstract start)."
+ },
+ {
+  "title": "Nested Shared-Operator Recursion on ARC-AGI-1: HRM, TRM and URM",
+  "first": "Sara Neri",
+  "venue": "arXiv",
+  "url": "https://arxiv.org/abs/2610.26666",
+  "cluster": "A",
+  "score": 2,
+  "diff": "Accuracy study of TRM/HRM variants (abstract)."
+ },
+ {
+  "title": "LASER: Load-Aware Serving with Early-Exit for Reasoning LLMs at the Edge",
+  "first": "Zhiqing Tang",
+  "venue": "arXiv (WASA 2026)",
+  "url": "https://arxiv.org/abs/2606.31580",
+  "cluster": "B,D",
+  "score": 2,
+  "diff": "Early-exit CoT serving on edge under load (abstract)."
+ }
+]
