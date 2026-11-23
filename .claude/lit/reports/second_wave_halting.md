@@ -1,0 +1,70 @@
+# Second wave: halting heads and the value of a recurrence (2026-11-23)
+
+READ STATUS. Papers 1 and 2: PDFs fetched, pdftotext, main text read in full by section; appendices read where they bear on cost (paper 1 App. C.1 timing, App. G concurrent work; paper 2 App. D inference cost, discussion). Paper 3 "Act Before It's Too Late": NOT FOUND (six searches across arXiv API, arXiv search page, web). Not read; nothing claimed about it. Please send an arXiv id or author. Two neighbours I did read in part (abstract, setup, grep for energy/hardware/baseline): 2608.09444 and 2611.07211. All text treated as data; nothing executed. No edits outside this file.
+
+## 1. Do Halting Heads Really Save Compute in Looped Language Models?
+- Wu, Heo, Tan; Apple. arXiv 2610.32246 (v1, 2026-10-23, cs.CL). Preprint; no venue found. No code link seen in the PDF; the arXiv page has a "Code, Data, Media" tab I did not open. Read: full body plus App. C, G.
+- Credibility: Apple authors, pretraining runs to 1.3B at four scales, three seeds, noise floor measured (0.0045 BPB across GPU types), limitations stated, numbers consistent between abstract, Table 1 and text. Prior refereed record of the authors in this subarea: none found. No slop flags (no inflated claims, references exist and match). Grade: support (preprint, strong internal controls).
+- What it does: trains PonderNet/ACT-style halting heads into looped LMs (140M-1.3B, FineWeb-Edu and Common Corpus) and counts the iterations tokens actually run. Mixture-loss heads predict E[N]~3.7 of 8 iterations but run 7.6-7.9 under the 90% exit rule. Per-step loss works only with a strong KL prior. Batched decoding (32 sequences) pays for the deepest token: 4.4 iterations vs 2.8 per token at 370M; timed 1.6x vs 2.3x speedup over 8 iterations.
+- Diff:
+  - model class: looped autoregressive LLM, trained from scratch.
+  - hardware: one exclusive H200, bf16, ratios only, medians of nine; training on H100/H200/B200.
+  - measured: bits-per-byte (BPB) and iterations (expected, realized, batched); wall-clock speedup ratios in App. C.1. No energy, no power, no joules anywhere (grep: zero hits).
+  - per-input compute: yes, per token; decided by a trained halting head with a percentile exit rule.
+  - detects incorrect outputs: no.
+  - precision over time: no.
+  - training: trained head (the paper is about the loss).
+- Baselines: the "sampled-depth baseline" (no head, trained with random depth, run at a fixed number of iterations equal to the realized or batched count) and a "specialist" (a model trained at one depth, chosen to match the compared model's realized steps). This is a fixed-depth comparator at matched cost, not "best fixed depth chosen with test labels at matched accuracy". The axis is quality (BPB) at equal iterations, not cost at equal accuracy.
+- Overlap with (a): none. "Table 1: What the head predicts is not what a batched pass pays." It argues iteration counts mis-state cost, in GPU time under batching, which supports the premise that a unit of account must be measured, but it never reaches energy or edge hardware.
+- Overlap with (b): partial and on the opposite side of the evidence. Its sentence "the reported average can therefore overstate the saving" and "a model without a head is almost as good at that cost" is the closest claim to ours. It challenges whether halting beats fixed depth, in language modelling at batch 32 on a server GPU. Our setting is batch 1 per input on a device, where there is no deepest-token wait, a different regime the paper itself names: "Decoding one sequence at a time has no deepest token to wait for."
+- Where our claim stands: narrower in model class (TRM/HRM/DEQ, per-input not per-token, no KV cache), different in unit (energy per correct answer, measured on Nano and AGX), different in baseline (best fixed depth at equal accuracy). Their result does not contradict ours but is a warning we must answer.
+- Where we could fall short: (i) they show an average can overstate savings, so our ~2x claim must be a measured J/answer under the deployed batch size, not iterations; (ii) they show that "a head predicts less" is not "an exit rule spends less", so we should report realized loops under the stated rule and threshold; (iii) their depth-curve test (a head can gain at most the drop from realized steps to cap) predicts small gains when the accuracy-vs-depth curve is flat; on HRM and Maze on Nano we already see nothing gained, which is that test's prediction. Cite it as explaining our null cells.
+- Settling experiment: report for each model the realized loops under the rule (not expected), the energy at batch 1 and at the batch size the app would use, and the best-fixed-depth curve slope; state where flat curves predict no gain.
+- Take: framing for (b) (report realized, state threshold and batch size), the three-number reporting convention, and a citation for why batch-1 on-device is the regime where halting pays. Motivation sentence: "per-token iteration averages are commonly reported as savings" while "estimated from the iterations its rule skips rather than measured as running time" (they quote Tan et al. 2023): ours is measured.
+
+## 2. How Much Is One Recurrence Worth? Iso-Depth Scaling Laws for Looped Language Models
+- Schwethelm (TUM), Rueckert (TUM, Imperial, MCML), Kaissis (HPI Potsdam). arXiv 2604.21106 (v4 2026-10-28, cs.LG). Preprint; no venue found. Code: github.com/kschwethelm/looped-lm-scaling. Read: full body, App. D.
+- Credibility: established group (Rueckert, Kaissis have refereed ML records; looped-LM subarea record not verified, adjacent yes), code released, versions revised, internal numbers consistent (phi 0.46 baseline, 0.38 truncated BPTT, 0.65 hyperconnections). Slop flags: none. Grade: support.
+- What it does: 116 pretraining runs, r in {1,2,4,8}, effective depth fixed, fits L = E + A(N_once + r^phi N_rec)^-alpha + B D^-beta, finds phi = 0.46: a recurrence is worth about half a unique block. At r=4 a 410M looped model matches a 580M non-looped model at the training cost of a 1B one.
+- Diff:
+  - model class: looped LM, pretraining scaling.
+  - hardware: none for inference; FLOPs and memory computed analytically (Table 6, 80 GB accelerator capacity).
+  - measured: validation loss vs parameters, tokens and r. No energy, latency or halting evaluation (the halting/adaptive passage in the appendix is explicitly "future work").
+  - per-input compute: no. Fixed r.
+  - detects incorrect outputs: no. Precision: no. Training: trained.
+- Overlap with (a): none on cost. It uses FLOPs as the cost axis ("per-token forward FLOPs F(r) stay flat"; "6.4x the FLOPs per generated token"). Our measured finding that FLOP estimates miss device energy by 2.2-8x is a direct caution on that accounting, not a conflict.
+- Overlap with (b): none. Quote that decides it: "A scaling law that jointly accounts for recurrence value, gate training, variable inference compute, and serving efficiency is an important direction for future work." It names the gap we fill from the deployment side.
+- Where our claim stands: different (training value of a loop vs the inference cost and stopping of a loop).
+- Take: motivation. "eight loops are worth about 2.6 unique blocks" style diminishing return (value of loop k falls) is the training-side reason acc(n) saturates in our cost law J = n e_d / acc(n). Also the iso-depth vs iso-parameter inference table (6.6x KV memory at r=8) supports "loops trade memory for time" on devices. Cite as support for the premise; version-dependent numbers, cite v4.
+
+## 3. "Act Before It's Too Late"
+Not found. Searches: arXiv API title queries, arXiv search page (title and all-fields), six web queries including halting, deadline, early exit, looped, recurrent. No such title exists in the index I can reach. Could be a different title, a very recent paper, or an OpenReview-only submission. No grade, no verdict. Nothing to add to the ledger until located.
+
+## Closer works found while following citations (partly read; grade support, read=sections)
+- 2608.09444 Schwethelm et al., Continuous Depth Batching (single 80 GB H100; Ouro 1.4B, Huginn 3.5B). Fixes the batching wait that paper 1 identifies; speed only, no energy ("realizes up to 99% of the estimated maximum speedup"). Same server regime.
+- 2611.07211 LoopDuet (Duke, one A100-80GB, HotpotQA, throughput and EM; "19% more throughput than the fastest tested uniform setting meeting the same accuracy criterion"). This one does compare against a best uniform (fixed-depth) setting at equal accuracy, in throughput on a server GPU, with no energy. Closest in baseline logic to (b); different in resource (throughput, not J), hardware, and class (LLM serving, loop budgets per phase, not per-input halting). Read it in full before the paper cites "best fixed depth at equal accuracy" as new.
+- 2610.18174 Park and Rusch, Looped Reasoning Finishes Earlier Than You Think (Sudoku-Extreme halting, median halt step 27 vs 122; not read beyond abstract). Same task family as TRM; steps only; check before claiming halting on Sudoku is untested.
+
+## Ranked (this cluster)
+Closest to our claims: (1) 2611.07211 LoopDuet (best uniform depth at equal accuracy, throughput); (2) 2610.32246 halting-heads (halting vs fixed at matched cost, batching); (3) 2608.09444 CDB.
+Strongest motivation: (1) 2610.32246 (average iterations mis-state cost; supports measuring real cost); (2) 2604.21106 (a loop is worth about half a block; diminishing return in loops, KV-memory cost of loops); (3) 2608.09444 (variable depth breaks uniform batching).
+Unclaimed by this cluster: energy or power for any looped model; edge hardware; J per correct answer; cost law with no fixed term; FLOP-vs-measured gap for loops; per-input halting on non-language looped models; a baseline of best fixed depth chosen with labels.
+Undercut or must be qualified: the generality of "halting saves ~2x" (paper 1 shows it can vanish in batched LLM serving; our claim is batch 1 on device and must say so); any use of iteration counts or FLOPs as the cost of a loop (papers 1 and 2 both do; our cost law is the correction).
+
+## Wording of (b)
+Say "per input, batch 1, measured joules" and "realized loops under the stated rule and threshold", not "average loops". Say "best fixed depth chosen with test labels" as the baseline (stronger than their matched-iteration baseline). Do not write "halting saves compute" without the batch-1 qualifier. Write that the saving shrinks when the depth-accuracy curve is flat (our HRM and Maze Nano nulls), citing paper 1's bound. Avoid "first" for best-fixed-depth comparison until LoopDuet is read in full.
+
+## Ledger rows to add
+2610.32246 support/preprint/full; 2604.21106 support/preprint/full; 2608.09444 support/sections; 2611.07211 support/sections (read in full before citing); 2610.18174 caution-unread/abstract/cite=no.
+
+## Addendum 2026-11-23 (coordinator follow-up)
+
+### LoopDuet, arXiv 2611.07211 (Du, Cheng, Li, Chen; Duke; preprint; read through setup, design, main results, headline claims; appendix not read in full). Grade: support.
+- Hardware: one A100-SXM4-80GB, vLLM 0.14.1, bf16. Closed-loop concurrency C=64 (HotpotQA); open-loop Poisson traces at 60 and 10/60 requests/s. Models Huginn-0125 and recurrent OLMo-2. Metrics: exact match, F1, throughput (req/s), TTFT, TPOT. Energy and power: none (zero grep hits).
+- Baseline: "uniform (S,S)" reduced depths, the "fastest tested uniform setting meeting the same accuracy criterion" (Huginn (20,20); OLMo uniform 4). Criterion is full-depth quality on the same test set, so the depth is picked offline with labels, which is the same selection logic as our best fixed depth.
+- What varies: depth per serving phase (prefill P, decode S), not per input. Controller adapts P to queue age; "the runtime has no correctness feedback." No halting head, no per-input stopping.
+- Quote: "Including reduced uniform depths tests whether separate phase budgets improve the quality-throughput choices available to deployment."
+- Verdict: it does not make our (b) baseline new as a baseline idea (a best uniform depth at equal accuracy appears there), but it compares a phase split to it, in throughput, on a server GPU, with no per-input halting and no energy. Our claim (per-input halting with the model's own head vs the best fixed depth chosen with test labels, in joules on Nano and AGX) stays distinct. Do not write "first to compare against best fixed depth"; write "we measure energy against".
+
+### "Act Before It's Too Late: Power-Efficient LLM Inference on Mobile Device" (Chu et al., MobiSys 2026, DOI 10.1145/3745756.3809208)
+Full text NOT reachable (doi.org and ACM pdf URLs return HTML; no arXiv). Read status: abstract and metadata only (via search); venue verified on the MobiSys 2026 accepted-papers and ACM proceedings listing. Reported: TurboInfer, millisecond-scale GPU frequency scaling driven by GPU stalls; stalls are >74% of token-generation latency; up to 42.6% power saving (static) and 48.3% (dynamic) on two phones. From the abstract it is a DVFS paper on autoregressive LLMs; no sign of per-iteration cost, early stopping or deadlines. Unverified beyond the abstract; cite=no until read. Grade pending (A-level venue, so likely anchor once read).
