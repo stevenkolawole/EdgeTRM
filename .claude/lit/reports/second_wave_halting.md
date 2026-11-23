@@ -68,3 +68,48 @@ Say "per input, batch 1, measured joules" and "realized loops under the stated r
 
 ### "Act Before It's Too Late: Power-Efficient LLM Inference on Mobile Device" (Chu et al., MobiSys 2026, DOI 10.1145/3745756.3809208)
 Full text NOT reachable (doi.org and ACM pdf URLs return HTML; no arXiv). Read status: abstract and metadata only (via search); venue verified on the MobiSys 2026 accepted-papers and ACM proceedings listing. Reported: TurboInfer, millisecond-scale GPU frequency scaling driven by GPU stalls; stalls are >74% of token-generation latency; up to 42.6% power saving (static) and 48.3% (dynamic) on two phones. From the abstract it is a DVFS paper on autoregressive LLMs; no sign of per-iteration cost, early stopping or deadlines. Unverified beyond the abstract; cite=no until read. Grade pending (A-level venue, so likely anchor once read).
+
+## LoopDuet (2611.07211), read by the lead from the PDF: how it differs from our halting result
+
+Read: the main text in full (abstract to conclusion, pp. 1-14), and in the appendix the quality-criterion and
+state-distance pages. Sections 4.4-4.6 and the appendix tables were read only by keyword.
+
+Credibility: preprint (Nov 4, 2026); Duke, with Hai Li and Yiran Chen (an established systems group). It includes an AI-usage
+statement: Codex and Claude Code implemented and ran the experiments and drafted the text. Grade: support.
+
+What it does: it picks two FIXED depths per deployment, P for prompt (prefill) tokens and S for decoding tokens. It
+runs them in vLLM on one A100-80GB at bf16 with 64 requests in flight, on HotpotQA with Huginn and recurrent OLMo. A
+queue-age controller lowers P under load. "Offline quality measurements establish this operating range; the runtime
+has no correctness feedback."
+
+How we differ:
+1. **The unit of decision.** LoopDuet sets depth per serving phase, the same for every request, and changes it with
+   queue age. No input gets a depth chosen from its own state. Our halting stops each input on the model's own
+   signal.
+2. **The question asked of the baseline.** LoopDuet compares one static schedule (split) against another static
+   schedule (uniform). Neither side adapts to the input. We compare an input-adaptive rule against the best static
+   depth. The shared ingredient is a uniform-depth baseline matched on accuracy, and that ingredient is a standard
+   control, not LoopDuet's contribution.
+3. **What "equal accuracy" means.** LoopDuet uses "the fastest tested uniform setting meeting the same accuracy
+   criterion". The criterion is "an accuracy loss of at most one percentage point with a non-significant two-sided
+   exact McNemar comparison" against (32, 32), applied to a grid of 11 Huginn and 6 OLMo configurations. Ours is the
+   best fixed depth of the same weights, chosen with test labels (an oracle), compared at equal accuracy.
+4. **Unit of cost.** LoopDuet measures throughput (requests/s) and TTFT on a batched server GPU, and prices savings
+   with a layer-application count that "omits adapter, vocabulary-head, memory-traffic, and scheduling costs". We
+   measure joules per correct answer at batch 1 on the Jetson Nano and AGX Xavier. Caveat for our FLOP claim: on its
+   batched A100 the layer count predicts 1.94x for Huginn (32, 16) and it measures 1.87x throughput, so the proxy
+   tracks there. Our 2.2-8x FLOP miss is about energy on edge devices at batch 1 and must be worded that way.
+5. **Where the saving comes from.** LoopDuet's saving comes from long prompts ("prompt positions account for over
+   99% of this work") and from gathering continuing tokens into compact batches. Our models have no prompt or decode
+   phase, and their state has a fixed size, so its mechanism does not apply.
+6. **Its state-distance rule, relevant to our check (c).** LoopDuet screens candidate prompt depths with a
+   hidden-state distance against the same model at full depth. The threshold is the pooled 90th percentile, 0.24, and
+   it transfers across held-out checkpoints. That rule picks a budget for a correctly computed model. Our check
+   compares a compiled device build against an fp32 host to detect a toolchain fault. Cite it in the check's related
+   work: a label-free state threshold that transfers is shared ground, and our use and our reference differ.
+
+Our wording: we never claim to be "first to compare against the best fixed depth"; we do not need to. The claim is
+per-input halting with the model's own head, against the best fixed depth of the same weights chosen with test
+labels, at equal accuracy, in measured joules per correct answer at batch 1 on edge devices. The related-work clause:
+"LoopDuet compares phase-level depth schedules against the fastest uniform depth within an accuracy tolerance, by
+throughput on a batched A100; neither side adapts depth per input."
