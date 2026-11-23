@@ -4,6 +4,7 @@ Same device list and compile targets as the TRM step table (aihub_h1.DEVICES / c
   fp32   QNN (qnn_dlc, fp16 on the HTP) on Snapdragon devices with fp16 HTP; TFLite on Tensor/Exynos/older
   w8a16  one AI Hub quantize job per graph (real calibration states), then qnn_dlc --quantize_io on every
          Snapdragon device, integer-only HTPs included
+DEVICES rows are (name, os, has QNN, fp16 HTP), as in aihub_h1.DEVICES.
 Every job id is recorded in <root>/jobs.json, so the loop can be killed and restarted.
 
     python profile_step_graphs.py --root ~/aihub_steps advance   (submit what is ready; loop with --loop)
@@ -17,7 +18,7 @@ from pathlib import Path
 import numpy as np
 
 GRAPHS = ["dt_maze33_step", "mdeq_small_step"]
-DEVICES = [  # (name, os, has QNN, fp16 HTP), as aihub_h1.DEVICES
+DEVICES = [
     ("Samsung Galaxy S21", "12", True, False), ("Samsung Galaxy A73 5G", "12", True, False),
     ("Dragonwing RB3 Gen 2 Vision Kit", "1.6", True, False), ("SA8295P ADP", "14", True, True),
     ("Samsung Galaxy S22 5G", "12", True, True), ("Samsung Galaxy S23", "13", True, True),
@@ -101,7 +102,7 @@ def advance(root):
                     cj = hub.submit_compile_job(model=model, device=hub.Device(name, os_), options=opts,
                                                 name=f"step_{g}_{prec}_{name}")
                     jid, err = cj.job_id, None
-                except Exception as exc:  # noqa: BLE001
+                except Exception as exc:
                     jid, err = None, str(exc)[:300]
                 rec["jobs"].append({"kind": "compile", "graph": g, "prec": prec, "device": name, "os": os_,
                                     "runtime": runtime, "job_id": jid, "submit_error": err, "at": now()})
@@ -173,7 +174,7 @@ def main():
     while True:
         try:
             more = advance(root)
-        except Exception as exc:  # noqa: BLE001  (API hiccup: retry next pass)
+        except Exception as exc:
             print(f"{now()} pass error: {str(exc)[:200]}", flush=True)
             more = True
         if not a.loop or not more:
