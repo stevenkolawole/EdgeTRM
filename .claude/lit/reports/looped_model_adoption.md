@@ -59,3 +59,16 @@ Not in the list: I did not verify LLaDA 2.x or Mercury 2, and I did not search f
 - Nanbeige notes slower decoding from looping, and Halloran (https://arxiv.org/abs/2608.13987) documents deployment bugs and memory overhead for looped models on Apple Silicon.
 - A halting-heads study (https://arxiv.org/abs/2610.32246) finds that heads predict fewer iterations than they actually run. Only the candidates table's abstract summary was read.
 - Use "increasingly common" for the 2026 releases, not "dominant".
+## Correction: Inkling 2 Mini is looped (checked against the primary source)
+
+The sweep's "Inkling does not iterate" holds only for Inkling and Inkling 2 Small. Inkling 2 Mini, released by
+Thinking Machines on Nov 20, 2026 (https://thinkingmachines.ai/news/inkling-2-mini, read in full), is a looped
+transformer: "running the middle layers of the model three times for every token". It has 24 layers in four blocks of
+six; the two middle blocks run three times, a fixed count ("only supports a fixed number of looping passes"). It has
+26.4B total parameters with 3.4B active in the text and 5.4B in the table (the page disagrees with itself); about 20 GB
+in total; "small enough to run on your laptop"; open weights (https://huggingface.co/thinkingmachines/Inkling-2-Mini,
+model card https://thinkingmachines.ai/model-card/inkling-2-mini/). It also links a variable-loop research model
+(https://thinkingmachines.ai/model-card/tml-d24-varloop-research/). The page says a non-looped model needed "140% more
+inference compute" to match the looped loss. Goodfire's interpretability study of it
+(https://www.goodfire.com/research/interpreting-inkling-2-mini/, Nov 20, 2026) confirms layers 7-18 loop T = 3 times.
+Grade: support (company release with open weights and a model card; no tech report).
