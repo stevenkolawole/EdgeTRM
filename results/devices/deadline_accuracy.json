@@ -2900,6 +2900,1504 @@
      }
     }
    ]
+  },
+  "dt_maze33_step/fp32": {
+   "host_curve": {
+    "10": 0.0,
+    "20": 0.003,
+    "30": 0.039,
+    "40": 0.1,
+    "60": 0.258,
+    "100": 0.551,
+    "300": 1.0
+   },
+   "devices": [
+    {
+     "device": "Samsung Galaxy S26",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 0.586,
+     "reach": {
+      "50": {
+       "steps": 85,
+       "exact": 0.258
+      },
+      "100": {
+       "steps": 170,
+       "exact": 0.551
+      },
+      "250": {
+       "steps": 426,
+       "exact": 1.0
+      },
+      "500": {
+       "steps": 853,
+       "exact": 1.0
+      },
+      "1000": {
+       "steps": 1706,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy S25",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 0.693,
+     "reach": {
+      "50": {
+       "steps": 72,
+       "exact": 0.258
+      },
+      "100": {
+       "steps": 144,
+       "exact": 0.551
+      },
+      "250": {
+       "steps": 360,
+       "exact": 1.0
+      },
+      "500": {
+       "steps": 721,
+       "exact": 1.0
+      },
+      "1000": {
+       "steps": 1443,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "Snapdragon X2 Elite CRD",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 0.758,
+     "reach": {
+      "50": {
+       "steps": 65,
+       "exact": 0.258
+      },
+      "100": {
+       "steps": 131,
+       "exact": 0.551
+      },
+      "250": {
+       "steps": 329,
+       "exact": 1.0
+      },
+      "500": {
+       "steps": 659,
+       "exact": 1.0
+      },
+      "1000": {
+       "steps": 1319,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy S24",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 0.849,
+     "reach": {
+      "50": {
+       "steps": 58,
+       "exact": 0.1
+      },
+      "100": {
+       "steps": 117,
+       "exact": 0.551
+      },
+      "250": {
+       "steps": 294,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 588,
+       "exact": 1.0
+      },
+      "1000": {
+       "steps": 1177,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "QCS8550 (Proxy)",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.179,
+     "reach": {
+      "50": {
+       "steps": 42,
+       "exact": 0.1
+      },
+      "100": {
+       "steps": 84,
+       "exact": 0.258
+      },
+      "250": {
+       "steps": 212,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 424,
+       "exact": 1.0
+      },
+      "1000": {
+       "steps": 848,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy S23",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.209,
+     "reach": {
+      "50": {
+       "steps": 41,
+       "exact": 0.1
+      },
+      "100": {
+       "steps": 82,
+       "exact": 0.258
+      },
+      "250": {
+       "steps": 206,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 413,
+       "exact": 1.0
+      },
+      "1000": {
+       "steps": 827,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "Snapdragon X Plus 8-Core CRD",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.279,
+     "reach": {
+      "50": {
+       "steps": 39,
+       "exact": 0.039
+      },
+      "100": {
+       "steps": 78,
+       "exact": 0.258
+      },
+      "250": {
+       "steps": 195,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 390,
+       "exact": 1.0
+      },
+      "1000": {
+       "steps": 781,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "Snapdragon X Elite CRD",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.311,
+     "reach": {
+      "50": {
+       "steps": 38,
+       "exact": 0.039
+      },
+      "100": {
+       "steps": 76,
+       "exact": 0.258
+      },
+      "250": {
+       "steps": 190,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 381,
+       "exact": 1.0
+      },
+      "1000": {
+       "steps": 762,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy S22 5G",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.984,
+     "reach": {
+      "50": {
+       "steps": 25,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 50,
+       "exact": 0.1
+      },
+      "250": {
+       "steps": 126,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 252,
+       "exact": 0.551
+      },
+      "1000": {
+       "steps": 504,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "Dragonwing IQ-9075 EVK",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 2.217,
+     "reach": {
+      "50": {
+       "steps": 22,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 45,
+       "exact": 0.1
+      },
+      "250": {
+       "steps": 112,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 225,
+       "exact": 0.551
+      },
+      "1000": {
+       "steps": 451,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "SA8295P ADP",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 2.337,
+     "reach": {
+      "50": {
+       "steps": 21,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 42,
+       "exact": 0.1
+      },
+      "250": {
+       "steps": 106,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 213,
+       "exact": 0.551
+      },
+      "1000": {
+       "steps": 427,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "SA8775P ADP",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 2.362,
+     "reach": {
+      "50": {
+       "steps": 21,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 42,
+       "exact": 0.1
+      },
+      "250": {
+       "steps": 105,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 211,
+       "exact": 0.551
+      },
+      "1000": {
+       "steps": 423,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "Arduino VENTUNO Q",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 2.468,
+     "reach": {
+      "50": {
+       "steps": 20,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 40,
+       "exact": 0.1
+      },
+      "250": {
+       "steps": 101,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 202,
+       "exact": 0.551
+      },
+      "1000": {
+       "steps": 405,
+       "exact": 1.0
+      }
+     }
+    },
+    {
+     "device": "SA7255P ADP",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 7.378,
+     "reach": {
+      "50": {
+       "steps": 6,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 13,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 33,
+       "exact": 0.039
+      },
+      "500": {
+       "steps": 67,
+       "exact": 0.258
+      },
+      "1000": {
+       "steps": 135,
+       "exact": 0.551
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy Tab S7",
+     "runtime": "tflite",
+     "ms_per_step": 8.959,
+     "reach": {
+      "50": {
+       "steps": 5,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 11,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 27,
+       "exact": 0.003
+      },
+      "500": {
+       "steps": 55,
+       "exact": 0.1
+      },
+      "1000": {
+       "steps": 111,
+       "exact": 0.551
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 9",
+     "runtime": "tflite",
+     "ms_per_step": 9.27,
+     "reach": {
+      "50": {
+       "steps": 5,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 10,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 26,
+       "exact": 0.003
+      },
+      "500": {
+       "steps": 53,
+       "exact": 0.1
+      },
+      "1000": {
+       "steps": 107,
+       "exact": 0.551
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy Note 20 (Intl)",
+     "runtime": "tflite",
+     "ms_per_step": 10.137,
+     "reach": {
+      "50": {
+       "steps": 4,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 9,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 24,
+       "exact": 0.003
+      },
+      "500": {
+       "steps": 49,
+       "exact": 0.1
+      },
+      "1000": {
+       "steps": 98,
+       "exact": 0.258
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 8",
+     "runtime": "tflite",
+     "ms_per_step": 10.616,
+     "reach": {
+      "50": {
+       "steps": 4,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 9,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 23,
+       "exact": 0.003
+      },
+      "500": {
+       "steps": 47,
+       "exact": 0.1
+      },
+      "1000": {
+       "steps": 94,
+       "exact": 0.258
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 6",
+     "runtime": "tflite",
+     "ms_per_step": 11.164,
+     "reach": {
+      "50": {
+       "steps": 4,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 8,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 22,
+       "exact": 0.003
+      },
+      "500": {
+       "steps": 44,
+       "exact": 0.1
+      },
+      "1000": {
+       "steps": 89,
+       "exact": 0.258
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 4",
+     "runtime": "tflite",
+     "ms_per_step": 12.145,
+     "reach": {
+      "50": {
+       "steps": 4,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 8,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 20,
+       "exact": 0.003
+      },
+      "500": {
+       "steps": 41,
+       "exact": 0.1
+      },
+      "1000": {
+       "steps": 82,
+       "exact": 0.258
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 7",
+     "runtime": "tflite",
+     "ms_per_step": 16.238,
+     "reach": {
+      "50": {
+       "steps": 3,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 6,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 15,
+       "exact": 0.0
+      },
+      "500": {
+       "steps": 30,
+       "exact": 0.039
+      },
+      "1000": {
+       "steps": 61,
+       "exact": 0.258
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 3",
+     "runtime": "tflite",
+     "ms_per_step": 16.409,
+     "reach": {
+      "50": {
+       "steps": 3,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 6,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 15,
+       "exact": 0.0
+      },
+      "500": {
+       "steps": 30,
+       "exact": 0.039
+      },
+      "1000": {
+       "steps": 60,
+       "exact": 0.258
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy A53 5G",
+     "runtime": "tflite",
+     "ms_per_step": 18.818,
+     "reach": {
+      "50": {
+       "steps": 2,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 5,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 13,
+       "exact": 0.0
+      },
+      "500": {
+       "steps": 26,
+       "exact": 0.003
+      },
+      "1000": {
+       "steps": 53,
+       "exact": 0.1
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 10",
+     "runtime": "tflite",
+     "ms_per_step": 19.139,
+     "reach": {
+      "50": {
+       "steps": 2,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 5,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 13,
+       "exact": 0.0
+      },
+      "500": {
+       "steps": 26,
+       "exact": 0.003
+      },
+      "1000": {
+       "steps": 52,
+       "exact": 0.1
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 5",
+     "runtime": "tflite",
+     "ms_per_step": 25.716,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 3,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 9,
+       "exact": 0.0
+      },
+      "500": {
+       "steps": 19,
+       "exact": 0.0
+      },
+      "1000": {
+       "steps": 38,
+       "exact": 0.039
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy A14 5G",
+     "runtime": "tflite",
+     "ms_per_step": 28.219,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 3,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 8,
+       "exact": 0.0
+      },
+      "500": {
+       "steps": 17,
+       "exact": 0.0
+      },
+      "1000": {
+       "steps": 35,
+       "exact": 0.039
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 3a",
+     "runtime": "tflite",
+     "ms_per_step": 42.858,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 2,
+       "exact": 0.0
+      },
+      "250": {
+       "steps": 5,
+       "exact": 0.0
+      },
+      "500": {
+       "steps": 11,
+       "exact": 0.0
+      },
+      "1000": {
+       "steps": 23,
+       "exact": 0.003
+      }
+     }
+    }
+   ]
+  },
+  "mdeq_small_step/fp32": {
+   "host_curve": {
+    "1": 0.003,
+    "2": 0.062,
+    "3": 0.185,
+    "4": 0.551,
+    "5": 0.6579999999999999,
+    "6": 0.7240000000000001,
+    "7": 0.736,
+    "8": 0.76,
+    "9": 0.767,
+    "10": 0.7759999999999999,
+    "11": 0.777,
+    "12": 0.7759999999999999,
+    "13": 0.7759999999999999,
+    "14": 0.779,
+    "15": 0.778,
+    "16": 0.78,
+    "18": 0.777,
+    "20": 0.777,
+    "26": 0.779,
+    "32": 0.778,
+    "40": 0.778
+   },
+   "devices": [
+    {
+     "device": "Samsung Galaxy S26",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 0.532,
+     "reach": {
+      "50": {
+       "steps": 93,
+       "exact": 0.778
+      },
+      "100": {
+       "steps": 187,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 469,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 939,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 1879,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy S25",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 0.573,
+     "reach": {
+      "50": {
+       "steps": 87,
+       "exact": 0.778
+      },
+      "100": {
+       "steps": 174,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 436,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 872,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 1745,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Snapdragon X2 Elite CRD",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 0.627,
+     "reach": {
+      "50": {
+       "steps": 79,
+       "exact": 0.778
+      },
+      "100": {
+       "steps": 159,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 398,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 797,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 1594,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy S24",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 0.754,
+     "reach": {
+      "50": {
+       "steps": 66,
+       "exact": 0.778
+      },
+      "100": {
+       "steps": 132,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 331,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 663,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 1326,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "QCS8550 (Proxy)",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 0.984,
+     "reach": {
+      "50": {
+       "steps": 50,
+       "exact": 0.778
+      },
+      "100": {
+       "steps": 101,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 254,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 508,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 1016,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy S23",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 0.987,
+     "reach": {
+      "50": {
+       "steps": 50,
+       "exact": 0.778
+      },
+      "100": {
+       "steps": 101,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 253,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 506,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 1013,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Snapdragon X Plus 8-Core CRD",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.036,
+     "reach": {
+      "50": {
+       "steps": 48,
+       "exact": 0.778
+      },
+      "100": {
+       "steps": 96,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 241,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 482,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 965,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Snapdragon X Elite CRD",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.081,
+     "reach": {
+      "50": {
+       "steps": 46,
+       "exact": 0.778
+      },
+      "100": {
+       "steps": 92,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 231,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 462,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 925,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Dragonwing IQ-9075 EVK",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.43,
+     "reach": {
+      "50": {
+       "steps": 34,
+       "exact": 0.778
+      },
+      "100": {
+       "steps": 69,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 174,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 349,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 699,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy S22 5G",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.468,
+     "reach": {
+      "50": {
+       "steps": 34,
+       "exact": 0.778
+      },
+      "100": {
+       "steps": 68,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 170,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 340,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 681,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "SA8775P ADP",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.542,
+     "reach": {
+      "50": {
+       "steps": 32,
+       "exact": 0.778
+      },
+      "100": {
+       "steps": 64,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 162,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 324,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 648,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Arduino VENTUNO Q",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.567,
+     "reach": {
+      "50": {
+       "steps": 31,
+       "exact": 0.779
+      },
+      "100": {
+       "steps": 63,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 159,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 319,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 638,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "SA8295P ADP",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 1.711,
+     "reach": {
+      "50": {
+       "steps": 29,
+       "exact": 0.779
+      },
+      "100": {
+       "steps": 58,
+       "exact": 0.778
+      },
+      "250": {
+       "steps": 146,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 292,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 584,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "SA7255P ADP",
+     "runtime": "qnn_dlc",
+     "ms_per_step": 4.122,
+     "reach": {
+      "50": {
+       "steps": 12,
+       "exact": 0.7759999999999999
+      },
+      "100": {
+       "steps": 24,
+       "exact": 0.777
+      },
+      "250": {
+       "steps": 60,
+       "exact": 0.778
+      },
+      "500": {
+       "steps": 121,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 242,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 8",
+     "runtime": "tflite",
+     "ms_per_step": 26.43,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 3,
+       "exact": 0.185
+      },
+      "250": {
+       "steps": 9,
+       "exact": 0.767
+      },
+      "500": {
+       "steps": 18,
+       "exact": 0.777
+      },
+      "1000": {
+       "steps": 37,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy Tab S7",
+     "runtime": "tflite",
+     "ms_per_step": 28.098,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 3,
+       "exact": 0.185
+      },
+      "250": {
+       "steps": 8,
+       "exact": 0.76
+      },
+      "500": {
+       "steps": 17,
+       "exact": 0.78
+      },
+      "1000": {
+       "steps": 35,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 9",
+     "runtime": "tflite",
+     "ms_per_step": 29.932,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 3,
+       "exact": 0.185
+      },
+      "250": {
+       "steps": 8,
+       "exact": 0.76
+      },
+      "500": {
+       "steps": 16,
+       "exact": 0.78
+      },
+      "1000": {
+       "steps": 33,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 7",
+     "runtime": "tflite",
+     "ms_per_step": 30.202,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 3,
+       "exact": 0.185
+      },
+      "250": {
+       "steps": 8,
+       "exact": 0.76
+      },
+      "500": {
+       "steps": 16,
+       "exact": 0.78
+      },
+      "1000": {
+       "steps": 33,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 4",
+     "runtime": "tflite",
+     "ms_per_step": 30.78,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 3,
+       "exact": 0.185
+      },
+      "250": {
+       "steps": 8,
+       "exact": 0.76
+      },
+      "500": {
+       "steps": 16,
+       "exact": 0.78
+      },
+      "1000": {
+       "steps": 32,
+       "exact": 0.778
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 6",
+     "runtime": "tflite",
+     "ms_per_step": 31.381,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 3,
+       "exact": 0.185
+      },
+      "250": {
+       "steps": 7,
+       "exact": 0.736
+      },
+      "500": {
+       "steps": 15,
+       "exact": 0.778
+      },
+      "1000": {
+       "steps": 31,
+       "exact": 0.779
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy Note 20 (Intl)",
+     "runtime": "tflite",
+     "ms_per_step": 36.42,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 2,
+       "exact": 0.062
+      },
+      "250": {
+       "steps": 6,
+       "exact": 0.7240000000000001
+      },
+      "500": {
+       "steps": 13,
+       "exact": 0.7759999999999999
+      },
+      "1000": {
+       "steps": 27,
+       "exact": 0.779
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 3",
+     "runtime": "tflite",
+     "ms_per_step": 49.581,
+     "reach": {
+      "50": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "100": {
+       "steps": 2,
+       "exact": 0.062
+      },
+      "250": {
+       "steps": 5,
+       "exact": 0.6579999999999999
+      },
+      "500": {
+       "steps": 10,
+       "exact": 0.7759999999999999
+      },
+      "1000": {
+       "steps": 20,
+       "exact": 0.777
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 5",
+     "runtime": "tflite",
+     "ms_per_step": 56.181,
+     "reach": {
+      "50": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "250": {
+       "steps": 4,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 8,
+       "exact": 0.76
+      },
+      "1000": {
+       "steps": 17,
+       "exact": 0.78
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy A14 5G",
+     "runtime": "tflite",
+     "ms_per_step": 59.432,
+     "reach": {
+      "50": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "250": {
+       "steps": 4,
+       "exact": 0.551
+      },
+      "500": {
+       "steps": 8,
+       "exact": 0.76
+      },
+      "1000": {
+       "steps": 16,
+       "exact": 0.78
+      }
+     }
+    },
+    {
+     "device": "Samsung Galaxy A53 5G",
+     "runtime": "tflite",
+     "ms_per_step": 73.733,
+     "reach": {
+      "50": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "250": {
+       "steps": 3,
+       "exact": 0.185
+      },
+      "500": {
+       "steps": 6,
+       "exact": 0.7240000000000001
+      },
+      "1000": {
+       "steps": 13,
+       "exact": 0.7759999999999999
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 10",
+     "runtime": "tflite",
+     "ms_per_step": 77.215,
+     "reach": {
+      "50": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "250": {
+       "steps": 3,
+       "exact": 0.185
+      },
+      "500": {
+       "steps": 6,
+       "exact": 0.7240000000000001
+      },
+      "1000": {
+       "steps": 12,
+       "exact": 0.7759999999999999
+      }
+     }
+    },
+    {
+     "device": "Google Pixel 3a",
+     "runtime": "tflite",
+     "ms_per_step": 82.866,
+     "reach": {
+      "50": {
+       "steps": 0,
+       "exact": 0.0
+      },
+      "100": {
+       "steps": 1,
+       "exact": 0.003
+      },
+      "250": {
+       "steps": 3,
+       "exact": 0.185
+      },
+      "500": {
+       "steps": 6,
+       "exact": 0.7240000000000001
+      },
+      "1000": {
+       "steps": 12,
+       "exact": 0.7759999999999999
+      }
+     }
+    }
+   ]
   }
  },
  "device_vs_host": [

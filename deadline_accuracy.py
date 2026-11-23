@@ -11,6 +11,9 @@ Latency is kernel time per step: per-step dispatch and carry copy are not includ
 Also reports, for every on-device chain with a host curve of the same graph and precision,
 the mean absolute gap between device and host exact accuracy across steps.
 
+DeepThinking and MDEQ rows use the fp32 step-graph latencies of results/devices/step_latency (profile_step_graphs.py)
+with the host fp32 iteration curves; on Snapdragon NPUs that graph runs in fp16, whose accuracy is not measured on device.
+
 Usage: python3 deadline_accuracy.py  (writes results/devices/deadline_accuracy.json)
 """
 import json
@@ -21,6 +24,29 @@ DEV = Path(__file__).resolve().parent / "results" / "devices"
 DEADLINES_MS = (50, 100, 250, 500, 1000)
 SERIES = [("sudoku_mlp", "fp32"), ("sudoku_mlp", "w8a16"), ("sudoku_attn", "w8a16"),
           ("maze", "fp32"), ("maze", "w8a16")]
+
+
+def iteration_curves():
+    """Host fp32 accuracy against iteration count for the DeepThinking and MDEQ step graphs.
+
+    DeepThinking 33x33 mazes: n = 1000 at 10-100 iterations (results/breadth/dt_mazes.json) and the Jetson Nano's
+    fixed-300 run (n = 50, edge/results/nano-a). MDEQ-Small ImageNet top-1 from z = 0: the fp32 row of
+    results/breadth/m1_mdeq.md (images 0-2499). Accuracy at k iterations is read as the value at the largest
+    measured count <= k.
+    """
+    root = DEV.parent
+    dt = {}
+    for r in json.loads((root / "breadth" / "dt_mazes.json").read_text())["records"]:
+        if str(r["size"]) == "33" and r["quant"].get("spec") == "fp32":
+            dt[r["iters"]] = r["acc"]
+    nano = json.loads((root.parent / "edge" / "results" / "nano-a" / "nano-a_dt_fixed300_maxn.json").read_text())
+    dt[300] = nano["windows"]["trt_fp32_b1_fixed300"]["median_clean"]["acc_window"]
+    lines = (root / "breadth" / "m1_mdeq.md").read_text().splitlines()
+    head = next(l for l in lines if l.startswith("| format |"))
+    row = next(l for l in lines if l.startswith("| fp32 |"))
+    iters = [int(c) for c in head.strip("|").split("|")[1:]]
+    top1 = [float(c) / 100 for c in row.strip("|").split("|")[1:]]
+    return {"dt_maze33_step": dict(sorted(dt.items())), "mdeq_small_step": dict(zip(iters, top1))}
 
 
 def main():
@@ -49,6 +75,18 @@ def main():
             rows.append({"device": r["device"], "chip": r["chip"], "runtime": r["runtime"],
                          "ms_per_step": r["ms"], "reach": reach})
         out["series"][f"{task}/{prec}"] = {"host_curve": curve, "devices": rows}
+
+    lat = json.loads((DEV / "step_latency" / "step_latency.json").read_text())["rows"]
+    for graph, curve in iteration_curves().items():
+        rows = []
+        for r in sorted((r for r in lat if r["graph"] == graph and r["prec"] == "fp32"), key=lambda r: r["ms_min"]):
+            reach = {}
+            for d in DEADLINES_MS:
+                k = int(d // r["ms_min"])
+                done = [n for n in curve if n <= k]
+                reach[d] = {"steps": k, "exact": curve[max(done)] if done else 0.0}
+            rows.append({"device": r["device"], "runtime": r["runtime"], "ms_per_step": r["ms_min"], "reach": reach})
+        out["series"][f"{graph}/fp32"] = {"host_curve": curve, "devices": rows}
 
     for (name, task, prec), c in sorted(dev.items()):
         h = host.get((task, prec))

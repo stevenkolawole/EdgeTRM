@@ -1,0 +1,2232 @@
+{
+ "uploads": {
+  "dt_maze33_step": "mmdy9kp20",
+  "mdeq_small_step": "mnlvx8r53"
+ },
+ "jobs": [
+  {
+   "kind": "quantize",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "job_id": "j5qx3lomp",
+   "at": "2026-11-23T09:37:36Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "SA8295P ADP",
+   "os": "14",
+   "runtime": "qnn_dlc",
+   "job_id": "jgl93yrlg",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:36Z",
+   "status": "OPTIMIZING_MODEL"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S22 5G",
+   "os": "12",
+   "runtime": "qnn_dlc",
+   "job_id": "j569n8l75",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:37Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S23",
+   "os": "13",
+   "runtime": "qnn_dlc",
+   "job_id": "jp3lez2zp",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:37Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "QCS8550 (Proxy)",
+   "os": "12",
+   "runtime": "qnn_dlc",
+   "job_id": "jgo73lqd5",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:38Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Dragonwing IQ-9075 EVK",
+   "os": "1.9",
+   "runtime": "qnn_dlc",
+   "job_id": "jpvyvlxmp",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:38Z",
+   "status": "OPTIMIZING_MODEL"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "SA8775P ADP",
+   "os": "14",
+   "runtime": "qnn_dlc",
+   "job_id": "jgj6er48p",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:39Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Snapdragon X Elite CRD",
+   "os": "11",
+   "runtime": "qnn_dlc",
+   "job_id": "jpe0k730g",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:39Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Snapdragon X Plus 8-Core CRD",
+   "os": "11",
+   "runtime": "qnn_dlc",
+   "job_id": "jgzqrlk6g",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:40Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S24",
+   "os": "14",
+   "runtime": "qnn_dlc",
+   "job_id": "j5w0qlnjp",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:40Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "SA7255P ADP",
+   "os": "14",
+   "runtime": "qnn_dlc",
+   "job_id": "jg97wzev5",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:41Z",
+   "status": "OPTIMIZING_MODEL"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Arduino VENTUNO Q",
+   "os": "24.04",
+   "runtime": "qnn_dlc",
+   "job_id": "jp1kenxlg",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:41Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S25",
+   "os": "15",
+   "runtime": "qnn_dlc",
+   "job_id": "jgdyodllg",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:42Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Snapdragon 8 Elite QRD",
+   "os": "15",
+   "runtime": "qnn_dlc",
+   "job_id": null,
+   "submit_error": "Device(name='Snapdragon 8 Elite QRD', os='15', attributes=[]) is not available.",
+   "at": "2026-11-23T09:37:42Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S26",
+   "os": "16",
+   "runtime": "qnn_dlc",
+   "job_id": "j571xorr5",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:42Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Snapdragon 8 Elite Gen 5 QRD",
+   "os": "16",
+   "runtime": "qnn_dlc",
+   "job_id": null,
+   "submit_error": "Device(name='Snapdragon 8 Elite Gen 5 QRD', os='16', attributes=[]) is not available.",
+   "at": "2026-11-23T09:37:42Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Snapdragon X2 Elite CRD",
+   "os": "11",
+   "runtime": "qnn_dlc",
+   "job_id": "jp46verl5",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:43Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 3",
+   "os": "10",
+   "runtime": "tflite",
+   "job_id": "jpx8y0o95",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:43Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 3a",
+   "os": "10",
+   "runtime": "tflite",
+   "job_id": "j5m139xq5",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:44Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 4",
+   "os": "11",
+   "runtime": "tflite",
+   "job_id": "jgnd31vmp",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:44Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 5",
+   "os": "12",
+   "runtime": "tflite",
+   "job_id": "jprmex3eg",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:45Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy Tab S7",
+   "os": "11",
+   "runtime": "tflite",
+   "job_id": "jp2qloymp",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:45Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Xiaomi Redmi Note 10 5G",
+   "os": "11",
+   "runtime": "tflite",
+   "job_id": null,
+   "submit_error": "Device(name='Xiaomi Redmi Note 10 5G', os='11', attributes=[]) is not available.",
+   "at": "2026-11-23T09:37:45Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 6",
+   "os": "13",
+   "runtime": "tflite",
+   "job_id": "jpyk6834g",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:46Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 7",
+   "os": "14",
+   "runtime": "tflite",
+   "job_id": "jp08lo0e5",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:46Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 8",
+   "os": "14",
+   "runtime": "tflite",
+   "job_id": "jp8dzjy85",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:47Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 9",
+   "os": "15",
+   "runtime": "tflite",
+   "job_id": "jgkw36xog",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:47Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 10",
+   "os": "16",
+   "runtime": "tflite",
+   "job_id": "j5qx34qmp",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:48Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy Note 20 (Intl)",
+   "os": "11",
+   "runtime": "tflite",
+   "job_id": "jgl93wmlg",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:48Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy A53 5G",
+   "os": "12",
+   "runtime": "tflite",
+   "job_id": "j569no475",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:48Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy A14 5G",
+   "os": "13",
+   "runtime": "tflite",
+   "job_id": "jp3leo0zp",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:49Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "quantize",
+   "graph": "mdeq_small_step",
+   "prec": "w8a16",
+   "job_id": "jgo73d6d5",
+   "at": "2026-11-23T09:37:54Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "SA8295P ADP",
+   "os": "14",
+   "runtime": "qnn_dlc",
+   "job_id": "jpvyv2kmp",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:55Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S22 5G",
+   "os": "12",
+   "runtime": "qnn_dlc",
+   "job_id": "jgj6e3n8p",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:55Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S23",
+   "os": "13",
+   "runtime": "qnn_dlc",
+   "job_id": "jpe0k6m0g",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:56Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "QCS8550 (Proxy)",
+   "os": "12",
+   "runtime": "qnn_dlc",
+   "job_id": "jgzqrzd6g",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:56Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Dragonwing IQ-9075 EVK",
+   "os": "1.9",
+   "runtime": "qnn_dlc",
+   "job_id": "j5w0qy6jp",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:57Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "SA8775P ADP",
+   "os": "14",
+   "runtime": "qnn_dlc",
+   "job_id": "jg97wonv5",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:57Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Snapdragon X Elite CRD",
+   "os": "11",
+   "runtime": "qnn_dlc",
+   "job_id": "jp1keozlg",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:58Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Snapdragon X Plus 8-Core CRD",
+   "os": "11",
+   "runtime": "qnn_dlc",
+   "job_id": "jgdyo61lg",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:58Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S24",
+   "os": "14",
+   "runtime": "qnn_dlc",
+   "job_id": "j571xoyr5",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:59Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "SA7255P ADP",
+   "os": "14",
+   "runtime": "qnn_dlc",
+   "job_id": "jp46vell5",
+   "submit_error": null,
+   "at": "2026-11-23T09:37:59Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Arduino VENTUNO Q",
+   "os": "24.04",
+   "runtime": "qnn_dlc",
+   "job_id": "jpx8y0k95",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:00Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S25",
+   "os": "15",
+   "runtime": "qnn_dlc",
+   "job_id": "j5m139nq5",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:00Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Snapdragon 8 Elite QRD",
+   "os": "15",
+   "runtime": "qnn_dlc",
+   "job_id": null,
+   "submit_error": "Device(name='Snapdragon 8 Elite QRD', os='15', attributes=[]) is not available.",
+   "at": "2026-11-23T09:38:00Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S26",
+   "os": "16",
+   "runtime": "qnn_dlc",
+   "job_id": "jgnd316mp",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:01Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Snapdragon 8 Elite Gen 5 QRD",
+   "os": "16",
+   "runtime": "qnn_dlc",
+   "job_id": null,
+   "submit_error": "Device(name='Snapdragon 8 Elite Gen 5 QRD', os='16', attributes=[]) is not available.",
+   "at": "2026-11-23T09:38:01Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Snapdragon X2 Elite CRD",
+   "os": "11",
+   "runtime": "qnn_dlc",
+   "job_id": "jprmexveg",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:01Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 3",
+   "os": "10",
+   "runtime": "tflite",
+   "job_id": "jp2qlokmp",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:02Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 3a",
+   "os": "10",
+   "runtime": "tflite",
+   "job_id": "jpyk6814g",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:03Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 4",
+   "os": "11",
+   "runtime": "tflite",
+   "job_id": "jp08loze5",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:03Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 5",
+   "os": "12",
+   "runtime": "tflite",
+   "job_id": "jp8dzjq85",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:03Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy Tab S7",
+   "os": "11",
+   "runtime": "tflite",
+   "job_id": "jgkw36eog",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:04Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Xiaomi Redmi Note 10 5G",
+   "os": "11",
+   "runtime": "tflite",
+   "job_id": null,
+   "submit_error": "Device(name='Xiaomi Redmi Note 10 5G', os='11', attributes=[]) is not available.",
+   "at": "2026-11-23T09:38:04Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 6",
+   "os": "13",
+   "runtime": "tflite",
+   "job_id": "j5qx346mp",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:04Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 7",
+   "os": "14",
+   "runtime": "tflite",
+   "job_id": "jgl93wvlg",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:05Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 8",
+   "os": "14",
+   "runtime": "tflite",
+   "job_id": "j569noy75",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:05Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 9",
+   "os": "15",
+   "runtime": "tflite",
+   "job_id": "jp3leojzp",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:06Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 10",
+   "os": "16",
+   "runtime": "tflite",
+   "job_id": "jgo73d2d5",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:06Z",
+   "status": "OPTIMIZING_MODEL"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy Note 20 (Intl)",
+   "os": "11",
+   "runtime": "tflite",
+   "job_id": "jpvyv26mp",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:07Z",
+   "status": "OPTIMIZING_MODEL"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy A53 5G",
+   "os": "12",
+   "runtime": "tflite",
+   "job_id": "jgj6e3v8p",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:07Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy A14 5G",
+   "os": "13",
+   "runtime": "tflite",
+   "job_id": "jpe0k6d0g",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:08Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S22 5G",
+   "runtime": "qnn_dlc",
+   "job_id": "jgzqrz36g",
+   "from_compile": "j569n8l75",
+   "at": "2026-11-23T09:38:09Z",
+   "status": "SUCCESS",
+   "ms_min": 1.984,
+   "ms_median": 2.0445,
+   "peak_mb": 129.62890625,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S23",
+   "runtime": "qnn_dlc",
+   "job_id": "j5w0qyejp",
+   "from_compile": "jp3lez2zp",
+   "at": "2026-11-23T09:38:09Z",
+   "status": "SUCCESS",
+   "ms_min": 1.209,
+   "ms_median": 1.2745,
+   "peak_mb": 100.7421875,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "QCS8550 (Proxy)",
+   "runtime": "qnn_dlc",
+   "job_id": "jg97wolv5",
+   "from_compile": "jgo73lqd5",
+   "at": "2026-11-23T09:38:10Z",
+   "status": "SUCCESS",
+   "ms_min": 1.179,
+   "ms_median": 1.2105,
+   "peak_mb": 110.42578125,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S21",
+   "os": "12",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgdyo6xlg",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:39Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy A73 5G",
+   "os": "12",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "j571xo2r5",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:39Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "os": "1.6",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jp46venl5",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:40Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "SA8295P ADP",
+   "os": "14",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jpx8y0995",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:40Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S22 5G",
+   "os": "12",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "j5m139eq5",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:40Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S23",
+   "os": "13",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgnd310mp",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:41Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "os": "15",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jprmex6eg",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:42Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Dragonwing Q-6690 MTP",
+   "os": "15",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jp2qloxmp",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:42Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "QCS8550 (Proxy)",
+   "os": "12",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jpyk68z4g",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:42Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Dragonwing IQ-9075 EVK",
+   "os": "1.9",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jp08lo4e5",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:43Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "SA8775P ADP",
+   "os": "14",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jp8dzj285",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:43Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Snapdragon X Elite CRD",
+   "os": "11",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgkw36vog",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:44Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Snapdragon X Plus 8-Core CRD",
+   "os": "11",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "j5qx340mp",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:44Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S24",
+   "os": "14",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgl93w4lg",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:45Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "SA7255P ADP",
+   "os": "14",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "j569no275",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:45Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Arduino VENTUNO Q",
+   "os": "24.04",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jp3leonzp",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:46Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S25",
+   "os": "15",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgo73dzd5",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:46Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Snapdragon 8 Elite QRD",
+   "os": "15",
+   "runtime": "qnn_dlc_qio",
+   "job_id": null,
+   "submit_error": "Device(name='Snapdragon 8 Elite QRD', os='15', attributes=[]) is not available.",
+   "at": "2026-11-23T09:38:46Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S26",
+   "os": "16",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jpvyv2qmp",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:47Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Snapdragon 8 Elite Gen 5 QRD",
+   "os": "16",
+   "runtime": "qnn_dlc_qio",
+   "job_id": null,
+   "submit_error": "Device(name='Snapdragon 8 Elite Gen 5 QRD', os='16', attributes=[]) is not available.",
+   "at": "2026-11-23T09:38:47Z"
+  },
+  {
+   "kind": "compile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Snapdragon X2 Elite CRD",
+   "os": "11",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgj6e3d8p",
+   "submit_error": null,
+   "at": "2026-11-23T09:38:47Z",
+   "status": "CREATED"
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "SA8295P ADP",
+   "runtime": "qnn_dlc",
+   "job_id": "jpe0k6o0g",
+   "from_compile": "jgl93yrlg",
+   "at": "2026-11-23T09:38:48Z",
+   "status": "SUCCESS",
+   "ms_min": 2.337,
+   "ms_median": 2.4255,
+   "peak_mb": 129.5703125,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Dragonwing IQ-9075 EVK",
+   "runtime": "qnn_dlc",
+   "job_id": "jgzqrz26g",
+   "from_compile": "jpvyvlxmp",
+   "at": "2026-11-23T09:38:49Z",
+   "status": "SUCCESS",
+   "ms_min": 2.217,
+   "ms_median": 2.236,
+   "peak_mb": 12.48828125,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "SA8775P ADP",
+   "runtime": "qnn_dlc",
+   "job_id": "j5w0qywjp",
+   "from_compile": "jgj6er48p",
+   "at": "2026-11-23T09:38:50Z",
+   "status": "SUCCESS",
+   "ms_min": 2.362,
+   "ms_median": 2.473,
+   "peak_mb": 97.25390625,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Snapdragon X Elite CRD",
+   "runtime": "qnn_dlc",
+   "job_id": "jg97wo0v5",
+   "from_compile": "jpe0k730g",
+   "at": "2026-11-23T09:38:50Z",
+   "status": "SUCCESS",
+   "ms_min": 1.311,
+   "ms_median": 1.4335,
+   "peak_mb": 21.28515625,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Snapdragon X Plus 8-Core CRD",
+   "runtime": "qnn_dlc",
+   "job_id": "jp1keo2lg",
+   "from_compile": "jgzqrlk6g",
+   "at": "2026-11-23T09:38:51Z",
+   "status": "SUCCESS",
+   "ms_min": 1.279,
+   "ms_median": 1.421,
+   "peak_mb": 21.296875,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S24",
+   "runtime": "qnn_dlc",
+   "job_id": "jgdyo6nlg",
+   "from_compile": "j5w0qlnjp",
+   "at": "2026-11-23T09:38:52Z",
+   "status": "SUCCESS",
+   "ms_min": 0.849,
+   "ms_median": 0.854,
+   "peak_mb": 135.6015625,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "SA7255P ADP",
+   "runtime": "qnn_dlc",
+   "job_id": "jgdyo6qeg",
+   "from_compile": "jg97wzev5",
+   "at": "2026-11-23T09:44:13Z",
+   "status": "SUCCESS",
+   "ms_min": 7.378,
+   "ms_median": 7.5405,
+   "peak_mb": 87.77734375,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Arduino VENTUNO Q",
+   "runtime": "qnn_dlc",
+   "job_id": "j571xoll5",
+   "from_compile": "jp1kenxlg",
+   "at": "2026-11-23T09:44:14Z",
+   "status": "SUCCESS",
+   "ms_min": 2.468,
+   "ms_median": 2.506,
+   "peak_mb": 12.7578125,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S25",
+   "runtime": "qnn_dlc",
+   "job_id": "jp46vedv5",
+   "from_compile": "jgdyodllg",
+   "at": "2026-11-23T09:44:15Z",
+   "status": "SUCCESS",
+   "ms_min": 0.693,
+   "ms_median": 0.729,
+   "peak_mb": 151.94140625,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S26",
+   "runtime": "qnn_dlc",
+   "job_id": "jpx8y0615",
+   "from_compile": "j571xorr5",
+   "at": "2026-11-23T09:44:16Z",
+   "status": "SUCCESS",
+   "ms_min": 0.586,
+   "ms_median": 0.599,
+   "peak_mb": 161.4921875,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Snapdragon X2 Elite CRD",
+   "runtime": "qnn_dlc",
+   "job_id": "j5m1396w5",
+   "from_compile": "jp46verl5",
+   "at": "2026-11-23T09:44:16Z",
+   "status": "SUCCESS",
+   "ms_min": 0.758,
+   "ms_median": 0.9155,
+   "peak_mb": 22.6796875,
+   "units": {
+    "NPU": 22
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 3",
+   "runtime": "tflite",
+   "job_id": "jgnd31mrp",
+   "from_compile": "jpx8y0o95",
+   "at": "2026-11-23T09:44:17Z",
+   "status": "SUCCESS",
+   "ms_min": 16.409,
+   "ms_median": 18.196,
+   "peak_mb": 61.1640625,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 3a",
+   "runtime": "tflite",
+   "job_id": "jprmex29g",
+   "from_compile": "j5m139xq5",
+   "at": "2026-11-23T09:44:18Z",
+   "status": "SUCCESS",
+   "ms_min": 42.858,
+   "ms_median": 43.7015,
+   "peak_mb": 61.97265625,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 4",
+   "runtime": "tflite",
+   "job_id": "jp08lo265",
+   "from_compile": "jgnd31vmp",
+   "at": "2026-11-23T09:44:19Z",
+   "status": "SUCCESS",
+   "ms_min": 12.145,
+   "ms_median": 15.036,
+   "peak_mb": 93.640625,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 5",
+   "runtime": "tflite",
+   "job_id": "jp8dzjmx5",
+   "from_compile": "jprmex3eg",
+   "at": "2026-11-23T09:44:19Z",
+   "status": "SUCCESS",
+   "ms_min": 25.716,
+   "ms_median": 28.1395,
+   "peak_mb": 83.57421875,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy Tab S7",
+   "runtime": "tflite",
+   "job_id": "jgl93w28g",
+   "from_compile": "jp2qloymp",
+   "at": "2026-11-23T09:44:20Z",
+   "status": "SUCCESS",
+   "ms_min": 8.959,
+   "ms_median": 9.4205,
+   "peak_mb": 97.3671875,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 6",
+   "runtime": "tflite",
+   "job_id": "jp3leo1lp",
+   "from_compile": "jpyk6834g",
+   "at": "2026-11-23T09:44:21Z",
+   "status": "SUCCESS",
+   "ms_min": 11.164,
+   "ms_median": 17.2555,
+   "peak_mb": 106.17578125,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 7",
+   "runtime": "tflite",
+   "job_id": "jgo73dnx5",
+   "from_compile": "jp08lo0e5",
+   "at": "2026-11-23T09:44:22Z",
+   "status": "SUCCESS",
+   "ms_min": 16.238,
+   "ms_median": 19.5545,
+   "peak_mb": 144.828125,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 8",
+   "runtime": "tflite",
+   "job_id": "jpvyv2rjp",
+   "from_compile": "jp8dzjy85",
+   "at": "2026-11-23T09:44:22Z",
+   "status": "SUCCESS",
+   "ms_min": 10.616,
+   "ms_median": 19.9425,
+   "peak_mb": 111.984375,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 9",
+   "runtime": "tflite",
+   "job_id": "jgj6e32xp",
+   "from_compile": "jgkw36xog",
+   "at": "2026-11-23T09:44:23Z",
+   "status": "SUCCESS",
+   "ms_min": 9.27,
+   "ms_median": 11.43,
+   "peak_mb": 150.8515625,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Google Pixel 10",
+   "runtime": "tflite",
+   "job_id": "jpe0k6w1g",
+   "from_compile": "j5qx34qmp",
+   "at": "2026-11-23T09:44:24Z",
+   "status": "SUCCESS",
+   "ms_min": 19.139,
+   "ms_median": 26.529,
+   "peak_mb": 116.69921875,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy Note 20 (Intl)",
+   "runtime": "tflite",
+   "job_id": "jgzqrzjkg",
+   "from_compile": "jgl93wmlg",
+   "at": "2026-11-23T09:44:25Z",
+   "status": "SUCCESS",
+   "ms_min": 10.137,
+   "ms_median": 10.7345,
+   "peak_mb": 102.79296875,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy A53 5G",
+   "runtime": "tflite",
+   "job_id": "j5w0qyq6p",
+   "from_compile": "j569no475",
+   "at": "2026-11-23T09:44:26Z",
+   "status": "SUCCESS",
+   "ms_min": 18.818,
+   "ms_median": 25.8105,
+   "peak_mb": 98.375,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy A14 5G",
+   "runtime": "tflite",
+   "job_id": "jg97wowl5",
+   "from_compile": "jp3leo0zp",
+   "at": "2026-11-23T09:44:26Z",
+   "status": "SUCCESS",
+   "ms_min": 28.219,
+   "ms_median": 31.879,
+   "peak_mb": 93.57421875,
+   "units": {
+    "GPU": 14
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "SA8295P ADP",
+   "runtime": "qnn_dlc",
+   "job_id": "jp1keoe2g",
+   "from_compile": "jpvyv2kmp",
+   "at": "2026-11-23T09:44:27Z",
+   "status": "SUCCESS",
+   "ms_min": 1.711,
+   "ms_median": 1.76,
+   "peak_mb": 131.171875,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S22 5G",
+   "runtime": "qnn_dlc",
+   "job_id": "jgdyo6oeg",
+   "from_compile": "jgj6e3n8p",
+   "at": "2026-11-23T09:44:28Z",
+   "status": "SUCCESS",
+   "ms_min": 1.468,
+   "ms_median": 1.4815,
+   "peak_mb": 163.85546875,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S23",
+   "runtime": "qnn_dlc",
+   "job_id": "j571xoxl5",
+   "from_compile": "jpe0k6m0g",
+   "at": "2026-11-23T09:44:28Z",
+   "status": "SUCCESS",
+   "ms_min": 0.987,
+   "ms_median": 1.0045,
+   "peak_mb": 96.93359375,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "QCS8550 (Proxy)",
+   "runtime": "qnn_dlc",
+   "job_id": "jp46vevv5",
+   "from_compile": "jgzqrzd6g",
+   "at": "2026-11-23T09:44:29Z",
+   "status": "SUCCESS",
+   "ms_min": 0.984,
+   "ms_median": 0.993,
+   "peak_mb": 97.1015625,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Dragonwing IQ-9075 EVK",
+   "runtime": "qnn_dlc",
+   "job_id": "jpx8y0y15",
+   "from_compile": "j5w0qy6jp",
+   "at": "2026-11-23T09:44:30Z",
+   "status": "SUCCESS",
+   "ms_min": 1.43,
+   "ms_median": 1.4585,
+   "peak_mb": 9.74609375,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "SA8775P ADP",
+   "runtime": "qnn_dlc",
+   "job_id": "j5m1393w5",
+   "from_compile": "jg97wonv5",
+   "at": "2026-11-23T09:44:31Z",
+   "status": "SUCCESS",
+   "ms_min": 1.542,
+   "ms_median": 1.626,
+   "peak_mb": 86.296875,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Snapdragon X Elite CRD",
+   "runtime": "qnn_dlc",
+   "job_id": "jgnd313rp",
+   "from_compile": "jp1keozlg",
+   "at": "2026-11-23T09:44:32Z",
+   "status": "SUCCESS",
+   "ms_min": 1.081,
+   "ms_median": 1.176,
+   "peak_mb": 16.625,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Snapdragon X Plus 8-Core CRD",
+   "runtime": "qnn_dlc",
+   "job_id": "jprmexe9g",
+   "from_compile": "jgdyo61lg",
+   "at": "2026-11-23T09:44:32Z",
+   "status": "SUCCESS",
+   "ms_min": 1.036,
+   "ms_median": 1.1065,
+   "peak_mb": 16.609375,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S24",
+   "runtime": "qnn_dlc",
+   "job_id": "jpyk6867g",
+   "from_compile": "j571xoyr5",
+   "at": "2026-11-23T09:44:33Z",
+   "status": "SUCCESS",
+   "ms_min": 0.754,
+   "ms_median": 0.76,
+   "peak_mb": 229.08984375,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "SA7255P ADP",
+   "runtime": "qnn_dlc",
+   "job_id": "jp08lol65",
+   "from_compile": "jp46vell5",
+   "at": "2026-11-23T09:44:34Z",
+   "status": "SUCCESS",
+   "ms_min": 4.122,
+   "ms_median": 4.1995,
+   "peak_mb": 86.25,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Arduino VENTUNO Q",
+   "runtime": "qnn_dlc",
+   "job_id": "jp8dzjzx5",
+   "from_compile": "jpx8y0k95",
+   "at": "2026-11-23T09:44:35Z",
+   "status": "SUCCESS",
+   "ms_min": 1.567,
+   "ms_median": 1.602,
+   "peak_mb": 8.0703125,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S25",
+   "runtime": "qnn_dlc",
+   "job_id": "jgkw3632g",
+   "from_compile": "j5m139nq5",
+   "at": "2026-11-23T09:44:35Z",
+   "status": "SUCCESS",
+   "ms_min": 0.573,
+   "ms_median": 0.599,
+   "peak_mb": 153.30078125,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy S26",
+   "runtime": "qnn_dlc",
+   "job_id": "j5qx3434p",
+   "from_compile": "jgnd316mp",
+   "at": "2026-11-23T09:44:36Z",
+   "status": "SUCCESS",
+   "ms_min": 0.532,
+   "ms_median": 0.5585,
+   "peak_mb": 170.91015625,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Snapdragon X2 Elite CRD",
+   "runtime": "qnn_dlc",
+   "job_id": "jgl93w38g",
+   "from_compile": "jprmexveg",
+   "at": "2026-11-23T09:44:37Z",
+   "status": "SUCCESS",
+   "ms_min": 0.627,
+   "ms_median": 0.7505,
+   "peak_mb": 17.96875,
+   "units": {
+    "NPU": 119
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 3",
+   "runtime": "tflite",
+   "job_id": "j569non05",
+   "from_compile": "jp2qlokmp",
+   "at": "2026-11-23T09:44:38Z",
+   "status": "SUCCESS",
+   "ms_min": 49.581,
+   "ms_median": 53.363,
+   "peak_mb": 86.78125,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 3a",
+   "runtime": "tflite",
+   "job_id": "jp3leoelp",
+   "from_compile": "jpyk6814g",
+   "at": "2026-11-23T09:44:39Z",
+   "status": "SUCCESS",
+   "ms_min": 82.866,
+   "ms_median": 89.4845,
+   "peak_mb": 89.65625,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 4",
+   "runtime": "tflite",
+   "job_id": "jpvyv2vjp",
+   "from_compile": "jp08loze5",
+   "at": "2026-11-23T09:44:39Z",
+   "status": "SUCCESS",
+   "ms_min": 30.78,
+   "ms_median": 39.2395,
+   "peak_mb": 125.92578125,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 5",
+   "runtime": "tflite",
+   "job_id": "jgj6e3exp",
+   "from_compile": "jp8dzjq85",
+   "at": "2026-11-23T09:44:40Z",
+   "status": "SUCCESS",
+   "ms_min": 56.181,
+   "ms_median": 59.737,
+   "peak_mb": 112.015625,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy Tab S7",
+   "runtime": "tflite",
+   "job_id": "jgzqrzrkg",
+   "from_compile": "jgkw36eog",
+   "at": "2026-11-23T09:44:41Z",
+   "status": "SUCCESS",
+   "ms_min": 28.098,
+   "ms_median": 29.6305,
+   "peak_mb": 122.52734375,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 6",
+   "runtime": "tflite",
+   "job_id": "j5w0qy96p",
+   "from_compile": "j5qx346mp",
+   "at": "2026-11-23T09:44:42Z",
+   "status": "SUCCESS",
+   "ms_min": 31.381,
+   "ms_median": 39.2,
+   "peak_mb": 141.46484375,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 7",
+   "runtime": "tflite",
+   "job_id": "jp1keo82g",
+   "from_compile": "jgl93wvlg",
+   "at": "2026-11-23T09:44:42Z",
+   "status": "SUCCESS",
+   "ms_min": 30.202,
+   "ms_median": 38.2015,
+   "peak_mb": 174.79296875,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 8",
+   "runtime": "tflite",
+   "job_id": "jgdyo6veg",
+   "from_compile": "j569noy75",
+   "at": "2026-11-23T09:44:43Z",
+   "status": "SUCCESS",
+   "ms_min": 26.43,
+   "ms_median": 35.403,
+   "peak_mb": 145.2265625,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 9",
+   "runtime": "tflite",
+   "job_id": "j571xodl5",
+   "from_compile": "jp3leojzp",
+   "at": "2026-11-23T09:44:44Z",
+   "status": "SUCCESS",
+   "ms_min": 29.932,
+   "ms_median": 41.6885,
+   "peak_mb": 189.3046875,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Google Pixel 10",
+   "runtime": "tflite",
+   "job_id": "jgdyo6rrg",
+   "from_compile": "jgo73d2d5",
+   "at": "2026-11-23T09:50:07Z",
+   "status": "SUCCESS",
+   "ms_min": 77.215,
+   "ms_median": 123.0425,
+   "peak_mb": 166.02734375,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy Note 20 (Intl)",
+   "runtime": "tflite",
+   "job_id": "j571xojv5",
+   "from_compile": "jpvyv26mp",
+   "at": "2026-11-23T09:50:08Z",
+   "status": "SUCCESS",
+   "ms_min": 36.42,
+   "ms_median": 44.313,
+   "peak_mb": 141.16015625,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy A53 5G",
+   "runtime": "tflite",
+   "job_id": "jp46vex85",
+   "from_compile": "jgj6e3v8p",
+   "at": "2026-11-23T09:50:08Z",
+   "status": "SUCCESS",
+   "ms_min": 73.733,
+   "ms_median": 97.147,
+   "peak_mb": 124.76953125,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "mdeq_small_step",
+   "prec": "fp32",
+   "device": "Samsung Galaxy A14 5G",
+   "runtime": "tflite",
+   "job_id": "j5m139wd5",
+   "from_compile": "jpe0k6d0g",
+   "at": "2026-11-23T09:50:09Z",
+   "status": "SUCCESS",
+   "ms_min": 59.432,
+   "ms_median": 71.829,
+   "peak_mb": 147.96484375,
+   "units": {
+    "CPU": 345,
+    "GPU": 111
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S21",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgnd319kp",
+   "from_compile": "jgdyo6xlg",
+   "at": "2026-11-23T09:50:10Z",
+   "status": "FAILED",
+   "error": "Failed to profile the model: QNN_DEVICE_ERROR_INVALID_CONFIG: Invalid config values"
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy A73 5G",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jprmex40g",
+   "from_compile": "j571xo2r5",
+   "at": "2026-11-23T09:50:11Z",
+   "status": "SUCCESS",
+   "ms_min": 3.663,
+   "ms_median": 3.793,
+   "peak_mb": 93.5859375,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Dragonwing RB3 Gen 2 Vision Kit",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jp2qlo7rp",
+   "from_compile": "jp46venl5",
+   "at": "2026-11-23T09:50:12Z",
+   "status": "SUCCESS",
+   "ms_min": 3.69,
+   "ms_median": 4.533,
+   "peak_mb": 10.234375,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "SA8295P ADP",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jpyk6848g",
+   "from_compile": "jpx8y0995",
+   "at": "2026-11-23T09:50:12Z",
+   "status": "SUCCESS",
+   "ms_min": 1.483,
+   "ms_median": 1.553,
+   "peak_mb": 129.375,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S22 5G",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jp08lo195",
+   "from_compile": "j5m139eq5",
+   "at": "2026-11-23T09:50:13Z",
+   "status": "SUCCESS",
+   "ms_min": 0.98,
+   "ms_median": 1.006,
+   "peak_mb": 102.01953125,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S23",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jp8dzj3k5",
+   "from_compile": "jgnd310mp",
+   "at": "2026-11-23T09:50:14Z",
+   "status": "SUCCESS",
+   "ms_min": 0.802,
+   "ms_median": 0.813,
+   "peak_mb": 98.59765625,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Snapdragon 7 Gen 4 QRD",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgkw36lwg",
+   "from_compile": "jprmex6eg",
+   "at": "2026-11-23T09:50:14Z",
+   "status": "SUCCESS",
+   "ms_min": 1.277,
+   "ms_median": 1.3,
+   "peak_mb": 159.65625,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Dragonwing Q-6690 MTP",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "j5qx347np",
+   "from_compile": "jp2qloxmp",
+   "at": "2026-11-23T09:50:15Z",
+   "status": "SUCCESS",
+   "ms_min": 10.639,
+   "ms_median": 10.7615,
+   "peak_mb": 165.02734375,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "QCS8550 (Proxy)",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgl93w0jg",
+   "from_compile": "jpyk68z4g",
+   "at": "2026-11-23T09:50:16Z",
+   "status": "SUCCESS",
+   "ms_min": 0.8,
+   "ms_median": 0.8115,
+   "peak_mb": 97.35546875,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Dragonwing IQ-9075 EVK",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "j569no365",
+   "from_compile": "jp08lo4e5",
+   "at": "2026-11-23T09:50:17Z",
+   "status": "SUCCESS",
+   "ms_min": 1.023,
+   "ms_median": 1.178,
+   "peak_mb": 8.296875,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "SA8775P ADP",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jp3leo43p",
+   "from_compile": "jp8dzj285",
+   "at": "2026-11-23T09:50:17Z",
+   "status": "SUCCESS",
+   "ms_min": 1.144,
+   "ms_median": 1.221,
+   "peak_mb": 95.6640625,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Snapdragon X Elite CRD",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgo73d1q5",
+   "from_compile": "jgkw36vog",
+   "at": "2026-11-23T09:50:18Z",
+   "status": "SUCCESS",
+   "ms_min": 0.903,
+   "ms_median": 0.9985,
+   "peak_mb": 17.45703125,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Snapdragon X Plus 8-Core CRD",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jpvyv2zkp",
+   "from_compile": "j5qx340mp",
+   "at": "2026-11-23T09:50:19Z",
+   "status": "SUCCESS",
+   "ms_min": 0.897,
+   "ms_median": 0.9795,
+   "peak_mb": 17.34765625,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S24",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgj6e3kvp",
+   "from_compile": "jgl93w4lg",
+   "at": "2026-11-23T09:50:20Z",
+   "status": "SUCCESS",
+   "ms_min": 0.574,
+   "ms_median": 0.5925,
+   "peak_mb": 137.12109375,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "SA7255P ADP",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jpe0k64og",
+   "from_compile": "j569no275",
+   "at": "2026-11-23T09:50:21Z",
+   "status": "SUCCESS",
+   "ms_min": 2.638,
+   "ms_median": 2.767,
+   "peak_mb": 93.95703125,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Arduino VENTUNO Q",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jgzqrzvog",
+   "from_compile": "jp3leonzp",
+   "at": "2026-11-23T09:50:21Z",
+   "status": "SUCCESS",
+   "ms_min": 1.121,
+   "ms_median": 1.1425,
+   "peak_mb": 7.6640625,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S25",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "j5w0qym3p",
+   "from_compile": "jgo73dzd5",
+   "at": "2026-11-23T09:50:22Z",
+   "status": "SUCCESS",
+   "ms_min": 0.498,
+   "ms_median": 0.5095,
+   "peak_mb": 145.140625,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Samsung Galaxy S26",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jg97wo9w5",
+   "from_compile": "jpvyv2qmp",
+   "at": "2026-11-23T09:50:23Z",
+   "status": "SUCCESS",
+   "ms_min": 0.446,
+   "ms_median": 0.454,
+   "peak_mb": 155.59765625,
+   "units": {
+    "NPU": 16
+   }
+  },
+  {
+   "kind": "profile",
+   "graph": "dt_maze33_step",
+   "prec": "w8a16",
+   "device": "Snapdragon X2 Elite CRD",
+   "runtime": "qnn_dlc_qio",
+   "job_id": "jp1keoq8g",
+   "from_compile": "jgj6e3d8p",
+   "at": "2026-11-23T09:50:24Z",
+   "status": "SUCCESS",
+   "ms_min": 0.609,
+   "ms_median": 0.693,
+   "peak_mb": 18.8125,
+   "units": {
+    "NPU": 16
+   }
+  }
+ ]
+}
