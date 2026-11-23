@@ -1,0 +1,3933 @@
+{
+ "rule": "verdict on acc_final / host_acc_final: PASS >= 0.95, FAIL < 0.5, WARN between",
+ "cos": "mean over inputs of the cosine of the flattened carry with the host fp32 carry at the same loop; TRM z_H, DT thought, MDEQ z0..z3 concatenated",
+ "rows": [
+  {
+   "gpu": "a100",
+   "model": "hrm_sudoku",
+   "build": "fp16",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.43,
+   "acc_loop2": 0.08,
+   "agree_loop2": 0.9990123456790123,
+   "agree_final": 0.9714814814814815,
+   "state": "z_H",
+   "cos_l1": 0.9999955214410164,
+   "cos_l2": 0.9999887101818196,
+   "cos_final": 0.9916157147045507,
+   "cos_all": {
+    "z_H": [
+     0.9999955214410164,
+     0.9999887101818196,
+     0.9916157147045507
+    ],
+    "z_L": [
+     0.9999975235653635,
+     0.9999879413652253,
+     0.9850225622904548
+    ]
+   },
+   "engine_md5": "2012294c0398",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/hrm_sudoku_fp16_preds.npz",
+   "ratio": 1.048780487804878,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "hrm_sudoku",
+   "build": "int8mm",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.24,
+   "acc_loop2": 0.02,
+   "agree_loop2": 0.7779012345679013,
+   "agree_final": 0.8049382716049382,
+   "state": "z_H",
+   "cos_l1": 0.8527286303114604,
+   "cos_l2": 0.9135123929497228,
+   "cos_final": 0.8863642120986224,
+   "cos_all": {
+    "z_H": [
+     0.8527286303114604,
+     0.9135123929497228,
+     0.8863642120986224
+    ],
+    "z_L": [
+     0.899564029271407,
+     0.877581725089812,
+     0.8353048793684588
+    ]
+   },
+   "engine_md5": "97bfc0769bdb",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/hrm_sudoku_int8mm_preds.npz",
+   "ratio": 0.5853658536585366,
+   "verdict": "WARN"
+  },
+  {
+   "gpu": "a100",
+   "model": "hrm_sudoku",
+   "build": "int8proj",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.45,
+   "acc_loop2": 0.06,
+   "agree_loop2": 0.8539506172839506,
+   "agree_final": 0.8827160493827161,
+   "state": "z_H",
+   "cos_l1": 0.9316645917602961,
+   "cos_l2": 0.9555349597604713,
+   "cos_final": 0.9366020305832436,
+   "cos_all": {
+    "z_H": [
+     0.9316645917602961,
+     0.9555349597604713,
+     0.9366020305832436
+    ],
+    "z_L": [
+     0.9569773943982974,
+     0.9406746734086017,
+     0.9034102568290965
+    ]
+   },
+   "engine_md5": "cf1423062d36",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/hrm_sudoku_int8proj_preds.npz",
+   "ratio": 1.0975609756097562,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "maze",
+   "build": "fp16",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.88,
+   "acc_loop2": 0.12,
+   "agree_loop2": 0.9998666666666667,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999986283254959,
+   "cos_l2": 0.9999976077090971,
+   "cos_final": 0.9999972637231304,
+   "cos_all": {
+    "z_H": [
+     0.9999986283254959,
+     0.9999976077090971,
+     0.9999972637231304
+    ],
+    "z_L": [
+     0.9999984508082272,
+     0.9999966578788215,
+     0.9999920714204782
+    ]
+   },
+   "engine_md5": "d2716f9197cb",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/maze_fp16_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "maze",
+   "build": "int8mm",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.8749777777777777,
+   "agree_final": 0.8518888888888889,
+   "state": "z_H",
+   "cos_l1": 0.7979437645953851,
+   "cos_l2": 0.4200993923515093,
+   "cos_final": 0.31293508360963623,
+   "cos_all": {
+    "z_H": [
+     0.7979437645953851,
+     0.4200993923515093,
+     0.31293508360963623
+    ],
+    "z_L": [
+     0.759075247777855,
+     0.5444565609553939,
+     0.44090755782338265
+    ]
+   },
+   "engine_md5": "df1e9b13d1d2",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/maze_int8mm_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "a100",
+   "model": "maze",
+   "build": "int8proj",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.9,
+   "acc_loop2": 0.06,
+   "agree_loop2": 0.9951555555555556,
+   "agree_final": 0.9984,
+   "state": "z_H",
+   "cos_l1": 0.9988292046133858,
+   "cos_l2": 0.8607858490827505,
+   "cos_final": 0.8247051566156859,
+   "cos_all": {
+    "z_H": [
+     0.9988292046133858,
+     0.8607858490827505,
+     0.8247051566156859
+    ],
+    "z_L": [
+     0.999704038002811,
+     0.9889211568314021,
+     0.927330454724899
+    ]
+   },
+   "engine_md5": "abe41f988335",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/maze_int8proj_preds.npz",
+   "ratio": 1.0227272727272727,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_attn",
+   "build": "fp16",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.51,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9992592592592593,
+   "agree_final": 0.9734567901234568,
+   "state": "z_H",
+   "cos_l1": 0.9999995483759405,
+   "cos_l2": 0.9999973997070455,
+   "cos_final": 0.9960678378498027,
+   "cos_all": {
+    "z_H": [
+     0.9999995483759405,
+     0.9999973997070455,
+     0.9960678378498027
+    ],
+    "z_L": [
+     0.9999994987863549,
+     0.9999968882348778,
+     0.9705443814831526
+    ]
+   },
+   "engine_md5": "8d35c0a91299",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/sudoku_attn_fp16_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_attn",
+   "build": "int8mm",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.01,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.7234567901234568,
+   "agree_final": 0.6270370370370371,
+   "state": "z_H",
+   "cos_l1": 0.9556885605299422,
+   "cos_l2": 0.8146555944701153,
+   "cos_final": 0.6229617915513859,
+   "cos_all": {
+    "z_H": [
+     0.9556885605299422,
+     0.8146555944701153,
+     0.6229617915513859
+    ],
+    "z_L": [
+     0.9603976530926296,
+     0.7946490149885957,
+     0.46407345542263634
+    ]
+   },
+   "engine_md5": "09b246fe06d2",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/sudoku_attn_int8mm_preds.npz",
+   "ratio": 0.0196078431372549,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_attn",
+   "build": "int8proj",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.51,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.8382716049382716,
+   "agree_final": 0.8667901234567901,
+   "state": "z_H",
+   "cos_l1": 0.9543390311777941,
+   "cos_l2": 0.891580882728628,
+   "cos_final": 0.8182793730496465,
+   "cos_all": {
+    "z_H": [
+     0.9543390311777941,
+     0.891580882728628,
+     0.8182793730496465
+    ],
+    "z_L": [
+     0.9588444662161963,
+     0.8737125281444807,
+     0.739264369028051
+    ]
+   },
+   "engine_md5": "b619be2a1173",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/sudoku_attn_int8proj_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_mlp",
+   "build": "fp16",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.56,
+   "acc_loop2": 0.02,
+   "agree_loop2": 0.9977777777777778,
+   "agree_final": 0.975679012345679,
+   "state": "z_H",
+   "cos_l1": 0.9998792355371277,
+   "cos_l2": 0.9999278771637182,
+   "cos_final": 0.9882201897843937,
+   "cos_all": {
+    "z_H": [
+     0.9998792355371277,
+     0.9999278771637182,
+     0.9882201897843937
+    ],
+    "z_L": [
+     0.9999247256489957,
+     0.9999774286459604,
+     0.9801507396695682
+    ]
+   },
+   "engine_md5": "22476df352f0",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/sudoku_mlp_fp16_preds.npz",
+   "ratio": 0.9655172413793105,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_mlp",
+   "build": "int8mm",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.49,
+   "acc_loop2": 0.03,
+   "agree_loop2": 0.8202469135802469,
+   "agree_final": 0.8388888888888889,
+   "state": "z_H",
+   "cos_l1": 0.8486839187771676,
+   "cos_l2": 0.7900683654466163,
+   "cos_final": 0.6375593628504932,
+   "cos_all": {
+    "z_H": [
+     0.8486839187771676,
+     0.7900683654466163,
+     0.6375593628504932
+    ],
+    "z_L": [
+     0.9125875864629723,
+     0.8534389422992906,
+     0.7222897898296076
+    ]
+   },
+   "engine_md5": "13c2f95e3a0c",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/sudoku_mlp_int8mm_preds.npz",
+   "ratio": 0.8448275862068966,
+   "verdict": "WARN"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_mlp",
+   "build": "int8proj",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.49,
+   "acc_loop2": 0.03,
+   "agree_loop2": 0.8202469135802469,
+   "agree_final": 0.8388888888888889,
+   "state": "z_H",
+   "cos_l1": 0.8486839187771676,
+   "cos_l2": 0.7900683654466163,
+   "cos_final": 0.6375593628504932,
+   "cos_all": {
+    "z_H": [
+     0.8486839187771676,
+     0.7900683654466163,
+     0.6375593628504932
+    ],
+    "z_L": [
+     0.9125875864629723,
+     0.8534389422992906,
+     0.7222897898296076
+    ]
+   },
+   "engine_md5": "fbf6dc618ea7",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate_a100/sudoku_mlp_int8proj_preds.npz",
+   "ratio": 0.8448275862068966,
+   "verdict": "WARN",
+   "dup_of": "int8mm"
+  },
+  {
+   "gpu": "a100",
+   "model": "dt_maze33",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 1.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "thought",
+   "cos_l1": 0.999999999999963,
+   "cos_l2": 0.9999999999999182,
+   "cos_final": 0.9999999999995434,
+   "cos_all": {
+    "thought": [
+     0.999999999999963,
+     0.9999999999999182,
+     0.9999999999995434
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "1a97fbadda51",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/dt_maze33_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "dt_maze33",
+   "build": "fp16",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 1.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9998495370370369,
+   "agree_final": 1.0,
+   "state": "thought",
+   "cos_l1": 0.9999979768012662,
+   "cos_l2": 0.9999970923619904,
+   "cos_final": 0.9999732653148221,
+   "cos_all": {
+    "thought": [
+     0.9999979768012662,
+     0.9999970923619904,
+     0.9999732653148221
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "0d774cb70784",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/dt_maze33_fp16_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "dt_maze33",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 1.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9817283950617284,
+   "agree_final": 1.0,
+   "state": "thought",
+   "cos_l1": 0.9903014528888088,
+   "cos_l2": 0.9883786819799315,
+   "cos_final": 0.997662434809445,
+   "cos_all": {
+    "thought": [
+     0.9903014528888088,
+     0.9883786819799315,
+     0.997662434809445
+    ]
+   },
+   "n_int8_out_layers": 10,
+   "engine_md5": "ffb2adc7550c",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/dt_maze33_int8_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "dt_maze33",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 1.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9817283950617284,
+   "agree_final": 1.0,
+   "state": "thought",
+   "cos_l1": 0.9903014528888088,
+   "cos_l2": 0.9883786819799315,
+   "cos_final": 0.997662434809445,
+   "cos_all": {
+    "thought": [
+     0.9903014528888088,
+     0.9883786819799315,
+     0.997662434809445
+    ]
+   },
+   "n_int8_out_layers": 10,
+   "engine_md5": "ffb2adc7550c",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/dt_maze33_int8f32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "int8"
+  },
+  {
+   "gpu": "a100",
+   "model": "dt_maze33",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "BUILD_FAILED": true,
+   "errors": [
+    "[ERROR] [optimizer.cpp::filterPTQFormats::5019] Error Code 2: Internal Error (Assertion !n->candidateRequirements.empty() failed. /recur_block/recur_block.1/recur_block.1.1/conv2/Conv + /recur_block/recur_block.1/recur_block.1.1/Add + /recur_block/recur_block.1/recur_block.1.1/Relu_1 requires output to be in floating point precision. No format available with unquantized output. Try setting layer o"
+   ]
+  },
+  {
+   "gpu": "a100",
+   "model": "dt_maze33",
+   "build": "int8strict_prefer",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 1.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9817283950617284,
+   "agree_final": 1.0,
+   "state": "thought",
+   "cos_l1": 0.9903014528888088,
+   "cos_l2": 0.9883786819799315,
+   "cos_final": 0.997662434809445,
+   "cos_all": {
+    "thought": [
+     0.9903014528888088,
+     0.9883786819799315,
+     0.997662434809445
+    ]
+   },
+   "n_int8_out_layers": 10,
+   "engine_md5": "ffb2adc7550c",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/dt_maze33_int8strict_prefer_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "int8"
+  },
+  {
+   "gpu": "a100",
+   "model": "dt_maze33",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.6720293209876543,
+   "agree_final": 0.7670852623456791,
+   "state": "thought",
+   "cos_l1": 0.0462048531463786,
+   "cos_l2": 0.04648313750776925,
+   "cos_final": -0.018891950676620136,
+   "cos_all": {
+    "thought": [
+     0.0462048531463786,
+     0.04648313750776925,
+     -0.018891950676620136
+    ]
+   },
+   "n_int8_out_layers": 11,
+   "engine_md5": "cd8840c47e7d",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/dt_maze33_qdq_fp16_preds.npz",
+   "qdq_ort_control": {
+    "ort_asym": 1.0,
+    "ort_sym": 0.0
+   },
+   "note": "fault in the symmetric QDQ rewrite (ORT on the same graph also fails)",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "a100",
+   "model": "dt_maze33",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.6720293209876543,
+   "agree_final": 0.7670852623456791,
+   "state": "thought",
+   "cos_l1": 0.0462048531463786,
+   "cos_l2": 0.04648313750776925,
+   "cos_final": -0.018891950676620136,
+   "cos_all": {
+    "thought": [
+     0.0462048531463786,
+     0.04648313750776925,
+     -0.018891950676620136
+    ]
+   },
+   "n_int8_out_layers": 11,
+   "engine_md5": "bb5c3c0f5d16",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/dt_maze33_qdq_fp32_preds.npz",
+   "qdq_ort_control": {
+    "ort_asym": 1.0,
+    "ort_sym": 0.0
+   },
+   "note": "fault in the symmetric QDQ rewrite (ORT on the same graph also fails)",
+   "ratio": 0.0,
+   "verdict": "FAIL",
+   "dup_of": "qdq_fp16"
+  },
+  {
+   "gpu": "a100",
+   "model": "hrm_sudoku",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.41,
+   "acc_loop2": 0.08,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999997855,
+   "cos_l2": 0.9999999999991046,
+   "cos_final": 0.9999999955147507,
+   "cos_all": {
+    "z_H": [
+     0.9999999999997855,
+     0.9999999999991046,
+     0.9999999955147507
+    ],
+    "z_L": [
+     0.999999999999894,
+     0.9999999999991215,
+     0.9999999885903496
+    ],
+    "cat": [
+     0.9999999999998398,
+     0.9999999999991132,
+     0.9999999920525571
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "36a449ed6454",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/hrm_sudoku_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "hrm_sudoku",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.43,
+   "acc_loop2": 0.08,
+   "agree_loop2": 0.9990123456790123,
+   "agree_final": 0.9714814814814815,
+   "state": "z_H",
+   "cos_l1": 0.9999955214410164,
+   "cos_l2": 0.9999887101818196,
+   "cos_final": 0.9916157147045507,
+   "cos_all": {
+    "z_H": [
+     0.9999955214410164,
+     0.9999887101818196,
+     0.9916157147045507
+    ],
+    "z_L": [
+     0.9999975235653635,
+     0.9999879413652255,
+     0.9850225622904548
+    ],
+    "cat": [
+     0.9999965221531787,
+     0.9999883255146688,
+     0.9883191610554438
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "1646a257e0ef",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/hrm_sudoku_int8_preds.npz",
+   "ratio": 1.048780487804878,
+   "verdict": "PASS",
+   "dup_of": "fp16"
+  },
+  {
+   "gpu": "a100",
+   "model": "hrm_sudoku",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.41,
+   "acc_loop2": 0.08,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999997842,
+   "cos_l2": 0.9999999999990484,
+   "cos_final": 0.9999999972924024,
+   "cos_all": {
+    "z_H": [
+     0.9999999999997842,
+     0.9999999999990484,
+     0.9999999972924024
+    ],
+    "z_L": [
+     0.9999999999998933,
+     0.9999999999990596,
+     0.9999999934300433
+    ],
+    "cat": [
+     0.9999999999998388,
+     0.999999999999054,
+     0.9999999953612269
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "8b6e8d8fa474",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/hrm_sudoku_int8f32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "fp32"
+  },
+  {
+   "gpu": "a100",
+   "model": "hrm_sudoku",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.26,
+   "acc_loop2": 0.02,
+   "agree_loop2": 0.7751851851851852,
+   "agree_final": 0.8080246913580247,
+   "state": "z_H",
+   "cos_l1": 0.8519874008873558,
+   "cos_l2": 0.9129604766180193,
+   "cos_final": 0.890010980312492,
+   "cos_all": {
+    "z_H": [
+     0.8519874008873558,
+     0.9129604766180193,
+     0.890010980312492
+    ],
+    "z_L": [
+     0.8989680867486062,
+     0.8769416336526613,
+     0.8368574824148347
+    ],
+    "cat": [
+     0.875477793359168,
+     0.8949511801749082,
+     0.863434315386643
+    ]
+   },
+   "n_int8_out_layers": 591,
+   "engine_md5": "f3e2bc287d91",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/hrm_sudoku_int8strict_preds.npz",
+   "ratio": 0.6341463414634146,
+   "verdict": "WARN"
+  },
+  {
+   "gpu": "a100",
+   "model": "hrm_sudoku",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.20716049382716048,
+   "agree_final": 0.12691358024691357,
+   "state": "z_H",
+   "cos_l1": 0.2365845133673926,
+   "cos_l2": 0.14586402307755192,
+   "cos_final": 0.060077671051526005,
+   "cos_all": {
+    "z_H": [
+     0.2365845133673926,
+     0.14586402307755192,
+     0.060077671051526005
+    ],
+    "z_L": [
+     0.21800108959965922,
+     0.20015236695766064,
+     0.14272924136193724
+    ],
+    "cat": [
+     0.22701790648179215,
+     0.169260935429831,
+     0.09680597768036099
+    ]
+   },
+   "n_int8_out_layers": 339,
+   "engine_md5": "11290b77800f",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/hrm_sudoku_qdq_fp16_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "a100",
+   "model": "hrm_sudoku",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.20716049382716048,
+   "agree_final": 0.12691358024691357,
+   "state": "z_H",
+   "cos_l1": 0.2365845133673926,
+   "cos_l2": 0.14586402307755192,
+   "cos_final": 0.060077671051526005,
+   "cos_all": {
+    "z_H": [
+     0.2365845133673926,
+     0.14586402307755192,
+     0.060077671051526005
+    ],
+    "z_L": [
+     0.21800108959965922,
+     0.20015236695766064,
+     0.14272924136193724
+    ],
+    "cat": [
+     0.22701790648179215,
+     0.169260935429831,
+     0.09680597768036099
+    ]
+   },
+   "n_int8_out_layers": 339,
+   "engine_md5": "95eb786fb891",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/hrm_sudoku_qdq_fp32_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL",
+   "dup_of": "qdq_fp16"
+  },
+  {
+   "gpu": "a100",
+   "model": "maze",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.88,
+   "acc_loop2": 0.12,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999998944,
+   "cos_l2": 0.9999999999998426,
+   "cos_final": 0.999999999999801,
+   "cos_all": {
+    "z_H": [
+     0.9999999999998944,
+     0.9999999999998426,
+     0.999999999999801
+    ],
+    "z_L": [
+     0.9999999999998961,
+     0.9999999999997823,
+     0.9999999999996975
+    ],
+    "cat": [
+     0.9999999999998953,
+     0.9999999999998122,
+     0.9999999999997492
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "dcaba31d28d6",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/maze_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "maze",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.88,
+   "acc_loop2": 0.12,
+   "agree_loop2": 0.9998222222222222,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999974368548622,
+   "cos_l2": 0.9999958588557256,
+   "cos_final": 0.9999927343793614,
+   "cos_all": {
+    "z_H": [
+     0.9999974368548622,
+     0.9999958588557256,
+     0.9999927343793614
+    ],
+    "z_L": [
+     0.9999974404342511,
+     0.9999953132368455,
+     0.9999786781255204
+    ],
+    "cat": [
+     0.9999974385853245,
+     0.9999955860125889,
+     0.9999857062593247
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "ce97e3dea828",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/maze_int8_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "maze",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.88,
+   "acc_loop2": 0.12,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999998944,
+   "cos_l2": 0.9999999999998426,
+   "cos_final": 0.999999999999801,
+   "cos_all": {
+    "z_H": [
+     0.9999999999998944,
+     0.9999999999998426,
+     0.999999999999801
+    ],
+    "z_L": [
+     0.9999999999998961,
+     0.9999999999997823,
+     0.9999999999996975
+    ],
+    "cat": [
+     0.9999999999998953,
+     0.9999999999998122,
+     0.9999999999997492
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "84d404a23aed",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/maze_int8f32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "fp32"
+  },
+  {
+   "gpu": "a100",
+   "model": "maze",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.8764444444444445,
+   "agree_final": 0.8540444444444445,
+   "state": "z_H",
+   "cos_l1": 0.7978522776072939,
+   "cos_l2": 0.41983506152595823,
+   "cos_final": 0.3132573482541974,
+   "cos_all": {
+    "z_H": [
+     0.7978522776072939,
+     0.41983506152595823,
+     0.3132573482541974
+    ],
+    "z_L": [
+     0.7590090678189128,
+     0.5444782810956761,
+     0.4408758671011135
+    ],
+    "cat": [
+     0.7784306436210183,
+     0.4821567962028253,
+     0.3770658576038284
+    ]
+   },
+   "n_int8_out_layers": 261,
+   "engine_md5": "93be73e5752c",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/maze_int8strict_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "a100",
+   "model": "maze",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.5682888888888888,
+   "agree_final": 0.6252888888888889,
+   "state": "z_H",
+   "cos_l1": 0.1777982181667087,
+   "cos_l2": 0.20857157355806608,
+   "cos_final": 0.1772372426684462,
+   "cos_all": {
+    "z_H": [
+     0.1777982181667087,
+     0.20857157355806608,
+     0.1772372426684462
+    ],
+    "z_L": [
+     0.44858084009624993,
+     0.2710485914642761,
+     0.19271684483334084
+    ],
+    "cat": [
+     0.3095305464473523,
+     0.2398839891368987,
+     0.18507737519726292
+    ]
+   },
+   "n_int8_out_layers": 144,
+   "engine_md5": "c3553b6bec43",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/maze_qdq_fp16_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "a100",
+   "model": "maze",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.5682888888888888,
+   "agree_final": 0.6252888888888889,
+   "state": "z_H",
+   "cos_l1": 0.1777982181667087,
+   "cos_l2": 0.20857157355806608,
+   "cos_final": 0.1772372426684462,
+   "cos_all": {
+    "z_H": [
+     0.1777982181667087,
+     0.20857157355806608,
+     0.1772372426684462
+    ],
+    "z_L": [
+     0.44858084009624993,
+     0.2710485914642761,
+     0.19271684483334084
+    ],
+    "cat": [
+     0.3095305464473523,
+     0.2398839891368987,
+     0.18507737519726292
+    ]
+   },
+   "n_int8_out_layers": 144,
+   "engine_md5": "f2d286859075",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/maze_qdq_fp32_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL",
+   "dup_of": "qdq_fp16"
+  },
+  {
+   "gpu": "a100",
+   "model": "mdeq_small",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.655,
+   "acc_loop2": 0.045,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "cat",
+   "cos_l1": 0.9999999999934067,
+   "cos_l2": 0.9999999999956417,
+   "cos_final": 0.9999999999838317,
+   "cos_all": {
+    "z0": [
+     0.9999999999950373,
+     0.9999999999965057,
+     0.9999999999870636
+    ],
+    "z1": [
+     0.9999999999902535,
+     0.9999999999942694,
+     0.999999999978228
+    ],
+    "z2": [
+     0.9999999999904554,
+     0.9999999999928812,
+     0.9999999999755983
+    ],
+    "z3": [
+     0.9999999999924021,
+     0.9999999999906044,
+     0.9999999999719804
+    ],
+    "cat": [
+     0.9999999999934067,
+     0.9999999999956417,
+     0.9999999999838317
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "d618458756aa",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/mdeq_small_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "mdeq_small",
+   "build": "fp16",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.655,
+   "acc_loop2": 0.045,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "cat",
+   "cos_l1": 0.9999995158726916,
+   "cos_l2": 0.9999976929553159,
+   "cos_final": 0.9999829792451135,
+   "cos_all": {
+    "z0": [
+     0.9999996420438001,
+     0.9999978724727473,
+     0.9999865564397894
+    ],
+    "z1": [
+     0.9999993053069747,
+     0.9999976298651047,
+     0.999977268806227
+    ],
+    "z2": [
+     0.9999993747196416,
+     0.9999968194135118,
+     0.9999735603954346
+    ],
+    "z3": [
+     0.9999982457916287,
+     0.999994236486634,
+     0.9999665659084594
+    ],
+    "cat": [
+     0.9999995158726916,
+     0.9999976929553159,
+     0.9999829792451135
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "ddfd07e8521b",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/mdeq_small_fp16_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "mdeq_small",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.65,
+   "acc_loop2": 0.045,
+   "agree_loop2": 0.98,
+   "agree_final": 0.94,
+   "state": "cat",
+   "cos_l1": 0.9998102870842805,
+   "cos_l2": 0.9993986172799285,
+   "cos_final": 0.9889503680301291,
+   "cos_all": {
+    "z0": [
+     0.9998104837139846,
+     0.999500693365963,
+     0.9938555529934138
+    ],
+    "z1": [
+     0.9998463608027517,
+     0.9991532142101776,
+     0.9835934970383141
+    ],
+    "z2": [
+     0.9996654514380132,
+     0.9994168563496447,
+     0.9718939056576672
+    ],
+    "z3": [
+     0.9995589421673989,
+     0.9989612317299971,
+     0.9465472695569137
+    ],
+    "cat": [
+     0.9998102870842805,
+     0.9993986172799285,
+     0.9889503680301291
+    ]
+   },
+   "n_int8_out_layers": 17,
+   "engine_md5": "3ada09484efb",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/mdeq_small_int8_preds.npz",
+   "ratio": 0.9923664122137404,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "mdeq_small",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.65,
+   "acc_loop2": 0.045,
+   "agree_loop2": 0.97,
+   "agree_final": 0.935,
+   "state": "cat",
+   "cos_l1": 0.9998251794537346,
+   "cos_l2": 0.9994236731997126,
+   "cos_final": 0.9915067964609652,
+   "cos_all": {
+    "z0": [
+     0.9998105393570828,
+     0.9995044945024492,
+     0.9948391949629403
+    ],
+    "z1": [
+     0.9998461451794785,
+     0.9991627435931043,
+     0.9866809193236188
+    ],
+    "z2": [
+     0.9998784331240195,
+     0.9996712040915006,
+     0.9860153586178175
+    ],
+    "z3": [
+     0.9998308873783188,
+     0.9992712768925768,
+     0.9604292448138136
+    ],
+    "cat": [
+     0.9998251794537346,
+     0.9994236731997126,
+     0.9915067964609652
+    ]
+   },
+   "n_int8_out_layers": 16,
+   "engine_md5": "bf8196a71450",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/mdeq_small_int8f32_preds.npz",
+   "ratio": 0.9923664122137404,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "mdeq_small",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.62,
+   "acc_loop2": 0.095,
+   "agree_loop2": 0.385,
+   "agree_final": 0.85,
+   "state": "cat",
+   "cos_l1": 0.9550926365002578,
+   "cos_l2": 0.9674948309940118,
+   "cos_final": 0.946348188711307,
+   "cos_all": {
+    "z0": [
+     0.9784099169914765,
+     0.9760841303667227,
+     0.9634763063660056
+    ],
+    "z1": [
+     0.9436748300478314,
+     0.9677082577924021,
+     0.9195273169486895
+    ],
+    "z2": [
+     0.7836090405622176,
+     0.8940618314599318,
+     0.8984582364321507
+    ],
+    "z3": [
+     0.8455958648376264,
+     0.8743584205648426,
+     0.854305841417337
+    ],
+    "cat": [
+     0.9550926365002578,
+     0.9674948309940118,
+     0.946348188711307
+    ]
+   },
+   "n_int8_out_layers": 47,
+   "engine_md5": "5407be2b5ae7",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/mdeq_small_int8strict_preds.npz",
+   "ratio": 0.9465648854961831,
+   "verdict": "WARN"
+  },
+  {
+   "gpu": "a100",
+   "model": "mdeq_small",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.0,
+   "agree_final": 0.0,
+   "state": "cat",
+   "cos_l1": 0.3804250296200192,
+   "cos_l2": 0.16107351527168945,
+   "cos_final": 0.1546391320465118,
+   "cos_all": {
+    "z0": [
+     0.6329751951745889,
+     0.24169163451157252,
+     0.23398970056437648
+    ],
+    "z1": [
+     0.03726313435306828,
+     0.07098130585028369,
+     0.05442703481443308
+    ],
+    "z2": [
+     0.049036692680910224,
+     0.01927598168392605,
+     0.019110904349450265
+    ],
+    "z3": [
+     0.008496233494223748,
+     -0.026573400535332182,
+     -0.013135736154860989
+    ],
+    "cat": [
+     0.3804250296200192,
+     0.16107351527168945,
+     0.1546391320465118
+    ]
+   },
+   "n_int8_out_layers": 46,
+   "engine_md5": "2350e87b39aa",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/mdeq_small_qdq_fp16_preds.npz",
+   "qdq_ort_control": {
+    "ort_asym": 1.0,
+    "ort_sym": 0.0
+   },
+   "note": "fault in the symmetric QDQ rewrite (ORT on the same graph also fails)",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "a100",
+   "model": "mdeq_small",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.0,
+   "agree_final": 0.0,
+   "state": "cat",
+   "cos_l1": 0.49877409944164364,
+   "cos_l2": 0.19231590079023525,
+   "cos_final": 0.16847929190044186,
+   "cos_all": {
+    "z0": [
+     0.6321445563965313,
+     0.25035553557341905,
+     0.23423858235037665
+    ],
+    "z1": [
+     0.3623650181686505,
+     0.12258225617139078,
+     0.09708625531677456
+    ],
+    "z2": [
+     0.301128055484078,
+     0.1832036923142537,
+     0.07213756492566951
+    ],
+    "z3": [
+     0.10000341574606526,
+     -0.02768311791374099,
+     -0.01744306448299268
+    ],
+    "cat": [
+     0.49877409944164364,
+     0.19231590079023525,
+     0.16847929190044186
+    ]
+   },
+   "n_int8_out_layers": 48,
+   "engine_md5": "cad31a1cf117",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/mdeq_small_qdq_fp32_preds.npz",
+   "qdq_ort_control": {
+    "ort_asym": 1.0,
+    "ort_sym": 0.0
+   },
+   "note": "fault in the symmetric QDQ rewrite (ORT on the same graph also fails)",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_attn",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.51,
+   "acc_loop2": 0.0,
+   "agree_loop2": 1.0,
+   "agree_final": 0.9998765432098765,
+   "state": "z_H",
+   "cos_l1": 0.9999999999999496,
+   "cos_l2": 0.999999999999723,
+   "cos_final": 0.9999997115825504,
+   "cos_all": {
+    "z_H": [
+     0.9999999999999496,
+     0.999999999999723,
+     0.9999997115825504
+    ],
+    "z_L": [
+     0.999999999999946,
+     0.9999999999996666,
+     0.9999977670416044
+    ],
+    "cat": [
+     0.9999999999999477,
+     0.9999999999996948,
+     0.9999987393156445
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "9277c1e22ff2",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_attn_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_attn",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.52,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9992592592592593,
+   "agree_final": 0.9765432098765432,
+   "state": "z_H",
+   "cos_l1": 0.9999994440994042,
+   "cos_l2": 0.9999969241339115,
+   "cos_final": 0.9902049684167771,
+   "cos_all": {
+    "z_H": [
+     0.9999994440994042,
+     0.9999969241339115,
+     0.9902049684167771
+    ],
+    "z_L": [
+     0.9999993835312925,
+     0.9999963425750965,
+     0.9682365260003175
+    ],
+    "cat": [
+     0.9999994135605499,
+     0.9999966329382355,
+     0.979220701283388
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "ff00fd4b8ec1",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_attn_int8_preds.npz",
+   "ratio": 1.0196078431372548,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_attn",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.51,
+   "acc_loop2": 0.0,
+   "agree_loop2": 1.0,
+   "agree_final": 0.9998765432098765,
+   "state": "z_H",
+   "cos_l1": 0.9999999999999496,
+   "cos_l2": 0.999999999999723,
+   "cos_final": 0.9999997115825504,
+   "cos_all": {
+    "z_H": [
+     0.9999999999999496,
+     0.999999999999723,
+     0.9999997115825504
+    ],
+    "z_L": [
+     0.999999999999946,
+     0.9999999999996666,
+     0.9999977670416044
+    ],
+    "cat": [
+     0.9999999999999477,
+     0.9999999999996948,
+     0.9999987393156445
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "9ed41875c84d",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_attn_int8f32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "fp32"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_attn",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.02,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.7245679012345679,
+   "agree_final": 0.6398765432098765,
+   "state": "z_H",
+   "cos_l1": 0.9554602255590106,
+   "cos_l2": 0.8144406641722586,
+   "cos_final": 0.634351784323743,
+   "cos_all": {
+    "z_H": [
+     0.9554602255590106,
+     0.8144406641722586,
+     0.634351784323743
+    ],
+    "z_L": [
+     0.9601508497946166,
+     0.7941076541989951,
+     0.47662508960456845
+    ],
+    "cat": [
+     0.9578055505217833,
+     0.8042740446248899,
+     0.5554874730738731
+    ]
+   },
+   "n_int8_out_layers": 369,
+   "engine_md5": "13bb4a98d716",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_attn_int8strict_preds.npz",
+   "ratio": 0.0392156862745098,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_attn",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.16839506172839505,
+   "agree_final": 0.1008641975308642,
+   "state": "z_H",
+   "cos_l1": 0.24839112770993046,
+   "cos_l2": 0.09257559395794797,
+   "cos_final": 0.046620225702551206,
+   "cos_all": {
+    "z_H": [
+     0.24839112770993046,
+     0.09257559395794797,
+     0.046620225702551206
+    ],
+    "z_L": [
+     0.3276180304293054,
+     0.155361079702858,
+     0.08299211245530076
+    ],
+    "cat": [
+     0.2884284904789759,
+     0.1251225012069548,
+     0.06579809147530846
+    ]
+   },
+   "n_int8_out_layers": 200,
+   "engine_md5": "a587a67df75c",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_attn_qdq_fp16_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_attn",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.16839506172839505,
+   "agree_final": 0.1008641975308642,
+   "state": "z_H",
+   "cos_l1": 0.24839112770993046,
+   "cos_l2": 0.09257559395794797,
+   "cos_final": 0.046620225702551206,
+   "cos_all": {
+    "z_H": [
+     0.24839112770993046,
+     0.09257559395794797,
+     0.046620225702551206
+    ],
+    "z_L": [
+     0.3276180304293054,
+     0.155361079702858,
+     0.08299211245530076
+    ],
+    "cat": [
+     0.2884284904789759,
+     0.1251225012069548,
+     0.06579809147530846
+    ]
+   },
+   "n_int8_out_layers": 200,
+   "engine_md5": "751b455eea31",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_attn_qdq_fp32_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL",
+   "dup_of": "qdq_fp16"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_mlp",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.58,
+   "acc_loop2": 0.02,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999946168,
+   "cos_l2": 0.9999999999964809,
+   "cos_final": 0.9999998924915197,
+   "cos_all": {
+    "z_H": [
+     0.9999999999946168,
+     0.9999999999964809,
+     0.9999998924915197
+    ],
+    "z_L": [
+     0.9999999999967506,
+     0.9999999999987677,
+     0.9999996378973325
+    ],
+    "cat": [
+     0.9999999999956838,
+     0.9999999999976243,
+     0.9999997651944164
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "9a704d2c03b0",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_mlp_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_mlp",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.58,
+   "acc_loop2": 0.02,
+   "agree_loop2": 0.9967901234567901,
+   "agree_final": 0.9606172839506173,
+   "state": "z_H",
+   "cos_l1": 0.9998118838212343,
+   "cos_l2": 0.999877231144876,
+   "cos_final": 0.9813618113347783,
+   "cos_all": {
+    "z_H": [
+     0.9998118838212343,
+     0.999877231144876,
+     0.9813618113347783
+    ],
+    "z_L": [
+     0.9998808409362429,
+     0.9999540493887535,
+     0.9676437450663886
+    ],
+    "cat": [
+     0.999846362008088,
+     0.9999156399764766,
+     0.9745028157034108
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "9e68b72b7c93",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_mlp_int8_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_mlp",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.58,
+   "acc_loop2": 0.02,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999946168,
+   "cos_l2": 0.9999999999964809,
+   "cos_final": 0.9999998924915197,
+   "cos_all": {
+    "z_H": [
+     0.9999999999946168,
+     0.9999999999964809,
+     0.9999998924915197
+    ],
+    "z_L": [
+     0.9999999999967506,
+     0.9999999999987677,
+     0.9999996378973325
+    ],
+    "cat": [
+     0.9999999999956838,
+     0.9999999999976243,
+     0.9999997651944164
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "69085cf66195",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_mlp_int8f32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "fp32"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_mlp",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.44,
+   "acc_loop2": 0.02,
+   "agree_loop2": 0.7913580246913581,
+   "agree_final": 0.8351851851851851,
+   "state": "z_H",
+   "cos_l1": 0.7834297151596725,
+   "cos_l2": 0.7443995019335462,
+   "cos_final": 0.6111624110085693,
+   "cos_all": {
+    "z_H": [
+     0.7834297151596725,
+     0.7443995019335462,
+     0.6111624110085693
+    ],
+    "z_L": [
+     0.8625847476132507,
+     0.8166062365488967,
+     0.6830095645860859
+    ],
+    "cat": [
+     0.8230071954524517,
+     0.7805027064173199,
+     0.6470859551801085
+    ]
+   },
+   "n_int8_out_layers": 271,
+   "engine_md5": "0024afd79bff",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_mlp_int8strict_preds.npz",
+   "ratio": 0.7586206896551725,
+   "verdict": "WARN"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_mlp",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.10395061728395062,
+   "agree_final": 0.10123456790123457,
+   "state": "z_H",
+   "cos_l1": 0.011187507306466303,
+   "cos_l2": 0.023986506122673154,
+   "cos_final": 0.025169548325597174,
+   "cos_all": {
+    "z_H": [
+     0.011187507306466303,
+     0.023986506122673154,
+     0.025169548325597174
+    ],
+    "z_L": [
+     0.022160101754658858,
+     0.0503042310353156,
+     0.06824332714783692
+    ],
+    "cat": [
+     0.01617973760977039,
+     0.035735765210891196,
+     0.04463937974057222
+    ]
+   },
+   "n_int8_out_layers": 116,
+   "engine_md5": "c6da391cd079",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_mlp_qdq_fp16_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "a100",
+   "model": "sudoku_mlp",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.10395061728395062,
+   "agree_final": 0.10123456790123457,
+   "state": "z_H",
+   "cos_l1": 0.011187507306466303,
+   "cos_l2": 0.023986506122673154,
+   "cos_final": 0.025169548325597174,
+   "cos_all": {
+    "z_H": [
+     0.011187507306466303,
+     0.023986506122673154,
+     0.025169548325597174
+    ],
+    "z_L": [
+     0.022160101754658858,
+     0.0503042310353156,
+     0.06824332714783692
+    ],
+    "cat": [
+     0.01617973760977039,
+     0.035735765210891196,
+     0.04463937974057222
+    ]
+   },
+   "n_int8_out_layers": 116,
+   "engine_md5": "b127837b64c2",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/a100/sudoku_mlp_qdq_fp32_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL",
+   "dup_of": "qdq_fp16"
+  },
+  {
+   "gpu": "l40s",
+   "model": "hrm_sudoku",
+   "build": "fp16",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.41,
+   "acc_loop2": 0.08,
+   "agree_loop2": 0.9993827160493827,
+   "agree_final": 0.9632098765432099,
+   "state": "z_H",
+   "cos_l1": 0.9999948981537876,
+   "cos_l2": 0.9999877264226058,
+   "cos_final": 0.9895212535711511,
+   "cos_all": {
+    "z_H": [
+     0.9999948981537876,
+     0.9999877264226058,
+     0.9895212535711511
+    ],
+    "z_L": [
+     0.9999972382802429,
+     0.9999868563820506,
+     0.9811278860896725
+    ]
+   },
+   "engine_md5": "6faeb4bfe32f",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/hrm_sudoku_fp16_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "hrm_sudoku",
+   "build": "int8mm",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.23,
+   "acc_loop2": 0.02,
+   "agree_loop2": 0.7788888888888889,
+   "agree_final": 0.798395061728395,
+   "state": "z_H",
+   "cos_l1": 0.8514776933804994,
+   "cos_l2": 0.9136055107778414,
+   "cos_final": 0.8793170224487931,
+   "cos_all": {
+    "z_H": [
+     0.8514776933804994,
+     0.9136055107778414,
+     0.8793170224487931
+    ],
+    "z_L": [
+     0.8989976028595591,
+     0.877452281507156,
+     0.828234817160899
+    ]
+   },
+   "engine_md5": "c509063da925",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/hrm_sudoku_int8mm_preds.npz",
+   "ratio": 0.5609756097560976,
+   "verdict": "WARN"
+  },
+  {
+   "gpu": "l40s",
+   "model": "hrm_sudoku",
+   "build": "int8proj",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.45,
+   "acc_loop2": 0.06,
+   "agree_loop2": 0.8519753086419753,
+   "agree_final": 0.8859259259259259,
+   "state": "z_H",
+   "cos_l1": 0.9316103399765508,
+   "cos_l2": 0.9559107468712953,
+   "cos_final": 0.9408815512893911,
+   "cos_all": {
+    "z_H": [
+     0.9316103399765508,
+     0.9559107468712953,
+     0.9408815512893911
+    ],
+    "z_L": [
+     0.9569640774705523,
+     0.9409095122477883,
+     0.9018622480144854
+    ]
+   },
+   "engine_md5": "20bdc8de50b8",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/hrm_sudoku_int8proj_preds.npz",
+   "ratio": 1.0975609756097562,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "maze",
+   "build": "fp16",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.88,
+   "acc_loop2": 0.12,
+   "agree_loop2": 0.9999777777777777,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999977360616015,
+   "cos_l2": 0.9999970613928353,
+   "cos_final": 0.9999981652942558,
+   "cos_all": {
+    "z_H": [
+     0.9999977360616015,
+     0.9999970613928353,
+     0.9999981652942558
+    ],
+    "z_L": [
+     0.9999978582549118,
+     0.9999968524454904,
+     0.9999972323925879
+    ]
+   },
+   "engine_md5": "65c2657eb559",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/maze_fp16_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "maze",
+   "build": "int8mm",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.8750222222222223,
+   "agree_final": 0.8513777777777778,
+   "state": "z_H",
+   "cos_l1": 0.7979543786840079,
+   "cos_l2": 0.42005513355134577,
+   "cos_final": 0.31281348984800794,
+   "cos_all": {
+    "z_H": [
+     0.7979543786840079,
+     0.42005513355134577,
+     0.31281348984800794
+    ],
+    "z_L": [
+     0.7590311772574592,
+     0.5445424383984446,
+     0.4403729335709158
+    ]
+   },
+   "engine_md5": "46b00804ea7a",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/maze_int8mm_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "l40s",
+   "model": "maze",
+   "build": "int8proj",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.88,
+   "acc_loop2": 0.04,
+   "agree_loop2": 0.9919555555555556,
+   "agree_final": 0.9983777777777778,
+   "state": "z_H",
+   "cos_l1": 0.9986149152650913,
+   "cos_l2": 0.8557187052779881,
+   "cos_final": 0.8232031350688024,
+   "cos_all": {
+    "z_H": [
+     0.9986149152650913,
+     0.8557187052779881,
+     0.8232031350688024
+    ],
+    "z_L": [
+     0.9995004181608103,
+     0.9817583752778809,
+     0.9257497530495457
+    ]
+   },
+   "engine_md5": "09c49e7851cd",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/maze_int8proj_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_attn",
+   "build": "fp16",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.52,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9985185185185185,
+   "agree_final": 0.9717283950617284,
+   "state": "z_H",
+   "cos_l1": 0.9999982878263631,
+   "cos_l2": 0.99999293313435,
+   "cos_final": 0.9915234654562255,
+   "cos_all": {
+    "z_H": [
+     0.9999982878263631,
+     0.99999293313435,
+     0.9915234654562255
+    ],
+    "z_L": [
+     0.9999979512330388,
+     0.9999913075343659,
+     0.9619226561148292
+    ]
+   },
+   "engine_md5": "3c1b59630b01",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/sudoku_attn_fp16_preds.npz",
+   "ratio": 1.0196078431372548,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_attn",
+   "build": "int8mm",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.02,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.7239506172839506,
+   "agree_final": 0.6346913580246913,
+   "state": "z_H",
+   "cos_l1": 0.9555975730182077,
+   "cos_l2": 0.8146926597297606,
+   "cos_final": 0.6312585254339159,
+   "cos_all": {
+    "z_H": [
+     0.9555975730182077,
+     0.8146926597297606,
+     0.6312585254339159
+    ],
+    "z_L": [
+     0.9603197663434752,
+     0.7947607461607901,
+     0.4752682318210419
+    ]
+   },
+   "engine_md5": "d7b5a5b78ad9",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/sudoku_attn_int8mm_preds.npz",
+   "ratio": 0.0392156862745098,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_attn",
+   "build": "int8proj",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.51,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.8382716049382716,
+   "agree_final": 0.8666666666666667,
+   "state": "z_H",
+   "cos_l1": 0.9543390311777941,
+   "cos_l2": 0.891580882728628,
+   "cos_final": 0.8182793730496465,
+   "cos_all": {
+    "z_H": [
+     0.9543390311777941,
+     0.891580882728628,
+     0.8182793730496465
+    ],
+    "z_L": [
+     0.9588444662161963,
+     0.8737125281444807,
+     0.739264369028051
+    ]
+   },
+   "engine_md5": "54277fab9fa7",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/sudoku_attn_int8proj_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_mlp",
+   "build": "fp16",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.58,
+   "acc_loop2": 0.02,
+   "agree_loop2": 0.9983950617283951,
+   "agree_final": 0.9787654320987654,
+   "state": "z_H",
+   "cos_l1": 0.999977844035799,
+   "cos_l2": 0.9999849133760376,
+   "cos_final": 0.9946928246507336,
+   "cos_all": {
+    "z_H": [
+     0.999977844035799,
+     0.9999849133760376,
+     0.9946928246507336
+    ],
+    "z_L": [
+     0.9999862949082587,
+     0.999994254322422,
+     0.9869384657117319
+    ]
+   },
+   "engine_md5": "cd20b339f874",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/sudoku_mlp_fp16_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_mlp",
+   "build": "int8mm",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.49,
+   "acc_loop2": 0.03,
+   "agree_loop2": 0.8202469135802469,
+   "agree_final": 0.8388888888888889,
+   "state": "z_H",
+   "cos_l1": 0.8486839187771674,
+   "cos_l2": 0.7900683654466163,
+   "cos_final": 0.6375593628504931,
+   "cos_all": {
+    "z_H": [
+     0.8486839187771674,
+     0.7900683654466163,
+     0.6375593628504931
+    ],
+    "z_L": [
+     0.9125875864629723,
+     0.8534389422992906,
+     0.7222897898296077
+    ]
+   },
+   "engine_md5": "8b8030d671ae",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/sudoku_mlp_int8mm_preds.npz",
+   "ratio": 0.8448275862068966,
+   "verdict": "WARN"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_mlp",
+   "build": "int8proj",
+   "source": "trt_gate",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.49,
+   "acc_loop2": 0.03,
+   "agree_loop2": 0.8202469135802469,
+   "agree_final": 0.8388888888888889,
+   "state": "z_H",
+   "cos_l1": 0.8486839187771674,
+   "cos_l2": 0.7900683654466163,
+   "cos_final": 0.6375593628504931,
+   "cos_all": {
+    "z_H": [
+     0.8486839187771674,
+     0.7900683654466163,
+     0.6375593628504931
+    ],
+    "z_L": [
+     0.9125875864629723,
+     0.8534389422992906,
+     0.7222897898296077
+    ]
+   },
+   "engine_md5": "1605121dcf67",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_gate/sudoku_mlp_int8proj_preds.npz",
+   "ratio": 0.8448275862068966,
+   "verdict": "WARN",
+   "dup_of": "int8mm"
+  },
+  {
+   "gpu": "l40s",
+   "model": "dt_maze33",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 1.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "thought",
+   "cos_l1": 0.999999999999963,
+   "cos_l2": 0.9999999999999182,
+   "cos_final": 0.9999999999995434,
+   "cos_all": {
+    "thought": [
+     0.999999999999963,
+     0.9999999999999182,
+     0.9999999999995434
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "65a95dc93acd",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/dt_maze33_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "dt_maze33",
+   "build": "fp16",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 1.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9998495370370369,
+   "agree_final": 1.0,
+   "state": "thought",
+   "cos_l1": 0.9999978462531323,
+   "cos_l2": 0.9999968076360994,
+   "cos_final": 0.9999727286015073,
+   "cos_all": {
+    "thought": [
+     0.9999978462531323,
+     0.9999968076360994,
+     0.9999727286015073
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "df563acee581",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/dt_maze33_fp16_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "dt_maze33",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 1.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9817283950617284,
+   "agree_final": 1.0,
+   "state": "thought",
+   "cos_l1": 0.9903014528888088,
+   "cos_l2": 0.9883786835859638,
+   "cos_final": 0.997734533668052,
+   "cos_all": {
+    "thought": [
+     0.9903014528888088,
+     0.9883786835859638,
+     0.997734533668052
+    ]
+   },
+   "n_int8_out_layers": 10,
+   "engine_md5": "985c7999881e",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/dt_maze33_int8_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "dt_maze33",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 1.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9817283950617284,
+   "agree_final": 1.0,
+   "state": "thought",
+   "cos_l1": 0.9903014528888088,
+   "cos_l2": 0.9883786835859638,
+   "cos_final": 0.997734533668052,
+   "cos_all": {
+    "thought": [
+     0.9903014528888088,
+     0.9883786835859638,
+     0.997734533668052
+    ]
+   },
+   "n_int8_out_layers": 10,
+   "engine_md5": "07b5a99cfa41",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/dt_maze33_int8f32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "int8"
+  },
+  {
+   "gpu": "l40s",
+   "model": "dt_maze33",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "BUILD_FAILED": true,
+   "errors": [
+    "[ERROR] [optimizer.cpp::filterPTQFormats::5019] Error Code 2: Internal Error (Assertion !n->candidateRequirements.empty() failed. /recur_block/recur_block.1/recur_block.1.1/conv2/Conv + /recur_block/recur_block.1/recur_block.1.1/Add + /recur_block/recur_block.1/recur_block.1.1/Relu_1 requires output to be in floating point precision. No format available with unquantized output. Try setting layer o"
+   ]
+  },
+  {
+   "gpu": "l40s",
+   "model": "dt_maze33",
+   "build": "int8strict_prefer",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 1.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9817283950617284,
+   "agree_final": 1.0,
+   "state": "thought",
+   "cos_l1": 0.9903014528888088,
+   "cos_l2": 0.9883786835859638,
+   "cos_final": 0.997734533668052,
+   "cos_all": {
+    "thought": [
+     0.9903014528888088,
+     0.9883786835859638,
+     0.997734533668052
+    ]
+   },
+   "n_int8_out_layers": 10,
+   "engine_md5": "b243108af709",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/dt_maze33_int8strict_prefer_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "int8"
+  },
+  {
+   "gpu": "l40s",
+   "model": "dt_maze33",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.6720293209876543,
+   "agree_final": 0.7670852623456791,
+   "state": "thought",
+   "cos_l1": 0.0462048531463786,
+   "cos_l2": 0.04648313750776925,
+   "cos_final": -0.018891950676620136,
+   "cos_all": {
+    "thought": [
+     0.0462048531463786,
+     0.04648313750776925,
+     -0.018891950676620136
+    ]
+   },
+   "n_int8_out_layers": 11,
+   "engine_md5": "a14d3b434b22",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/dt_maze33_qdq_fp16_preds.npz",
+   "qdq_ort_control": {
+    "ort_asym": 1.0,
+    "ort_sym": 0.0
+   },
+   "note": "fault in the symmetric QDQ rewrite (ORT on the same graph also fails)",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "l40s",
+   "model": "dt_maze33",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 300,
+   "n": 100,
+   "host_acc_final": 1.0,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.6720293209876543,
+   "agree_final": 0.7670852623456791,
+   "state": "thought",
+   "cos_l1": 0.0462048531463786,
+   "cos_l2": 0.04648313750776925,
+   "cos_final": -0.018891950676620136,
+   "cos_all": {
+    "thought": [
+     0.0462048531463786,
+     0.04648313750776925,
+     -0.018891950676620136
+    ]
+   },
+   "n_int8_out_layers": 11,
+   "engine_md5": "d49c7d3ac904",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/dt_maze33_qdq_fp32_preds.npz",
+   "qdq_ort_control": {
+    "ort_asym": 1.0,
+    "ort_sym": 0.0
+   },
+   "note": "fault in the symmetric QDQ rewrite (ORT on the same graph also fails)",
+   "ratio": 0.0,
+   "verdict": "FAIL",
+   "dup_of": "qdq_fp16"
+  },
+  {
+   "gpu": "l40s",
+   "model": "hrm_sudoku",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.41,
+   "acc_loop2": 0.08,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999997855,
+   "cos_l2": 0.9999999999991046,
+   "cos_final": 0.9999999955147507,
+   "cos_all": {
+    "z_H": [
+     0.9999999999997855,
+     0.9999999999991046,
+     0.9999999955147507
+    ],
+    "z_L": [
+     0.999999999999894,
+     0.9999999999991215,
+     0.9999999885903496
+    ],
+    "cat": [
+     0.9999999999998398,
+     0.9999999999991132,
+     0.9999999920525571
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "af5f75fefc4a",
+   "reused_from": "/data/user_data/skolawol/e1/work/hrm_sudoku/dyn_H2_b1_fp32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/hrm_sudoku_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "hrm_sudoku",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.41,
+   "acc_loop2": 0.08,
+   "agree_loop2": 0.9993827160493827,
+   "agree_final": 0.9632098765432099,
+   "state": "z_H",
+   "cos_l1": 0.9999948981537876,
+   "cos_l2": 0.9999877264226058,
+   "cos_final": 0.9895212535711511,
+   "cos_all": {
+    "z_H": [
+     0.9999948981537876,
+     0.9999877264226058,
+     0.9895212535711511
+    ],
+    "z_L": [
+     0.9999972382802429,
+     0.9999868563820506,
+     0.9811278860896725
+    ],
+    "cat": [
+     0.9999960679837813,
+     0.9999872910724216,
+     0.9853245670797051
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "944585c38427",
+   "reused_from": "/data/user_data/skolawol/e1/work/hrm_sudoku/dyn_H2_b1_int8.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/hrm_sudoku_int8_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "fp16"
+  },
+  {
+   "gpu": "l40s",
+   "model": "hrm_sudoku",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.41,
+   "acc_loop2": 0.08,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999997753,
+   "cos_l2": 0.9999999999992094,
+   "cos_final": 0.9999999982798622,
+   "cos_all": {
+    "z_H": [
+     0.9999999999997753,
+     0.9999999999992094,
+     0.9999999982798622
+    ],
+    "z_L": [
+     0.9999999999998894,
+     0.9999999999991575,
+     0.9999999960956693
+    ],
+    "cat": [
+     0.9999999999998324,
+     0.9999999999991833,
+     0.9999999971877681
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "a8567f006252",
+   "reused_from": "/data/user_data/skolawol/e1/work/hrm_sudoku/dyn_H2_b1_int8f32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/hrm_sudoku_int8f32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "fp32"
+  },
+  {
+   "gpu": "l40s",
+   "model": "hrm_sudoku",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.26,
+   "acc_loop2": 0.02,
+   "agree_loop2": 0.7751851851851852,
+   "agree_final": 0.8080246913580247,
+   "state": "z_H",
+   "cos_l1": 0.8519874008873558,
+   "cos_l2": 0.9129604766180193,
+   "cos_final": 0.890010980312492,
+   "cos_all": {
+    "z_H": [
+     0.8519874008873558,
+     0.9129604766180193,
+     0.890010980312492
+    ],
+    "z_L": [
+     0.8989680867486062,
+     0.8769416336526613,
+     0.8368574824148347
+    ],
+    "cat": [
+     0.875477793359168,
+     0.8949511801749082,
+     0.863434315386643
+    ]
+   },
+   "n_int8_out_layers": 591,
+   "engine_md5": "92b049c19367",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/hrm_sudoku_int8strict_preds.npz",
+   "ratio": 0.6341463414634146,
+   "verdict": "WARN"
+  },
+  {
+   "gpu": "l40s",
+   "model": "hrm_sudoku",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.20716049382716048,
+   "agree_final": 0.12691358024691357,
+   "state": "z_H",
+   "cos_l1": 0.2365845133673926,
+   "cos_l2": 0.14586402307755192,
+   "cos_final": 0.060077671051526005,
+   "cos_all": {
+    "z_H": [
+     0.2365845133673926,
+     0.14586402307755192,
+     0.060077671051526005
+    ],
+    "z_L": [
+     0.21800108959965922,
+     0.20015236695766064,
+     0.14272924136193724
+    ],
+    "cat": [
+     0.22701790648179215,
+     0.169260935429831,
+     0.09680597768036099
+    ]
+   },
+   "n_int8_out_layers": 339,
+   "engine_md5": "19acd15ec356",
+   "reused_from": "/data/user_data/skolawol/e1/work/hrm_sudoku/qdq/trt_qdq_fp16.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/hrm_sudoku_qdq_fp16_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "l40s",
+   "model": "hrm_sudoku",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.41,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.20716049382716048,
+   "agree_final": 0.12691358024691357,
+   "state": "z_H",
+   "cos_l1": 0.2365845133673926,
+   "cos_l2": 0.14586402307755192,
+   "cos_final": 0.060077671051526005,
+   "cos_all": {
+    "z_H": [
+     0.2365845133673926,
+     0.14586402307755192,
+     0.060077671051526005
+    ],
+    "z_L": [
+     0.21800108959965922,
+     0.20015236695766064,
+     0.14272924136193724
+    ],
+    "cat": [
+     0.22701790648179215,
+     0.169260935429831,
+     0.09680597768036099
+    ]
+   },
+   "n_int8_out_layers": 339,
+   "engine_md5": "7ff32fb4578e",
+   "reused_from": "/data/user_data/skolawol/e1/work/hrm_sudoku/qdq/trt_qdq_fp32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/hrm_sudoku_qdq_fp32_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL",
+   "dup_of": "qdq_fp16"
+  },
+  {
+   "gpu": "l40s",
+   "model": "maze",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.88,
+   "acc_loop2": 0.12,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999997613,
+   "cos_l2": 0.9999999999996768,
+   "cos_final": 0.9999999999995004,
+   "cos_all": {
+    "z_H": [
+     0.9999999999997613,
+     0.9999999999996768,
+     0.9999999999995004
+    ],
+    "z_L": [
+     0.9999999999997721,
+     0.9999999999996205,
+     0.9999999999995924
+    ],
+    "cat": [
+     0.9999999999997666,
+     0.9999999999996487,
+     0.9999999999995464
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "8aeea55fea13",
+   "reused_from": "/data/user_data/skolawol/e1/work/maze/dyn_H1_b1_fp32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/maze_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "maze",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.88,
+   "acc_loop2": 0.12,
+   "agree_loop2": 0.9999777777777777,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999977360616015,
+   "cos_l2": 0.9999970613928353,
+   "cos_final": 0.9999981652942558,
+   "cos_all": {
+    "z_H": [
+     0.9999977360616015,
+     0.9999970613928353,
+     0.9999981652942558
+    ],
+    "z_L": [
+     0.9999978582549118,
+     0.9999968524454904,
+     0.9999972323925879
+    ],
+    "cat": [
+     0.999997797115019,
+     0.9999969568950623,
+     0.9999976987965435
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "44b87c174378",
+   "reused_from": "/data/user_data/skolawol/e1/work/maze/dyn_H1_b1_int8.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/maze_int8_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "fp16"
+  },
+  {
+   "gpu": "l40s",
+   "model": "maze",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.88,
+   "acc_loop2": 0.12,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999997613,
+   "cos_l2": 0.9999999999996768,
+   "cos_final": 0.9999999999995004,
+   "cos_all": {
+    "z_H": [
+     0.9999999999997613,
+     0.9999999999996768,
+     0.9999999999995004
+    ],
+    "z_L": [
+     0.9999999999997721,
+     0.9999999999996205,
+     0.9999999999995924
+    ],
+    "cat": [
+     0.9999999999997666,
+     0.9999999999996487,
+     0.9999999999995464
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "f62766829d42",
+   "reused_from": "/data/user_data/skolawol/e1/work/maze/dyn_H1_b1_int8f32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/maze_int8f32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "fp32"
+  },
+  {
+   "gpu": "l40s",
+   "model": "maze",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.8763333333333333,
+   "agree_final": 0.854,
+   "state": "z_H",
+   "cos_l1": 0.7977084214442591,
+   "cos_l2": 0.41997892754344585,
+   "cos_final": 0.313146756616177,
+   "cos_all": {
+    "z_H": [
+     0.7977084214442591,
+     0.41997892754344585,
+     0.313146756616177
+    ],
+    "z_L": [
+     0.7590780002798947,
+     0.5442120393956462,
+     0.4404864200530292
+    ],
+    "cat": [
+     0.7783931773160188,
+     0.4820956906624903,
+     0.3768158105447874
+    ]
+   },
+   "n_int8_out_layers": 351,
+   "engine_md5": "411c324d7f4e",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/maze_int8strict_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "l40s",
+   "model": "maze",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.5682888888888888,
+   "agree_final": 0.6252888888888889,
+   "state": "z_H",
+   "cos_l1": 0.1777982181667087,
+   "cos_l2": 0.20857157355806608,
+   "cos_final": 0.1772372426684462,
+   "cos_all": {
+    "z_H": [
+     0.1777982181667087,
+     0.20857157355806608,
+     0.1772372426684462
+    ],
+    "z_L": [
+     0.44858084009624993,
+     0.2710485914642761,
+     0.19271684483334084
+    ],
+    "cat": [
+     0.3095305464473523,
+     0.2398839891368987,
+     0.18507737519726292
+    ]
+   },
+   "n_int8_out_layers": 144,
+   "engine_md5": "236f5175bd54",
+   "reused_from": "/data/user_data/skolawol/e1/work/maze/qdq/trt_qdq_fp16.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/maze_qdq_fp16_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "l40s",
+   "model": "maze",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 50,
+   "host_acc_final": 0.88,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.5682888888888888,
+   "agree_final": 0.6252888888888889,
+   "state": "z_H",
+   "cos_l1": 0.1777982181667087,
+   "cos_l2": 0.20857157355806608,
+   "cos_final": 0.1772372426684462,
+   "cos_all": {
+    "z_H": [
+     0.1777982181667087,
+     0.20857157355806608,
+     0.1772372426684462
+    ],
+    "z_L": [
+     0.44858084009624993,
+     0.2710485914642761,
+     0.19271684483334084
+    ],
+    "cat": [
+     0.3095305464473523,
+     0.2398839891368987,
+     0.18507737519726292
+    ]
+   },
+   "n_int8_out_layers": 144,
+   "engine_md5": "105b56545c80",
+   "reused_from": "/data/user_data/skolawol/e1/work/maze/qdq/trt_qdq_fp32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/maze_qdq_fp32_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL",
+   "dup_of": "qdq_fp16"
+  },
+  {
+   "gpu": "l40s",
+   "model": "mdeq_small",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.655,
+   "acc_loop2": 0.045,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "cat",
+   "cos_l1": 0.9999999999934165,
+   "cos_l2": 0.9999999999956478,
+   "cos_final": 0.9999999999839873,
+   "cos_all": {
+    "z0": [
+     0.9999999999950352,
+     0.999999999996509,
+     0.9999999999872026
+    ],
+    "z1": [
+     0.9999999999902934,
+     0.9999999999942796,
+     0.9999999999784073
+    ],
+    "z2": [
+     0.9999999999904595,
+     0.9999999999928966,
+     0.9999999999758024
+    ],
+    "z3": [
+     0.999999999992404,
+     0.9999999999906075,
+     0.9999999999722019
+    ],
+    "cat": [
+     0.9999999999934165,
+     0.9999999999956478,
+     0.9999999999839873
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "a04d3d0f7caf",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/mdeq_small_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "mdeq_small",
+   "build": "fp16",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.655,
+   "acc_loop2": 0.045,
+   "agree_loop2": 0.995,
+   "agree_final": 0.995,
+   "state": "cat",
+   "cos_l1": 0.999999495537432,
+   "cos_l2": 0.9999976716610434,
+   "cos_final": 0.9999832254604917,
+   "cos_all": {
+    "z0": [
+     0.9999996285663388,
+     0.999997874729946,
+     0.9999867348760738
+    ],
+    "z1": [
+     0.9999992572100033,
+     0.9999975172901446,
+     0.9999776140857137
+    ],
+    "z2": [
+     0.9999994776322854,
+     0.9999968849557531,
+     0.9999738038070953
+    ],
+    "z3": [
+     0.9999981558726563,
+     0.9999943757664538,
+     0.999967359730761
+    ],
+    "cat": [
+     0.999999495537432,
+     0.9999976716610434,
+     0.9999832254604917
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "91a07988d382",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/mdeq_small_fp16_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "mdeq_small",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.66,
+   "acc_loop2": 0.045,
+   "agree_loop2": 0.935,
+   "agree_final": 0.89,
+   "state": "cat",
+   "cos_l1": 0.9998282134906495,
+   "cos_l2": 0.9994516857395503,
+   "cos_final": 0.9842582020448131,
+   "cos_all": {
+    "z0": [
+     0.9998132810468752,
+     0.9995748500946908,
+     0.9898248241715961
+    ],
+    "z1": [
+     0.9998653137689459,
+     0.999179965161174,
+     0.9774354792238317
+    ],
+    "z2": [
+     0.9998750610400942,
+     0.9995541700438499,
+     0.9709660899183749
+    ],
+    "z3": [
+     0.9995120845429604,
+     0.9983717151456191,
+     0.9289069608324574
+    ],
+    "cat": [
+     0.9998282134906495,
+     0.9994516857395503,
+     0.9842582020448131
+    ]
+   },
+   "n_int8_out_layers": 15,
+   "engine_md5": "3fc4fa6299aa",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/mdeq_small_int8_preds.npz",
+   "ratio": 1.0076335877862594,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "mdeq_small",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.655,
+   "acc_loop2": 0.05,
+   "agree_loop2": 0.8,
+   "agree_final": 0.905,
+   "state": "cat",
+   "cos_l1": 0.9969207005530458,
+   "cos_l2": 0.9973062349588778,
+   "cos_final": 0.9803033756216104,
+   "cos_all": {
+    "z0": [
+     0.9990010211150502,
+     0.9982992605486157,
+     0.9866511590369444
+    ],
+    "z1": [
+     0.9949604410226311,
+     0.9962541582440281,
+     0.971677973779917
+    ],
+    "z2": [
+     0.9839661460183302,
+     0.9924396876286272,
+     0.9642495644314562
+    ],
+    "z3": [
+     0.9905064384048589,
+     0.9902060503543934,
+     0.9293584391423693
+    ],
+    "cat": [
+     0.9969207005530458,
+     0.9973062349588778,
+     0.9803033756216104
+    ]
+   },
+   "n_int8_out_layers": 19,
+   "engine_md5": "91262e6c9400",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/mdeq_small_int8f32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "mdeq_small",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.63,
+   "acc_loop2": 0.095,
+   "agree_loop2": 0.385,
+   "agree_final": 0.85,
+   "state": "cat",
+   "cos_l1": 0.9550926365002578,
+   "cos_l2": 0.9674947631431678,
+   "cos_final": 0.9463768601007891,
+   "cos_all": {
+    "z0": [
+     0.9784099169914765,
+     0.9760841163153177,
+     0.9634856203544493
+    ],
+    "z1": [
+     0.9436748300478314,
+     0.9677082249215551,
+     0.919602387246861
+    ],
+    "z2": [
+     0.7836090405622176,
+     0.8940622376184225,
+     0.8985283595621616
+    ],
+    "z3": [
+     0.8455958648376264,
+     0.8743553861752617,
+     0.8544049503421999
+    ],
+    "cat": [
+     0.9550926365002578,
+     0.9674947631431678,
+     0.9463768601007891
+    ]
+   },
+   "n_int8_out_layers": 47,
+   "engine_md5": "5d230fa3d6e6",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/mdeq_small_int8strict_preds.npz",
+   "ratio": 0.9618320610687022,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "mdeq_small",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.0,
+   "agree_final": 0.0,
+   "state": "cat",
+   "cos_l1": 0.49736456317235406,
+   "cos_l2": 0.1945933190711707,
+   "cos_final": 0.17611899078003249,
+   "cos_all": {
+    "z0": [
+     0.6325455171551841,
+     0.2574418914051125,
+     0.24322036933948638
+    ],
+    "z1": [
+     0.3609201824172402,
+     0.11429323531661312,
+     0.10623225139962564
+    ],
+    "z2": [
+     0.3250249535280156,
+     0.17706824926118067,
+     0.0678673893507516
+    ],
+    "z3": [
+     0.005372740113577173,
+     -0.013435966810323859,
+     -0.015713958916726816
+    ],
+    "cat": [
+     0.49736456317235406,
+     0.1945933190711707,
+     0.17611899078003249
+    ]
+   },
+   "n_int8_out_layers": 47,
+   "engine_md5": "970cd9ca1ddd",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/mdeq_small_qdq_fp16_preds.npz",
+   "qdq_ort_control": {
+    "ort_asym": 1.0,
+    "ort_sym": 0.0
+   },
+   "note": "fault in the symmetric QDQ rewrite (ORT on the same graph also fails)",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "l40s",
+   "model": "mdeq_small",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 16,
+   "n": 200,
+   "host_acc_final": 0.655,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.0,
+   "agree_final": 0.0,
+   "state": "cat",
+   "cos_l1": 0.49877409944164364,
+   "cos_l2": 0.192315864576745,
+   "cos_final": 0.16844707696924094,
+   "cos_all": {
+    "z0": [
+     0.6321445563965313,
+     0.25035574802812555,
+     0.23422600128210114
+    ],
+    "z1": [
+     0.3623650181686505,
+     0.12258186489655114,
+     0.09697298812663621
+    ],
+    "z2": [
+     0.301128055484078,
+     0.18320310864761377,
+     0.07215182027089993
+    ],
+    "z3": [
+     0.10000341574606526,
+     -0.0276794998677813,
+     -0.01744299906635024
+    ],
+    "cat": [
+     0.49877409944164364,
+     0.192315864576745,
+     0.16844707696924094
+    ]
+   },
+   "n_int8_out_layers": 47,
+   "engine_md5": "8fd00370ab59",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/mdeq_small_qdq_fp32_preds.npz",
+   "qdq_ort_control": {
+    "ort_asym": 1.0,
+    "ort_sym": 0.0
+   },
+   "note": "fault in the symmetric QDQ rewrite (ORT on the same graph also fails)",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_attn",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.51,
+   "acc_loop2": 0.0,
+   "agree_loop2": 1.0,
+   "agree_final": 0.9997530864197531,
+   "state": "z_H",
+   "cos_l1": 0.9999999999999435,
+   "cos_l2": 0.9999999999997057,
+   "cos_final": 0.9999999401617744,
+   "cos_all": {
+    "z_H": [
+     0.9999999999999435,
+     0.9999999999997057,
+     0.9999999401617744
+    ],
+    "z_L": [
+     0.9999999999999367,
+     0.9999999999996448,
+     0.9999995129053835
+    ],
+    "cat": [
+     0.9999999999999402,
+     0.9999999999996751,
+     0.9999997265343598
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "6c0f11ddb5c0",
+   "reused_from": "/data/user_data/skolawol/e1/work/sudoku_attn/dyn_H1_b1_fp32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_attn_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_attn",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.52,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.9985185185185185,
+   "agree_final": 0.9717283950617284,
+   "state": "z_H",
+   "cos_l1": 0.9999982878263631,
+   "cos_l2": 0.99999293313435,
+   "cos_final": 0.9915234654562255,
+   "cos_all": {
+    "z_H": [
+     0.9999982878263631,
+     0.99999293313435,
+     0.9915234654562255
+    ],
+    "z_L": [
+     0.9999979512330388,
+     0.9999913075343659,
+     0.9619226561148292
+    ],
+    "cat": [
+     0.9999981192536975,
+     0.9999921198710853,
+     0.9767230885407756
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "7173afeb461e",
+   "reused_from": "/data/user_data/skolawol/e1/work/sudoku_attn/dyn_H1_b1_int8.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_attn_int8_preds.npz",
+   "ratio": 1.0196078431372548,
+   "verdict": "PASS",
+   "dup_of": "fp16"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_attn",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.51,
+   "acc_loop2": 0.0,
+   "agree_loop2": 1.0,
+   "agree_final": 0.9997530864197531,
+   "state": "z_H",
+   "cos_l1": 0.9999999999999435,
+   "cos_l2": 0.9999999999997057,
+   "cos_final": 0.9999999401617744,
+   "cos_all": {
+    "z_H": [
+     0.9999999999999435,
+     0.9999999999997057,
+     0.9999999401617744
+    ],
+    "z_L": [
+     0.9999999999999367,
+     0.9999999999996448,
+     0.9999995129053835
+    ],
+    "cat": [
+     0.9999999999999402,
+     0.9999999999996751,
+     0.9999997265343598
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "69bccda0d0e7",
+   "reused_from": "/data/user_data/skolawol/e1/work/sudoku_attn/dyn_H1_b1_int8f32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_attn_int8f32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "fp32"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_attn",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.02,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.7245679012345679,
+   "agree_final": 0.6398765432098765,
+   "state": "z_H",
+   "cos_l1": 0.9554602255590106,
+   "cos_l2": 0.8144406641722586,
+   "cos_final": 0.634351784323743,
+   "cos_all": {
+    "z_H": [
+     0.9554602255590106,
+     0.8144406641722586,
+     0.634351784323743
+    ],
+    "z_L": [
+     0.9601508497946166,
+     0.7941076541989951,
+     0.47662508960456845
+    ],
+    "cat": [
+     0.9578055505217833,
+     0.8042740446248899,
+     0.5554874730738731
+    ]
+   },
+   "n_int8_out_layers": 369,
+   "engine_md5": "bc845597f5cc",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_attn_int8strict_preds.npz",
+   "ratio": 0.0392156862745098,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_attn",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.16839506172839505,
+   "agree_final": 0.1008641975308642,
+   "state": "z_H",
+   "cos_l1": 0.24839112770993046,
+   "cos_l2": 0.09257559395794797,
+   "cos_final": 0.046620225702551206,
+   "cos_all": {
+    "z_H": [
+     0.24839112770993046,
+     0.09257559395794797,
+     0.046620225702551206
+    ],
+    "z_L": [
+     0.3276180304293054,
+     0.155361079702858,
+     0.08299211245530076
+    ],
+    "cat": [
+     0.2884284904789759,
+     0.1251225012069548,
+     0.06579809147530846
+    ]
+   },
+   "n_int8_out_layers": 200,
+   "engine_md5": "0ad66ce4d937",
+   "reused_from": "/data/user_data/skolawol/e1/work/sudoku_attn/qdq/trt_qdq_fp16.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_attn_qdq_fp16_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_attn",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.51,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.16839506172839505,
+   "agree_final": 0.1008641975308642,
+   "state": "z_H",
+   "cos_l1": 0.24839112770993046,
+   "cos_l2": 0.09257559395794797,
+   "cos_final": 0.046620225702551206,
+   "cos_all": {
+    "z_H": [
+     0.24839112770993046,
+     0.09257559395794797,
+     0.046620225702551206
+    ],
+    "z_L": [
+     0.3276180304293054,
+     0.155361079702858,
+     0.08299211245530076
+    ],
+    "cat": [
+     0.2884284904789759,
+     0.1251225012069548,
+     0.06579809147530846
+    ]
+   },
+   "n_int8_out_layers": 200,
+   "engine_md5": "8d9e9317895a",
+   "reused_from": "/data/user_data/skolawol/e1/work/sudoku_attn/qdq/trt_qdq_fp32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_attn_qdq_fp32_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL",
+   "dup_of": "qdq_fp16"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_mlp",
+   "build": "fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.58,
+   "acc_loop2": 0.02,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999943848,
+   "cos_l2": 0.9999999999963795,
+   "cos_final": 0.9999999753205115,
+   "cos_all": {
+    "z_H": [
+     0.9999999999943848,
+     0.9999999999963795,
+     0.9999999753205115
+    ],
+    "z_L": [
+     0.9999999999965838,
+     0.9999999999986554,
+     0.99999991699
+    ],
+    "cat": [
+     0.9999999999954844,
+     0.9999999999975173,
+     0.9999999461552533
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "90f1e21d5e8b",
+   "reused_from": "/data/user_data/skolawol/e1/work/sudoku_mlp/dyn_H1_b1_fp32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_mlp_fp32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_mlp",
+   "build": "int8",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.58,
+   "acc_loop2": 0.02,
+   "agree_loop2": 0.9983950617283951,
+   "agree_final": 0.9787654320987654,
+   "state": "z_H",
+   "cos_l1": 0.999977844035799,
+   "cos_l2": 0.9999849133760376,
+   "cos_final": 0.9946928246507336,
+   "cos_all": {
+    "z_H": [
+     0.999977844035799,
+     0.9999849133760376,
+     0.9946928246507336
+    ],
+    "z_L": [
+     0.9999862949082587,
+     0.999994254322422,
+     0.9869384657117319
+    ],
+    "cat": [
+     0.9999820691542228,
+     0.9999895835584494,
+     0.9908156350804037
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "5e7cb098cb1a",
+   "reused_from": "/data/user_data/skolawol/e1/work/sudoku_mlp/dyn_H1_b1_int8.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_mlp_int8_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "fp16"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_mlp",
+   "build": "int8f32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.58,
+   "acc_loop2": 0.02,
+   "agree_loop2": 1.0,
+   "agree_final": 1.0,
+   "state": "z_H",
+   "cos_l1": 0.9999999999943848,
+   "cos_l2": 0.9999999999963795,
+   "cos_final": 0.9999999753205115,
+   "cos_all": {
+    "z_H": [
+     0.9999999999943848,
+     0.9999999999963795,
+     0.9999999753205115
+    ],
+    "z_L": [
+     0.9999999999965838,
+     0.9999999999986554,
+     0.99999991699
+    ],
+    "cat": [
+     0.9999999999954844,
+     0.9999999999975173,
+     0.9999999461552533
+    ]
+   },
+   "n_int8_out_layers": 0,
+   "engine_md5": "328016e650eb",
+   "reused_from": "/data/user_data/skolawol/e1/work/sudoku_mlp/dyn_H1_b1_int8f32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_mlp_int8f32_preds.npz",
+   "ratio": 1.0,
+   "verdict": "PASS",
+   "dup_of": "fp32"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_mlp",
+   "build": "int8strict",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.44,
+   "acc_loop2": 0.02,
+   "agree_loop2": 0.7913580246913581,
+   "agree_final": 0.8351851851851851,
+   "state": "z_H",
+   "cos_l1": 0.7834297151596725,
+   "cos_l2": 0.7443995019335462,
+   "cos_final": 0.6111624110085693,
+   "cos_all": {
+    "z_H": [
+     0.7834297151596725,
+     0.7443995019335462,
+     0.6111624110085693
+    ],
+    "z_L": [
+     0.8625847476132507,
+     0.8166062365488967,
+     0.6830095645860859
+    ],
+    "cat": [
+     0.8230071954524517,
+     0.7805027064173199,
+     0.6470859551801085
+    ]
+   },
+   "n_int8_out_layers": 270,
+   "engine_md5": "b5aac0d8f506",
+   "reused_from": null,
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_mlp_int8strict_preds.npz",
+   "ratio": 0.7586206896551725,
+   "verdict": "WARN"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_mlp",
+   "build": "qdq_fp16",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.10395061728395062,
+   "agree_final": 0.10123456790123457,
+   "state": "z_H",
+   "cos_l1": 0.011187507306466303,
+   "cos_l2": 0.023986506122673154,
+   "cos_final": 0.025169548325597174,
+   "cos_all": {
+    "z_H": [
+     0.011187507306466303,
+     0.023986506122673154,
+     0.025169548325597174
+    ],
+    "z_L": [
+     0.022160101754658858,
+     0.0503042310353156,
+     0.06824332714783692
+    ],
+    "cat": [
+     0.01617973760977039,
+     0.035735765210891196,
+     0.04463937974057222
+    ]
+   },
+   "n_int8_out_layers": 116,
+   "engine_md5": "fe86befdd97a",
+   "reused_from": "/data/user_data/skolawol/e1/work/sudoku_mlp/qdq/trt_qdq_fp16.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_mlp_qdq_fp16_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL"
+  },
+  {
+   "gpu": "l40s",
+   "model": "sudoku_mlp",
+   "build": "qdq_fp32",
+   "source": "trt_faults",
+   "loops": 8,
+   "n": 100,
+   "host_acc_final": 0.58,
+   "acc_final": 0.0,
+   "acc_loop2": 0.0,
+   "agree_loop2": 0.10395061728395062,
+   "agree_final": 0.10123456790123457,
+   "state": "z_H",
+   "cos_l1": 0.011187507306466303,
+   "cos_l2": 0.023986506122673154,
+   "cos_final": 0.025169548325597174,
+   "cos_all": {
+    "z_H": [
+     0.011187507306466303,
+     0.023986506122673154,
+     0.025169548325597174
+    ],
+    "z_L": [
+     0.022160101754658858,
+     0.0503042310353156,
+     0.06824332714783692
+    ],
+    "cat": [
+     0.01617973760977039,
+     0.035735765210891196,
+     0.04463937974057222
+    ]
+   },
+   "n_int8_out_layers": 116,
+   "engine_md5": "386da16dcd1d",
+   "reused_from": "/data/user_data/skolawol/e1/work/sudoku_mlp/qdq/trt_qdq_fp32.engine",
+   "preds": "/home/stevenkolawole/workspace/emnlp-26/EdgeTRM/results/trt_faults/l40s/sudoku_mlp_qdq_fp32_preds.npz",
+   "ratio": 0.0,
+   "verdict": "FAIL",
+   "dup_of": "qdq_fp16"
+  }
+ ]
+}
