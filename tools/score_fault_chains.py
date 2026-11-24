@@ -46,7 +46,8 @@ def main():
         hj = tdir / "packed" / "host_fp32_n8.json"
         hpath = json.loads(hj.read_text())["path"] if hj.exists() else str(tdir / "host_fp32_n8.npz")
         h = np.load(hpath)
-        hzH, hpred = h["zH"][1], h["preds"][7]
+        hzH, hpreds = h["zH"][1], h["preds"]
+        hpred = hpreds[7]
         _, lab, _ = F.data(task)
         N = hzH.shape[0]
         lab = lab[:N]
@@ -75,6 +76,8 @@ def main():
             r["phi_s2_H"], r["phi_s2_H_min"] = float(c.mean()), float(c.min())
             if "preds" in z.files and z["preds"].shape[0] == 8:
                 r["dev_exact_s8_recomputed"] = float((z["preds"][7] == lab).all(-1).mean())
+                for k in (1, 2, 8):
+                    r[f"pred_agree_s{k}"] = float((z["preds"][k - 1] == hpreds[k - 1]).mean())
             rows.append(r)
             print(f"{task} {tag}: phi_s2 {r['phi_s2_H']:.4f} exact {r['dev_exact_s8']:.3f}/{host_exact:.3f} {r['label']}",
                   flush=True)
@@ -84,6 +87,9 @@ def main():
     W = [r["phi_s2_H"] for r in sc if r["label"] == "WARN"]
     summ = dict(n_scored=len(sc), n_pass=len(P), n_warn=len(W), n_fail=len(Fl),
                 auroc_fail_vs_pass=auroc(Fl, P), auroc_notpass_vs_pass=auroc(Fl + W, P),
+                auroc_pred_agree={k: auroc([r[k] for r in sc if r["label"] == "FAIL" and k in r],
+                                           [r[k] for r in sc if r["label"] == "PASS" and k in r])
+                                  for k in ("pred_agree_s1", "pred_agree_s2", "pred_agree_s8")},
                 pass_range=[min(P), max(P)] if P else None, fail_range=[min(Fl), max(Fl)] if Fl else None, warn=sorted(W),
                 cuts={})
     for name, cut in CUTS.items():
