@@ -64,7 +64,7 @@ Say "per input, batch 1, measured joules" and "realized loops under the stated r
 - Baseline: "uniform (S,S)" reduced depths, the "fastest tested uniform setting meeting the same accuracy criterion" (Huginn (20,20); OLMo uniform 4). Criterion is full-depth quality on the same test set, so the depth is picked offline with labels, which is the same selection logic as our best fixed depth.
 - What varies: depth per serving phase (prefill P, decode S), not per input. Controller adapts P to queue age; "the runtime has no correctness feedback." No halting head, no per-input stopping.
 - Quote: "Including reduced uniform depths tests whether separate phase budgets improve the quality-throughput choices available to deployment."
-- Verdict: it does not make our (b) baseline new as a baseline idea (a best uniform depth at equal accuracy appears there), but it compares a phase split to it, in throughput, on a server GPU, with no per-input halting and no energy. Our claim (per-input halting with the model's own head vs the best fixed depth chosen with test labels, in joules on Nano and AGX) stays distinct. Do not write "first to compare against best fixed depth"; write "we measure energy against".
+- Verdict: LoopDuet sets depth per serving phase and compares that static schedule with a static uniform depth, in throughput, on a server GPU, with no per-input halting and no energy. Our claim (per-input halting with the model's own head vs the best fixed depth chosen with test labels, in joules on Nano and AGX) stays distinct. Do not write "first to compare against best fixed depth"; write "we measure energy against".
 
 ### "Act Before It's Too Late: Power-Efficient LLM Inference on Mobile Device" (Chu et al., MobiSys 2026, DOI 10.1145/3745756.3809208)
 Full text NOT reachable (doi.org and ACM pdf URLs return HTML; no arXiv). Read status: abstract and metadata only (via search); venue verified on the MobiSys 2026 accepted-papers and ACM proceedings listing. Reported: TurboInfer, millisecond-scale GPU frequency scaling driven by GPU stalls; stalls are >74% of token-generation latency; up to 42.6% power saving (static) and 48.3% (dynamic) on two phones. From the abstract it is a DVFS paper on autoregressive LLMs; no sign of per-iteration cost, early stopping or deadlines. Unverified beyond the abstract; cite=no until read. Grade pending (A-level venue, so likely anchor once read).
@@ -108,7 +108,7 @@ How we differ:
    compares a compiled device build against an fp32 host to detect a toolchain fault. Cite it in the check's related
    work: a label-free state threshold that transfers is shared ground, and our use and our reference differ.
 
-Our wording: we never claim to be "first to compare against the best fixed depth"; we do not need to. The claim is
+Our wording states what we measure, with no "first" claim needed. The claim is
 per-input halting with the model's own head, against the best fixed depth of the same weights chosen with test
 labels, at equal accuracy, in measured joules per correct answer at batch 1 on edge devices. The related-work clause:
 "LoopDuet compares phase-level depth schedules against the fastest uniform depth within an accuracy tolerance, by

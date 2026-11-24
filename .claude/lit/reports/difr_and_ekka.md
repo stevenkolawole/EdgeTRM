@@ -49,7 +49,7 @@ Both papers read in full from the arXiv PDFs (pdftotext, main text, appendices, 
 - Their detector has a calibrated null from pooled honest hardware variation (GPU type, TP, engine). Ours uses a separate fp32 host reference on different hardware. If we cannot show our PASS builds sit inside a honest-noise band across hardware, a reviewer can ask for it.
 - Their fingerprints are tiny (under 1 byte per token to 30 bytes). Ours moves a full state.
 - They test adversarial manipulation (the temperature attack that defeats cross-entropy). We have no such test.
-- They already say, in the abstract, "detect infrastructure bugs before they affect users at scale". Our novelty claim must rest on loops, edge toolchains and accuracy, not on the generic idea of a reference comparison.
+- Their abstract says "detect infrastructure bugs before they affect users at scale", meaning cloud LLM serving. Comparing a computation with a reference run is a generic idea that predates DiFR; it is not theirs to hold, and we do not frame our check as theirs.
 
 *Settling experiments.*
 - Run their Activation-DiFR (random orthogonal projection, k=8/32, L2 distance, logistic regression) on our after-loop-2 states for the same 80 builds, with the same fp32 reference. Report AUROC, and AUC at 1% FPR.
@@ -60,7 +60,7 @@ Both papers read in full from the arXiv PDFs (pdftotext, main text, appendices, 
 - The baseline: Activation-DiFR with k=2/8/32 and the tolerated-noise-band calibration.
 - The cross-entropy attack as a framing of why a reference comparison beats an output-statistics check.
 - The "inference infrastructure bugs go undetected for weeks" motivation (Anthropic postmortem; Kimi K2 vendor spread), both cited in the intro, which we can cite as motivation for silent faults.
-- A narrowing: their evidence says the reference-comparison idea is prior art for LLMs on servers. Our claims are the looped-state variant, the edge toolchain faults and the compounding explanation.
+- Setting: theirs is LLM serving on servers. Ours is screening compiled edge builds of looped models before deployment, where the check must pass quantized builds that keep their accuracy and fail broken ones.
 
 ## 2. Ekka (2606.04594)
 
@@ -116,8 +116,8 @@ Both papers read in full from the arXiv PDFs (pdftotext, main text, appendices, 
 ## Answers to the five questions
 
 1. **Which part of our check each holds.**
-   - DiFR holds the generic reference-comparison detector for quantized builds: "verifies inference by comparing internal model state from the provider against those computed by a trusted verifier."
-   - Ekka holds the fp32-reference-normalised error and layer-wise localization: "normalizes by the reference framework's precision error."
+   - DiFR verifies a cloud provider: "verifies inference by comparing internal model state from the provider against those computed by a trusted verifier." It flags any departure from the trusted model, so a correct quantized build counts as a deviation; it does not separate accurate quantized builds from broken ones.
+   - Ekka debugs a serving engine once a bug is known, localizing layers: "normalizes by the reference framework's precision error."
    - Neither holds loops, edge devices, or the compounding-after-2-loops signal.
 2. **Reference and when it is wrong.** DiFR: a trusted bf16 implementation, calibrated against honest hardware noise. Ekka: HuggingFace plus its fp32 run. Neither addresses a wrong reference. DiFR only touches a benign implementation gap (HuggingFace on Qwen3-30B-A3B) and handles it as a policy choice, and Ekka assumes the reference is correct (it builds its knowledge base only from verified-correct models). Our 0% vs 58% case is unclaimed.
 3. **Tie the detector to task accuracy.** No for both. DiFR has no accuracy numbers. Ekka uses benchmark accuracy only to define bugs and to validate a correct implementation.
@@ -136,7 +136,7 @@ Both papers read in full from the arXiv PDFs (pdftotext, main text, appendices, 
   - Predicting device accuracy from a host curve plus one latency.
   - Tying the detector to task accuracy.
   - Repair by running the last loops at higher precision.
-- **Claims undercut:** "label-free comparison to a trusted reference detects quantized builds" is prior art (DiFR, from 2 tokens at AUC > 0.999). "An fp32 reference with a precision-normalised error separates bugs from numerical noise" is prior art (Ekka). Narrow our claim to the looped-state check, edge toolchains, and the accuracy and reference-failure analyses.
+- **Positioning (corrected Nov 24, Steven):** DiFR detects that a provider's model differs from the trusted one (from 2 tokens, AUC > 0.999), including a provider that quantized it; Ekka localizes known serving bugs. Neither runs on edge builds or looped models, and neither separates accurate quantized builds from broken ones. Describe our check on its own terms; a DiFR-style distance is our labelled baseline, not their result in our setting.
 
 ## Caveats
 - DiFR's AUC is at 1% FPR over token batches, and ours is PASS/FAIL AUROC over builds, so the numbers are not comparable until we run their method on our data.
