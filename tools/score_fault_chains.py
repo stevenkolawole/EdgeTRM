@@ -20,6 +20,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import aihub_faults as F  # noqa: E402
 
 PASS_FLOOR, FAIL_CEIL = 0.8206705575659003, 0.7685424976192253
+DIFR_P = np.linalg.qr(np.random.default_rng(0).standard_normal((512, 512)))[0][:8]
 CUTS = {"pass_floor": PASS_FLOOR, "midpoint": (PASS_FLOOR + FAIL_CEIL) / 2}
 
 
@@ -46,7 +47,8 @@ def main():
         hj = tdir / "packed" / "host_fp32_n8.json"
         hpath = json.loads(hj.read_text())["path"] if hj.exists() else str(tdir / "host_fp32_n8.npz")
         h = np.load(hpath)
-        hzH, hpreds = h["zH"][1], h["preds"]
+        hz_all, hpreds = h["zH"], h["preds"]
+        hzH = hz_all[1]
         hpred = hpreds[7]
         _, lab, _ = F.data(task)
         N = hzH.shape[0]
@@ -74,6 +76,11 @@ def main():
             assert dz.shape[0] == N, (tag, dz.shape, N)
             c = cos_rows(dz, hzH)
             r["phi_s2_H"], r["phi_s2_H_min"] = float(c.mean()), float(c.min())
+            for k in (2, 8):
+                dk = z["zH_steps"][steps.index(k - 1)][:, 0].reshape(-1, 512)
+                hk = hz_all[k - 1].reshape(-1, 512)
+                r[f"difr_k8_rel_s{k}"] = float(np.linalg.norm((dk - hk) @ DIFR_P.T, axis=1).mean()
+                                              / np.linalg.norm(hk @ DIFR_P.T, axis=1).mean())
             if "preds" in z.files and z["preds"].shape[0] == 8:
                 r["dev_exact_s8_recomputed"] = float((z["preds"][7] == lab).all(-1).mean())
                 for k in (1, 2, 8):
@@ -87,6 +94,9 @@ def main():
     W = [r["phi_s2_H"] for r in sc if r["label"] == "WARN"]
     summ = dict(n_scored=len(sc), n_pass=len(P), n_warn=len(W), n_fail=len(Fl),
                 auroc_fail_vs_pass=auroc(Fl, P), auroc_notpass_vs_pass=auroc(Fl + W, P),
+                auroc_difr={k: auroc([-r[k] for r in sc if r["label"] == "FAIL" and k in r],
+                                     [-r[k] for r in sc if r["label"] == "PASS" and k in r])
+                            for k in ("difr_k8_rel_s2", "difr_k8_rel_s8")},
                 auroc_pred_agree={k: auroc([r[k] for r in sc if r["label"] == "FAIL" and k in r],
                                            [r[k] for r in sc if r["label"] == "PASS" and k in r])
                                   for k in ("pred_agree_s1", "pred_agree_s2", "pred_agree_s8")},
